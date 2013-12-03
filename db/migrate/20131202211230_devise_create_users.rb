@@ -9,9 +9,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :full_name, :default => ""
       t.string :phone_number, :default => ""
       t.string :first_name, :default => ""
+      t.boolean :admin, :default => false
+      t.boolean :uber_admin, :default => false
 
       t.boolean :push_permissions, :default => true
       t.boolean :email_permissions, :default => true
+      
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

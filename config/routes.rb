@@ -9,9 +9,13 @@ Buildhawk::Application.routes.draw do
     get "registrations/new", :to => "devise/sessions#new"
     get "logout", :to => "devise/sessions#destroy", :as => :logout
   end
-  
+
   resources :users
-  resources :admin
+  resources :admin do
+    collection do
+      post :import_checklist
+    end
+  end
   resources :projects
   resources :checklists
   resources :photos

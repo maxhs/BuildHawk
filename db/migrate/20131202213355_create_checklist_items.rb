@@ -1,11 +1,14 @@
 class CreateChecklistItems < ActiveRecord::Migration
-  def change
-    create_table :checklist_items do |t|
-    	t.boolean :complete, :default => false
-    	t.string :status
-    	t.text :body
-    	t.belongs_to :checklist
-      	t.timestamps
-    end
-  end
+  	def change
+    	create_table :checklist_items do |t|
+	    	t.boolean :complete, :default => false
+	    	t.string :status
+	    	t.string :type
+	    	t.text :body
+	    	t.belongs_to :subcategory
+	    	t.datetime :critical_date
+      		t.datetime :milestone_date
+	      	t.timestamps
+    	end
+  	end
 end

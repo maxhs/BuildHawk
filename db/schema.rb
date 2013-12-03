@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203012855) do
+ActiveRecord::Schema.define(version: 20131203041238) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -37,16 +37,32 @@ ActiveRecord::Schema.define(version: 20131203012855) do
     t.datetime "updated_at"
   end
 
-  create_table "checklist_items", force: true do |t|
-    t.boolean  "complete",     default: false
-    t.string   "status"
-    t.text     "body"
+  create_table "categories", force: true do |t|
+    t.integer  "index"
     t.integer  "checklist_id"
+    t.datetime "completed_date"
+    t.datetime "milestone_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "checklist_items", force: true do |t|
+    t.boolean  "complete",       default: false
+    t.string   "status"
+    t.string   "type"
+    t.text     "body"
+    t.integer  "subcategory_id"
+    t.datetime "critical_date"
+    t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "checklists", force: true do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.datetime "completed_date"
+    t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,6 +80,11 @@ ActiveRecord::Schema.define(version: 20131203012855) do
     t.string   "email"
     t.string   "phone_number"
     t.integer  "projects_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "core_checklists", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -92,6 +113,7 @@ ActiveRecord::Schema.define(version: 20131203012855) do
     t.integer  "company_id"
     t.integer  "user_id"
     t.integer  "project_id"
+    t.string   "source"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -114,6 +136,8 @@ ActiveRecord::Schema.define(version: 20131203012855) do
   create_table "punchlist_items", force: true do |t|
     t.text     "body"
     t.integer  "punchlist_id"
+    t.integer  "user_id"
+    t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -125,24 +149,40 @@ ActiveRecord::Schema.define(version: 20131203012855) do
     t.datetime "updated_at"
   end
 
+  create_table "report_fields", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reports", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "subcategories", force: true do |t|
+    t.integer  "category_id"
+    t.integer  "index"
+    t.datetime "completed_date"
+    t.datetime "milestone_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "first_name",             default: ""
     t.string   "last_name",              default: ""
     t.string   "full_name",              default: ""
     t.string   "phone_number",           default: ""
+    t.boolean  "admin",                  default: false
+    t.boolean  "uber_admin",             default: false
     t.boolean  "push_permissions",       default: true
     t.boolean  "email_permissions",      default: true
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,    null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"

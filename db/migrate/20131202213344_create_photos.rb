@@ -5,6 +5,7 @@ class CreatePhotos < ActiveRecord::Migration
       	t.belongs_to :company
       	t.belongs_to :user
       	t.belongs_to :project
+      	t.string :source
       	t.timestamps
     end
   end
