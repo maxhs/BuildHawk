@@ -1,0 +1,14 @@
+development:
+  bucket: buildhawk-dev-images
+  access_key_id: AKIAIJKP662CIN62CYAQ
+  secret_access_key: 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
+
+test:
+  bucket: buildhawk-dev-images
+  access_key_id: AKIAIJKP662CIN62CYAQ
+  secret_access_key: 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
+
+production:
+  bucket: buildhawk-images
+  access_key_id: AKIAIJKP662CIN62CYAQ
+  secret_access_key: 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

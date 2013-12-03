@@ -1,0 +1,191 @@
+<div id="menu" class="navbar navbar-default navbar-fixed-top">
+	<ul class="nav navbar-nav">
+		<li><a id="logo" href="#first-splash"><%= image_tag("logo_transparent.png") %></a></li>
+		<li><a href="#contact">Contact</a></li>
+		<li><a href="#pricing">Pricing</a></li>
+		<li><a href="#about">About</a></li>	
+		<li><a href="/login">Beta Login<a/></li>	
+	</ul>
+</div>
+
+<section id="first-splash">
+
+	<div class="splash-container">
+		<%= image_tag("macbook-iphone.png", :id => "macbook-iphone") %>
+		
+		<div class="container marketing">
+			<div class="row splash-image">
+				<p>Structure site workflow, increase efficiency, prevent errors and ensure quality. Use BuildHawk's pre-populated checklists or customize your own.</p>
+				<span class="first" id="checklist-image"></span>
+				<span id="checklist-image-blue"></span>
+			</div>
+			
+			<div class="row splash-image">
+				<p>Project documents are stored in the cloud: accessible anytime, anywhere. Easily access photos, blueprints, schedules, and more.</p>
+				<span class="first" id="document-image"></span>
+				<span id="document-image-blue"></span>
+			</div> 
+			
+			<div class="row splash-image">
+				<p>Easily create and share a project work list. Enable your team to track issues with a single set of notes and photos.</p>
+				<span class="first" id="punchlist-image"></span>
+				<span id="punchlist-image-blue"></span>
+				
+			</div>
+			
+			<div class="row splash-image" style="border:0;">
+				<p>Reports are easy with automatic weather, notifications, pictures and more, all through a simple, customizable interface.</p>
+				<span class="first" id="report-image"></span>
+				<span id="report-image-blue"></span>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+<section id="about">
+	<ul id="pitch">
+		<li>
+			<div class="benefit image"> <%= image_tag("cloud.png") %> </div>
+			<div class="benefit">
+				<h4>Easy access</h4>
+				<p>Keep the team connected, anywhere and anytime. Real time updates help you keep a thumb on the pulse of any project. </p>
+			</div>
+		</li>
+		
+		<li>
+			<div class="benefit image"> <%= image_tag("lock.png", :id => "lock") %> </div>
+			<div class="benefit">
+				<h4>Secure</h4>
+				<p>Keep the team connected, anywhere and anytime. Real time updates help you keep a thumb on the pulse of any project. </p>
+			</div>
+		</li>
+
+		<li>
+			<div class="benefit image"> <%= image_tag("messaging.png", :id => "messaging") %> </div>
+			<div class="benefit">
+				<h4>Streamlined Communication</h4>
+				<p>Say goodbye to long email threads. You and your team can manage your project’s communication from a single, easy-to-use interface.</p>
+			</div>
+		</li>
+
+		<li>
+			<div class="benefit image"> <%= image_tag("personnel.png", :id => "personnel") %> </div>
+			<div class="benefit">
+				<h4>Manage Personnel</h4>
+				<p>Delegate tasks and share info with specific personnel via easy-to-update user permissions. You’ll also be able to create limited project access for clients, keeping them connected and in the loop. </p>
+			</div>
+		</li>
+	</ul>
+</section>
+
+<section id="pricing">
+
+	<div id="left">
+		<p>+ &nbsp;Pay per project</p>
+		<p>+ &nbsp;No contracts</p>
+		<p>+ &nbsp;Unlimited users</p>
+		<p style="width:50%;">+ &nbsp;Free storage and access after project completion</p>
+	</div>
+
+	<div id="right">
+		 <%= image_tag("computer_outline.png") %>
+	</div>
+
+</section>
+
+<section id="contact">
+	<h2 id="coming-soon"> BuildHawk is coming soon!</h2>
+	<br/>
+	<p> If you’d like to test out the beta, or if you just want to stay in touch,<br />simply fill out the below form and we’ll let you know when it’s ready for early access.</p>
+	<br/>
+	<form role="form">
+		<div class="form-group">
+			<input type="text" class="form-control" data-jgs-value="data.fullname" placeholder="Your Name"/>
+			<div class="help-block error-helper"><!-- for client and server side errors --></div>
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" data-jgs-value="data.email" placeholder="Your email"/>
+			<div class="help-block error-helper"><!-- for client and server side errors --></div>
+		</div>
+		<div class="form-group" style="margin-bottom: 0px;">
+			<input type="text" class="form-control" data-jgs-value="data.company" placeholder="Company"/>
+			<div class="help-block error-helper"><!-- for client and server side errors --></div>
+		</div>
+		
+		<button type="button" class="btn btn-lg reset">Reset</button>
+		<button type="button" class="btn btn-lg send">Send</button>
+	</form>
+	<div class="confirmation" style="display: none;">
+		Success! You've pre-registered.
+	</div>
+</section>
+
+
+<footer>
+	<div id="container">
+		<ul>
+			<li><a href="#about">About</a></li>
+			<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
+			<li><a href="/about#faq">FAQ</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="#contact">Contact</a></li>
+			<li><a href="/terms">Terms of Service</a></li>
+			<li><a href="/privacy" style="cursor:default;color:#555">Privacy Policy</a></li>
+		</ul>
+
+		<div id="copyright">&copy; BuildHawk, 2013</div>
+	</div>
+</footer>
+
+<!-- begin olark code -->
+<script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+f[z]=function(){
+(a.s=a.s||[]).push(arguments)};var a=f[z]._={
+},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+0:+new Date};a.P=function(u){
+a.p[u]=new Date-a.p[0]};function s(){
+a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+b.contentWindow[g].open()}catch(w){
+c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+/* custom configuration goes here (www.olark.com/documentation) */
+olark.identify('8288-283-10-6856');/*]]>*/</script><noscript><a href="https://www.olark.com/site/8288-283-10-6856/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
+<!-- end olark code -->
+<script type="text/javascript">
+$('a').click(function(){
+    $('html, body').animate({
+        scrollTop: $( $.attr(this, 'href') ).offset().top
+    }, 500);
+    return false;
+});
+
+$(document).ready(function(){
+	$('.splash-image').hover(
+		function(){
+			$(this).find("p").css({
+				'color':'#111111',
+	'WebkitTransition' : 'color .25s ease-in-out',
+    'MozTransition'    : 'color .25s ease-in-out',
+    'MsTransition'     : 'color .25s ease-in-out',
+    'OTransition'      : 'color .25s ease-in-out',
+    'transition'       : 'color .25s ease-in-out'});
+    $(this).find('span.first').css('opacity','0');
+}
+	,
+	function(){
+		$(this).find("p").css('color','#666');
+		$(this).find('span.first').css('opacity','1');
+	});
+
+	$('#')
+});
+</script>
