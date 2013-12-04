@@ -1,0 +1,7 @@
+<div id="edit-user-container">
+	<%= form_for @user, :method => :put do |f| %>
+		<%= f.text_field :full_name, :placeholder => "Your full name", :class=>"tt-hint form-control" %>
+		<%= f.email_field :email, :placeholder => "Your email address" %>
+		<button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button>
+	<% end %>
+</div>

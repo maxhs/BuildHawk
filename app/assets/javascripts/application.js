@@ -33,3 +33,20 @@ if (history && history.pushState){
         });
     });
 }
+
+$(document).ready(function(){
+    var width = $(window).width()
+    $('#alert,#notice').css("left",width/4);
+
+    if ($('#notice').text().length !== 0) {
+        $('#notice').css({}).delay(500).fadeIn("normal", function() {
+            $(this).delay(2500).fadeOut();
+        });
+    }
+
+  if ($("#alert").text().length !== 0) {
+    $("#alert").css({}).delay(500).fadeIn("normal", function() {
+      $(this).delay(2500).fadeOut();
+    });
+  }
+});

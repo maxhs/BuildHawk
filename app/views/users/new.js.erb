@@ -1,5 +1,0 @@
-console.log("new user");
-$('#pages').fadeOut(200,function(){
-	$(this).html('<%= j render :partial => "new", :locals => {:user => @user } %>');
-	$(this).fadeIn(200);
-});

@@ -1,6 +1,6 @@
-<table id="edit-user-form">
-	<tr><td><h2>My settings</h2></td></tr>
-	<%= nested_form_for @user, :method => :put do |f| %>
+<table id="new-user-form">
+	<tr><td><h2>New User</h2></td></tr>
+	<%= form_for @user, :url => create_user_admin_index_path(@user), :method => :post do |f| %>
 		<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
@@ -11,14 +11,6 @@
 		<tr><td>Push Permissions? <%= f.check_box :push_permissions %></td></tr>
 		<tr><td><%= f.password_field :password, :placeholder => "Password", :class=>"tt-hint form-control" %></td></tr>
 		<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password", :class=>"tt-hint form-control" %></td></tr>
-		<tr><td><%= image_tag @user.photos.first.image.url(:medium), :class => "user-pic" %>
-
-		</td></tr>
-		<tr><td>
-			<%= f.fields_for @user.photos.build do |p| %>
-				<%= p.file_field :image %>
-			<% end %>
-		</td></tr>
-		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
+		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Create" %></button></td></tr>
 	<% end %>
 </table>

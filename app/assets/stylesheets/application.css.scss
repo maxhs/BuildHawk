@@ -39,6 +39,23 @@ a:hover, a.current-page {
 	color:#cc3333;
 }
 
+.alert, .notice {
+	font-size: 1.25em;
+	line-height: 40px;
+	vertical-align: middle;
+	width:50%;
+	height: 40px;
+	text-align: center;
+	position:fixed;
+	top: 60px;
+	z-index:9999;
+	display:none;
+	color:#000;
+	background:transparent;
+	padding:0;
+	margin:0 auto;
+}
+
 body {
 	font-weight:300;
 	
@@ -53,6 +70,8 @@ body {
 	}
 
 	#pagescontainer {
+	margin-top:60px;
+
 		> .row {
 			margin-top: 40px;
 			padding-bottom: 40px;
@@ -66,7 +85,7 @@ body {
 		border: 1px solid #e7e7e7;
 		.navbar-header{
 			.navbar-brand {
-				padding:0;
+				padding:0 30px;
 				margin-left:0;
 
 				img {
@@ -81,6 +100,10 @@ body {
 
 
 	.navbar-nav {
+
+		li:hover, li:hover a {
+			background:transparent;
+		}
 		> li > a {
 			font-size:1.4em;
 			padding:15px 25px;

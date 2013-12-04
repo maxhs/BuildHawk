@@ -1,31 +1,35 @@
 <% if @checklist && @checklist.categories.count > 0 %>
-	<table class="project-checklist-table">
-		<th>Category</th>
-		<th>Subcategory</th>
-		<th>Item</th>
-		<th>Updated</th>
-		<th>edit</th>
+	<div class="project-checklist-table">
+
+		<header>
+	
+	<div class="input-group" style="width: 100%; margin-right: 5px;">
+		<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search checklist items">
+		<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+	</div>
+	
+</header>
+
+<div class="row" style="font-weight: bold; margin: 25px 0px 5px 0px;">
+	<div class="col-md-7">&nbsp;</div>
+	<div class="col-md-2" style="text-align: center;">Critical Date</div>	
+	<div class="col-md-2" style="text-align: center;">Completed</div>	
+</div>
 		<% @checklist.categories.each do |c| %>
-			<tr>
-				<td>
-					<%= c.name %>
-				</td>
-			</tr>
+			<div class="category">
+				<h1><%= c.name %></h1>
+			</div>
 			<% c.subcategories.each do |s| %>
-				<tr>
-					<td></td>
-					<td><%=s.name%></td>
-					<% s.checklist_items.each do |i| %>
-					<tr>
-						<td></td>
-						<td></td>
-						<td><%= i.body %></td>
-						<td><%= i.updated_at %></td>
-						<td><%= link_to "Edit" %></td>
-					</tr>
+				<div class="subcategory">
+					<h2><%=s.name%></h2>
+				</div>
+				<% s.checklist_items.each do |i| %>
+					<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>
+						<%= render :partial => 'checklist_item_row', :locals => {:item => i} %>
 					<% end %>
-				</tr>
+				<% end %>
+				
 			<% end %>
 		<% end %>
-	</table>
+	
 <% end %>

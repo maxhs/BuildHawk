@@ -2,9 +2,10 @@ class ProjectsController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :find_project
 
+	autocomplete :checklist_item, :body
+
 	def new
 		@project = Project.new
-		
 		@users = current_user.company.users
 		if request.xhr?
 			respond_to do |format|
@@ -61,6 +62,11 @@ class ProjectsController < ApplicationController
 	end
 
 	def update
+		if params[:project][:checklist].present?
+			checklist = Checklist.find_by(name: params[:project][:checklist])
+			@project.update_attribute :checklist_id, checklist.id
+			params[:project].delete(:checklist)
+		end
 		@project = Project.find params[:id]
 		@project.update_attributes params[:project]
 		@projects = current_user.company.projects
@@ -83,6 +89,10 @@ class ProjectsController < ApplicationController
 		#@items = @project.checklist.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
 		@checklist = @project.checklist
 	end     
+
+	def checklist_item
+		@checklist_item = ChecklistItem.find params[:id]
+	end
 
 	def punchlists
 		@punchlist = @project.punchlists.first

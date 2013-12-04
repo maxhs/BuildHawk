@@ -21,7 +21,7 @@
 					<td class="category"><%= item.subcategory.category.name %></td>
 					<td class="subcategory"><%= item.subcategory.name %></td>
 					<td><%= item.body %></td>
-					<td class="timestamp"><%= item.updated_at %></td>
+					<td class="timestamp"><%= parse_time item.updated_at %></td>
 					<td class="edit"><%= link_to "Edit" %></td>
 				</tr>
 			<% end %>

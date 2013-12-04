@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204082654) do
+ActiveRecord::Schema.define(version: 20131204194226) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20131204082654) do
     t.integer  "subcategory_id"
     t.datetime "critical_date"
     t.datetime "milestone_date"
+    t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -130,11 +131,12 @@ ActiveRecord::Schema.define(version: 20131204082654) do
   end
 
   create_table "projects", force: true do |t|
-    t.boolean  "active",     default: true
+    t.boolean  "active",       default: true
     t.integer  "company_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "checklist_id"
   end
 
   create_table "punchlist_items", force: true do |t|

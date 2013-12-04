@@ -9,6 +9,7 @@ class UberAdminController < ApplicationController
 	end
 
 	def upload_template
+		puts "anything?"
 		Checklist.import(params[:checklist][:file])
 		redirect_to uber_admin_index_path
 	end

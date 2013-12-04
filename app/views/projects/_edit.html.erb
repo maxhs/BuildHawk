@@ -10,7 +10,9 @@
 			<tr><td><%= a.text_field :state , :placeholder => "State" %></td></tr>
 			<tr><td><%= a.text_field :zip , :placeholder => "Zip" %></td></tr>
 		<% end %>
-		<tr><td>Project Users: <%= f.select :project_users, options_for_select(@users.collect{|u| u.full_name}),
+		<tr><td>Checklist: <%= f.select :checklist, options_for_select(current_user.company.checklists.collect(&:name)) %></td></tr>
+
+        <tr><td>Project Users: <%= f.select :project_users, options_for_select(@users.collect{|u| u.full_name}),
                                    { :multiple => true, :size => @users.count } %></td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
 	<% end %>

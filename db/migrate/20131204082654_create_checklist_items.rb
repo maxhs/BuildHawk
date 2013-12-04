@@ -8,6 +8,7 @@ class CreateChecklistItems < ActiveRecord::Migration
 	    	t.belongs_to :subcategory
 	    	t.datetime :critical_date
       		t.datetime :milestone_date
+      		t.datetime :completed_date
 	      	t.timestamps
     	end
   	end

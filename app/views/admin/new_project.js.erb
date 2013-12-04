@@ -1,0 +1,6 @@
+$('.sidebarProjects div a').css('color','#777');
+$('#new-project-link').css('color','#cc0000');
+$('#pages').fadeOut(200,function(){
+	$(this).html('<%= j render :partial => "new_project", :locals => {:project => @project } %>');
+	$(this).fadeIn(200);
+});

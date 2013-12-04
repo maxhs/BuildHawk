@@ -7,6 +7,14 @@ class ChecklistItem < ActiveRecord::Base
 
   	acts_as_api
 
+    def subcategory_name
+      subcategory.name
+    end
+
+    def category_name
+      subcategory.category.name
+    end
+
   	api_accessible :project do |t|
   		t.add :title
   		t.add :body
@@ -15,6 +23,8 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :subcategory_id
   		t.add :status
   		t.add :complete
+      t.add :subcategory_name
+      t.add :category_name
   	end
 
 end
