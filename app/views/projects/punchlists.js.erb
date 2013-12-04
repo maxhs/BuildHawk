@@ -1,0 +1,4 @@
+$('#pages').fadeOut(200,function(){
+	$(this).html('<%= j render :partial => "punchlists", :locals => {:punchlists => @punchlists } %>');
+	$(this).fadeIn(200);
+});

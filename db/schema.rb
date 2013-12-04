@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203041238) do
+ActiveRecord::Schema.define(version: 20131204082654) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "company_id"
+    t.string   "state",        default: ""
     t.boolean  "active"
     t.string   "street1",      default: ""
     t.string   "street2",      default: ""
@@ -40,8 +41,10 @@ ActiveRecord::Schema.define(version: 20131203041238) do
   create_table "categories", force: true do |t|
     t.integer  "index"
     t.integer  "checklist_id"
+    t.integer  "core_checklist_id"
     t.datetime "completed_date"
     t.datetime "milestone_date"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,7 +52,7 @@ ActiveRecord::Schema.define(version: 20131203041238) do
   create_table "checklist_items", force: true do |t|
     t.boolean  "complete",       default: false
     t.string   "status"
-    t.string   "type"
+    t.string   "item_type"
     t.text     "body"
     t.integer  "subcategory_id"
     t.datetime "critical_date"
@@ -60,6 +63,7 @@ ActiveRecord::Schema.define(version: 20131203041238) do
 
   create_table "checklists", force: true do |t|
     t.integer  "project_id"
+    t.integer  "company_id"
     t.string   "name"
     t.datetime "completed_date"
     t.datetime "milestone_date"
@@ -161,6 +165,7 @@ ActiveRecord::Schema.define(version: 20131203041238) do
 
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
+    t.string   "name"
     t.integer  "index"
     t.datetime "completed_date"
     t.datetime "milestone_date"

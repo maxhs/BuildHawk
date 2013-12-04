@@ -3,7 +3,7 @@ class CreateChecklistItems < ActiveRecord::Migration
     	create_table :checklist_items do |t|
 	    	t.boolean :complete, :default => false
 	    	t.string :status
-	    	t.string :type
+	    	t.string :item_type
 	    	t.text :body
 	    	t.belongs_to :subcategory
 	    	t.datetime :critical_date

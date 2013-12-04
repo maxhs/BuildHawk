@@ -1,5 +1,5 @@
 class Subcategory < ActiveRecord::Base
-	attr_accessible :name, :category_id, :index, :milestone, :completed_date
+	attr_accessible :name, :category_id, :index, :milestone, :completed_date, :checklist_items
   	belongs_to :category
   	has_many :checklist_items
 

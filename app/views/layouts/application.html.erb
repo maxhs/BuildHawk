@@ -26,17 +26,22 @@
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
 							<% if user_signed_in? %>
-								<li class="nav-projects"><%= link_to "Projects", projects_path %></li>
-								<li class="nav-admin" data-jgs-show="user.permissions.admin_company"><a href="/users">Admin</a></li>
+								<li class="nav-projects" id="nav-projects"><%= link_to "Projects", projects_path %></li>
+								<% if current_user.admin %>
+									<li class="nav-admin" id="nav-admin"><%= link_to "Admin", admin_index_path %></li> 
+								<% end %>
+								<% if current_user.uber_admin %>
+									<li class="nav-uber-admin" id="nav-uber-admin"><%= link_to "Uber Admin", uber_admin_index_path %></li> 
+								<% end %>
 							<% end %>
 						</ul>
 						<ul class="nav navbar-nav pull-right">
 							<% if user_signed_in? %>
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span data-jgs-text="data.fullname"></span> <b class="caret"></b></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><%=current_user.full_name%></span> <b class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li><a href="/user/me">My Settings</a></li>
-										<li><a href="/api/v1/logout">Logout</a></li>
+										<li><%= link_to "My Settings", edit_user_path(current_user) %></li>
+										<li><%= link_to "Logout", logout_path %></li>
 									</ul>
 								</li>
 							<% else %>
@@ -46,9 +51,49 @@
 					</div><!--/.nav-collapse -->
 				</div>
 			</div>
+		<div id="pagescontainer" class="container">
+			<% if user_signed_in? && current_page?(:controller=>:projects) && @projects %>
+			<script>
+				$('#nav-projects a').addClass('current-page');
+			</script>
+				<div class="row row-offcanvas row-offcanvas-left">
+					<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+						<div class="well sidebar-nav projects">
+							<div class="sidebarProjects">
+								<% @projects.each do |project| %>
+									<div><%= link_to project.name, project_path(project), :remote => true %></div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-9" id="main">
+			<% elsif user_signed_in? && current_page?(:controller=>:admin) %>
+			<script>
+				$('#nav-admin a').addClass('current-page');
+			</script>
+				<div class="row row-offcanvas row-offcanvas-left">
+					<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+						<div class="well sidebar-nav projects">
+							<div class="sidebarProjects">
+								<div id="option-one"><%= link_to "Add User", new_user_path, :remote => true %></div>
+								<div id="option-two"><%= link_to "New Project", new_project_path, :remote => true %></div>
+								<div id="option-two"><%= link_to "Reports", reports_path, :remote => true %></div>
+								<div id="option-two"><%= link_to "Checklist Templates", checklists_path, :remote => true %></div>
+								<div id="option-two"><%= link_to "Personnel Management", users_path, :remote => true %></div>
+								<div id="last-option"><%= link_to "Billing" %></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-9" id="main">
+			<% else %>
+				<script>
+					$('#nav-uber-admin a').addClass('current-page');
+				</script>
+			<% end %>
+					
 
-		<%= yield %>
-	
-	</div>
+						<%= yield %>
+					
+					</div>
 </body>
 </html>

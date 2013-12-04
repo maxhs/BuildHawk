@@ -4,7 +4,7 @@ class CreateAddresses < ActiveRecord::Migration
     	t.belongs_to :user
     	t.belongs_to :project
     	t.belongs_to :company
-    	
+    	t.string :state, :default => ""
     	t.boolean :active
     	t.string :street1, :default => ""
     	t.string :street2, :default => ""

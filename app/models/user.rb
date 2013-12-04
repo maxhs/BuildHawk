@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
     attr_accessible :first_name, :last_name, :user_id, :email, :password, :phone_number, :push_permissions, :email_permissions,
-    				:full_name, :company_id
+    				:full_name, :company_id, :company_attributes
 
     belongs_to :company
   	has_many :project_users
   	has_many :projects, :through => :project_users 
 
-  	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  	devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable#, :rememberable
+
+  	accepts_nested_attributes_for :company
 
   	acts_as_api
 

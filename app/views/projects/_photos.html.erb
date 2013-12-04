@@ -1,0 +1,8 @@
+<table id="checklists-table">
+	<h2>Documents</h2>
+	<% @photos.each do |photo| %>
+		<%= image_tag photo.image.url(:small) %>
+	<% end %>
+
+	<%= link_to "Add photo", new_photo_project_path(@project), :remote => true %>
+</table>

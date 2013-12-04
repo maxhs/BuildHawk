@@ -26,9 +26,11 @@ a {
 	color:#777;
 	-webkit-transition: all 0.25s ease-out;
 	-moz-transition: all 0.25s ease-out;
+	-o-transition: all 0.25s ease-out;
 	transition: all 0.25s ease-out;
+
 }
-a:hover {
+a:hover, a.current-page {
 	text-decoration:none;
 	color:#cc0000;
 }
@@ -52,20 +54,31 @@ body {
 
 	#pagescontainer {
 		> .row {
-			margin-top: 100px;
+			margin-top: 40px;
 			padding-bottom: 40px;
 			
 		}
 	}
 
-	.navbar-brand {
-		padding:0;
+	.navbar {
+		margin-bottom: 20px;
+		background-color: #f8f8f8;
+		border: 1px solid #e7e7e7;
+		.navbar-header{
+			.navbar-brand {
+				padding:0;
+				margin-left:0;
 
-		img {
-			margin-top:10px;
-			height:30px;
+				img {
+					margin-top:10px;
+					height:30px;
+				}
+			}
 		}
 	}
+
+
+
 
 	.navbar-nav {
 		> li > a {
@@ -77,10 +90,6 @@ body {
 			background-color:transparent;
 		}
 
-		> .active > a, > .active > a:hover {
-			color:#cc3333;
-			background-color:transparent;
-		}
 	}
 
 	.dropdown-menu {
@@ -104,7 +113,7 @@ body {
 	}
 
 	.container {
-		max-width:90%;
+		width:90%;
 	}
 
 	footer {
@@ -207,13 +216,49 @@ body {
 			}
 		}
 	}
+}
 
+.session-container {
+	padding-top:5%;
+	display:block;
+	width:400px;
+	margin:0 auto;
+
+	form {
+		width:100%;
+		input {
+			margin:0 auto;
+			width:100%;
+		}
+	}
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	box-shadow:0 0 0 0 #fff;
+	-moz-box-shadow:0 0 0 0 #fff;
+	-webkit-box-shadow:0 0 0 0 #fff;
+	border:1px solid #eee;
+	padding:7px;
+}
+
+input {
+	outline:0;
+	display:block;
+}
+
+input[type="submit"] {
+	background:transparent;
+	border:0;
+	color:#fff;
 }
 
 .sidebarProjects {
-	margin-top: 20px;
+	
 	> div {
-		margin-bottom: 15px;
+		margin: 20px 0;
 	}
 }
 
@@ -225,7 +270,7 @@ body {
 #wrap {
 	#main, #sidebar {
 		> .admin, > .projects {
-			display: none;
+			/*display: none;*/
 
 			ul > li > a {
 				font-size: 1.2em;
@@ -273,16 +318,7 @@ body {
 
 		}
 	}
-	&.templates-page, &.template-page, &.reportTypes-page, &.reportType-page, &.users-page, &.userform-page, &.templateitem-page, &.projectform-page, &.billing-page {
-		#main, #sidebar {
-			> .projects {
-				display: none;
-			}
-			> .admin {
-				display: block;
-			}
-		}
-	}
+	
 }
 
 body {
@@ -298,8 +334,8 @@ body {
 		text-decoration:none;
 	}
 
-	#pages {	// bootstrap views (pages) are all inside #pages container
-		#login-page, #register-page, #forgot-page, #reset-page {	// each diff page, has own id as well
+	#pages {
+		#login-page, #register-page, #forgot-page, #reset-page {
 			margin: 100px auto; 
 			max-width: 350px;
 			padding: 10px;

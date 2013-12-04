@@ -18,3 +18,18 @@
 //= require jquery.remotipart
 //= require shadowbox
 //= require_tree .
+
+if (history && history.pushState){
+    $(function(){
+        $('body').on('click', 'a',function(e){
+            if ($(e.target).is('#left-menu-toggle img, #right-menu-toggle, .response-form, #add-feedback-link, #remove-user-image, #logout-link, a.remove, .bookmark-link, .cancel-editing, .edit-contribution, .feature, .delete-link, #more-sentences, #contact-link a, .load-more-stories, #weekly-signup-link')) {
+            
+            } else {
+                history.pushState(null, null, this.href);
+            }
+        });
+        $(window).bind("popstate", function(){
+          $.getScript(location.href);
+        });
+    });
+}

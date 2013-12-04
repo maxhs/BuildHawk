@@ -2,6 +2,7 @@ class CreateSubcategories < ActiveRecord::Migration
   def change
     create_table :subcategories do |t|
       t.belongs_to :category
+      t.string :name
       t.integer :index
       t.datetime :completed_date
       t.datetime :milestone_date

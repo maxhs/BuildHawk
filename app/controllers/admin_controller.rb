@@ -1,6 +1,10 @@
 class AdminController < ApplicationController
 
-	def import_checklist
-		Checklist.import(params[:file])
+	def index
+		@core_checklist = CoreChecklist.last
+	end
+
+	def edit_item
+
 	end
 end

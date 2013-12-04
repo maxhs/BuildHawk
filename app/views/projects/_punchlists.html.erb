@@ -1,0 +1,20 @@
+<% if @punchlist && @punchlist.punchlist_items.count >> 0 %>
+	<table id="punchlist-table">
+		<h2>Punchlist</h2>
+
+		<%= link_to "Add Item", new_punchlist_item_project_path(@project), :remote => true %>
+		<% @punchlist.punchlist_items.each do |item| %>
+		<tr>
+			<td>
+				<%= item.body %>
+			</td>
+		</tr>
+
+		<% end %>
+		</table>
+	</table>
+<% else %>
+	<div id="no-punchlist">
+		No Punchlist Items
+	</div>
+<% end %>

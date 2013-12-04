@@ -1,0 +1,31 @@
+<% if @checklist && @checklist.categories.count > 0 %>
+	<table class="project-checklist-table">
+		<th>Category</th>
+		<th>Subcategory</th>
+		<th>Item</th>
+		<th>Updated</th>
+		<th>edit</th>
+		<% @checklist.categories.each do |c| %>
+			<tr>
+				<td>
+					<%= c.name %>
+				</td>
+			</tr>
+			<% c.subcategories.each do |s| %>
+				<tr>
+					<td></td>
+					<td><%=s.name%></td>
+					<% s.checklist_items.each do |i| %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><%= i.body %></td>
+						<td><%= i.updated_at %></td>
+						<td><%= link_to "Edit" %></td>
+					</tr>
+					<% end %>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+<% end %>

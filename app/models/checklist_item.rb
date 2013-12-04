@@ -1,5 +1,5 @@
 class ChecklistItem < ActiveRecord::Base
-	attr_accessible :title, :complete, :type, :body, :user_id, :subcategory_id, :status, :critical_date, :completed_date
+	attr_accessible :body, :complete, :item_type, :user_id, :subcategory_id, :subcategory, :status, :critical_date, :completed_date
   	
   	belongs_to :subcategory
   	has_many :photos

@@ -4,5 +4,6 @@ class CreateReportFields < ActiveRecord::Migration
 
       t.timestamps
     end
+
   end
 end

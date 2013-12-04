@@ -1,0 +1,8 @@
+<table>
+	<%= form_for @punchlist_item, :url => {:action => :punchlist_item }, :method => :post do |f| %>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+		<%= hidden_field_tag :project_id, @project.id %>
+		<tr><td><%= f.text_field :body, :placeholder => "Punchlist item" %></td></tr>
+		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Create" %></button></td></tr>
+	<% end %>
+</table>

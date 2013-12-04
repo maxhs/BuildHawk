@@ -1,14 +1,14 @@
 development:
   bucket: buildhawk-dev
-  access_key_id: AKIAIG3O6L7Y7SE2JJGA
-  secret_access_key: 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
+  access_key_id: AKIAJC7K2IXFBN7BU2NA
+  secret_access_key: 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
 
 test:
   bucket: buildhawk-dev
-  access_key_id: AKIAIG3O6L7Y7SE2JJGA
-  secret_access_key: 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
+  access_key_id: AKIAJC7K2IXFBN7BU2NA
+  secret_access_key: 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
 
 production:
   bucket: buildhawk
-  access_key_id: AKIAIG3O6L7Y7SE2JJGA
-  secret_access_key: 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
+  access_key_id: AKIAJC7K2IXFBN7BU2NA
+  secret_access_key: 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

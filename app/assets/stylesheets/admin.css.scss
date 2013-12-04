@@ -1,3 +1,104 @@
 // Place all the styles related to the Admin controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	font-weight:300;
+
+	// button to clear searches
+	.clear {
+		float: right; 
+		margin: 0px 10px 0px 0px;
+	}
+
+	.navbar-brand {
+		padding:0;
+
+		img {
+			margin-top:10px;
+			height:30px;
+		}
+	}
+
+	.navbar-nav {
+		> li > a {
+			font-size:1.4em;
+			padding:15px 25px;
+		}
+
+		> a:hover {
+			background-color:transparent;
+		}
+	}
+
+	.dropdown-menu {
+		width:200%;
+		> li > a {
+			line-height:2.25em;
+			font-size:1.25em;
+			font-weight:300;
+			padding:3px 40px;
+			text-align:right;
+		}
+	}
+
+	.datepicker.dropdown-menu {
+		width:auto;
+		padding:10px;
+
+		th {
+			text-align:center;
+		}
+	}
+
+	.container {
+		max-width:90%;
+	}
+
+}
+
+#upload-core {
+	width:400px;
+	padding:0 30px 30px;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	margin:20px auto;
+	display:block;
+	border:1px solid #ddd;
+	background:#f1f1f1;
+	text-align:center;
+	table {
+		width:100%;
+
+		form {
+			input {
+				margin: 30px auto;
+			}
+		}
+	}
+}
+
+.core-item-row {
+	border-bottom:1px solid #ddd;
+}
+
+#core-checklist {
+	padding:20px; 
+	margin-top:40px; 
+	border:1px solid #ddd; 
+	margin:0 auto; 
+	width:90%;
+
+	th {
+		background:#eee;
+	}
+
+	td {
+		padding:7px;
+	}
+
+	td.category,td.subcategory,td.timestamp, td.edit {
+		width:10%;
+	}
+}

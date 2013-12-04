@@ -1,0 +1,28 @@
+<div id="upload-core">
+	<table>
+		<%= form_for @checklist, :url => upload_template_admin_index_path, :multipart => true, :method => :post do |f| %>
+			<tr><td>Upload template:<%= f.file_field :file %></td></tr>
+			<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Upload" %></button></td></tr>
+		<% end %>
+	</table>
+</div>
+<div style="margin-top:40px; border:1px solid #ddd; margin:0 auto; width:90%; padding:17px;">
+	<% if @items %>
+		<table>
+			<th>Category</th>
+			<th>Subcategory</th>
+			<th>Item</th>
+			<th>Last Updated</th>
+			<tbody>
+			<% @items.each do |item| %>
+				<tr class="core-item-row" style="border-bottom:1px solid #ddd;">
+					<td><%= item.subcategory.category.name %></td>
+					<td><%= item.subcategory.name %></td>
+					<td><%= item.body %></td>
+					<td><%= item.updated_at %></td>
+				</tr>
+			<% end %>
+		</tbody>
+		</table>
+	<% end %>
+</div>
