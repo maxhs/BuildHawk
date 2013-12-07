@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
     attr_accessible :first_name, :last_name, :user_id, :email, :password, :phone_number, :push_permissions, :email_permissions,
-    				:full_name, :company_id, :company_attributes, :photos_attributes, :password_confirmation
+    				:full_name, :company_id, :company_attributes, :photos_attributes, :password_confirmation, :admin, :uber_admin
 
     belongs_to :company
   	has_many :project_users, :dependent => :destroy
