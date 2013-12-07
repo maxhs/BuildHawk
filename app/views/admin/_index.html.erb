@@ -1,0 +1,17 @@
+<div class="row row-offcanvas row-offcanvas-left">
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+		<div class="well sidebar-nav projects">
+			<div class="sidebarProjects">
+				<div><%= link_to "Add User", new_user_admin_index_path, :id => "new-user-link", :remote => true %></div>
+				<div><%= link_to "New Project", new_project_admin_index_path, :id => "new-project-link", :remote => true %></div>
+				<div><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></div>
+				<div><%= link_to "Checklist Templates", checklists_admin_index_path, :id => "admin-checklists-link", :remote => true %></div>
+				<div><%= link_to "Personnel Management", users_admin_index_path, :id => "personnel-link", :remote => true %></div>
+				<div><%= link_to "Billing", billing_admin_index_path, :id => "billing-link", :remote => true  %></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-9" id="main">
+		<div id="pages">
+			index!
+		</div>

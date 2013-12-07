@@ -1,6 +1,17 @@
 class UberAdminController < ApplicationController
 
 	def index
+		@companies = Company.all
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :index
+		end
+	end
+
+	def core_checklist
 		@checklist = Checklist.new
 		core_checklist = CoreChecklist.last
 		if core_checklist
@@ -9,7 +20,6 @@ class UberAdminController < ApplicationController
 	end
 
 	def upload_template
-		puts "anything?"
 		Checklist.import(params[:checklist][:file])
 		redirect_to uber_admin_index_path
 	end
@@ -25,6 +35,23 @@ class UberAdminController < ApplicationController
 
 	def update_item
 
+	end
+
+	def companies
+		@companies = Company.all
+	end
+
+	def edit_company
+		@company = Company.find params[:company_id]
+	end
+
+	def update_company
+		@company = Company.find params[:company_id]
+		@company.update_attributes params[:company]
+	end
+
+	def users
+		@users = User.all
 	end
 
 end

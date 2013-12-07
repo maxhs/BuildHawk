@@ -10,11 +10,42 @@
 	width:100%;
 
 	.row {
-		padding:10px;
+		padding:12px;
 		border-bottom:1px solid #eee;
+		font-size:15px;
 	}
 
 	.checklist-item.completed {
 		background:#eee;
+	}
+}
+
+
+.checklist-item-form{
+	padding:20px;
+	border:1px solid #eee;
+	
+	.row {
+		span {
+			line-height:63px;
+		}
+	}
+
+	.header-description {
+		border:1px solid #eee;
+		margin-top:-1px;
+	}
+	
+	h4 {
+		display:inline-block;
+	}
+
+	.item-body {	
+		font-size:16px;
+	}
+
+	input[type="checkbox"] {
+		display:inline-block;
+		margin-left:20px;
 	}
 }

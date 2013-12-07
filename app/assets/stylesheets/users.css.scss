@@ -8,6 +8,21 @@
 }
 
 #edit-user-form {
+	display:block;
 	width:600px;
 	margin:0 auto;
+	border:1px solid #eee;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+
+	tbody {
+		display:block;
+		padding:0 30px 30px;
+	}
+}
+
+input[type="checkbox"] {
+	display:inline-block;
+	margin-left:20px;
 }

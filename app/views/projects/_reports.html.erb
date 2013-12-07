@@ -1,1 +1,35 @@
-reporst index!
+<header>
+	
+	<%= link_to "Add Report", new_report_project_path(@project), :class=>"btn btn-default pull-right", :style=>"min-width:24%;", :remote => true %>
+	
+	<div class="input-group" style="max-width: 74%;margin-bottom: 20px">
+		<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Reports">
+		<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+	</div>
+</header>
+
+
+<table class="table table-bordered table-responsive" id="users">
+	<thead>
+		<tr>
+			<th>Report Date</th>
+			<th>Type</th>
+			<th>Created</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<% if @reports.count && @reports.count > 0 %>
+			<% @reports.each do |report| %>
+				<tr>
+					<td><%= link_to report.title, show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
+					<td><%= report.report_type %></td>
+					<td><%= parse_time report.created_at %></td>
+				</tr>
+				<% end %>
+			<% else %>
+				<tr><td colspan="3" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No reports</h4></td></tr>
+			<% end %>
+		
+	</tbody>
+</table>

@@ -27,4 +27,5 @@ class ChecklistsController < ApplicationController
 	def create
 
 	end
+	
 end

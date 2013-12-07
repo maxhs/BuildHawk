@@ -1,0 +1,6 @@
+$('a').css('color','#777');
+$('#nav-uber-admin a').css('color','#cc0000');
+$('#pagescontainer').fadeOut(200,function(){
+	$(this).html('<%= j render :partial => "index" %>');
+	$(this).fadeIn(200);
+});

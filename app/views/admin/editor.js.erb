@@ -1,0 +1,6 @@
+$('.sidebarProjects div a').css('color','#777');
+$('#admin-checklists-link').css('color','#cc0000');
+$('#pages').fadeOut(200,function(){
+	$(this).html('<%= j render :partial => "editor", :locals => {:checklist => @checklist } %>');
+	$(this).fadeIn(200);
+});

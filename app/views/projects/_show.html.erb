@@ -16,5 +16,5 @@
 	<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
 </p>
 <div id="pages">
-	show project
+	<%= render :partial => "project_dashboard", :locals => {:project => @project} %>
 </div>

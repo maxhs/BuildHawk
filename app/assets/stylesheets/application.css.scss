@@ -96,16 +96,13 @@ body {
 		}
 	}
 
-
-
-
 	.navbar-nav {
 
 		li:hover, li:hover a {
 			background:transparent;
 		}
 		> li > a {
-			font-size:1.4em;
+			font-size:1.25em;
 			padding:15px 25px;
 		}
 
@@ -256,18 +253,32 @@ body {
 	}
 }
 
-input[type="email"], input[type="password"], input[type="text"] {
+input[type="email"], input[type="password"], input[type="text"], textarea {
 	border-radius:4px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	box-shadow:0 0 0 0 #fff;
-	-moz-box-shadow:0 0 0 0 #fff;
-	-webkit-box-shadow:0 0 0 0 #fff;
+	box-shadow:0 0 0 0 #eee;
+	-moz-box-shadow:0 0 0 0 #eee;
+	-webkit-box-shadow:0 0 0 0 #eee;
 	border:1px solid #eee;
 	padding:7px;
 }
 
-input {
+select[multiple] {
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	outline: 0;
+	width: 50%;
+	height: auto;
+	border: 1px solid #eee;
+}
+
+select, select[multiple] {
+	margin-left:10px !important;
+}
+
+input, textarea {
 	outline:0;
 	display:block;
 }
@@ -426,417 +437,13 @@ body {
 		#logo:hover {
 			border-bottom:0 !important;
 		}
-
-		.splash-container {
-			margin:30px auto;
-			max-width:1140px;
-		}
-
-		#first-splash {
-			background:#fff;
-			height:660px;
-			font-size:1.1em;
-			padding-top:80px;
-			padding-bottom:80px;
-
-			#macbook-iphone {
-				max-width: 45%;
-				margin: 7.5% auto 5%;
-			}
-
-			.container.marketing {
-				float:right;
-				display:inline-block;
-				width:50%;
-				max-width:900px;
-				padding-top:0.5%;
-				font-size:1.1em;
-			}
-
-			#checklist-image {
-				background-image:url('../images/splash_checklist_gray.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-			#checklist-image-blue {
-				background-image:url('../images/splash_checklist_blue.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-
-			#document-image {
-				background-image:url('../images/splash_document_gray.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-			#document-image-blue {
-				background-image:url('../images/splash_document_blue.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-
-			#report-image {
-				background-image:url('../images/splash_report_gray.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-			#report-image-blue {
-				background-image:url('../images/splash_report_blue.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-
-			#punchlist-image {
-				background-image:url('../images/splash_punchlist_gray.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-			#punchlist-image-blue {
-				background-image:url('../images/splash_punchlist_blue.png');
-				background-repeat:no-repeat;
-				background-position:center; 
-				background-size:100px;
-				width:100px;
-				height:100px;
-				display:inline-block;
-				margin:0 1%;
-				position:absolute;
-			}
-
-			.left {
-			float:left;
-			}
-
-			.right {
-			float:right;
-			text-align:right;
-			}
-
-			.splash-image {
-			height:110px;
-			width:90%;
-			margin:1.5% 2.5% 0 0;
-			padding-bottom:1%;
-			display:inline-table;
-			border-bottom:1px solid #eee;
-
-			.first {
-				transition:opacity .25s linear;
-				-moz-transition:opacity .25s linear;
-				-webkit-transition:opacity .25s linear;
-				z-index:2;
-			}
-
-				p {
-					width:80%;
-					display:inline-block;
-					margin:0;
-					padding-top:20px;
-					vertical-align:top;
-					color:#666;
-				}
-			}
-		}
-
-		#about {
-			height:880px;
-			padding-top:60px;
-
-			ul#pitch {
-				max-width:1140px;
-				margin:0 auto;
-				font-size:1.15em;
-				height:90%;
-				padding:2.5% 0 0 0;
-
-				li {
-					margin: 0 auto;
-					list-style: none;
-					height: 25%;
-					border-bottom: 1px solid #eee;
-					padding-top: 2%;
-				}
-
-				li:last-child {
-					border:0;
-					padding-top:1%;
-				}
-
-				.benefit {
-					display:inline-table;
-					width:60%;
-					margin:.5% auto 2.5%;
-					float:right;
-				}
-
-				.benefit.image {
-					float:left;
-					width:25%;
-					margin-left:10%;
-
-					#lock {
-						max-width:70px;
-					}
-
-					img {
-						max-width:120px;
-						padding-top:10px;
-					}
-				}
-			}
-		}
-
-		#pricing {
-			height:700px;
-
-			#left {
-				display:inline-block;
-				float:left;
-				width:50%;
-				height:100%;
-				background-color:#336699;
-				padding-top:193px;
-				box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
-				-webkit-box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
-				-moz-box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
-
-				p {
-					width:50%;
-					margin: 0 auto;
-					font-size:1.6em;
-					color:#fff;
-					line-height:3.25em;
-					text-align:left;
-					font-weight:lighter;
-				}
-			}
-
-			#right {
-				display:inline-block;
-				float:right;
-				width:50%;
-				height:100%;
-				background-color:#fff;
-
-				img {
-					display:block;
-					margin:225px auto;
-				}
-			}
-		}
-
-		#contact {
-			background:#eee;
-			height:500px;
-			text-align:center;
-			padding-top:30px;
-
-			#coming-soon{
-				font-weight:300;
-				padding-top:60px; 
-				margin:0 auto;
-			}
-
-			p {
-				padding-top:10px;
-				font-size:1.15em;
-			}
-
-			input[type="text"]{
-				margin: .5em auto;
-				font-weight: lighter;
-				font-family: helvetica;
-				font-size: 1.1em;
-				padding: .5em;
-				height: 2.5em;
-				width: 300px;
-				
-				border-radius: 3px;
-			}
-
-			button {
-				background-color:#336699;
-				width:8em;
-				height:2.5em;
-				border-radius:3px;
-				color:#fff;
-				border:0;
-				box-shadow:0 0 0 0;
-				font-size:1.15em;
-				margin:1em;
-			}
-		}
-	}
-
-	footer {
-		height:120px;
-		background-color:#fff;
-		color:#fff;
-		font-size:1.15em;
-		padding-top:25px;
-
-		#container {		
-			width:80%;
-			margin: 0 auto;
-
-			ul {
-				display:inline-block;
-				width:40%;
-
-				li {
-					list-style:none;
-				}
-			}
-
-			#copyright {
-				float:right;
-				color:#aaa;
-				display:inline-block;
-			}
-		}
 	}
 }
 
-#about-page {
-
-		#menu {
-			width:100%;
-			margin:0 auto;
-			top:0;
-			box-shadow: 0 0 2px 1px #ccc;
-			-webkit-box-shadow: 0 0 2px 1px #ccc;
-			-moz-box-shadow: 0 0 2px 1px #ccc;
-		}
-
-
-		#logo:hover {
-			border-bottom:0 !important;
-		}
-
-	#team, #faq, #about {
-		height:100% !important;
-		margin-top:80px;
-		
-		#user-voice-container {
-			max-width:1140px;
-			margin:2.5% auto;
-			background:#fff;
-			padding:2.5% 2.5% 0 2.5%;
-			border:1px solid #ddd;
-			border-radius:3px;
-			-webkit-border-radius:3px;
-			-moz-border-radius:3px;
-			box-shadow: 0 0 10px 0 #ddd;
-			-moz-box-shadow: 0 0 10px 0 #ddd;
-			-webkit-box-shadow: 0 0 10px 0 #ddd;
-		}
-
-		ul#team-list, ul#pitch {
-			width:90%;
-			max-width:1140px;
-			margin:2.5% auto 0;
-			background:#fff;
-			padding:2.5% 2.5% 0 2.5%;
-			list-style:none;
-			border:1px solid #ddd;
-			border-radius:3px;
-			-webkit-border-radius:3px;
-			-moz-border-radius:3px;
-			box-shadow: 0 0 10px 0 #ddd;
-			-moz-box-shadow: 0 0 10px 0 #ddd;
-			-webkit-box-shadow: 0 0 10px 0 #ddd;
-			height:auto !important;
-
-			li {
-				display:block;
-				border-bottom:1px solid #eee;
-				min-height:200px;
-
-				.team-member-name {
-					font-size:1.5em;
-					padding-bottom:1%;
-				}
-
-				.team-member-image {
-					float:left;
-					width:200px;
-					overflow:hidden;
-					margin-right:2.5%;
-				}
-
-				p {
-					font-size:1.1em;
-					line-height:1.5em;
-				}
-
-				.benefit.image {
-					width:20%;
-					float:left;
-				}
-
-				.benefit {
-					width:70%;
-					float:right;
-				}
-			}
-			li:last-child {
-				border:0;
-			}
-		}
-
-		ul#team-list li {
-			min-height:300px;
-			padding:5%;
-		}
-
-		ul#team-list li {
-			min-height:300px;
-		}
-	}
+.btn-lg {
+	line-height:1;
+	margin:7px;
 }
-
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
 	#habla_beta_container_do_not_rely_on_div_classes_or_names {

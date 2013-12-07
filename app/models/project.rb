@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
-	attr_accessible :name, :company_id, :active, :users, :address_attributes, :projects_users_attributes, :checklist, :photos
+	attr_accessible :name, :company_id, :active, :users, :address_attributes, :users_attributes, :projects_users_attributes, :checklist, :photos,
+                  :user_ids
   	
   	has_many :project_users
   	has_many :users, :through => :project_users 
@@ -12,7 +13,7 @@ class Project < ActiveRecord::Base
   	has_one :checklist
 
     accepts_nested_attributes_for :address
-    accepts_nested_attributes_for :project_users
+    accepts_nested_attributes_for :users
     
     after_create :assign_core
 
@@ -21,6 +22,13 @@ class Project < ActiveRecord::Base
       new_checklist = Checklist.create
       new_checklist.categories << core.categories
       self.update_attribute :checklist, new_checklist 
+
+      add_punchlist if punchlists.count == 0
+    end
+
+    def add_punchlist
+      puts "creating a punchlist"
+      punchlists.create
     end
   	
     acts_as_api

@@ -1,20 +1,43 @@
-<% if @punchlist && @punchlist.punchlist_items.count >> 0 %>
-	<table id="punchlist-table">
-		<h2>Punchlist</h2>
+<header>
+	<%= link_to "Add Item", new_punchlist_item_project_path(@project), :class=>"btn btn-default pull-right", :style=>"width:24%", :remote => true %>
+	<div class="input-group" style="width: 74%; margin-bottom: 20px;">
+		<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Punch Lists">
+		<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+	</div>
+</header>
 
-		<%= link_to "Add Item", new_punchlist_item_project_path(@project), :remote => true %>
-		<% @punchlist.punchlist_items.each do |item| %>
-		<tr>
-			<td>
-				<%= item.body %>
-			</td>
-		</tr>
-
-		<% end %>
-		</table>
+<% if @items && @items.count %>
+	<table class="table table-bordered table-responsive" id="users">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Assignment</th>
+				<th>Completed</th>
+				<th>Created On</th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<% @items.each do |item| %>
+				<tr>
+					<td><%= link_to item.body, edit_punchlist_item_project_path(@project, :item_id => item.id), :remote => true %> </td>
+					<td>
+						<% if item.assignee_id %>
+							<%= item.assignee.full_name %>
+						<% else %>
+							<span style="color:#aaa;font-style:italic;">Not yet assigned</span>
+						<% end %>
+					</td>
+					<td>
+						<% if item.completed_at %>
+							<%= parse_time item.completed_at %>
+						<% end %>
+					</td>
+					<td><%= parse_time item.created_at %></td>
+				</tr>
+			<% end %>
+		</tbody>
 	</table>
 <% else %>
-	<div id="no-punchlist">
-		No Punchlist Items
-	</div>
+	<tr><div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No punchlist items</h3></div>	</tr>
 <% end %>

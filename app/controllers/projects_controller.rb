@@ -36,6 +36,9 @@ class ProjectsController < ApplicationController
 
 	def show
 		@projects = current_user.company.projects if current_user.company
+		@project = Project.find params[:id]
+		@items = @project.checklist.categories.joins(:subcategories => :checklist_items).where(:checklist => {:checklist_items => {:complete => true}})
+		puts "item count: #{@items.count}"
 		@checklist = @project.checklist
 		if request.xhr?
 			respond_to do |format|
@@ -48,6 +51,7 @@ class ProjectsController < ApplicationController
 
 	def edit
 		@project = Project.find params[:id]
+		@project.users.build
 		unless @project.address
 			@project.build_address
 		end
@@ -64,11 +68,12 @@ class ProjectsController < ApplicationController
 	def update
 		if params[:project][:checklist].present?
 			checklist = Checklist.find_by(name: params[:project][:checklist])
-			@project.update_attribute :checklist_id, checklist.id
 			params[:project].delete(:checklist)
+			params[:project][:checklist] = checklist
 		end
 		@project = Project.find params[:id]
 		@project.update_attributes params[:project]
+		
 		@projects = current_user.company.projects
 		if request.xhr?
 			respond_to do |format|
@@ -86,8 +91,8 @@ class ProjectsController < ApplicationController
 	end
 
 	def checklist
-		#@items = @project.checklist.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
 		@checklist = @project.checklist
+		puts "did we find a checklist? #{@checklist} #{@checklist.categories.count} #{@checklist.categories.map(&:subcategories).flatten.count}"
 	end     
 
 	def checklist_item
@@ -96,14 +101,46 @@ class ProjectsController < ApplicationController
 
 	def punchlists
 		@punchlist = @project.punchlists.first
+		@items = @punchlist.punchlist_items if @punchlist
 	end
 
 	def reports
 		@reports = @project.reports
 	end
 
+	def new_report
+		@report = Report.new
+		@report_title = "Add a New Report"
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			@reports = @project.reports
+			redirect_to reports_project_path(@project)
+		end
+	end
+
+	def report
+		@report = @project.reports.create params[:report]
+		redirect_to reports_project_path(@project)
+	end
+
+	def show_report
+		@report_title = ""
+		@report = Report.find params[:report_id]
+		@report.report_personnel.build
+	end
+
 	def photos
 		@photos = @project.photos
+		if request.xhr? && remotipart_submitted?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :photos
+		end
 	end	
 
 	def new_punchlist_item
@@ -124,12 +161,24 @@ class ProjectsController < ApplicationController
 		else
 			@punchlist = @project.punchlists.first
 		end
+		if params[:punchlist_item][:assignee].present?
+			user = User.find_by(full_name: params[:punchlist_item][:assignee])
+			params[:punchlist_item].delete(:assignee)
+		end
 		@punchlist_item = @punchlist.punchlist_items.create params[:punchlist_item]
+		@punchlist_item.update_attribute :assignee_id, user.id if user
 		redirect_to project_path(@project)
 	end
 
 	def edit_punchlist_item
-		@punchlist_item = PunchlistItem.find params[:id]
+		@punchlist_item = PunchlistItem.find params[:item_id]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			redirect_to punchlists_project_path(@project)
+		end
 	end
 
 	def update_punchlist_item
@@ -142,9 +191,26 @@ class ProjectsController < ApplicationController
 	end
 
 	def photo
-		@photo = Photo.create params[:photo]
-		@photo.update_attributes :company_id => params[:company_id],:project_id => params[:project_id],:user_id => params[:user_id]
+		@photo = @project.photos.create params[:photo]
+		@photo.update_attributes :company_id => params[:company_id],:user_id => params[:user_id]
 		redirect_to photos_project_path(@project)
+	end
+
+	def delete_report
+		@report = Report.find params[:report_id]
+		if @report.destroy
+			redirect_to reports_project_path(@project)
+		end
+	end
+
+	def delete_photo
+
+	end
+
+	def delete_punchlist_item
+		@item = PunchlistItem.find params[:item_id]
+		@item.destroy
+		redirect_to punchlists_project_path(@project)
 	end
 
 	private

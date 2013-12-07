@@ -2,61 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-	font-weight:300;
-
-	// button to clear searches
-	.clear {
-		float: right; 
-		margin: 0px 10px 0px 0px;
-	}
-
-	.navbar-brand {
-		padding:0;
-
-		img {
-			margin-top:10px;
-			height:30px;
-		}
-	}
-
-	.navbar-nav {
-		> li > a {
-			font-size:1.4em;
-			padding:15px 25px;
-		}
-
-		> a:hover {
-			background-color:transparent;
-		}
-	}
-
-	.dropdown-menu {
-		width:100%;
-		> li > a {
-			line-height:2.25em;
-			font-size:1.25em;
-			font-weight:300;
-			padding:3px 40px;
-			text-align:right;
-		}
-	}
-
-	.datepicker.dropdown-menu {
-		width:auto;
-		padding:10px;
-
-		th {
-			text-align:center;
-		}
-	}
-
-	.container {
-		max-width:90%;
-	}
-
-}
-
 #upload-core {
 	width:400px;
 	padding:0 30px 30px;
@@ -101,4 +46,8 @@ body {
 	td.category,td.subcategory,td.timestamp, td.edit {
 		width:10%;
 	}
+}
+
+.admin-user-pic {
+	max-width:200px;
 }

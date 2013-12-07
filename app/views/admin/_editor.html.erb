@@ -1,0 +1,56 @@
+<% if @checklist && @checklist.categories.count > 0 %>
+	<div class="project-checklist-table">
+		<header>
+			<div class="input-group" style="width: 100%; margin-right: 5px;">
+				<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search checklist items">
+				<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+			</div>
+		</header>
+
+		<div class="row" style="font-weight: bold; margin: 25px 0px 5px 0px;">
+			<div class="col-md-7">&nbsp;</div>
+			<div class="col-md-2" style="text-align: center;">Critical Date</div>	
+			<div class="col-md-2" style="text-align: center;">Completed</div>	
+		</div>
+
+		<% @checklist.categories.each do |c| %>
+			<div class="category">
+				<h1><%= c.name %></h1>
+			</div>
+			<% c.subcategories.each do |s| %>
+				<div class="subcategory">
+					<h2><%=s.name%></h2>
+				</div>
+				<% s.checklist_items.each do |i| %>
+					<%= link_to item_editor_admin_index_path(@project, :item_id => i.id), :remote => true do %>
+						<%= render :partial => 'projects/checklist_item_row', :locals => {:item => i} %>
+					<% end %>
+				<% end %>
+				
+			<% end %>
+		<% end %>
+	</div>
+<% else %>
+	<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>	
+<% end %>
+
+<script>
+$(document).ready(function(){
+    $("#filter").keyup(function(){
+ 
+        // Retrieve the input field text and reset the count to zero
+        var filter = $(this).val(), count = 0;
+        if ($(this).val().length == 0) {
+        	console.log("emplty");
+        	$(".row.checklist-item").fadeIn(0);
+        } else {
+	        $(".row.checklist-item .checklist-body").each(function(){
+	            // If the list item does not contain the text phrase fade it out
+	            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+	                $(this).parent().fadeOut(0);
+	            }
+	        });
+	    }
+    });
+});
+</script>

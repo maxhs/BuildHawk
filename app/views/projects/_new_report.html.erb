@@ -1,0 +1,20 @@
+<table id="add-report">
+	<tbody>
+		<%= nested_form_for @report, :url => {:action => :report, :multipart => true }, :method => :post do |f| %>
+			<tr><td><h3><%= @report_title %></h3></td></tr>
+			<tr><td><%= f.text_field :title, :placeholder => "Report Title" %></td></tr>
+			<tr><td><span style="margin-right:20px">Report Type</span><%= f.select :report_type, options_for_select(@report.possible_types) %></td></tr>
+			<tr><td><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></td></tr>
+			<tr><td><span style="margin-right:20px">Select personnel</span><%= f.select :report_personnel, options_for_select(current_user.company.users.collect{|u| u.full_name}) %></td></tr>
+			<tr><td><span style="margin-right:20px">Add a photo</span>
+				<%= f.fields_for @report.photos.build do |photo| %>
+					<%= photo.file_field :image %>
+				<% end %>
+			</td></tr>
+			<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Submit" %></button></td></tr>
+			<% if @report.id %><tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :class => "delete-report-link" %></td></tr><% end %>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+			<%= hidden_field_tag :project_id, @project.id %>
+		<% end %>
+	</tbody>
+</table>

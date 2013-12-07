@@ -1,0 +1,14 @@
+<div class="row row-offcanvas row-offcanvas-left">
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+		<div class="well sidebar-nav projects">
+			<div class="sidebarProjects">
+				<div><%= link_to "Companies", companies_uber_admin_index_path, :id => "uber-admin-companies-link", :remote => true %></div>
+				<div><%= link_to "Users", users_uber_admin_index_path, :id => "uber-admin-users-link", :remote => true %></div>
+				<div><%= link_to "Core Checklists", core_checklist_uber_admin_index_path, :id => "uber-admin-checklist-link", :remote => true %></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-9" id="main">
+		<div id="pages">
+			<%= render :partial => "companies" %>
+		</div>

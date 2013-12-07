@@ -5,95 +5,145 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+    <script type="text/javascript">
+    Shadowbox.init({
+    	skipSetup:true,
+    	onOpen:function(){
+    		$('#top-nav').css('opacity','.1');
+    	},
+    	onClose:function(){
+    		$('#top-nav').css('opacity','1');},
+    		handleOversize: "drag",
+    		overlayOpacity: "0.8"
+    })
+    window.onload = function() {
+	    Shadowbox.setup(".shadow-photo");
+	}
+  </script>
 </head>
 <body>
 	<p class="notice" id="notice"><%= notice %></p>
     <p class="alert" id="alert"><%= alert %></p>
 
     <div id="wrap">
-			<!-- Fixed navbar -->
-			<div class="navbar navbar-fixed-top" style="min-height: 50px;">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="/"><%= image_tag('logo.png') %></a>
-					</div>
-					
-					<div class="collapse navbar-collapse">
-						<ul class="nav navbar-nav">
-							<% if user_signed_in? %>
-								<li class="nav-projects" id="nav-projects"><%= link_to "Projects", projects_path %></li>
-								<% if current_user.admin %>
-									<li class="nav-admin" id="nav-admin"><%= link_to "Admin", admin_index_path %></li> 
-								<% end %>
-								<% if current_user.uber_admin %>
-									<li class="nav-uber-admin" id="nav-uber-admin"><%= link_to "Uber Admin", uber_admin_index_path %></li> 
-								<% end %>
-							<% end %>
-						</ul>
-						<ul class="nav navbar-nav pull-right">
-							<% if user_signed_in? %>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><%=current_user.full_name%></span> <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><%= link_to "My Settings", edit_user_path(current_user) %></li>
-										<li><%= link_to "Logout", logout_path %></li>
-									</ul>
-								</li>
-							<% else %>
-								<li><%= link_to "Beta Login", login_path %>
-							<% end %>
-						</ul>
-					</div><!--/.nav-collapse -->
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-fixed-top" id="top-nav" style="min-height: 50px;">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/"><%= image_tag('logo.png') %></a>
 				</div>
+				
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<% if user_signed_in? %>
+							<li class="nav-projects" id="nav-projects"><%= link_to "Projects", projects_path, :remote => true %></li>
+							<% if current_user.admin %>
+								<li class="nav-admin" id="nav-admin"><%= link_to "Admin", admin_index_path, :remote => true %></li> 
+							<% end %>
+							<% if current_user.uber_admin %>
+								<li class="nav-uber-admin" id="nav-uber-admin"><%= link_to "Uber Admin", uber_admin_index_path, :remote => true %></li> 
+							<% end %>
+						<% end %>
+					</ul>
+					<ul class="nav navbar-nav pull-right">
+						<% if user_signed_in? %>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><%=current_user.full_name%></span> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><%= link_to "My Settings", edit_user_path(current_user) %></li>
+									<li><%= link_to "Logout", logout_path %></li>
+								</ul>
+							</li>
+						<% else %>
+							<li><%= link_to "Beta Login", login_path %>
+						<% end %>
+					</ul>
+				</div><!--/.nav-collapse -->
 			</div>
+		</div>
+	<% if user_signed_in? %>
 		<div id="pagescontainer" class="container">
-			<% if user_signed_in? && current_page?(:controller=>:projects) && @projects %>
-			<script>
-				$('#nav-projects a').addClass('current-page');
-			</script>
-				<div class="row row-offcanvas row-offcanvas-left">
-					<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-						<div class="well sidebar-nav projects">
-							<div class="sidebarProjects">
-								<% @projects.each do |project| %>
-									<div><%= link_to project.name, project_path(project), :remote => true %></div>
-								<% end %>
+			<% if current_page?(:controller=>:projects) && @projects %>
+				<script>
+					$('#nav-projects a').addClass('current-page');
+				</script>
+					<div class="row row-offcanvas row-offcanvas-left">
+						<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+							<div class="well sidebar-nav projects">
+								<div class="sidebarProjects">
+									<% @projects.each do |project| %>
+										<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
+									<% end %>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-xs-12 col-sm-9" id="main">
-			<% elsif user_signed_in? && current_page?(:controller=>:admin) %>
-			<script>
-				$('#nav-admin a').addClass('current-page');
-			</script>
-				<div class="row row-offcanvas row-offcanvas-left">
-					<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-						<div class="well sidebar-nav projects">
-							<div class="sidebarProjects">
-								<div><%= link_to "Add User", new_user_admin_index_path, :id => "new-user-link", :remote => true %></div>
-								<div><%= link_to "New Project", new_project_admin_index_path, :id => "new-project-link", :remote => true %></div>
-								<div><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></div>
-								<div><%= link_to "Checklist Templates", checklists_admin_index_path, :id => "admin-checklists-link", :remote => true %></div>
-								<div><%= link_to "Personnel Management", users_admin_index_path, :id => "personnel-link", :remote => true %></div>
-								<div><%= link_to "Billing" %></div>
+						<div class="col-xs-12 col-sm-9" id="main">
+			<% elsif current_page?(:controller=>:admin) %>
+				<script>
+					$('#nav-admin a').addClass('current-page');
+				</script>
+					<div class="row row-offcanvas row-offcanvas-left">
+						<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+							<div class="well sidebar-nav projects">
+								<div class="sidebarProjects">
+									<div><%= link_to "Add User", new_user_admin_index_path, :id => "new-user-link", :remote => true %></div>
+									<div><%= link_to "New Project", new_project_admin_index_path, :id => "new-project-link", :remote => true %></div>
+									<div><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></div>
+									<div><%= link_to "Checklist Templates", checklists_admin_index_path, :id => "admin-checklists-link", :remote => true %></div>
+									<div><%= link_to "Personnel Management", users_admin_index_path, :id => "personnel-link", :remote => true %></div>
+									<div><%= link_to "Billing", billing_admin_index_path, :id => "billing-link", :remote => true  %></div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-xs-12 col-sm-9" id="main">
-			<% else %>
+						<div class="col-xs-12 col-sm-9" id="main">
+			<% elsif current_page?(:controller => :uber_admin) %>
 				<script>
 					$('#nav-uber-admin a').addClass('current-page');
 				</script>
+				<div class="row row-offcanvas row-offcanvas-left">
+					<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+						<div class="well sidebar-nav projects">
+							<div class="sidebarProjects">
+								<div><%= link_to "Companies", companies_uber_admin_index_path, :id => "uber-admin-companies-link", :remote => true %></div>
+								<div><%= link_to "New Users", users_uber_admin_index_path, :id => "uber-admin-users-link", :remote => true %></div>
+								<div><%= link_to "Core Checklist", core_checklist_uber_admin_index_path, :id => "uber-admin-checklist-link", :remote => true %></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-9" id="main">
 			<% end %>
-					
 
 						<%= yield %>
 					
 					</div>
+				</div>
+			</div>
+		<% else %>
+			<%= yield %>
+		<% end %>
+		<div id="push"></div>
+	</div>
+	<footer>
+		<div id="container">
+			<ul>
+				<li><a href="#about">About</a></li>
+				<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
+				<li><a href="/about#faq">FAQ</a></li>
+			</ul>
+
+			<ul>
+				<li><a href="#contact">Contact</a></li>
+				<li><a href="/terms">Terms of Service</a></li>
+				<li><a href="/privacy" style="cursor:default;color:#555">Privacy Policy</a></li>
+			</ul>
+
+			<div id="copyright">&copy; BuildHawk, 2013</div>
+		</div>
+	</footer>
 </body>
 </html>

@@ -1,11 +1,25 @@
-<table>
+<table id="add-photo">
 	<%= form_for @new_photo, :url => {:action => :photo, :multipart => true }, :method => :post do |f| %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<%= hidden_field_tag :project_id, @project.id %>
 		<%= hidden_field_tag :company_id, @company.id %>
 		<%= hidden_field_tag :user_id, current_user.id %>
 		<tr><td><%= f.file_field :image %></td></tr>
-		<tr><td><%= f.text_field :source, :placeholder => "Label" %></td></tr>
+		<tr><td><%= f.text_field :source, :placeholder => "Add a label", :id => "source-label" %></td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Add photo" %></button></td></tr>
 	<% end %>
 </table>
+
+<script type="text/javascript">
+	$(function() {
+	    $("input:file").change(function (){
+	    	$("#source-label").animate({"opacity":1},500);
+	    });
+	    $("#new_photo").submit(function(event){  
+			$('#new-image-container').fadeOut(200,function(){
+				$(this).html('<div class="loading">LOADING...</div>');
+				$(this).fadeIn(200);
+			})
+		});
+	});
+</script>

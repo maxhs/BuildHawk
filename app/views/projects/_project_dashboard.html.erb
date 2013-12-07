@@ -1,0 +1,38 @@
+
+<h3>Upcoming Critical Items</h3>
+<div class="row" data-jgs-each-due="data.cl_due_soon" >
+	<div class="col-md-8" data-jgs-text="due:name"></div>
+	<div class="col-md-2" data-jgs-text="due:due | date"></div>
+</div>
+
+
+<h3>Recently Completed</h3>
+<div class="row" data-jgs-each-comp="data.wl_completed" >
+	<div class="col-md-8" data-jgs-text="comp:name"></div>
+	<div class="col-md-2" data-jgs-text="comp:completed | completedOn"></div>
+</div>
+
+
+<h3>Recent Documents</h3>
+<div class="row">
+	<div class="col-md-12" style="overflow: hidden;">
+		<div data-jgs-each-img="data.recent_docs" style="float: left; width: auto; margin: 0px 5px 10px 0px;">
+			<img data-jgs-getsrc="img:urls" />
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-4">Category</div>
+	<div class="col-sm-2">% Completion</div>
+	<div class="col-sm-2">Completion Date</div>
+	<div class="col-sm-2">Milestone</div>
+	<div class="col-sm-2">+/-</div>
+</row>
+<div class="row" data-jgs-each-stat="data.cl_categories">
+	<div class="col-sm-4" data-jgs-text="stat:_id"></div>
+	<div class="col-sm-2"><span data-jgs-text="stat:percent"></span>%</div>
+	<div class="col-sm-2" data-jgs-text="stat:category_due | date"></div>
+	<div class="col-sm-2" data-jgs-text="stat:category_complete | date"></div>
+	<div class="col-sm-2"></div>
+</row>

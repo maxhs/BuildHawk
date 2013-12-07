@@ -22,7 +22,7 @@
 if (history && history.pushState){
     $(function(){
         $('body').on('click', 'a',function(e){
-            if ($(e.target).is('#left-menu-toggle img, #right-menu-toggle, .response-form, #add-feedback-link, #remove-user-image, #logout-link, a.remove, .bookmark-link, .cancel-editing, .edit-contribution, .feature, .delete-link, #more-sentences, #contact-link a, .load-more-stories, #weekly-signup-link')) {
+            if ($(e.target).is('.shadow-photo, .documents-photo')) {
             
             } else {
                 history.pushState(null, null, this.href);

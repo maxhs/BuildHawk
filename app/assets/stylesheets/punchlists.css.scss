@@ -1,3 +1,31 @@
 // Place all the styles related to the Punchlists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table#add-punchlist {
+	width:100%; 
+	border:1px solid #eee;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	padding:20px;
+
+	tbody {
+		width:50%;
+		margin:0 auto;
+		padding-bottom:70px;
+		display:block;
+		tr, td {
+			padding-top:10px;
+			width:100%;
+			display:block;
+		}
+		input {
+			width:100% !important;
+			display:block;
+			margin:0 auto;
+		}
+
+	}	
+
+}

@@ -6,10 +6,16 @@ class CreateChecklistItems < ActiveRecord::Migration
 	    	t.string :item_type
 	    	t.text :body
 	    	t.belongs_to :subcategory
+	    	t.belongs_to :category
+	    	t.belongs_to :checklist
 	    	t.datetime :critical_date
       		t.datetime :milestone_date
       		t.datetime :completed_date
 	      	t.timestamps
     	end
+
+    	add_index :checklist_items, :category_id, :name => 'checklist_item_category_id_ix'
+  		add_index :checklist_items, :subcategory_id, :name => 'checklist_item_subcategory_id_ix'
+  		add_index :checklist_items, :checklist_id, :name => 'checklist_item_checklist_id_ix'
   	end
 end

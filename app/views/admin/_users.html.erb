@@ -16,15 +16,19 @@
 			<th>Name</th>
 			<th>Email</th>
 			<th>Created On</th>
+			<th>Edit</th>
 		</tr>
 	</thead>
 
 	<tbody>
-		<tr>
-			<td><img src="http://www.filepicker.io/api/file/2DykVyHfTKe1gAw3poSd/convert?w=100&amp;h=100&amp;cache=true"></td>
-			<td><a href="/user/529d659407082c0200000003">Alex G</a></td>
-			<td>alexgriffith@gmail.com</td>
-			<td>Dec 2nd 2013, 9:01:08 pm</td>
-		</tr>
+		<% @users.each do |user| %>
+			<tr>
+				<td><% if user.photos && user.photos.count > 0 %><%= image_tag user.photos.first.image.url(:small), :class =>"admin-user-pic" %><% end %></td>
+				<td><%= user.full_name %></td>
+				<td><%= user.email %></td>
+				<td><%= parse_time user.created_at%></td>
+				<td><%= link_to "Edit", edit_user_admin_index_path(:id => user.id), :remote => true %></td>
+			</tr>
+		<% end %>
 	</tbody>
 </table>

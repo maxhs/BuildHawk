@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204194226) do
+ActiveRecord::Schema.define(version: 20131205060646) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -55,12 +55,18 @@ ActiveRecord::Schema.define(version: 20131204194226) do
     t.string   "item_type"
     t.text     "body"
     t.integer  "subcategory_id"
+    t.integer  "category_id"
+    t.integer  "checklist_id"
     t.datetime "critical_date"
     t.datetime "milestone_date"
     t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "checklist_items", ["category_id"], name: "checklist_item_category_id_ix"
+  add_index "checklist_items", ["checklist_id"], name: "checklist_item_checklist_id_ix"
+  add_index "checklist_items", ["subcategory_id"], name: "checklist_item_subcategory_id_ix"
 
   create_table "checklists", force: true do |t|
     t.integer  "project_id"
@@ -87,6 +93,8 @@ ActiveRecord::Schema.define(version: 20131204194226) do
     t.integer  "projects_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "pre_register"
+    t.string   "contact_name"
   end
 
   create_table "core_checklists", force: true do |t|
@@ -121,6 +129,9 @@ ActiveRecord::Schema.define(version: 20131204194226) do
     t.string   "source"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "report_id"
+    t.integer  "punchlist_item_id"
+    t.integer  "checklist_item_id"
   end
 
   create_table "project_users", force: true do |t|
@@ -146,6 +157,9 @@ ActiveRecord::Schema.define(version: 20131204194226) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "assignee_id"
+    t.boolean  "completed",    default: false
+    t.datetime "completed_at"
   end
 
   create_table "punchlists", force: true do |t|
@@ -160,7 +174,19 @@ ActiveRecord::Schema.define(version: 20131204194226) do
     t.datetime "updated_at"
   end
 
+  create_table "report_personnels", force: true do |t|
+    t.integer  "report_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reports", force: true do |t|
+    t.string   "title"
+    t.string   "body"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "report_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

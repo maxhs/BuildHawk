@@ -1,1 +1,17 @@
-<%= @checklist_item.body %>
+<div class="checklist-item-form">
+<div class="row">
+	<span class="col-md-5 header-description"><h2><%= @checklist_item.category_name %></h2></span>
+</div>
+<div class="row">
+	<span class="col-md-5 header-description"><h3><%= @checklist_item.subcategory_name %></h3></span>
+</div>
+<div class="row">
+	<span class="col-md-12 item-body"><%= @checklist_item.body %></span>
+</div>
+
+<table style="margin:40px auto 0; width:100%;">
+	<%= form_for @checklist_item, :url => update_checklist_item_projects_path, :method => :put do |f| %>
+		<tr><td><h4>Mark Complete?</h4><%= f.check_box :complete %></td></tr>
+		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Update" %></button></td></tr>
+	<% end %>
+</div>

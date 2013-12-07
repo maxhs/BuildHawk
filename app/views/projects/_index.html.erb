@@ -1,0 +1,14 @@
+<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+			<div class="well sidebar-nav projects">
+				<div class="sidebarProjects">
+					<% @projects.each do |project| %>
+						<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-9" id="main">
+			<div id="pages">
+				User Main Dashboard
+			</div>
