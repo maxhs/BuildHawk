@@ -76,7 +76,6 @@ class AdminController < ApplicationController
 		else 
 			checklist = Checklist.create
 			items = CoreChecklist.last.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
-			puts "had to create a new checklist with items: #{items}"
 			checklist.checklist_items << items
 		end
 		@project = current_user.company.projects.create params[:project]

@@ -1,4 +1,5 @@
+console.log("got to checklist");
 $('#pages').fadeOut(200,function(){
-	$(this).html('<%= j render :partial => "checklist", :locals => {:checklist => @checklist } %>');
+	$(this).html('<%= j render :partial => "checklist" %>');
 	$(this).fadeIn(200);
 });

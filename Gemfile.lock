@@ -75,9 +75,6 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.5)
-    jbuilder (1.5.2)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -94,6 +91,7 @@ GEM
     multi_xml (0.5.5)
     nested_form (0.3.2)
     nokogiri (1.5.10)
+    non-stupid-digest-assets (1.0.0)
     orm_adapter (0.4.0)
     paperclip (3.5.1)
       activemodel (>= 3.0.0)
@@ -224,10 +222,10 @@ DEPENDENCIES
   devise
   geocoder
   httparty
-  jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
   nested_form
+  non-stupid-digest-assets
   paperclip
   pg
   postmark-rails
