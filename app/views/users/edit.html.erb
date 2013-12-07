@@ -11,7 +11,7 @@
 		<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (if changing)", :class=>"tt-hint form-control" %></td></tr>
 		<tr><td style="padding:10px 0;">Email Permissions? <%= f.check_box :email_permissions %></td></tr>
 		<tr><td style="padding:10px 0;">Push Permissions? <%= f.check_box :push_permissions %></td></tr>
-		<tr><td><%= image_tag @user.photos.first.image.url(:medium), :class => "user-pic" %>
+		<% if @user.photos && @user.photos.count > 0 %><tr><td><%= image_tag @user.photos.first.image.url(:medium), :class => "user-pic" %><% end %>
 
 		</td></tr>
 		<tr><td>

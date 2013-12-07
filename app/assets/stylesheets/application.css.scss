@@ -14,6 +14,8 @@
  */
 
 @import "shadowbox";
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
 /*@import "bootstrap-glyphicons.less";
 @import "core.less";*/
 
@@ -70,13 +72,7 @@ body {
 	}
 
 	#pagescontainer {
-	margin-top:60px;
-
-		> .row {
-			margin-top: 40px;
-			padding-bottom: 40px;
-			
-		}
+		margin-top:100px;
 	}
 
 	.navbar {
@@ -631,7 +627,9 @@ body {
 	}
 }
 
-
+.bootstrap-datetimepicker-widget {
+	width:auto !important;
+}
 
 
 /*

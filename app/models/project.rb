@@ -2,15 +2,15 @@ class Project < ActiveRecord::Base
 	attr_accessible :name, :company_id, :active, :users, :address_attributes, :users_attributes, :projects_users_attributes, :checklist, :photos,
                   :user_ids
   	
-  	has_many :project_users
+  	has_many :project_users, :dependent => :destroy
   	has_many :users, :through => :project_users 
   	
   	belongs_to :company
   	has_one :address
-  	has_many :punchlists
-    has_many :photos
-    has_many :reports
-  	has_one :checklist
+  	has_many :punchlists, :dependent => :destroy
+    has_many :photos, :dependent => :destroy
+    has_many :reports, :dependent => :destroy
+  	has_one :checklist, :dependent => :destroy
 
     accepts_nested_attributes_for :address
     accepts_nested_attributes_for :users

@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 	def update
 		@user = current_user
 		@user.update_attributes params[:user] if params[:user] && current_user
-		if @user.save
+		if @user.save!
 			flash[:notice] = "Settings updated!"
 		end
 		render :edit

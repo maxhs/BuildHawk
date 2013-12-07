@@ -72,60 +72,26 @@
 				<script>
 					$('#nav-projects a').addClass('current-page');
 				</script>
-					<div class="row row-offcanvas row-offcanvas-left">
-						<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-							<div class="well sidebar-nav projects">
-								<div class="sidebarProjects">
-									<% @projects.each do |project| %>
-										<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
-									<% end %>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-9" id="main">
 			<% elsif current_page?(:controller=>:admin) %>
 				<script>
 					$('#nav-admin a').addClass('current-page');
 				</script>
-					<div class="row row-offcanvas row-offcanvas-left">
-						<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-							<div class="well sidebar-nav projects">
-								<div class="sidebarProjects">
-									<div><%= link_to "Add User", new_user_admin_index_path, :id => "new-user-link", :remote => true %></div>
-									<div><%= link_to "New Project", new_project_admin_index_path, :id => "new-project-link", :remote => true %></div>
-									<div><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></div>
-									<div><%= link_to "Checklist Templates", checklists_admin_index_path, :id => "admin-checklists-link", :remote => true %></div>
-									<div><%= link_to "Personnel Management", users_admin_index_path, :id => "personnel-link", :remote => true %></div>
-									<div><%= link_to "Billing", billing_admin_index_path, :id => "billing-link", :remote => true  %></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-9" id="main">
+				
 			<% elsif current_page?(:controller => :uber_admin) %>
 				<script>
 					$('#nav-uber-admin a').addClass('current-page');
 				</script>
-				<div class="row row-offcanvas row-offcanvas-left">
-					<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-						<div class="well sidebar-nav projects">
-							<div class="sidebarProjects">
-								<div><%= link_to "Companies", companies_uber_admin_index_path, :id => "uber-admin-companies-link", :remote => true %></div>
-								<div><%= link_to "New Users", users_uber_admin_index_path, :id => "uber-admin-users-link", :remote => true %></div>
-								<div><%= link_to "Core Checklist", core_checklist_uber_admin_index_path, :id => "uber-admin-checklist-link", :remote => true %></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-9" id="main">
 			<% end %>
-
 						<%= yield %>
 					
 					</div>
 				</div>
 			</div>
-		<% else %>
-			<%= yield %>
-		<% end %>
+			
+
+	<% else %>
+		<%= yield %>
+	<% end %>
 		<div id="push"></div>
 	</div>
 	<footer>

@@ -40,6 +40,7 @@ GEM
       nokogiri (>= 1.4.4, < 1.6.0)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.1.2)
+    bootstrap-datetimepicker-rails (0.0.11)
     builder (3.1.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -124,7 +125,6 @@ GEM
       sprockets-rails (~> 2.0.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
-    rails3-jquery-autocomplete (0.6.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -216,6 +216,7 @@ DEPENDENCIES
   acts_as_api
   apn_sender
   aws-sdk
+  bootstrap-datetimepicker-rails
   cocaine
   coffee-rails (~> 4.0.0)
   daemons
@@ -233,7 +234,6 @@ DEPENDENCIES
   protected_attributes
   rails (= 4.0.0)
   rails-observers
-  rails3-jquery-autocomplete
   rails_12factor
   remotipart
   resque

@@ -73,9 +73,14 @@ class AdminController < ApplicationController
 		if params[:project][:checklist].present?
 			checklist = Checklist.find_by(name: params[:project][:checklist])
 			params[:project].delete(:checklist)
+		else 
+			checklist = Checklist.create
+			items = CoreChecklist.last.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+			puts "had to create a new checklist with items: #{items}"
+			checklist.checklist_items << items
 		end
 		@project = current_user.company.projects.create params[:project]
-		@project.update_attribute :checklist_id, checklist.id
+		@project.update_attribute :checklist_id, checklist.id if checklist
 		if @project.save && request.xhr?
 			respond_to do |format|
 				format.js

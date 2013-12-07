@@ -2,8 +2,6 @@ class ProjectsController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :find_project
 
-	autocomplete :checklist_item, :body
-
 	def new
 		@project = Project.new
 		@users = current_user.company.users
@@ -29,15 +27,13 @@ class ProjectsController < ApplicationController
 			respond_to do |format|
 				format.js
 			end
-		else
-			render :index
 		end
 	end
 
 	def show
 		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
-		@items = @project.checklist.categories.joins(:subcategories => :checklist_items).where(:checklist => {:checklist_items => {:complete => true}})
+		@items = @project.checklist.checklist_items.where(:complete => true)
 		puts "item count: #{@items.count}"
 		@checklist = @project.checklist
 		if request.xhr?

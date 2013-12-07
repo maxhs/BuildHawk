@@ -1,7 +1,7 @@
 class Subcategory < ActiveRecord::Base
 	attr_accessible :name, :category_id, :index, :milestone, :completed_date, :checklist_items
   	belongs_to :category
-  	has_many :checklist_items
+  	has_many :checklist_items, :dependent => :destroy
 
   	acts_as_api
 

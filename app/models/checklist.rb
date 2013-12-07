@@ -1,10 +1,12 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
-    attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone, :completed_date, :categories_attributes, :categories
+    attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone, :completed_date, :categories_attributes, 
+    				:categories, :checklist_items
   	belongs_to :project
   	belongs_to :company
   	
-  	has_many :categories
+  	has_many :checklist_items, :dependent => :destroy
+  	has_many :categories, :dependent => :destroy
   	accepts_nested_attributes_for :categories
 
   	def self.import(file)

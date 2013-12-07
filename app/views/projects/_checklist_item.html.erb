@@ -3,15 +3,33 @@
 	<span class="col-md-5 header-description"><h2><%= @checklist_item.category_name %></h2></span>
 </div>
 <div class="row">
-	<span class="col-md-5 header-description"><h3><%= @checklist_item.subcategory_name %></h3></span>
+	<span class="col-md-5 header-description"><h3 style="padding-left:1em"><%= @checklist_item.subcategory_name %></h3></span>
 </div>
 <div class="row">
 	<span class="col-md-12 item-body"><%= @checklist_item.body %></span>
 </div>
 
-<table style="margin:40px auto 0; width:100%;">
+<table style="margin: 0 auto; width:100%;">
 	<%= form_for @checklist_item, :url => update_checklist_item_projects_path, :method => :put do |f| %>
-		<tr><td><h4>Mark Complete?</h4><%= f.check_box :complete %></td></tr>
+		<tr><td>
+			<div class="input-append date form_datetime datetimepicker" id="datetimepicker">
+
+				<%= f.text_field :critical_date, :value => f.object.critical_date, :placeholder => Time.now.strftime("%b %e, %Y  %l:%m %P"), :class =>"datetime-input" %>
+
+			<span class="add-on"></span>
+		</div>
+		</td></tr>
+		<tr><td>Mark complete?<%= f.check_box :complete %></td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Update" %></button></td></tr>
 	<% end %>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".datetimepicker").datetimepicker({
+	    	format: "M d, yyyy  H:ii p",
+	    	showMeridian: true,
+	    	autoclose: true,
+	    	todayBtn: true
+		});
+	});
+</script>

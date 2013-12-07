@@ -1,6 +1,6 @@
 Buildhawk::Application.routes.draw do
   default_url_options :host => "buildhawk.com"
-  devise_for :users, :path => ''
+  devise_for :users, :path => '', :controllers => {:registrations => "registrations"}
   root :to => "home#index"
 
   devise_scope :user do

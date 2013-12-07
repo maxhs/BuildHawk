@@ -2,11 +2,11 @@ class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields
   	belongs_to :user
   	belongs_to :project
-  	has_many :comments
-  	has_many :report_fields
-    has_many :report_personnel
-    has_many :users, :through => :report_personnel 
-    has_many :photos
+  	has_many :comments, :dependent => :destroy
+  	has_many :report_fields, :dependent => :destroy
+    has_many :report_personnel, :dependent => :destroy
+    has_many :users, :through => :report_personnel, :dependent => :destroy
+    has_many :photos, :dependent => :destroy
 
     def possible_types
       ["Daily","Safety"]

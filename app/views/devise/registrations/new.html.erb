@@ -4,8 +4,19 @@
 	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 	  <%= devise_error_messages! %>
 
+	  <div><%= f.label "First name" %><br />
+	  <%= f.text_field :first_name, :autofocus => true %></div>
+
+	  <div><%= f.label "Last name" %><br />
+	  <%= f.text_field :last_name  %></div>
+	  
+	  <div><%= f.label "Company" %><br />
+	  <%= f.fields_for resource.build_company do |c| %>
+	  	<%= c.text_field :name, :placeholder => "Company name"  %></div>
+	  <% end %>
+
 	  <div><%= f.label :email %><br />
-	  <%= f.email_field :email, :autofocus => true %></div>
+	  <%= f.email_field :email %></div>
 
 	  <div><%= f.label :password %><br />
 	  <%= f.password_field :password %></div>

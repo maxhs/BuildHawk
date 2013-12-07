@@ -1,14 +1,21 @@
-<div class="row row-offcanvas row-offcanvas-left">
-		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-			<div class="well sidebar-nav projects">
-				<div class="sidebarProjects">
-					<% @projects.each do |project| %>
-						<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
-					<% end %>
-				</div>
+
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+	<div class="well sidebar-nav projects">
+		<% if @projects && @projects.count > 0 %>
+			<div class="sidebarProjects">
+				<% @projects.each do |project| %>
+					<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
+				<% end %>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-9" id="main">
-			<div id="pages">
-				User Main Dashboard
-			</div>
+		<% else %>
+			<div style="font-style:italic;color:#aaa;padding:30px 0;text-align:center;font-size:1.25em;font-weight:200">No projects yet</div>
+		<% end %>
+	</div>
+</div>
+
+					<div class="col-xs-12 col-sm-9" id="main">
+<div class="col-xs-12 col-sm-9" id="main">
+	<div id="pages">
+		Dashboard stuff
+	</div>
+</div>

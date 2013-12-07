@@ -11,14 +11,18 @@
 	display:block;
 	width:600px;
 	margin:0 auto;
-	border:1px solid #eee;
+	padding:30px;
 	border-radius:4px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 
-	tbody {
+	h2, h3 {
+		text-align:center;
+	}
+
+	form, tbody, tr, td {
 		display:block;
-		padding:0 30px 30px;
+		width:100%;
 	}
 }
 
