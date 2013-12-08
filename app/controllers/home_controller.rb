@@ -8,4 +8,8 @@ class HomeController < ApplicationController
 			render :splash
 		end
 	end
+
+	def about
+
+	end
 end
