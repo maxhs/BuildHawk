@@ -129,6 +129,31 @@ class ProjectsController < ApplicationController
 		@report.report_users.build
 	end
 
+	def update_report
+		@report = Report.find params[:report_id]
+		if params[:report][:report_users].present?
+			r_users = params[:report][:report_users]
+			r_users.each do |r|
+				if r.length > 0
+					puts "this is r: #{r}"
+					u = User.where(:full_name => r, :company_id => @project.company.id).first_or_create
+					ru = ReportUser.where(:user_id => u.id, :report_id => @report.id).first_or_create
+					@report.report_users << ru
+				end
+			end
+			params[:report].delete(:report_users)
+		end
+		@report.update_attributes params[:report]
+		@reports = @project.reports
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "reports"}
+			end
+		else 
+			render :reports
+		end
+	end
+
 	def photos
 		@photos = @project.photos
 		if request.xhr? && remotipart_submitted?

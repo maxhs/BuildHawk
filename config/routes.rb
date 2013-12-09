@@ -12,6 +12,7 @@ Buildhawk::Application.routes.draw do
   end
 
   post "/projects/:id", :to => "projects#update"
+  get "/projects/:id/update_report", :to => "projects#update_report"
 
   resources :users
   resources :home do 
@@ -70,11 +71,12 @@ Buildhawk::Application.routes.draw do
       post :photo
       delete :delete_report
       delete :delete_photo
+      post :update_report
+      post :update_checklist_item
+      post :update_punchlist_item
     end
     collection do
-      put :update_checklist_item
-      put :update_punchlist_item
-      put :update_report
+
       delete :delete_punchlist_item
     end
   end

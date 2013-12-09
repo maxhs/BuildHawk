@@ -172,11 +172,13 @@ ActiveRecord::Schema.define(version: 20131209080710) do
   create_table "report_fields", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "report_id"
   end
 
   create_table "report_users", force: true do |t|
     t.integer  "report_id"
     t.integer  "user_id"
+    t.string   "full_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

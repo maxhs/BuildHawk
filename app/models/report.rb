@@ -1,6 +1,6 @@
 class Report < ActiveRecord::Base
-	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :report_personnel, :report_users_attributes
-  	belongs_to :user
+	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos, :photos_attributes, :report_users, :report_users_attributes
+  	#belongs_to :user
   	belongs_to :project
   	has_many :comments, :dependent => :destroy
   	has_many :report_fields, :dependent => :destroy
@@ -9,6 +9,7 @@ class Report < ActiveRecord::Base
     has_many :photos, :dependent => :destroy
 
     accepts_nested_attributes_for :report_users
+    accepts_nested_attributes_for :photos
 
     def possible_types
       ["Daily","Safety"]

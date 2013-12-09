@@ -15,10 +15,10 @@
 			</td></tr>
 			
 			<% if @report.id %>
-				<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Submit" %></button></td></tr>
+				<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
 				<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :class => "delete-report-link" %></td></tr>
 			<% else %>
-				<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
+				<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Submit" %></button></td></tr>
 			<% end %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<%= hidden_field_tag :project_id, @project.id %>
