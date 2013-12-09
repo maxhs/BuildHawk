@@ -1,6 +1,12 @@
 <% if @checklist && @checklist.categories.count > 0 %>
 	<div class="project-checklist-table">
 		<header>
+			<table>
+				<%= form_for @checklist do |f| %>
+					<tr><td style="width:80%; padding-bottom:20px;"><%= f.text_field :name, :style=> "width:100%;" %></td>
+					<td style="vertical-align:top"><button class="btn btn-success btn-lg pull-right" style="display:inline-block; margin:0;line-height:.8em;"><%= f.submit "Change Name", :remote => true %></button></td></tr>
+				<% end %>
+			</table>
 			<div class="input-group" style="width: 100%; margin-right: 5px;">
 				<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search checklist items">
 				<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>

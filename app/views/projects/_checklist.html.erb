@@ -23,7 +23,7 @@
 				</div>
 				<% s.checklist_items.each do |i| %>
 					<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>
-						<%= render :partial => 'checklist_item_row', :locals => {:item => i} %>
+						<%= render :partial => 'projects/checklist_item_row', :locals => {:item => i} %>
 					<% end %>
 				<% end %>
 				

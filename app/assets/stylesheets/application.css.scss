@@ -10,12 +10,12 @@
  *
  *= require_self
  *= require bootstrap
+ *= require datetimepicker
  *= require_tree .
  */
 
 @import "shadowbox";
 @import 'bootstrap';
-@import 'bootstrap-datetimepicker';
 /*@import "bootstrap-glyphicons.less";
 @import "core.less";*/
 

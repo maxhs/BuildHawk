@@ -3,10 +3,11 @@ class User < ActiveRecord::Base
     				:full_name, :company_id, :company_attributes, :photos_attributes, :password_confirmation, :admin, :uber_admin
 
     belongs_to :company
+    
   	has_many :project_users, :dependent => :destroy
   	has_many :projects, :through => :project_users 
-    has_many :report_personnel, :dependent => :destroy
-    has_many :reports, :through => :report_personnel
+    has_many :report_users, :dependent => :destroy
+    has_many :reports, :through => :report_users
     has_many :photos, :dependent => :destroy
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable #, :rememberable

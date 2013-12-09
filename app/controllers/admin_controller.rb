@@ -57,6 +57,16 @@ class AdminController < ApplicationController
 		@checklist = Checklist.find params[:checklist_id]
 	end
 
+	def create_template
+		@company = Company.find params[:company_id]
+		@checklist = @company.checklists.create :name => "New Checklist Template"  
+		puts "just created that checklist: #{@checklist.id}"
+		@checklist.categories << CoreChecklist.last.categories if CoreChecklist.last
+		@checklist.save!
+		@checklists = @company.checklists
+		render :editor
+	end
+
 	def new_project
 		@project = Project.new
 		@project.build_address

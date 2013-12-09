@@ -1,0 +1,4 @@
+$('#pages').fadeOut(200,function(){
+	$(this).html('<%= j render :partial => "projects/checklist" %>');
+	$(this).fadeIn(200);
+});

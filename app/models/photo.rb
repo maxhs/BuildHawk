@@ -1,8 +1,9 @@
 class Photo < ActiveRecord::Base
-	attr_accessible :image, :user_id, :user, :project_id, :project, :company_id, :image_file_name, :source
+	attr_accessible :image, :user_id, :user, :project_id, :project, :company_id, :image_file_name, :source, :report_id
 
 	belongs_to :user
 	belongs_to :project
+	belongs_to :report
 	belongs_to :company
 	belongs_to :punchlist_item
 	belongs_to :checklist_item

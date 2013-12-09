@@ -33,9 +33,11 @@ class ProjectsController < ApplicationController
 	def show
 		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
-		@items = @project.checklist.checklist_items.where(:complete => true)
-		puts "item count: #{@items.count}"
-		@checklist = @project.checklist
+		if @project.checklist && @project.checklist.checklist_items
+			@items = @project.checklist.checklist_items.where(:complete => true)
+			puts "item count: #{@items.count}"
+			@checklist = @project.checklist
+		end
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -92,7 +94,14 @@ class ProjectsController < ApplicationController
 	end     
 
 	def checklist_item
-		@checklist_item = ChecklistItem.find params[:id]
+		@checklist_item = ChecklistItem.find params[:item_id]
+	end
+
+	def update_checklist_item
+		@checklist_item = ChecklistItem.find params[:checklist_item_id]
+		@checklist_item.update_attributes params[:checklist_item]
+		@checklist = @checklist_item.subcategory.category.checklist
+		render :checklist
 	end
 
 	def punchlists
@@ -106,7 +115,7 @@ class ProjectsController < ApplicationController
 
 	def new_report
 		@report = Report.new
-		@report.report_users.build
+		@report.users.build
 		@report_title = "Add a New Report"
 		if request.xhr?
 			respond_to do |format|
@@ -126,23 +135,11 @@ class ProjectsController < ApplicationController
 	def show_report
 		@report_title = ""
 		@report = Report.find params[:report_id]
-		@report.report_users.build
+		@report.users.build
 	end
 
 	def update_report
 		@report = Report.find params[:report_id]
-		if params[:report][:report_users].present?
-			r_users = params[:report][:report_users]
-			r_users.each do |r|
-				if r.length > 0
-					puts "this is r: #{r}"
-					u = User.where(:full_name => r, :company_id => @project.company.id).first_or_create
-					ru = ReportUser.where(:user_id => u.id, :report_id => @report.id).first_or_create
-					@report.report_users << ru
-				end
-			end
-			params[:report].delete(:report_users)
-		end
 		@report.update_attributes params[:report]
 		@reports = @project.reports
 		if request.xhr?

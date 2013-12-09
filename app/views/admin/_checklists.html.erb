@@ -16,5 +16,5 @@
 		<% end %>
 	</table>
 <% else %>
-	No checklists
+	<%= link_to "Create Checklist Template", create_template_admin_index_path(:company_id => current_user.company.id), :method => :post %>
 <% end %>

@@ -14,7 +14,6 @@ gem 'acts_as_api'
 gem 'geocoder'
 gem 'devise'
 gem 'httparty'
-gem 'bootstrap-datetimepicker-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem "nested_form"

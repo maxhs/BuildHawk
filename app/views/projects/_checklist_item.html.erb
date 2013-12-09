@@ -10,26 +10,27 @@
 </div>
 
 <table style="margin: 0 auto; width:100%;">
-	<%= form_for @checklist_item, :url => update_checklist_item_projects_path, :method => :put do |f| %>
+	<%= form_for @checklist_item, :url => {:controller => :checklist_items, :action => :update, :id => @checklist_item.id}, :method => :put, :remote => true do |f| %>
 		<tr><td>
-			<div class="input-append date form_datetime datetimepicker" id="datetimepicker">
-
-				<%= f.text_field :critical_date, :value => f.object.critical_date, :placeholder => Time.now.strftime("%b %e, %Y  %l:%m %P"), :class =>"datetime-input" %>
-
-			<span class="add-on"></span>
-		</div>
+			<h4>Status:</h4>
+			<%= f.select :status, [nil,"In-Progress","Completed","Not Applicable"], :style => "width:400px !important;" %>
 		</td></tr>
-		<tr><td>Mark complete?<%= f.check_box :complete %></td></tr>
+		<tr><td>
+			<h4>Critical Date:</h4>
+			<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+
+					<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+
+					<span class="add-on"><i class="icon-th"></i></span>
+		
+			</div>
+		</td></tr>
+
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Update" %></button></td></tr>
 	<% end %>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".datetimepicker").datetimepicker({
-	    	format: "M d, yyyy  H:ii p",
-	    	showMeridian: true,
-	    	autoclose: true,
-	    	todayBtn: true
-		});
+		$("#dp").datepicker();
 	});
 </script>

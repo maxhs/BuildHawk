@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     @company = Company.where(name: params[:user][:company][:name]).first_or_create!
     @company.projects.build unless @company.projects.count
     current_user.update_attribute :company_id, @company.id
-    
+
   end
 
   def update

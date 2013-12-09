@@ -4,8 +4,9 @@ class CreateReports < ActiveRecord::Migration
       t.string :title
       t.string :body
       t.belongs_to :project
-      t.belongs_to :user
+      t.belongs_to :author, :class_name => "User"
       t.string :report_type
+      t.text :weather
       t.timestamps
     end
   end

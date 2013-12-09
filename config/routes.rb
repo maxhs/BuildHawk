@@ -13,6 +13,7 @@ Buildhawk::Application.routes.draw do
 
   post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
+  get "/projects/:id/update_punchlist_item", :to => "projects#update_punchlist_item"
 
   resources :users
   resources :home do 
@@ -28,6 +29,7 @@ Buildhawk::Application.routes.draw do
       post :create_user
       get :reports
       get :checklists
+      post :create_template
       get :new_project
       post :create_project
       get :billing
@@ -72,7 +74,6 @@ Buildhawk::Application.routes.draw do
       delete :delete_report
       delete :delete_photo
       post :update_report
-      post :update_checklist_item
       post :update_punchlist_item
     end
     collection do
@@ -82,6 +83,7 @@ Buildhawk::Application.routes.draw do
   end
   resources :companies
   resources :checklists
+  resources :checklist_items
   resources :photos
   resources :punchlists
   resources :reports

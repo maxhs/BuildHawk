@@ -15,7 +15,6 @@
 //= require turbolinks
 //= require jquery_nested_form
 //= require bootstrap
-//= require bootstrap-datetimepicker
 //= require jquery.remotipart
 //= require shadowbox
 //= require_tree .

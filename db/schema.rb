@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209080710) do
+ActiveRecord::Schema.define(version: 20131209192804) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(version: 20131209080710) do
     t.string   "name",           default: "", null: false
     t.string   "email"
     t.string   "phone_number"
+    t.boolean  "pre_register"
+    t.string   "contact_name"
     t.integer  "projects_count"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "pre_register"
-    t.string   "contact_name"
   end
 
   create_table "core_checklists", force: true do |t|
@@ -170,15 +170,14 @@ ActiveRecord::Schema.define(version: 20131209080710) do
   end
 
   create_table "report_fields", force: true do |t|
+    t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "report_id"
   end
 
   create_table "report_users", force: true do |t|
     t.integer  "report_id"
     t.integer  "user_id"
-    t.string   "full_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -187,11 +186,11 @@ ActiveRecord::Schema.define(version: 20131209080710) do
     t.string   "title"
     t.string   "body"
     t.integer  "project_id"
-    t.integer  "user_id"
+    t.integer  "author_id"
     t.string   "report_type"
+    t.text     "weather"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "weather"
   end
 
   create_table "subcategories", force: true do |t|
