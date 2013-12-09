@@ -14,7 +14,7 @@
 			<div class="container">
 				<ul class="nav navbar-nav">
 					<li class="project nav-dashboard active"><%= link_to "Dashboard", project_path(@project), :remote => true %></li>
-					<% if @project.checklist %><li class="project nav-checklists"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li><% end %>
+					<li class="project nav-checklists"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
 					<li class="project nav-documents"><%= link_to "Documents", photos_project_path(@project), :remote => true %></a></li>
 					<li class="project nav-reports"><%= link_to "Reports", reports_project_path(@project), :class=>"current-page", :remote => true %></li>
 					<li class="project nav-punchlists"><%= link_to "Work List", punchlists_project_path(@project), :remote => true %></li>
