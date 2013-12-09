@@ -106,6 +106,7 @@ class ProjectsController < ApplicationController
 
 	def new_report
 		@report = Report.new
+		@report.report_users.build
 		@report_title = "Add a New Report"
 		if request.xhr?
 			respond_to do |format|
@@ -125,7 +126,7 @@ class ProjectsController < ApplicationController
 	def show_report
 		@report_title = ""
 		@report = Report.find params[:report_id]
-		@report.report_personnel.build
+		@report.report_users.build
 	end
 
 	def photos

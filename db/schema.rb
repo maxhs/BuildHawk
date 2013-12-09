@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205060646) do
+ActiveRecord::Schema.define(version: 20131209080710) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 20131205060646) do
     t.datetime "updated_at"
   end
 
-  create_table "report_personnels", force: true do |t|
+  create_table "report_users", force: true do |t|
     t.integer  "report_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 20131205060646) do
     t.string   "report_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "weather"
   end
 
   create_table "subcategories", force: true do |t|

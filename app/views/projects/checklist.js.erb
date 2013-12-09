@@ -1,3 +1,5 @@
+$('#main * .navbar-nav > li > a').removeClass('current-page');
+$('.nav-checklists a').addClass('current-page');
 $('#pages').fadeOut(200,function(){
 	$(this).html('<%= j render :partial => "checklist" %>');
 	$(this).fadeIn(200);

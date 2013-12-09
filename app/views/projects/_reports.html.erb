@@ -15,6 +15,7 @@
 			<th>Report Date</th>
 			<th>Type</th>
 			<th>Created</th>
+			<th>Photos</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,10 +26,17 @@
 					<td><%= link_to report.title, show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
 					<td><%= report.report_type %></td>
 					<td><%= parse_time report.created_at %></td>
+					<td>
+						<%if report.photos && report.photos.count > 1 %>
+							<%= report.photos.count %>
+						<% else %>
+							0
+						<% end %>
+					</td>
 				</tr>
 				<% end %>
 			<% else %>
-				<tr><td colspan="3" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No reports</h4></td></tr>
+				<tr><td colspan="4" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No reports</h4></td></tr>
 			<% end %>
 		
 	</tbody>

@@ -1,4 +1,6 @@
-$('#pages').fadeOut(200,function(){
+$('#main * .navbar-nav > li > a').removeClass('current-page');
+$('.nav-documents a').addClass('current-page');$('#pages').fadeOut(200,function(){
+
 	$(this).html('<%= j render :partial => "photos", :locals => {:photos => @photos } %>');
 	$(this).fadeIn(200);
 });

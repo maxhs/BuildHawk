@@ -1,5 +1,5 @@
 class ReportField < ActiveRecord::Base
-	attr_accessible :title, :type, :body, :user_id, :report_id
+	  attr_accessible :title, :type, :body, :user_id, :report_id
   	belongs_to :user
   	belongs_to :report
 

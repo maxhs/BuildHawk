@@ -129,7 +129,7 @@ body {
 	}
 
 	.container {
-		width:90%;
+		width:95%;
 	}
 
 	footer {
@@ -253,10 +253,10 @@ input[type="email"], input[type="password"], input[type="text"], textarea {
 	border-radius:4px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	box-shadow:0 0 0 0 #eee;
-	-moz-box-shadow:0 0 0 0 #eee;
-	-webkit-box-shadow:0 0 0 0 #eee;
-	border:1px solid #eee;
+	box-shadow:0 0 0 0 transparent;
+	-moz-box-shadow:0 0 0 0 transparent;
+	-webkit-box-shadow:0 0 0 0 transparent;
+	border:1px solid #ddd;
 	padding:7px;
 }
 

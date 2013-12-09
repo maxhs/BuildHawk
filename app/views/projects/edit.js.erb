@@ -1,3 +1,5 @@
+$('#main * .navbar-nav > li > a').removeClass('current-page');
+$('.nav-edit a').addClass('current-page');
 $('#pages').fadeOut(200,function(){
 	$(this).html('<%= j render :partial => "edit" %>');
 	$(this).fadeIn(200);
