@@ -7,6 +7,8 @@ class ChecklistItem < ActiveRecord::Base
   	has_many :photos
   	has_many :comments
 
+    after_commit :check_completed
+
   	acts_as_api
 
     def subcategory_name
@@ -15,6 +17,16 @@ class ChecklistItem < ActiveRecord::Base
 
     def category_name
       subcategory.category.name
+    end
+
+    def check_completed
+      if status == "Completed" && completed_date == nil
+        self.update_attribute :completed_date, Date.today
+        #TODO create a completed notification
+
+      elsif status != "Completed" && completed_date != nil
+        self.update_attribute :completed_date, nil
+      end
     end
 
   	api_accessible :project do |t|

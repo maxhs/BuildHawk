@@ -1,6 +1,6 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('.nav-punchlists a').addClass('current-page');
 $('#pages').fadeOut(200,function(){
-	$(this).html('<%= j render :partial => "punchlists", :locals => {:punchlists => @punchlists } %>');
+	$(this).html('<%= j render :partial => "worklist", :locals => {:punchlists => @punchlists } %>');
 	$(this).fadeIn(200);
 });

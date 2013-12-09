@@ -1,6 +1,6 @@
 <table id="edit-user-form">
 	<tr><td><h2>My settings</h2></td></tr>
-	<%= nested_form_for @user, :action => :update, :multipart => true, :method => :put do |f| %>
+	<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
 		<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
@@ -17,6 +17,7 @@
 		<tr><td>
 			<%= f.fields_for @user.photos.build do |p| %>
 				<%= p.file_field :image %>
+				<%= hidden_field_tag :user_id, @user.id %>
 			<% end %>
 		</td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>

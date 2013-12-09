@@ -1,5 +1,5 @@
 class Report < ActiveRecord::Base
-	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos, :photos_attributes, :users_attributes, :report_users_attributes,
+	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos_attributes, :users_attributes, :report_users_attributes,
                   :users, :user_ids
   	belongs_to :author
   	belongs_to :project

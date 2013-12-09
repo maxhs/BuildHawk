@@ -90,8 +90,28 @@ class ProjectsController < ApplicationController
 
 	def checklist
 		@checklist = @project.checklist
-		puts "did we find a checklist? #{@checklist} #{@checklist.categories.count} #{@checklist.categories.map(&:subcategories).flatten.count}"
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :checklist
+		end
 	end     
+
+	def delete_checklist
+		@checklist = Checklist.find params[:checklist_id]
+		@checklist.destroy
+		@projects = current_user.company.projects if current_user.company
+		@project = Project.find params[:id]
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "projects/show"}
+			end
+		else
+			render :show
+		end
+	end
 
 	def checklist_item
 		@checklist_item = ChecklistItem.find params[:item_id]
@@ -104,7 +124,7 @@ class ProjectsController < ApplicationController
 		render :checklist
 	end
 
-	def punchlists
+	def worklist
 		@punchlist = @project.punchlists.first
 		@items = @punchlist.punchlist_items if @punchlist
 	end
@@ -144,7 +164,7 @@ class ProjectsController < ApplicationController
 		@reports = @project.reports
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "reports"}
+				format.js { render :template => "projects/reports"}
 			end
 		else 
 			render :reports
@@ -162,7 +182,7 @@ class ProjectsController < ApplicationController
 		end
 	end	
 
-	def new_punchlist_item
+	def new_worklist_item
 		@punchlist_item = PunchlistItem.new
 		if request.xhr?
 			respond_to do |format|
@@ -173,7 +193,7 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def punchlist_item
+	def worklist_item
 		@project = Project.find params[:project_id]
 		if @project.punchlists.count == 0
 			@punchlist = @project.punchlists.create
@@ -189,18 +209,18 @@ class ProjectsController < ApplicationController
 		redirect_to project_path(@project)
 	end
 
-	def edit_punchlist_item
+	def edit_worklist_item
 		@punchlist_item = PunchlistItem.find params[:item_id]
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else 
-			redirect_to punchlists_project_path(@project)
+			redirect_to worklist_project_path(@project)
 		end
 	end
 
-	def update_punchlist_item
+	def update_worklist_item
 		@punchlist_item = PunchlistItem.find params[:id]
 		@punchlist_item.update_attributes params[:punchlist_item]
 	end
@@ -226,10 +246,10 @@ class ProjectsController < ApplicationController
 
 	end
 
-	def delete_punchlist_item
+	def delete_worklist_item
 		@item = PunchlistItem.find params[:item_id]
 		@item.destroy
-		redirect_to punchlists_project_path(@project)
+		redirect_to worklist_project_path(@project)
 	end
 
 	private

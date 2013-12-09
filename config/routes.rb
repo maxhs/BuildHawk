@@ -13,7 +13,8 @@ Buildhawk::Application.routes.draw do
 
   post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
-  get "/projects/:id/update_punchlist_item", :to => "projects#update_punchlist_item"
+  get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
+  post "/users/:id", :to => "users#update"
 
   resources :users
   resources :home do 
@@ -56,11 +57,11 @@ Buildhawk::Application.routes.draw do
   end
   resources :projects do
     member do
-      get :punchlists
-      get :new_punchlist_item
-      get :edit_punchlist_item
+      get :worklist
+      get :new_worklist_item
+      get :edit_worklist_item
       get :edit_checklist_item
-      post :punchlist_item
+      post :worklist_item
       get :checklist
       post :create_checklist_item
       get :checklist_item
@@ -74,11 +75,12 @@ Buildhawk::Application.routes.draw do
       delete :delete_report
       delete :delete_photo
       post :update_report
-      post :update_punchlist_item
+      post :update_worklist_item
+      delete :delete_checklist
     end
     collection do
 
-      delete :delete_punchlist_item
+      delete :delete_worklist_item
     end
   end
   resources :companies

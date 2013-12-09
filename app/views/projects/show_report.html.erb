@@ -20,7 +20,7 @@
 						<li class="nav-checklists"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
 						<li class="nav-documents"><%= link_to "Documents", photos_project_path(@project), :remote => true %></a></li>
 						<li class="nav-reports"><%= link_to "Reports", reports_project_path(@project), :remote => true %></li>
-						<li class="nav-punchlists"><%= link_to "Work List", punchlists_project_path(@project), :class => "current-page", :remote => true %></li>
+						<li class="nav-punchlists"><%= link_to "Work List", workist_project_path(@project), :class => "current-page", :remote => true %></li>
 						<% if current_user.admin %> <li class="nav-edit"><%= link_to "Edit", edit_project_path(@project), :remote => true %></li> <% end %>
 					</ul>
 				</div>

@@ -31,7 +31,8 @@
 		<% end %>
 	</div>
 <% else %>
-	<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>	
+	<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>
+	<div style="text-align:center;font-style:italic"><%= link_to "Remove this checklist?", delete_checklist_project_path(@project, :checklist_id => @checklist.id), :remote => true, :method => :delete %></div>	
 <% end %>
 
 <script>
