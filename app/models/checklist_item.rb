@@ -23,7 +23,7 @@ class ChecklistItem < ActiveRecord::Base
     def check_completed
       if status == "Completed" && completed_date == nil
         self.update_attribute :completed_date, Date.today
-        if subcategory.completed_count == subcategory.item_count
+        if subcategory.completed_count != 0 && subcategory.completed_count == subcategory.item_count
           puts "marking subcategory completed"
           subcategory.update_attribute :completed_date, Date.today
         end
