@@ -15,11 +15,11 @@
 
 		<% @checklist.categories.each do |c| %>
 			<div class="category">
-				<h1 style="display:inline-block"><%= c.name %></h1>(<%=c.completed_count%> of <%=c.item_count%>)
+				<h1 style="display:inline-block"><%= c.name %></h1> (<%=c.completed_count%> completed out of <%=c.item_count%>)
 			</div>
 			<% c.subcategories.each do |s| %>
 				<div class="subcategory">
-					<h2><%=s.name%></h2>
+					<h2 style="display:inline-block"><%=s.name%></h2>  (<%=s.completed_count%> of <%=s.item_count%>)
 				</div>
 				<% s.checklist_items.each do |i| %>
 					<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>

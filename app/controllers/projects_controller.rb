@@ -34,11 +34,11 @@ class ProjectsController < ApplicationController
 		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
 		if @project.checklist && @project.checklist.checklist_items
-			items = @project.checklist.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+			items = @project.checklist.item_array
 			@item_count = items.count
 
 			@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
-			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).reverse
+			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
 			@recent_photos = Photo.last(5)
 
 			@checklist = @project.checklist

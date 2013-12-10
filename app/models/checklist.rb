@@ -9,6 +9,19 @@ class Checklist < ActiveRecord::Base
   	has_many :categories, :dependent => :destroy
   	accepts_nested_attributes_for :categories
 
+  	def completed_count
+  		items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+  		items.select{|i| i.status == "Completed"}.count
+  	end
+
+  	def item_count
+  		categories.map(&:subcategories).flatten.map(&:checklist_items).flatten.count
+  	end
+
+  	def item_array
+  		categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+  	end
+
   	def self.import(file)
 	  spreadsheet = open_spreadsheet(file)
 	  header = spreadsheet.row(2)

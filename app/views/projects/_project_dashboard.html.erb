@@ -2,8 +2,9 @@
 <h3>Upcoming Critical Items</h3>
 <table style="width:100%;">
 	<% @upcoming_items.each do |item| %>
+		
 		<tr>
-			<td class="col-md-8"><%= item.body %></td>
+			<td class="col-md-8">- <%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></td>
 			<td class="col-md-2"><%= parse_date item.critical_date %></td>
 		<tr>
 	<% end %>
@@ -14,8 +15,10 @@
 <table style="width:100%;">
 	<% @recently_completed.each do |item| %>
 		<tr>
-			<td class="col-md-8"><%= item.body %></td>
-			<td class="col-md-2"><%= parse_date item.completed_date %></td>
+			
+				<td class="col-md-8">- <%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></td>
+				<td class="col-md-2"><%= parse_date item.completed_date %></td>
+			
 		</tr>
 	<% end %>
 </table>
@@ -42,11 +45,11 @@
 	<th class="col-sm-2">+/-</th>
 </theader>
 <% @checklist.categories.each do |cat| %>
-	<tr >
-		<td class="col-sm-4"><%= cat.name %> </td>
-		<td class="col-sm-2"><span><%= cat.completed_count/cat.item_count%> </span>%</td>
+	<tr style="font-size:1.1em;border-bottom:1px solid #eee;">
+		<td class="col-sm-4" style="padding:10px 0;"><%= cat.name %> </td>
+		<td class="col-sm-2"><span><%= number_to_percentage(cat.completed_count/cat.item_count.to_f*100,:precision=>1) %></span></td>
 		<td class="col-sm-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></td>
 		<td class="col-sm-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></td>
-		<td class="col-sm-2"></td>
+		<td class="col-sm-2">&nbsp;</td>
 	</tr>
 <% end %>
