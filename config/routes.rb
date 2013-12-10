@@ -93,6 +93,11 @@ Buildhawk::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :photos
+      resources :sessions, :only => [:create, :forgot_password] do
+        collection do 
+          post :forgot_password
+        end 
+      end
       resources :companies 
       resources :projects
       resources :users
