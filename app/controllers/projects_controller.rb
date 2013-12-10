@@ -194,7 +194,7 @@ class ProjectsController < ApplicationController
 				format.js
 			end
 		else 
-			redirect_to punchlists_project_path(@project)
+			redirect_to worklist_project_path(@project)
 		end
 	end
 
@@ -211,7 +211,7 @@ class ProjectsController < ApplicationController
 		end
 		@punchlist_item = @punchlist.punchlist_items.create params[:punchlist_item]
 		@punchlist_item.update_attribute :assignee_id, user.id if user
-		redirect_to project_path(@project)
+		redirect_to worklist_project_path(@project)
 	end
 
 	def edit_worklist_item
@@ -232,6 +232,7 @@ class ProjectsController < ApplicationController
 		# 	puts "should be updating completed by user"
 		# 	@punchlist_item.update_attribute :completed_by_user_id, current_user.id
 		# end
+		worklist_project_path(@project)
 	end
 
 	def new_photo

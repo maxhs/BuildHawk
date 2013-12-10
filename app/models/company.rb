@@ -9,9 +9,13 @@ class Company < ActiveRecord::Base
 	accepts_nested_attributes_for :photos
 	acts_as_api
 
-  	api_accessible :user do |t|
+  	api_accessible :company do |t|
   		t.add :id
   		t.add :name
   		t.add :users
+  	end
+
+  	api_accessible :user, :extend => :company do |t|
+  		
   	end
 end

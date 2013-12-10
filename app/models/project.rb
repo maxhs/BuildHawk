@@ -33,10 +33,6 @@ class Project < ActiveRecord::Base
   	
     acts_as_api
 
-  	api_accessible :user do |t|
-
-  	end
-
   	api_accessible :project do |t|
   		t.add :name
   		t.add :addresses
@@ -44,4 +40,8 @@ class Project < ActiveRecord::Base
   		t.add :checklist
   		t.add :punchlists
   	end
+
+    api_accessible :user, :extend => :project do |t|
+
+    end
 end

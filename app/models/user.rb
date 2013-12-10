@@ -44,7 +44,6 @@ class User < ActiveRecord::Base
 	    t.add :last_name
 	    t.add :full_name
 	    t.add :email
-	    t.add :address
 	    t.add :phone_number
 	    t.add :company
 	    t.add :projects
