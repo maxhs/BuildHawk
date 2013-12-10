@@ -15,7 +15,7 @@
 
 		<% @checklist.categories.each do |c| %>
 			<div class="category">
-				<h1><%= c.name %></h1>
+				<h1 style="display:inline-block"><%= c.name %></h1>(<%=c.completed_count%> of <%=c.item_count%>)
 			</div>
 			<% c.subcategories.each do |s| %>
 				<div class="subcategory">

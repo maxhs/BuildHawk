@@ -34,8 +34,13 @@ class ProjectsController < ApplicationController
 		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
 		if @project.checklist && @project.checklist.checklist_items
-			@items = @project.checklist.checklist_items.where(:complete => true)
-			puts "item count: #{@items.count}"
+			items = @project.checklist.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+			@item_count = items.count
+
+			@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
+			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).reverse
+			@recent_photos = Photo.last(5)
+
 			@checklist = @project.checklist
 		end
 		if request.xhr?
@@ -223,6 +228,10 @@ class ProjectsController < ApplicationController
 	def update_worklist_item
 		@punchlist_item = PunchlistItem.find params[:id]
 		@punchlist_item.update_attributes params[:punchlist_item]
+		# if params[:punchlist_item][:status] == "Completed"
+		# 	puts "should be updating completed by user"
+		# 	@punchlist_item.update_attribute :completed_by_user_id, current_user.id
+		# end
 	end
 
 	def new_photo

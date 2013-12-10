@@ -1,5 +1,7 @@
-<% if item.complete %>
+<% if item.status == "Completed" %>
 	<div class="row checklist-item completed">
+<% elsif item.status == "Not Applicable" %>
+	<div class="row checklist-item not-applicable">
 <% else %>
 	<div class="row checklist-item">
 <% end %>
@@ -8,11 +10,15 @@
 		</div>
 
 		<div class="col-md-2" style="text-align: center;">
-			<% if item.critical_date %><%= parse_date item.critical_date %><% end %>
+			<% if item.critical_date %>
+				<%= parse_date item.critical_date %>
+			<% end %>
 		</div>
 
 		<div class="col-md-2" style="text-align: center;">
-			<% if item.completed_date %><%= parse_date item.completed_date %><% end %>
+			<% if item.completed_date %>
+				<%= parse_date item.completed_date %>
+			<% end %>
 		</div>
 
 	</div>

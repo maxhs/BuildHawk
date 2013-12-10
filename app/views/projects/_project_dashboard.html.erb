@@ -1,38 +1,52 @@
 
 <h3>Upcoming Critical Items</h3>
-<div class="row" data-jgs-each-due="data.cl_due_soon" >
-	<div class="col-md-8" data-jgs-text="due:name"></div>
-	<div class="col-md-2" data-jgs-text="due:due | date"></div>
-</div>
+<table style="width:100%;">
+	<% @upcoming_items.each do |item| %>
+		<tr>
+			<td class="col-md-8"><%= item.body %></td>
+			<td class="col-md-2"><%= parse_date item.critical_date %></td>
+		<tr>
+	<% end %>
+</table>
 
 
 <h3>Recently Completed</h3>
-<div class="row" data-jgs-each-comp="data.wl_completed" >
-	<div class="col-md-8" data-jgs-text="comp:name"></div>
-	<div class="col-md-2" data-jgs-text="comp:completed | completedOn"></div>
-</div>
+<table style="width:100%;">
+	<% @recently_completed.each do |item| %>
+		<tr>
+			<td class="col-md-8"><%= item.body %></td>
+			<td class="col-md-2"><%= parse_date item.completed_date %></td>
+		</tr>
+	<% end %>
+</table>
 
 
 <h3>Recently Added Documents</h3>
 <div class="row">
 	<div class="col-md-12" style="overflow: hidden;">
-		<div data-jgs-each-img="data.recent_docs" style="float: left; width: auto; margin: 0px 5px 10px 0px;">
-			<img data-jgs-getsrc="img:urls" />
-		</div>
+		<% @recent_photos.each do |photo| %>
+			<% if photo.image_file_name%>
+				<%= image_tag photo.image.url(:small), :class=>"dashboard-photo",:style=>"float: left; width: auto; margin: 0px 5px 10px 0px;" %>
+				<%= photo.source %>
+			<% end %>
+		<% end %>
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-sm-4">Category</div>
-	<div class="col-sm-2">% Completion</div>
-	<div class="col-sm-2">Completion Date</div>
-	<div class="col-sm-2">Milestone</div>
-	<div class="col-sm-2">+/-</div>
-</row>
-<div class="row" data-jgs-each-stat="data.cl_categories">
-	<div class="col-sm-4" data-jgs-text="stat:_id"></div>
-	<div class="col-sm-2"><span data-jgs-text="stat:percent"></span>%</div>
-	<div class="col-sm-2" data-jgs-text="stat:category_due | date"></div>
-	<div class="col-sm-2" data-jgs-text="stat:category_complete | date"></div>
-	<div class="col-sm-2"></div>
-</row>
+<table style="width:100%;">
+<theader>
+	<th class="col-sm-4"><h4>Category</h4></th>
+	<th class="col-sm-2">% Completion</th>
+	<th class="col-sm-2">Completion Date</th>
+	<th class="col-sm-2">Milestone</th>
+	<th class="col-sm-2">+/-</th>
+</theader>
+<% @checklist.categories.each do |cat| %>
+	<tr >
+		<td class="col-sm-4"><%= cat.name %> </td>
+		<td class="col-sm-2"><span><%= cat.completed_count/cat.item_count%> </span>%</td>
+		<td class="col-sm-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></td>
+		<td class="col-sm-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></td>
+		<td class="col-sm-2"></td>
+	</tr>
+<% end %>

@@ -79,7 +79,6 @@ Buildhawk::Application.routes.draw do
       delete :delete_checklist
     end
     collection do
-
       delete :delete_worklist_item
     end
   end

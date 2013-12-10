@@ -15,8 +15,13 @@
 		font-size:15px;
 	}
 
-	.checklist-item.completed {
-		background:#eee;
+	.row.checklist-item.completed div {
+		text-decoration:line-through;
+	}
+
+	.row.checklist-item.not-applicable {
+		background:#f7f7f7;
+		color:#bbb;
 	}
 }
 

@@ -50,13 +50,14 @@ ActiveRecord::Schema.define(version: 20131209192804) do
   end
 
   create_table "checklist_items", force: true do |t|
-    t.boolean  "complete",       default: false
+    t.boolean  "complete",             default: false
     t.string   "status"
     t.string   "item_type"
     t.text     "body"
     t.integer  "subcategory_id"
     t.integer  "category_id"
     t.integer  "checklist_id"
+    t.integer  "completed_by_user_id"
     t.datetime "critical_date"
     t.datetime "milestone_date"
     t.datetime "completed_date"

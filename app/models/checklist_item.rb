@@ -1,9 +1,10 @@
 class ChecklistItem < ActiveRecord::Base
-	attr_accessible :body, :complete, :item_type, :user_id, :subcategory_id, :subcategory, :status, :critical_date, :completed_date
+	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :subcategory_id, :subcategory, :status, :critical_date, :completed_date
   	
   	belongs_to :subcategory
     belongs_to :category
     belongs_to :checklist
+    belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
   	has_many :comments
 
@@ -22,10 +23,15 @@ class ChecklistItem < ActiveRecord::Base
     def check_completed
       if status == "Completed" && completed_date == nil
         self.update_attribute :completed_date, Date.today
+        if subcategory.completed_count == subcategory.item_count
+          puts "marking subcategory completed"
+          subcategory.update_attribute :completed_date, Date.today
+        end
         #TODO create a completed notification
 
       elsif status != "Completed" && completed_date != nil
-        self.update_attribute :completed_date, nil
+        puts "should be getting rid of completed date"
+        self.update_attributes :completed_date => nil, :completed_by_user => nil
       end
     end
 
