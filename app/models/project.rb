@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
 
   	api_accessible :project do |t|
   		t.add :name
-  		t.add :addresses
+  		t.add :address
   		t.add :company
   		t.add :checklist
   		t.add :punchlists
@@ -43,6 +43,6 @@ class Project < ActiveRecord::Base
 
     api_accessible :user do |t|
       t.add :name
-      t.add :addresses
+      t.add :address
     end
 end
