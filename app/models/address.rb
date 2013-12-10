@@ -14,4 +14,11 @@ class Address < ActiveRecord::Base
   		t.add :country
   		t.add :phone_number
   	end
+
+    api_accessible :user, :extend => :project do |t|
+      
+    end
+    api_accessible :company, :extend => :project do |t|
+      
+    end
 end
