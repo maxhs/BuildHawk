@@ -12,6 +12,7 @@ class Company < ActiveRecord::Base
   	api_accessible :company do |t|
   		t.add :id
   		t.add :name
+  		t.add :projects
   		t.add :users
   	end
 

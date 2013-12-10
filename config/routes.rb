@@ -100,6 +100,8 @@ Buildhawk::Application.routes.draw do
       end
       resources :companies 
       resources :projects
+      resources :checklists
+      resources :punchlists
       resources :users
       resources :comments
     end

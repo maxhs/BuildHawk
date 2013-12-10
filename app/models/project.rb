@@ -33,7 +33,7 @@ class Project < ActiveRecord::Base
   	
     acts_as_api
 
-  	api_accessible :project do |t|
+  	api_accessible :projects do |t|
   		t.add :name
   		t.add :address
   		t.add :company
