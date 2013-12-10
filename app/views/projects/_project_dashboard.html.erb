@@ -14,15 +14,12 @@
 <h3>Recently Completed</h3>
 <table style="width:100%;">
 	<% @recently_completed.each do |item| %>
-		<tr>
-			
-				<td class="col-md-8">- <%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></td>
-				<td class="col-md-2"><%= parse_date item.completed_date %></td>
-			
+		<tr>	
+			<td class="col-md-8">- <%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></td>
+			<td class="col-md-2"><%= parse_date item.completed_date %></td>
 		</tr>
 	<% end %>
 </table>
-
 
 <h3>Recently Added Documents</h3>
 <div class="row">

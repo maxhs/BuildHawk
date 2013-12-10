@@ -14,7 +14,7 @@
 		<tr>
 			<th>Report Date</th>
 			<th>Type</th>
-			<th>Created</th>
+			<th>Last Updated</th>
 			<th>Photos</th>
 		</tr>
 	</thead>
@@ -23,12 +23,16 @@
 		<% if @reports.count && @reports.count > 0 %>
 			<% @reports.each do |report| %>
 				<tr>
-					<td><%= link_to report.title, show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
+					<td><%= link_to "#{report.report_type} - #{parse_date report.created_at}", show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
 					<td><%= report.report_type %></td>
-					<td><%= parse_time report.created_at %></td>
+					<td><%= parse_time report.updated_at %></td>
 					<td>
-						<%if report.photos && report.photos.count > 1 %>
-							<%= report.photos.count %>
+						<%if report.photos && report.photos.count > 0 %>
+							<% if report.photos.count == 1 %>
+								1
+							<% else %>
+								<%= report.photos.count %>
+							<% end %>
 						<% else %>
 							0
 						<% end %>
