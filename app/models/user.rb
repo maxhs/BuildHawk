@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     has_many :reports, :through => :report_users
     has_many :photos, :dependent => :destroy
 
+    has_many :apn_registrations, :dependent => :destroy
+
   	devise :database_authenticatable, :registerable, :recoverable, :trackable #, :rememberable
 
   	accepts_nested_attributes_for :company
