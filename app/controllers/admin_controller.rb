@@ -3,6 +3,7 @@ class AdminController < ApplicationController
 
 	def index
 		@core_checklist = Checklist.where(:core => true).last
+		@users = current_user.company.users
 	end
 
 	def show
@@ -67,13 +68,7 @@ class AdminController < ApplicationController
 		@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id  
 		@checklist.save!
 		@checklists = @company.checklists
-		if request.xhr?
-			respond_to do |format|
-				format.js {render :template => "admin/editor"}
-			end
-		else
-			render :editor
-		end
+		redirect_to checklists_admin_index_path
 	end
 
 	def delete_checklist
@@ -103,21 +98,29 @@ class AdminController < ApplicationController
 	end
 
 	def create_project
+		puts "create project params: #{params}"
+		@checklist = Checklist.new
 		if params[:project][:checklist].present?
-			checklist = Checklist.find_by(name: params[:project][:checklist])
+			list = Checklist.find_by(name: params[:project][:checklist])
+			@checklist =  list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => :project_id
+			@checklist.save!
+			puts "new checklist has #{@checklist.categories.count} categories after save"
 			params[:project].delete(:checklist)
 		else 
-			checklist = Checklist.create
-			items = CoreChecklist.last.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
-			checklist.checklist_items << items
+			puts "did not have a checklist in the params"
+			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}
+			@checklist.save!
 		end
+		puts "checklist outside of initial find method: #{@checklist.categories.count} with id: #{@checklist.id}"
+		
 		@project = current_user.company.projects.create params[:project]
-		@project.update_attribute :checklist_id, checklist.id if checklist
-		if @project.save && request.xhr?
+		@project.checklist = @checklist
+		#@project.update_attribute :checklist_id, @checklist.id if @checklist
+		if @project.save! && request.xhr?
 			respond_to do |format|
 				format.js
 			end
-		elsif @project.save
+		elsif @project.save!
 			redirect_to admin_index_path
 		else
 			@response_message = "Please make sure you've completed the form before submitting".html_safe

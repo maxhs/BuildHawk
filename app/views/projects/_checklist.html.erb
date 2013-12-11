@@ -19,7 +19,7 @@
 			</div>
 			<% c.subcategories.each do |s| %>
 				<div class="subcategory">
-					<h2 style="display:inline-block"><%=s.name%></h2>  (<%=s.completed_count%> of <%=s.item_count%>)
+					<h3 style="display:inline-block"><%=s.name%></h3>  (<%=s.completed_count%> of <%=s.item_count%>)
 				</div>
 				<% s.checklist_items.each do |i| %>
 					<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>

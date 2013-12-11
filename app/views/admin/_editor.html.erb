@@ -43,11 +43,9 @@
 <script>
 $(document).ready(function(){
     $("#filter").keyup(function(){
- 
         // Retrieve the input field text and reset the count to zero
         var filter = $(this).val(), count = 0;
         if ($(this).val().length == 0) {
-        	console.log("emplty");
         	$(".row.checklist-item").fadeIn(0);
         } else {
 	        $(".row.checklist-item .checklist-body").each(function(){
