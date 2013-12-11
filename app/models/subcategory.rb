@@ -10,7 +10,7 @@ class Subcategory < ActiveRecord::Base
     end
 
     def completed_count
-      checklist_items.where(:status => "Completed").count
+      checklist_items.where(:status => "Completed").count if checklist_items
     end
 
     def check_completed

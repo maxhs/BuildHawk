@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
     end
 
     def completed_count
-      subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count
+      subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
     end
 
   	acts_as_api
