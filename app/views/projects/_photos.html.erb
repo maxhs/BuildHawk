@@ -1,8 +1,10 @@
 <table id="checklists-table">
 	<h2>Documents</h2>
 	<% @photos.each do |photo| %>
-		<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-			<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
+		<% if photo.image_file_name %>
+			<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
+				<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
+			<% end %>
 		<% end %>
 	<% end %>
 

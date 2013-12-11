@@ -1,11 +1,10 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
     attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
-    				:categories, :checklist_items
+    				:categories
   	belongs_to :project
   	belongs_to :company
   	
-  	has_many :checklist_items, :dependent => :destroy
   	has_many :categories, :dependent => :destroy
   	accepts_nested_attributes_for :categories
 
@@ -56,7 +55,7 @@ class Checklist < ActiveRecord::Base
   	end
 
   	api_accessible :projects do |t|
-  		t.add :checklist_items
+  		t.add :item_array
   		t.add :name
   		t.add :milestone_date
   		t.add :completed_date
