@@ -50,6 +50,7 @@ class User < ActiveRecord::Base
 	    t.add :company
 	    t.add :projects
 	    t.add :company
+      t.add :authentication_token
   	end
 
   	api_accessible :feed do |t|
