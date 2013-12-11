@@ -56,7 +56,7 @@ class Project < ActiveRecord::Base
     end
 
     def has_categories?
-      categories.any?
+      !categories.nil?
     end
   	
     acts_as_api
