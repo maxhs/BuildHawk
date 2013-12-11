@@ -49,7 +49,7 @@ class Photo < ActiveRecord::Base
 	api_accessible :dashboard do |t|
 		#t.add :url1000
 		#t.add :url500
-		#t.add :url200
+		t.add :url200
 		#t.add :url100
 		#t.add :source
 		#t.add :user
