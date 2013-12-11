@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
     end
 
     def recent_documents
-        photos.where("image_file_name IS NOT NULL")
+        photos.last(10)
     end
 
     def categories
