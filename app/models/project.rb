@@ -42,18 +42,22 @@ class Project < ActiveRecord::Base
     def progress
       number_to_percentage(checklist.completed_count/checklist.item_count.to_f, :precision => 1)
     end
+
+    def recent_documents
+        photos.last(5)
+    end
   	
     acts_as_api
 
   	api_accessible :projects do |t|
-      t.add :id
+        t.add :id
   		t.add :name
   		t.add :address
   		t.add :company
   		t.add :checklist
   		t.add :punchlists
-      t.add :active
-      t.add :users
+        t.add :active
+        t.add :users
   	end
 
     api_accessible :user do |t|
@@ -65,5 +69,6 @@ class Project < ActiveRecord::Base
       t.add :progress
       t.add :upcoming_items
       t.add :recently_completed
+      t.add :recent_documents
     end
 end

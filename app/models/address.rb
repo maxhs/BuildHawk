@@ -6,7 +6,7 @@ class Address < ActiveRecord::Base
 
 
     def formatted_address
-      "#{street1} #{street2}, #{city}, #{state}"
+      "#{street1}, #{city}, #{state} #{zip}"
     end
   	
     acts_as_api
