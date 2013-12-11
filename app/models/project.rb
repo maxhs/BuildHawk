@@ -50,18 +50,22 @@ class Project < ActiveRecord::Base
     def categories
         checklist.categories if checklist
     end
+
+    def has_checklist
+      checklist.present?
+    end
   	
     acts_as_api
 
   	api_accessible :projects do |t|
-        t.add :id
+      t.add :id
   		t.add :name
   		t.add :address
   		t.add :company
-  		t.add :checklist
+  		t.add :checklist, :if => :has_checklist?
   		t.add :punchlists
-        t.add :active
-        t.add :users
+      t.add :active
+      t.add :users
   	end
 
     api_accessible :user do |t|

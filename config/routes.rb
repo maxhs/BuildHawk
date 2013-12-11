@@ -87,6 +87,7 @@ Buildhawk::Application.routes.draw do
     end
   end
   resources :companies
+  resources :comments
   resources :checklists
   resources :checklist_items
   resources :photos

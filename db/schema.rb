@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211032551) do
+ActiveRecord::Schema.define(version: 20131211190622) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20131211032551) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "checklist_item_id"
+    t.integer  "punchlist_item_id"
   end
 
   create_table "companies", force: true do |t|

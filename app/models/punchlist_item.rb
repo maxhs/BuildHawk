@@ -4,7 +4,7 @@ class PunchlistItem < ActiveRecord::Base
 
 	belongs_to :project
 	belongs_to :assignee, :class_name => "User"
-
+    has_many :comments, :dependent => :destroy
 	has_many :photos
     accepts_nested_attributes_for :photos# :reject_if => lambda { |c| c[:image_file_name].blank? }
 

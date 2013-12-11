@@ -36,8 +36,8 @@ class Checklist < ActiveRecord::Base
 	    subcategory = category.subcategories.find_or_create_by(name: row[subcategory_title])
 	    item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title]
 	  end
-    @new_core.update_attribute :core, true
-	  @new_core.save
+        @new_core.update_attribute :core, true
+	    @new_core.save
 	end
 
 	def self.open_spreadsheet(file)

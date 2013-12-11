@@ -7,7 +7,7 @@ class ChecklistItem < ActiveRecord::Base
     belongs_to :checklist
     belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
-  	has_many :comments
+  	has_many :comments, :dependent => :destroy
 
     after_commit :check_completed
 
