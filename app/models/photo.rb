@@ -19,4 +19,33 @@ class Photo < ActiveRecord::Base
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :url            => "buildhawk.s3.amazonaws.com",
 	                    :path           => "photo_image_:id_:style.:extension"
+
+	acts_as_api
+	
+	def url500
+		if image_file_name
+			image.url(:medium)
+		end
+	end
+
+	def url200
+		if image_file_name
+			image.url(:small)
+		end
+	end
+
+	def url1000
+		if image_file_name
+			image.url(:large)
+		end
+	end
+
+	api_accessible :dashboard do |t|
+		t.add :url1000
+		t.add :url500
+		t.add :url200
+		t.add :source
+		t.add :user
+	end
+
 end

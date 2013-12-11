@@ -30,6 +30,7 @@ class Category < ActiveRecord::Base
     end
 
     api_accessible :dashboard do |t|
+      t.add :name
       t.add :item_count
       t.add :completed_count
     end
