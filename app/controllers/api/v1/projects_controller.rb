@@ -9,7 +9,10 @@ class Api::V1::ProjectsController < Api::V1::ApiController
     end
 
     def show
-
+    	@project = Project.find params[:id]
+    	respond_to do |format|
+        	format.json { render_for_api :projects, :json => @project}
+      	end
     end
 
 end
