@@ -16,4 +16,9 @@ class Api::V1::ChecklistItemsController < Api::V1::ApiController
       	end
     end
 
+    def photo
+        @checklist_item = ChecklistItem.find params[:id]
+        puts "photo params: #{params}"
+    end
+
 end
