@@ -22,7 +22,6 @@ class Report < ActiveRecord::Base
   		t.add :title
   		t.add :report_type
   		t.add :body
-  		t.add :completed_date
   		t.add :report_fields
   	end
 end
