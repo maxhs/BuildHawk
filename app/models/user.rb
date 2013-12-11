@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
     attr_accessible :first_name, :last_name, :user_id, :email, :password, :phone_number, :push_permissions, :email_permissions,
-    				:full_name, :company_id, :company_attributes, :photos_attributes, :password_confirmation, :admin, :uber_admin
+    				:full_name, :company_id, :company_attributes, :photos_attributes, :password_confirmation, :admin, :uber_admin,
+            :authentication_token
 
     belongs_to :company
     
@@ -12,7 +13,7 @@ class User < ActiveRecord::Base
 
     has_many :apn_registrations, :dependent => :destroy
 
-  	devise :database_authenticatable, :registerable, :recoverable, :trackable #, :rememberable
+  	devise :database_authenticatable, :registerable, :recoverable, :trackable, :token_authenticatable #, :rememberable
 
   	accepts_nested_attributes_for :company
     accepts_nested_attributes_for :photos

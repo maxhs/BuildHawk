@@ -4,7 +4,12 @@ class Address < ActiveRecord::Base
   	belongs_to :company
   	belongs_to :project
 
-  	acts_as_api
+
+    def formatted_address
+      "#{street1} #{street2}, #{city}, #{state}"
+    end
+  	
+    acts_as_api
 
   	api_accessible :projects do |t|
   		t.add :street1
@@ -13,6 +18,7 @@ class Address < ActiveRecord::Base
   		t.add :zip
   		t.add :country
   		t.add :phone_number
+      t.add :formatted_address
   	end
 
     api_accessible :user, :extend => :projects do |t|

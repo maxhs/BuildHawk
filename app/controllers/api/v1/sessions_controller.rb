@@ -5,7 +5,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
 		@user = User.find_for_database_authentication email: params[:user][:email]
 		return invalid_login_attempt unless @user
 		if @user.valid_password? params[:user][:password]
-			#@user.reset_authentication_token!
+			@user.reset_authentication_token!
 			puts "successfully signed in user"
             if device_token
 			 @user.apn_registrations.where(:token => device_token).first_or_create
