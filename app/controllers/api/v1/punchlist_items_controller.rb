@@ -1,10 +1,10 @@
-class Api::V1::ChecklistItemsController < Api::V1::ApiController
+class Api::V1::PunchlistItemsController < Api::V1::ApiController
 
     def update
-    	@item = ChecklistItem.find params[:id]
-    	@item.update_attributes params[:checklist_item]
+    	@item = PunchlistItem.find params[:id]
+    	@item.update_attributes params[:punchlist_item]
     	respond_to do |format|
-        	format.json { render_for_api :checklist, :json => item, :root => :checklist_item}
+        	format.json { render_for_api :punchlist, :json => item, :root => :punchlist_item}
       	end
     end
 

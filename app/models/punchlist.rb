@@ -13,4 +13,8 @@ class Punchlist < ActiveRecord::Base
   	api_accessible :projects do |t|
   		t.add :punchlist_items
   	end
+
+    api_accessible :punchlist do |t|
+      t.add :punchlist_items
+    end
 end
