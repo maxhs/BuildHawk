@@ -14,12 +14,14 @@ class ChecklistItemsController < ApplicationController
 		end
 		@checklist = @checklist_item.subcategory.category.checklist
 		@project = @checklist.project
+		@company = current_user.company
+		@projects = @company.projects
 		if request.xhr?
 			respond_to do |format|
-				format.js
+				format.js { render :template => "projects/checklist"}
 			end
 		else 
-			render :update
+			redirect_to checklist_project_path(@project)
 		end
 	end
 end
