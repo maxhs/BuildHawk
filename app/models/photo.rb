@@ -40,19 +40,24 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
-	def url1000
+	def orig
 		if image_file_name
-			image.url(:large)
+			image.url(:original)
 		end
 	end
 
+	def user_name
+		user.full_name if user
+	end
+
 	api_accessible :dashboard do |t|
-		t.add :url1000
+		t.add :orig
 		t.add :url500
 		t.add :url200
 		t.add :url100
 		t.add :source
 		t.add :created_at
+		t.add :user_name
 	end
 
 	api_accessible :item, :extend => :dashboard do |t|
