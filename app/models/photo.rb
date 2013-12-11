@@ -63,4 +63,8 @@ class Photo < ActiveRecord::Base
 
 	end
 
+	api_accessible :checklist, :extend => :dashboard do |t|
+
+	end
+
 end
