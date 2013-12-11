@@ -60,4 +60,8 @@ class User < ActiveRecord::Base
     api_accessible :projects do |t|
 
     end
+
+    api_accessible :dashboard, :extend => :user do |t|
+
+    end
 end
