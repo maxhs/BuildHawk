@@ -65,8 +65,6 @@ class Checklist < ActiveRecord::Base
     api_accessible :checklist do |t|
         t.add :item_array
         t.add :name
-        t.add :milestone_date
-        t.add :completed_date
     end
 
 end
