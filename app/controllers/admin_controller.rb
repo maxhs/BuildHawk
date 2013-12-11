@@ -2,11 +2,11 @@ class AdminController < ApplicationController
 	before_filter :authenticate_user!
 
 	def index
-		@core_checklist = CoreChecklist.last
+		@core_checklist = Checklist.where(:core => true).last
 	end
 
 	def show
-
+		render :checklists
 	end
 
 	def edit_item
