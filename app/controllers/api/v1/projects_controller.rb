@@ -15,4 +15,8 @@ class Api::V1::ProjectsController < Api::V1::ApiController
       	end
     end
 
+    def dash
+    	puts "in the dash method"
+    end
+
 end

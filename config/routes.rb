@@ -103,7 +103,11 @@ Buildhawk::Application.routes.draw do
         end 
       end
       resources :companies 
-      resources :projects
+      resources :projects do
+        collection do
+          get :dash
+        end
+      end
       resources :checklists
       resources :punchlists
       resources :users

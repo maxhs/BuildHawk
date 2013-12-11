@@ -9,7 +9,8 @@ class Api::V1::ChecklistsController < Api::V1::ApiController
     end
 
     def show
-    	@checklist = Checklist.find params[:id]
+    	project = Project.find params[:id]
+    	@checklist = project.checklist
     	respond_to do |format|
         	format.json { render_for_api :checklist, :json => @checklist, :root => :checklist}
       	end
