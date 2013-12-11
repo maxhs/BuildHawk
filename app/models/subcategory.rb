@@ -26,7 +26,7 @@ class Subcategory < ActiveRecord::Base
   		t.add :name
   		t.add :category_id
   		t.add :index
-  		t.add :milestone
+  		t.add :milestone_date
   		t.add :completed_date
   	end
 end
