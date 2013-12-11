@@ -6,7 +6,7 @@ class Address < ActiveRecord::Base
 
   	acts_as_api
 
-  	api_accessible :project do |t|
+  	api_accessible :projects do |t|
   		t.add :street1
   		t.add :street2
   		t.add :city
