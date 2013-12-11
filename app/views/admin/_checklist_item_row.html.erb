@@ -1,0 +1,27 @@
+
+	<div class="row checklist-item">
+		<div class="col-md-7 checklist-body" style="margin-left:20px;margin-right:-20px;">
+			<%=item.body%>
+		</div>
+
+		<div class="col-md-2" style="text-align: center;">
+			<% if item.critical_date %>
+				<%= parse_date item.critical_date %>
+			<% else %>
+				&nbsp;
+			<% end %>
+		</div>
+
+		<div class="col-md-2" style="text-align: center;">
+			<% if item.completed_date %>
+				<%= parse_date item.completed_date %>
+			<% else %>
+				&nbsp;
+			<% end %>
+		</div>
+
+		<div class="col-md-1" style="text-align: center;">
+			Edit
+		</div>
+
+	</div>

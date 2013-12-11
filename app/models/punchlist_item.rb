@@ -3,6 +3,7 @@ class PunchlistItem < ActiveRecord::Base
 					:photos_attributes, :completed, :completed_at
 
 	belongs_to :project
+    belongs_to :punchlist
 	belongs_to :assignee, :class_name => "User"
     has_many :comments, :dependent => :destroy
 	has_many :photos

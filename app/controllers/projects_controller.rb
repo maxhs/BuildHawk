@@ -154,7 +154,14 @@ class ProjectsController < ApplicationController
 
 	def report
 		@report = @project.reports.create params[:report]
-		redirect_to reports_project_path(@project)
+		@reports = @project.reports
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "projects/reports"}
+			end
+		else 
+			render :reports
+		end
 	end
 
 	def show_report
@@ -265,8 +272,11 @@ class ProjectsController < ApplicationController
 
 	def delete_worklist_item
 		@item = PunchlistItem.find params[:item_id]
+		@punchlist = @item.punchlist
+		@items = @punchlist.punchlist_items
+		@project = @punchlist.project
 		@item.destroy
-		redirect_to worklist_project_path(@project)
+		render :worklist
 	end
 
 	private

@@ -1,0 +1,4 @@
+$('#pages').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "item_editor", :locals => {:item => @item, :project => @project } %>');
+	$(this).fadeIn(100);
+});
