@@ -44,7 +44,6 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :critical_date
   		t.add :completed_date
   		t.add :status
-  		t.add :complete
       t.add :subcategory_name
       t.add :category_name
   	end
