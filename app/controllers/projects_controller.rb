@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
 	def show
 		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
-		if @project.checklist && @project.checklist.checklist_items
+		if @project.checklist 
 			items = @project.checklist.item_array
 			@item_count = items.count
 
