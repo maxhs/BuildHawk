@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   	acts_as_api
 
   	api_accessible :user do |t|
+      t.add :id
 	    t.add :first_name
 	    t.add :last_name
 	    t.add :full_name
