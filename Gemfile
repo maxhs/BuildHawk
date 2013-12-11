@@ -36,6 +36,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 gem 'thin'
 gem 'roo'
+gem 'deep_cloneable', '~> 1.6.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

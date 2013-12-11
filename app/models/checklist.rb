@@ -1,7 +1,7 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
     attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
-    				:categories
+    				        :categories, :company, :company_id
   	belongs_to :project
   	belongs_to :company
   	
@@ -29,13 +29,14 @@ class Checklist < ActiveRecord::Base
 	  type_title = spreadsheet.row(2)[2]
 	  item_title = spreadsheet.row(2)[3]
 
-	  @new_core = CoreChecklist.create
+	  @new_core = self.create
 	  (3..spreadsheet.last_row).each do |i|
 	    row = Hash[[header, spreadsheet.row(i)].transpose]
 	    category = @new_core.categories.find_or_create_by(name: row[category_title])
 	    subcategory = category.subcategories.find_or_create_by(name: row[subcategory_title])
 	    item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title]
 	  end
+    @new_core.update_attribute :core, true
 	  @new_core.save
 	end
 

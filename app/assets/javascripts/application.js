@@ -22,7 +22,7 @@
 if (history && history.pushState){
     $(function(){
         $('body').on('click', 'a',function(e){
-            if ($(e.target).is('.shadow-photo, .documents-photo')) {
+            if ($(e.target).is('.shadow-photo, .documents-photo, .delete-checklist-link, .no-link')) {
             
             } else {
                 history.pushState(null, null, this.href);

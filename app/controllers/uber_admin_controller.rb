@@ -13,7 +13,7 @@ class UberAdminController < ApplicationController
 
 	def core_checklist
 		@checklist = Checklist.new
-		core_checklist = CoreChecklist.last
+		core_checklist = Checklist.where(:core => true).last
 		if core_checklist
 			@items = core_checklist.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
 		end

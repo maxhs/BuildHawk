@@ -9,6 +9,22 @@
 	margin:0 auto; 
 	width:100%;
 
+	tr {
+		border-top:1px solid #eee;
+	}
+
+	th {
+		text-align:center;
+		font-size:1.1em;
+	}
+
+	td {
+		text-align:center;
+		padding:20px;
+		font-size:1em;
+		border-right:1px solid #eee;
+	}
+
 	.row {
 		padding:12px;
 		border-bottom:1px solid #eee;

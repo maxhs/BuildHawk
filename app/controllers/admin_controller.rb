@@ -59,11 +59,33 @@ class AdminController < ApplicationController
 
 	def create_template
 		@company = Company.find params[:company_id]
-		@checklist = @company.checklists.create :name => "New Checklist Template"  
-		@checklist.categories << CoreChecklist.last.categories if CoreChecklist.last
+		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}
+		puts "is it setting a compnay id? #{@company_id}"
+		@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id  
 		@checklist.save!
+		puts "is it setting a compnay id? #{@checklist.company_id}"
 		@checklists = @company.checklists
-		render :editor
+		if request.xhr?
+			respond_to do |format|
+				format.js {render :template => "admin/editor"}
+			end
+		else
+			render :editor
+		end
+	end
+
+	def delete_checklist
+		@checklist = Checklist.find params[:checklist_id]
+		@checklist.destroy
+		@company = Company.find params[:company_id]
+		@checklists = @company.checklists
+		if request.xhr?
+			respond_to do |format|
+				format.js {render :template => "admin/checklists"}
+			end
+		else
+			render :checklists
+		end
 	end
 
 	def new_project

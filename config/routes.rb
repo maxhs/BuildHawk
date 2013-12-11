@@ -36,6 +36,7 @@ Buildhawk::Application.routes.draw do
       get :billing
       get :editor
       get :item_editor
+      delete :delete_checklist
     end
     member do
       get :edit_user
