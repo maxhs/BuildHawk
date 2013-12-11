@@ -109,7 +109,9 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :checklists
+      resources :checklist_items
       resources :punchlists
+      resources :punchlist_items
       resources :users
       resources :comments
     end
