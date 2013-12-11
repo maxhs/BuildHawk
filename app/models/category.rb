@@ -21,4 +21,11 @@ class Category < ActiveRecord::Base
   		t.add :milestone
   		t.add :completed_date
   	end
+
+    api_accessible :checklist do |t|
+      t.add :subcategories
+      t.add :name
+      t.add :completed_date
+      t.add :milestone_date
+    end
 end

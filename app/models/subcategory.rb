@@ -29,4 +29,11 @@ class Subcategory < ActiveRecord::Base
   		t.add :milestone_date
   		t.add :completed_date
   	end
+
+    api_accessible :checklist do |t|
+      t.add :checklist_items
+      t.add :name
+      t.add :completed_date
+      t.add :milestone_date
+    end
 end
