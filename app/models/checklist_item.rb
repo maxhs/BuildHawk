@@ -35,7 +35,7 @@ class ChecklistItem < ActiveRecord::Base
       end
     end
 
-  	api_accessible :project do |t|
+  	api_accessible :projects do |t|
   		t.add :title
   		t.add :body
   		t.add :critical_date

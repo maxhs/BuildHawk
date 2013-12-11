@@ -7,4 +7,10 @@ class PunchlistItem < ActiveRecord::Base
 
 	has_many :photos
     accepts_nested_attributes_for :photos
+
+    acts_as_api
+
+    api_accessible :projects do |t|
+  		t.add :name
+  	end
 end

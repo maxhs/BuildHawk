@@ -54,4 +54,8 @@ class User < ActiveRecord::Base
   	api_accessible :feed do |t|
 	
   	end
+
+    api_accessible :projects do |t|
+
+    end
 end

@@ -15,7 +15,7 @@ class Category < ActiveRecord::Base
 
   	acts_as_api
 
-  	api_accessible :project do |t|
+  	api_accessible :projects do |t|
   		t.add :name
   		t.add :index
   		t.add :milestone

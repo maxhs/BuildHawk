@@ -7,10 +7,10 @@ class Punchlist < ActiveRecord::Base
 	acts_as_api
 
   	api_accessible :user do |t|
-
+  		t.add :punchlist_items
   	end
 
-  	api_accessible :project do |t|
-
+  	api_accessible :projects do |t|
+  		t.add :punchlist_items
   	end
 end

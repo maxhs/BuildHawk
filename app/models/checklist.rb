@@ -48,4 +48,15 @@ class Checklist < ActiveRecord::Base
 	  else raise "Unknown file type: #{file.original_filename}"
 	  end
 	end
+
+	acts_as_api
+
+  	api_accessible :user do |t|
+
+  	end
+
+  	api_accessible :projects do |t|
+  		t.add :checklist_items
+  	end
+
 end

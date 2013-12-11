@@ -18,7 +18,7 @@ class Report < ActiveRecord::Base
 
   	acts_as_api
 
-  	api_accessible :project do |t|
+  	api_accessible :projects do |t|
   		t.add :title
   		t.add :report_type
   		t.add :body

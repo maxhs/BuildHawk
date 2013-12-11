@@ -3,4 +3,14 @@ class Comment < ActiveRecord::Base
   	belongs_to :user
   	belongs_to :report
   	has_many :photos
+
+  	acts_as_api
+
+  	api_accessible :user do |t|
+
+  	end
+
+  	api_accessible :projects do |t|
+
+  	end
 end
