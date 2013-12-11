@@ -34,6 +34,12 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
+	def url100
+		if image_file_name
+			image.url(:small)
+		end
+	end
+
 	def url1000
 		if image_file_name
 			image.url(:large)
@@ -44,8 +50,10 @@ class Photo < ActiveRecord::Base
 		t.add :url1000
 		t.add :url500
 		t.add :url200
+		t.add :url100
 		t.add :source
 		t.add :user
+		t.add :created_at
 	end
 
 end
