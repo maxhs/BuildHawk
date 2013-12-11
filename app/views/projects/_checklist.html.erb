@@ -7,7 +7,7 @@
 			</div>
 		</header>
 
-		<div class="row" style="font-weight: bold; margin: 25px 0px 5px 0px;">
+		<div class="row" style="font-weight: bold; margin: 0;">
 			<div class="col-md-8">&nbsp;</div>
 			<div class="col-md-2" style="text-align: center;">Critical Date</div>	
 			<div class="col-md-2" style="text-align: center;">Completed</div>	
@@ -15,11 +15,11 @@
 
 		<% @checklist.categories.each do |c| %>
 			<div class="category">
-				<h1 style="display:inline-block"><%= c.name %></h1> (<%=c.completed_count%> completed out of <%=c.item_count%>)
+				<h1 style="display:inline-block;"><%= c.name %></h1><span style="padding-left:1em;color:#aaa;">(<%=c.completed_count%> completed out of <%=c.item_count%>)</span>
 			</div>
 			<% c.subcategories.each do |s| %>
 				<div class="subcategory">
-					<h3 style="display:inline-block"><%=s.name%></h3>  (<%=s.completed_count%> of <%=s.item_count%>)
+					<h3 style="display:inline-block"><%=s.name%></h3><span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.item_count%>)</span>
 				</div>
 				<% s.checklist_items.each do |i| %>
 					<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>

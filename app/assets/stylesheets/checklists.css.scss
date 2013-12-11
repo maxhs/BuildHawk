@@ -52,8 +52,14 @@
 		}
 	}
 
-	.header-description {
+	table, tbody, tr, td, form {
+		display:block; 
+		width:100%;
+	}
 
+	table {
+		border:1px solid #eee;
+		padding:20px
 	}
 	
 	h4 {
@@ -61,13 +67,17 @@
 	}
 
 	.item-body {	
-		font-size:16px;
-		margin:2em auto;
+		font-size:17px;
+		margin:0.5em auto 2em;
 		display:block;
 	}
 
 	input[type="checkbox"] {
 		display:inline-block;
 		margin-left:20px;
+	}
+
+	button {
+	margin-top:-50px;
 	}
 }

@@ -1,4 +1,4 @@
-$('#pages').fadeOut(200,function(){
+$('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "edit_report", :locals => {:report => @report } %>');
-	$(this).fadeIn(200);
+	$(this).fadeIn(100);
 });

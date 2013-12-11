@@ -210,8 +210,15 @@ class ProjectsController < ApplicationController
 			params[:punchlist_item].delete(:assignee)
 		end
 		@punchlist_item = @punchlist.punchlist_items.create params[:punchlist_item]
+		@items = @punchlist.punchlist_items if @punchlist
 		@punchlist_item.update_attribute :assignee_id, user.id if user
-		redirect_to worklist_project_path(@project)
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "projects/worklist"}
+			end
+		else 
+			render :worklist
+		end
 	end
 
 	def edit_worklist_item

@@ -1,6 +1,6 @@
 $('a').css('color','#777');
 $('#nav-projects a').css('color','#cc0000');
-$('#pagescontainer').fadeOut(200,function(){
+$('#pagescontainer').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "edit" %>');
-	$(this).fadeIn(200);
+	$(this).fadeIn(100);
 });

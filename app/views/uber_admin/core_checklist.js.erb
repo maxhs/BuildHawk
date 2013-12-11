@@ -1,6 +1,6 @@
 $('.sidebarProjects div a').css('color','#777');
 $('#uber-admin-checklist-link').css('color','#cc0000');
-$('#pages').fadeOut(200,function(){
+$('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "core_checklist", :locals => {:core_checklist => @core_checklist } %>');
-	$(this).fadeIn(200);
+	$(this).fadeIn(100);
 });

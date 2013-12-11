@@ -1,4 +1,4 @@
-$('#pages').fadeOut(200,function(){
+$('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "new_photo", :locals => {:project => @project, :company => @company} %>');
-	$(this).fadeIn(200);
+	$(this).fadeIn(100);
 });

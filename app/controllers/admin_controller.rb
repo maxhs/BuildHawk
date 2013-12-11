@@ -113,7 +113,7 @@ class AdminController < ApplicationController
 		end
 		puts "checklist outside of initial find method: #{@checklist.categories.count} with id: #{@checklist.id}"
 		
-		@project = current_user.company.projects.create params[:project]
+		@project = Project.create params[:project]
 		@project.checklist = @checklist
 		#@project.update_attribute :checklist_id, @checklist.id if @checklist
 		if @project.save! && request.xhr?

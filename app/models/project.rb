@@ -15,17 +15,6 @@ class Project < ActiveRecord::Base
 
     accepts_nested_attributes_for :address
     accepts_nested_attributes_for :users
-    
-    after_create :assign_core
-
-    def assign_core
-      core = CoreChecklist.last
-      new_checklist = Checklist.create
-      new_checklist.categories << core.categories
-      self.update_attribute :checklist, new_checklist 
-
-      add_punchlist if punchlists.count == 0
-    end
 
     def add_punchlist
       punchlists.create
