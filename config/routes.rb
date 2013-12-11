@@ -118,6 +118,7 @@ Buildhawk::Application.routes.draw do
       resources :punchlist_items
       resources :users
       resources :comments
+      resources :reports
     end
   end
 
