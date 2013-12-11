@@ -51,7 +51,7 @@ class Project < ActiveRecord::Base
         checklist.categories if checklist
     end
 
-    def has_checklist
+    def has_checklist?
       checklist.present?
     end
   	

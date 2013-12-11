@@ -1,0 +1,5 @@
+console.log("just created a comment");
+$('#comments-table').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "projects/comments", :locals => {:comments => @comments} %>');
+	$(this).fadeIn(100);
+});
