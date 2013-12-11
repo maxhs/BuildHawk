@@ -1,6 +1,6 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
-    attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone, :completed_date, :categories_attributes, 
+    attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
     				:categories, :checklist_items
   	belongs_to :project
   	belongs_to :company
@@ -57,6 +57,9 @@ class Checklist < ActiveRecord::Base
 
   	api_accessible :projects do |t|
   		t.add :checklist_items
+  		t.add :name
+  		t.add :milestone_date
+  		t.add :completed_date
   	end
 
 end

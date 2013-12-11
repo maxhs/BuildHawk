@@ -36,11 +36,10 @@ class ChecklistItem < ActiveRecord::Base
     end
 
   	api_accessible :projects do |t|
-  		t.add :title
   		t.add :body
   		t.add :critical_date
   		t.add :completed_date
-  		t.add :subcategory_id
+  		t.add :subcategory
   		t.add :status
   		t.add :complete
       t.add :subcategory_name
