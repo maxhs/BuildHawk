@@ -5,6 +5,10 @@ class AdminController < ApplicationController
 		@core_checklist = CoreChecklist.last
 	end
 
+	def show
+
+	end
+
 	def edit_item
 
 	end
@@ -60,10 +64,8 @@ class AdminController < ApplicationController
 	def create_template
 		@company = Company.find params[:company_id]
 		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}
-		puts "is it setting a compnay id? #{@company_id}"
 		@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id  
 		@checklist.save!
-		puts "is it setting a compnay id? #{@checklist.company_id}"
 		@checklists = @company.checklists
 		if request.xhr?
 			respond_to do |format|

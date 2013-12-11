@@ -32,12 +32,12 @@
 	}
 
 	.row.checklist-item.completed div {
-		text-decoration:line-through;
+		background:#f7f7f7;
+		color:#bbb;
 	}
 
 	.row.checklist-item.not-applicable {
-		background:#f7f7f7;
-		color:#bbb;
+		text-decoration:line-through;
 	}
 }
 

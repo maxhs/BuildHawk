@@ -15,6 +15,12 @@
 			<h4>Status:</h4>
 			<%= f.select :status, [nil,"In-Progress","Completed","Not Applicable"], :style => "width:400px !important;" %>
 		</td></tr>
+		<% if @checklist_item.status == "Completed" %>
+			<tr><td>
+				<h4>Completed By:</h4>
+				<%= @checklist_item.completed_by_user.full_name %>
+			</td></tr>
+		<% end %>
 
 		<tr><td>
 			<h4>Critical Date:</h4>
@@ -37,7 +43,7 @@
 			<% end %>
 		</td></tr>
 
-		<tr><td><span style="margin-right:20px">Add a photo</span>
+		<tr><td><h4>Add a photo:</h4>
 			<%= f.fields_for :photos, @checklist_item.photos.build do |photo| %>
 				<%= photo.file_field :image %>
 				<%= photo.hidden_field :project_id, :value => @project.id %>
