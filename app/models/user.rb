@@ -64,4 +64,11 @@ class User < ActiveRecord::Base
     api_accessible :dashboard, :extend => :user do |t|
 
     end
+
+    api_accessible :punchlist do |t|
+      t.add :first_name
+      t.add :full_name
+      t.add :email
+      t.add :phone_number
+    end
 end
