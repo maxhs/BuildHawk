@@ -11,8 +11,8 @@
 	<% if @report.comments && @report.comments.count > 0 %>
 		<% @report.comments.each do |comment| %>
 			<tr>
-				<td style="width:80%;"><%= comment.body %></td>
-				<td style="width:20%;"><%= parse_time comment.created_at %></td>
+				<td class="col-md-8"><%= comment.body %></td>
+				<td class="col-md-4"><%= parse_time comment.created_at %></td>
 			</tr>
 		<% end %>
 	<% end %>

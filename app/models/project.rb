@@ -54,6 +54,10 @@ class Project < ActiveRecord::Base
     def has_checklist?
       checklist.present?
     end
+
+    def has_categories?
+      categories.any?
+    end
   	
     acts_as_api
 
@@ -78,6 +82,6 @@ class Project < ActiveRecord::Base
       t.add :upcoming_items
       t.add :recently_completed
       t.add :recent_documents
-      t.add :categories
+      t.add :categories, :if => :has_categories?
     end
 end
