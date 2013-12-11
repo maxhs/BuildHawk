@@ -10,7 +10,7 @@ class Report < ActiveRecord::Base
     has_many :photos, :dependent => :destroy
 
     accepts_nested_attributes_for :users
-    accepts_nested_attributes_for :photos
+    accepts_nested_attributes_for :photos, :allow_nil => false
 
     def possible_types
       ["Daily","Safety"]

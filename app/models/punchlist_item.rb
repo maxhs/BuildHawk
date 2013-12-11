@@ -6,7 +6,7 @@ class PunchlistItem < ActiveRecord::Base
 	belongs_to :assignee, :class_name => "User"
 
 	has_many :photos
-    accepts_nested_attributes_for :photos
+    accepts_nested_attributes_for :photos, :allow_nil => false
 
     acts_as_api
 

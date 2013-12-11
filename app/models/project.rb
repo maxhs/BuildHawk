@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
   	has_one :checklist, :dependent => :destroy
 
     accepts_nested_attributes_for :address
-    accepts_nested_attributes_for :users
+    accepts_nested_attributes_for :users, :allow_nil => false
     
     after_create :assign_core
 
@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
     end
 
     def recent_documents
-        photos.last(10)
+        photos.last(5)
     end
 
     def categories

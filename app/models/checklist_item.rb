@@ -11,7 +11,7 @@ class ChecklistItem < ActiveRecord::Base
 
     after_commit :check_completed
 
-    accepts_nested_attributes_for :photos
+    accepts_nested_attributes_for :photos, :allow_nil => false
 
   	acts_as_api
 
