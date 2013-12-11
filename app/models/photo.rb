@@ -72,4 +72,8 @@ class Photo < ActiveRecord::Base
 
 	end
 
+	api_accessible :punchlist, :extend => :dashboard do |t|
+
+	end
+
 end

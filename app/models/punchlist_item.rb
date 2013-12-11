@@ -17,6 +17,7 @@ class PunchlistItem < ActiveRecord::Base
   		t.add :location
   		t.add :completed_at
   		t.add :completed
+        t.add :photos
   	end
 
     api_accessible :dashboard, :extend => :projects do |t|
