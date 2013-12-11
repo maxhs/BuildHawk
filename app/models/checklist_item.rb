@@ -1,5 +1,6 @@
 class ChecklistItem < ActiveRecord::Base
-	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :subcategory_id, :subcategory, :status, :critical_date, :completed_date
+	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :subcategory_id, :subcategory, :status, :critical_date, :completed_date,
+                    :photos, :photos_attributes
   	
   	belongs_to :subcategory
     belongs_to :category
@@ -9,6 +10,8 @@ class ChecklistItem < ActiveRecord::Base
   	has_many :comments
 
     after_commit :check_completed
+
+    accepts_nested_attributes_for :photos
 
   	acts_as_api
 
@@ -42,8 +45,8 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :subcategory
   		t.add :status
   		t.add :complete
-      t.add :subcategory_name
-      t.add :category_name
+        t.add :subcategory_name
+        t.add :category_name
   	end
 
 end

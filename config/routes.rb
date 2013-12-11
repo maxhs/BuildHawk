@@ -15,6 +15,7 @@ Buildhawk::Application.routes.draw do
   get "/projects/:id/update_report", :to => "projects#update_report"
   get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
   post "/users/:id", :to => "users#update"
+  post "/checklist_items/:id", :to => "checklist_items#update"
 
   resources :users
   resources :home do 
