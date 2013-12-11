@@ -18,7 +18,10 @@ class Api::V1::ChecklistItemsController < Api::V1::ApiController
 
     def photo
         @checklist_item = ChecklistItem.find params[:id]
-        puts "photo params: #{params}"
+        @checklist_item.photos.create params[:photo][:image]
+        respond_to do |format|
+            format.json { render_for_api :checklist, :json => @checklist_item, :root => :checklist_item}
+        end
     end
 
 end

@@ -52,8 +52,11 @@ class Photo < ActiveRecord::Base
 		t.add :url200
 		t.add :url100
 		t.add :source
-		#t.add :user
 		t.add :created_at
+	end
+
+	api_accessible :item, :extend => :dashboard do |t|
+
 	end
 
 end
