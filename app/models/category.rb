@@ -28,4 +28,9 @@ class Category < ActiveRecord::Base
       t.add :completed_date
       t.add :milestone_date
     end
+
+    api_accessible :dashboard do |t|
+      t.add :item_count
+      t.add :completed_count
+    end
 end
