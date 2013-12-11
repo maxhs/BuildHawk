@@ -17,6 +17,10 @@ class Api::V1::ProjectsController < Api::V1::ApiController
 
     def dash
     	puts "in the dash method"
+    	@project = Project.find params[:id]
+    	respond_to do |format|
+        	format.json { render_for_api :dashboard, :json => @project}
+      	end
     end
 
 end
