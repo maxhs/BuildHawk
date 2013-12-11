@@ -16,4 +16,11 @@ class Api::V1::ReportsController < Api::V1::ApiController
       	end
     end
 
+    def create
+        @report = Report.create params[:report]
+        respond_to do |format|
+            format.json { render_for_api :projects, :json => report, :root => :report}
+        end
+    end
+
 end
