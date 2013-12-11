@@ -74,6 +74,6 @@ class Project < ActiveRecord::Base
       t.add :upcoming_items
       t.add :recently_completed
       t.add :recent_documents
-      t.add :categories
+      #t.add :categories
     end
 end
