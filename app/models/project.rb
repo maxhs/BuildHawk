@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
   	has_one :checklist, :dependent => :destroy
 
     accepts_nested_attributes_for :address
-    accepts_nested_attributes_for :users, :allow_nil => false
+    accepts_nested_attributes_for :users
     
     after_create :assign_core
 

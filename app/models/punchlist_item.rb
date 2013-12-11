@@ -6,7 +6,7 @@ class PunchlistItem < ActiveRecord::Base
 	belongs_to :assignee, :class_name => "User"
 
 	has_many :photos
-    accepts_nested_attributes_for :photos, :allow_nil => false
+    accepts_nested_attributes_for :photos# :reject_if => lambda { |c| c[:image_file_name].blank? }
 
     acts_as_api
 
