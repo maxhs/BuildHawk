@@ -15,10 +15,11 @@ class Address < ActiveRecord::Base
   		t.add :phone_number
   	end
 
-    api_accessible :user, :extend => :project do |t|
+    api_accessible :user, :extend => :projects do |t|
       
     end
-    api_accessible :company, :extend => :project do |t|
+
+    api_accessible :company, :extend => :projects do |t|
       
     end
 end
