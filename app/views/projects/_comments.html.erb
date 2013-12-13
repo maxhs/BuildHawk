@@ -1,19 +1,18 @@
-<h3 style="text-align:center; width:50%;margin:0 auto; display:block;">Comments</h3>
-		<div id="comments-form">
-	<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
-		<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
-		<%= f.hidden_field :user_id, :value => current_user.id %>
-		<%= f.hidden_field :report_id, :value => @report.id %>
-		<button class="btn btn-success btn-lg pull-right"><%= f.submit "Send" %></button>
-	<% end %>
-</div>
 <table id="comments-table">
-	<% if @report.comments && @report.comments.count > 0 %>
-		<% @report.comments.each do |comment| %>
-			<tr>
-				<td class="col-md-8"><%= comment.body %></td>
-				<td class="col-md-4"><%= parse_time comment.created_at %></td>
-			</tr>
+	<% if comments && comments.count > 0 %>
+		<% comments.each do |comment| %>
+			<% if comment %>
+				<tr>
+					<td class="col-md-12"><%= comment.body %></td>
+					<td class="col-md-12" style="line-height:1em">
+						<% if comment.user %>- <%= comment.user.full_name %> // <% end %>
+						<%= parse_time comment.created_at %>
+						<% if user_signed_in? && comment.user == current_user %>
+							&nbsp;// <%= link_to "Remove", comment_path(comment), :method => :delete, :class => "delete-link", :remote => true %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
 		<% end %>
 	<% end %>
 </table>

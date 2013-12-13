@@ -21,9 +21,20 @@
 			</td></tr>
 			
 			<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
-			<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :class => "delete-report-link" %></td></tr>
+			<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=> "float:right", :class => "delete-report-link" %></td></tr>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<% end %>
 	</tbody>
 </table>
-<%= render :partial => "projects/comments", :locals => {:report => @report} %>
+
+<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h3>
+<div id="comments-form">
+	<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
+		<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.hidden_field :report_id, :value => @report.id %>
+		<button class="btn btn-success btn-md pull-right" style="margin-top:14px;"><%= f.submit "Send" %></button>
+	<% end %>
+</div>
+
+<%= render :partial => "projects/comments", :locals => {:comments => @report.comments} %>

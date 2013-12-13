@@ -31,12 +31,18 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "updated_at"
   end
 
+  add_index "addresses", ["company_id"], name: "addresses_company_id_ix"
+  add_index "addresses", ["project_id"], name: "addresses_project_id_ix"
+  add_index "addresses", ["user_id"], name: "addresses_user_id_ix"
+
   create_table "apn_registrations", force: true do |t|
     t.integer  "user_id"
     t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "apn_registrations", ["user_id"], name: "apn_registrations_user_id_ix"
 
   create_table "categories", force: true do |t|
     t.integer  "index"
@@ -48,6 +54,8 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories", ["checklist_id"], name: "categories_checklist_id_ix"
 
   create_table "checklist_items", force: true do |t|
     t.boolean  "complete",             default: false
@@ -68,6 +76,7 @@ ActiveRecord::Schema.define(version: 20131211190622) do
   add_index "checklist_items", ["category_id"], name: "checklist_item_category_id_ix"
   add_index "checklist_items", ["checklist_id"], name: "checklist_item_checklist_id_ix"
   add_index "checklist_items", ["subcategory_id"], name: "checklist_item_subcategory_id_ix"
+  add_index "checklist_items", ["subcategory_id"], name: "checklist_items_subcategory_id_ix"
 
   create_table "checklists", force: true do |t|
     t.integer  "project_id"
@@ -80,6 +89,9 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.boolean  "core",           default: false
   end
 
+  add_index "checklists", ["company_id"], name: "checklists_company_id_ix"
+  add_index "checklists", ["project_id"], name: "checklists_project_id_ix"
+
   create_table "comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "report_id"
@@ -89,6 +101,11 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.integer  "checklist_item_id"
     t.integer  "punchlist_item_id"
   end
+
+  add_index "comments", ["checklist_item_id"], name: "comments_checklist_item_id_ix"
+  add_index "comments", ["punchlist_item_id"], name: "comments_punchlist_item_id_ix"
+  add_index "comments", ["report_id"], name: "comments_report_id_ix"
+  add_index "comments", ["user_id"], name: "comments_user_id_ix"
 
   create_table "companies", force: true do |t|
     t.string   "name",           default: "", null: false
@@ -138,12 +155,20 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.integer  "checklist_item_id"
   end
 
+  add_index "photos", ["checklist_item_id"], name: "photos_checklist_item_id_ix"
+  add_index "photos", ["punchlist_item_id"], name: "photos_punchlist_item_id_ix"
+  add_index "photos", ["report_id"], name: "photos_report_id_ix"
+  add_index "photos", ["user_id"], name: "photos_user_id_ix"
+
   create_table "project_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "project_users", ["project_id"], name: "project_users_project_id_ix"
+  add_index "project_users", ["user_id"], name: "project_users_user_id_ix"
 
   create_table "projects", force: true do |t|
     t.boolean  "active",       default: true
@@ -153,6 +178,8 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "updated_at"
     t.integer  "checklist_id"
   end
+
+  add_index "projects", ["company_id"], name: "projects_company_id_ix"
 
   create_table "punchlist_items", force: true do |t|
     t.text     "body"
@@ -165,6 +192,8 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.boolean  "completed",    default: false
     t.datetime "completed_at"
   end
+
+  add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
 
   create_table "punchlists", force: true do |t|
     t.boolean  "worklist",   default: false
@@ -197,6 +226,9 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "updated_at"
   end
 
+  add_index "reports", ["author_id"], name: "reports_author_id_ix"
+  add_index "reports", ["project_id"], name: "reports_project_id_ix"
+
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
@@ -206,6 +238,8 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "subcategories", ["category_id"], name: "subcategories_category_id_ix"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -232,6 +266,7 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.string   "authentication_token"
   end
 
+  add_index "users", ["company_id"], name: "users_company_id_ix"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

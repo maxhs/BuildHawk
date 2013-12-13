@@ -1,7 +1,8 @@
 class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos_attributes, :users_attributes, :report_users_attributes,
                   :users, :user_ids
-  	belongs_to :author
+  	
+    belongs_to :author, :class_name => "User"
   	belongs_to :project
   	has_many :comments, :dependent => :destroy
   	has_many :report_fields, :dependent => :destroy
