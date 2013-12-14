@@ -20,7 +20,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
             comments = report.comments
         end
     	respond_to do |format|
-        	format.json { render_for_api :checklist, :json => comments, :root => :checklist}
+        	format.json { render_for_api :projects, :json => comments, :root => :comments}
       	end
     end
 
@@ -37,7 +37,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
             comments = report.comments
         end
         respond_to do |format|
-            format.json { render_for_api :checklist, :json => comments, :root => :checklist}
+            format.json { render_for_api :projects, :json => comments, :root => :comments}
         end
     end
 
