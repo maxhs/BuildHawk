@@ -9,8 +9,6 @@ class Photo < ActiveRecord::Base
 	belongs_to :punchlist_item
 	belongs_to :checklist_item
     
-    validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif','application/pdf','application/x-pdf']
-    
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["1000x1000#", :jpg],
 	                    			 :medium => ["500x500#", :jpg],
