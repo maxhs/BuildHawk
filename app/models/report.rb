@@ -24,5 +24,6 @@ class Report < ActiveRecord::Base
   		t.add :report_type
   		t.add :body
   		t.add :report_fields
+      t.add :comments
   	end
 end

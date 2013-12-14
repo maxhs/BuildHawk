@@ -16,9 +16,6 @@
 
 @import "shadowbox";
 @import 'bootstrap';
-/*@import "bootstrap-glyphicons.less";
-@import "core.less";*/
-
 
 html, body {
 	height: 100%;
@@ -684,10 +681,10 @@ body {
 
 /* Override Bootstrap 3 font locations */
 @font-face {
-font-family: 'Glyphicons Halflings';
-src: url('../assets/glyphicons-halflings-regular.eot');
-src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
-url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
-url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
-url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  font-family: 'Glyphicons Halflings';
+  src: url('glyphicons-halflings-regular.eot');
+  src: url('glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+  		url('glyphicons-halflings-regular.woff') format('woff'), 
+  		url('glyphicons-halflings-regular.ttf') format('truetype'), 
+  		url('glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }

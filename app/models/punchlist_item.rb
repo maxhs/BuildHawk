@@ -20,6 +20,7 @@ class PunchlistItem < ActiveRecord::Base
   		t.add :completed
         t.add :photos
         t.add :created_at
+        t.add :comments
   	end
 
     api_accessible :dashboard, :extend => :projects do |t|
