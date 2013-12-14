@@ -46,7 +46,7 @@ class ChecklistItem < ActiveRecord::Base
   		#t.add :status
       #t.add :subcategory_name
       #t.add :category_name
-      t.add :photos
+      #t.add :photos
       #t.add :comments
   	end
 

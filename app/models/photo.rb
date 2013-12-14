@@ -40,9 +40,9 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
-	def orig
+	def url1000
 		if image_file_name
-			image.url(:original)
+			image.url(:large)
 		end
 	end
 
@@ -51,7 +51,7 @@ class Photo < ActiveRecord::Base
 	end
 
 	api_accessible :dashboard do |t|
-		t.add :large
+		t.add :url1000
 		t.add :url500
 		t.add :url200
 		t.add :url100
