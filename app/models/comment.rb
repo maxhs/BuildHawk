@@ -18,6 +18,7 @@ class Comment < ActiveRecord::Base
   	api_accessible :projects do |t|
       t.add :body
       t.add :user
+      t.add :created_at
   	end
 
   	api_accessible :dashboard, :extend => :projects do |t|
