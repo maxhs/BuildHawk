@@ -16,10 +16,12 @@ class Comment < ActiveRecord::Base
   	end
 
   	api_accessible :projects do |t|
-
+      t.add :body
+      t.add :user
   	end
 
   	api_accessible :dashboard do |t|
-
+      t.add :body
+      t.add :user
   	end
 end
