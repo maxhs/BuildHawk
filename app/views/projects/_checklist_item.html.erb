@@ -17,7 +17,7 @@
 					<h4>Status:</h4>
 					<%= f.select :status, [nil,"In-Progress","Completed","Not Applicable"], :style => "width:400px !important;" %>
 				</td></tr>
-				<% if @checklist_item.status == "Completed" %>
+				<% if @checklist_item.status == "Completed" && @checklist_item.completed_by_user %>
 					<tr><td>
 						<h4>Completed By:</h4>
 						<%= @checklist_item.completed_by_user.full_name %>
