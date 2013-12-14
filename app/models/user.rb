@@ -71,4 +71,11 @@ class User < ActiveRecord::Base
       t.add :email
       t.add :phone_number
     end
+
+    api_accessible :checklist do |t|
+      t.add :first_name
+      t.add :full_name
+      t.add :email
+      t.add :phone_number
+    end
 end

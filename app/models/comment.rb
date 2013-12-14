@@ -20,8 +20,11 @@ class Comment < ActiveRecord::Base
       t.add :user
   	end
 
-  	api_accessible :dashboard do |t|
-      t.add :body
-      t.add :user
+  	api_accessible :dashboard, :extend => :projects do |t|
+
   	end
+
+    api_accessible :checklist, :extend => :projects do |t|
+
+    end
 end
