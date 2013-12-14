@@ -28,10 +28,10 @@ class Api::V1::CommentsController < Api::V1::ApiController
         comment = Comment.create params[:comment]
         if params[:comment][:checklist_item_id].present?
             checklist_item = ChecklistItem.find params[:comment][:checklist_item_id]
-            comments = report.comments
+            comments = checklist_item.comments
         elsif params[:comment][:punchlist_item_id].present?
             punchlist_item = PunchlistItem.find params[:comment][:punchlist_item_id]
-            comments = report.comments
+            comments = punchlist_item.comments
         elsif params[:comment][:report_id].present?
             report = Report.find params[:comment][:report_id]
             comments = report.comments
