@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
 		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
 		if @project.checklist 
-			items = @project.checklist.item_array
+			items = @project.checklist.items
 			@item_count = items.count
 
 			@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)

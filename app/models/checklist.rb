@@ -5,20 +5,36 @@ class Checklist < ActiveRecord::Base
   	belongs_to :project
   	belongs_to :company
   	
+    has_many :checklist_items, :dependent => :destroy
   	has_many :categories, :dependent => :destroy
   	accepts_nested_attributes_for :categories
 
   	def completed_count
-  		items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
-  		items.select{|i| i.status == "Completed"}.count
+      if checklist_items.count
+        items = checklist_items
+      else
+  		  items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+      end
+  		
+      return items.select{|i| i.status == "Completed"}.count
   	end
 
   	def item_count
-  		categories.map(&:subcategories).flatten.map(&:checklist_items).flatten.count
+      if checklist_items.count
+        checklist_items.count
+      else
+  		  categories.map(&:subcategories).flatten.map(&:checklist_items).flatten.count
+      end
   	end
 
-  	def item_array
-  		categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+  	def items
+      if checklist_items.count > 0
+        checklist_items
+      else 
+  		  items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+        checklist_items << items
+        return items
+      end
   	end
 
   	def self.import(file)

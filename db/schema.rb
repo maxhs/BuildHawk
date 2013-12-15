@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 20131211190622) do
   add_index "checklist_items", ["category_id"], name: "checklist_item_category_id_ix"
   add_index "checklist_items", ["checklist_id"], name: "checklist_item_checklist_id_ix"
   add_index "checklist_items", ["subcategory_id"], name: "checklist_item_subcategory_id_ix"
-  add_index "checklist_items", ["subcategory_id"], name: "checklist_items_subcategory_id_ix"
 
   create_table "checklists", force: true do |t|
     t.integer  "project_id"

@@ -7,7 +7,6 @@ class AddCommentAttributes < ActiveRecord::Migration
   	add_index :comments, :report_id, :name => 'comments_report_id_ix'
   	add_index :comments, :checklist_item_id, :name => 'comments_checklist_item_id_ix'
   	add_index :comments, :punchlist_item_id, :name => 'comments_punchlist_item_id_ix'
-  	add_index :checklist_items, :subcategory_id, :name => 'checklist_items_subcategory_id_ix'
   	add_index :subcategories, :category_id, :name => 'subcategories_category_id_ix'
   	add_index :categories, :checklist_id, :name => 'categories_checklist_id_ix'
   	add_index :checklists, :project_id, :name => 'checklists_project_id_ix'
