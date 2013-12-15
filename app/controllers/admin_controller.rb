@@ -34,13 +34,17 @@ class AdminController < ApplicationController
 
 	def create_user
 		@user = current_user.company.users.create params[:user]
-		if @user.save
-			redirect_to users_admin_index_path
-		else
+		if @user.save & request.xhr?
 			@response_message = "Please make sure you've included first name, last name, email and password".html_safe
 			respond_to do |format|
 				format.js { render :template => "incorrect" }
 			end
+		elsif @user.save
+			flash[:notice] = "User created"
+			redirect_to users_admin_index_path
+		else
+			flash[:notice] = "Unable to create user. Please make sure the form is complete."
+			render :new_user
 		end
 	end
 

@@ -44,6 +44,19 @@ class UberAdminController < ApplicationController
 	end
 
 	def update_user
+		@user = User.find params[:user_id]
+		@user.update_attributes params[:user]
+		@users = User.all
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :users
+		end
+	end
+
+	def show
 
 	end
 

@@ -56,7 +56,7 @@ Buildhawk::Application.routes.draw do
       get :edit_company
       get :edit_user
       put :update_company
-      put :update_user
+      post :update_user
     end
   end
   resources :projects do
