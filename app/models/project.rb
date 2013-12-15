@@ -13,8 +13,8 @@ class Project < ActiveRecord::Base
     has_many :reports, :dependent => :destroy
   	has_one :checklist, :dependent => :destroy
 
-    accepts_nested_attributes_for :address
-    accepts_nested_attributes_for :users
+    accepts_nested_attributes_for :address, :allow_destroy => true
+    accepts_nested_attributes_for :users, :allow_destroy => true
 
     def add_punchlist
       punchlists.create

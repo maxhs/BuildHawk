@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable, :token_authenticatable #, :rememberable
 
-  	accepts_nested_attributes_for :company
-    accepts_nested_attributes_for :photos
+  	accepts_nested_attributes_for :company, :allow_destroy => true
+    accepts_nested_attributes_for :photos, :allow_destroy => true
 
     validates_presence_of :first_name
     validates_presence_of :last_name

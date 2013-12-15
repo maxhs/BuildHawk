@@ -52,6 +52,14 @@
 		}
 	}
 
+	select, select[multiple] {
+		font-size:1.25em;
+		padding:10px 0;
+		line-height:1.1em;
+		text-align:center;
+		height:87px;
+	}
+
 	table, tbody, tr, td, form {
 		display:block; 
 		width:100%;
@@ -60,10 +68,6 @@
 	table {
 		border:1px solid #eee;
 		padding:20px
-	}
-	
-	h4 {
-		display:inline-block;
 	}
 
 	.item-body {	

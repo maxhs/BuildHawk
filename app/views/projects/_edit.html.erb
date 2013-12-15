@@ -1,5 +1,5 @@
 <table id="edit-project-form">
-	<%= nested_form_for @project, :method => :put do |f| %>
+	<%= nested_form_for @project, :method => :put, :remote => true do |f| %>
 		<%= hidden_field_tag :company_id, current_user.company.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<tr><td><%= f.text_field :name, :placeholder => "Project name" %></td></tr>

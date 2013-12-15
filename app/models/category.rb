@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
   	belongs_to :checklist
   	has_many :subcategories
     has_many :checklist_items, :dependent => :destroy
-  	accepts_nested_attributes_for :subcategories
+  	accepts_nested_attributes_for :subcategories, :allow_destroy => true
 
     after_create :assign_items
 

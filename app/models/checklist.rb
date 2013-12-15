@@ -7,7 +7,7 @@ class Checklist < ActiveRecord::Base
   	
     has_many :checklist_items, :dependent => :destroy
   	has_many :categories, :dependent => :destroy
-  	accepts_nested_attributes_for :categories
+  	accepts_nested_attributes_for :categories, :allow_destroy => true
 
     after_create :assign_items
 

@@ -13,9 +13,10 @@
 	<%= nested_form_for @checklist_item, :url => {:controller => :checklist_items, :action => :update, :id => @checklist_item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
 		<table style="margin: 0 auto; width:100%;">
 			</tbody>
-				<tr><td>
+				<tr><td style="text-align:center;">
 					<h4>Status:</h4>
-					<%= f.select :status, [nil,"In-Progress","Completed","Not Applicable"], :style => "width:400px !important;" %>
+					<%= f.select :status, ["In-Progress","Completed","Not Applicable"], {}, :multiple => true, :style => "width:400px !important;" %>
+					
 				</td></tr>
 				<% if @checklist_item.status == "Completed" && @checklist_item.completed_by_user %>
 					<tr><td>

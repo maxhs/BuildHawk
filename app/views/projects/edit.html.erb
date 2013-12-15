@@ -2,16 +2,23 @@
 	$('ul.nav li > a').removeClass('current-page');
 	$('#nav-projects a').addClass('current-page');
 </script>
-	<div class="row row-offcanvas row-offcanvas-left">
-		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-			<div class="well sidebar-nav projects">
-				<div class="sidebarProjects">
-					<% @projects.each do |project| %>
-						<div><%= link_to project.name, project_path(project), :remote => true %></div>
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+	<div class="well sidebar-nav projects">
+		<% if @projects && @projects.count > 0 %>
+			<div class="sidebarProjects">
+				<% @projects.each do |project| %>
+					<% if project.checklist && project.checklist.item_count > 0 %>
+						<div><%= link_to "#{project.name} - (#{number_to_percentage(project.checklist.completed_count.to_f/project.checklist.item_count*100, :precision =>1)})" , project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
+					<% else %>
+						<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
 					<% end %>
-				</div>
+				<% end %>
 			</div>
-		</div>
+		<% else %>
+			<div style="font-style:italic;color:#aaa;padding:30px 0;text-align:center;font-size:1.25em;font-weight:200">No projects yet</div>
+		<% end %>
+	</div>
+</div>
 		<div class="col-xs-12 col-sm-9" id="main">
 						<!-- Fixed navbar -->
 			<div class="navbar">
@@ -27,9 +34,6 @@
 				</div>
 			</div>
 
-			<p class="pull-left visible-xs" style="margin-right: 10px;">
-				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-			</p>
 			<div id="pages">
 				<%= render :partial => "edit" %>
 			</div>

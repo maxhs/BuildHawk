@@ -6,7 +6,7 @@ class Company < ActiveRecord::Base
 	has_many :photos, :dependent => :destroy
 	has_many :checklists, :dependent => :destroy
   validates_uniqueness_of :name
-	accepts_nested_attributes_for :photos
+	accepts_nested_attributes_for :photos, :allow_destroy => true
 	acts_as_api
 
   	api_accessible :company do |t|

@@ -29,7 +29,7 @@
 					<h2><%=s.name%></h2>
 				</div>
 				
-				<%= render :partial => 'admin/checklist_item_row', :collection => s.checklist_items, :as => :item %>
+				<%= render :partial => 'admin/checklist_item_row', :collection => s.checklist_items, :as => :item, cache: true %>
 				
 			<% end %>
 		<% end %>

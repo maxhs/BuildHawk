@@ -11,7 +11,7 @@ class ChecklistItem < ActiveRecord::Base
 
     after_commit :check_completed
 
-    accepts_nested_attributes_for :photos#, :reject_if => lambda { |c| c[:image_file_name].blank? }
+    accepts_nested_attributes_for :photos, :allow_destroy => true#, :reject_if => lambda { |c| c[:image_file_name].blank? }
 
   	acts_as_api
 
