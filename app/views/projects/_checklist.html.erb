@@ -21,11 +21,8 @@
 				<div class="subcategory">
 					<h3 style="display:inline-block"><%=s.name%></h3><span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.item_count%>)</span>
 				</div>
-				<% s.checklist_items.each do |i| %>
-					<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>
-						<%= render :partial => 'projects/checklist_item_row', :locals => {:item => i} %>
-					<% end %>
-				<% end %>
+
+				<%= render :partial => 'projects/checklist_item_row', collection: s.checklist_items, :as => :item %>
 				
 			<% end %>
 		<% end %>

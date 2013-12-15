@@ -28,11 +28,8 @@
 				<div class="subcategory">
 					<h2><%=s.name%></h2>
 				</div>
-				<% s.checklist_items.each do |i| %>
-					<%= link_to item_editor_admin_index_path(@project, :item_id => i.id), :remote => true do %>
-						<%= render :partial => 'admin/checklist_item_row', :locals => {:item => i} %>
-					<% end %>
-				<% end %>
+				
+				<%= render :partial => 'admin/checklist_item_row', :collection => s.checklist_items, :as => :item %>
 				
 			<% end %>
 		<% end %>

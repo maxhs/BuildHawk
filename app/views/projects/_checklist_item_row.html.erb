@@ -1,28 +1,30 @@
-<% if item.status == "Completed" %>
-	<div class="row checklist-item completed">
-<% elsif item.status == "Not Applicable" %>
-	<div class="row checklist-item not-applicable">
-<% else %>
-	<div class="row checklist-item">
+<%= link_to checklist_item_project_path(@project, :item_id => item.id), :remote => true do %>
+
+	<% if item.status == "Completed" %>
+		<div class="row checklist-item completed">
+	<% elsif item.status == "Not Applicable" %>
+		<div class="row checklist-item not-applicable">
+	<% else %>
+		<div class="row checklist-item">
+	<% end %>
+		<div class="col-md-8 checklist-body" style="margin-left:20px;margin-right:-20px;">
+			<%=item.body%>
+		</div>
+
+		<div class="col-md-2" style="text-align: center;">
+			<% if item.critical_date %>
+				<%= parse_date item.critical_date %>
+			<% else %>
+				&nbsp;
+			<% end %>
+		</div>
+
+		<div class="col-md-2" style="text-align: center;">
+			<% if item.completed_date %>
+				<%= parse_date item.completed_date %>
+			<% else %>
+				&nbsp;
+			<% end %>
+		</div>
+	</div>
 <% end %>
-	<div class="col-md-8 checklist-body" style="margin-left:20px;margin-right:-20px;">
-		<%=item.body%>
-	</div>
-
-	<div class="col-md-2" style="text-align: center;">
-		<% if item.critical_date %>
-			<%= parse_date item.critical_date %>
-		<% else %>
-			&nbsp;
-		<% end %>
-	</div>
-
-	<div class="col-md-2" style="text-align: center;">
-		<% if item.completed_date %>
-			<%= parse_date item.completed_date %>
-		<% else %>
-			&nbsp;
-		<% end %>
-	</div>
-
-</div>
