@@ -1,19 +1,21 @@
-<table id="checklists-table">
-	<h2>Documents</h2>
-	<% @photos.each do |photo| %>
-		<% if photo.image_file_name %>
-			<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-				<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
+<div id="project-documents">
+	<table id="checklists-table">
+		<h2>Documents</h2>
+		<% @photos.each do |photo| %>
+			<% if photo.image_file_name %>
+				<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
+					<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
+				<% end %>
 			<% end %>
 		<% end %>
-	<% end %>
 
-	<%= link_to "Add photo", new_photo_project_path(@project), :remote => true %>
-</table>
+		<%= link_to "Add photo", new_photo_project_path(@project), :remote => true %>
+	</table>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		Shadowbox.clearCache();
-	    Shadowbox.setup(".shadow-photo", {});
-	});
-</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			Shadowbox.clearCache();
+		    Shadowbox.setup(".shadow-photo", {});
+		});
+	</script>
+</div>

@@ -1,52 +1,54 @@
-<% if @checklist %>
-	<div class="project-checklist-table">
-		<header>
-			<div class="input-group" style="width: 100%; margin-right: 5px;">
-				<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search checklist items">
-				<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
-			</div>
-		</header>
-
-		<div class="row" style="font-weight: bold; margin: 0;">
-			<div class="col-md-8">&nbsp;</div>
-			<div class="col-md-2" style="text-align: center;">Critical Date</div>	
-			<div class="col-md-2" style="text-align: center;">Completed</div>	
-		</div>
-
-		<% @checklist.categories.each do |c| %>
-			<div class="category">
-				<h1 style="display:inline-block;"><%= c.name %></h1><span style="padding-left:1em;color:#aaa;">(<%=c.completed_count%> completed out of <%=c.item_count%>)</span>
-			</div>
-			<% c.subcategories.each do |s| %>
-				<div class="subcategory">
-					<h3 style="display:inline-block"><%=s.name%></h3><span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.item_count%>)</span>
+<div id="project-checklist">
+	<% if @checklist %>
+		<div class="project-checklist-table">
+			<header>
+				<div class="input-group" style="width: 100%; margin-right: 5px;">
+					<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search checklist items">
+					<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
 				</div>
+			</header>
 
-				<%= render :partial => 'projects/checklist_item_row', collection: s.checklist_items, :as => :item, cache: true %>
-				
+			<div class="row" style="font-weight: bold; margin: 0;">
+				<div class="col-md-8">&nbsp;</div>
+				<div class="col-md-2" style="text-align: center;">Critical Date</div>	
+				<div class="col-md-2" style="text-align: center;">Completed</div>	
+			</div>
+
+			<% @checklist.categories.each do |c| %>
+				<div class="category">
+					<h1 style="display:inline-block;"><%= c.name %></h1><span style="padding-left:1em;color:#aaa;">(<%=c.completed_count%> completed out of <%=c.item_count%>)</span>
+				</div>
+				<% c.subcategories.each do |s| %>
+					<div class="subcategory">
+						<h3 style="display:inline-block"><%=s.name%></h3><span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.item_count%>)</span>
+					</div>
+
+					<%= render :partial => 'projects/checklist_item_row', collection: s.checklist_items, :as => :item, cache: true %>
+					
+				<% end %>
 			<% end %>
-		<% end %>
-	</div>
-<% else %>
-	<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>
-	<div style="text-align:center;font-style:italic"><%= link_to "Remove this checklist?", delete_checklist_project_path(@project, :checklist_id => @checklist.id), :remote => true, :method => :delete %></div>	
-<% end %>
+		</div>
+	<% else %>
+		<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>
+		<div style="text-align:center;font-style:italic"><%= link_to "Remove this checklist?", delete_checklist_project_path(@project, :checklist_id => @checklist.id), :remote => true, :method => :delete %></div>	
+	<% end %>
 
-<script>
-	$(document).ready(function(){
-	    $("#filter").keyup(function(){
-	        var filter = $(this).val(), count = 0;
+	<script>
+		$(document).ready(function(){
+		    $("#filter").keyup(function(){
+		        var filter = $(this).val(), count = 0;
 
-	        if ($(this).val().length == 0) {
-	        	$(".row.checklist-item").fadeIn(0);
-	        } else {
-		        $(".row.checklist-item .checklist-body").each(function(){
-		            // If the list item does not contain the text phrase fade it out
-		            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-		                $(this).parent().fadeOut(0);
-		            }
-		        });
-		    }
+		        if ($(this).val().length == 0) {
+		        	$(".row.checklist-item").fadeIn(0);
+		        } else {
+			        $(".row.checklist-item .checklist-body").each(function(){
+			            // If the list item does not contain the text phrase fade it out
+			            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+			                $(this).parent().fadeOut(0);
+			            }
+			        });
+			    }
+			});
 		});
-	});
-</script>
+	</script>
+</div>

@@ -1,47 +1,48 @@
-<header>
-	
-	<%= link_to "Add Report", new_report_project_path(@project), :class=>"btn btn-default pull-right", :style=>"min-width:24%;", :remote => true %>
-	
-	<div class="input-group" style="max-width: 74%;margin-bottom: 20px">
-		<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Reports">
-		<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
-	</div>
-</header>
-
-
-<table class="table table-bordered table-responsive" id="users">
-	<thead>
-		<tr>
-			<th>Report Date</th>
-			<th>Type</th>
-			<th>Last Updated</th>
-			<th>Photos</th>
-		</tr>
-	</thead>
-	<tbody>
+<div id="project-reports">
+	<header>	
+		<%= link_to "Add Report", new_report_project_path(@project), :class=>"btn btn-default pull-right", :style=>"min-width:24%;", :remote => true %>
 		
-		<% if @reports.count && @reports.count > 0 %>
-			<% @reports.each do |report| %>
-				<tr>
-					<td><%= link_to "#{report.report_type} - #{parse_date report.created_at}", show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
-					<td><%= report.report_type %></td>
-					<td><%= parse_time report.updated_at %></td>
-					<td>
-						<%if report.photos && report.photos.count > 0 %>
-							<% if report.photos.count == 1 %>
-								1
+		<div class="input-group" style="max-width: 74%;margin-bottom: 20px">
+			<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Reports">
+			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+		</div>
+	</header>
+
+
+	<table class="table table-bordered table-responsive" id="users">
+		<thead>
+			<tr>
+				<th>Report Date</th>
+				<th>Type</th>
+				<th>Last Updated</th>
+				<th>Photos</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<% if @reports.count && @reports.count > 0 %>
+				<% @reports.each do |report| %>
+					<tr>
+						<td><%= link_to "#{report.report_type} - #{parse_date report.created_at}", show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
+						<td><%= report.report_type %></td>
+						<td><%= parse_time report.updated_at %></td>
+						<td>
+							<%if report.photos && report.photos.count > 0 %>
+								<% if report.photos.count == 1 %>
+									1
+								<% else %>
+									<%= report.photos.count %>
+								<% end %>
 							<% else %>
-								<%= report.photos.count %>
+								0
 							<% end %>
-						<% else %>
-							0
-						<% end %>
-					</td>
-				</tr>
+						</td>
+					</tr>
+					<% end %>
+				<% else %>
+					<tr><td colspan="4" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No reports</h4></td></tr>
 				<% end %>
-			<% else %>
-				<tr><td colspan="4" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No reports</h4></td></tr>
-			<% end %>
-		
-	</tbody>
-</table>
+			
+		</tbody>
+	</table>
+</div>
