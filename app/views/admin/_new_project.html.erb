@@ -11,8 +11,8 @@
 			<tr><td><%= a.text_field :state , :placeholder => "State" %></td></tr>
 			<tr><td><%= a.text_field :zip , :placeholder => "Zip" %></td></tr>
 		<% end %>
-		<tr><td style="padding:10px 0;">Select Checklist: <%= f.select :checklist, options_for_select(current_user.company.checklists.map(&:name)) %></td></tr>
-        <tr><td style="padding:10px 0;">Assign Users: <%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :multiple => true %></td></tr>
+		<tr><td style="padding:10px 0;"><h4>Select Checklist:</h4> <%= f.select :checklist, options_for_select(current_user.company.checklists.map(&:name)) %></td></tr>
+        <tr><td style="padding:10px 0;"><h4>Assign Users:</h4> <%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :multiple => true %></td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Create" %></button></td></tr>
 	<% end %>
 </table>

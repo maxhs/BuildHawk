@@ -1,5 +1,5 @@
 class PunchlistItem < ActiveRecord::Base
-	attr_accessible :body, :assignee_id, :assignee, :project_id, :project, :location, 
+	attr_accessible :body, :assignee_id, :assignee, :project_id, :project, :location, :order_index,
 					:photos_attributes, :completed, :completed_at, :assignee_attributes
 
 	belongs_to :project
