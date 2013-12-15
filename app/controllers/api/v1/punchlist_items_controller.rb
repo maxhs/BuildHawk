@@ -18,7 +18,7 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
 
     def create
         @project = Project.find params[:project_id]
-        @punchlist_item = @project.punchlist_items.create params[:punchlist_item]
+        @punchlist_item = @project.punchlists.last.punchlist_items.create params[:punchlist_item]
         if @punchlist_item.save
             respond_to do |format|
                 format.json { render_for_api :punchlist, :json => @punchlist_item, :root => :punchlist_item}
