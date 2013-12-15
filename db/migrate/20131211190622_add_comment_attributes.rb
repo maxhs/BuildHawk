@@ -29,5 +29,12 @@ class AddCommentAttributes < ActiveRecord::Migration
 
     add_column :checklist_items, :order_index, :integer
     add_column :punchlist_items, :order_index, :integer
+    add_column :categories, :order_index, :integer
+    add_column :subcategories, :order_index, :integer
+
+    add_column :checklists, :checklist_items_count, :integer
+    add_column :subcategories, :checklist_items_count, :integer
+    add_column :categories, :checklist_items_count, :integer
+    add_column :categories, :subcategories_count, :integer
   end
 end

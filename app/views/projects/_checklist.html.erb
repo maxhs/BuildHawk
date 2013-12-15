@@ -15,9 +15,12 @@
 			</div>
 
 			
-					<%= render :partial => 'projects/checklist_item_row', collection: @checklist.checklist_items, :as => :item, cache: true %>
+				
+
+				<%= render :partial => 'projects/checklist_item_row', collection: @checklist.checklist_items, :as => :item, cache: true %>
 					
 			
+		
 		</div>
 	<% else %>
 		<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>

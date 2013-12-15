@@ -1,6 +1,6 @@
 class Subcategory < ActiveRecord::Base
 	attr_accessible :name, :category_id, :index, :milestone_date, :completed_date, :checklist_items
-  	belongs_to :category
+  	belongs_to :category, :counter_cache => true
   	has_many :checklist_items, :dependent => :destroy
 
     after_save :check_completed

@@ -53,6 +53,9 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order_index"
+    t.integer  "checklist_items_count"
+    t.integer  "subcategories_count"
   end
 
   add_index "categories", ["checklist_id"], name: "categories_checklist_id_ix"
@@ -86,7 +89,8 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "core",           default: false
+    t.boolean  "core",                  default: false
+    t.integer  "checklist_items_count"
   end
 
   add_index "checklists", ["company_id"], name: "checklists_company_id_ix"
@@ -238,6 +242,8 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order_index"
+    t.integer  "checklist_items_count"
   end
 
   add_index "subcategories", ["category_id"], name: "subcategories_category_id_ix"

@@ -2,9 +2,9 @@ class ChecklistItem < ActiveRecord::Base
 	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :subcategory_id, :subcategory, :status, :critical_date, :completed_date,
                     :photos, :photos_attributes, :checklist_id, :checklist, :order_index
   	
-  	belongs_to :subcategory
-    belongs_to :category
-    belongs_to :checklist
+  	belongs_to :subcategory, :counter_cache => true
+    belongs_to :category, :counter_cache => true
+    belongs_to :checklist, :counter_cache => true
     belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
   	has_many :comments, :dependent => :destroy

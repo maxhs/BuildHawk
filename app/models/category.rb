@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-	  attr_accessible :name, :checklist_id, :index, :milestone_date, :completed_date, :subcategories_attributes
+	  attr_accessible :name, :checklist_id, :index, :milestone_date, :completed_date, :subcategories_attributes, :order_index
   	belongs_to :checklist
   	has_many :subcategories
     has_many :checklist_items, :dependent => :destroy
@@ -25,6 +25,11 @@ class Category < ActiveRecord::Base
 
     def assign_items
       checklist_items << subcategories.map(&:checklist_items).flatten
+      sub_index = 0
+      subcategories.each do |i|
+        i.update_attribute :order_index, sub_index
+        sub_index+=1
+      end
     end
 
   	acts_as_api
