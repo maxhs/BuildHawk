@@ -1,4 +1,15 @@
-
+<% if item.subcategory.checklist_items.index(item) == 0 %>	
+	<% sub = item.subcategory %>
+	<% if sub.category.subcategories.index(sub) == 0 %>	
+		<% c = sub.category %>	
+		<div class="category">
+			<h1 style="display:inline-block;"><%= c.name %></h1><span style="padding-left:1em;color:#aaa;">(<%=c.completed_count%> completed out of <%=c.item_count%>)</span>
+		</div>
+	<% end %>	
+	<div class="subcategory">
+		<h3 style="display:inline-block"><%= sub.name%></h3><span style="padding-left:1em;color:#aaa;">(<%= sub.completed_count%> of <%= sub.item_count%>)</span>
+	</div>
+<% end %>
 
 <%= link_to checklist_item_project_path(project, :item_id => item.id), :remote => true do %>
 <% if item.status == "Completed" %>

@@ -9,6 +9,8 @@ class Checklist < ActiveRecord::Base
   	has_many :categories, :dependent => :destroy
   	accepts_nested_attributes_for :categories
 
+    after_create :assign_items
+
   	def completed_count
       if checklist_items.count
         items = checklist_items
@@ -31,50 +33,55 @@ class Checklist < ActiveRecord::Base
       if checklist_items.count > 0
         checklist_items
       else 
-  		  items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+  		items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
         checklist_items << items
         return items
       end
   	end
 
   	def self.import(file)
-	  spreadsheet = open_spreadsheet(file)
-	  header = spreadsheet.row(2)
-	  category_title = spreadsheet.row(2)[0]
-	  subcategory_title = spreadsheet.row(2)[1]
-	  type_title = spreadsheet.row(2)[2]
-	  item_title = spreadsheet.row(2)[3]
+        spreadsheet = open_spreadsheet(file)
+        header = spreadsheet.row(2)
+        category_title = spreadsheet.row(2)[0]
+        subcategory_title = spreadsheet.row(2)[1]
+        type_title = spreadsheet.row(2)[2]
+        item_title = spreadsheet.row(2)[3]
 
-	  @new_core = self.create
-	  (3..spreadsheet.last_row).each do |i|
-	    row = Hash[[header, spreadsheet.row(i)].transpose]
-	    category = @new_core.categories.find_or_create_by(name: row[category_title])
-	    subcategory = category.subcategories.find_or_create_by(name: row[subcategory_title])
-	    item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title]
-	  end
-        @new_core.update_attribute :core, true
-	    @new_core.save
+        @new_core = self.create
+        (3..spreadsheet.last_row).each do |i|
+            row = Hash[[header, spreadsheet.row(i)].transpose]
+            category = @new_core.categories.find_or_create_by(name: row[category_title])
+            subcategory = category.subcategories.find_or_create_by(name: row[subcategory_title])
+            item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title]
+	    end
+            @new_core.update_attribute :core, true
+	       @new_core.save
 	end
 
 	def self.open_spreadsheet(file)
-	  case File.extname(file.original_filename)
-	  when ".csv" then Csv.new(file.path, nil, :ignore)
-	  when ".xls" then Excel.new(file.path, nil, :ignore)
-	  when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
-	  else raise "Unknown file type: #{file.original_filename}"
-	  end
+        case File.extname(file.original_filename)
+        when ".csv" then Csv.new(file.path, nil, :ignore)
+        when ".xls" then Excel.new(file.path, nil, :ignore)
+        when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+        else raise "Unknown file type: #{file.original_filename}"
+        end
 	end
+
+    def assign_items
+        puts "assigning items after create"
+        checklist_items << categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+    end
 
 	acts_as_api
 
-  	api_accessible :user do |t|
+	api_accessible :user do |t|
 
-  	end
+	end
 
-  	api_accessible :projects do |t|
-  		t.add :name
+	api_accessible :projects do |t|
+		t.add :name
         t.add :id
-  	end
+	end
 
     api_accessible :checklist do |t|
         t.add :categories

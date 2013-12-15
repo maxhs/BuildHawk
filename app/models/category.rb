@@ -2,14 +2,23 @@ class Category < ActiveRecord::Base
 	  attr_accessible :name, :checklist_id, :index, :milestone_date, :completed_date, :subcategories_attributes
   	belongs_to :checklist
   	has_many :subcategories
+    has_many :checklist_items, :dependent => :destroy
   	accepts_nested_attributes_for :subcategories
 
     def item_count
-      subcategories.joins(:checklist_items).count
+      if checklist_items.count > 0
+        checklist_items.count
+      else
+        subcategories.joins(:checklist_items).count
+      end
     end
 
     def completed_count
-      subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
+      if checklist_items.count > 0
+        checklist_items.where(:status => "Completed").count
+      else
+        subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
+      end
     end
 
   	acts_as_api
