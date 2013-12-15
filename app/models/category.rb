@@ -24,12 +24,13 @@ class Category < ActiveRecord::Base
     end
 
     def assign_items
-      checklist_items << subcategories.map(&:checklist_items).flatten
+      # order
       sub_index = 0
       subcategories.each do |i|
         i.update_attribute :order_index, sub_index
-        sub_index+=1
+        sub_index += 1
       end
+      checklist_items << subcategories.map(&:checklist_items).flatten
     end
 
   	acts_as_api

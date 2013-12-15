@@ -9,6 +9,8 @@ class ChecklistItem < ActiveRecord::Base
   	has_many :photos
   	has_many :comments, :dependent => :destroy
 
+    default_scope { order('id') }
+
     after_commit :check_completed
 
     accepts_nested_attributes_for :photos, :allow_destroy => true#, :reject_if => lambda { |c| c[:image_file_name].blank? }
