@@ -5,6 +5,8 @@ class Category < ActiveRecord::Base
     has_many :checklist_items, :dependent => :destroy
   	accepts_nested_attributes_for :subcategories
 
+    after_create :assign_items
+
     def item_count
       if checklist_items.count > 0
         checklist_items.count
@@ -19,6 +21,10 @@ class Category < ActiveRecord::Base
       else
         subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
       end
+    end
+
+    def assign_items
+      checklist_items << subcategories.map(&:checklist_items).flatten
     end
 
   	acts_as_api

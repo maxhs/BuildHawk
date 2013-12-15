@@ -13,28 +13,20 @@
 			<div class="col-md-2" style="text-align: center;">Completed</div>	
 		</div>
 
-		<% if @checklist.checklist_items.count > 0 %>
-			<% @checklist.checklist_items.each do |i| %>
-				
-				<%= render :partial => 'projects/checklist_item_row', :locals => {:item => i, :project => @project} %>
-			
-			<% end %>
-		<% else %>
-			<% @checklist.categories.each do |c| %>
-				<div class="category">
-					<h1 style="display:inline-block;"><%= c.name %></h1><span style="padding-left:1em;color:#aaa;">(<%=c.completed_count%> completed out of <%=c.item_count%>)</span>
+		<% @checklist.categories.each do |c| %>
+			<div class="category">
+				<h1 style="display:inline-block;"><%= c.name %></h1><span style="padding-left:1em;color:#aaa;">(<%=c.completed_count%> completed out of <%=c.item_count%>)</span>
+			</div>
+			<% c.subcategories.each do |s| %>
+				<div class="subcategory">
+					<h3 style="display:inline-block"><%=s.name%></h3><span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.item_count%>)</span>
 				</div>
-				<% c.subcategories.each do |s| %>
-					<div class="subcategory">
-						<h3 style="display:inline-block"><%=s.name%></h3><span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.item_count%>)</span>
-					</div>
-					<% s.checklist_items.each do |i| %>
-						<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>
-							<%= render :partial => 'projects/checklist_item_row', :locals => {:item => i} %>
-						<% end %>
+				<% s.checklist_items.each do |i| %>
+					<%= link_to checklist_item_project_path(@project, :item_id => i.id), :remote => true do %>
+						<%= render :partial => 'projects/checklist_item_row', :locals => {:item => i} %>
 					<% end %>
-					
 				<% end %>
+				
 			<% end %>
 		<% end %>
 	</div>
