@@ -26,5 +26,8 @@ class AddCommentAttributes < ActiveRecord::Migration
   	add_index :reports, :author_id, :name => 'reports_author_id_ix'
   	add_index :reports, :project_id, :name => 'reports_project_id_ix'
   	add_index :punchlist_items, :assignee_id, :name => 'punchlist_items_assignee_id_ix'
+
+    add_column :checklist_items, :order_index, :integer
+    add_column :punchlist_items, :order_index, :integer
   end
 end

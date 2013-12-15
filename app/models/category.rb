@@ -11,7 +11,7 @@ class Category < ActiveRecord::Base
       if checklist_items.count > 0
         checklist_items.count
       else
-        subcategories.joins(:checklist_items).count
+        subcategories.includes(:checklist_items).count
       end
     end
 
@@ -19,7 +19,7 @@ class Category < ActiveRecord::Base
       if checklist_items.count > 0
         checklist_items.where(:status => "Completed").count
       else
-        subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
+        subcategories.includes(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
       end
     end
 

@@ -4,6 +4,7 @@ class Subcategory < ActiveRecord::Base
   	has_many :checklist_items, :dependent => :destroy
 
     after_save :check_completed
+    after_create :assign_indices
 
     def item_count
       checklist_items.count
@@ -17,6 +18,14 @@ class Subcategory < ActiveRecord::Base
       if category.completed_count != 0 && category.completed_count == category.item_count
         puts "marking category completed"
         category.update_attribute :completed_date, Date.today
+      end
+    end
+
+    def assign_indices
+      item_index = 0
+      checklist_items.each do |i|
+        i.update_attribute :order_index, item_index
+        item_index+=1
       end
     end
 

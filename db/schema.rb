@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order_index"
   end
 
   add_index "checklist_items", ["category_id"], name: "checklist_item_category_id_ix"
@@ -190,6 +191,7 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.integer  "assignee_id"
     t.boolean  "completed",    default: false
     t.datetime "completed_at"
+    t.integer  "order_index"
   end
 
   add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
