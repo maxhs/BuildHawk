@@ -1,3 +1,6 @@
+
+
+<%= link_to checklist_item_project_path(project, :item_id => item.id), :remote => true do %>
 <% if item.status == "Completed" %>
 	<div class="row checklist-item completed">
 <% elsif item.status == "Not Applicable" %>
@@ -5,6 +8,7 @@
 <% else %>
 	<div class="row checklist-item">
 <% end %>
+
 		<div class="col-md-8 checklist-body" style="margin-left:20px;margin-right:-20px;">
 			<%=item.body%>
 		</div>
@@ -24,5 +28,5 @@
 				&nbsp;
 			<% end %>
 		</div>
-
+<% end %>
 	</div>
