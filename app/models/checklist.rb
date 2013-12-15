@@ -48,11 +48,13 @@ class Checklist < ActiveRecord::Base
         item_title = spreadsheet.row(2)[3]
 
         @new_core = self.create
+        item_index = 0
         (3..spreadsheet.last_row).each do |i|
             row = Hash[[header, spreadsheet.row(i)].transpose]
             category = @new_core.categories.find_or_create_by(name: row[category_title])
             subcategory = category.subcategories.find_or_create_by(name: row[subcategory_title])
-            item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title]
+            item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index
+            item_index += 1
 	    end
             @new_core.update_attribute :core, true
 	       @new_core.save

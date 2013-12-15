@@ -24,7 +24,6 @@ class Category < ActiveRecord::Base
     end
 
     def assign_items
-      # order
       sub_index = 0
       subcategories.each do |i|
         i.update_attribute :order_index, sub_index

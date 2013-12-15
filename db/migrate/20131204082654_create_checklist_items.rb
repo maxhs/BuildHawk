@@ -5,6 +5,8 @@ class CreateChecklistItems < ActiveRecord::Migration
 	    	t.string :status
 	    	t.string :item_type
 	    	t.text :body
+	    	t.integer :order_index
+	    	t.integer :item_index
 	    	t.belongs_to :subcategory
 	    	t.belongs_to :category
 	    	t.belongs_to :checklist

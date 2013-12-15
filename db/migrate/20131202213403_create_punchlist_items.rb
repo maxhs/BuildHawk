@@ -5,6 +5,7 @@ class CreatePunchlistItems < ActiveRecord::Migration
     	t.belongs_to :punchlist
     	t.belongs_to :user
     	t.string :location
+    	t.integer :order_index
       	t.timestamps
     end
   end

@@ -11,6 +11,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :first_name, :default => ""
       t.boolean :admin, :default => false
       t.boolean :uber_admin, :default => false
+      t.string :authentication_token
 
       t.boolean :push_permissions, :default => true
       t.boolean :email_permissions, :default => true

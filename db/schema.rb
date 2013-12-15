@@ -45,17 +45,16 @@ ActiveRecord::Schema.define(version: 20131211190622) do
   add_index "apn_registrations", ["user_id"], name: "apn_registrations_user_id_ix"
 
   create_table "categories", force: true do |t|
-    t.integer  "index"
+    t.integer  "order_index"
     t.integer  "checklist_id"
     t.integer  "core_checklist_id"
     t.datetime "completed_date"
     t.datetime "milestone_date"
+    t.integer  "checklist_items_count"
+    t.integer  "subcategories_count"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "order_index"
-    t.integer  "checklist_items_count"
-    t.integer  "subcategories_count"
   end
 
   add_index "categories", ["checklist_id"], name: "categories_checklist_id_ix"
@@ -65,6 +64,8 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.string   "status"
     t.string   "item_type"
     t.text     "body"
+    t.integer  "order_index"
+    t.integer  "item_index"
     t.integer  "subcategory_id"
     t.integer  "category_id"
     t.integer  "checklist_id"
@@ -74,7 +75,6 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "order_index"
   end
 
   add_index "checklist_items", ["category_id"], name: "checklist_item_category_id_ix"
@@ -87,10 +87,10 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.string   "name"
     t.datetime "completed_date"
     t.datetime "milestone_date"
+    t.integer  "checklist_items_count"
+    t.boolean  "core",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "core",                  default: false
-    t.integer  "checklist_items_count"
   end
 
   add_index "checklists", ["company_id"], name: "checklists_company_id_ix"
@@ -99,11 +99,11 @@ ActiveRecord::Schema.define(version: 20131211190622) do
   create_table "comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "report_id"
+    t.integer  "punchlist_item_id"
+    t.integer  "checklist_item_id"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "checklist_item_id"
-    t.integer  "punchlist_item_id"
   end
 
   add_index "comments", ["checklist_item_id"], name: "comments_checklist_item_id_ix"
@@ -118,11 +118,6 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.boolean  "pre_register"
     t.string   "contact_name"
     t.integer  "projects_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "core_checklists", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -190,12 +185,12 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.integer  "punchlist_id"
     t.integer  "user_id"
     t.string   "location"
+    t.integer  "order_index"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assignee_id"
     t.boolean  "completed",    default: false
     t.datetime "completed_at"
-    t.integer  "order_index"
   end
 
   add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
@@ -237,13 +232,12 @@ ActiveRecord::Schema.define(version: 20131211190622) do
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "index"
+    t.integer  "order_index"
+    t.integer  "checklist_items_count"
     t.datetime "completed_date"
     t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "order_index"
-    t.integer  "checklist_items_count"
   end
 
   add_index "subcategories", ["category_id"], name: "subcategories_category_id_ix"
@@ -257,6 +251,7 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.string   "phone_number",           default: ""
     t.boolean  "admin",                  default: false
     t.boolean  "uber_admin",             default: false
+    t.string   "authentication_token"
     t.boolean  "push_permissions",       default: true
     t.boolean  "email_permissions",      default: true
     t.string   "reset_password_token"
@@ -270,7 +265,6 @@ ActiveRecord::Schema.define(version: 20131211190622) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "authentication_token"
   end
 
   add_index "users", ["company_id"], name: "users_company_id_ix"

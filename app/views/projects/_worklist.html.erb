@@ -5,20 +5,19 @@
 			<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Punch Lists">
 			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
 		</div>
-	</header>
-
-	<% if @items && @items.count %>
-		<table class="table table-bordered table-responsive" id="users">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Assignment</th>
-					<th>Completed</th>
-					<th>Created On</th>
-				</tr>
-			</thead>
-		
-			<tbody>
+	</header>	
+	<table class="table table-bordered table-responsive" id="users">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Assignment</th>
+				<th>Completed</th>
+				<th>Created On</th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<% if @items && @items.count %>
 				<% @items.each do |item| %>
 					<tr>
 						<td><%= link_to item.body, edit_worklist_item_project_path(@project, :item_id => item.id), :remote => true %> </td>
@@ -37,9 +36,9 @@
 						<td><%= parse_time item.created_at %></td>
 					</tr>
 				<% end %>
-			</tbody>
-		</table>
-	<% else %>
-		<tr><div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No punchlist items</h3></div>	</tr>
-	<% end %>
+			<% else %>
+				<tr><td colspan="4" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No Work List Items</h4></td></tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>
