@@ -28,4 +28,8 @@ class Comment < ActiveRecord::Base
     api_accessible :checklist, :extend => :projects do |t|
 
     end
+
+    api_accessible :punchlist, :extend => :projects do |t|
+
+    end
 end

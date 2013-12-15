@@ -16,4 +16,12 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
       	end
     end
 
+    def photo
+        @punchlist_item = PunchlistItem.find params[:id]
+        @punchlist_item.photos.create params[:photo]
+        respond_to do |format|
+            format.json { render_for_api :punchlist, :json => @punchlist_item, :root => :punchlist_item}
+        end
+    end
+
 end
