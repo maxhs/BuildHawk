@@ -10,7 +10,7 @@ class Photo < ActiveRecord::Base
 	belongs_to :checklist_item
     
   	has_attached_file 	:image, 
-	                    :styles => { :large => ["1000x1000#", :jpg],
+	                    :styles => { :large => ["1536x1536#", :jpg],
 	                    			 :medium => ["500x500#", :jpg],
 	                                 :small  => ["200x200#", :jpg],
 	                                 :thumb  => ["100x100#", :jpg]
@@ -50,6 +50,10 @@ class Photo < ActiveRecord::Base
 		user.full_name if user
 	end
 
+	def created_date
+		created_at.to_date
+	end
+
 	api_accessible :dashboard do |t|
 		t.add :url1000
 		t.add :url500
@@ -58,6 +62,7 @@ class Photo < ActiveRecord::Base
 		t.add :source
 		t.add :created_at
 		t.add :user_name
+		t.add :created_date
 	end
 
 	api_accessible :item, :extend => :dashboard do |t|
