@@ -33,9 +33,8 @@ class Checklist < ActiveRecord::Base
         if checklist_items.count > 0
             checklist_items
         else 
-  		    items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
-            checklist_items << items
-            return items
+  		    checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
+            return checklist_items
         end
   	end
 
@@ -48,7 +47,7 @@ class Checklist < ActiveRecord::Base
             type_title = spreadsheet.row(2)[2]
             item_title = spreadsheet.row(2)[3]
 
-            @new_core = self.create
+            @new_core = self.create :core => true
             item_index = 0
             (3..spreadsheet.last_row).each do |i|
                 row = Hash[[header, spreadsheet.row(i)].transpose]
@@ -57,9 +56,7 @@ class Checklist < ActiveRecord::Base
                 item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index if row[type_title] && row[item_title]
                 item_index += 1
     	    end
-            Checklist.where(:core => true).each do |c| c.update_attribute :core, false end
-            @new_core.update_attribute :core, true
-    	    @new_core.save
+    	    @new_core.save!
     	end
 
     	def open_spreadsheet(file)
@@ -79,7 +76,6 @@ class Checklist < ActiveRecord::Base
         else
             puts "local env"
             checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
-            self.save!
         end 
     end
 
