@@ -60,7 +60,6 @@ class Checklist < ActiveRecord::Base
             @new_core.update_attribute :core, true
     	    @new_core.save
     	end
-        #handle_asynchronously :import    
 
     	def open_spreadsheet(file)
             case File.extname(file.original_filename)
@@ -73,9 +72,10 @@ class Checklist < ActiveRecord::Base
     end
 
     def assign_items
-        puts "assigning items after create"
-        #checklist_items << categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+        puts "assigning items after create asynchronously"
+        checklist_items << categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
     end
+    handle_asynchronously :assign_items
 
 	acts_as_api
 
