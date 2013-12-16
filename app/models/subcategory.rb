@@ -16,7 +16,6 @@ class Subcategory < ActiveRecord::Base
 
     def check_completed
       if category.completed_count != 0 && category.completed_count == category.item_count
-        puts "marking category completed"
         category.update_attribute :completed_date, Date.today
       end
     end
