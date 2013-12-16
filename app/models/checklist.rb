@@ -1,6 +1,6 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
-    require 'Time'
+    
     attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
     				        :categories, :company, :company_id
   	belongs_to :project
