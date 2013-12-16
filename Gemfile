@@ -30,6 +30,7 @@ gem 'delayed_job_active_record'
 gem 'apn_sender', :require => 'apn'
 gem 'daemons'
 gem "non-stupid-digest-assets"
+gem "redis"
 gem "resque"
 gem 'resque-scheduler'
 gem 'coffee-rails', '~> 4.0.0'
@@ -38,6 +39,7 @@ gem 'turbolinks'
 gem 'thin'
 gem 'roo'
 gem 'deep_cloneable', '~> 1.6.0'
+gem 'unicorn'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

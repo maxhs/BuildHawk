@@ -1,0 +1,5 @@
+monthly_digest:
+  cron: "0 0 1 * *"
+  class: MonthlyDigest
+  args:
+  description: Sends the monthly digest

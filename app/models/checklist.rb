@@ -12,62 +12,65 @@ class Checklist < ActiveRecord::Base
     after_create :assign_items
 
   	def completed_count
-      if checklist_items.count
-        items = checklist_items
-      else
-  		  items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
-      end
-  		
-      return items.select{|i| i.status == "Completed"}.count
+        if checklist_items.count
+            items = checklist_items
+        else
+  		    items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+        end
+        return items.select{|i| i.status == "Completed"}.count
   	end
 
   	def item_count
-      if checklist_items.count
-        checklist_items.count
-      else
-  		  categories.map(&:subcategories).flatten.map(&:checklist_items).flatten.count
-      end
+        if checklist_items.count
+            checklist_items.count
+        else
+  		    categories.map(&:subcategories).flatten.map(&:checklist_items).flatten.count
+        end
   	end
 
   	def items
-      if checklist_items.count > 0
-        checklist_items
-      else 
-  		items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
-        checklist_items << items
-        return items
-      end
+        if checklist_items.count > 0
+            checklist_items
+        else 
+  		    items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+            checklist_items << items
+            return items
+        end
   	end
 
-  	def self.import(file)
-        spreadsheet = open_spreadsheet(file)
-        header = spreadsheet.row(2)
-        category_title = spreadsheet.row(2)[0]
-        subcategory_title = spreadsheet.row(2)[1]
-        type_title = spreadsheet.row(2)[2]
-        item_title = spreadsheet.row(2)[3]
+    class << self
+      	def import(file)
+            spreadsheet = open_spreadsheet(file)
+            header = spreadsheet.row(2)
+            category_title = spreadsheet.row(2)[0]
+            subcategory_title = spreadsheet.row(2)[1]
+            type_title = spreadsheet.row(2)[2]
+            item_title = spreadsheet.row(2)[3]
 
-        @new_core = self.create
-        item_index = 0
-        (3..spreadsheet.last_row).each do |i|
-            row = Hash[[header, spreadsheet.row(i)].transpose]
-            category = @new_core.categories.find_or_create_by(name: row[category_title])
-            subcategory = category.subcategories.find_or_create_by(name: row[subcategory_title])
-            item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index
-            item_index += 1
-	    end
+            @new_core = self.create
+            item_index = 0
+            (3..spreadsheet.last_row).each do |i|
+                row = Hash[[header, spreadsheet.row(i)].transpose]
+                category = @new_core.categories.where(:name => row[category_title]).first_or_create
+                subcategory = category.subcategories.where(:name => row[subcategory_title]).first_or_create
+                item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index
+                item_index += 1
+    	    end
+            
             @new_core.update_attribute :core, true
-	       @new_core.save
-	end
+    	    @new_core.save_without_delay
+    	end
+        #handle_asynchronously :import    
 
-	def self.open_spreadsheet(file)
-        case File.extname(file.original_filename)
-        when ".csv" then Csv.new(file.path, nil, :ignore)
-        when ".xls" then Excel.new(file.path, nil, :ignore)
-        when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
-        else raise "Unknown file type: #{file.original_filename}"
-        end
-	end
+    	def open_spreadsheet(file)
+            case File.extname(file.original_filename)
+            when ".csv" then Csv.new(file.path, nil, :ignore)
+            when ".xls" then Excel.new(file.path, nil, :ignore)
+            when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+            else raise "Unknown file type: #{file.original_filename}"
+            end
+    	end
+    end
 
     def assign_items
         puts "assigning items after create"
