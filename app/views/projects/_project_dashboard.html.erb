@@ -51,7 +51,7 @@
 			<th class="col-sm-2">Milestone</th>
 			<th class="col-sm-2">+/-</th>
 		</theader>
-		<% @checklist.categories.each do |cat| %>
+		<% @checklist.categories.sort_by{|c|c.name.to_i}.each do |cat| %>
 			<tr style="font-size:1.1em;border-bottom:1px solid #eee;">
 				<td class="col-sm-4" style="padding:10px 0;"><%= cat.name %> </td>
 				<td class="col-sm-2"><span><%= number_to_percentage(cat.completed_count/cat.item_count.to_f*100,:precision=>1) %></span></td>
