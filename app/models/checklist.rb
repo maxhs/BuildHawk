@@ -56,6 +56,7 @@ class Checklist < ActiveRecord::Base
                 item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index if row[type_title] || row[item_title]
                 item_index += 1
     	    end
+            @new_core.core = true
     	    @new_core.save
     	end
 
