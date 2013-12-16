@@ -19,7 +19,7 @@ class Category < ActiveRecord::Base
     def progress_percentage
       items = subcategories.includes(:checklist_items) 
       completed_items = items.where(:checklist_items => {:status => "Completed"})
-      number_to_percentage(completed_items.count/items.count.to_f*100,:precision=>1)
+      number_to_percentage(completed_items.count/items.count*100,:precision=>1)
     end
 
     def order_indices
