@@ -7,8 +7,13 @@ class ChecklistItemsController < ApplicationController
 			@checklist_item.update_attribute :critical_date, datetime
 			params[:checklist_item].delete(:critical_date)
 		end
+		if params[:checklist_item][:status].present?
+			status = params[:checklist_item][:status][1]
+			params[:checklist_item].delete(:status)
+			@checklist_item.update_attribute :status, status
+		end
 		@checklist_item.update_attributes params[:checklist_item]
-		if params[:checklist_item][:status] == "Completed"
+		if status && status == "Completed"
 			puts "should be updating completed by user"
 			@checklist_item.update_attribute :completed_by_user_id, current_user.id
 		end

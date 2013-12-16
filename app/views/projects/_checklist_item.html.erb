@@ -15,7 +15,7 @@
 			</tbody>
 				<tr><td style="text-align:center;">
 					<h4>Status:</h4>
-					<%= f.select :status, ["In-Progress","Completed","Not Applicable"], {}, :multiple => true, :style => "width:400px !important;" %>
+					<%= f.select :status, ["In-Progress","Completed","Not Applicable"], {:include_blank => false}, :multiple => true, :style => "width:400px !important;" %>
 					
 				</td></tr>
 				<% if @checklist_item.status == "Completed" && @checklist_item.completed_by_user %>

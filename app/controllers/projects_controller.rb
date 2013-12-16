@@ -89,8 +89,9 @@ class ProjectsController < ApplicationController
 	end 
 
 	def destroy
-		@project.destroy
-		redirect_to projects_path
+		puts "deleting project in background"
+        @project.background_destroy
+		redirect_to users_admin_index_path
 	end
 
 	def checklist

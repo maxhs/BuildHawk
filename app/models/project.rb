@@ -47,7 +47,12 @@ class Project < ActiveRecord::Base
     def has_categories?
       !categories.nil?
     end
-  	
+
+    def background_destroy
+  	  puts "background destroy"
+      Resque.enqueue(DestroyProject,id)
+    end
+
     acts_as_api
 
   	api_accessible :projects do |t|
