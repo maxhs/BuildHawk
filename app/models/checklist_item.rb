@@ -3,8 +3,8 @@ class ChecklistItem < ActiveRecord::Base
                     :photos, :photos_attributes, :checklist_id, :checklist, :order_index, :item_index
   	
   	belongs_to :subcategory, :counter_cache => true
-    belongs_to :category, :counter_cache => true
-    belongs_to :checklist, :counter_cache => true
+    #belongs_to :category, :counter_cache => true
+    belongs_to :checklist#, :counter_cache => true
     belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
   	has_many :comments, :dependent => :destroy

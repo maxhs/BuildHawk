@@ -116,30 +116,23 @@ class AdminController < ApplicationController
 	end
 
 	def create_project
-		puts "create project params: #{params}"
 		@checklist = Checklist.new
 		if params[:project][:checklist].present?
 			list = Checklist.find_by(name: params[:project][:checklist])
-			puts "dup'd checklist: #{list.id}"
 			@checklist =  list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}]
-			@checklist.save!
-			puts "new checklist has #{@checklist.categories.count} categories after save"
+			@checklist.save
 			params[:project].delete(:checklist)
 		else 
-			puts "did not have a checklist in the params"
 			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}
-			@checklist.save!
+			@checklist.save
 		end
-		puts "checklist outside of initial find method: #{@checklist.categories.count} with id: #{@checklist.id}"
-		
 		@project = Project.create params[:project]
 		@project.checklist = @checklist
-		#@project.update_attribute :checklist_id, @checklist.id if @checklist
-		if @project.save! && request.xhr?
+		if @project.save && request.xhr?
 			respond_to do |format|
 				format.js
 			end
-		elsif @project.save!
+		elsif @project.save
 			redirect_to admin_index_path
 		else
 			@response_message = "Please make sure you've completed the form before submitting".html_safe
