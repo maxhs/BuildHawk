@@ -292,16 +292,24 @@ input[type="submit"] {
 }
 
 #wrap {
+	#main {
+		.navbar-nav {
+			li a {
+				font-size:1.15em;
+			}
+		}
+	}
+
 	#main, #sidebar {
 		> .admin, > .projects {
 			/*display: none;*/
 
 			ul > li > a {
-				font-size: 1.2em;
+				font-size: 1.1em;
 			}
 
 			> .sidebarProjects > div > a {
-				font-size: 1.2em;
+				font-size: 1.15em;
 			}
 		}
 	}

@@ -4,7 +4,10 @@
 		<% @photos.each do |photo| %>
 			<% if photo.image_file_name %>
 				<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-					<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
+					<div style="width:120px;display:inline-block;">
+						<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
+						<% if photo.source %><%= photo.source%> <% end %>asdas 
+					</div>
 				<% end %>
 			<% end %>
 		<% end %>
