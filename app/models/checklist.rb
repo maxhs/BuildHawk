@@ -71,13 +71,13 @@ class Checklist < ActiveRecord::Base
     end
 
     def assign_items
-        if Rails.env.production?
-            puts "assigning items after create asynchronously"
-            Resque.enqueue(AssignItems,self)
-        else
-            puts "local env"
+        #if Rails.env.production?
+        #    puts "assigning items after create asynchronously"
+        #    Resque.enqueue(AssignItems,self)
+        #else
+        #    puts "local env"
             checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
-        end 
+        #end 
     end
 
 	acts_as_api
