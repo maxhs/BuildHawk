@@ -73,12 +73,9 @@ class Checklist < ActiveRecord::Base
     end
 
     def assign_items
-        puts "assigning items asynchronously"
-        checklist_items << categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
-        #puts "assigning items after create asynchronously"
-        #Resque.enqueue(AssignItems,id)
+        puts "assigning items after create asynchronously"
+        Resque.enqueue(AssignItems,id)
     end
-    handle_asynchronously :assign_items
 
 	acts_as_api
 
