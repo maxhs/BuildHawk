@@ -119,11 +119,11 @@ class AdminController < ApplicationController
 		@checklist = Checklist.new
 		if params[:project][:checklist].present?
 			list = Checklist.find_by(name: params[:project][:checklist])
-			@checklist =  list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}]
+			@checklist =  list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
 			@checklist.save
 			params[:project].delete(:checklist)
 		else 
-			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}
+			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
 			@checklist.save
 		end
 		@project = Project.create params[:project]
