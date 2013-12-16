@@ -1,11 +1,11 @@
 <table id="add-punchlist">
-	<%= nested_form_for @punchlist_item, :url => {:action => :worklist_item, :multipart => true }, :remote => true, :method => :post do |f| %>
+	<%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :remote => true, :method => :post do |f| %>
 		<tr><td><h3>Add a new Punchlist item</h3></td></tr>
 		<tr><td><%= f.text_field :body, :placeholder => "Describe the work item" %></td></tr>
 		<tr><td><%= f.text_field :location, :placeholder => "Add a location (optional)" %></td></tr>
 		<tr><td><span style="margin-right:20px">Select an assignee</span><%= f.select :assignee, options_for_select(current_user.company.users.collect{|u| u.full_name}) %></td></tr>
-		<tr><td><span style="margin-right:20px">Add a photo</span>
-			<%= f.fields_for :photos, @punchlist_item.photos.build do |photo| %>
+		<tr><td><span style="margin-right:20px"><h4>Add a photo</h4></span>
+			<%= f.fields_for :photos do |photo| %>
 				<%= photo.file_field :image %>
 				<%= photo.hidden_field :project_id, :value => @project.id %>
 				<%= photo.hidden_field :source, :value => "Work List" %>

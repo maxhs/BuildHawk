@@ -9,6 +9,7 @@
 	<table class="table table-bordered table-responsive" id="users">
 		<thead>
 			<tr>
+				<th>Photo</th>
 				<th>Name</th>
 				<th>Assignment</th>
 				<th>Completed</th>
@@ -20,6 +21,11 @@
 			<% if @items && @items.count %>
 				<% @items.each do |item| %>
 					<tr>
+						<td style="width:100px;"><% if item.photos && item.photos.count > 0 %>
+							<% photo = item.photos.where("image_file_name IS NOT NULL").first %>
+							<%=image_tag(photo.image.url(:thumb)) %>
+							<% end %>
+						</td>
 						<td><%= link_to item.body, edit_worklist_item_project_path(@project, :item_id => item.id), :remote => true %> </td>
 						<td>
 							<% if item.assignee_id %>

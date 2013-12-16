@@ -13,7 +13,7 @@ class ChecklistItem < ActiveRecord::Base
 
     after_commit :check_completed
 
-    accepts_nested_attributes_for :photos, :allow_destroy => true#, :reject_if => lambda { |c| c[:image_file_name].blank? }
+    accepts_nested_attributes_for :photos
 
   	acts_as_api
 
@@ -29,7 +29,6 @@ class ChecklistItem < ActiveRecord::Base
       if status == "Completed" && completed_date == nil
         self.update_attribute :completed_date, Date.today
         if subcategory.completed_count != 0 && subcategory.completed_count == subcategory.item_count
-          puts "marking subcategory completed"
           subcategory.update_attribute :completed_date, Date.today
         end
         #TODO create a completed notification

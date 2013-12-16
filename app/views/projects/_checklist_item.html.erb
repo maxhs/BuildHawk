@@ -19,23 +19,23 @@
 					
 				</td></tr>
 				<% if @checklist_item.status == "Completed" && @checklist_item.completed_by_user %>
-					<tr><td>
+					<tr><td style="text-align:center;">
 						<h4>Completed By:</h4>
 						<%= @checklist_item.completed_by_user.full_name %>
 					</td></tr>
 				<% else %>
-					<tr><td>
+					<tr><td style="text-align:center;padding-top:20px;">
 						<h4>Critical Date:</h4>
 						<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
 
-								<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+								<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :style=>"margin:0 auto;", :class =>"date-input", :id => "dp" %>
 								<span class="add-on"><i class="icon-th"></i></span>
 					
 						</div>
 					</td></tr>
 				<% end %>
-				<% if @checklist_item.photos %>
-					<tr><td style="padding:30px 0;">
+				<% if @checklist_item.photos && @checklist_item.photos.count > 0 %>
+					<tr><td style="padding:30px 0;padding-top:20px;">
 						<% @checklist_item.photos.each do |p| %>
 							<% if p.image_file_name%>
 								<%= link_to p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
@@ -46,9 +46,9 @@
 					</td></tr>
 				<% end %>
 
-				<tr><td><h4>Add a photo:</h4>
+				<tr><td style="text-align:center;padding-top:20px;"><h4>Add a photo:</h4>
 					<%= f.fields_for :photos, @checklist_item.photos.build do |photo| %>
-						<%= photo.file_field :image %>
+						<%= photo.file_field :image, :style=>"margin:0 auto;" %>
 						<%= photo.hidden_field :project_id, :value => @project.id %>
 						<% if @checklist_item.id %><%= photo.hidden_field :checklist_item_id, :value => @checklist_item.id %><% end %>
 						<%= photo.hidden_field :source, :value => "Checklist" %>

@@ -227,6 +227,7 @@ class ProjectsController < ApplicationController
 
 	def new_worklist_item
 		@punchlist_item = PunchlistItem.new
+		@punchlist_item.photos.build
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -273,10 +274,6 @@ class ProjectsController < ApplicationController
 	def update_worklist_item
 		@punchlist_item = PunchlistItem.find params[:punchlist_item_id]
 		@punchlist_item.update_attributes params[:punchlist_item]
-		# if params[:punchlist_item][:status] == "Completed"
-		# 	puts "should be updating completed by user"
-		# 	@punchlist_item.update_attribute :completed_by_user_id, current_user.id
-		# end
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/worklist"}
