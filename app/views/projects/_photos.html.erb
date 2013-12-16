@@ -4,15 +4,15 @@
 		<% @photos.each do |photo| %>
 			<% if photo.image_file_name %>
 				<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-					<div style="width:120px;display:inline-block;">
+					<div style="width:220px;text-align:center;display:inline-block;">
 						<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
-						<% if photo.source %><%= photo.source%> <% end %>asdas 
+						<% if photo.source %><%= photo.source%> <% end %>
 					</div>
 				<% end %>
 			<% end %>
 		<% end %>
 
-		<%= link_to "Add photo", new_photo_project_path(@project), :remote => true %>
+		<tr><td><%= link_to "Add photo", new_photo_project_path(@project), :remote => true %></td></tr>
 	</table>
 
 	<script type="text/javascript">
