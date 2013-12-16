@@ -73,7 +73,7 @@ class Checklist < ActiveRecord::Base
     def assign_items
         if Rails.env.production?
             puts "assigning items after create asynchronously"
-            Resque.enqueue(AssignItems,id)
+            Resque.enqueue(AssignItems,self)
         else
             puts "local env"
             checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
