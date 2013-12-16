@@ -3,16 +3,16 @@
 		<h2>Documents</h2>
 		<% @photos.each do |photo| %>
 			<% if photo.image_file_name %>
-				<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-					<div style="width:220px;text-align:center;display:inline-block;">
+				<div style="width:220px;text-align:center;display:inline-block;">
+					<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
 						<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
-						<% if photo.source %><%= photo.source%> <% end %>
-					</div>
-				<% end %>
+					<% end %>
+					<% if photo.source %><%= photo.source%> <% end %>
+				</div>
 			<% end %>
 		<% end %>
 
-		<tr><td><%= link_to "Add photo", new_photo_project_path(@project), :remote => true %></td></tr>
+		<tr><td style="padding-top:27px;text-align:center;"><%= link_to "Add photo", new_photo_project_path(@project), :style=>"margin:0 auto;",:remote => true %></td></tr>
 	</table>
 
 	<script type="text/javascript">

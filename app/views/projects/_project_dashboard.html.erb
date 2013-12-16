@@ -30,12 +30,12 @@
 			<div class="col-md-12" style="overflow: hidden;">
 				<% @recent_photos.each do |photo| %>
 					<% if photo.image_file_name%>
-						<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-							<div style="float: left; width: auto; margin: 0px 5px 10px 0px;">
-								<%= image_tag photo.image.url(:small), :class=>"dashboard-photo" %>
-								<span><%= photo.source %></span>
-							</div>
-						<% end %>
+						<div style="width:220px;text-align:center;display:inline-block;">
+							<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
+								<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
+							<% end %>
+							<% if photo.source %><%= photo.source%> <% end %>
+						</div>
 					<% end %>
 				<% end %>
 			</div>
