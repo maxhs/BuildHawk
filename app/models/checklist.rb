@@ -53,10 +53,10 @@ class Checklist < ActiveRecord::Base
                 row = Hash[[header, spreadsheet.row(i)].transpose]
                 category = @new_core.categories.where(:name => row[category_title]).first_or_create
                 subcategory = category.subcategories.where(:name => row[subcategory_title]).first_or_create
-                item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index if row[type_title] && row[item_title]
+                item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index if row[type_title] || row[item_title]
                 item_index += 1
     	    end
-    	    @new_core.save!
+    	    @new_core.save
     	end
 
     	def open_spreadsheet(file)
