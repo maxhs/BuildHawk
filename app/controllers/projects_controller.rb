@@ -90,7 +90,7 @@ class ProjectsController < ApplicationController
 	def destroy
 		@project.update_attribute :company_id, nil
         @project.background_destroy
-		redirect_to users_admin_index_path
+		redirect_to projects_path
 	end
 
 	def checklist
