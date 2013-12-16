@@ -1,6 +1,6 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
-    
+
     attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
     				        :categories, :company, :company_id
   	belongs_to :project
@@ -74,7 +74,7 @@ class Checklist < ActiveRecord::Base
 
     def assign_items
         puts "assigning items after create asynchronously"
-        Resque.enqueue_at(Time.now,AssignItems,id)
+        Resque.enqueue(AssignItems,id)
     end
 
 	acts_as_api
