@@ -57,8 +57,8 @@ class Checklist < ActiveRecord::Base
                 item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index if row[type_title] && row[item_title]
                 item_index += 1
     	    end
-            
-          @new_core.update_attribute :core, true
+            Checklist.where(:core => true).each do |c| c.update_attribute :core, false end
+            @new_core.update_attribute :core, true
     	    @new_core.save
     	end
 
@@ -73,8 +73,14 @@ class Checklist < ActiveRecord::Base
     end
 
     def assign_items
-        puts "assigning items after create asynchronously"
-        Resque.enqueue(AssignItems,id)
+        if Rails.env.production?
+            puts "assigning items after create asynchronously"
+            Resque.enqueue(AssignItems,id)
+        else
+            puts "local env"
+            checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
+            self.save!
+        end 
     end
 
 	acts_as_api
