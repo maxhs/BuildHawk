@@ -29,7 +29,7 @@ class Category < ActiveRecord::Base
         i.update_attribute :order_index, sub_index
         sub_index += 1
       end
-      checklist_items << subcategories.map(&:checklist_items).flatten
+      #checklist_items << subcategories.map(&:checklist_items).flatten
     end
 
   	acts_as_api

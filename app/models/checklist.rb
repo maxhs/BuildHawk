@@ -58,7 +58,7 @@ class Checklist < ActiveRecord::Base
     	    end
             
             @new_core.update_attribute :core, true
-    	    @new_core.save_without_delay
+    	    @new_core.save
     	end
         #handle_asynchronously :import    
 
@@ -74,7 +74,7 @@ class Checklist < ActiveRecord::Base
 
     def assign_items
         puts "assigning items after create"
-        checklist_items << categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+        #checklist_items << categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
     end
 
 	acts_as_api
