@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
 	  attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :subcategories_attributes, :order_index
   	belongs_to :checklist
   	has_many :subcategories, :dependent => :destroy
@@ -8,19 +9,17 @@ class Category < ActiveRecord::Base
     after_create :order_indices
 
     def item_count
-      if checklist_items.count > 0
-        checklist_items.count
-      else
-        subcategories.includes(:checklist_items).count
-      end
+      subcategories.includes(:checklist_items).count if subcategories
     end
 
     def completed_count
-      if checklist_items.count > 0
-        checklist_items.where(:status => "Completed").count
-      else
-        subcategories.includes(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
-      end
+      subcategories.includes(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
+    end
+
+    def progress_percentage
+      items = subcategories.includes(:checklist_items) 
+      completed_items = items.where(:checklist_items => {:status => "Completed"})
+      number_to_percentage(completed_items.count/items.count.to_f*100,:precision=>1)
     end
 
     def order_indices

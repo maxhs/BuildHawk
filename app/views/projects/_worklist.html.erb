@@ -21,9 +21,10 @@
 			<% if @items && @items.count %>
 				<% @items.each do |item| %>
 					<tr>
-						<td style="width:100px;"><% if item.photos && item.photos.count > 0 %>
-							<% photo = item.photos.where("image_file_name IS NOT NULL").first %>
-							<% if photo %><%=image_tag(photo.image.url(:thumb)) %><% end %>
+						<td style="width:100px;">
+							<% if item.photos && item.photos.count > 0 %>
+								<% photo = item.photos.where("image_file_name IS NOT NULL").first %>
+								<% if photo %><%=image_tag(photo.image.url(:thumb)) %><% end %>
 							<% end %>
 						</td>
 						<td><%= link_to item.body, edit_worklist_item_project_path(@project, :item_id => item.id), :remote => true %> </td>
@@ -43,7 +44,7 @@
 					</tr>
 				<% end %>
 			<% else %>
-				<tr><td colspan="4" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No Work List Items</h4></td></tr>
+				<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No Work List Items</h4></td></tr>
 			<% end %>
 		</tbody>
 	</table>
