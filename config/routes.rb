@@ -67,8 +67,10 @@ Buildhawk::Application.routes.draw do
       get :edit_checklist_item
       post :worklist_item
       get :checklist
-      post :create_checklist_item
       get :checklist_item
+      get :category
+      post :update_category
+      post :create_checklist_item
       get :reports
       get :new_report
       get :show_report

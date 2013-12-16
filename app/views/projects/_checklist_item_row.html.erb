@@ -3,7 +3,7 @@
 	<% if s.order_index == 0 %>
 		<% c = s.category %>
 		<div class="category">
-			<h1 style="display:inline-block"><%=c.name%></h1><span style="padding-left:1em;color:#aaa;">(<%=c.completed_count%> of <%=c.checklist_items_count%>)</span>
+			<h1 style="display:inline-block"><%=c.name%></h1><%= link_to "Edit Category", category_project_path(@project, :category_id => c.id), :style=>"margin-left:20px;", :remote => true %>
 		</div>
 	<% end %>
 	<div class="subcategory">

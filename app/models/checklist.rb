@@ -58,7 +58,7 @@ class Checklist < ActiveRecord::Base
                 item_index += 1
     	    end
             
-            @new_core.update_attribute :core, true
+          @new_core.update_attribute :core, true
     	    @new_core.save
     	end
 

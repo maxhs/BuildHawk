@@ -130,6 +130,37 @@ class ProjectsController < ApplicationController
 		render :checklist
 	end
 
+	def category
+		@category = Category.find params[:category_id]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :category
+		end
+	end
+
+	def update_category
+		@category = Category.find params[:category_id]
+		if params[:category][:milestone_date].present?
+			datetime = Date.strptime(params[:category][:milestone_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
+			@category.update_attribute :milestone_date, datetime
+		end
+		if params[:category][:name].present?
+			@category.update_attribute :name, params[:category][:name]
+		end
+		
+		@checklist = @project.checklist
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "projects/checklist" }
+			end
+		else
+			render :checklist
+		end
+	end
+
 	def worklist
 		@punchlist = @project.punchlists.first
 		@items = @punchlist.punchlist_items if @punchlist
