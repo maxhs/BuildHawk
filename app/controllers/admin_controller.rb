@@ -83,8 +83,8 @@ class AdminController < ApplicationController
 
 	def create_template
 		@company = Company.find params[:company_id]
-		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}
-		@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id  
+		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
+		@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id
 		@checklist.save!
 		@checklists = @company.checklists
 		redirect_to checklists_admin_index_path
@@ -121,13 +121,13 @@ class AdminController < ApplicationController
 		@checklist = Checklist.new
 		if params[:project][:checklist].present?
 			list = Checklist.find_by(name: params[:project][:checklist])
-			@checklist =  list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => :project_id
+			@checklist =  list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => [:project_id, :core]
 			@checklist.save!
 			puts "new checklist has #{@checklist.categories.count} categories after save"
 			params[:project].delete(:checklist)
 		else 
 			puts "did not have a checklist in the params"
-			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}
+			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
 			@checklist.save!
 		end
 		puts "checklist outside of initial find method: #{@checklist.categories.count} with id: #{@checklist.id}"

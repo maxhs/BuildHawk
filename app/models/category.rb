@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
 	  attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :subcategories_attributes, :order_index
   	belongs_to :checklist
-  	has_many :subcategories
+  	has_many :subcategories, :dependent => :destroy
     has_many :checklist_items, :dependent => :destroy
   	accepts_nested_attributes_for :subcategories, :allow_destroy => true
 

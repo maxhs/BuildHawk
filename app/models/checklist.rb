@@ -54,7 +54,7 @@ class Checklist < ActiveRecord::Base
                 row = Hash[[header, spreadsheet.row(i)].transpose]
                 category = @new_core.categories.where(:name => row[category_title]).first_or_create
                 subcategory = category.subcategories.where(:name => row[subcategory_title]).first_or_create
-                item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index
+                item = subcategory.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index if row[type_title] && row[item_title]
                 item_index += 1
     	    end
             
@@ -73,9 +73,12 @@ class Checklist < ActiveRecord::Base
     end
 
     def assign_items
-        puts "assigning items after create asynchronously"
-        Resque.enqueue(AssignItems,id)
+        puts "assigning items asynchronously"
+        checklist_items << categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+        #puts "assigning items after create asynchronously"
+        #Resque.enqueue(AssignItems,id)
     end
+    handle_asynchronously :assign_items
 
 	acts_as_api
 

@@ -34,14 +34,13 @@ class ProjectsController < ApplicationController
 		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
 		if @project.checklist 
-			items = @project.checklist.items
+			@checklist = @project.checklist
+			items = @checklist.checklist_items
 			@item_count = items.count
 
 			@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
 			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
 			@recent_photos = @project.photos.last(5)
-
-			@checklist = @project.checklist
 		end
 		if request.xhr?
 			respond_to do |format|
@@ -89,7 +88,7 @@ class ProjectsController < ApplicationController
 	end 
 
 	def destroy
-		puts "deleting project in background"
+		@project.update_attribute :company_id, nil
         @project.background_destroy
 		redirect_to users_admin_index_path
 	end
@@ -150,7 +149,7 @@ class ProjectsController < ApplicationController
 		if params[:category][:name].present?
 			@category.update_attribute :name, params[:category][:name]
 		end
-		
+
 		@checklist = @project.checklist
 		if request.xhr?
 			respond_to do |format|
