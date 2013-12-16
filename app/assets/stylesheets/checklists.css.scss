@@ -26,14 +26,14 @@
 	}
 
 	.row {
-		line-height:50px;
+		padding:20px 0;
 		border-bottom:1px solid #eee;
 		font-size:15px;
 	}
 
 	.row.checklist-item.completed div {
-		background:#f7f7f7;
-		color:#bbb;
+		
+		div {color:#bbb;}
 	}
 
 	.row.checklist-item.not-applicable div {

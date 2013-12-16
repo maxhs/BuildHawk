@@ -20,19 +20,8 @@
 			<div class="col-md-1" style="text-align: center;">Edit</div>	
 		</div>
 
-		<% @checklist.categories.each do |c| %>
-			<div class="category">
-				<h1><%= c.name %></h1>
-			</div>
-			<% c.subcategories.each do |s| %>
-				<div class="subcategory">
-					<h2><%=s.name%></h2>
-				</div>
-				
-				<%= render :partial => 'admin/checklist_item_row', :collection => s.checklist_items, :as => :item, cache: true %>
-				
-			<% end %>
-		<% end %>
+		<%= render :partial => 'admin/checklist_item_row', :collection => @checklist.checklist_items, :as => :item, cache: true %>		
+		
 	</div>
 <% else %>
 	<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>	

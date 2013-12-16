@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
     has_many :checklist_items, :dependent => :destroy
   	accepts_nested_attributes_for :subcategories, :allow_destroy => true
 
-    after_create :assign_items
+    after_create :order_indices
 
     def item_count
       if checklist_items.count > 0
@@ -23,7 +23,8 @@ class Category < ActiveRecord::Base
       end
     end
 
-    def assign_items
+    def order_indices
+      puts "should be ordering categories"
       sub_index = 0
       subcategories.order('name').each do |i|
         i.update_attribute :order_index, sub_index

@@ -4,7 +4,7 @@ class Subcategory < ActiveRecord::Base
   	has_many :checklist_items, :dependent => :destroy
 
     after_save :check_completed
-    after_create :assign_indices
+    after_create :order_indices
 
     def item_count
       checklist_items.count
@@ -20,7 +20,7 @@ class Subcategory < ActiveRecord::Base
       end
     end
 
-    def assign_indices
+    def order_indices
       item_index = 0
       checklist_items.each do |i|
         i.update_attribute :order_index, item_index

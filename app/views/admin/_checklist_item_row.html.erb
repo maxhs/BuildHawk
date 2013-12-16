@@ -1,3 +1,16 @@
+<% if item.order_index == 0 %>
+	<% s = item.subcategory %>
+	<% if s.order_index == 0 %>
+		<% c = s.category %>
+		<div class="category">
+			<h1 style="display:inline-block"><%=c.name%></h1>
+		</div>
+	<% end %>
+	<div class="subcategory">
+		<h3 style="display:inline-block"><%=s.name%></h3>
+	</div>
+<% end %>
+
 <%= link_to item_editor_admin_index_path(@project, :item_id => item.id), :remote => true do %>
 	<div class="row checklist-item">
 		<div class="col-md-7 checklist-body" style="margin-left:20px;margin-right:-20px;">
