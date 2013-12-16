@@ -25,5 +25,11 @@ module Buildhawk
     # Precompile additional assets
     config.assets.precompile += %w( .png .jpg .jpeg .svg .eot .woff .ttf )
 
+    config.action_mailer.delivery_method   = :postmark
+    config.action_mailer.postmark_settings = { :api_key => ENV['POSTMARK_API_KEY'] }
+    config.action_mailer.default_url_options = { host: "www.buildhawk.com" }
+
+    ActionMailer::Base.default :from => 'will@buildhawk.com'
+
   end
 end

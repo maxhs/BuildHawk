@@ -43,7 +43,7 @@ Buildhawk::Application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :info
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -88,7 +88,7 @@ Buildhawk::Application.configure do
   }
   
   #for the mailer
-  config.action_mailer.default_url_options = { :host => 'www.writeverses.com' }
+  config.action_mailer.default_url_options = { :host => 'www.buildhawk.com' }
 
   # Configure mailer SMTP settings
   config.action_mailer.delivery_method = :smtp
