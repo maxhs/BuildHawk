@@ -8,6 +8,8 @@ class Category < ActiveRecord::Base
 
     after_create :order_indices
 
+    default_scope { order('order_index') }
+
     def item_count
       subcategories.includes(:checklist_items).count if subcategories
     end
@@ -23,7 +25,6 @@ class Category < ActiveRecord::Base
     end
 
     def order_indices
-      puts "should be ordering categories"
       sub_index = 0
       subcategories.order('name').each do |i|
         i.update_attribute :order_index, sub_index

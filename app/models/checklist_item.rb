@@ -3,8 +3,7 @@ class ChecklistItem < ActiveRecord::Base
                     :photos, :photos_attributes, :checklist_id, :checklist, :order_index, :item_index
   	
   	belongs_to :subcategory, :counter_cache => true
-    #belongs_to :category, :counter_cache => true
-    belongs_to :checklist#, :counter_cache => true
+    belongs_to :checklist
     belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
   	has_many :comments, :dependent => :destroy
@@ -45,8 +44,8 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :critical_date
   		t.add :completed_date
   		t.add :status
-      t.add :subcategory_name
-      t.add :category_name
+      #t.add :subcategory_name
+      #t.add :category_name
       t.add :photos
       t.add :comments
   	end

@@ -92,9 +92,8 @@ class Checklist < ActiveRecord::Base
 	end
 
     api_accessible :checklist do |t|
-        #t.add :categories
-        #t.add :name
-        t.add :items
+        t.add :categories
+        t.add :name
     end
 
 end
