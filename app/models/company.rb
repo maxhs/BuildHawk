@@ -13,13 +13,11 @@ class Company < ActiveRecord::Base
   		t.add :id
   		t.add :name
   		t.add :projects
-  		t.add :users
   	end
 
   	api_accessible :projects do |t|
   		t.add :id
       t.add :name
-      t.add :users
   	end
 
   	api_accessible :user do |t|
