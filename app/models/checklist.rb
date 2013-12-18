@@ -78,6 +78,11 @@ class Checklist < ActiveRecord::Base
         #    puts "local env"
             checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
         #end 
+        sub_index = 0
+        categories.sort_by{|c|c.name.to_i}.each do |i|
+            i.update_attribute :order_index, sub_index
+            sub_index += 1
+        end
     end
 
 	acts_as_api

@@ -26,7 +26,7 @@ class Category < ActiveRecord::Base
 
     def order_indices
       sub_index = 0
-      subcategories.order('name').each do |i|
+      subcategories.sort_by{|c|c.name.to_i}.each do |i|
         i.update_attribute :order_index, sub_index
         sub_index += 1
       end
