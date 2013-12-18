@@ -42,6 +42,12 @@ class User < ActiveRecord::Base
       company.users.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :photo => user.photos.first}}
     end
 
+    def photo
+      if photos && photos.count > 0
+        photos.first
+      end
+    end
+
   	acts_as_api
 
   	api_accessible :user do |t|
@@ -53,6 +59,7 @@ class User < ActiveRecord::Base
 	    t.add :phone_number
       t.add :authentication_token
       t.add :coworkers
+      t.add :photo
   	end
 
   	api_accessible :feed do |t|
