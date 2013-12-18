@@ -21,7 +21,7 @@
 	<tbody>
 		<% @users.each do |user| %>
 			<tr class="user-row">
-				<td style="width:100px;"><% if user.photos && user.photos.count > 0 %><%= image_tag user.photos.first.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
+				<td style="width:100px;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
 				<td class="user-name"><%= link_to user.full_name, edit_user_uber_admin_index_path(:user_id => user.id), :remote => true %></td>
 				<td><%= user.email %></td>
 				<td><%= parse_time user.created_at %></td>
