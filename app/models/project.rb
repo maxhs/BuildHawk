@@ -29,7 +29,7 @@ class Project < ActiveRecord::Base
     end
 
     def progress
-      number_to_percentage(checklist.completed_count*100/checklist.item_count.to_f, :precision => 1) if checklist
+      number_to_percentage(checklist.completed_count*100/checklist.checklist_items_count.to_f, :precision => 1) if checklist
     end
 
     def recent_documents
@@ -71,7 +71,7 @@ class Project < ActiveRecord::Base
     end
 
     api_accessible :dashboard do |t|
-      #t.add :progress, :if => :has_checklist?
+      t.add :progress, :if => :has_checklist?
       #t.add :upcoming_items, :if => :has_checklist?
       #t.add :recently_completed, :if => :has_checklist?
       #t.add :recent_documents, :if => :has_checklist?
