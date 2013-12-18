@@ -25,7 +25,7 @@ class Project < ActiveRecord::Base
     end
 
     def recently_completed
-      checklist.checklist_items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5) if checklist
+      checklist.checklist_items.where(:status => "Completed").sort_by(&:completed_date).last(5) if checklist
     end
 
     def progress
