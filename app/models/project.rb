@@ -21,11 +21,11 @@ class Project < ActiveRecord::Base
     end
 
     def upcoming_items
-      checklist.item_array.select{|i| i.critical_date}.sort_by(&:critical_date).last(5) if checklist
+      checklist.checklist_items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5) if checklist
     end
 
     def recently_completed
-      checklist.item_array.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5) if checklist
+      checklist.checklist_items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5) if checklist
     end
 
     def progress
