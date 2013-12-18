@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
     attr_accessible :first_name, :last_name, :user_id, :email, :password, :phone_number, :push_permissions, :email_permissions,
-    				:full_name, :company_id, :company_attributes, :photos_attributes, :password_confirmation, :admin, :uber_admin,
+    				:full_name, :company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin,
             :authentication_token
 
     belongs_to :company
@@ -9,14 +9,22 @@ class User < ActiveRecord::Base
   	has_many :projects, :through => :project_users 
     has_many :report_users, :dependent => :destroy
     has_many :reports, :through => :report_users
-    has_many :photos, :dependent => :destroy
 
     has_many :apn_registrations, :dependent => :destroy
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable, :token_authenticatable #, :rememberable
 
   	accepts_nested_attributes_for :company, :allow_destroy => true
-    accepts_nested_attributes_for :photos, :allow_destroy => true
+
+    has_attached_file :image, 
+                      :styles => { :medium => ["600x600#", :jpg],
+                                   :small  => ["200x200#", :jpg],
+                                   :thumb  => ["100x100#", :jpg]
+                       },
+                      :storage        => :s3,
+                      :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
+                      :url            => "buildhawk.s3.amazonaws.com",
+                      :path           => "photo_image_:id_:style.:extension"
 
     validates_presence_of :first_name
     validates_presence_of :last_name
@@ -39,12 +47,24 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :photo => user.photos.first}}
+      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
     end
 
-    def photo
-      if photos && photos.count > 0
-        photos.first
+    def url500
+      if image_file_name
+        image.url(:medium)
+      end
+    end
+
+    def url200
+      if image_file_name
+        image.url(:small)
+      end
+    end
+
+    def url100
+      if image_file_name
+        image.url(:small)
       end
     end
 
@@ -59,7 +79,8 @@ class User < ActiveRecord::Base
 	    t.add :phone_number
       t.add :authentication_token
       t.add :coworkers
-      t.add :photo
+      t.add :url100
+      t.add :url200
   	end
 
   	api_accessible :feed do |t|
