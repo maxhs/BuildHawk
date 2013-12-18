@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
 	
   	end
 
-    api_accessible :projects do |t|
+    api_accessible :projects, :extend => :user do |t|
 
     end
 
