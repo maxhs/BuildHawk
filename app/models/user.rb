@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_namy => user.full_name, :email => :user.email}}
+      company.users.map{|user| {:full_namy => user.full_name, :email => user.email}}
     end
 
   	acts_as_api
