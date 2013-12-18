@@ -9,7 +9,15 @@
 				<%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :include_blank => false, :multiple => true %>
 			</td></tr>
 			<% @report.photos.each do |photo| %>
-				<% if photo.image_file_name %><tr><td style="padding:7px;"><%= image_tag photo.image.url(:small) %><% end %>
+				<% if photo.image_file_name %>
+					<tr><td style="padding:7px;">
+						<div style="width:220px;text-align:left;display:inline-block;">
+							<%= image_tag photo.image.url(:small) %>
+							<div>Date: <%= photo.created_date%> </div>
+							<% if photo.source %><div>Source: <%= photo.source%></div> <% end %>
+						</div>
+					</td></tr>
+				<% end %>
 			<% end %>
 			<tr><td style="padding:7px;"><h4>Add a photo</h4>
 				<%= f.fields_for :photos, @report.photos.build do |photo| %>
