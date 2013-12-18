@@ -60,7 +60,6 @@ class Project < ActiveRecord::Base
   		t.add :name
   		t.add :address
   		t.add :company
-  		t.add :checklist, :if => :has_checklist?
   		t.add :punchlists
       t.add :active
       t.add :users
