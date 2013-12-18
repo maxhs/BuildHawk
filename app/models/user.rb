@@ -47,9 +47,6 @@ class User < ActiveRecord::Base
 	    t.add :full_name
 	    t.add :email
 	    t.add :phone_number
-	    t.add :company
-	    t.add :projects
-	    t.add :company
       t.add :authentication_token
   	end
 
