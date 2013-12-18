@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
+      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100} unless user.id == self.id}
     end
 
     def url500
