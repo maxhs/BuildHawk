@@ -23,7 +23,7 @@
 	<tbody>
 		<% @users.each do |user| %>
 			<tr>
-				<td><% if user.photos && user.photos.count > 0 %><%= image_tag user.photos.first.image.url(:small), :class =>"admin-user-pic" %><% end %></td>
+				<td><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
 				<td><%= user.full_name %></td>
 				<td><%= user.email %></td>
 				<td><%= parse_time user.created_at%></td>
