@@ -79,7 +79,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#dp").datepicker();
+		$("#dp").datepicker({
+			clearBtn:true,
+			autoclose:true
+		});
 		Shadowbox.clearCache();
 	    Shadowbox.setup(".shadow-photo", {});
 	});
