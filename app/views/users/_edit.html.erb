@@ -11,14 +11,14 @@
 		<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (if changing)", :class=>"tt-hint form-control" %></td></tr>
 		<tr><td style="padding:10px 0;">Email Permissions? <%= f.check_box :email_permissions %></td></tr>
 		<tr><td style="padding:10px 0;">Push Permissions? <%= f.check_box :push_permissions %></td></tr>
-		<% if @user.photos && @user.photos.count > 0 %><tr><td><%= image_tag @user.photos.first.image.url(:medium), :class => "user-pic" %><% end %>
+		<% if @user.image_file_name %><tr><td><%= image_tag @user.image.url(:medium), :class => "user-pic" %><% end %>
 
 		</td></tr>
 		<tr><td>
-			<%= f.fields_for @user.photos.build do |p| %>
-				<%= p.file_field :image %>
-				<%= hidden_field_tag :user_id, @user.id %>
-			<% end %>
+
+				<%= f.file_field :image %>
+
+
 		</td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
 	<% end %>

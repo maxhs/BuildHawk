@@ -24,7 +24,6 @@ class UsersController < ApplicationController
 
 	def edit
 		@user = current_user
-		@user.build_photos
 	end
 
 	def show
