@@ -52,7 +52,6 @@ class User < ActiveRecord::Base
 	    t.add :email
 	    t.add :phone_number
       t.add :authentication_token
-      t.add :coworkers
   	end
 
     api_accessible :company do |t|
