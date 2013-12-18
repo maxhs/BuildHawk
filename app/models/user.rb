@@ -51,6 +51,16 @@ class User < ActiveRecord::Base
       t.add :company
   	end
 
+    api_accessible :company do |t|
+      t.add :id
+      t.add :first_name
+      t.add :last_name
+      t.add :full_name
+      t.add :email
+      t.add :phone_number
+      t.add :authentication_token
+    end
+
   	api_accessible :feed do |t|
 	
   	end

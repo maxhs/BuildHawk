@@ -22,6 +22,7 @@ class Company < ActiveRecord::Base
 
   	api_accessible :user do |t|
   		t.add :name
+      t.add :users
   	end
 
     api_accessible :dashboard do |t|
