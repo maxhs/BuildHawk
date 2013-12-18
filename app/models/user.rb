@@ -38,10 +38,6 @@ class User < ActiveRecord::Base
       password.present?
     end
 
-    def coworkers
-      company.users
-    end
-
   	acts_as_api
 
   	api_accessible :user do |t|

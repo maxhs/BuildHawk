@@ -62,7 +62,6 @@ class Project < ActiveRecord::Base
   		t.add :company
   		t.add :punchlists
       t.add :active
-      t.add :users
   	end
 
     api_accessible :user do |t|
