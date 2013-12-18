@@ -38,6 +38,14 @@ class Checklist < ActiveRecord::Base
         end
   	end
 
+    def upcoming_items
+        items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
+    end
+
+    def recently_completed
+        items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
+    end
+
     class << self
       	def import(file)
             spreadsheet = open_spreadsheet(file)
