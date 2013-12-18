@@ -33,7 +33,7 @@ class Checklist < ActiveRecord::Base
         if checklist_items.count > 0
             checklist_items
         else 
-  		    checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
+  		    checklist_items << categories.sort_by{|c|c.name.to_i}.map(&:subcategories).flatten.map(&:checklist_items).flatten
             return checklist_items
         end
   	end
@@ -84,7 +84,7 @@ class Checklist < ActiveRecord::Base
         #    Resque.enqueue(AssignItems,self)
         #else
         #    puts "local env"
-            checklist_items << categories.order('name').map(&:subcategories).flatten.map(&:checklist_items).flatten
+            checklist_items << categories.sort_by{|c|c.name.to_i}.map(&:subcategories).flatten.map(&:checklist_items).flatten
         #end 
         sub_index = 0
         categories.sort_by{|c|c.name.to_i}.each do |i|
