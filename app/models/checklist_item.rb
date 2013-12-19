@@ -38,6 +38,14 @@ class ChecklistItem < ActiveRecord::Base
       end
     end
 
+    def project_id
+      if checklist
+        checklist.project.id
+      else
+        subcategory.category.checklist.project.id
+      end
+    end
+
   	api_accessible :projects do |t|
   		t.add :id
       t.add :body
@@ -51,7 +59,7 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     api_accessible :dashboard, :extend => :projects do |t|
-
+      t.add :project_id
     end
 
     api_accessible :detail, :extend => :projects do |t|
