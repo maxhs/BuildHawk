@@ -39,7 +39,7 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
-	def orig
+	def original
 		if image_file_name
 			image.url(:original)
 		end
