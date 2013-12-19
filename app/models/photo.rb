@@ -29,13 +29,19 @@ class Photo < ActiveRecord::Base
 
 	def url100
 		if image_file_name
-			image.url(:small)
+			image.url(:thumb)
 		end
 	end
 
-	def url1000
+	def url_large
 		if image_file_name
 			image.url(:large)
+		end
+	end
+
+	def orig
+		if image_file_name
+			image.url(:original)
 		end
 	end
 
@@ -48,7 +54,8 @@ class Photo < ActiveRecord::Base
 	end
 
 	api_accessible :dashboard do |t|
-		t.add :url1000
+		t.add :url_large
+		t.add :original
 		t.add :url200
 		t.add :url100
 		t.add :source
