@@ -5,9 +5,9 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
     	@punchlist_item.update_attributes params[:punchlist_item]
         if params[:status].present?
             if params[:status] == "Completed"
-                @punchlist_item.update_attributes :completed => true, :completed_at Time.now
+                @punchlist_item.update_attributes :completed => true, :completed_at => Time.now
             else
-                @punchlist_item.update_attributes :completed => false, :completed_at nil
+                @punchlist_item.update_attributes :completed => false, :completed_at => nil
             end
         end
     	respond_to do |format|
