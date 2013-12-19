@@ -1,38 +1,13 @@
 <script>
 	$('#nav-projects a').addClass('current-page');
 </script>
-	<div class="row row-offcanvas row-offcanvas-left">
-		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
-			<div class="well sidebar-nav projects">
-				<div class="sidebarProjects">
-				<% @projects.each do |project| %>
-					<% if project.checklist && project.checklist.item_count > 0 %>
-						<div><%= link_to "#{project.name} - (#{number_to_percentage(project.checklist.completed_count.to_f/project.checklist.item_count*100, :precision =>1)})" , project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
-					<% else %>
-						<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
-					<% end %>
-				<% end %>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-9" id="main">
-						<!-- Fixed navbar -->
-			<div class="navbar">
-				<div class="container">
-					<ul class="nav navbar-nav">
-						<li class="nav-dashboard active"><%= link_to "Dashboard", project_path(@project), :remote => true %></li>
-						<li class="nav-checklists"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
-						<li class="nav-documents"><%= link_to "Documents", photos_project_path(@project), :remote => true %></a></li>
-						<li class="nav-reports"><%= link_to "Reports", reports_project_path(@project), :remote => true %></li>
-						<li class="nav-punchlists"><%= link_to "Worklist", worklist_project_path(@project), :remote => true %></li>
-						<% if current_user.admin %> <li class="nav-edit"><%= link_to "Edit", edit_project_path(@project), :remote => true %></li> <% end %>
-					</ul>
-				</div>
-			</div>
+<%= render :partial => "projects/sidebar" %>
 
-			<p class="pull-left visible-xs" style="margin-right: 10px;">
-				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-			</p>
-			<div id="pages">
-				<%= render :partial => "projects/checklist", :locals => {:checklist => @checklist} %>
-			</div>
+<%= render :partial => "projects/project_nav" %>
+
+	<p class="pull-left visible-xs" style="margin-right: 10px;">
+		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+	</p>
+	<div id="pages">
+		<%= render :partial => "projects/checklist", :locals => {:checklist => @checklist} %>
+	</div>
