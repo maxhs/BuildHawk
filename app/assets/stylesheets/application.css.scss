@@ -46,7 +46,7 @@ a:hover, a.current-page {
 	height: 40px;
 	text-align: center;
 	position:fixed;
-	top: 44px;
+	top: 50px;
 	z-index:9999;
 	display:none;
 	color:#000;
@@ -367,11 +367,7 @@ body {
 	}
 
 	#pages {
-		padding:14px;
-		border:1px solid #eee;
-		border-radius:3px;
-		-webkit-border-radius:3px;
-		-moz-border-radius:3px;
+		
 
 		#login-page, #register-page, #forgot-page, #reset-page {
 			margin: 100px auto; 

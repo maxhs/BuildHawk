@@ -10,7 +10,11 @@ class ChecklistItemsController < ApplicationController
 		if params[:checklist_item][:status].present?
 			status = params[:checklist_item][:status][1]
 			params[:checklist_item].delete(:status)
-			@checklist_item.update_attribute :status, status
+			if status == "No Status"
+				@checklist_item.update_attribute :status, nil
+			else 
+				@checklist_item.update_attribute :status, status
+			end
 		end
 		@checklist_item.update_attributes params[:checklist_item]
 		if status && status == "Completed"
