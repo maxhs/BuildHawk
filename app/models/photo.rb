@@ -61,6 +61,7 @@ class Photo < ActiveRecord::Base
 		t.add :image_file_size
 		t.add :image_content_type
 		t.add :source
+		t.add :phase
 		t.add :created_at
 		t.add :user_name
 		t.add :created_date
