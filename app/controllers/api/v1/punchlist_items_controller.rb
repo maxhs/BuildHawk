@@ -3,6 +3,13 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
     def update
     	@punchlist_item = PunchlistItem.find params[:id]
     	@punchlist_item.update_attributes params[:punchlist_item]
+        if params[:status].present?
+            if params[:status] == "Completed"
+                @punchlist_item.update_attributes :completed => true, :completed_at Time.now
+            else
+                @punchlist_item.update_attributes :completed => false, :completed_at nil
+            end
+        end
     	respond_to do |format|
         	format.json { render_for_api :punchlist, :json => @punchlist_item, :root => :punchlist_item}
       	end

@@ -44,10 +44,6 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :critical_date
   		t.add :completed_date
   		t.add :status
-      #t.add :subcategory_name
-      #t.add :category_name
-      #t.add :photos
-      #t.add :comments
   	end
 
     api_accessible :checklist, :extend => :projects do |t|
@@ -56,6 +52,11 @@ class ChecklistItem < ActiveRecord::Base
 
     api_accessible :dashboard, :extend => :projects do |t|
 
+    end
+
+    api_accessible :detail, :extend => :projects do |t|
+      t.add :photos
+      t.add :comments
     end
 
 end
