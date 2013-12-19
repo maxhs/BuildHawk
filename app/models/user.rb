@@ -109,5 +109,10 @@ class User < ActiveRecord::Base
       t.add :full_name
       t.add :email
       t.add :phone_number
+      t.add :id
+    end
+
+    api_accessible :detail, :extend => :checklist do |t|
+
     end
 end
