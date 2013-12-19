@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20131219202311) do
     t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "phase"
   end
 
   add_index "checklist_items", ["subcategory_id", "checklist_id"], name: "checklist_items_ix"
@@ -148,6 +147,7 @@ ActiveRecord::Schema.define(version: 20131219202311) do
     t.integer  "report_id"
     t.integer  "punchlist_item_id"
     t.integer  "checklist_item_id"
+    t.string   "phase"
   end
 
   add_index "photos", ["report_id", "checklist_item_id", "punchlist_item_id", "user_id"], name: "photos_ix"
