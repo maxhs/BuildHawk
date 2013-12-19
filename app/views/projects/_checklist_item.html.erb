@@ -89,4 +89,19 @@
 	    	$('#dp').val('');
 	    });
 	});
+
+	$(function() {
+
+    // Action on Click
+    $( ".btn" ).click(function() {
+        $.isLoading({ text: "Loading..."});
+		        
+		        // Re-enabling event
+		        /*setTimeout( function(){ 
+		            $.isLoading( "hide" );
+		            $( "#load-overlay .demo p" ).html( "Content Loaded" )
+		                                        .addClass("alert-success"); 
+		        }, 2000 );*/
+		    });
+		});
 </script>
