@@ -65,6 +65,7 @@ class ChecklistItem < ActiveRecord::Base
     api_accessible :detail, :extend => :projects do |t|
       t.add :photos
       t.add :comments
+      t.add :category_name
     end
 
 end
