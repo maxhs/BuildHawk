@@ -3,7 +3,7 @@
 	<% if s.order_index == 0 %>
 		<% c = s.category %>
 		<div class="category">
-			<h1 style="display:inline-block"><%=c.name%></h1><%= link_to "Edit Category", category_project_path(@project, :category_id => c.id), :style=>"margin-left:20px;", :remote => true %>
+			<h1 style="display:inline-block"><%=c.name%></h1><%= link_to "Edit Phase", category_project_path(@project, :category_id => c.id), :style=>"margin-left:20px;", :remote => true %>
 		</div>
 	<% end %>
 	<div class="subcategory">

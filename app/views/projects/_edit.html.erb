@@ -15,6 +15,7 @@
 		    <tr><td style="padding:10px 0;">
 		    	<h4>Personnel Assigned:</h4>
 		    	<%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :style=>"min-height:140px;", :multiple => true %>
+		    	<div style="color:#aaa;">(&#8984; or ctrl click to deselect)</div>
 		    </td></tr>
 
 		    <% if current_user.uber_admin %>

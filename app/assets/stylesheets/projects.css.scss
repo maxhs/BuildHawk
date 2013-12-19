@@ -25,3 +25,15 @@
 		width:100%;
 	}
 }
+
+#company-dashboard {
+	.company-project {
+		height:200px;
+		border: 1px solid #e7e7e7;
+		border-radius: 4px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		margin-bottom:14px;
+		padding:14px;
+	}
+}
