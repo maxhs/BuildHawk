@@ -6,6 +6,8 @@ class Subcategory < ActiveRecord::Base
     after_save :check_completed
     after_create :order_indices
 
+    default_scope { order('order_index') }
+
     def item_count
       checklist_items.count
     end
