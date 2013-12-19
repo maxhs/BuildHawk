@@ -33,7 +33,6 @@ class ChecklistItem < ActiveRecord::Base
         #TODO create a completed notification
 
       elsif status != "Completed" && completed_date != nil
-        puts "should be getting rid of completed date"
         self.update_attributes :completed_date => nil, :completed_by_user => nil
       end
     end
@@ -52,6 +51,7 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :critical_date
   		t.add :completed_date
   		t.add :status
+      t.add :item_type
   	end
 
     api_accessible :checklist, :extend => :projects do |t|
