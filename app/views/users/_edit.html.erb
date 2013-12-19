@@ -15,10 +15,15 @@
 			<tr><td>
 				<%= image_tag @user.image.url(:medium), :class => "user-pic" %>
 			</td></tr>
+			<tr><td>
+				Replace your photo: <%= f.file_field :image %>
+			</td></tr>
+		<% else %>
+			<tr><td>
+				Add a photo: <%= f.file_field :image %>
+			</td></tr>
 		<% end %>
-		<tr><td>
-			<%= f.file_field :image %>
-		</td></tr>
+		
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
 	<% end %>
 </table>

@@ -18,17 +18,16 @@ class ChecklistItemsController < ApplicationController
 		end
 		@checklist_item.update_attributes params[:checklist_item]
 		if status && status == "Completed"
-			puts "should be updating completed by user"
 			@checklist_item.update_attribute :completed_by_user_id, current_user.id
 		end
 		@checklist = @checklist_item.subcategory.category.checklist
 		@project = @checklist.project
-		if request.xhr?
+		if request.xhr? && remotipart_submitted?
 			respond_to do |format|
 				format.js
 			end
 		else 
-			redirect_to checklist_item_project_path(@project)
+			render :update
 		end
 	end
 end

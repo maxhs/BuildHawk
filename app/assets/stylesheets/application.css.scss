@@ -31,7 +31,7 @@ a {
 }
 a:hover, a.current-page {
 	text-decoration:none;
-	color:#cc0000;
+	color:#cc0000 !important;
 }
 
 .text-success {
@@ -39,7 +39,8 @@ a:hover, a.current-page {
 }
 
 .alert, .notice {
-	font-size: 1.25em;
+	font-size: 1.2em;
+	font-weight:400;
 	line-height: 40px;
 	vertical-align: middle;
 	width:50%;
@@ -96,12 +97,14 @@ body {
 			background:transparent;
 		}
 		> li > a {
-			font-size:1.25em;
+			font-size:1.2em;
+			font-weight:300;
 			padding:15px 25px;
 		}
 
 		> a:hover {
 			background-color:transparent;
+			color:#cc0000 !important;
 		}
 
 	}

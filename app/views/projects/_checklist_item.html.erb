@@ -54,6 +54,7 @@
 				<tr><td style="text-align:center;padding-top:20px;clear:both;"><h4>Add a photo:</h4>
 					<%= f.fields_for :photos, @checklist_item.photos.build do |photo| %>
 						<%= photo.file_field :image, :style=>"margin:0 auto;" %>
+						<%= photo.hidden_field :user_id, :value => current_user.id %>
 						<%= photo.hidden_field :project_id, :value => @project.id %>
 						<% if @checklist_item.id %><%= photo.hidden_field :checklist_item_id, :value => @checklist_item.id %><% end %>
 						<%= photo.hidden_field :source, :value => "Checklist" %>

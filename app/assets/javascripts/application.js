@@ -40,13 +40,13 @@ $(document).ready(function(){
 
     if ($('#notice').text().length !== 0) {
         $('#notice').css({}).delay(500).fadeIn("normal", function() {
-            $(this).delay(2500).fadeOut();
+            $(this).delay(4000).fadeOut();
         });
     }
 
   if ($("#alert").text().length !== 0) {
     $("#alert").css({}).delay(500).fadeIn("normal", function() {
-      $(this).delay(2500).fadeOut();
+      $(this).delay(4000).fadeOut();
     });
   }
 });

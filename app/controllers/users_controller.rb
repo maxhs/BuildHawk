@@ -33,10 +33,13 @@ class UsersController < ApplicationController
 	def update
 		@user = current_user
 		@user.update_attributes params[:user] if params[:user] && current_user
-		if @user.save!
+		if @user.save
 			sign_in(current_user, :bypass => true) if params[:user][:password].present? && params[:user][:password_confirmation].present?
 			flash[:notice] = "Settings updated!"
+			render :edit
+		else
+			redirect_to edit_user_path(@user)
+			flash[:notice] = "Please make sure you've completed the form and that your password(s) are valid".html_safe
 		end
-		render :edit
 	end
 end

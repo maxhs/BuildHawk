@@ -14,7 +14,7 @@
 				<div class="col-md-2" style="text-align: center;">Completed</div>	
 			</div>
 
-			<%= render :partial => 'projects/checklist_item_row', collection: @checklist.checklist_items, :as => :item, cache: true %>
+			<%= render :partial => 'projects/checklist_item_row', :locals => {:checklist => @checklist, :project => @project}, collection: @checklist.checklist_items, :as => :item, cache: true %>
 					
 		</div>
 	<% else %>
