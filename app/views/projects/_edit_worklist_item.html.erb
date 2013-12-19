@@ -30,7 +30,7 @@
 					<%= photo.file_field :image %>
 					<%= photo.hidden_field :project_id, :value => @project.id %>
 					<% if @punchlist_item.id %><%= photo.hidden_field :punchlist_item_id, :value => @punchlist_item.id %><% end %>
-					<%= photo.hidden_field :source, :value => "Work List" %>
+					<%= photo.hidden_field :source, :value => "Worklist" %>
 				<% end %>
 			</td></tr>
 			<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>

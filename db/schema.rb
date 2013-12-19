@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20131219003825) do
   add_index "comments", ["user_id", "report_id", "checklist_item_id", "punchlist_item_id"], name: "comments_ix"
 
   create_table "companies", force: true do |t|
-    t.string   "name",           default: "", null: false
+    t.string   "name",               default: "", null: false
     t.string   "email"
     t.string   "phone_number"
     t.boolean  "pre_register"
@@ -111,6 +111,10 @@ ActiveRecord::Schema.define(version: 20131219003825) do
     t.integer  "projects_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "delayed_jobs", force: true do |t|

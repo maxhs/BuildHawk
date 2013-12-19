@@ -18,17 +18,19 @@
 				<th>Projects</th>
 				<th>Users</th>
 				<th>Created On</th>
+				<th>Edit</th>
 			</tr>
 		</thead>
 
 		<tbody>
 			<% @companies.each do |company| %>
 				<tr>
-					<td><% if company.photos && company.photos.count > 0 %><%= image_tag company.photos.first.image.url(:thumb), :class =>"uber-admin-company-pic" %><% end %></td>
+					<td><% if company.image_file_name %><%= image_tag company.image.url(:thumb), :class =>"uber-admin-company-pic" %><% end %></td>
 					<td><%= company.name %></td>
 					<td><%= company.projects.count %></td>
 					<td><%= company.users.count %></td>
 					<td><%= parse_time company.created_at %></td>
+					<td><%= link_to "Edit", edit_company_uber_admin_index_path(:company_id => company.id), :remote => true  %></td>
 				</tr>
 			<% end %>
 	</tbody>

@@ -71,11 +71,26 @@ class UberAdminController < ApplicationController
 
 	def edit_company
 		@company = Company.find params[:company_id]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :edit_company
+		end
 	end
 
 	def update_company
 		@company = Company.find params[:company_id]
 		@company.update_attributes params[:company]
+		@companies = Company.all
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :companies
+		end
 	end
 
 	def users

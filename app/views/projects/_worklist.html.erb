@@ -18,7 +18,7 @@
 		</thead>
 	
 		<tbody>
-			<% if @items && @items.count %>
+			<% if @items && @items.count > 0 %>
 				<% @items.each do |item| %>
 					<tr>
 						<td style="width:100px;">
@@ -44,7 +44,7 @@
 					</tr>
 				<% end %>
 			<% else %>
-				<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No Work List Items</h4></td></tr>
+				<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No Worklist Items</h4></td></tr>
 			<% end %>
 		</tbody>
 	</table>

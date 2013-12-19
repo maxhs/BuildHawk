@@ -55,7 +55,7 @@ Buildhawk::Application.routes.draw do
       get :core_checklist
       get :edit_company
       get :edit_user
-      put :update_company
+      post :update_company
       post :update_user
     end
   end

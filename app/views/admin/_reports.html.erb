@@ -1,1 +1,34 @@
-Reports Index
+<div id="users-page" class="page">
+<header>
+	<h2>Reports Index</h2>
+	<!--<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
+		<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
+		<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+	</div>-->
+</header>
+
+</div>
+
+<table class="table table-bordered table-responsive" id="users">
+	<thead>
+		<tr>
+			<th style="width: 60px;">Photo</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Created On</th>
+			<th>Edit</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+				<td><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
+				<td><%= user.full_name %></td>
+				<td><%= user.email %></td>
+				<td><%= parse_time user.created_at%></td>
+				<td><%= link_to "Edit", edit_user_admin_index_path(:id => user.id), :remote => true %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
