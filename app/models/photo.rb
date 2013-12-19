@@ -58,6 +58,8 @@ class Photo < ActiveRecord::Base
 		t.add :original
 		t.add :url200
 		t.add :url100
+		t.add :image_file_size
+		t.add :image_content_type
 		t.add :source
 		t.add :created_at
 		t.add :user_name
