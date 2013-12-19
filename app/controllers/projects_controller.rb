@@ -234,6 +234,8 @@ class ProjectsController < ApplicationController
 	def new_worklist_item
 		@punchlist_item = PunchlistItem.new
 		@punchlist_item.photos.build
+		@punchlist_item.build_assignee
+		@users = @project.company.users
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -244,15 +246,15 @@ class ProjectsController < ApplicationController
 	end
 
 	def worklist_item
-		@project = Project.find params[:project_id]
+		@project = Project.find params[:id]
 		if @project.punchlists.count == 0
 			@punchlist = @project.punchlists.create
 		else
 			@punchlist = @project.punchlists.first
 		end
-		if params[:punchlist_item][:assignee].present?
-			user = User.find_by(full_name: params[:punchlist_item][:assignee])
-			params[:punchlist_item].delete(:assignee)
+		if params[:punchlist_item][:assignee_attributes].present?
+			user = User.find_by(full_name: params[:punchlist_item][:assignee_attributes][:full_name])
+			params[:punchlist_item].delete(:assignee_attributes)
 		end
 		@punchlist_item = @punchlist.punchlist_items.create params[:punchlist_item]
 		@items = @punchlist.punchlist_items if @punchlist
@@ -268,6 +270,7 @@ class ProjectsController < ApplicationController
 
 	def edit_worklist_item
 		@punchlist_item = PunchlistItem.find params[:item_id]
+		@punchlist_item.build_assignee if @punchlist_item.assignee.nil?
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -279,6 +282,15 @@ class ProjectsController < ApplicationController
 
 	def update_worklist_item
 		@punchlist_item = PunchlistItem.find params[:punchlist_item_id]
+		if params[:punchlist_item][:assignee_attributes].present?
+			user = User.find_by(full_name: params[:punchlist_item][:assignee_attributes][:full_name])
+			params[:punchlist_item].delete(:assignee_attributes)
+			if user
+				@punchlist_item.update_attribute :assignee_id, user.id
+			else
+				@punchlist_item.update_attribute :assignee_id, nil
+			end
+		end
 		@punchlist_item.update_attributes params[:punchlist_item]
 		if request.xhr?
 			respond_to do |format|

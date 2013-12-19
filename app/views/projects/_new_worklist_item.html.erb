@@ -3,16 +3,20 @@
 		<tr><td><h3>Add a new Punchlist item</h3></td></tr>
 		<tr><td><%= f.text_field :body, :placeholder => "Describe the work item" %></td></tr>
 		<tr><td><%= f.text_field :location, :placeholder => "Add a location (optional)" %></td></tr>
-		<tr><td><span style="margin-right:20px">Select an assignee</span><%= f.select :assignee, options_for_select(current_user.company.users.collect{|u| u.full_name}) %></td></tr>
+		<tr><td><h4>Select an assignee</h4>
+				<%= f.fields_for :assignee do |a| %>
+					<%= a.select :full_name, @users.map(&:full_name) << "No Assignment", :class=>"assignee-select" %>
+				<% end %>
+			</td></tr>
 		<tr><td><span style="margin-right:20px"><h4>Add a photo</h4></span>
 			<%= f.fields_for :photos do |photo| %>
 				<%= photo.file_field :image %>
 				<%= photo.hidden_field :project_id, :value => @project.id %>
+				<%= photo.hidden_field :user_id, :value => current_user.id %>
 				<%= photo.hidden_field :source, :value => "Worklist" %>
 			<% end %>
 		</td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Add" %></button></td></tr>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-		<%= hidden_field_tag :project_id, @project.id %>
 	<% end %>
 </table>
