@@ -10,8 +10,7 @@ class Photo < ActiveRecord::Base
 	belongs_to :checklist_item
     
   	has_attached_file 	:image, 
-	                    :styles => { :large => ["1536x1536#", :jpg],
-	                    			 :medium => ["500x500#", :jpg],
+	                    :styles => { :large => ["1200x1200#", :jpg],
 	                                 :small  => ["200x200#", :jpg],
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },
@@ -21,12 +20,6 @@ class Photo < ActiveRecord::Base
 	                    :path           => "photo_image_:id_:style.:extension"
 
 	acts_as_api
-	
-	def url500
-		if image_file_name
-			image.url(:medium)
-		end
-	end
 
 	def url200
 		if image_file_name
@@ -56,7 +49,6 @@ class Photo < ActiveRecord::Base
 
 	api_accessible :dashboard do |t|
 		t.add :url1000
-		t.add :url500
 		t.add :url200
 		t.add :url100
 		t.add :source
