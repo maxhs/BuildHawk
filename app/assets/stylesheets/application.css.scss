@@ -282,6 +282,27 @@ input[type="submit"] {
 	color:#fff;
 }
 
+.image-block{
+	width:220px;
+	text-align:left;
+	display:inline-block;
+	padding:10px;
+	margin:10px;
+	line-height:1.3em;
+	border:1px solid #eee;
+
+	.label {
+		color:#aaa;
+		padding-right:7px;
+	}
+
+	.delete-link {
+		float:right;
+		margin:7px auto 0;
+		font-size:.9em;
+	}
+}
+
 .sidebarProjects {
 	
 	> div {

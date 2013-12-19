@@ -37,13 +37,7 @@
 					<tr><td style="padding:30px 0;padding-top:60px;clear:both;">
 						<% @checklist_item.photos.each do |p| %>
 							<% if p.image_file_name%>
-								<div style="width:220px;text-align:left;display:inline-block;">
-									<%= link_to p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-										<%= image_tag p.image.url(:small) %> 
-										<div>Date: <%= p.created_date%> </div>
-										<% if p.source %><div>Source: <%= p.source%></div> <% end %>
-									<% end %>
-								</div>
+								<%= render :partial => "image", :locals => {:p => p} %>
 							<% end %>
 						<% end %>
 					</td></tr>
@@ -91,17 +85,13 @@
 	});
 
 	$(function() {
-
-    // Action on Click
-    $( ".btn" ).click(function() {
-        $.isLoading({ text: "Loading..."});
-		        
-		        // Re-enabling event
-		        /*setTimeout( function(){ 
-		            $.isLoading( "hide" );
-		            $( "#load-overlay .demo p" ).html( "Content Loaded" )
-		                                        .addClass("alert-success"); 
-		        }, 2000 );*/
-		    });
-		});
+    	$( ".btn" ).click(function() {
+        	$.isLoading({ text: "Loading..."});     
+	        /*setTimeout( function(){ 
+	            $.isLoading( "hide" );
+	            $( "#load-overlay .demo p" ).html( "Content Loaded" )
+	                                        .addClass("alert-success"); 
+	        }, 2000 );*/
+	    });
+	});
 </script>
