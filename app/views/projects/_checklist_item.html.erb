@@ -40,7 +40,7 @@
 						<% @checklist_item.photos.each do |p| %>
 							<% if p.image_file_name%>
 								<div style="width:220px;text-align:left;display:inline-block;">
-									<%= link_to p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
+									<%= link_to p.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
 										<%= image_tag p.image.url(:small) %> 
 										<div>Date: <%= p.created_date%> </div>
 										<% if p.source %><div>Source: <%= p.source%></div> <% end %>

@@ -8,16 +8,20 @@
 			<tr><td style="padding:7px;"><h4>Select onsite personnel:</h4>
 				<%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :include_blank => false, :multiple => true %>
 			</td></tr>
-			<% @report.photos.each do |photo| %>
-				<% if photo.image_file_name %>
-					<tr><td style="padding:7px;">
-						<div style="width:220px;text-align:left;display:inline-block;">
-							<%= image_tag photo.image.url(:small) %>
-							<div>Date: <%= photo.created_date%> </div>
-							<% if photo.source %><div>Source: <%= photo.source%></div> <% end %>
-						</div>
-					</td></tr>
-				<% end %>
+			<% if @report.photos && @report.photos.count > 0 %>
+				<tr><td style="padding:30px 0;padding-top:20px;">
+					<% @report.photos.each do |p| %>
+						<% if p.image_file_name%>
+							<div style="width:220px;text-align:left;display:inline-block;">
+								<%= link_to p.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
+									<%= image_tag p.image.url(:small) %> 
+									<div>Date: <%= p.created_date%> </div>
+									<% if p.source %><div>Source: <%= p.source%></div> <% end %>
+								<% end %>
+							</div>
+						<% end %>
+					<% end %>
+				</td></tr>
 			<% end %>
 			<tr><td style="padding:7px;"><h4>Add a photo</h4>
 				<%= f.fields_for :photos, @report.photos.build do |photo| %>

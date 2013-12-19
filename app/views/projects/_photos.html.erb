@@ -4,7 +4,7 @@
 		<% @photos.each do |photo| %>
 			<% if photo.image_file_name %>
 				<div style="width:220px;text-align:left;display:inline-block;">
-					<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
+					<%= link_to photo.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
 						<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
 					<% end %>
 					<div>Date: <%= photo.created_date%> </div>
