@@ -28,10 +28,8 @@
 						<td style="text-align:center;padding-top:20px; width:50%;display:inline-block;">
 							<h4>Critical Date:</h4>
 							<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-
-									<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :style=>"margin:0 auto;", :class =>"date-input", :id => "dp" %>
-									<span class="add-on"><i class="icon-th"></i></span>
-						
+								<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :style=>"margin:0 auto;", :class =>"date-input", :id => "dp" %>
+								<span id="clear-critical-date"> Clear Date</span>
 							</div>
 						</td></tr>
 				<% end %>
@@ -81,11 +79,14 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#dp").datepicker({
-			clearBtn:true,
-			autoclose:true
+		$("#dp").datepicker();
+		$('#dp').datepicker().on('changeDate', function(){
+		    $('#dp').datepicker('hide');
 		});
 		Shadowbox.clearCache();
 	    Shadowbox.setup(".shadow-photo", {});
+	    $('#clear-critical-date').click(function(){
+	    	$('#dp').val('');
+	    });
 	});
 </script>

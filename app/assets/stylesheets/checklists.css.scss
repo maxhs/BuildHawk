@@ -83,7 +83,19 @@
 	}
 
 	button {
-	margin-top:-50px;
+		margin-top:-50px;
+	}
+
+	#clear-critical-date:hover {
+		-webkit-transition: all 0.25s ease-out;
+		-moz-transition: all 0.25s ease-out;
+		-o-transition: all 0.25s ease-out;
+		transition: all 0.25s ease-out;
+		cursor:pointer;
+	}	
+
+	#clear-critical-date:hover {
+		color:#cc0000;
 	}
 }
 

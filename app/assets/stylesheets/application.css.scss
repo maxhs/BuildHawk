@@ -27,11 +27,11 @@ a {
 	-moz-transition: all 0.25s ease-out;
 	-o-transition: all 0.25s ease-out;
 	transition: all 0.25s ease-out;
-
 }
+
 a:hover, a.current-page {
 	text-decoration:none;
-	color:#cc0000 !important;
+	color:#cc0000;
 }
 
 .text-success {
