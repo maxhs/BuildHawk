@@ -49,7 +49,6 @@ class Project < ActiveRecord::Base
     end
 
     def background_destroy
-  	  puts "background destroy"
       Resque.enqueue(DestroyProject,id)
     end
 
@@ -72,7 +71,7 @@ class Project < ActiveRecord::Base
     api_accessible :dashboard do |t|
       t.add :progress, :if => :has_checklist?
       t.add :upcoming_items
-      #t.add :recently_completed, :if => :has_checklist?
+      t.add :recently_completed, :if => :has_checklist?
       t.add :recent_documents, :if => :has_checklist?
       t.add :categories, :if => :has_categories?
     end
