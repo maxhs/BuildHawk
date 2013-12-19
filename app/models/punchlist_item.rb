@@ -1,9 +1,10 @@
 class PunchlistItem < ActiveRecord::Base
 	attr_accessible :body, :assignee_id, :assignee, :project_id, :project, :location, :order_index, :photos,
-					:photos_attributes, :completed, :completed_at, :assignee_attributes
+					:photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id
 
 	belongs_to :project
     belongs_to :punchlist
+    belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
     has_many :comments, :dependent => :destroy
 	has_many :photos, :dependent => :destroy
