@@ -126,7 +126,13 @@ class ProjectsController < ApplicationController
 		@checklist_item = ChecklistItem.find params[:checklist_item_id]
 		@checklist_item.update_attributes params[:checklist_item]
 		@checklist = @checklist_item.subcategory.category.checklist
-		render :checklist
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :checklist
+		end
 	end
 
 	def category

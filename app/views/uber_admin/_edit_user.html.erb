@@ -1,8 +1,7 @@
 <table id="edit-user-form">
 	<tr><td><h2>Edit User: <%=@user.full_name %></h2></td></tr>
 	<%= nested_form_for @user, :url => {:action => :update_user}, :html => {:multipart => true}, :remote => true, :method => :post do |f| %>
-		<%= f.hidden_field :company_id, :value => current_user.company.id %>
-		<%= hidden_field_tag :user_id, current_user.id %>
+		<%= hidden_field_tag :user_id, @user.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
 		<tr><td><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></td></tr>
