@@ -32,16 +32,9 @@
 		<h3>Recently Added Documents</h3>
 		<div class="row" style="margin-bottom:20px;">
 			<div class="col-md-12" style="overflow: hidden;">
-				<% @recent_photos.each do |photo| %>
-					<% if photo.image_file_name%>
-						<div style="width:220px;text-align:left;display:inline-block;">
-							<%= link_to photo.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-								<%= image_tag photo.image.url(:small), :class => "documents-photo" %>
-							<% end %>
-							<div>Date: <%= photo.created_date%> </div>
-							<div><% if photo.source %>Source: <%= photo.source%><% else %>&nbsp;<% end %></div> 
-							<div><% if photo.user %>Taken by: <%= photo.user.full_name%><% else %>&nbsp;<% end %></div> 
-						</div>
+				<% @recent_photos.each do |p| %>
+					<% if p.image_file_name%>
+						<%= render :partial => "image", :locals => {:p => p} %>
 					<% end %>
 				<% end %>
 			</div>
