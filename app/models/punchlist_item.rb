@@ -8,7 +8,7 @@ class PunchlistItem < ActiveRecord::Base
 	belongs_to :assignee, :class_name => "User"
     has_many :comments, :dependent => :destroy
 	has_many :photos, :dependent => :destroy
-    accepts_nested_attributes_for :photos, :allow_destroy => true
+    accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true
 
     acts_as_api

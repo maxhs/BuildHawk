@@ -12,7 +12,7 @@ class ChecklistItem < ActiveRecord::Base
 
     after_commit :check_completed
 
-    accepts_nested_attributes_for :photos
+    accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
   	acts_as_api
 

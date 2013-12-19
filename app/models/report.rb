@@ -11,7 +11,7 @@ class Report < ActiveRecord::Base
     has_many :photos, :dependent => :destroy
 
     accepts_nested_attributes_for :users, :allow_destroy => true
-    accepts_nested_attributes_for :photos, :allow_destroy => true# :reject_if => lambda { |c| c[:image_file_name].blank? }
+    accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
     def possible_types
       ["Daily","Safety"]
