@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20131219202311) do
     t.boolean  "completed",            default: false
     t.datetime "completed_at"
     t.integer  "completed_by_user_id"
+    t.string   "assignee_name"
   end
 
   add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
@@ -262,6 +263,7 @@ ActiveRecord::Schema.define(version: 20131219202311) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "active",                 default: true
   end
 
   add_index "users", ["company_id"], name: "users_company_id_ix"

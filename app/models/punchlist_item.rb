@@ -1,6 +1,7 @@
 class PunchlistItem < ActiveRecord::Base
 	attr_accessible :body, :assignee_id, :assignee, :project_id, :project, :location, :order_index, :photos,
-					:photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id
+					:photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id,
+                    :assignee_name
 
 	belongs_to :project
     belongs_to :punchlist
@@ -11,12 +12,22 @@ class PunchlistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
+    after_save :clean_name
+
+    def clean_name
+        if assignee && assignee.full_name
+            assignee_name = assignee.full_name
+        end
+    end
+
+
     acts_as_api
 
     api_accessible :projects do |t|
   		t.add :id
   		t.add :body
   		t.add :assignee
+        t.add :assignee_name
   		t.add :location
   		t.add :completed_at
   		t.add :completed
