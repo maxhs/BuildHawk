@@ -20,10 +20,12 @@ class Report < ActiveRecord::Base
   	acts_as_api
 
   	api_accessible :projects do |t|
+      t.add :id
   		t.add :title
   		t.add :report_type
   		t.add :body
   		t.add :report_fields
+      t.add :possible_types
       t.add :comments
   	end
 end
