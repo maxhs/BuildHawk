@@ -14,6 +14,8 @@ class PunchlistItem < ActiveRecord::Base
 
     after_save :clean_name
 
+    default_scope { order('created_at') }
+
     def clean_name
         if assignee && assignee.full_name
             assignee_name = assignee.full_name
