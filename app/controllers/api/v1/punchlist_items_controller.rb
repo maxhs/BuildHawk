@@ -10,7 +10,10 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
                 @punchlist_item.update_attribute :assignee_name, params[:punchlist_item][:assignee]
             end
             params[:punchlist_item].delete(:assignee)
+        elsif @punchlist_item.assignee != nil
+            @punchlist_item.update_attribute :assignee, nil 
         end
+
     	@punchlist_item.update_attributes params[:punchlist_item]
         if params[:status].present?
             if params[:status] == "Completed"
