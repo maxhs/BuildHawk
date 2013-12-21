@@ -4,7 +4,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
     	@report = Report.find params[:id]
     	@report.update_attributes params[:report]
     	respond_to do |format|
-        	format.json { render_for_api :projects, :json => report, :root => :report}
+        	format.json { render_for_api :projects, :json => @report, :root => :report}
       	end
     end
 
