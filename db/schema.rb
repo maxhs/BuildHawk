@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131221185622) do
+ActiveRecord::Schema.define(version: 20131225222758) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -200,6 +200,13 @@ ActiveRecord::Schema.define(version: 20131221185622) do
   end
 
   create_table "report_fields", force: true do |t|
+    t.integer  "report_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "report_subs", force: true do |t|
+    t.integer  "sub_id"
     t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"

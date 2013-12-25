@@ -35,5 +35,7 @@ class Report < ActiveRecord::Base
       t.add :possible_types
       t.add :comments
       t.add :photos
+      t.add :users
+      t.add :subs
   	end
 end
