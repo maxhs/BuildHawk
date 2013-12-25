@@ -1,6 +1,7 @@
 class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos_attributes, 
-                  :users_attributes, :report_users_attributes, :users, :user_ids, :created_date
+                  :users_attributes, :report_users_attributes, :users, :user_ids, :created_date, :subs, :subs_attributes,
+                  :report_subs_attributes
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
@@ -8,9 +9,12 @@ class Report < ActiveRecord::Base
   	has_many :report_fields, :dependent => :destroy
     has_many :report_users, :dependent => :destroy
     has_many :users, :through => :report_users
+    has_many :report_subs, :dependent => :destroy
+    has_many :subs, :through => :report_users
     has_many :photos, :dependent => :destroy
 
     accepts_nested_attributes_for :users, :allow_destroy => true
+    accepts_nested_attributes_for :subs, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
     def possible_types
