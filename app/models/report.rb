@@ -27,5 +27,6 @@ class Report < ActiveRecord::Base
   		t.add :report_fields
       t.add :possible_types
       t.add :comments
+      t.add :photos
   	end
 end
