@@ -1,5 +1,5 @@
 class Subcategory < ActiveRecord::Base
-	attr_accessible :name, :category_id, :order_index, :milestone_date, :completed_date, :checklist_items
+	attr_accessible :name, :category_id, :order_index, :milestone_date, :completed_date, :checklist_items, :status
   	belongs_to :category
   	has_many :checklist_items, :dependent => :destroy
 
@@ -19,6 +19,10 @@ class Subcategory < ActiveRecord::Base
     def check_completed
       if category.completed_count != 0 && category.completed_count == category.item_count
         category.update_attribute :completed_date, Date.today
+        status = "Completed"
+      elsif completed_date != nil
+        completed_date = nil
+        status = nil
       end
     end
 
