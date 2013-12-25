@@ -12,4 +12,13 @@ class Api::V1::PhotosController < Api::V1::ApiController
       	end
     end
 
+    def destroy
+    	@photo = Photo.find params[:id]
+    	if @photo.destroy
+        	render :json=>{:success=>true}
+      	else 
+        	render :json=>{:success=>false}
+      	end
+    end
+
 end
