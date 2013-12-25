@@ -10,7 +10,7 @@ class Report < ActiveRecord::Base
     has_many :report_users, :dependent => :destroy
     has_many :users, :through => :report_users
     has_many :report_subs, :dependent => :destroy
-    has_many :subs, :through => :report_users
+    has_many :subs, :through => :report_subs
     has_many :photos, :dependent => :destroy
 
     accepts_nested_attributes_for :users, :allow_destroy => true
