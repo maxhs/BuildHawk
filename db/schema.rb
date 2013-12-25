@@ -221,6 +221,7 @@ ActiveRecord::Schema.define(version: 20131221185622) do
     t.text     "weather"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_date"
   end
 
   add_index "reports", ["author_id", "project_id"], name: "reports_ix"
