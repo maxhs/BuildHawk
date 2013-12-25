@@ -54,6 +54,7 @@ class Photo < ActiveRecord::Base
 	end
 
 	api_accessible :dashboard do |t|
+		t.add :id
 		t.add :url_large
 		t.add :original
 		t.add :url200
