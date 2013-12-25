@@ -3,6 +3,6 @@ class AddMorePhotoAttributes < ActiveRecord::Migration
   	add_column :photos, :name, :string, :default => ""
   	add_column :subcategories, :status, :string
   	add_column :categories, :status, :string
-  	#add_column :reports, :created_date, :string
+  	add_column :reports, :created_date, :string
   end
 end
