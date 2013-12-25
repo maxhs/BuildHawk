@@ -1,6 +1,6 @@
 class Report < ActiveRecord::Base
-	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos_attributes, :users_attributes, :report_users_attributes,
-                  :users, :user_ids
+	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos_attributes, 
+                  :users_attributes, :report_users_attributes, :users, :user_ids
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
@@ -21,6 +21,8 @@ class Report < ActiveRecord::Base
 
   	api_accessible :projects do |t|
       t.add :id
+      t.add :created_at
+      t.add :updated_at
   		t.add :title
   		t.add :report_type
   		t.add :body
