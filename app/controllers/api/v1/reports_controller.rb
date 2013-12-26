@@ -10,7 +10,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
 
     def show
     	project = Project.find params[:id]
-    	reports = project.reports
+    	reports = project.reports.order('created_at DESC')
     	respond_to do |format|
         	format.json { render_for_api :projects, :json => reports, :root => :reports}
       	end
