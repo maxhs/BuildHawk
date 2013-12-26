@@ -126,7 +126,7 @@ Buildhawk::Application.routes.draw do
       resources :users
       resources :comments
       resources :reports do 
-        member do 
+        collection do 
           get :date
           get :next
           get :prev
