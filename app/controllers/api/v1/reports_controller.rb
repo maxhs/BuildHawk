@@ -24,7 +24,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
     end
 
     def prev
-        @report = Report.where(:created_date => params[:created_date]).first.offset(1)
+        @report = Report.where(:created_date => params[:created_date]).offset(1).first
         respond_to do |format|
             format.json { render_for_api :projects, :json => @report, :root => :report}
         end
