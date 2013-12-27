@@ -10,17 +10,10 @@ class Api::V1::ReportsController < Api::V1::ApiController
 
     def show
     	project = Project.find params[:id]
-    	reports = project.reports.order('created_at DESC')
+    	reports = project.reports.sort_by(&:created_date)
     	respond_to do |format|
         	format.json { render_for_api :projects, :json => reports, :root => :reports}
       	end
-    end
-
-    def date
-        @report = Report.where(:created_date => params[:created_date]).first
-        respond_to do |format|
-            format.json { render_for_api :projects, :json => @report, :root => :report}
-        end
     end
 
     def create

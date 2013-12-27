@@ -125,11 +125,7 @@ Buildhawk::Application.routes.draw do
       end
       resources :users
       resources :comments
-      resources :reports do 
-        collection do 
-          get :date
-        end
-      end
+      resources :reports
     end
   end
 
