@@ -128,8 +128,6 @@ Buildhawk::Application.routes.draw do
       resources :reports do 
         collection do 
           get :date
-          get :next
-          get :prev
         end
       end
     end
