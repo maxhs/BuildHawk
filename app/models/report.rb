@@ -1,7 +1,7 @@
 class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :user_id, :project_id, :report_fields, :weather, :photos_attributes, 
                   :users_attributes, :report_users_attributes, :users, :user_ids, :created_date, :subs, :subs_attributes,
-                  :report_subs_attributes
+                  :report_subs_attributes, :weather_icon, :temp, :wind
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
@@ -32,6 +32,9 @@ class Report < ActiveRecord::Base
   		t.add :report_type
   		t.add :body
       t.add :weather
+      t.add :weather_icon
+      t.add :temp
+      t.add :wind
   		t.add :report_fields
       t.add :possible_types
       t.add :comments
