@@ -1,10 +1,12 @@
 class Api::V1::ReportsController < Api::V1::ApiController
 
     def update
-    	@report = Report.find params[:id]
-    	@report.update_attributes params[:report]
+    	report = Report.find params[:id]
+    	report.update_attributes params[:report]
+        project = report.project
+        @reports = project.reports
     	respond_to do |format|
-        	format.json { render_for_api :projects, :json => @report, :root => :report}
+        	format.json { render_for_api :projects, :json => @reports, :root => :report}
       	end
     end
 
