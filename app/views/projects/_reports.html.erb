@@ -23,7 +23,7 @@
 			<% if @reports.count && @reports.count > 0 %>
 				<% @reports.each do |report| %>
 					<tr>
-						<td><%= link_to "#{report.report_type} - #{parse_date report.created_date}", show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
+						<td><%= link_to "#{report.report_type} - #{report.created_date}", show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
 						<td><%= report.report_type %></td>
 						<td><%= parse_time report.updated_at %></td>
 						<td>
