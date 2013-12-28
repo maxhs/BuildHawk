@@ -421,6 +421,16 @@ footer {
 }
 
 #about-background {
-	background:#eee;
+	border:1px solid #eee;
+
+	#about {
+
+		margin-top:10px;
+		
+		ul#pitch li {
+			border-color:transparent;
+
+		}
+	}
 }
 	
