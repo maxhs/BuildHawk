@@ -125,7 +125,11 @@ Buildhawk::Application.routes.draw do
       end
       resources :users
       resources :comments
-      resources :reports
+      resources :reports do
+        collection do
+          post :photo
+        end
+      end
     end
   end
 

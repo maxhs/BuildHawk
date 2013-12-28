@@ -25,4 +25,12 @@ class Api::V1::ReportsController < Api::V1::ApiController
         end
     end
 
+    def photo
+        report = Report.find params[:id]
+        report.photos.create params[:photo]
+        respond_to do |format|
+            format.json { render_for_api :projects, :json => report, :root => :report}
+        end
+    end
+
 end
