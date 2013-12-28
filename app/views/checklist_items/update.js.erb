@@ -1,5 +1,4 @@
 $('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "projects/checklist", :locals => {:checklist => @checklist, :project => @project} %>');
 	$(this).fadeIn(100);
-	$.isLoading( "hide" );
 });

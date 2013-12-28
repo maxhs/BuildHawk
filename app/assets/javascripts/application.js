@@ -12,10 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require jquery_nested_form
 //= require bootstrap
 //= require jquery.remotipart
+//= require nprogress
+//= require nprogress-ajax
 //= require shadowbox
 //= require_tree .
 

@@ -14,6 +14,10 @@
  *= require_tree .
  */
 
+$nprogress-color: #cc0000;
+
+@import 'nprogress';
+@import 'nprogress-bootstrap';
 @import "shadowbox";
 @import 'bootstrap';
 

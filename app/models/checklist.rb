@@ -1,6 +1,7 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
-
+    include ActionView::Helpers::NumberHelper
+    
     attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
     				        :categories, :company, :company_id
   	belongs_to :project
@@ -44,6 +45,10 @@ class Checklist < ActiveRecord::Base
 
     def recently_completed
         items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
+    end
+
+    def progress_percentage
+      number_to_percentage(completed_count.to_f/item_count.to_f*100,:precision=>1)
     end
 
     class << self

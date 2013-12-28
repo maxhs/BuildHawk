@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131225222758) do
+ActiveRecord::Schema.define(version: 20131227202509) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -229,6 +229,9 @@ ActiveRecord::Schema.define(version: 20131225222758) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "created_date"
+    t.string   "weather_icon"
+    t.string   "temp"
+    t.string   "wind"
   end
 
   add_index "reports", ["author_id", "project_id"], name: "reports_ix"

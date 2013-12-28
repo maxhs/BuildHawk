@@ -2,8 +2,24 @@
 	<% if @company.projects && @company.projects.count > 0 %>
 		<% @company.projects.each do |project| %>
 			<div class="company-project">
-				<%= link_to project.name %>
+				<div>
+					<h5>Synopsis</h5>
+					<%= link_to project.name, project_path(project) %> - <%= project.address.formatted_address %>
+				</div>
+				<div>
+					<h5>Progress</h5>
+					<%= project.checklist.progress_percentage %>
+				</div>
+				<div>
+					<h5>Upcoming</h5>
+					<ol>
+						<% project.checklist.upcoming_items.each do |item| %>
+							<li><%= link_to item.body, checklist_item_project_path(project, :item_id => item.id), :remote => true %></li>
+						<% end %>
+					</ol>
+				</div>
 			</div>
+
 		<% end %>
 	<% else %>
 		<div style="color:#aaa;text-align:center;font-size:1.25em; font-style:italic;margin-top:50px;">Your company does not have any active projects</div>

@@ -35,11 +35,11 @@ gem "resque"
 gem 'resque-scheduler'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'turbolinks'
+#gem 'turbolinks'
 gem 'thin'
 gem 'roo'
 gem 'deep_cloneable', '~> 1.6.0'
-gem 'unicorn'
+gem 'nprogress-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

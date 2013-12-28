@@ -2,6 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+NProgress.configure
+  showSpinner: false
+  ease: 'easeInOut'
+  speed: 400
+  
 $(document).ready ->
   $(".splash-image").hover (->
     $(this).find("p").css
