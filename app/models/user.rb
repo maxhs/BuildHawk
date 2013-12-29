@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   	has_many :projects, :through => :project_users 
     has_many :report_users, :dependent => :destroy
     has_many :reports, :through => :report_users
-
+    has_many :notifications, :dependent => :destroy
     has_many :apn_registrations, :dependent => :destroy
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable, :token_authenticatable #, :rememberable
