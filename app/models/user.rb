@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
 
     def notify_all_devices(options)
       apn_registrations.map{|r| r.token}.each do |token|
+        puts "should be sending a push to #{token}"
         APN.notify_async token, options
       end
     end
