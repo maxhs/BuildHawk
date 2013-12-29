@@ -26,15 +26,15 @@ gem 'rails-observers'
 #gem 'actionpack-page_caching'
 #gem 'actionpack-action_caching'
 gem 'multi_fetch_fragments'
-gem 'delayed_job_active_record'
-gem 'apn_sender', :require => 'apn'
-gem 'daemons'
 gem "non-stupid-digest-assets"
 gem "redis"
 gem "resque"
 gem 'resque-scheduler'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'delayed_job_active_record'
+gem 'apn_sender', :require => 'apn'
+gem 'daemons'
 #gem 'turbolinks'
 gem 'thin'
 gem 'roo'
