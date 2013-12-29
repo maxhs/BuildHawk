@@ -1,5 +1,4 @@
 class UserMailer < ActionMailer::Base
-  default from: "will@buildhawk.com"
 
   def welcome(user)
   	@user = user

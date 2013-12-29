@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
     validates_confirmation_of :password
     validates_presence_of :password, :if => :password_required?
 
+    after_create :welcome
     after_create :ensure_full_name
     after_update :ensure_full_name
 
@@ -40,9 +41,12 @@ class User < ActiveRecord::Base
       unless full_name.length > 0
         self.update_attribute :full_name, "#{first_name} #{last_name}"
       end
-      UserMailer.welcome(self).deliver if self.email 
     end
     
+    def welcome
+      UserMailer.welcome(self).deliver if self.email 
+    end
+
     def password_required?
       password.present?
     end
