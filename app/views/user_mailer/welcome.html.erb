@@ -1,0 +1,17 @@
+<div style="width:100%;padding:5% 0 5% 0;font-family:'helvetica','arial',sans-serif;">	
+	<div style="background:#f1f1f1;width:80%; padding:5%; margin:0 auto; border:1px solid #cccccc; border-radius:3px;">
+		<div style="width:100px; margin:0 auto;"><%= link_to root_url do %><img style="width:100%;" src="http://www.buildhawk.com/assets/logo.png"%><% end %></div>
+		<% if @user.first_name? %>
+			<p>Hi <%= @user.first_name %>,</p>
+		<% else %>
+			<p>Welcome!</p>
+		<% end %>
+
+		<p>You've been successfull signed up for <%= link_to "BuildHawk", root_url %>! </p>
+
+		<p>Please login <%= link_to "here", login_url(:host => "www.buildhawk.com") %> using your temporary password: <%= @user.password %></p>
+
+		<p>Thanks,<br>
+		The BuildHawk Team<br>
+	</div>
+</div>
