@@ -33,6 +33,5 @@ class Notification < ActiveRecord::Base
 		t.add :punchlist_item_id
 		t.add :checklist_item_id
 		t.add :message
-		t.add
 	end
 end
