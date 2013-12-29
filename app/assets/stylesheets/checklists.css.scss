@@ -46,12 +46,6 @@
 .checklist-item-form{
 	padding:20px;
 	border:1px solid #eee;
-	
-	.row {
-		span {
-			line-height:63px;
-		}
-	}
 
 	select, select[multiple] {
 		font-size:1.25em;
@@ -84,6 +78,17 @@
 
 	button {
 		margin-top:-50px;
+	}
+
+	.date-input {
+		font-weight:200;
+		margin:0 auto 5px;
+		text-align:center;
+	}
+
+	#clear-critical-date {
+		font-size:12px;
+		text-transform:uppercase;
 	}
 
 	#clear-critical-date:hover {

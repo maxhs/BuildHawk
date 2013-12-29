@@ -51,6 +51,10 @@ class Checklist < ActiveRecord::Base
       number_to_percentage(completed_count.to_f/item_count.to_f*100,:precision=>1)
     end
 
+    def progress
+        completed_count.to_f/item_count.to_f*100
+    end
+
     class << self
       	def import(file)
             spreadsheet = open_spreadsheet(file)

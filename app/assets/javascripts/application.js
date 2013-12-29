@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_nested_form
+//= require jquery.ui.progressbar
 //= require bootstrap
 //= require jquery.remotipart
 //= require nprogress

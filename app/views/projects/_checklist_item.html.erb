@@ -28,7 +28,7 @@
 						<td style="text-align:center;padding-top:20px; width:50%;display:inline-block;">
 							<h4>Critical Date:</h4>
 							<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-								<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :style=>"margin:0 auto;", :class =>"date-input", :id => "dp" %>
+								<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 								<span id="clear-critical-date"> Clear Date</span>
 							</div>
 						</td></tr>
@@ -66,7 +66,7 @@
 		<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
 		<%= f.hidden_field :user_id, :value => current_user.id %>
 		<%= f.hidden_field :checklist_item_id, :value => @checklist_item.id %>
-		<button class="btn btn-success btn-md pull-right" style="margin-top:14px;"><%= f.submit "Send" %></button>
+		<button class="btn btn-success btn-md pull-right" style="margin-top:14px;"><%= f.submit "Post" %></button>
 	<% end %>
 </div>
 

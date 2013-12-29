@@ -35,9 +35,44 @@
 		-moz-border-radius: 4px;
 		margin-bottom:15px;
 		padding:5px 20px;
+
+		table {
+			tr {
+				line-height:33px;
+				vertical-align:middle;
+				border:1px solid #eee;
+			}
+
+			.dashboard-label {
+				color:#aaa;
+				font-size:12px;
+				padding-right:21px;
+				padding-left:7px;
+			}
+		}
 	}
 
-	h5 {
-		margin-left:-5px;
+	.ui-progressbar {
+		display:inline-block;
+		border:1px solid #ccc;
+		width:200px;
+		height:1em;
+		vertical-align:middle;
+		margin-top:-2px;
+	}
+
+	#progress-link {
+
+		.ui-progressbar-value {
+			margin-top:0;
+			background:#336699;
+			border-width:0;
+		}
+	}
+
+	h5,h4 {
+		width:100%;
+		a {color:#222;}
+		a:hover {color:#cc0000;}
 	}
 }

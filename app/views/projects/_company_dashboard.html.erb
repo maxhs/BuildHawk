@@ -2,25 +2,35 @@
 	<% if @company.projects && @company.projects.count > 0 %>
 		<% @company.projects.each do |project| %>
 			<div class="company-project">
-				<div>
-					<h5>Synopsis</h5>
-					<%= link_to project.name, project_path(project) %> - <%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>
-				</div>
-				<div>
-					<h5>Progress</h5>
-					<%= link_to project.checklist.progress_percentage, project_path(project), :remote => true %>
-				</div>
+				<table>
+					<tr style="border-width:0;"><td><h4 style="text-align:center;"><%= link_to project.name, project_path(project) %></h4></td></tr>
+				
+					<tr>
+						<td class="dashboard-label">Map:</td>
+						<td><%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %></td>
+					</tr>
+
+					<tr>
+						<td class="dashboard-label">Progress:</td>
+						<td>
+							<div id="progress-link"></div>
+							<% @progress_value = project.checklist.progress %>
+							<%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
+						</td>
+					</tr>
 				<% if project.checklist.upcoming_items.count > 0 %>
-					<div>
-						<h5>Upcoming</h5>
-						<ol>
-							<% project.checklist.upcoming_items.each do |item| %>
-								<li><%= link_to item.body, checklist_item_project_path(project, :item_id => item.id), :remote => true %></li>
-							<% end %>
-						</ol>
-					</div>
+					<tr>
+						<td class="dashboard-label">Upcoming</td>
+						<td>
+							<ol>
+								<% project.checklist.upcoming_items.each do |item| %>
+									<li><%= link_to item.body, checklist_item_project_path(project, :item_id => item.id), :remote => true %></li>
+								<% end %>
+							</ol>
+						</td>
+					</tr>
 				<% else %>
-					<h5 style="font-style:italic;color:#aaa;padding-top:7px;">No upcoming items</h5>
+					<div><h5 style="font-style:italic;color:#aaa;padding-top:7px;">No upcoming items</h5></div>
 				<% end %>
 			</div>
 
@@ -33,6 +43,10 @@
 		$(document).ready(function(){
 			Shadowbox.clearCache();
 		    Shadowbox.setup(".shadow-photo", {});
+
+		    $('#progress-link').progressbar({
+		    	value:<%=@progress_value%>
+		    });
 		});
 	</script>
 </div>
