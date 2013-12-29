@@ -3,7 +3,7 @@ class AdminController < ApplicationController
 
 	def index
 		@core_checklist = Checklist.where(:core => true).last
-		@users = current_user.company.users
+		@checklists = current_user.company.checklists
 	end
 
 	def show

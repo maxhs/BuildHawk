@@ -69,6 +69,12 @@ class User < ActiveRecord::Base
       end
     end
 
+    def notify_all_devices(options)
+      apn_registrations.map{|r| r.token}.each do |token|
+        APN.notify_async token, options
+      end
+    end
+
   	acts_as_api
 
   	api_accessible :user do |t|

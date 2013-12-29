@@ -3,4 +3,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+require 'apn/tasks'
+
 Buildhawk::Application.load_tasks
