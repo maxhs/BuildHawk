@@ -18,20 +18,21 @@
 							<%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
 						</td>
 					</tr>
-				<% if project.checklist.upcoming_items.count > 0 %>
-					<tr>
-						<td class="dashboard-label">Upcoming</td>
-						<td>
-							<ol>
-								<% project.checklist.upcoming_items.each do |item| %>
-									<li><%= link_to item.body, checklist_item_project_path(project, :item_id => item.id), :remote => true %></li>
-								<% end %>
-							</ol>
-						</td>
-					</tr>
-				<% else %>
-					<div><h5 style="font-style:italic;color:#aaa;padding-top:7px;">No upcoming items</h5></div>
-				<% end %>
+					<% if project.checklist.upcoming_items.count > 0 %>
+						<tr>
+							<td class="dashboard-label">Upcoming</td>
+							<td>
+								<ol>
+									<% project.checklist.upcoming_items.each do |item| %>
+										<li><%= link_to item.body, checklist_item_project_path(project, :item_id => item.id), :remote => true %></li>
+									<% end %>
+								</ol>
+							</td>
+						</tr>
+					<% else %>
+						<div><h5 style="font-style:italic;color:#aaa;padding-top:7px;">No upcoming items</h5></div>
+					<% end %>
+				</table>
 			</div>
 
 		<% end %>
