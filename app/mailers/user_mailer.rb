@@ -6,7 +6,8 @@ class UserMailer < ActionMailer::Base
   	mail(
       :subject => "Welcome to BuildHawk!",
       :to      => user.email,
-      :from    => "will@buildhawk.com",
+      #:from    => "will@buildhawk.com",
+      :from    => "max@ristrettolabs.com",
       :tag     => 'Welcome'
     )
 
