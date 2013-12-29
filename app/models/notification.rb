@@ -18,7 +18,7 @@ class Notification < ActiveRecord::Base
 		        :report_id 			=> self.report_id, 
 		        :punchlist_item_id 	=> self.punchlist_item_id,
 		        :checklist_item_id 	=> self.checklist_item_id,
-		        :target_user_id 	=> self.target_user_id, 
+		        #:target_user_id 	=> self.target_user_id, 
 		        :badge          	=> self.user.notifications.where(:read => false).count
 		    )
 			self.sent = true

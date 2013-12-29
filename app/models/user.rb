@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
       unless full_name.length > 0
         self.update_attribute :full_name, "#{first_name} #{last_name}"
       end
+      welcome
     end
     
     def welcome
