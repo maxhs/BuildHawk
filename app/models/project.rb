@@ -20,13 +20,19 @@ class Project < ActiveRecord::Base
     searchable do
       string  :name
       text    :checklist do
-        checklist.checklist_items.map(&:body)
+        checklist.checklist_items.map(&:body) if checklist
       end
       text    :punchlists do
         punchlists.map{|p| p.punchlist_items.map(&:body)}
       end
       text    :address do
         address.formatted_address
+      end
+      text    :company do
+        company.name
+      end
+      integer    :company do
+        company.id
       end
       time    :created_at
     end

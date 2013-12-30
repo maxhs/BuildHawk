@@ -2,33 +2,15 @@
 <div id="pages">
 	<% if @projects.count > 0 %>
 		<% @projects.each do |project| %>
-			<div class="company-project">
-				<table>
+			<div class="search-project">
+				<table style="border-bottom:1px solid #eee; width:100%;">
 					<tr style="border-width:0;"><td><h4><%= link_to project.name, project_path(project) %></h4></td></tr>
 				
 					<tr>
-						<td class="dashboard-label">Map:</td>
+						<td class="search-label">Map:</td>
 						<td><%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %></td>
 					</tr>
 
-					<% if project.checklist.upcoming_items.count > 0 %>
-						<tr>
-							<td class="dashboard-label">Upcoming</td>
-							<td>
-								<ol>
-									<% project.checklist.upcoming_items.each do |item| %>
-										<li>
-											<%= link_to checklist_item_project_path(project, :item_id => item.id), :remote => true do %>
-												<%= "#{parse_date item.critical_date} - #{item.body}" %>
-											<% end %>
-										</li>
-									<% end %>
-								</ol>
-							</td>
-						</tr>
-					<% else %>
-						<tr><td><h5 style="font-style:italic;color:#aaa;padding-left:7px;font-weight:200;font-size:14px;text-align:center;width:100%;">No upcoming items</h5></td></tr>
-					<% end %>
 				</table>
 			</div>
 

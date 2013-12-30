@@ -105,6 +105,7 @@ class ProjectsController < ApplicationController
 		search_term = "%#{params[:search]}%" if params[:search]
 		initial = Project.search do
 			fulltext search_term
+			with(:company, current_user.company.id)
 		end
 		@projects = initial.results.uniq
 		@prompt = "No search results"
@@ -360,7 +361,7 @@ class ProjectsController < ApplicationController
 
 	def find_project
 		if params[:id].present?
-			@project = Project.find params[:id] unless params[:id] == "search"
+			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
 		end
 		@company = current_user.company
 		@projects = @company.projects
