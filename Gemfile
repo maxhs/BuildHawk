@@ -23,8 +23,6 @@ gem 'shadowbox-rails'
 gem 'sass-rails'
 gem 'protected_attributes'
 gem 'rails-observers'
-#gem 'actionpack-page_caching'
-#gem 'actionpack-action_caching'
 gem 'multi_fetch_fragments'
 gem "non-stupid-digest-assets"
 gem "redis"
@@ -35,11 +33,15 @@ gem 'uglifier', '>= 1.3.0'
 gem 'delayed_job_active_record'
 gem 'apn_sender', :require => 'apn'
 gem 'daemons'
-#gem 'turbolinks'
+gem "sunspot_rails", "~> 2.1.0"
+gem 'sunspot_solr'
 gem 'thin'
 gem 'roo'
 gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'
+#gem 'actionpack-page_caching'
+#gem 'actionpack-action_caching'
+#gem 'turbolinks'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -16,6 +16,21 @@ class Project < ActiveRecord::Base
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true
 
+    # websolr
+    searchable do
+      string  :name
+      text    :checklist do
+        checklist.checklist_items.map(&:body)
+      end
+      text    :punchlists do
+        punchlists.map{|p| p.punchlist_items.map(&:body)}
+      end
+      text    :address do
+        address.formatted_address
+      end
+      time    :created_at
+    end
+
     def add_punchlist
       punchlists.create
     end

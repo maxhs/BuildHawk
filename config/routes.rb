@@ -11,6 +11,7 @@ Buildhawk::Application.routes.draw do
     get 'about', :to => "home#about", :as => :about
   end
 
+  post "/projects/search", :to => "projects#search"
   post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
   get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
@@ -87,6 +88,7 @@ Buildhawk::Application.routes.draw do
       delete :delete_checklist
     end
     collection do
+      post :search
       delete :delete_worklist_item
     end
   end

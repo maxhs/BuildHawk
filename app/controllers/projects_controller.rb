@@ -101,6 +101,23 @@ class ProjectsController < ApplicationController
 		redirect_to projects_path
 	end
 
+	def search
+		search_term = "%#{params[:search]}%" if params[:search]
+		initial = Project.search do
+			fulltext search_term
+		end
+		@projects = initial.results.uniq
+		@prompt = "No search results"
+		puts "search results: #{@projects}"
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :index
+		end
+	end
+
 	def checklist
 		@checklist = @project.checklist
 		if request.xhr?
@@ -342,10 +359,12 @@ class ProjectsController < ApplicationController
 	private
 
 	def find_project
-		@project = Project.find params[:id] if params[:id]
+		if params[:id].present?
+			@project = Project.find params[:id] unless params[:id] == "search"
+		end
 		@company = current_user.company
 		@projects = @company.projects
-		@users = current_user.company.users
+		@users = @company.users
 	end
 
 end
