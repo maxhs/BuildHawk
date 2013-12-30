@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
 
 			@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
 			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
-			@recent_photos = @project.photos.last(5)
+			@recent_photos = @project.photos.last(5).sort_by(&:created_at).reverse
 		end
 		if request.xhr?
 			respond_to do |format|
@@ -221,7 +221,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def photos
-		@photos = @project.photos
+		@photos = @project.photos.sort_by(&:created_date).reverse
 		if request.xhr? && remotipart_submitted?
 			respond_to do |format|
 				format.js

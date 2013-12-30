@@ -13,9 +13,15 @@
 					<tr>
 						<td class="dashboard-label">Progress:</td>
 						<td>
-							<div id="progress-link"></div>
-							<% @progress_value = project.checklist.progress %>
+							<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
 							<%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
+							<script type="text/javascript">
+								$(function(){
+									$('#progress-link-<%=project.id%>').progressbar({
+								    	value:<%=project.checklist.progress%>
+								    });
+								})
+							</script>
 						</td>
 					</tr>
 					<% if project.checklist.upcoming_items.count > 0 %>
@@ -44,10 +50,6 @@
 		$(document).ready(function(){
 			Shadowbox.clearCache();
 		    Shadowbox.setup(".shadow-photo", {});
-
-		    $('#progress-link').progressbar({
-		    	value:<%=@progress_value%>
-		    });
 		});
 	</script>
 </div>

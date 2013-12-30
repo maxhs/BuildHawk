@@ -61,7 +61,7 @@
 		margin-top:-2px;
 	}
 
-	#progress-link {
+	.progress-link {
 
 		.ui-progressbar-value {
 			margin-top:0;
@@ -74,5 +74,32 @@
 		width:100%;
 		a {color:#222;}
 		a:hover {color:#cc0000;}
+	}
+}
+
+.sidebarProjects {
+	div {
+		margin: 10px auto 0;
+	}
+
+	padding-bottom: 10px;
+
+	.ui-progressbar {
+		display:inline-block;
+		border:1px solid #ccc;
+		width:90%;
+		height:14px;
+		vertical-align:middle;
+		margin-top:-2px;
+		margin-bottom:7px;
+	}
+
+	.progress-link {
+
+		.ui-progressbar-value {
+			margin-top:0;
+			background:#336699;
+			border-width:0;
+		}
 	}
 }
