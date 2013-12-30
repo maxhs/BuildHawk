@@ -5,7 +5,7 @@
 		<tr><td><%= f.text_field :location, :placeholder => "Add a location (optional)" %></td></tr>
 		<tr><td><h4>Select an assignee</h4>
 				<%= f.fields_for :assignee do |a| %>
-					<%= a.select :full_name, ["No Assignment"] << @users.map(&:full_name), :class=>"assignee-select" %>
+					<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), :class=>"assignee-select" %>
 				<% end %>
 			</td></tr>
 		<tr><td><span style="margin-right:20px"><h4>Add a photo</h4></span>

@@ -6,7 +6,7 @@
 			<tr><td><%= f.text_field :location, :placeholder => "Add a location (optional)" %></td></tr>
 			<tr><td><h4>Select an assignee</h4>
 				<%= f.fields_for :assignee do |a| %>
-					<%= a.select :full_name, ["No Assignment"] << @users.map(&:full_name), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;" %>
+					<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;" %>
 				<% end %>
 			</td></tr>
 			<% if @punchlist_item.photos && @punchlist_item.photos.count > 0 %>
