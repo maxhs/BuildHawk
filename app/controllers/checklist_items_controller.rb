@@ -1,6 +1,5 @@
 class ChecklistItemsController < ApplicationController
 	def update
-		puts "should be updating a checklist item"
 		@checklist_item = ChecklistItem.find params[:id]
 		if params[:checklist_item][:critical_date].present?
 			datetime = Date.strptime(params[:checklist_item][:critical_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
@@ -22,12 +21,12 @@ class ChecklistItemsController < ApplicationController
 		end
 		@checklist = @checklist_item.subcategory.category.checklist
 		@project = @checklist.project
-		if request.xhr? && remotipart_submitted?
+		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else 
-			render :update
+			redirect_to checklist_project_path(@project)
 		end
 	end
 end

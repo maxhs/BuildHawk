@@ -21,7 +21,11 @@
 	<% else %>
 		<div class="row checklist-item">
 	<% end %>
+		<% if current_user.admin %>
+			<div class="col-md-7 checklist-body" style="margin-left:20px;margin-right:-20px;">
+		<% else %>
 			<div class="col-md-8 checklist-body" style="margin-left:20px;margin-right:-20px;">
+		<% end %>
 				<%=item.body%>
 			</div>
 
@@ -40,5 +44,10 @@
 					&nbsp;
 				<% end %>
 			</div>
+		<% if current_user.admin %>
+			<div class="col-md-1" style="text-align: center;">
+				<%= link_to 'Edit', item_editor_admin_index_path(:item_id => item.id), :remote => true %>
+			</div>
+		<% end %>
 		</div>
 <% end %>
