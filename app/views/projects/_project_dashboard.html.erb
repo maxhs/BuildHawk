@@ -10,7 +10,7 @@
 				<% end %>
 			</table>
 		<% else %>
-			<div style="color:#aaa;font-style:italic">(No upcoming items)</div>
+			<div style="color:#aaa;font-style:italic;font-weight:200;">(No upcoming items)</div>
 		<% end %>
 
 	<h3>Recently Completed</h3>
@@ -25,7 +25,7 @@
 				<% end %>
 			</table>
 		<% else %>
-			<div style="color:#aaa;font-style:italic;margin-bottom:20px;">(No recently completed items)</div>
+			<div style="color:#aaa;font-style:italic;margin-bottom:20px;font-weight:200;">(No recently completed items)</div>
 		<% end %>
 
 	<% if @recent_photos && @recent_photos.count > 0 %>

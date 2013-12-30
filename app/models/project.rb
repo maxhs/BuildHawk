@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
 
     # websolr
     searchable do
-      string  :name
+      text    :name
       text    :checklist do
         checklist.checklist_items.map(&:body) if checklist
       end
