@@ -13,16 +13,17 @@ class PunchlistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
-    after_save :clean_name
+    after_commit :clean_name
 
     default_scope { order('created_at') }
 
     def clean_name
         if assignee && assignee.full_name
             unless assignee_name && assignee_name == assignee.full_name
-                message = truncate(body, length:15)
+                truncated = truncate(body, length:15)
+                message = "\"#{truncated}\" has been assigned to you on #{project.name}"
                 Notification.create(
-                    :message            => '"#{message}" has been assigned to you on #{project.name}',
+                    :message            => message,
                     :user_id            => assignee.id,
                     :punchlist_item_id  => self.id,
                     :notification_type  => "Worklist",
@@ -32,7 +33,6 @@ class PunchlistItem < ActiveRecord::Base
             assignee_name = assignee.full_name
         end
     end
-
 
     acts_as_api
 
