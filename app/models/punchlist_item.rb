@@ -1,4 +1,5 @@
 class PunchlistItem < ActiveRecord::Base
+    include ActionView::Helpers::TextHelper
 	attr_accessible :body, :assignee_id, :assignee, :project_id, :project, :location, :order_index, :photos,
 					:photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id,
                     :assignee_name
@@ -23,6 +24,7 @@ class PunchlistItem < ActiveRecord::Base
                 Notification.create(
                     :message            => '"#{message}" has been assigned to you on #{project.name}',
                     :user_id            => assignee.id,
+                    :punchlist_item_id  => self.id,
                     :notification_type  => "Worklist",
                     :user               => assignee
                 )

@@ -1,6 +1,5 @@
 class Notification < ActiveRecord::Base
-	include ActionView::Helpers::TextHelper
-	
+
 	attr_accessible :user_id, :user, :target_user_id, :target_user, :read, :sent, :checklist_item_id,
 					:checklist_item, :punchlist_item, :punchlist_item_id, :report, :report_id, :message,
 					:notification_type
