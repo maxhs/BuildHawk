@@ -12,7 +12,7 @@ class PunchlistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
-    after_commit :clean_name
+    after_commit :clean_name, :if => :persisted?
 
     default_scope { order('created_at') }
 
