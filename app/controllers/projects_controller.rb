@@ -21,12 +21,20 @@ class ProjectsController < ApplicationController
 	end
 
 	def index
-		@projects = current_user.company.projects if current_user.company
+		if params[:company_id]
+			puts "fetching projects for uber admin"
+			company = Company.find params[:company_id]
+			@projects = company.projects
+		elsif current_user.company
+			@projects = current_user.company.projects
+		end
 
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
+		else
+			render :index
 		end
 	end
 

@@ -4,7 +4,7 @@
 
 .well {
 	min-height: 20px;
-	padding: 0 20px;
+	padding: 0px 20px;
 	margin-bottom: 20px;
 	background-color: #f7f7f7;
 	border: 1px solid #e7e7e7;
@@ -37,6 +37,7 @@
 		padding:5px 20px 20px;
 
 		table {
+			width:100%;
 			tr {
 				line-height:33px;
 				vertical-align:middle;
@@ -78,11 +79,6 @@
 }
 
 .sidebarProjects {
-	div.project {
-		margin: 10px auto 0;
-	}
-
-	padding-bottom: 10px;
 
 	.ui-progressbar {
 		display:inline-block;

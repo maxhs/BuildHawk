@@ -45,7 +45,6 @@ class UberAdminController < ApplicationController
 
 	def update_user
 		@user = User.find params[:user_id]
-
 		@user.update_attributes params[:user]
 		@users = User.all
 		if request.xhr?
@@ -54,6 +53,19 @@ class UberAdminController < ApplicationController
 			end
 		else 
 			render :users
+		end
+	end
+
+	def destroy_user
+		@user = User.find params[:user_id]
+		@user.destroy
+		@users = User.all
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "uber_admin/users"}
+			end
+		else
+			redirect_to users_uber_admin_index_path
 		end
 	end
 
@@ -90,6 +102,20 @@ class UberAdminController < ApplicationController
 			end
 		else 
 			render :companies
+		end
+	end
+
+	def destroy_company
+		@company = Company.find params[:company_id]
+		@company.destroy
+		@companies = Company.all
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "uber_admin/companies"}
+			end
+		else
+			puts "shold be rendering index" 
+			redirect_to companies_uber_admin_index_path
 		end
 	end
 
