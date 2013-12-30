@@ -1,10 +1,9 @@
 class PunchlistItem < ActiveRecord::Base
     include ActionView::Helpers::TextHelper
-	attr_accessible :body, :assignee_id, :assignee, :project_id, :project, :location, :order_index, :photos,
+	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :punchlist_id, :punchlist,
 					:photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id,
                     :assignee_name
 
-	belongs_to :project
     belongs_to :punchlist
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
@@ -13,7 +12,7 @@ class PunchlistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
-    after_save :clean_name
+    after_commit :clean_name
 
     default_scope { order('created_at') }
 
@@ -21,7 +20,7 @@ class PunchlistItem < ActiveRecord::Base
         if assignee && assignee.full_name
             unless assignee_name && assignee_name == assignee.full_name
                 truncated = truncate(body, length:15)
-                message = "\"#{truncated}\" has been assigned to you"
+                message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
                 Notification.create(
                     :message            => message,
                     :user_id            => self.assignee.id,
