@@ -18,6 +18,15 @@ class PunchlistItem < ActiveRecord::Base
 
     def clean_name
         if assignee && assignee.full_name
+            unless assignee_name && assignee_name == assignee.full_name
+                message = truncate(body, length:15)
+                Notification.create(
+                    :message            => '"#{message}" has been assigned to you on #{project.name}',
+                    :user_id            => assignee.id,
+                    :notification_type  => "Worklist",
+                    :user               => assignee
+                )
+            end
             assignee_name = assignee.full_name
         end
     end
