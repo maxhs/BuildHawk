@@ -231,7 +231,6 @@ DEPENDENCIES
   nprogress-rails
   paperclip
   pg
-  postmark
   postmark-rails
   protected_attributes
   rails (= 4.0.0)
