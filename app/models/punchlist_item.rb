@@ -21,13 +21,7 @@ class PunchlistItem < ActiveRecord::Base
             unless assignee_name && assignee_name == assignee.full_name
                 truncated = truncate(body, length:15)
                 message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
-                Notification.create(
-                    :message            => message,
-                    :user_id            => self.assignee.id,
-                    :punchlist_item_id  => self.id,
-                    :notification_type  => "Worklist",
-                    :user               => self.assignee
-                )
+                Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist",:user => self.assignee).first_or_create
             end
             assignee_name = assignee.full_name
         end
