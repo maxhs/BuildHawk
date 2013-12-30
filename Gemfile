@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem "nested_form"
 gem "remotipart"
+gem 'postmark'
 gem 'postmark-rails'
 gem 'shadowbox-rails'
 gem 'sass-rails'
