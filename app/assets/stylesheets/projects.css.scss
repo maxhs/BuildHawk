@@ -78,7 +78,7 @@
 }
 
 .sidebarProjects {
-	div {
+	div.project {
 		margin: 10px auto 0;
 	}
 
@@ -94,7 +94,7 @@
 		margin-bottom:7px;
 	}
 
-	.progress-link {
+	.progress-link, .sidebar-progress-link {
 
 		.ui-progressbar-value {
 			margin-top:0;
