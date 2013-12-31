@@ -1,4 +1,5 @@
 $('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "new_photo", :locals => {:project => @project, :company => @company} %>');
 	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

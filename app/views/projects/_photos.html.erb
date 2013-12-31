@@ -1,5 +1,4 @@
 <div id="project-documents">
-	<table id="checklists-table">
 		<h2>Documents</h2>
 		<% @photos.each do |p| %>
 			<% if p.image_file_name %>
@@ -7,8 +6,8 @@
 			<% end %>
 		<% end %>
 
-		<tr><td style="padding-top:27px;text-align:center;"><%= link_to "Add photo", new_photo_project_path(@project), :style=>"margin:0 auto;",:remote => true %></td></tr>
-	</table>
+		<div style="padding-top:27px;text-align:center;"><%= link_to "Add photo", new_photo_project_path(@project), :style=>"margin:0 auto;",:id => "add-photo-link", :remote => true %></div>
+	
 
 	<script type="text/javascript">
 		$(document).ready(function(){

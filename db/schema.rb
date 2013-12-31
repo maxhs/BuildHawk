@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227202509) do
+ActiveRecord::Schema.define(version: 20131229154544) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20131227202509) do
     t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "photos_count"
+    t.integer  "comments_count"
   end
 
   add_index "checklist_items", ["subcategory_id", "checklist_id"], name: "checklist_items_ix"
@@ -134,6 +136,19 @@ ActiveRecord::Schema.define(version: 20131227202509) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "notifications", force: true do |t|
+    t.boolean  "read",              default: false
+    t.boolean  "sent",              default: false
+    t.integer  "user_id"
+    t.integer  "report_id"
+    t.integer  "punchlist_item_id"
+    t.integer  "checklist_item_id"
+    t.text     "message"
+    t.string   "notification_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "photos", force: true do |t|
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -188,6 +203,8 @@ ActiveRecord::Schema.define(version: 20131227202509) do
     t.datetime "completed_at"
     t.integer  "completed_by_user_id"
     t.string   "assignee_name"
+    t.integer  "photos_count"
+    t.integer  "comments_count"
   end
 
   add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
