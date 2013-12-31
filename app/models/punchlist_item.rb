@@ -7,6 +7,7 @@ class PunchlistItem < ActiveRecord::Base
     belongs_to :punchlist
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
+    has_many :subs
     has_many :comments, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }

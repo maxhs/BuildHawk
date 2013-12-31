@@ -235,7 +235,6 @@ ActiveRecord::Schema.define(version: 20131231205818) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "count",      default: 0
   end
 
   create_table "reports", force: true do |t|
@@ -276,6 +275,8 @@ ActiveRecord::Schema.define(version: 20131231205818) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count",             default: 0
+    t.integer  "punchlist_item_id"
   end
 
   create_table "users", force: true do |t|
