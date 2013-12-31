@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: f369ca16f956979d7e2a68242399417197f43168
+  specs:
+    stripe (1.9.9)
+      mime-types (~> 1.25)
+      multi_json (>= 1.0.4, < 2)
+      rest-client (~> 1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -154,6 +163,8 @@ GEM
       redis (>= 3.0.0)
       resque (>= 1.20.0, < 1.25)
       rufus-scheduler (~> 2.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     roo (1.12.2)
       nokogiri
       rubyzip
@@ -256,6 +267,7 @@ DEPENDENCIES
   sdoc
   shadowbox-rails
   sqlite3
+  stripe!
   sunspot_rails (~> 2.1.0)
   sunspot_solr
   thin

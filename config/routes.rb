@@ -99,6 +99,7 @@ Buildhawk::Application.routes.draw do
   resources :photos
   resources :punchlists
   resources :reports
+  resources :charges
 
   #mobile API
   namespace :api do
