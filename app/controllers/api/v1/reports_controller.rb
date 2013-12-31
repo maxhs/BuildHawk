@@ -8,10 +8,12 @@ class Api::V1::ReportsController < Api::V1::ApiController
                 puts "u: #{u} and :#{u[:name]}"
                 user = User.find_by full_name: u[:name]
                 if user
-                    report.report_users.where(:user_id => user.id).first_or_create
+                    ru = report.report_users.where(:user_id => user.id).first_or_create
+                    ru.update_attribute :count, u[:count]
                     puts "creating a new report user: #{user.full_name}"
                 else
-
+                    report_sub = report.report_subs.create :count => u[:count], :name => u[:name]
+                    puts "just created a new report sub: #{report_sub}" 
                 end
             end
             params[:report].delete(:users)
