@@ -11,7 +11,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
                     report.report_users.where(:user_id => user.id).first_or_create
                     puts "creating a new report user: #{user.full_name}"
                 else
-                    
+
                 end
             end
             params[:report].delete(:users)
@@ -20,7 +20,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
         #project = report.project
         #@reports = project.reports
     	respond_to do |format|
-        	format.json { render_for_api :projects, :json => report, :root => :report}
+        	format.json { render_for_api :report, :json => report, :root => :report}
       	end
     end
 
@@ -28,14 +28,14 @@ class Api::V1::ReportsController < Api::V1::ApiController
     	project = Project.find params[:id]
     	reports = project.reports.sort_by(&:created_date)
     	respond_to do |format|
-        	format.json { render_for_api :projects, :json => reports, :root => :reports}
+        	format.json { render_for_api :report, :json => reports, :root => :reports}
       	end
     end
 
     def create
         @report = Report.create params[:report]
         respond_to do |format|
-            format.json { render_for_api :projects, :json => @report, :root => :report}
+            format.json { render_for_api :report, :json => @report, :root => :report}
         end
     end
 
@@ -43,7 +43,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
         report = Report.find params[:id]
         report.photos.create params[:photo]
         respond_to do |format|
-            format.json { render_for_api :projects, :json => report, :root => :report}
+            format.json { render_for_api :report, :json => report, :root => :report}
         end
     end
 
