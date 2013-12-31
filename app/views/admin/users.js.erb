@@ -3,4 +3,5 @@ $('#personnel-link').css('color','#cc0000');
 $('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "users", :locals => {:users => @users } %>');
 	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

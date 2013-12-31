@@ -6,4 +6,5 @@ $('#<%=@project.id%>-link').css('color','#cc0000');
 $('#main').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project, :checklist => @checklist } %>');
 	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

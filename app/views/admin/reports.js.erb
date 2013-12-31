@@ -3,4 +3,5 @@ $('#admin-reports-link').css('color','#cc0000');
 $('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "reports", :locals => {:reports => @reports } %>');
 	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

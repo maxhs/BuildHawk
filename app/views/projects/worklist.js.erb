@@ -3,4 +3,5 @@ $('.nav-punchlists a').addClass('current-page');
 $('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "worklist", :locals => {:punchlists => @punchlists } %>');
 	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

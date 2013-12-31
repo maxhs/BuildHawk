@@ -3,4 +3,5 @@ $('#new-user-link').css('color','#cc0000');
 $('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "new_user", :locals => {:user => @user } %>');
 	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

@@ -3,4 +3,5 @@ $('#nav-admin a').css('color','#cc0000');
 $('#pagescontainer').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "index" %>');
 	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

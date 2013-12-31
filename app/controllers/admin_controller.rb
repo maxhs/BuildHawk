@@ -55,7 +55,7 @@ class AdminController < ApplicationController
 	end
 
 	def reports
-
+		@projects = current_user.company.projects
 	end
 
 	def checklists

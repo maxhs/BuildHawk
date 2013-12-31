@@ -1,36 +1,38 @@
 <div id="reports-page" class="page">
-	<header>
-		<h2>Reports Index</h2>
-		<!--<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
+	<!--<header>
+		<h3 style="margin-top:0;">Reports Index</h3>
+		<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
 			<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
 			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
-		</div>-->
-	</header>
+		</div>
+	</header>-->
 
-
-<table class="table table-bordered table-responsive" id="reports">
-	<thead>
-		<tr>
-			<th>Report Date</th>
-			<th>Type</th>
-			<th>Last Updated</th>
-			<th>Photos</th>
-		</tr>
-	</thead>
-
-	<% if @reports && @reports.count > 0 %>
-		<tbody>
-			<% @reports.each do |report| %>
+<% @projects.each do |project| %>
+	<h4><%= link_to project.name, reports_project_path(project), :remote => true %> </h4>
+	<table class="table table-bordered table-responsive report">
+		<% if project.reports && project.reports.count > 0 %>
+			<thead>
 				<tr>
-					<td><%= parse_date report.create_at %></td>
-					<td><%= report.type %></td>
-					<td><%= parse_time report.updated_at%></td>
-					<td><% if report.photos && report.photos.count > 0 %><%= image_tag report.photos.first.image.url(:thumb), :class =>"admin-report-pic" %><% end %></td>
+					<th>Report Date</th>
+					<th>Type</th>
+					<th>Last Updated</th>
+					<th># Photos</th>
 				</tr>
-			<% end %>
-		</tbody>
+			</thead>
+			<tbody>
+				<% project.reports.each do |report| %>
+					<tr>
+						<td><%= link_to parse_date(report.created_at), show_report_project_path(project, :report_id => report.id), :remote => true %></td>
+						<td><%= report.report_type %></td>
+						<td><%= parse_time report.updated_at%></td>
+						<td><% if report.photos && report.photos.count > 0 %><%= image_tag report.photos.first.image.url(:thumb), :class =>"admin-report-pic" %><% else %>0<% end %></td>
+						
+					</tr>
+				<% end %>
+			</tbody>
 
-	<% else %>
-		<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;">No Reports</h4></td></tr>
-	<% end %>
-</table>
+		<% else %>
+			<tr><td colspan="12" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;font-weight:200;">No Reports</h4></td></tr>
+		<% end %>
+	</table>
+<% end %>
