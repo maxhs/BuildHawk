@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
 
     end
 
-    api_accessible :report, :extend => :projects do |t|
+    api_accessible :report
       t.add :id
       t.add :first_name
       t.add :last_name
