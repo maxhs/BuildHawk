@@ -52,7 +52,8 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :completed_date
   		t.add :status
       t.add :item_type
-      t.add :photo_count
+      t.add :photos_count
+      t.add :comments_count
   	end
 
     api_accessible :checklist, :extend => :projects do |t|
