@@ -5,7 +5,8 @@ class Api::V1::ReportsController < Api::V1::ApiController
         if params[:report][:users].present?
             users = params[:report][:users]
             users.each do |u|
-                user = User.find_by(full_name: u)
+                puts "u: #{u} and :#{u[:name]}"
+                user = User.find_by full_name: u[:name]
                 report.report_users.where(:user_id => user.id).first_or_create if user
                 puts "creating a new report user: #{user.full_name}"
             end
