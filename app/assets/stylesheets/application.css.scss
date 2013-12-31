@@ -26,19 +26,6 @@ html, body {
 	height: 100%;
 }
 
-a {
-	color:#777;
-	-webkit-transition: all 0.25s ease-out;
-	-moz-transition: all 0.25s ease-out;
-	-o-transition: all 0.25s ease-out;
-	transition: all 0.25s ease-out;
-}
-
-a:hover, a.current-page {
-	text-decoration:none;
-	color:#cc0000;
-}
-
 .text-success {
 	color:#cc3333;
 }
@@ -81,7 +68,7 @@ body {
 	.navbar {
 		margin-bottom: 20px;
 		background-color: #f7f7f7;
-		border: 1px solid #e7e7e7;
+		border: 1.5px solid #ddd;
 		.navbar-header{
 			.navbar-brand {
 				padding:0 30px;
@@ -95,14 +82,20 @@ body {
 		}
 	}
 
+	.nav .caret {
+		border-top-color:#777;
+		border-bottom-color:#777;
+	}
+
 	.navbar-nav {
 
 		li:hover, li:hover a {
 			background:transparent;
 		}
 		> li > a {
-			font-size:1.2em;
-			font-weight:300;
+			font-size:16px;
+			font-family:'Gotham Book','Montserrat','Helvetica Neue','Helvetica',sans-serif;
+			text-transform:uppercase;
 			padding:15px 25px;
 		}
 
@@ -392,7 +385,11 @@ body {
 	background:#eee;
 	
 	a {
-		color:#777;
+		color:#222;
+		-webkit-transition: all 0.25s ease-out;
+		-moz-transition: all 0.25s ease-out;
+		-o-transition: all 0.25s ease-out;
+		transition: all 0.25s ease-out;
 	}
 
 	a:hover {
@@ -732,6 +729,25 @@ pre,.well{background:#FFFFFF;}
 	background-repeat:no-repeat;
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  src: asset-url('Montserrat-Regular.eot');
+  src: asset-url('Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+       asset-url('Montserrat-Regular.woff') format('woff'),
+       asset-url('Montserrat-Regular.ttf') format('truetype'),
+       asset-url('Montserrat-Regular.svg#Montserrat-Regular') format('svg');
+}
+
+@font-face {
+    font-family: 'Gotham Book';
+    src: asset-url('gotham-book-webfont.eot');
+    src: asset-url('gotham-book-webfont.eot?#iefix') format('embedded-opentype'),
+         asset-url('gotham-book-webfont.woff') format('woff'),
+         asset-url('gotham-book-webfont.ttf') format('truetype'),
+         asset-url('gotham-book-webfont.svg#gotham_bookregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* Override Bootstrap 3 font locations */
 @font-face {
