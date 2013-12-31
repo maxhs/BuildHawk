@@ -1,7 +1,7 @@
 <table id="add-report">
 	<tbody>
 		<%= nested_form_for @report, :url => {:action => :report }, :html=> {:multipart => true}, :method => :post do |f| %>
-			
+			<%= f.hidden_field :created_date, :value => parse_date(Time.now) %>
 			<tr><td style="padding:7px;"><span style="margin-right:20px"><h4 style="display:inline-block;">Report Type:</h4></span><%= f.select :report_type, options_for_select(@report.possible_types) %></td></tr>
 			<tr><td><h4>General Remarks</h4><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></td></tr>
 			<tr><td><h4>Weather</h4><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></td></tr>

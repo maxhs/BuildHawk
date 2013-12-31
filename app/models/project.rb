@@ -25,16 +25,26 @@ class Project < ActiveRecord::Base
       text    :punchlists do
         punchlists.map{|p| p.punchlist_items.map(&:body)}
       end
+      text    :reports do
+        reports.map{ |r| r.title }
+        reports.map{ |r| r.body }
+        reports.map{ |r| r.weather }
+      end
       text    :address do
         address.formatted_address
       end
       text    :company do
         company.name
       end
+      
       integer    :company do
         company.id
       end
       time    :created_at
+    end
+
+    def checklist_items
+      checklist.checklist_items
     end
 
     def add_punchlist
