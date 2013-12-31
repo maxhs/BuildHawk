@@ -39,6 +39,11 @@ class Company < ActiveRecord::Base
       t.add :id
   	end
 
+    api_accessible :report do |t|
+      t.add :name
+      t.add :id
+    end
+
     api_accessible :dashboard do |t|
     
     end
