@@ -1,6 +1,6 @@
 class ChecklistItem < ActiveRecord::Base
 	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :subcategory_id, :subcategory, :status, :critical_date, :completed_date,
-                    :photos, :photos_attributes, :checklist_id, :checklist, :order_index, :item_index
+                    :photos, :photos_attributes, :checklist_id, :checklist, :order_index, :item_index, :photos_count, :comments_count
   	
   	belongs_to :subcategory
     belongs_to :checklist
@@ -52,6 +52,7 @@ class ChecklistItem < ActiveRecord::Base
   		t.add :completed_date
   		t.add :status
       t.add :item_type
+      t.add :photo_count
   	end
 
     api_accessible :checklist, :extend => :projects do |t|

@@ -9,7 +9,11 @@ class CreateNotifications < ActiveRecord::Migration
     	t.belongs_to :checklist_item
     	t.text :message
     	t.string :notification_type
-      	t.timestamps
+      t.timestamps
     end
+    add_column :checklist_items, :photos_count, :integer
+    add_column :checklist_items, :comments_count, :integer
+    add_column :punchlist_items, :photos_count, :integer
+    add_column :punchlist_items, :comments_count, :integer
   end
 end

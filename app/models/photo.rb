@@ -6,8 +6,8 @@ class Photo < ActiveRecord::Base
 	belongs_to :project
 	belongs_to :report
 	belongs_to :company
-	belongs_to :punchlist_item
-	belongs_to :checklist_item
+	belongs_to :punchlist_item, counter_cache: true
+	belongs_to :checklist_item, counter_cache: true
     
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["2000x2000#", :jpg],
