@@ -41,7 +41,7 @@ class Report < ActiveRecord::Base
 
   	acts_as_api
 
-  	api_accessible :projects do |t|
+  	api_accessible :report do |t|
       t.add :id
       t.add :created_at
       t.add :updated_at
@@ -57,7 +57,7 @@ class Report < ActiveRecord::Base
       t.add :possible_types
       t.add :comments
       t.add :photos
-      t.add :users
-      t.add :subs
+      t.add :report_users
+      t.add :report_subs
   	end
 end

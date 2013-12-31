@@ -18,6 +18,10 @@ table#add-report {
 	input, textarea {
 		width:100%;
 	}
+	
+	select[multiple] {
+		min-height:100px;
+	}
 }
 #reports-page {
 

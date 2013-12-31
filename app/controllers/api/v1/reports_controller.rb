@@ -7,8 +7,12 @@ class Api::V1::ReportsController < Api::V1::ApiController
             users.each do |u|
                 puts "u: #{u} and :#{u[:name]}"
                 user = User.find_by full_name: u[:name]
-                report.report_users.where(:user_id => user.id).first_or_create if user
-                puts "creating a new report user: #{user.full_name}"
+                if user
+                    report.report_users.where(:user_id => user.id).first_or_create
+                    puts "creating a new report user: #{user.full_name}"
+                else
+                    
+                end
             end
             params[:report].delete(:users)
         end

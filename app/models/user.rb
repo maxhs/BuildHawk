@@ -127,4 +127,13 @@ class User < ActiveRecord::Base
     api_accessible :detail, :extend => :checklist do |t|
 
     end
+
+    api_accessible :report, :extend => :projects do |t|
+      t.add :id
+      t.add :first_name
+      t.add :last_name
+      t.add :full_name
+      t.add :email
+      t.add :phone_number
+    end
 end
