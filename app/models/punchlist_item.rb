@@ -12,19 +12,21 @@ class PunchlistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
-    after_commit :clean_name, :if => :persisted?
+    after_save :clean_name
+    after_commit :notify, :if => :persisted?
 
     default_scope { order('created_at') }
 
-    def clean_name
+    def clean_name 
         if assignee && assignee.full_name
-            unless assignee_name && assignee_name == assignee.full_name
-                truncated = truncate(body, length:20)
-                message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
-                Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist",:user => self.assignee).first_or_create
-            end
             assignee_name = assignee.full_name
         end
+    end
+
+    def notify
+        truncated = truncate(body, length:20)
+        message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
+        Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist",:user => self.assignee).first_or_create
     end
 
     acts_as_api
