@@ -1,5 +1,5 @@
 class ReportSub < ActiveRecord::Base
-	attr_accessible :report_id, :sub_id
+	attr_accessible :report_id, :sub_id, :count
 	belongs_to :report
 	belongs_to :sub
 
@@ -8,5 +8,6 @@ class ReportSub < ActiveRecord::Base
   	api_accessible :report do |t|
   		t.add :id
   		t.add :user
+  		t.add :count
   	end
 end
