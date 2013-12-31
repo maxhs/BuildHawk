@@ -39,6 +39,10 @@ class Report < ActiveRecord::Base
       ["Daily","Safety"]
     end
 
+    def subcontractors
+      report_users + report_subs
+    end
+
   	acts_as_api
 
   	api_accessible :report do |t|
@@ -57,7 +61,6 @@ class Report < ActiveRecord::Base
       t.add :possible_types
       t.add :comments
       t.add :photos
-      t.add :report_users
-      t.add :report_subs
+      t.add :subcontractors
   	end
 end
