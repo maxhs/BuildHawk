@@ -39,7 +39,7 @@ class Report < ActiveRecord::Base
       ["Daily","Safety"]
     end
 
-    def subcontractors
+    def personnel
       report_users + report_subs
     end
 
@@ -61,6 +61,6 @@ class Report < ActiveRecord::Base
       t.add :possible_types
       t.add :comments
       t.add :photos
-      t.add :subcontractors
+      t.add :personnel
   	end
 end
