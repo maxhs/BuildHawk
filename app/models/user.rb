@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
       end
     end
 
+    def personnel
+      company.subs
+    end
+
   	acts_as_api
 
   	api_accessible :user do |t|
@@ -92,6 +96,7 @@ class User < ActiveRecord::Base
 	    t.add :phone_number
       t.add :authentication_token
       t.add :coworkers
+      t.add :personnel
       t.add :company
       t.add :url100
       t.add :url200
