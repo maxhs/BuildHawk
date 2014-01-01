@@ -10,7 +10,6 @@
 		<h3 style="display:inline-block"><%=s.name%></h3><span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.checklist_items.count%>)</span>
 	</div>
 <% end %>
-
 				
 <%= link_to checklist_item_project_path(@project, :item_id => item.id), :remote => true do %>
 
@@ -50,4 +49,9 @@
 			</div>
 		<% end %>
 		</div>
+<% end %>
+<% if current_user.admin && item == item.subcategory.checklist_items.last %>
+	<div style="margin:30px 20px 10px">
+		<%= link_to "New Checklist Item", new_checklist_item_project_path(@project, :subcategory_id => item.subcategory.id), :class=>"new-checklist-item", :remote => true %>
+	</div>
 <% end %>

@@ -68,6 +68,8 @@ Buildhawk::Application.routes.draw do
       get :new_worklist_item
       get :edit_worklist_item
       get :edit_checklist_item
+      get :new_checklist_item
+      post :create_checklist_item
       post :worklist_item
       get :checklist
       get :checklist_item
@@ -138,5 +140,5 @@ Buildhawk::Application.routes.draw do
     end
   end
 
-  mount Resque::Server.new, :at => "/resque"
+  #mount Resque::Server.new, :at => "/resque"
 end

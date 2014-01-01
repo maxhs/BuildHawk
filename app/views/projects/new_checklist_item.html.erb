@@ -1,0 +1,11 @@
+<%= render :partial => "projects/sidebar" %>
+
+<%= render :partial => "projects/project_nav" %>
+
+	<p class="pull-left visible-xs" style="margin-right: 10px;">
+		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+	</p>
+	<div id="pages">
+		<% render :partial => "new_checklist_item", :locals => {:checklist_item => @checklist_item, :category_name => @category_name, :subcategory_name => @subcategory.name, :checklist => @checklist} %>
+	</div>
+</div>

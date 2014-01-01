@@ -161,6 +161,33 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def new_checklist_item
+		@checklist_item = ChecklistItem.new
+		@subcategory = Subcategory.find params[:subcategory_id]
+		@category = @subcategory.category
+		@checklist = @category.checklist
+		@category_name = @category.name
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :new_checklist_item
+		end
+	end
+
+	def create_checklist_item
+		puts "creating a checklist item: #{params}"
+		@checklist_item = ChecklistItem.create params[:checklist_item]
+		if request.xhr?
+			respond_to do |format|
+				format.js {render :template => "projects/create"}
+			end
+		else
+			render :checklist
+		end
+	end
+
 	def category
 		@category = Category.find params[:category_id]
 		if request.xhr?

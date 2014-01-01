@@ -1,0 +1,27 @@
+<div class="checklist-item-form border-box">
+	<div class="row">
+		<span class="col-md-5 header-description"><h2><%= @category_name %></h2></span>
+	</div>
+	<div class="row">
+		<span class="col-md-5 header-description"><h4><%= @subcategory.name %></h4></span>
+	</div>
+
+	<%= nested_form_for @checklist_item, :url => {:controller => :projects, :action => :create_checklist_item}, :remote => true, :method => :post do |f| %>
+		<%= f.hidden_field :subcategory_id, :value => @subcategory.id %>
+		<%= f.hidden_field :checklist_id, :value => @checklist.id %>
+		<table style="margin: 0 auto; width:100%;display:block;">
+			<tbody>
+				<tr>
+					<td>
+						<%= f.text_area :body, :placeholder => "Describe the new checklist item" %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button class="btn btn-success btn-md pull-right" style="clear:both;"><%= f.submit "Add", :class => "no-link" %></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	<% end %>
+</div>

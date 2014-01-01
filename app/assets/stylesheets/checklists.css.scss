@@ -81,10 +81,6 @@
 		margin-left:20px;
 	}
 
-	button {
-		margin-top:-50px;
-	}
-
 	.date-input {
 		font-weight:200;
 		margin:0 auto 5px;
@@ -106,6 +102,33 @@
 
 	#clear-critical-date:hover {
 		color:#cc0000;
+	}
+}
+
+.new-checklist-item {
+	border:1px solid #ddd;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	padding:14px;
+}
+
+.new_checklist_item {
+	
+	table {
+		border-color:#fff;
+		border-width:0;
+		padding:0;
+		padding:20px 0 40px;
+	}
+
+	textarea {
+		width:100%;
+		display:block;
+	}
+
+	button {
+		margin-top:10px;
 	}
 }
 

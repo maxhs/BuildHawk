@@ -1,0 +1,8 @@
+$('#pages').fadeOut(100,function(){
+<% if @project %>
+	$(this).html('<%= j render :partial => "projects/checklist", :locals => {:checklist => @checklist, :project => @project} %>');
+<% else %>
+	$(this).html('<%= j render :partial => "admin/editor", :locals => {:checklist => @checklist} %>');
+<% end %>
+	$(this).fadeIn(100);
+});

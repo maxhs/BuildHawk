@@ -29,4 +29,18 @@ class ChecklistItemsController < ApplicationController
 			redirect_to checklist_project_path(@project)
 		end
 	end
+
+	def destroy
+		@checklist_item = ChecklistItem.find params[:id]
+		@checklist = @checklist_item.checklist
+		@project = @checklist_item.subcategory.category.checklist.project
+		@checklist_item.destroy
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			redirect_to checklist_project_path(@project)
+		end
+	end
 end

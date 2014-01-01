@@ -34,11 +34,11 @@ class ChecklistItem < ActiveRecord::Base
   	acts_as_api
 
     def subcategory_name
-      subcategory.name
+      subcategory.name if subcategory
     end
 
     def category_name
-      subcategory.category.name
+      subcategory.category.name if subcategory && subcategory.category
     end
 
     def check_completed
