@@ -1,7 +1,7 @@
 $('a').css('color','#222');
-$('#nav-uber-admin a').css('color','#cc0000');
+$('#nav-about a').css('color','#cc0000');
 $('#pagescontainer').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "index" %>');
+	$(this).html('<%= j render :partial => "about" %>');
 	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

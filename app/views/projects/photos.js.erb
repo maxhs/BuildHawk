@@ -1,5 +1,5 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
-$('.nav-documents a').addClass('current-page');$('#pages').fadeOut(100,function(){
+$('.nav-documents a').addClass('current-page');$('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "photos", :locals => {:photos => @photos } %>');
-	$(this).fadeIn(100);
+	$(this).fadeIn(170);
 });

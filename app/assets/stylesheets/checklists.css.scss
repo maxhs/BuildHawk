@@ -42,10 +42,15 @@
 	}
 }
 
-
+.category-form {
+	background-color:#fff;
+	border:1px solid #ddd;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	padding:0 20px 20px;
+}
 .checklist-item-form{
-	padding:20px;
-	border:1px solid #eee;
 
 	select, select[multiple] {
 		font-size:1.25em;
@@ -116,10 +121,14 @@
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
 }
 .item-editor {
-	border:1px solid #eee;
+	border:1px solid #ddd;
 	display:block;
 	width:100%;
-	padding: 30px 30px 100px;
+	background-color:#fff;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	padding: 10px 30px 50px;
 	h3 {
 		display:inline-block;
 	}

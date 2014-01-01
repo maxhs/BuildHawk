@@ -1,6 +1,7 @@
 $('a').css('color','#222');
 $('#nav-projects a').css('color','#cc0000');
-$('#pagescontainer').fadeOut(100,function(){
+$('#pagescontainer').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(100);
+	$(this).fadeIn(170);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

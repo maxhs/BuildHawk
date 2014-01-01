@@ -1,5 +1,5 @@
 <%= nested_form_for @punchlist_item, :url => {:action => :update_worklist_item, :multipart => true }, :method => :post do |f| %>
-	<table id="add-punchlist">
+	<table id="add-punchlist" class="border-box" style="padding-top:20px;">
 		</tbody>
 			<tr><td><h3>Edit Work List item</h3></td></tr>
 			<tr><td><%= f.text_field :body, :placeholder => "Describe the work item" %></td></tr>

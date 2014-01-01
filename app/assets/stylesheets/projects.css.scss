@@ -6,7 +6,7 @@
 	min-height: 20px;
 	padding: 0px 20px;
 	margin-bottom: 20px;
-	background-color: #f7f7f7;
+	background-color: #fff;
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -21,7 +21,7 @@
 
 #new-project-form, #edit-project-form {
 	max-width:600px;
-	width:50%;
+	width:80%;
 	margin:0 auto;
 
 	form, input {
@@ -57,6 +57,7 @@
 
 #company-dashboard {
 	.company-project {
+		background-color:#fff;
 		min-height:200px;
 		border: 1px solid #ddd;
 		border-radius: 4px;

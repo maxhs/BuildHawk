@@ -1,4 +1,4 @@
-<table id="edit-user-form">
+<table id="edit-user-form" class="border-box">
 	<tr><td><h2>My settings</h2></td></tr>
 	<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
 		<%= hidden_field_tag :company_id, :value => current_user.company.id %>

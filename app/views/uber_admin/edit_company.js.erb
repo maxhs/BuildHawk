@@ -1,6 +1,7 @@
 $('.sidebarProjects div a').css('color','#222');
 $('#uber-admin-companies-link').css('color','#cc0000');
-$('#pages').fadeOut(100,function(){
+$('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "edit_company", :locals => {:company => @company } %>');
-	$(this).fadeIn(100);
+	$(this).fadeIn(170);
+	$("html, body").animate({ scrollTop: 0 }, 300);
 });

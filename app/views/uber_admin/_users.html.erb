@@ -1,51 +1,50 @@
-<div id="users-page" class="page">
-<header>
-	
-	<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
-		<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
-		<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
-	</div>
-</header>
+<div id="users-page" class="page border-box" style="padding-top:15px;padding-bottom:0px">
+	<header>
+		<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
+			<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
+			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+		</div>
+	</header>
 
+
+	<table class="table table-bordered table-responsive" id="users">
+		<thead>
+			<th>Photo</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Created On</th>
+		
+		</thead>
+
+		<tbody>
+			<% @users.each do |user| %>
+				<tr class="user-row">
+					<td style="width:100px;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
+					<td class="user-name"><%= link_to user.full_name, edit_user_uber_admin_index_path(:user_id => user.id), :remote => true %></td>
+					<td><%= user.email %></td>
+					<td><%= parse_time user.created_at %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<script>
+	$(document).ready(function(){
+	    $("#filter").keyup(function(){
+	        // Retrieve the input field text and reset the count to zero
+	        var filter = $(this).val(), count = 0;
+	        if ($(this).val().length == 0) {
+
+	        	$(".user-row").fadeIn(0);
+	        } else {
+		        $(".user-row .user-name").each(function(){
+		            // If the list item does not contain the text phrase fade it out
+		            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+		                $(this).parent().fadeOut(0);
+		            }
+		        });
+		    }
+	    });
+	});
+	</script>
 </div>
-
-<table class="table table-bordered table-responsive" id="users">
-	<thead>
-		<th>Photo</th>
-		<th>Name</th>
-		<th>Email</th>
-		<th>Created On</th>
-	
-	</thead>
-
-	<tbody>
-		<% @users.each do |user| %>
-			<tr class="user-row">
-				<td style="width:100px;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
-				<td class="user-name"><%= link_to user.full_name, edit_user_uber_admin_index_path(:user_id => user.id), :remote => true %></td>
-				<td><%= user.email %></td>
-				<td><%= parse_time user.created_at %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
-<script>
-$(document).ready(function(){
-    $("#filter").keyup(function(){
-        // Retrieve the input field text and reset the count to zero
-        var filter = $(this).val(), count = 0;
-        if ($(this).val().length == 0) {
-
-        	$(".user-row").fadeIn(0);
-        } else {
-	        $(".user-row .user-name").each(function(){
-	            // If the list item does not contain the text phrase fade it out
-	            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-	                $(this).parent().fadeOut(0);
-	            }
-	        });
-	    }
-    });
-});
-</script>

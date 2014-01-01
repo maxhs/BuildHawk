@@ -1,5 +1,5 @@
-$('#pages').fadeOut(100,function(){
+$('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "edit_report", :locals => {:report => @report } %>');
-	$(this).fadeIn(100);
+	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

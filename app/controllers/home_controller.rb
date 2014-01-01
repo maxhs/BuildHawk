@@ -10,6 +10,12 @@ class HomeController < ApplicationController
 	end
 
 	def about
-
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :about
+		end
 	end
 end
