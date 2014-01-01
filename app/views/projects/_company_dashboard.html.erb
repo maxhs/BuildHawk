@@ -26,7 +26,7 @@
 					</tr>
 					<% if project.checklist.upcoming_items.count > 0 %>
 						<tr>
-							<td class="dashboard-label">Upcoming</td>
+							<td class="dashboard-label">Upcoming:</td>
 							<td>
 								<ol>
 									<% project.checklist.upcoming_items.each do |item| %>
@@ -40,7 +40,8 @@
 							</td>
 						</tr>
 					<% else %>
-						<tr><td><h5 style="font-style:italic;color:#aaa;padding-left:7px;font-weight:200;font-size:14px;text-align:center;width:100%;">No upcoming items</h5></td></tr>
+						<tr><td class="dashboard-label">Upcoming:</td>
+							<td style="width:0;"><h5 style="font-style:italic;color:#aaa;padding-left:7px;font-weight:200;font-size:14px;text-align:center;width:100%;">No upcoming items</h5></td></tr>
 					<% end %>
 				</table>
 			</div>

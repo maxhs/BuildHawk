@@ -1,4 +1,4 @@
-$('.sidebarProjects > div a').css('color','#777');
+$('.sidebarProjects > div a').css('color','#222');
 $('#<%=@project.id%>-link').css('color','#cc0000');
 $('#main').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "show", :locals => {:project => @project} %>');

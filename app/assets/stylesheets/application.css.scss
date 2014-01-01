@@ -83,8 +83,8 @@ body {
 	}
 
 	.nav .caret {
-		border-top-color:#777;
-		border-bottom-color:#777;
+		border-top-color:#222;
+		border-bottom-color:#222;
 	}
 
 	.navbar-nav {
@@ -141,16 +141,17 @@ body {
 		a {
 			font-size:1.25em;
 			line-height:1.5em;
-			color:#aaa;
 			-webkit-transition: all 0.25s ease-out;
     		-moz-transition: all 0.25s ease-out;
+    		-o-transition: all 0.25s ease-out;
     		transition: all 0.25s ease-out;
     		text-decoration:none;
 		}
 
 		a:hover {
-			color:#222;
+			color:#cc0000 !important;
 		}
+
 		.links {
 			> div {
 				width: auto;

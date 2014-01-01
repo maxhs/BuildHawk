@@ -7,7 +7,7 @@
 	padding: 0px 20px;
 	margin-bottom: 20px;
 	background-color: #f7f7f7;
-	border: 1px solid #e7e7e7;
+	border: 1px solid #ddd;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -58,7 +58,7 @@
 #company-dashboard {
 	.company-project {
 		min-height:200px;
-		border: 1px solid #e7e7e7;
+		border: 1px solid #ddd;
 		border-radius: 4px;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
@@ -70,7 +70,7 @@
 			tr {
 				line-height:33px;
 				vertical-align:middle;
-				border:1px solid #eee;
+				border:1px solid #ddd;
 			}
 
 			.dashboard-label {
@@ -78,6 +78,11 @@
 				font-size:12px;
 				padding-right:21px;
 				padding-left:7px;
+			}
+
+			ol li {
+				line-height:23px;
+				padding-top:7px;
 			}
 		}
 	}
