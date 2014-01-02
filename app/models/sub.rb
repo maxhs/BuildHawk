@@ -18,4 +18,20 @@ class Sub < ActiveRecord::Base
     api_accessible :user, :extend => :report do |t|
 
     end
+
+    api_accessible :projects, :extend => :report do |t|
+
+    end
+
+    api_accessible :detail, :extend => :report do |t|
+
+    end
+
+    api_accessible :punchlist, :extend => :report do |t|
+
+    end
+
+    api_accessible :checklist, :extend => :report do |t|
+
+    end
 end
