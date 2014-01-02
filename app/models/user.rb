@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    def personnel
+    def subcontractors
       company.subs
     end
 
@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
 	    t.add :phone_number
       t.add :authentication_token
       t.add :coworkers
-      t.add :personnel
+      t.add :subcontractors
       t.add :company
       t.add :url100
       t.add :url200
