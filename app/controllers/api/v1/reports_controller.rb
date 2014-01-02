@@ -1,7 +1,7 @@
 class Api::V1::ReportsController < Api::V1::ApiController
 
     def update
-        @current_user = User.find params[:author_id] 
+        @current_user = User.find params[:report][:author_id] 
     	report = Report.find params[:id]
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
