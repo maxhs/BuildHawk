@@ -32,7 +32,7 @@
 				</td></tr>
 				
 				<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
-				<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=> "float:right", :class => "delete-report-link" %></td></tr>
+				<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=>"margin:0 auto;display:block;width:70px;text-align:center;float:right;" , :class => "delete-report-link" %></td></tr>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<% end %>
 		</tbody>

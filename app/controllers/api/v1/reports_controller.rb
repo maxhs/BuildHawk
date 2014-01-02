@@ -77,11 +77,10 @@ class Api::V1::ReportsController < Api::V1::ApiController
 
         if users
             users.each do |u|
-                puts "u: #{u} and :#{u[:name]}"
-                user = User.find_by full_name: u[:name]
+                puts "u: #{u} and :#{u[:full_name]}"
+                user = User.find_by full_name: u[:full_name]
                 if user
                     ru = @report.report_users.where(:user_id => user.id).first_or_create
-                    ru.update_attribute :count, u[:count]
                     puts "creating a new report user: #{user.full_name}"
                 end
             end

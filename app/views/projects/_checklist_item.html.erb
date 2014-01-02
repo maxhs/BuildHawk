@@ -62,7 +62,7 @@
 				<% if current_user.admin %>
 					<tr>
 						<td>
-							<%= link_to "Delete Item", checklist_item_path(@checklist_item), :method => :delete, :data => {:confirm => "Are you sure you want to delete this item?"}, :style=>"margin:0 auto;display:block; width:84px;text-align:center" %>
+							<%= link_to "Delete Item", checklist_item_path(@checklist_item), :method => :delete, :data => {:confirm => "Are you sure you want to delete this item?"}, :style=>"margin:0 auto;display:block;width:84px;text-align:center" %>
 						</td>
 					</tr>
 				<% end %>
