@@ -19,9 +19,16 @@ table#add-report {
 		width:100%;
 	}
 	
-	select[multiple] {
-		min-height:100px;
+	.select-container {
+		width:50%;
+		float:left;
+
+		select[multiple] {
+			min-height:100px;
+			width:80%;
+		}
 	}
+	
 }
 #reports-page {
 

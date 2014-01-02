@@ -3,22 +3,21 @@ class Api::V1::ReportsController < Api::V1::ApiController
     def update
         @current_user = User.find params[:author_id] 
     	report = Report.find params[:id]
-        if params[:report][:users].present?
-            users = params[:report][:users]
+        if params[:report][:report_users].present?
+            users = params[:report][:report_users]
             users.each do |u|
-                puts "u: #{u} and :#{u[:name]}"
-                user = User.find_by full_name: u[:name]
+                puts "u: #{u} and :#{u[:full_name]}"
+                user = User.find_by full_name: u[:full_name]
                 if user
                     ru = report.report_users.where(:user_id => user.id).first_or_create
-                    ru.update_attribute :count, u[:count]
                     puts "adding a new report user: #{user.full_name}"
                 end
             end
-            params[:report].delete(:users)
+            params[:report].delete(:report_users)
         end
 
-        if params[:report][:subs].present?
-            subs = params[:report][:subs]
+        if params[:report][:report_subs].present?
+            subs = params[:report][:report_subs]
             subs.each do |s|
                 puts "s: #{s} and :#{s[:name]}"
                 sub = Sub.find_by name: s[:name]
@@ -31,7 +30,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
                     puts "adding a new report sub: #{the_sub.name}"
                 end
             end
-            params[:report].delete(:subs)
+            params[:report].delete(:report_subs)
         end
 
     	report.update_attributes params[:report]
@@ -56,7 +55,6 @@ class Api::V1::ReportsController < Api::V1::ApiController
 
         if params[:report][:report_subs].present?
             subs = params[:report][:report_subs]
-            
             params[:report].delete(:report_subs)
         end
         @report = Report.create params[:report]

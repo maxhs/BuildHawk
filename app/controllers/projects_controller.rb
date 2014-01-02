@@ -231,6 +231,7 @@ class ProjectsController < ApplicationController
 	def new_report
 		@report = Report.new
 		@report.users.build
+		@report.subs.build
 		@report_title = "Add a New Report"
 		if request.xhr?
 			respond_to do |format|
@@ -258,6 +259,7 @@ class ProjectsController < ApplicationController
 		@report_title = ""
 		@report = Report.find params[:report_id]
 		@report.users.build
+		@report.subs.build
 	end
 
 	def update_report
@@ -393,6 +395,7 @@ class ProjectsController < ApplicationController
 		@company = current_user.company
 		@projects = @company.projects
 		@users = @company.users
+		@subs = @company.subs
 	end
 
 end
