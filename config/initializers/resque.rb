@@ -1,13 +1,13 @@
-# require 'resque'
-# require 'resque_scheduler'
-# require 'resque_scheduler/server'
+require 'resque'
+require 'resque_scheduler'
+require 'resque_scheduler/server'
 
-# ENV["REDISTOGO_URL"] ||= "redis://redistogo:f243c3ae15d561bc11eb16d98684f5bc@albacore.redistogo.com:9278/"
+ENV["REDISTOGO_URL"] ||= "redis://redistogo:f243c3ae15d561bc11eb16d98684f5bc@albacore.redistogo.com:9278/"
 
-# uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
-# Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
+Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
-# Resque.redis.namespace = "resque:buildhawk-rails"
+Resque.redis.namespace = "resque:buildhawk-rails"
 
 # If you want to be able to dynamically change the schedule,
 # uncomment this line.  A dynamic schedule can be updated via the
@@ -17,8 +17,8 @@
 # Note: This feature is only available in >=2.0.0.
 #Resque::Scheduler.dynamic = true
 
-#Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
+Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 
 # The schedule doesn't need to be stored in a YAML, it just needs to
 # be a hash.  YAML is usually the easiest.
-#Resque.schedule = YAML.load_file(Rails.root.join('config', 'resque_schedule.yml'))
+Resque.schedule = YAML.load_file(Rails.root.join('config', 'resque_schedule.yml'))

@@ -53,11 +53,21 @@
 			<tbody>
 				<% @checklist.categories.sort_by{|c|c.name.to_i}.each do |cat| %>
 					<tr style="font-size:1.1em;border-bottom:1px solid #eee;">
-						<td class="col-sm-4" style="padding:17px 0;"><%= cat.name %> </td>
+						<td class="col-sm-4" style="padding:17px 0;"><%= link_to cat.name, checklist_project_path(@project), :remote => true %></td>
 						<td class="col-sm-2"><span><%= cat.progress_percentage %></span></td>
 						<td class="col-sm-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></td>
 						<td class="col-sm-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></td>
-						<td class="col-sm-2">&nbsp;</td>
+						<td class="col-sm-2">
+							<% if cat.milestone_date && cat.completed_date %> 
+								<% diff = (cat.milestone_date.to_date-cat.completed_date.to_date).to_i %>
+								<% if diff < 0 %>
+									<span style="color:red"><%= diff %></span>
+								<% else %>
+									<span style="color:green">+<%= diff %></span>
+								<% end %>
+
+							<% end %> 
+						</td>
 					</tr>
 				<% end %>
 			</tbody>
