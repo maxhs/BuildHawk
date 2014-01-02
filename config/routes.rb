@@ -135,6 +135,7 @@ Buildhawk::Application.routes.draw do
       resources :reports do
         collection do
           post :photo
+          delete :remove_personnel
         end
       end
     end
