@@ -49,15 +49,15 @@ class Api::V1::ReportsController < Api::V1::ApiController
     end
 
     def create
-        if params[:report][:users].present?
-            users = params[:report][:users]
-            params[:report].delete(:users)
+        if params[:report][:report_users].present?
+            users = params[:report][:report_users]
+            params[:report].delete(:report_users)
         end
 
-        if params[:report][:subs].present?
-            subs = params[:report][:subs]
+        if params[:report][:report_subs].present?
+            subs = params[:report][:report_subs]
             
-            params[:report].delete(:subs)
+            params[:report].delete(:report_subs)
         end
         @report = Report.create params[:report]
         if subs
