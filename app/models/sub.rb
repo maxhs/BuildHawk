@@ -14,4 +14,8 @@ class Sub < ActiveRecord::Base
       	t.add :phone_number
         t.add :count
   	end
+
+    api_accessible :user, :extend => :report do |t|
+
+    end
 end
