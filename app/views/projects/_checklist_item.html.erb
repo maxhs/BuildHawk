@@ -70,19 +70,19 @@
 		</table>
 	<% end %>
 </div>
+<div class="border-box" style="margin-top:20px;">
+	<h3 style="text-align:center; width:80%;margin:20px auto; display:block;">Comments</h3>
+	<div id="comments-form">
+		<%= form_for @checklist_item.comments.new, :method => :post, :remote => true do |f| %>
+			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
+			<%= f.hidden_field :user_id, :value => current_user.id %>
+			<%= f.hidden_field :checklist_item_id, :value => @checklist_item.id %>
+			<button class="btn btn-success btn-md pull-right" style="margin-top:14px;"><%= f.submit "Post" %></button>
+		<% end %>
+	</div>
 
-<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h3>
-<div id="comments-form">
-	<%= form_for @checklist_item.comments.new, :method => :post, :remote => true do |f| %>
-		<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
-		<%= f.hidden_field :user_id, :value => current_user.id %>
-		<%= f.hidden_field :checklist_item_id, :value => @checklist_item.id %>
-		<button class="btn btn-success btn-md pull-right" style="margin-top:14px;"><%= f.submit "Post" %></button>
-	<% end %>
+	<%= render :partial => "projects/comments", :locals => {:comments => @checklist_item.comments} %>
 </div>
-
-<%= render :partial => "projects/comments", :locals => {:comments => @checklist_item.comments} %>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#dp").datepicker();

@@ -37,10 +37,10 @@
 		        if ($(this).val().length == 0) {
 		        	$(".row.checklist-item").fadeIn(0);
 		        } else {
-			        $(".row.checklist-item .checklist-body").each(function(){
+			        $(".row.checklist-item").each(function(){
 			            // If the list item does not contain the text phrase fade it out
 			            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-			                $(this).parent().fadeOut(0);
+			                $(this).fadeOut(0);
 			            }
 			        });
 			    }
