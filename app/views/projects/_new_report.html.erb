@@ -1,32 +1,46 @@
-<table id="add-report">
-	<tbody>
-		<%= nested_form_for @report, :url => {:action => :report }, :html=> {:multipart => true}, :method => :post do |f| %>
-			<%= f.hidden_field :created_date, :value => parse_date(Time.now) %>
-			<tr><td style="padding:7px;"><span style="margin-right:20px"><h4 style="display:inline-block;">Report Type:</h4></span><%= f.select :report_type, options_for_select(@report.possible_types) %></td></tr>
-			<tr><td><h4>General Remarks</h4><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></td></tr>
-			<tr><td><h4>Weather</h4><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></td></tr>
-			<tr><td style="padding:7px;"><h4>Select onsite personnel:</h4><%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :include_blank => false, :multiple => true %></td></tr>
+<div class="border-box">
+	<table id="add-report">
+		<tbody>
+			<%= nested_form_for @report, :url => {:action => :report }, :html=> {:multipart => true}, :method => :post do |f| %>
+				<tr><td><h4>Report Date</h4>
+						<div class="input-append date" data-date-format="dd-mm-yyyy">
+							<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+						</div>
+					</td></tr>
+				<tr><td><span style="margin-right:20px"><h4 style="display:inline-block;">Report Type:</h4></span><%= f.select :report_type, options_for_select(@report.possible_types) %></td></tr>
+				<tr><td><h4>General Remarks</h4><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></td></tr>
+				<tr><td><h4>Weather</h4><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></td></tr>
+				<tr><td style="padding:7px;"><h4>Select onsite personnel:</h4><%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :include_blank => false, :multiple => true %></td></tr>
 
-			<% @report.photos.each do |photo| %>
-				<tr><td style="padding:7px;"><%= image_tag photo.image.url(:medium) %>
-			<% end %>
-			<tr><td style="padding:7px;"><h4>Add a photo</h4>
-				<%= f.fields_for :photos, @report.photos.build do |photo| %>
-					<%= photo.file_field :image %>
-					<%= photo.hidden_field :report_id, :value => @report.id %>
-					<%= photo.hidden_field :project_id, :value => @project.id %>
-					<%= photo.hidden_field :source, :value => "Reports" %>
+				<% @report.photos.each do |photo| %>
+					<tr><td style="padding:7px;"><%= image_tag photo.image.url(:medium) %>
 				<% end %>
-			</td></tr>
-			
-			<% if @report.id %>
-				<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
-				<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :class => "delete-report-link" %></td></tr>
-			<% else %>
-				<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Submit" %></button></td></tr>
+				<tr><td style="padding:7px;"><h4>Add a photo</h4>
+					<%= f.fields_for :photos, @report.photos.build do |photo| %>
+						<%= photo.file_field :image %>
+						<%= photo.hidden_field :report_id, :value => @report.id %>
+						<%= photo.hidden_field :project_id, :value => @project.id %>
+						<%= photo.hidden_field :source, :value => "Reports" %>
+					<% end %>
+				</td></tr>
+				
+				<% if @report.id %>
+					<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
+					<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :class => "delete-report-link" %></td></tr>
+				<% else %>
+					<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Submit" %></button></td></tr>
+				<% end %>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+				<%= hidden_field_tag :project_id, @project.id %>
 			<% end %>
-			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-			<%= hidden_field_tag :project_id, @project.id %>
-		<% end %>
-	</tbody>
-</table>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#dp").datepicker();
+		$('#dp').datepicker().on('changeDate', function(){
+		    $('#dp').datepicker('hide');
+		});
+	});
+</script>

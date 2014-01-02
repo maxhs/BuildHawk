@@ -225,7 +225,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def reports
-		@reports = @project.reports.sort_by{|r| r.created_date}
+		@reports = @project.reports.sort_by{|r| r.date_for_sort}
 	end
 
 	def new_report

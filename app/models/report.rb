@@ -39,6 +39,10 @@ class Report < ActiveRecord::Base
       ["Daily","Safety"]
     end
 
+    def date_for_sort
+      Date.strptime(created_date,"%m/%d/%Y")
+    end
+
     def personnel
       report_users + report_subs
     end
