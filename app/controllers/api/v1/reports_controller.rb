@@ -23,8 +23,8 @@ class Api::V1::ReportsController < Api::V1::ApiController
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
                 puts "added a sub for report: #{sub.name}"
                 the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                the_sub.update_attribute :count, u[:count]
-                
+                puts "got the sub: #{the_sub.id}"
+                the_sub.update_attribute :count, s[:count]
             end
             params[:report].delete(:report_subs)
         end
@@ -44,6 +44,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
     end
 
     def create
+        @current_user = User.find params[:report][:author_id]
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             params[:report].delete(:report_users)
@@ -56,16 +57,12 @@ class Api::V1::ReportsController < Api::V1::ApiController
         @report = Report.create params[:report]
         if subs
             subs.each do |s|
-                puts "s: #{s} and :#{s[:name]}"
-                sub = Sub.find_by name: s[:name]
-                if sub
-                    the_sub = @report.report_subs.where(:sub_id => sub.id).first_or_create
-                    the_sub.update_attributes :count => u[:count], :company_id => @current_user.company.id
-                    puts "found a sub for report: #{the_sub.name}"
-                else 
-                    the_sub = @report.report_subs.create :name => s[:name], :count => u[:count], :company_id => @current_user.company.id
-                    puts "creating a new report sub: #{the_sub.name}"
-                end
+                puts "s: #{s} and #{s[:name]}"
+                sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
+                puts "added a sub for report: #{sub.name}"
+                the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
+                puts "got the sub: #{the_sub.id}"
+                the_sub.update_attribute :count, s[:count]
             end
         end
 
