@@ -150,6 +150,9 @@ body {
 	}
 
 	footer {
+		height:120px;
+		padding-top:25px;
+		border-top:1px solid #ddd;
 		background-color: #fff;
 		min-height: 75px;
 		font-size: 12px;
@@ -178,6 +181,28 @@ body {
 				padding-top: 25px;
 				padding-right: 50px;
 				
+			}
+		}
+
+		#container {		
+			width:50%;
+			margin: 0 auto;
+
+			ul {
+				display:inline-block;
+				width:40%;
+				font-weight:200;
+
+				li {
+					list-style:none;
+				}
+			}
+
+			#copyright {
+				position:relative;
+				bottom:0;
+				color:#aaa;
+				display:inline-block;
 			}
 		}
 	}
