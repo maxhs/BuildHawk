@@ -47,6 +47,7 @@ class Report < ActiveRecord::Base
 
   	api_accessible :report do |t|
       t.add :id
+      t.add :author
       t.add :created_at
       t.add :updated_at
       t.add :created_date
