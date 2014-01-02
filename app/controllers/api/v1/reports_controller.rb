@@ -19,16 +19,11 @@ class Api::V1::ReportsController < Api::V1::ApiController
         if params[:report][:report_subs].present?
             subs = params[:report][:report_subs]
             subs.each do |s|
-                puts "s: #{s} and :#{s[:name]}"
-                sub = Sub.find_by name: s[:name]
-                if sub
-                    the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                    the_sub.update_attributes :count => u[:count], :company_id => @current_user.company.id
-                    puts "found a sub for report: #{the_sub.name}"
-                else 
-                    the_sub = report.report_subs.create :name => s[:name], :count => u[:count], :company_id => @current_user.company.id
-                    puts "adding a new report sub: #{the_sub.name}"
-                end
+                puts "s: #{s} and #{s[:name]}"
+                sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
+                the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
+                the_sub.update_attributes :count => u[:count]
+                puts "added a sub for report: #{sub.name}"
             end
             params[:report].delete(:report_subs)
         end
