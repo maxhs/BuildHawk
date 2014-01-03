@@ -88,6 +88,7 @@ Buildhawk::Application.routes.draw do
       get :photos
       get :new_photo
       post :photo
+      delete :delete_item
       delete :delete_report
       delete :delete_photo
       post :update_report

@@ -163,6 +163,7 @@ class ProjectsController < ApplicationController
 
 	def new_checklist_item
 		@checklist_item = ChecklistItem.new
+		@item_index = params[:item_index]
 		@subcategory = Subcategory.find params[:subcategory_id]
 		@category = @subcategory.category
 		@checklist = @category.checklist
@@ -177,13 +178,29 @@ class ProjectsController < ApplicationController
 	end
 
 	def create_checklist_item
-		puts "creating a checklist item: #{params}"
+		index = params[:checklist_item][:item_index]
 		@checklist_item = ChecklistItem.create params[:checklist_item]
+		@checklist = @checklist_item.checklist
+		# @checklist.checklist_items.each do |i|
+		# 	i.update_attribute :item_index, i.item_index+1 if i.item_index > index.to_i
+		# end
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "projects/create"}
+				format.js {render :template => "projects/checklist"}
 			end
 		else
+			render :checklist
+		end
+	end
+
+	def delete_item
+		checklist_item = ChecklistItem.find params[:checklist_item_id]
+		@item_id = checklist_item.id
+		if checklist_item.destroy && request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		elsif checklist_item.destroy
 			render :checklist
 		end
 	end
