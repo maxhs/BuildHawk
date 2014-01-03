@@ -275,8 +275,12 @@ ActiveRecord::Schema.define(version: 20131231205818) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "count",             default: 0
+    t.integer  "count",              default: 0
     t.integer  "punchlist_item_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: true do |t|

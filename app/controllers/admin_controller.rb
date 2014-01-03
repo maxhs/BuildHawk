@@ -16,6 +16,7 @@ class AdminController < ApplicationController
 
 	def users
 		@users = current_user.company.users
+		@subs = current_user.company.subs
 	end
 
 	def new_user
@@ -29,6 +30,16 @@ class AdminController < ApplicationController
 	def update_user
 		@user = User.find params[:id]
 		@user.update_attributes params[:user]
+		redirect_to users_admin_index_path
+	end
+
+	def edit_sub
+		@sub = Sub.find params[:id]
+	end
+
+	def update_sub
+		@sub = Sub.find params[:id]
+		@sub.update_attributes params[:sub]
 		redirect_to users_admin_index_path
 	end
 
@@ -51,6 +62,12 @@ class AdminController < ApplicationController
 	def delete_user
 		@user = User.find params[:id]
 		@user.destroy
+		redirect_to users_admin_index_path
+	end
+
+	def delete_sub
+		@sub = Sub.find params[:id]
+		@sub.destroy
 		redirect_to users_admin_index_path
 	end
 

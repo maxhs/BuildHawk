@@ -1,9 +1,19 @@
 class Sub < ActiveRecord::Base
 	attr_accessible :name, :company_id, :company, :email, :phone_number, :count, :punchlist_item_id,
-                    :punchlist_item
+                  :punchlist_item, :image, :image_file_name
   	belongs_to :company
     belongs_to :punchlist_item
   	has_many :users
+
+    has_attached_file :image, 
+                  :styles => { :medium => ["600x600#", :jpg],
+                               :small  => ["200x200#", :jpg],
+                               :thumb  => ["100x100#", :jpg]
+                   },
+                  :storage        => :s3,
+                  :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
+                  :url            => "buildhawk.s3.amazonaws.com",
+                  :path           => "photo_image_:id_:style.:extension"
 
   	acts_as_api
 

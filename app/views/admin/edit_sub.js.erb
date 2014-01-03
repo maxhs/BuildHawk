@@ -1,0 +1,6 @@
+$('.sidebarProjects div a').css('color','#777');
+$('#personnel-link').css('color','#cc0000');
+$('#pages').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "edit_sub", :locals => {:sub => @sub } %>');
+	$(this).fadeIn(100);
+});

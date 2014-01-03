@@ -28,6 +28,7 @@ Buildhawk::Application.routes.draw do
     collection do
       get :users
       get :edit_user
+      get :edit_sub
       get :new_user
       post :create_user
       get :reports
@@ -44,8 +45,10 @@ Buildhawk::Application.routes.draw do
       get :edit_user
       post :update_billing
       post :update_user
+      post :update_sub
       post :update_checklist
       delete :delete_user
+      delete :delete_sub
     end
   end
   resources :uber_admin do
