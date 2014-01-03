@@ -7,7 +7,7 @@ class ReportSub < ActiveRecord::Base
 
   	api_accessible :report do |t|
   		t.add :id
-  		t.add :user
+  		t.add :sub
   		t.add :count
   	end
 end
