@@ -1,0 +1,7 @@
+$('.sidebarProjects div a').css('color','#222');
+$('#new-sub-link').css('color','#cc0000');
+$('#pages').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "new_sub", :locals => {:sub => @sub } %>');
+	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
+});

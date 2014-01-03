@@ -31,6 +31,8 @@ Buildhawk::Application.routes.draw do
       get :edit_sub
       get :new_user
       post :create_user
+      get :new_sub
+      post :create_sub
       get :reports
       get :checklists
       post :create_template

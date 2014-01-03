@@ -312,6 +312,7 @@ ActiveRecord::Schema.define(version: 20131231205818) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "active",                 default: true
+    t.boolean  "company_admin",          default: false
   end
 
   add_index "users", ["company_id"], name: "users_company_id_ix"

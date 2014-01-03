@@ -23,26 +23,6 @@ class AdminController < ApplicationController
 		@user = User.new
 	end
 
-	def edit_user
-		@user = User.find params[:id]
-	end
-
-	def update_user
-		@user = User.find params[:id]
-		@user.update_attributes params[:user]
-		redirect_to users_admin_index_path
-	end
-
-	def edit_sub
-		@sub = Sub.find params[:id]
-	end
-
-	def update_sub
-		@sub = Sub.find params[:id]
-		@sub.update_attributes params[:sub]
-		redirect_to users_admin_index_path
-	end
-
 	def create_user
 		@user = current_user.company.users.create params[:user]
 		if @user.save & request.xhr?
@@ -57,6 +37,46 @@ class AdminController < ApplicationController
 			flash[:notice] = "Unable to create user. Please make sure the form is complete."
 			render :new_user
 		end
+	end
+
+	def edit_user
+		@user = User.find params[:id]
+	end
+
+	def update_user
+		@user = User.find params[:id]
+		@user.update_attributes params[:user]
+		redirect_to users_admin_index_path
+	end
+
+	def new_sub
+		@sub = Sub.new
+	end
+
+	def create_sub
+		@sub = current_user.company.subs.create params[:sub]
+		if @sub.save & request.xhr?
+			@response_message = "Please make sure you've included a contact".html_safe
+			respond_to do |format|
+				format.js { render :template => "incorrect" }
+			end
+		elsif @sub.save
+			flash[:notice] = "Sub created"
+			redirect_to users_admin_index_path
+		else
+			flash[:notice] = "Unable to create sub. Please make sure the form is complete."
+			render :new_sub
+		end
+	end
+
+	def edit_sub
+		@sub = Sub.find params[:id]
+	end
+
+	def update_sub
+		@sub = Sub.find params[:id]
+		@sub.update_attributes params[:sub]
+		redirect_to users_admin_index_path
 	end
 
 	def delete_user
