@@ -277,6 +277,7 @@ ActiveRecord::Schema.define(version: 20131231205818) do
     t.datetime "updated_at"
     t.integer  "count",              default: 0
     t.integer  "punchlist_item_id"
+    t.string   "contact_name"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
