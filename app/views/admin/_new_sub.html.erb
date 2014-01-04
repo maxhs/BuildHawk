@@ -4,9 +4,13 @@
 		<%= form_for @sub, :url => create_sub_admin_index_path(@sub), :method => :post do |f| %>
 			<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+			<tr><td><%= f.label "Name" %></td></tr>
 			<tr><td><%= f.text_field :name, :placeholder => "Name", :class=>"tt-hint form-control" %></td></tr>
-			<tr><td><%= f.text_field :contact_name, :placeholder => "Contact name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Contact name" %></td></tr>
+			<tr><td><%= f.text_field :contact_name, :placeholder => "Contact Name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Contact email" %></td></tr>
 			<tr><td><%= f.email_field :email, :placeholder => "Contact email address", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Contact phone number" %></td></tr>
 			<tr><td><%= f.text_field :phone_number, :placeholder => "Contact phone number", :class=>"tt-hint form-control" %></td></tr>
 
 			<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Create" %></button></td></tr>
