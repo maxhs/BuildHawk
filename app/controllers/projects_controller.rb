@@ -348,7 +348,7 @@ class ProjectsController < ApplicationController
 				format.js
 			end
 		else 
-			redirect_to worklist_project_path(@project)
+			render :edit_worklist_item
 		end
 	end
 

@@ -1,1 +1,12 @@
-<% render :partial => "edit_worklist_item", :locals => {:punchlist_item => @punchlist_item} %>
+<%= render :partial => "projects/sidebar" %>
+
+<%= render :partial => "projects/project_nav" %>
+
+	<p class="pull-left visible-xs" style="margin-right: 10px;">
+		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+	</p>
+	<div id="pages">
+		<% render :partial => "edit_worklist_item", :locals => {:punchlist_item => @punchlist_item} %>
+	</div>
+</div>
+
