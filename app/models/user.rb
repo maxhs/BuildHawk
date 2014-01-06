@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     attr_accessible :first_name, :last_name, :user_id, :email, :password, :phone_number, :push_permissions, :email_permissions,
     				:full_name, :company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin,
-            :authentication_token
+            :authentication_token, :company_admin
 
     belongs_to :company
     
