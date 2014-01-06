@@ -1,6 +1,5 @@
 <table id="edit-user-form">
-	
-	<%= nested_form_for @sub, :url => update_sub_admin_path(@sub), :multipart => true, :method => :put do |f| %>
+	<%= nested_form_for @sub, :url => update_sub_admin_path(@sub), :multipart => true, :method => :patch do |f| %>
 		<tbody>
 			<tr><td><h2>Edit Subcontractor</h2></td></tr>
 			<%= hidden_field_tag :company_id, :value => current_user.company.id %>

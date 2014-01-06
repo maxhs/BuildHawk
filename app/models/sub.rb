@@ -1,6 +1,6 @@
 class Sub < ActiveRecord::Base
 	attr_accessible :name, :company_id, :company, :email, :phone_number, :count, :punchlist_item_id,
-                  :punchlist_item, :image, :image_file_name
+                  :punchlist_item, :image, :image_file_name, :contact_name
   	belongs_to :company
     belongs_to :punchlist_item
   	has_many :users

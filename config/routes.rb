@@ -45,10 +45,10 @@ Buildhawk::Application.routes.draw do
     end
     member do
       get :edit_user
-      post :update_billing
-      post :update_user
+      patch :update_billing
+      patch :update_user
       post :update_sub
-      post :update_checklist
+      patch :update_checklist
       delete :delete_user
       delete :delete_sub
     end
