@@ -23,10 +23,8 @@ class ProjectsController < ApplicationController
 	def index
 		if params[:company_id]
 			puts "fetching projects for uber admin"
-			company = Company.find params[:company_id]
-			@projects = company.projects
-		elsif current_user.company
-			@projects = current_user.company.projects
+			@company = Company.find params[:company_id]
+			@projects = @company.projects
 		end
 
 		if request.xhr?
