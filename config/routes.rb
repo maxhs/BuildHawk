@@ -78,8 +78,6 @@ Buildhawk::Application.routes.draw do
       post :worklist_item
       get :checklist
       get :checklist_item
-      get :category
-      post :update_category
       post :create_checklist_item
       get :reports
       get :new_report
@@ -102,7 +100,14 @@ Buildhawk::Application.routes.draw do
   end
   resources :companies
   resources :comments
-  resources :checklists
+  resources :checklists do 
+    member do 
+      get :category
+      get :subcategory
+      patch :update_category
+      patch :update_subcategory
+    end
+  end
   resources :checklist_items
   resources :photos
   resources :punchlists

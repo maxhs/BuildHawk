@@ -1,6 +1,0 @@
-$('#main * .navbar-nav > li > a').removeClass('current-page');
-$('.nav-checklists a').addClass('current-page');
-$('#pages').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/category" %>');
-	$(this).fadeIn(170);
-});

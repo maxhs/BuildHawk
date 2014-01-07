@@ -4,12 +4,13 @@
 		<% c = s.category %>
 		<div class="category">
 			<h1 style="display:inline-block"><%=c.name%></h1>
-			<%= link_to "Edit Phase", category_project_path(@project, :category_id => c.id), :style=>"margin-left:20px;", :remote => true %>
+			<%= link_to "Edit Phase", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :style=>"margin-left:20px;", :remote => true %>
 		</div>
 	<% end %>
 	<div class="subcategory">
 		<h3 style="display:inline-block"><%=s.name%></h3>
 		<span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.checklist_items.count%>)</span>
+		<%= link_to "Edit Category", subcategory_checklist_path(@project, :subcategory_id => s.id, :project_id => @project.id), :style=>"margin-left:20px;", :remote => true %>
 	</div>
 <% end %>			
 

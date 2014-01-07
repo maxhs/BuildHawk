@@ -49,6 +49,10 @@
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	padding:0 20px 20px;
+
+	input[type="text"] {
+		width:100%;
+	}
 }
 .checklist-item-form{
 
