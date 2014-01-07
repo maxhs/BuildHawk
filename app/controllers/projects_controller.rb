@@ -37,13 +37,12 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@projects = current_user.company.projects if current_user.company
 		@project = Project.find params[:id]
+		@projects = @project.company.projects
 		if @project.checklist 
 			@checklist = @project.checklist
 			items = @checklist.checklist_items
 			@item_count = items.count
-
 			@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
 			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
 			@recent_photos = @project.photos.last(5).sort_by(&:created_at).reverse
