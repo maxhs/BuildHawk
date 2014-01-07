@@ -1,5 +1,3 @@
-<h3> Editing </h3>
-
 <%= nested_form_for @item, :url => {:controller => :checklist_items, :action => :update, :id => @item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
 	<div class="item-editor" class="border-box;">
 		<div class="row">

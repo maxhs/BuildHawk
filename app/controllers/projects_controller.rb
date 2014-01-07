@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
 		unless @project.address
 			@project.build_address
 		end
-		@users = current_user.company.users
+		@users = @project.company.users
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -82,7 +82,7 @@ class ProjectsController < ApplicationController
 		@project = Project.find params[:id]
 		@project.update_attributes params[:project]
 		@checklist = @project.checklist
-		@projects = current_user.company.projects
+		@projects = @project.company.projects
 		if request.xhr?
 			respond_to do |format|
 				format.js

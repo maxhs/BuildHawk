@@ -15,7 +15,7 @@
 
 <%= link_to edit_checklist_item_path(item), :remote => true do %>
 	<div class="row checklist-item">
-		<div class="col-md-7 checklist-body" style="margin-left:20px;margin-right:-20px;">
+		<div class="col-md-6 checklist-body" style="margin-left:20px;margin-right:-20px;">
 			<%=item.body%>
 		</div>
 
@@ -38,8 +38,12 @@
 		<div class="col-md-1" style="text-align: center;">
 			Edit
 		</div>
+		<% end %>
+		<div class="col-md-1" style="text-align: center;">
+			<%= link_to "Delete", checklist_item_path(item), :method => :delete, :class => "delete-link", :remote => true %>
+		</div>
 	</div>
-<% end %>
+
 
 <% if item == item.subcategory.checklist_items.last %>
 	<div style="margin:30px 20px 10px">
