@@ -40,7 +40,6 @@ Buildhawk::Application.routes.draw do
       post :create_project
       get :billing
       get :editor
-      get :item_editor
       delete :delete_checklist
     end
     member do

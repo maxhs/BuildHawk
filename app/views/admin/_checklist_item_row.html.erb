@@ -13,7 +13,7 @@
 	</div>
 <% end %>
 
-<%= link_to item_editor_admin_index_path(@project, :item_id => item.id), :remote => true do %>
+<%= link_to edit_checklist_item_path(item), :remote => true do %>
 	<div class="row checklist-item">
 		<div class="col-md-7 checklist-body" style="margin-left:20px;margin-right:-20px;">
 			<%=item.body%>

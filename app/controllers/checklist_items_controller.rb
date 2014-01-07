@@ -34,14 +34,22 @@ class ChecklistItemsController < ApplicationController
 			else 
 				redirect_to core_checklist_uber_admin_index_path
 			end
-		elsif params[:project_id].present?
-			@project = Project.find params[:project_id]
+		elsif @checklist.project_id
+			@project = @checklist.project
 			if request.xhr?
 				respond_to do |format|
-					format.js
+					format.js {render :template => "projects/checklist"}
 				end
 			else 
 				redirect_to checklist_project_path(@project)
+			end
+		else
+			if request.xhr?
+				respond_to do |format|
+					format.js { render :template => "admin/editor" }
+				end
+			else
+				render "admin/editor"
 			end
 		end
 				

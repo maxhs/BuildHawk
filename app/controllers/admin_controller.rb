@@ -103,21 +103,6 @@ class AdminController < ApplicationController
 		@checklist = Checklist.find params[:checklist_id]
 	end
 
-	def item_editor
-		@item = ChecklistItem.find params[:item_id]
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :item_editor
-		end
-	end
-
-	def update_item
-
-	end
-
 	def create_template
 		@company = Company.find params[:company_id]
 		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
