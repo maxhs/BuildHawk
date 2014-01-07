@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131229154544) do
+ActiveRecord::Schema.define(version: 20131231205818) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 20131229154544) do
     t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count",      default: 0
   end
 
   create_table "report_users", force: true do |t|
@@ -249,6 +250,7 @@ ActiveRecord::Schema.define(version: 20131229154544) do
     t.string   "weather_icon"
     t.string   "temp"
     t.string   "wind"
+    t.string   "precip"
   end
 
   add_index "reports", ["author_id", "project_id"], name: "reports_ix"
@@ -274,6 +276,13 @@ ActiveRecord::Schema.define(version: 20131229154544) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count",              default: 0
+    t.integer  "punchlist_item_id"
+    t.string   "contact_name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -304,6 +313,7 @@ ActiveRecord::Schema.define(version: 20131229154544) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "active",                 default: true
+    t.boolean  "company_admin",          default: false
   end
 
   add_index "users", ["company_id"], name: "users_company_id_ix"
