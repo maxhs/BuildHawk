@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
                       :storage        => :s3,
                       :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
                       :url            => "buildhawk.s3.amazonaws.com",
-                      :path           => "photo_image_:id_:style.:extension"
+                      :path           => "user_image_:id_:style.:extension"
 
     validates_presence_of :first_name
     validates_presence_of :last_name

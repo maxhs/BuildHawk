@@ -4,7 +4,7 @@
 			<%= form_for @checklist, :url => upload_template_uber_admin_index_path, :multipart => true, :method => :post do |f| %>
 			<h3>Upload New Master Checklist Template</h3>
 				<tr><td><%= f.file_field :file %></td></tr>
-				<tr><td><button class="btn btn-success btn-lg"><%= f.submit "Upload New Core" %></button></td></tr>
+				<tr><td><button class="btn btn-success btn-lg" style="margin:20px auto 0"><%= f.submit "Upload New Core" %></button></td></tr>
 			<% end %>
 		</table>
 	</div>

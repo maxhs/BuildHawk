@@ -17,7 +17,7 @@ class Company < ActiveRecord::Base
                   :storage        => :s3,
                   :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
                   :url            => "buildhawk.s3.amazonaws.com",
-                  :path           => "photo_image_:id_:style.:extension"
+                  :path           => "company_image_:id_:style.:extension"
 
 
 	acts_as_api

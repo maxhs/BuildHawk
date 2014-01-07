@@ -2,7 +2,7 @@
 	<% if @companies && @companies.count > 0 %>
 		<thead>
 			<tr>
-				<th style="width: 100px;padding:0">Photo</th>
+				<th style="width: 100px;">Photo</th>
 				<th>Company Name</th>
 				<th>Projects</th>
 				<th>Users</th>
@@ -14,7 +14,7 @@
 		<tbody>
 			<% @companies.each do |company| %>
 				<tr>
-					<td style="width: 100px;padding:0"><% if company.image_file_name %><%= image_tag company.image.url(:thumb), :class =>"uber-admin-company-pic" %><% end %></td>
+					<td style="width: 100px;"><% if company.image_file_name %><%= image_tag company.image.url(:thumb), :class =>"uber-admin-company-pic" %><% end %></td>
 					<td><%= link_to company.name, projects_path(:company_id => company.id), :remote => true %></td>
 					<td><%= company.projects.count %></td>
 					<td><%= company.users.count %></td>
