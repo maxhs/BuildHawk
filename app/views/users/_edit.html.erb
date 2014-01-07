@@ -19,7 +19,7 @@
 		<tr><td><div style="padding:10px 0 30px;display:inline-block; width:25%;">Push Permissions</div> <%= f.check_box :push_permissions %></td></tr>
 		<% if @user.image_file_name %>
 			<tr><td>
-				<%= image_tag @user.image.url(:medium), :class => "user-pic" %>
+				<%= image_tag @user.image.url(:small), :class => "user-pic" %>
 			</td></tr>
 			<tr><td>
 				Replace your photo: <%= f.file_field :image %>
