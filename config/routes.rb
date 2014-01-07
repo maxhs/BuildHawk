@@ -73,12 +73,9 @@ Buildhawk::Application.routes.draw do
       get :new_worklist_item
       get :edit_worklist_item
       get :edit_checklist_item
-      get :new_checklist_item
-      post :create_checklist_item
       post :worklist_item
       get :checklist
       get :checklist_item
-      post :create_checklist_item
       get :reports
       get :new_report
       get :show_report
@@ -101,7 +98,9 @@ Buildhawk::Application.routes.draw do
   resources :companies
   resources :comments
   resources :checklists do 
-    member do 
+    member do
+      get :new_checklist_item
+      post :create_checklist_item 
       get :category
       get :subcategory
       patch :update_category

@@ -1,4 +1,9 @@
 class ChecklistItemsController < ApplicationController
+	def edit
+		@item = ChecklistItem.find params[:id]	
+		@core = params[:core] if params[:core].present?
+	end
+
 	def update
 		@checklist_item = ChecklistItem.find params[:id]
 		if params[:checklist_item][:critical_date].present?
@@ -20,14 +25,26 @@ class ChecklistItemsController < ApplicationController
 			@checklist_item.update_attribute :completed_by_user_id, current_user.id
 		end
 		@checklist = @checklist_item.subcategory.category.checklist
-		@project = @checklist.project
-		if request.xhr?
-			respond_to do |format|
-				format.js
+		if @checklist.core
+			@items = @checklist.items
+			if request.xhr?
+				respond_to do |format|
+					format.js {render :template => "uber_admin/core_checklist"}
+				end
+			else 
+				redirect_to core_checklist_uber_admin_index_path
 			end
-		else 
-			redirect_to checklist_project_path(@project)
+		elsif params[:project_id].present?
+			@project = Project.find params[:project_id]
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			else 
+				redirect_to checklist_project_path(@project)
+			end
 		end
+				
 	end
 
 	def destroy

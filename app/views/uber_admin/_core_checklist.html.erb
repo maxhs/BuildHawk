@@ -23,7 +23,7 @@
 						<td class="subcategory"><%= item.subcategory.name %></td>
 						<td><%= item.body %></td>
 						<td class="timestamp"><%= parse_time item.updated_at %></td>
-						<td class="edit"><%= link_to "Edit" %></td>
+						<td class="edit"><%= link_to "Edit", edit_checklist_item_path(item, :core => true), :remote => true %></td>
 					</tr>
 				<% end %>
 			</table>

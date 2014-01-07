@@ -38,6 +38,11 @@
 		<div class="col-md-1" style="text-align: center;">
 			Edit
 		</div>
+	</div>
+<% end %>
 
+<% if item == item.subcategory.checklist_items.last %>
+	<div style="margin:30px 20px 10px">
+		<%= link_to "New Checklist Item", new_checklist_item_checklist_path(item.checklist, :subcategory_id => item.subcategory.id, :item_index => item.item_index), :class=>"new-checklist-item", :remote => true %>
 	</div>
 <% end %>

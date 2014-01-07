@@ -101,9 +101,9 @@ body {
 		}
 	}
 
-	.nav .caret {
-		border-top-color:#222;
-		border-bottom-color:#222;
+	.nav .caret, .nav .caret:focus, .dropdown:hover, .navbar-nav:hover {
+		border-top-color:#222 !important;
+		border-bottom-color:#222 !important;
 	}
 
 	.navbar-nav {
@@ -475,7 +475,7 @@ body {
 				margin-bottom:14px;
 			}
 		}
-		
+
 		#login-page, #register-page, #forgot-page, #reset-page {
 			margin: 100px auto; 
 			max-width: 350px;

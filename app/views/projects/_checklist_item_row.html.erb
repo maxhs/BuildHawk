@@ -58,6 +58,6 @@
 
 <% if current_user.admin && item == item.subcategory.checklist_items.last %>
 	<div style="margin:30px 20px 10px">
-		<%= link_to "New Checklist Item", new_checklist_item_project_path(@project, :subcategory_id => item.subcategory.id, :item_index => item.item_index), :class=>"new-checklist-item", :remote => true %>
+		<%= link_to "New Checklist Item", new_checklist_item_checklist_path(@project, :subcategory_id => item.subcategory.id, :item_index => item.item_index, :project_id => @project.id), :class=>"new-checklist-item", :remote => true %>
 	</div>
 <% end %>
