@@ -44,7 +44,7 @@ class Report < ActiveRecord::Base
     end
 
     def personnel
-      users + subs
+      report_users + report_subs
     end
 
   	acts_as_api
@@ -67,7 +67,5 @@ class Report < ActiveRecord::Base
       t.add :comments
       t.add :photos
       t.add :personnel
-      #t.add :report_users
-      #t.add :report_subs
   	end
 end
