@@ -44,7 +44,7 @@ class Report < ActiveRecord::Base
     end
 
     def personnel
-      report_users + report_subs
+      users + subs
     end
 
   	acts_as_api

@@ -3,7 +3,6 @@ class Sub < ActiveRecord::Base
                   :punchlist_item, :image, :image_file_name, :contact_name
   	belongs_to :company
     belongs_to :punchlist_item
-  	has_many :users
 
     has_attached_file :image, 
                   :styles => { :medium => ["600x600#", :jpg],
