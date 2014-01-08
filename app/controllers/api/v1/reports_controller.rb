@@ -60,7 +60,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
                 puts "s: #{s} and #{s[:name]}"
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
                 puts "added a sub for report: #{sub.name}"
-                the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
+                the_sub = @report.report_subs.where(:sub_id => sub.id).first_or_create
                 puts "got the sub: #{the_sub.id}"
                 the_sub.update_attribute :count, s[:count]
             end
