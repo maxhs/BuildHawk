@@ -88,4 +88,7 @@ class Photo < ActiveRecord::Base
 
 	end
 
+	api_accessible :report, :extend => :dashboard do |t|
+
+	end
 end
