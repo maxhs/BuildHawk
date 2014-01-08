@@ -60,6 +60,7 @@ class Report < ActiveRecord::Base
   		t.add :body
       t.add :weather
       t.add :weather_icon
+      t.add :precip
       t.add :temp
       t.add :wind
   		t.add :report_fields
