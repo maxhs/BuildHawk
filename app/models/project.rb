@@ -23,7 +23,7 @@ class Project < ActiveRecord::Base
         address.formatted_address
       end
       text    :company do
-        company.name
+        company.name if company
       end
       time    :created_at
     end
