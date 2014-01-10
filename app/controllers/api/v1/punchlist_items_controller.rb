@@ -2,17 +2,14 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
 
     def update
     	@punchlist_item = PunchlistItem.find params[:id]
-        if params[:punchlist_item][:assignee].present?
-            user = User.where(:full_name => params[:punchlist_item][:assignee]).first
-            if user
-                @punchlist_item.update_attribute :assignee_id, user.id
-            else
-                sub = Sub.where(:name => params[:punchlist_item][:assignee], :company_id => @punchlist_item.punchlist.project.company.id).first_or_create
-                @punchlist_item.update_attribute :sub_assignee_id, sub.id
-            end
-            params[:punchlist_item].delete(:assignee)
-        elsif @punchlist_item.assignee_id != nil
-            @punchlist_item.update_attribute :assignee_id, nil 
+        if params[:punchlist_item][:user_assignee].present? 
+            user = User.where(:full_name => params[:punchlist_item][:user_assignee]).first
+            @punchlist_item.update_attribute :assignee_id, user.id
+        elsif params[:punchlist_item][:sub_assignee].present?
+            sub = Sub.where(:name => params[:punchlist_item][:assignee], :company_id => @punchlist_item.punchlist.project.company.id).first_or_create
+            @punchlist_item.update_attribute :sub_assignee_id, sub.id
+        else @punchlist_item.assignee_id != nil || @punchlist_item.sub_assignee_id != nil
+            @punchlist_item.update_attributes :assignee_id => nil, :sub_assignee_id => nil 
         end
 
     	@punchlist_item.update_attributes params[:punchlist_item]
