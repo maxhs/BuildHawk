@@ -32,8 +32,8 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
         @project = Project.find params[:project_id]
         puts "hey now: #{params[:punchlist_item]}"
 
-        if params[:punchlist_item].has_key?(:user_assignee) 
-            user_assignee = [:punchlist_item][:user_assignee]
+        if params[:punchlist_item].has_key?("user_assignee") 
+            user_assignee = [:punchlist_item]["user_assignee"]
             puts "punchlist item has a user assignee: #{user_assignee}"
             params[:punchlist_item].delete(:user_assignee)
         elsif params[:punchlist_item][:sub_assignee].present?
