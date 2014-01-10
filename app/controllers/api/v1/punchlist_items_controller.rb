@@ -30,6 +30,7 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
 
     def create
         @project = Project.find params[:project_id]
+        puts "hey now: #{params[:punchlist_item]}"
 
         if params[:punchlist_item][:user_assignee].present? 
             user_assignee = [:punchlist_item][:user_assignee]
