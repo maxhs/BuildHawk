@@ -14,8 +14,8 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
             @punchlist_item.update_attributes :assignee_id => nil, :sub_assignee_id => nil 
         end
         params[:punchlist_item].delete(:id)
-        if params[:status].present?
-            if params[:status] == "Completed"
+        if params[:punchlist_item][:status].present?
+            if params[:punchlist_item][:status] == "Completed"
                 @punchlist_item.update_attributes :completed => true, :completed_at => Time.now
             else
                 @punchlist_item.update_attributes :completed => false, :completed_at => nil
