@@ -52,8 +52,9 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      without_me = company.users.where("id != ?",self.id)
-      without_me.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
+      #without_me = company.users.where("id != ?",self.id)
+      #without_me.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
+      company.users
     end
 
     def url500
