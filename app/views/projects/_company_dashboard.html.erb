@@ -7,7 +7,7 @@
 				
 					<tr>
 						<td class="dashboard-label">Map:</td>
-						<td><%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %></td>
+						<td><%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)</td>
 					</tr>
 
 					<tr>
