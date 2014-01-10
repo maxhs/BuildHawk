@@ -10,7 +10,7 @@ class Photo < ActiveRecord::Base
 	belongs_to :checklist_item, counter_cache: true
     
   	has_attached_file 	:image, 
-	                    :styles => { :large => ["2000x2000#", :jpg],
+	                    :styles => { :large => ["2048x2048#", :jpg],
 	                                 :small  => ["200x200#", :jpg],
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },

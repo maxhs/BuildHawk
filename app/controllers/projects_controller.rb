@@ -43,7 +43,8 @@ class ProjectsController < ApplicationController
 			@checklist = @project.checklist
 			items = @checklist.checklist_items
 			@item_count = items.count
-			@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
+			#@recently_completed = items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
+			@recently_completed = @project.recent_feed.last(5)
 			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
 			@recent_photos = @project.photos.last(5).sort_by(&:created_at).reverse
 		end
