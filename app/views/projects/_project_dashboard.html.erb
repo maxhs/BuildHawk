@@ -32,9 +32,15 @@
 						</tr>
 					<% elsif class_name == "PunchlistItem" %>
 						<tr>	
-							<td class="col-md-1">- Worklist: </td>
+							<td class="col-md-1">Worklist: </td>
 							<td class="col-md-7"><%= link_to item.body, edit_worklist_item_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></td>
 							<td class="col-md-2"><%= parse_date item.completed_at %></td>
+						</tr>
+					<% elsif class_name == "Photo" %>
+						<tr>	
+							<td class="col-md-1">Document: </td>
+							<td class="col-md-7"><%= link_to item.image_file_name %></td>
+							<td class="col-md-2"><%= parse_date item.updated_at %></td>
 						</tr>
 					<% end %>
 				<% end %>
