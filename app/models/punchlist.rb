@@ -5,7 +5,7 @@ class Punchlist < ActiveRecord::Base
   	belongs_to :project
 
     def personnel
-        punchlist_items.map(&:subs).flatten + punchlist_items.map(&:assignee).flatten
+        punchlist_items.map(&:sub_assignee).flatten + punchlist_items.map(&:assignee).flatten
     end
 
 	acts_as_api
