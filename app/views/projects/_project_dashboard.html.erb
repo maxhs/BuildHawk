@@ -16,6 +16,9 @@
 	<h3>Recent Updates </h3>
 		<% if @recently_completed && @recently_completed.count > 0 %>
 			<table style="width:100%;">
+				<th>Type</th>
+				<th>Updated At</th>
+				<th>Item</th>
 				<% @recently_completed.each do |item| %>
 				<% class_name = item.class.name %>
 					<% if class_name == "ChecklistItem" %>
