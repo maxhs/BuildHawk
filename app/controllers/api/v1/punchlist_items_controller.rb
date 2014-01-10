@@ -29,7 +29,7 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
     end
 
     def create
-        @project = Project.find params[:project_id]
+        @project = Project.find params[:project_id].to_i
 
         if params[:punchlist_item][:assignee].present? 
             assignee = [:punchlist_item][:assignee]
