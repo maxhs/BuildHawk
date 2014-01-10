@@ -17,7 +17,6 @@
 		<% if @recently_completed && @recently_completed.count > 0 %>
 			<table style="width:100%;">
 				<% @recently_completed.each do |item| %>
-				<%= item.class %>
 				<% class_name = item.class.name %>
 					<% if class_name == "ChecklistItem" %>
 						<tr>	
@@ -27,7 +26,7 @@
 						</tr>
 					<% elsif class_name == "Report" %>
 						<tr>	
-							<td class="col-md-1">Report: </td>
+							<td class="col-md-1" style="">Report: </td>
 							<td class="col-md-7"><%= link_to item.body, show_report_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></td>
 							<td class="col-md-2"><%= item.created_date %></td>
 						</tr>
