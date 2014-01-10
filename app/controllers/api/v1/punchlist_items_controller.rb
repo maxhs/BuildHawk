@@ -31,20 +31,25 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
     def create
         @project = Project.find params[:project_id]
 
-        # if params[:punchlist_item][:assignee].present? 
-        #     assignee = [:punchlist_item][:assignee]
-        #     puts "punchlist item has an assignee: #{assignee}"
-        #     params[:punchlist_item].delete(:assignee)
-        # end
+        if params[:punchlist_item][:user_assignee].present? 
+            user_assignee = [:punchlist_item][:user_assignee]
+            puts "punchlist item has a user assignee: #{user_assignee}"
+            params[:punchlist_item].delete(:user_assignee)
+        elsif params[:punchlist_item][:sub_assignee].present?
+            sub_assignee = [:punchlist_item][:sub_assignee]
+            puts "punchlist item has a user assignee: #{sub_assignee}"
+            params[:punchlist_item].delete(:sub_assignee)
+        end
         puts "params after deleting: #{params}"
         @punchlist_item = @project.punchlists.last.punchlist_items.create params[:punchlist_item]
 
-        user = User.where(:full_name => assignee).first
-        if user
+        
+        if user_assignee
+            user = User.where(:full_name => user_assignee).first
             @punchlist_item.update_attribute :assignee_id, user.id
             puts "assignee is a user: #{user.full_name}"
-        else
-            sub = Sub.where(:name => assignee).first_or_create
+        elsif sub_assignee
+            sub = Sub.where(:name => sub_assignee).first_or_create
             @punchlist_item.update_attribute :assignee_id, sub.id
             puts "assignee is a sub: #{sub.name}"
         end
