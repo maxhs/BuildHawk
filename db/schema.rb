@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231205818) do
+ActiveRecord::Schema.define(version: 20140110203332) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -202,9 +202,9 @@ ActiveRecord::Schema.define(version: 20131231205818) do
     t.boolean  "completed",            default: false
     t.datetime "completed_at"
     t.integer  "completed_by_user_id"
-    t.string   "assignee_name"
     t.integer  "photos_count"
     t.integer  "comments_count"
+    t.integer  "sub_assignee_id"
   end
 
   add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
