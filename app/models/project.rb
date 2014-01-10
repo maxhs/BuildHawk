@@ -75,7 +75,7 @@ class Project < ActiveRecord::Base
       feed += Report.where(:project_id => id).order('updated_at DESC').limit(limit)
       feed += PunchlistItem.where(:punchlist_id => punchlists.first.id).order('updated_at DESC').limit(limit) if punchlists && punchlists.first
       feed += Photo.where(:project_id => id).order('updated_at DESC').limit(limit)
-      return feed.sort_by(&:updated_at).reverse
+      return feed.flatten.sort_by(&:updated_at).reverse.first(5)
     end
 
     acts_as_api

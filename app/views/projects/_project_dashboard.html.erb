@@ -17,25 +17,21 @@
 		<% if @recently_completed && @recently_completed.count > 0 %>
 			<table style="width:100%;">
 				<th>Type</th>
-				<th>Updated At</th>
+				<th>Last Updated</th>
 				<th>Item</th>
 				<% @recently_completed.each do |item| %>
 				<% class_name = item.class.name %>
 					<% if class_name == "ChecklistItem" %>
 						<tr>	
 							<td class="col-md-1">Checklist </td>
-							<% if item.completed_date %>
-								<td class="col-md-1">(<%= parse_date item.completed_date %>)</td>
-							<% else %>
-								<td class="col-md-1">(<%= parse_date item.updated_at %>)</td>
-							<% end %>
+							<td class="col-md-1">(<%= parse_date item.updated_at %>)</td>
 							<td class="col-md-8"><%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></td>
 							
 						</tr>
 					<% elsif class_name == "Report" %>
 						<tr>	
 							<td class="col-md-1">Report</td>
-							<td class="col-md-1">(<%= item.created_date %>)</td>
+							<td class="col-md-1">(<%= parse_date item.updated_at %>)</td>
 							<td class="col-md-8"><%= link_to item.body, show_report_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></td>
 							
 						</tr>
