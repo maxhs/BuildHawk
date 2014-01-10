@@ -6,7 +6,7 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
             user = User.where(:full_name => params[:punchlist_item][:user_assignee]).first
             @punchlist_item.update_attributes :assignee_id => user.id, :sub_assignee_id => nil
         elsif params[:punchlist_item][:sub_assignee].present?
-            sub = Sub.where(:name => params[:punchlist_item][:assignee], :company_id => @punchlist_item.punchlist.project.company.id).first_or_create
+            sub = Sub.where(:name => params[:punchlist_item][:sub_assignee], :company_id => @punchlist_item.punchlist.project.company.id).first_or_create
             @punchlist_item.update_attributes :sub_assignee_id => sub.id, :assignee_id => nil
         else @punchlist_item.assignee_id != nil || @punchlist_item.sub_assignee_id != nil
             @punchlist_item.update_attributes :assignee_id => nil, :sub_assignee_id => nil 
