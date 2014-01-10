@@ -42,8 +42,8 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
             @punchlist_item.update_attribute :assignee_id, user.id
             puts "assignee is a user: #{user.full_name}"
         elsif sub
-            @punchlist_item.update_attribute :assignee_id, sub.id
-            puts "assignee is a sub: #{sub.name}"
+            @punchlist_item.update_attribute :sub_assignee_id, sub.id
+            puts "sub assignee is a sub: #{sub.name}"
         end
 
         if @punchlist_item.save
