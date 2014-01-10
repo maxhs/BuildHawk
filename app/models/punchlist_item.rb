@@ -2,11 +2,12 @@ class PunchlistItem < ActiveRecord::Base
     include ActionView::Helpers::TextHelper
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :punchlist_id, :punchlist,
 					:photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id,
-                    :sub_assignee_id, :photos_count, :comments_count
+                    :sub_assignee_id, :sub_assignee, :photos_count, :comments_count
 
     belongs_to :punchlist
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
+    belongs_to :sub_assignee, :class_name => "Sub"
     has_many :comments, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
@@ -28,6 +29,7 @@ class PunchlistItem < ActiveRecord::Base
   		t.add :id
   		t.add :body
   		t.add :assignee
+        t.add :sub_assignee
   		t.add :location
   		t.add :completed_at
   		t.add :completed
