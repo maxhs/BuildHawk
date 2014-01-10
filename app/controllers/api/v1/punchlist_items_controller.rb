@@ -22,6 +22,9 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
             end
             params[:punchlist_item].delete(:status)
         end
+        unless params[:punchlist_item][:location].present?
+            @punchlist_item.update_attribute :location, nil
+        end
 
     	@punchlist_item.update_attributes params[:punchlist_item]
         
