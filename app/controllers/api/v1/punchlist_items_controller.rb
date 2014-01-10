@@ -14,15 +14,17 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
             @punchlist_item.update_attributes :assignee_id => nil, :sub_assignee_id => nil 
         end
         params[:punchlist_item].delete(:id)
-
-    	@punchlist_item.update_attributes params[:punchlist_item]
         if params[:status].present?
             if params[:status] == "Completed"
                 @punchlist_item.update_attributes :completed => true, :completed_at => Time.now
             else
                 @punchlist_item.update_attributes :completed => false, :completed_at => nil
             end
+            params[:punchlist_item].delete(:status)
         end
+
+    	@punchlist_item.update_attributes params[:punchlist_item]
+        
     	respond_to do |format|
         	format.json { render_for_api :punchlist, :json => @punchlist_item, :root => :punchlist_item}
       	end
