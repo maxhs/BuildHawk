@@ -31,11 +31,11 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
     def create
         @project = Project.find params[:project_id]
 
-        if params[:punchlist_item][:assignee].present? 
-            assignee = [:punchlist_item][:assignee]
-            puts "punchlist item has an assignee: #{assignee}"
-            params[:punchlist_item].delete(:assignee)
-        end
+        # if params[:punchlist_item][:assignee].present? 
+        #     assignee = [:punchlist_item][:assignee]
+        #     puts "punchlist item has an assignee: #{assignee}"
+        #     params[:punchlist_item].delete(:assignee)
+        # end
         puts "params after deleting: #{params}"
         @punchlist_item = @project.punchlists.last.punchlist_items.create params[:punchlist_item]
 
