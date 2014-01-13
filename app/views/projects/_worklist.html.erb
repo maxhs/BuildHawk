@@ -39,7 +39,7 @@
 								<%= item.assignee.full_name %>
 							<% elsif item.sub_assignee_id %>
 								<%= item.sub_assignee.name %>
-							<% end %>
+							<% else %>
 								<span style="color:#aaa;font-style:italic;">Not yet assigned</span>
 							<% end %>
 						</td>
