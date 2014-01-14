@@ -1,7 +1,7 @@
 <div class="border-box">
-	<table id="add-report">
-		<tbody>
-			<%= nested_form_for @report, :url => {:action => :update_report, :report_id => @report.id}, :multipart => true , :method => :post do |f| %>
+	<%= nested_form_for @report, :url => {:action => :update_report, :report_id => @report.id}, :multipart => true , :method => :post do |f| %>
+		<table id="add-report">
+			<tbody>
 				<tr><td><h4>Report Date</h4>
 					<div class="input-append date" data-date-format="dd-mm-yyyy">
 						<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
@@ -40,10 +40,10 @@
 				
 				<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
 				<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=>"margin:0 auto;display:block;width:70px;text-align:center;float:right;" , :class => "delete-report-link" %></td></tr>
-				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-			<% end %>
-		</tbody>
-	</table>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>	
+			</tbody>
+		</table>
+	<% end %>
 </div>
 
 <div class="border-box" style="margin-top:20px;">

@@ -9,7 +9,6 @@
 		<span class="col-md-12 item-body">- <%= @checklist_item.body %></span>
 	</div>
 
-
 	<%= nested_form_for @checklist_item, :url => {:controller => :checklist_items, :action => :update, :id => @checklist_item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
 		<table style="margin: 0 auto; width:100%;">
 			<tbody>

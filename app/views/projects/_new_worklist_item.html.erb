@@ -1,5 +1,5 @@
-<table id="add-punchlist" class="border-box" style="padding-top:20px;">
-	<%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :method => :post do |f| %>
+<%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :method => :post do |f| %>
+	<table id="add-punchlist" class="border-box" style="padding-top:20px;">
 		<tr><td><h3>Add a new Punchlist item</h3></td></tr>
 		<tr><td><%= f.text_field :body, :placeholder => "Describe the work item" %></td></tr>
 		<tr><td><%= f.text_field :location, :placeholder => "Add a location (optional)" %></td></tr>
@@ -18,5 +18,5 @@
 		</td></tr>
 		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Add" %></button></td></tr>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-	<% end %>
-</table>
+	</table>
+<% end %>
