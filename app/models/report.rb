@@ -40,7 +40,11 @@ class Report < ActiveRecord::Base
     end
 
     def date_for_sort
-      Date.strptime(created_date,"%m/%d/%Y")
+      if created_date
+        Date.strptime(created_date,"%m/%d/%Y")
+      else 
+        created_at
+      end
     end
 
     def personnel
