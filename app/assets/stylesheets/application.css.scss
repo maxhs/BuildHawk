@@ -113,7 +113,7 @@ body {
 		}
 		> li > a {
 			font-size:16px;
-			font-family:'Gotham Book','Montserrat','Helvetica Neue','Helvetica',sans-serif;
+			font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 			text-transform:uppercase;
 			padding:15px 25px;
 		}
@@ -781,15 +781,6 @@ body {
   footer {
   	display:none;
   }
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src: asset-url('Montserrat-Regular.eot');
-  src: asset-url('Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
-       asset-url('Montserrat-Regular.woff') format('woff'),
-       asset-url('Montserrat-Regular.ttf') format('truetype'),
-       asset-url('Montserrat-Regular.svg#Montserrat-Regular') format('svg');
 }
 
 @font-face {
