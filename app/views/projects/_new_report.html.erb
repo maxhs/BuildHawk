@@ -4,7 +4,7 @@
 			<tbody>
 				<tr><td><h4>Report Date</h4>
 						<div class="input-append date" data-date-format="dd-mm-yyyy">
-							<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+							<%= f.text_field :created_date, :value => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 						</div>
 					</td></tr>
 				<tr><td><span style="margin-right:20px"><h4 style="display:inline-block;">Report Type:</h4></span><%= f.select :report_type, options_for_select(@report.possible_types) %></td></tr>
