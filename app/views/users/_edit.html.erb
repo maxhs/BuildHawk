@@ -1,6 +1,6 @@
-<table id="edit-user-form" class="border-box">
+<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
+	<table id="edit-user-form" class="border-box">
 	<tr><td><h2>My settings</h2></td></tr>
-	<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
 		<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<tr><td><%= f.label "First name" %></td></tr>
@@ -29,7 +29,6 @@
 				Add a photo: <%= f.file_field :image %>
 			</td></tr>
 		<% end %>
-		
-		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
-	<% end %>
-</table>
+		<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
+	</table>
+<% end %>

@@ -1,7 +1,7 @@
 <div class="border-box">
-	<table id="new-user-form">
+	<%= form_for @sub, :url => create_sub_admin_index_path(@sub), :method => :post do |f| %>
+		<table id="new-user-form">
 		<tr><td><h2>Add Sub</h2></td></tr>
-		<%= form_for @sub, :url => create_sub_admin_index_path(@sub), :method => :post do |f| %>
 			<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<tr><td><%= f.label "Name" %></td></tr>
@@ -14,6 +14,6 @@
 			<tr><td><%= f.text_field :phone_number, :placeholder => "Contact phone number", :class=>"tt-hint form-control" %></td></tr>
 
 			<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Create" %></button></td></tr>
-		<% end %>
-	</table>
+		</table>
+	<% end %>
 </div>

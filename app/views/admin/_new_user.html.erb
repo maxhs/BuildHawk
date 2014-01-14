@@ -1,6 +1,6 @@
 <div class="border-box">
-	<table id="new-user-form">
-		<%= form_for @user, :url => create_user_admin_index_path(@user), :method => :post do |f| %>
+	<%= form_for @user, :url => create_user_admin_index_path(@user), :method => :post do |f| %>
+		<table id="new-user-form">
 			<tbody>
 				<tr><td><h2>Add User</h2></td></tr>
 				<%= hidden_field_tag :company_id, :value => current_user.company.id %>
@@ -23,6 +23,6 @@
 				<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Push Permissions?</div> <%= f.check_box :push_permissions %></td></tr>
 				<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Create" %></button></td></tr>
 			</tbody>
-		<% end %>
-	</table>
+		</table>
+	<% end %>
 </div>

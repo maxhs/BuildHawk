@@ -1,7 +1,7 @@
 <div class="border-box">
-	<table id="new-project-form">
-		<tr><td><h2>New Project</h2></td></tr>
-		<%= nested_form_for @project, :url => create_project_admin_index_path(@project), :method => :post do |f| %>
+	<%= nested_form_for @project, :url => create_project_admin_index_path(@project), :method => :post do |f| %>
+		<table id="new-project-form">
+			<tr><td><h2>New Project</h2></td></tr>
 			<%= f.hidden_field :company_id, :value => current_user.company.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<tr><td><%= f.text_field :name, :placeholder => "Project name" %></td></tr>
@@ -15,6 +15,6 @@
 			<tr><td style="padding:10px 0;"><h4>Select Checklist:</h4> <%= f.select :checklist, options_for_select(current_user.company.checklists.map(&:name)) %></td></tr>
 	        <tr><td style="padding:10px 0;"><h4>Assign Users:</h4> <%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :multiple => true %></td></tr>
 			<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Create" %></button></td></tr>
-		<% end %>
-	</table>
+		</table>
+	<% end %>
 </div>
