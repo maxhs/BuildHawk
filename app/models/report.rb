@@ -40,7 +40,7 @@ class Report < ActiveRecord::Base
     end
 
     def date_for_sort
-      if created_date
+      if created_date && created_date.length > 0
         Date.strptime(created_date,"%m/%d/%Y")
       else 
         created_at
