@@ -98,7 +98,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
         report = Report.find params[:report_id]
         if params[:sub_id].present?
             rs = report.report_subs.where(:sub_id => params[:sub_id]).first
-            if rs.destroy
+            if rs && rs.destroy
                 render :json=>{:success=>true}
             else
                 render :json=>{:success=>false}
