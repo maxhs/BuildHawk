@@ -46,7 +46,7 @@ Buildhawk::Application.routes.draw do
       get :edit_user
       patch :update_billing
       patch :update_user
-      post :update_sub
+      patch :update_sub
       patch :update_checklist
       delete :delete_user
       delete :delete_sub
