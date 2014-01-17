@@ -18,22 +18,22 @@ class Report < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
     # websolr
-    searchable do
-      text    :body
-      text    :weather
-      text    :title
-      integer :project_id
-      text    :temp
-      text    :wind
-      text    :report_fields
-      text    :report_type
-      text    :users do
-        users.map(&:full_name)
-        users.map(&:first_name)
-        users.map(&:last_name)
-      end
-      time    :created_at
-    end
+    # searchable do
+    #   text    :body
+    #   text    :weather
+    #   text    :title
+    #   integer :project_id
+    #   text    :temp
+    #   text    :wind
+    #   text    :report_fields
+    #   text    :report_type
+    #   text    :users do
+    #     users.map(&:full_name)
+    #     users.map(&:first_name)
+    #     users.map(&:last_name)
+    #   end
+    #   time    :created_at
+    # end
 
     def possible_types
       ["Daily","Safety"]
