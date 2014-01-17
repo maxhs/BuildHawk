@@ -88,46 +88,35 @@
 		</div>
 	<% if user_signed_in? %>
 		<div id="pagescontainer" class="container">
-			<% if current_page?(:controller=>:projects) && @projects %>
-				<script>
-					$('#nav-projects a').addClass('current-page');
-				</script>
-			<% elsif current_page?(:controller=>:admin) %>
-				<script>
-					$('#nav-admin a').addClass('current-page');
-				</script>
-				
-			<% elsif current_page?(:controller => :uber_admin) %>
-				<script>
-					$('#nav-uber-admin a').addClass('current-page');
-				</script>
-			<% end %>
-						<%= yield %>
-					
-					</div>
-				</div>
-			</div>
+			<%= yield %>
+		</div>
+	</div>
 			
-
 	<% else %>
 		<%= yield %>
 	<% end %>
-		<div id="push"></div>
+
+	<div id="push"></div>
+</div>
+
+<footer>
+	<div id="container">
+		<ul>
+			<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="/terms">Terms of Service</a></li>
+			<li><a href="/privacy">Privacy Policy</a></li>
+		</ul>
+
+		<div id="copyright">&copy; BuildHawk, 2013</div>
 	</div>
-	<footer>
-		<div id="container">
-			<ul>
-				<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
-				<li><a href="#contact">Contact</a></li>
-			</ul>
+</footer>
 
-			<ul>
-				<li><a href="/terms">Terms of Service</a></li>
-				<li><a href="/privacy">Privacy Policy</a></li>
-			</ul>
-
-			<div id="copyright">&copy; BuildHawk, 2013</div>
-		</div>
-	</footer>
 </body>
+<script type="text/javascript">
+	jQuery.ajaxSetup({ cache: true });
+</script>
 </html>
