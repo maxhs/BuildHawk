@@ -229,6 +229,46 @@ class ProjectsController < ApplicationController
 
 	def photos
 		@photos = @project.photos.sort_by(&:created_date).reverse
+		if request.xhr?
+			respond_to do |format|
+				format.js 
+			end
+		else 
+			render :photos
+		end
+	end	
+	def document_photos
+		@photos = @project.photos.sort_by(&:created_date).reverse
+		if request.xhr? && remotipart_submitted?
+			respond_to do |format|
+				format.js { render :template => "projects/photos"}
+			end
+		else 
+			render :photos
+		end
+	end	
+	def checklist_photos
+		@photos = @project.photos.where(:source => "Checklist")
+		if request.xhr? && remotipart_submitted?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :photos
+		end
+	end	
+	def worklist_photos
+		@photos = @project.photos.where(:source => "Worklist")
+		if request.xhr? && remotipart_submitted?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :photos
+		end
+	end	
+	def report_photos
+		@photos = @project.photos.where(:source => "Report")
 		if request.xhr? && remotipart_submitted?
 			respond_to do |format|
 				format.js

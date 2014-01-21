@@ -7,6 +7,10 @@
 	padding-bottom: 0;
 }
 
+#project-documents {
+	position:relative;
+}
+
 table#add-photo {
 	width:50%;
 	min-width:400px;
@@ -28,7 +32,7 @@ table#add-photo {
 	}
 }
 #add-photo-link {
-	width: 246px;
+	width: 180px;
 	font-size:14px;
 	display: block;
 	border-radius: 8px;
@@ -37,4 +41,33 @@ table#add-photo {
 	margin: 21px auto;
 	line-height: 30px;
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+}
+
+#filters {
+	position:relative;
+	top:-5px;
+	list-style:none;
+	display:inline-block;
+	font-size:1.2em;
+
+	li {
+		display:inline-block;
+		padding:0 20px;
+		vertical-align:middle;
+	}
+}
+
+#photo-table {
+	list-style:none;
+	display:inline-block;
+	width:20%;
+	vertical-align:top;
+	li {
+		display:block;
+	}
+}
+
+#photo-focus {
+	display:inline-block;
+	width:80%;
 }
