@@ -3,7 +3,7 @@
 		<h2 style="display:inline-block">Documents</h2>
 		
 		<ul id="filters">
-			<li><%= link_to "All", photos_project_path(@project), :remote => true %></li>
+			<li><%= link_to "All", all_photos_project_path(@project), :remote => true %></li>
 			<li><%= link_to "Documents", document_photos_project_path(@project), :remote => true %></li>
 			<li><%= link_to "Checklist", checklist_photos_project_path(@project), :remote => true %></li>
 			<li><%= link_to "Worklist", worklist_photos_project_path(@project), :remote => true %></li>
@@ -21,8 +21,8 @@
 		</div>
 
 		<div id="photo-focus">
-			<% p = @photos.last %>
-			<% if p.image_file_name %>
+			<% p = @photos.last if @photos && @photos.count %>
+			<% if p && p.image_file_name %>
 				<div class="image-block large" id="photo-<%=p.id%>">
 					<%= link_to p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
 						<%= image_tag p.image.url(:medium) %> 

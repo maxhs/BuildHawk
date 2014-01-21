@@ -227,11 +227,11 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def photos
+	def all_photos
 		@photos = @project.photos.sort_by(&:created_date).reverse
 		if request.xhr?
 			respond_to do |format|
-				format.js 
+				format.js
 			end
 		else 
 			render :photos

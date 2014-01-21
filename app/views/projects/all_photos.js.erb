@@ -1,0 +1,5 @@
+$('#main * .navbar-nav > li > a').removeClass('current-page');
+$('#photo-section').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "all_photos", :locals => {:photos => @photos } %>');
+	$(this).fadeIn(170);
+});
