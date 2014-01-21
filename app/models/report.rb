@@ -48,7 +48,7 @@ class Report < ActiveRecord::Base
     end
 
     def personnel
-      report_users.where("user_id IS NOT NULL") + report_subs.where("sub_id IS NOT NULL")
+      report_users + report_subs
     end
 
   	acts_as_api

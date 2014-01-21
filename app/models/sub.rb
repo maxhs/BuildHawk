@@ -4,6 +4,12 @@ class Sub < ActiveRecord::Base
   	belongs_to :company
     belongs_to :punchlist_item
 
+    before_destroy :clean_up
+
+    def clean_up
+        ReportSub.where(:sub_id => id).destroy_all
+    end
+
     has_attached_file :image, 
                   :styles => { :medium => ["600x600#", :jpg],
                                :small  => ["200x200#", :jpg],
