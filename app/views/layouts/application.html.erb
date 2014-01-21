@@ -20,6 +20,19 @@
 	    window.onload = function() {
 		    Shadowbox.setup(".shadow-photo");
 		}
+		jQuery.ajaxSetup({ cache: true });
+		var width = $(window).width()
+	    $('#alert,#notice').css("left",width/4);
+
+	  	if ($('#notice').text().length) {
+	        $($('#notice')).fadeIn(400, function() {
+	            $(this).delay(2500).fadeOut();
+	        });
+	    } else if ($('#alert').text().length) {
+	        $($('#alert')).fadeIn(400, function() {
+	            $(this).delay(2500).fadeOut();
+	        });
+	    }
 	</script>
 	<script type="text/javascript">
 
@@ -116,7 +129,5 @@
 </footer>
 
 </body>
-<script type="text/javascript">
-	jQuery.ajaxSetup({ cache: true });
-</script>
+
 </html>

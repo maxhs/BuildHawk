@@ -5,16 +5,19 @@
 		<%= hidden_field_tag :project_id, @project.id %>
 		<%= hidden_field_tag :company_id, @company.id %>
 		<%= hidden_field_tag :user_id, current_user.id %>
-		<tr><td><%= f.file_field :image %></td></tr>
-		<tr><td><%= f.text_field :source, :placeholder => "Add a label", :id => "source-label" %></td></tr>
-		<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Add" %></button></td></tr>
+		<tr><td><%= f.file_field :image, :style=>"padding-bottom:10px;" %></td></tr>
+		<tr><td><%= f.label "Documents Category (blueprints, contracts, etc)", :class => "hidden-fields" %></td></tr>
+		<tr><td><%= f.text_field :source, :placeholder => "Document label", :class => "hidden-fields" %></td></tr>
+		<tr><td><%= f.label "File Name", :class => "hidden-fields" %></td></tr>
+		<tr><td><%= f.text_field :name, :placeholder => "File name", :class => "hidden-fields" %></td></tr>
+		<tr><td><button class="btn btn-success btn-md pull-right hidden-fields"><%= f.submit "Add" %></button></td></tr>
 	</table>
 <% end %>
 
 <script type="text/javascript">
 	$(function() {
 	    $("input:file").change(function (){
-	    	$("#source-label").animate({"opacity":1},500);
+	    	$(".hidden-fields").animate({'opacity':'1'},500);
 	    });
 	    $("#new_photo").submit(function(event){  
 			$('#new-image-container').fadeOut(200,function(){
