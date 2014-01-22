@@ -34,13 +34,9 @@ class User < ActiveRecord::Base
     validates_presence_of :password, :if => :password_required?
 
     after_create :welcome
-    after_create :ensure_full_name
-    after_update :ensure_full_name
 
-    def ensure_full_name
-      unless full_name.length > 0
-        self.update_attribute :full_name, "#{first_name} #{last_name}"
-      end
+    def full_name
+      "#{first_name} #{last_name}"
     end
     
     def welcome
@@ -52,7 +48,6 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      #without_me = company.users.where("id != ?",self.id)
       company.users.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
     end
 
