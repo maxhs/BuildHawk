@@ -63,7 +63,6 @@ class Api::V1::ReportsController < Api::V1::ApiController
             subs.each do |s|
                 puts "s: #{s} and #{s[:name]}"
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
-                puts "added a sub for report: #{sub.name}"
                 the_sub = @report.report_subs.where(:sub_id => sub.id).first_or_create
                 puts "got the sub: #{the_sub.id}"
                 the_sub.update_attribute :count, s[:count]
@@ -87,7 +86,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
     end
 
     def photo
-        report = Report.find params[:id]
+        report = Report.find params[:report_id]
         report.photos.create params[:photo]
         respond_to do |format|
             format.json { render_for_api :report, :json => report, :root => :report}
