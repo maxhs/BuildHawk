@@ -11,7 +11,7 @@ module CreateProject
   			@checklist.save
   		end
   		@project = Project.create params
-  		@project.checklist = @checklisty
+  		@project.checklist = @checklist
   		puts "done creating project with checklist: #{@checklist.id}"
   	end
 end
