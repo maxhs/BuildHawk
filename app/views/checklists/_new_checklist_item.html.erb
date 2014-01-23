@@ -18,6 +18,12 @@
 						<%= f.text_area :body, :placeholder => "Describe the new checklist item" %>
 					</td>
 				</tr>
+				<tr><td><%= f.label "Item Type", :style => "margin-top:20px;" %></td></tr>
+				<tr>
+					<td>
+						<%= f.select :item_type, @checklist_item.types %>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<button class="btn btn-success btn-md pull-right" style="clear:both;"><%= f.submit "Add", :class => "no-link" %></button>

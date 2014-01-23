@@ -7,7 +7,10 @@
 			<h4>Category:</h4><%= @item.subcategory_name %>
 		</div>
 		<div class="row">
-			<h4>Item text:</h4><%= f.text_area :body, :style => "width:100%;margin-bottom:14px;" %>
+			<h4>Type:</h4>"<%= @item.item_type %>"
+		</div>
+		<div class="row">
+			<h4>Item:</h4><%= f.text_area :body, :style => "width:100%;margin-bottom:14px;" %>
 		</div>
 		<button class="btn btn-success btn-md pull-right" style="margin: 0 auto;"><%= f.submit "Update" %></button>
 	</div>

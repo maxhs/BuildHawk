@@ -38,6 +38,10 @@ class ChecklistItem < ActiveRecord::Base
       subcategory.name if subcategory
     end
 
+    def types
+      ["S&C","Doc","Com"]
+    end
+
     def category_name
       subcategory.category.name if subcategory && subcategory.category
     end
@@ -79,13 +83,14 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     api_accessible :dashboard, :extend => :projects do |t|
-      t.add :project_id
+      
     end
 
     api_accessible :detail, :extend => :projects do |t|
       t.add :photos
       t.add :comments
       t.add :category_name
+      t.add :project_id
     end
 
 end
