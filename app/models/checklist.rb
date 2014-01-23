@@ -88,13 +88,8 @@ class Checklist < ActiveRecord::Base
     end
 
     def assign_items
-        #if Rails.env.production?
-        #    puts "assigning items after create asynchronously"
-        #    Resque.enqueue(AssignItems,self)
-        #else
-        #    puts "local env"
-            checklist_items << categories.sort_by{|c|c.name.to_i}.map(&:subcategories).flatten.map(&:checklist_items).flatten
-        #end 
+
+        checklist_items << categories.sort_by{|c|c.name.to_i}.map(&:subcategories).flatten.map(&:checklist_items).flatten 
         sub_index = 0
         categories.sort_by{|c|c.name.to_i}.each do |i|
             i.update_attribute :order_index, sub_index

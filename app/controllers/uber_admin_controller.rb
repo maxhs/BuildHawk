@@ -114,7 +114,6 @@ class UberAdminController < ApplicationController
 				format.js { render :template => "uber_admin/companies"}
 			end
 		else
-			puts "shold be rendering index" 
 			redirect_to companies_uber_admin_index_path
 		end
 	end

@@ -1,5 +1,5 @@
 <div class="border-box">
-	<%= form_for @user, :url => create_user_admin_index_path(@user), :method => :post do |f| %>
+	<%= form_for @user, :url => create_user_admin_index_path(@user), :method => :post, :remote => true do |f| %>
 		<table id="new-user-form">
 			<tbody>
 				<tr><td><h2>Add User</h2></td></tr>

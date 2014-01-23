@@ -4,7 +4,7 @@
 			<tr><td><h2>Edit Subcontractor</h2></td></tr>
 			<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-			<tr><td><%= f.label "Name" %></td></tr>
+			<tr><td><%= f.label "Subcontractor name" %></td></tr>
 			<tr><td><%= f.text_field :name, :placeholder => "Name", :class=>"tt-hint form-control" %></td></tr>
 			<tr><td><%= f.label "Contact name" %></td></tr>
 			<tr><td><%= f.text_field :contact_name, :placeholder => "Contact Name", :class=>"tt-hint form-control" %></td></tr>

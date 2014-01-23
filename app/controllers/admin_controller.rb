@@ -24,7 +24,9 @@ class AdminController < ApplicationController
 	end
 
 	def create_user
-		@user = current_user.company.users.create! params[:user]
+		@user = current_user.company.users.create params[:user]
+		@users = current_user.company.users
+		@subs = current_user.company.subs
 		if @user.save & request.xhr?
 			@response_message = "User created".html_safe
 			respond_to do |format|
@@ -34,12 +36,12 @@ class AdminController < ApplicationController
 			flash[:notice] = "User created"
 			redirect_to users_admin_index_path
 		elsif request.xhr?
-			@response_message = "Please make sure you've included first name, last name, email and password".html_safe
+			@response_message = "Unable to create user. Please make sure the form is complete and the passwords match".html_safe
 			respond_to do |format|
-				format.js { render :template => "incorrect" }
+				format.js { render :template => "admin/incorrect" }
 			end
 		else
-			flash[:notice] = "Unable to create user. Please make sure the form is complete."
+			flash[:notice] = "Unable to create user. Please make sure the form is complete and the passwords match."
 			render :new_user
 		end
 	end
@@ -109,10 +111,8 @@ class AdminController < ApplicationController
 	end
 
 	def create_template
-		@company = Company.find params[:company_id]
-		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
-		@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id, :core => false
-		@checklists = @company.checklists
+		Resque.enqueue(CreateTemplate,params[:company_id])
+		flash[:notice] = "Creating checklist template...."
 		redirect_to checklists_admin_index_path
 	end
 
@@ -146,27 +146,15 @@ class AdminController < ApplicationController
 		@checklist = Checklist.new
 		if params[:project][:checklist].present?
 			list = Checklist.find_by(name: params[:project][:checklist])
-			@checklist =  list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
-			@checklist.save
 			params[:project].delete(:checklist)
+			Resque.enqueue(CreateProject,params[:project],list.id)
 		else 
-			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+			Resque.enqueue(CreateProject,params[:project],nil)
 			@checklist.save
 		end
-		@project = Project.create params[:project]
-		@project.checklist = @checklist
-		if @project.save && request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		elsif @project.save
-			redirect_to admin_index_path
-		else
-			@response_message = "Please make sure you've completed the form before submitting".html_safe
-			respond_to do |format|
-				format.js { render :template => "incorrect" }
-			end
-		end
+		
+		flash[:notice] = "Creating project now...."
+		redirect_to admin_index_path
 	end
 
 	def billing
