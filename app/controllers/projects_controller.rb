@@ -226,6 +226,16 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def documents
+		@photos = @project.photos.sort_by(&:created_date).reverse
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			
+		end
+	end
 	def all_photos
 		@photos = @project.photos.sort_by(&:created_date).reverse
 		if request.xhr?
@@ -233,47 +243,47 @@ class ProjectsController < ApplicationController
 				format.js
 			end
 		else 
-			render :photos
+			render :documents
 		end
 	end	
 	def document_photos
 		@photos = @project.photos.sort_by(&:created_date).reverse
 		if request.xhr? && remotipart_submitted?
 			respond_to do |format|
-				format.js { render :template => "projects/photos"}
+				format.js { render :template => "projects/documents"}
 			end
 		else 
-			render :photos
+			render :documents
 		end
 	end	
 	def checklist_photos
 		@photos = @project.photos.where(:source => "Checklist")
 		if request.xhr? && remotipart_submitted?
 			respond_to do |format|
-				format.js
+				format.js { render :template => "projects/documents"}
 			end
 		else 
-			render :photos
+			render :documents
 		end
 	end	
 	def worklist_photos
 		@photos = @project.photos.where(:source => "Worklist")
 		if request.xhr? && remotipart_submitted?
 			respond_to do |format|
-				format.js
+				format.js { render :template => "projects/documents"}
 			end
 		else 
-			render :photos
+			render :documents
 		end
 	end	
 	def report_photos
 		@photos = @project.photos.where(:source => "Report")
 		if request.xhr? && remotipart_submitted?
 			respond_to do |format|
-				format.js
+				format.js { render :template => "projects/documents"}
 			end
 		else 
-			render :photos
+			render :documents
 		end
 	end	
 
