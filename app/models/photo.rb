@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :user, :project_id, :project, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:punchlist_item_id, :phase
+					:punchlist_item_id, :phase, :name
 
 	belongs_to :user
 	belongs_to :project
@@ -65,6 +65,7 @@ class Photo < ActiveRecord::Base
 		t.add :phase
 		t.add :created_at
 		t.add :user_name
+		t.add :name
 		t.add :created_date
 	end
 
