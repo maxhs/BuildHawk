@@ -1,4 +1,4 @@
-<%= nested_form_for @project, :url => create_project_admin_index_path(@project), :method => :post do |f| %>
+<%= nested_form_for @project, :url => create_project_admin_index_path(@project), :method => :post, :remote => true do |f| %>
 	<div class="border-box">
 		<table id="new-project-form">
 			<tr><td><h2>New Project</h2></td></tr>

@@ -11,4 +11,4 @@
 		<tr><td>You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></tr>
 	<% end %>
 </table>
-<%= link_to "Create New Checklist Template", create_template_admin_index_path(:company_id => current_user.company.id), :id =>"new-checklist-link", :class => "no-link", :method => :post %>
+<%= link_to "Create New Checklist Template", create_template_admin_index_path(:company_id => current_user.company.id), :id =>"new-checklist-link", :class => "no-link", :method => :post, :remote => true %>

@@ -112,8 +112,15 @@ class AdminController < ApplicationController
 
 	def create_template
 		Resque.enqueue(CreateTemplate,params[:company_id])
-		flash[:notice] = "Creating checklist template...."
-		redirect_to checklists_admin_index_path
+		@response_message = "Creating checklist template..."
+		if request.xhr?
+			respond_to do |format|
+				format.js {render :template => "admin/background"}
+			end
+		else
+			flash[:notice] = "Creating checklist template..."
+			redirect_to checklists_admin_index_path
+		end
 	end
 
 	def delete_checklist
@@ -153,8 +160,15 @@ class AdminController < ApplicationController
 			@checklist.save
 		end
 		
-		flash[:notice] = "Creating project now...."
-		redirect_to admin_index_path
+		@response_message = "Creating project..."
+		if request.xhr?
+			respond_to do |format|
+				format.js {render :template => "admin/background"}
+			end
+		else
+			flash[:notice] = "Creating project..."
+			redirect_to admin_index_path
+		end
 	end
 
 	def billing
