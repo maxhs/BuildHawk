@@ -85,6 +85,7 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
+		t.add :folder
 		t.add :assignee, :if => :has_assignee?
 	end
 
