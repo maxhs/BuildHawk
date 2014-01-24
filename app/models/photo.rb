@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :user, :project_id, :project, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:punchlist_item_id, :phase, :name
+					:punchlist_item_id, :phase, :name, :punchlist_item
 
 	belongs_to :user
 	belongs_to :project
@@ -53,6 +53,18 @@ class Photo < ActiveRecord::Base
 		created_at.to_date
 	end
 
+	def assignee
+		if punchlist_item.assignee
+			punchlist_item.assignee.full_name
+		else
+			punchlist_item.sub_assignee.name
+		end
+	end
+
+	def has_assignee?
+		punchlist_item_id
+	end
+
 	api_accessible :dashboard do |t|
 		t.add :id
 		t.add :url_large
@@ -67,6 +79,7 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
+		t.add :assignee, :if => :has_assignee?
 	end
 
 	api_accessible :item, :extend => :dashboard do |t|
