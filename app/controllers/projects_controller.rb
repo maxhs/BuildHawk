@@ -364,7 +364,7 @@ class ProjectsController < ApplicationController
 	def photo
 		@photo = @project.photos.create params[:photo]
 		@photo.update_attributes :company_id => params[:company_id],:user_id => params[:user_id]
-		redirect_to photos_project_path(@project)
+		redirect_to documents_project_path(@project)
 	end
 
 	def delete_report
