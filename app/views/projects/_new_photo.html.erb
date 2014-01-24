@@ -6,8 +6,8 @@
 		<%= hidden_field_tag :company_id, @company.id %>
 		<%= hidden_field_tag :user_id, current_user.id %>
 		<tr><td><%= f.file_field :image, :style=>"padding-bottom:10px;" %></td></tr>
-		<tr><td><%= f.label "Documents Category (blueprints, contracts, etc)", :class => "hidden-fields" %></td></tr>
-		<tr><td><%= f.text_field :source, :placeholder => "Document label", :class => "hidden-fields" %></td></tr>
+		<tr><td><%= f.label "Folder (blueprints, contracts, etc)", :class => "hidden-fields" %></td></tr>
+		<tr><td><%= f.text_field :folder, :placeholder => "Folder label", :class => "hidden-fields" %></td></tr>
 		<tr><td><%= f.label "File Name", :class => "hidden-fields" %></td></tr>
 		<tr><td><%= f.text_field :name, :placeholder => "File name", :class => "hidden-fields" %></td></tr>
 		<tr><td><button class="btn btn-success btn-md pull-right hidden-fields"><%= f.submit "Add" %></button></td></tr>

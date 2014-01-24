@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :user, :project_id, :project, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:punchlist_item_id, :phase, :name, :punchlist_item
+					:punchlist_item_id, :phase, :name, :punchlist_item, :report, :folder
 
 	belongs_to :user
 	belongs_to :project
@@ -50,7 +50,13 @@ class Photo < ActiveRecord::Base
 	end
 
 	def created_date
-		created_at.to_date
+		if report
+			report.created_at.to_date
+		elsif punchlist_item
+			punchlist_item.created_at.to_date
+		else
+			created_at.to_date	
+		end
 	end
 
 	def assignee
