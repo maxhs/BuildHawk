@@ -2,18 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table#add-report {
+#add-report {
 	width:50%;
 	min-width:500px;
 	margin:20px auto 0;
 
-	td {
-		padding-bottom:20px;
+	.row {
+		padding-bottom:5px;
 	}
 
-	tbody {
-		width:100%;
-	}
 
 	input, textarea {
 		width:100%;

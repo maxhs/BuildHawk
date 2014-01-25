@@ -362,9 +362,14 @@ class ProjectsController < ApplicationController
 	end
 
 	def photo
-		@photo = @project.photos.create params[:photo]
+		@photo = @project.photos.create! params[:photo]
 		@photo.update_attributes :company_id => params[:company_id],:user_id => params[:user_id]
-		redirect_to documents_project_path(@project)
+		if @photo.save 
+			redirect_to documents_project_path(@project)
+		else
+			flash[:notice] = "didn't work"
+			redirect_to documents_project_path(@project)
+		end
 	end
 
 	def delete_report

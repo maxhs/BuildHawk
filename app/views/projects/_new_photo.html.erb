@@ -1,17 +1,16 @@
 <%= form_for @new_photo, :url => {:action => :photo, :multipart => true }, :method => :post do |f| %>
-	<table id="add-photo">
+	<div id="add-photo">
 		<h4 style="text-align:center;">New Document <span style="color:#aaa;font-size:16px;font-weight:normal;padding-left:10px;">(.png, .jpg/.jpeg, .gif, .pdf)</span></h4>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<%= hidden_field_tag :project_id, @project.id %>
 		<%= hidden_field_tag :company_id, @company.id %>
 		<%= hidden_field_tag :user_id, current_user.id %>
-		<tr><td><%= f.file_field :image, :style=>"padding-bottom:10px;" %></td></tr>
-		<tr><td><%= f.label "Folder (blueprints, contracts, etc)", :class => "hidden-fields" %></td></tr>
-		<tr><td><%= f.text_field :folder, :placeholder => "Folder label", :class => "hidden-fields" %></td></tr>
-		<tr><td><%= f.label "File Name", :class => "hidden-fields" %></td></tr>
-		<tr><td><%= f.text_field :name, :placeholder => "File name", :class => "hidden-fields" %></td></tr>
-		<tr><td><button class="btn btn-success btn-md pull-right hidden-fields"><%= f.submit "Add" %></button></td></tr>
-	</table>
+		<div><%= f.file_field :image, :style=>"padding-bottom:10px;" %></div>
+		<div><%= f.label "Folder (blueprints, contracts, etc) *", :class => "hidden-fields" %></div>
+		<div><%= f.text_field :folder, :placeholder => "Folder label", :class => "hidden-fields" %></div>
+		<div><%= f.label "File Name *", :class => "hidden-fields" %></div>
+		<div><%= f.text_field :name, :placeholder => "File name", :class => "hidden-fields" %></div>
+		<div><button class="btn btn-success btn-md pull-right hidden-fields"><%= f.submit "Add" %></button></div>
 <% end %>
 
 <script type="text/javascript">

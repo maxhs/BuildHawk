@@ -1,5 +1,5 @@
-$('a').css('color','#222');
-$('#nav-uber-admin a').css('color','#cc0000');
+$('a').removeClass('current-page');
+$('#nav-uber-admin a').addClass('current-page');
 $('#pagescontainer').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
 	$(this).fadeIn(170);

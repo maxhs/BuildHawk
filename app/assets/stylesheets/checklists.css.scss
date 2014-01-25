@@ -55,6 +55,8 @@
 	}
 }
 .checklist-item-form{
+	border:1px solid #eee;
+	padding:20px;
 
 	select, select[multiple] {
 		font-size:1.25em;
@@ -62,17 +64,7 @@
 		line-height:1.1em;
 		text-align:center;
 		height:110px;
-	}
-
-	table, tbody, tr, td, form {
-		display:block; 
-		width:100%;
-	}
-
-	table {
-		border:1px solid #eee;
-		padding:20px
-	}
+	}		
 
 	.item-body {	
 		font-size:17px;

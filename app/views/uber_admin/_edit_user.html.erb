@@ -1,43 +1,42 @@
 <div class='border-box'>
 	<%= nested_form_for @user, :url => {:action => :update_user}, :html => {:multipart => true}, :remote => true, :method => :post do |f| %>
-		<table id="edit-user-form">
-			<tr><td><h2>Edit User: <%=@user.full_name %></h2></td></tr>
+		<div id="edit-user-form">
+			<div><h2>Edit User: <%=@user.full_name %></h2></div>
 			<%= hidden_field_tag :user_id, @user.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-			<tr><td><%= f.label "Company" %></td></tr>
-			<tr><td><%= @user.company.name %> </td></tr>
-			<tr><td><%= f.label "First name" %></td></tr>
-			<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
-			<tr><td><%= f.label "Last name" %></td></tr>
-			<tr><td><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></td></tr>
+			<div><%= f.label "Company" %></div>
+			<div><%= @user.company.name %> </div>
+			<div><%= f.label "First name" %></div>
+			<div><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></div>
+			<div><%= f.label "Last name" %></div>
+			<div><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></div>
 
-			<tr><td><%= f.label "Email" %></td></tr>
-			<tr><td><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></td></tr>
-			<tr><td><%= f.label "Phone Number" %></td></tr>
-			<tr><td><%= f.text_field :phone_number, :placeholder => "Phone number", :class=>"tt-hint form-control" %></td></tr>
-			<tr><td><%= f.label "Password" %></td></tr>
-			<tr><td><%= f.password_field :password, :placeholder => "Password (only required if changing)", :class=>"tt-hint form-control" %></td></tr>
-			<tr><td><%= f.label "Password confirmation" %></td></tr>
-			<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (only required if changing)", :class=>"tt-hint form-control" %></td></tr>
-			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Admin</div> <%= f.check_box :admin %></td></tr>
-			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Company Admin</div> <%= f.check_box :company_admin %></td></tr>
-			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Uber Admin</div> <%= f.check_box :uber_admin %></td></tr>
+			<div><%= f.label "Email" %></div>
+			<div><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></div>
+			<div><%= f.label "Phone Number" %></div>
+			<div><%= f.text_field :phone_number, :placeholder => "Phone number", :class=>"tt-hint form-control" %></div>
+			<div><%= f.label "Password" %></div>
+			<div><%= f.password_field :password, :placeholder => "Password (only required if changing)", :class=>"tt-hint form-control" %></div>
+			<div><%= f.label "Password confirmation" %></div>
+			<div><%= f.password_field :password_confirmation, :placeholder => "Confirm password (only required if changing)", :class=>"tt-hint form-control" %></div>
+			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Admin</div> <%= f.check_box :admin %></div>
+			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Company Admin</div> <%= f.check_box :company_admin %></div>
+			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Uber Admin</div> <%= f.check_box :uber_admin %></div>
 
 			<% if @user.image_file_name %>
-				<tr><td>
+				<div>
 					<%= image_tag @user.image.url(:small), :class => "user-pic" %>
-				</td></tr>
-				<tr><td>
+				</div>
+				<div>
 					Replace photo: <%= f.file_field :image %>
-				</td></tr>
+				</div>
 			<% else %>
-				<tr><td>
+				<div>
 					Add a photo: <%= f.file_field :image %>
-				</td></tr>
+				</div>
 			<% end %>
 
-			<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></td></tr>
-			<tr><td><%= link_to "Delete User", destroy_user_uber_admin_index_path(:user_id => @user.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete this user?"}, :style=>"float:right;clear:both;padding:15px;" %></td></tr>
-		</table>
+			<div><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></div>
+			<div><%= link_to "Delete User", destroy_user_uber_admin_index_path(:user_id => @user.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete this user?"}, :style=>"float:right;clear:both;padding:15px;" %></div
 	<% end %>
 </div>

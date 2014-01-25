@@ -1,48 +1,85 @@
 <div class="border-box">
 	<%= nested_form_for @report, :url => {:action => :update_report, :report_id => @report.id}, :multipart => true , :method => :post do |f| %>
-		<table id="add-report">
-			<tbody>
-				<tr><td><h4>Report Date</h4>
-					<div class="input-append date" data-date-format="dd-mm-yyyy">
-						<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
-					</div>
-				</td></tr>
-				<tr><td><span style="margin-right:20px"><h4 style="display:inline-block;">Report Type:</h4></span><%= f.select :report_type, options_for_select(@report.possible_types) %></td></tr>
-				<tr><td><h4>General Remarks</h4><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></td></tr>
-				<tr><td><h4>Weather</h4><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></td></tr>
-				<tr><td style="padding:7px 0;">
-					<div class="select-container">
-						<h4>Onsite personnel:</h4>
-						<%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :include_blank => false, :multiple => true %>
-					</div>
-					<div class="select-container">
-						<h4>Subcontractors:</h4>
-						<%= f.select :sub_ids, @subs.all.collect {|u| [u.name, u.id]}, {}, :include_blank => false, :multiple => true %>
-					</div>
-				</td></tr>
-				<% if @report.photos && @report.photos.count > 0 %>
-					<tr><td style="padding:30px 0;padding-top:20px;">
-						<% @report.photos.each do |p| %>
-							<% if p.image_file_name%>
-								<%= render :partial => "image", :locals => {:p => p} %> 
-							<% end %>
+		<div id="add-report" class="container">
+			<div class="row">
+				<div class="col-md-12"><h4>Report Date</h4></div>
+			</div>
+
+			<div class="row">
+				<div class="input-append date col-md-12" data-date-format="dd-mm-yyyy">
+					<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3"><h4 style="display:inline-block;">Report Type:</h4></div>
+				<div class="col-md-9"><%= f.select :report_type, options_for_select(@report.possible_types) %></div>
+			</div>
+				
+			<div class="row">
+				<div class="col-md-12"><h4>General Remarks</h4></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12"><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12"><h4>Weather</h4></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6"><h4>Onsite personnel:</h4></div>
+				<div class="col-md-6"><h4>Subcontractors:</h4></div>
+			</div>
+
+			<div class="row">
+				<div class="select-container col-md-6">
+					<%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :include_blank => false, :multiple => true %>
+				</div>
+				<div class="select-container col-md-6">
+					
+					<%= f.select :sub_ids, @subs.all.collect {|u| [u.name, u.id]}, {}, :include_blank => false, :multiple => true %>
+				</div>
+			</div>
+
+			<% if @report.photos && @report.photos.count > 0 %>
+				<div class="row">
+					<% @report.photos.each do |p| %>
+						<% if p.image_file_name%>
+							<%= render :partial => "image", :locals => {:p => p} %> 
 						<% end %>
-					</td></tr>
-				<% end %>
-				<tr><td style="padding:7px 0;"><h4>Add a photo</h4>
+					<% end %>
+				</div>
+			<% end %>
+
+			<div class="row">
+				<div class="col-md-12"><h4>Add a photo</h4></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
 					<%= f.fields_for :photos, @report.photos.build do |photo| %>
 						<%= photo.file_field :image %>
 						<%= photo.hidden_field :report_id, :value => @report.id %>
 						<%= photo.hidden_field :project_id, :value => @project.id %>
 						<%= photo.hidden_field :source, :value => "Reports" %>
 					<% end %>
-				</td></tr>
-				
-				<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
-				<tr><td><%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=>"margin:0 auto;display:block;width:70px;text-align:center;float:right;" , :class => "delete-report-link" %></td></tr>
-				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>	
-			</tbody>
-		</table>
+				</div>
+			</div>
+			
+			<div class="row">
+				<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
+			</div>
+
+			<div class="row">
+				<%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=>"margin:0 auto;display:block;width:70px;text-align:center;float:right;" , :class => "delete-report-link" %>
+			</div>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>	
+		</div>
 	<% end %>
 </div>
 

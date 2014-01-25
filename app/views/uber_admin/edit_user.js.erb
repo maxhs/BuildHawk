@@ -1,5 +1,5 @@
-$('.sidebarProjects div a').css('color','#777');
-$('#uber-admin-users-link').css('color','#cc0000');
+$('.sidebarProjects div a').removeClass('current-page');
+$('#uber-admin-users-link').addClass('current-page');
 $('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "edit_user", :locals => {:user => @user } %>');
 	$(this).fadeIn(170);
