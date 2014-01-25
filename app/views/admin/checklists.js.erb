@@ -1,5 +1,5 @@
-$('.sidebarProjects div a').css('color','#222');
-$('#admin-checklists-link').css('color','#cc0000');
+$('.sidebarProjects div a').removeClass('current-page');
+$('#admin-checklists-link').addClass('current-page');
 $('#pages').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "checklists", :locals => {:checklists => @checklists } %>');
 	$(this).fadeIn(100);
