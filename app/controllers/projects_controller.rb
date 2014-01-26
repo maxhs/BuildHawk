@@ -242,6 +242,7 @@ class ProjectsController < ApplicationController
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
 		@p = @photos.first
 		@folders = @photos.map(&:folder).flatten
+		@nav = "document-photos-nav"
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/photos"}
@@ -254,6 +255,7 @@ class ProjectsController < ApplicationController
 		@photos = @project.photos.where(:source => "Checklist")
 		@p = @photos.first
 		@folders = @photos.map(&:folder).flatten
+		@nav = "checklist-photos-nav"
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/photos"}
@@ -266,6 +268,7 @@ class ProjectsController < ApplicationController
 		@photos = @project.photos.where(:source => "Worklist")
 		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
+		@nav = "worklist-photos-nav"
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/photos"}
@@ -278,6 +281,7 @@ class ProjectsController < ApplicationController
 		@photos = @project.photos.where(:source => "Report")
 		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
+		@nav = "report-photos-nav"
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/photos"}
@@ -286,6 +290,19 @@ class ProjectsController < ApplicationController
 			render :documents
 		end
 	end	
+
+	def show_photo
+		@photos = @project.photos.sort_by(&:created_date).reverse
+		@folders = @photos.map(&:folder).flatten
+		@p = Photo.find params[:photo_id]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :documents
+		end
+	end
 
 	def new_worklist_item
 		@punchlist_item = PunchlistItem.new

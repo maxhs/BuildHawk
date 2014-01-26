@@ -1,4 +1,6 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
+$('#filters > li > a').removeClass('current-page');
+$('#<%= @nav %>').addClass('current-page');
 $('#photo-focus').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/large_image" %>');
 	$(this).fadeIn(170);

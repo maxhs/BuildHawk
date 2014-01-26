@@ -1,0 +1,4 @@
+$('#photo-focus').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "projects/large_image" %>');
+	$(this).fadeIn(170);
+});

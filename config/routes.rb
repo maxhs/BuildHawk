@@ -80,7 +80,7 @@ Buildhawk::Application.routes.draw do
       get :show_report
       post :report
       get :documents
-      get :all_photos
+      get :show_photo
       get :document_photos
       get :checklist_photos
       get :worklist_photos
