@@ -1,5 +1,10 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('#photo-focus').fadeOut(170,function(){
-	$(this).html('<%= render partial: "large_image" %>');
+	$(this).html('<%= j render :partial => "projects/large_image" %>');
+	$(this).fadeIn(170);
+});
+
+$('#photo-table').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "projects/folders" %>');
 	$(this).fadeIn(170);
 });

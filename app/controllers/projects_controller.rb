@@ -241,6 +241,7 @@ class ProjectsController < ApplicationController
 	def document_photos
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
 		@p = @photos.first
+		@folders = @photos.map(&:folder).flatten
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/photos"}
@@ -252,6 +253,7 @@ class ProjectsController < ApplicationController
 	def checklist_photos
 		@photos = @project.photos.where(:source => "Checklist")
 		@p = @photos.first
+		@folders = @photos.map(&:folder).flatten
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/photos"}
@@ -262,7 +264,7 @@ class ProjectsController < ApplicationController
 	end	
 	def worklist_photos
 		@photos = @project.photos.where(:source => "Worklist")
-		puts "photos count: #{@photos.count}"
+		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
 		if request.xhr?
 			respond_to do |format|
@@ -274,6 +276,7 @@ class ProjectsController < ApplicationController
 	end	
 	def report_photos
 		@photos = @project.photos.where(:source => "Report")
+		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
 		if request.xhr?
 			respond_to do |format|

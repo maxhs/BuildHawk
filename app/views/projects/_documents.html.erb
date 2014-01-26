@@ -13,19 +13,11 @@
 	</div>
 	<div id="photo-section">
 		<div id="photo-table">
-			<ul>
-				<% @photos.map(&:source).each do |s| %>
-					<li><%= s %></li>
-				<% end %>
-			</ul>
+			<%= render partial: "folders" %>
 		</div>
 
-		<div id="photo-focus">
-			<% @photos.each do |p| %>
-				<% if p.image_file_name %>
-					<%= render :partial => "image", :locals => {:p => p} %>
-				<% end %>
-			<% end %>
+		<div id="photo-focus">	
+			<%= render :partial => "image", collection: @photos, as: :p, cache: true %>
 		</div>
 	</div>
 </div>
