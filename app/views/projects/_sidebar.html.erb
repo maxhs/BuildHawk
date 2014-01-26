@@ -14,7 +14,6 @@
 				<% @projects.each do |project| %>
 					<% if project.checklist && project.checklist.item_count > 0 %>
 						<div class="project"><%= link_to "#{project.name} - (#{number_to_percentage(project.checklist.completed_count.to_f/project.checklist.item_count*100, :precision =>1)})" , project_path(project), :id=>"#{project.id}-link", :remote => true %>
-						
 						<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
 						</div>
 							
