@@ -1,4 +1,4 @@
-$('a').css('color','#222');
+$('a').removeClass('current-page');
 $('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "search" %>');
 	$(this).fadeIn(170);

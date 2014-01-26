@@ -228,16 +228,7 @@ class ProjectsController < ApplicationController
 
 	def documents
 		@photos = @project.photos.sort_by(&:created_date).reverse
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else 
-			
-		end
-	end
-	def all_photos
-		@photos = @project.photos.sort_by(&:created_date).reverse
+		@folders = @photos.map(&:folder).flatten
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -245,12 +236,14 @@ class ProjectsController < ApplicationController
 		else 
 			render :documents
 		end
-	end	
+	end
+
 	def document_photos
-		@photos = @project.photos.sort_by(&:created_date).reverse
-		if request.xhr? && remotipart_submitted?
+		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
+		@p = @photos.first
+		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/documents"}
+				format.js { render :template => "projects/photos"}
 			end
 		else 
 			render :documents
@@ -258,9 +251,10 @@ class ProjectsController < ApplicationController
 	end	
 	def checklist_photos
 		@photos = @project.photos.where(:source => "Checklist")
-		if request.xhr? && remotipart_submitted?
+		@p = @photos.first
+		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/documents"}
+				format.js { render :template => "projects/photos"}
 			end
 		else 
 			render :documents
@@ -268,9 +262,11 @@ class ProjectsController < ApplicationController
 	end	
 	def worklist_photos
 		@photos = @project.photos.where(:source => "Worklist")
-		if request.xhr? && remotipart_submitted?
+		puts "photos count: #{@photos.count}"
+		@p = @photos.first
+		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/documents"}
+				format.js { render :template => "projects/photos"}
 			end
 		else 
 			render :documents
@@ -278,9 +274,10 @@ class ProjectsController < ApplicationController
 	end	
 	def report_photos
 		@photos = @project.photos.where(:source => "Report")
-		if request.xhr? && remotipart_submitted?
+		@p = @photos.first
+		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/documents"}
+				format.js { render :template => "projects/photos"}
 			end
 		else 
 			render :documents

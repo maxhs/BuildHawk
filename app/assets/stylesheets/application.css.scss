@@ -373,7 +373,11 @@ input[type="submit"] {
 	}
 }
 .image-block.large{
-	width:auto;
+	width:100%;
+
+	img {
+		width:100%;
+	}
 }
 
 .sidebarProjects {

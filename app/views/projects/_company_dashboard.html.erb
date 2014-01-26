@@ -54,11 +54,10 @@
 	<% else %>
 		<div style="color:#aaa;text-align:center;font-size:1.25em; font-style:italic;margin-top:50px;">Your company does not have any active projects</div>
 	<% end %>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			Shadowbox.clearCache();
-		    Shadowbox.setup(".shadow-photo", {});
-		});
-	</script>
 </div>
+<script type="text/javascript">
+	$(function(){
+		Shadowbox.clearCache();
+	    Shadowbox.setup(".shadow-photo", {});
+	});
+</script>

@@ -9,6 +9,8 @@ class Photo < ActiveRecord::Base
 	belongs_to :punchlist_item, counter_cache: true
 	belongs_to :checklist_item, counter_cache: true
     
+    before_create :ensure_defaults
+
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["2048x2048#", :jpg],
 	                                 :small  => ["200x200#", :jpg],
@@ -20,6 +22,19 @@ class Photo < ActiveRecord::Base
 	                    :path           => "photo_image_:id_:style.:extension"
 
 	acts_as_api
+
+	def ensure_defaults 
+		puts "name #{name} and folder #{folder} and source #{source}"
+		unless source == "Documents"
+			unless name
+				self.name = ""
+			end
+			unless folder
+				self.folder = ""
+			end
+		end
+	end
+
 
 	def url200
 		if image_file_name

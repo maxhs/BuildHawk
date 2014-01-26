@@ -1,0 +1,5 @@
+$('#main * .navbar-nav > li > a').removeClass('current-page');
+$('#photo-focus').fadeOut(170,function(){
+	$(this).html('<%= render partial: "large_image" %>');
+	$(this).fadeIn(170);
+});
