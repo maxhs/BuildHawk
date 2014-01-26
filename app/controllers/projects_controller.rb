@@ -44,7 +44,8 @@ class ProjectsController < ApplicationController
 			items = @checklist.checklist_items
 			@item_count = items.count
 			@recently_completed = @project.recent_feed
-			@upcoming_items = items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
+			current_time = Time.now
+			@upcoming_items = items.select{|i| i.critical_date if i.critical_date && i.critical_date > current_time}.sort_by(&:critical_date).last(5)
 			@recent_photos = @project.photos.last(5).sort_by(&:created_at).reverse
 		end
 		if request.xhr?
@@ -102,7 +103,7 @@ class ProjectsController < ApplicationController
 		search_term = "%#{params[:search]}%" if params[:search]
 		initial = Project.search do
 			fulltext search_term
-			with(:company, current_user.company.id)
+			with :company_id, current_user.company.id
 			#facet(:reports_ids)
 		end
 		@projects = initial.results.uniq

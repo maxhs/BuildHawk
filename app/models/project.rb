@@ -22,9 +22,7 @@ class Project < ActiveRecord::Base
       text    :address do
         address.formatted_address
       end
-      text    :company do
-        company.name if company
-      end
+      integer :company_id
       time    :created_at
     end
 
