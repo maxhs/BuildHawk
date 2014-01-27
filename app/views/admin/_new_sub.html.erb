@@ -1,7 +1,7 @@
 <div class="border-box">
 	<%= form_for @sub, :url => create_sub_admin_index_path(@sub), :method => :post do |f| %>
 		<table id="new-user-form">
-		<tr><td><h2>Add Sub</h2></td></tr>
+		<tr><td><h2>Add Subcontractor</h2></td></tr>
 			<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<tr><td><%= f.label "Subcontractor name" %></td></tr>

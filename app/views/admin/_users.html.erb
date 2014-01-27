@@ -1,5 +1,6 @@
 <div id="users-page" class="page border-box" style="padding-top:20px;padding-bottom:0;">
-	<h3>Company Users</h3>
+	<div><%= link_to "Add New User", new_user_admin_index_path, :id => "add-user-button", :remote => true %></div>
+	<h3 style="margin-top:10px;margin-bottom:30px;">Company Users</h3>
 	<!--<header>
 		<div class="input-group pull-right" style="width: 100%; margin: 0 auto 1%;">
 			<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
@@ -35,7 +36,8 @@
 </div>
 
 <div id="subs-page" class="page border-box" style="padding-top:20px;padding-bottom:0;margin-top:20px;">
-	<h3>Subcontractors</h3>
+	<div><%= link_to "Add New Sub", new_sub_admin_index_path, :id => "add-sub-button", :remote => true %></div>
+	<h3 style="margin-top:10px;margin-bottom:30px;">Subcontractors</h3>
 	<table class="table table-bordered table-responsive" id="subs">
 		<thead>
 			<tr>

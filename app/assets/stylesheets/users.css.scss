@@ -36,3 +36,19 @@ input[type="checkbox"] {
 	margin-left:20px;
 	margin-bottom:0;
 }
+
+#add-user-button, #add-sub-button {
+	float:right;
+	clear:both;
+	text-align:center;
+	width: 180px;
+	font-size:14px;
+	display: block;
+	border-radius: 8px;
+	padding: 7px;
+	border: 1px solid #ccc;
+	margin: 0 auto;
+	line-height: 27px;
+	font-size:15px;
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+}
