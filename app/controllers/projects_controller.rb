@@ -179,6 +179,25 @@ class ProjectsController < ApplicationController
 		@reports = @project.reports.sort_by{|r| r.date_for_sort}
 	end
 
+	def search_reports
+		search_term = "%#{params[:search]}%" if params[:search]
+		@project = Project.find params[:id]
+		puts "search term length? #{search_term.length}"
+		initial = Report.search do
+			fulltext search_term
+			with :project_id, params[:id]
+		end
+		@reports = initial.results.uniq
+		@prompt = "No search results"
+		if request.xhr?
+			respond_to do |format|
+				format.js { render template: "projects/reports" }
+			end
+		else
+			render :reports
+		end
+	end
+
 	def new_report
 		@report = Report.new
 		@report.users.build

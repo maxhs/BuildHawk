@@ -1,5 +1,4 @@
 <ul>
-
 	<% @folders.each do |s| %>
 		<% if s && s.length > 0 %>
 			<li class="folder-name">
@@ -16,5 +15,7 @@
 			
 		<% end %>
 	<% end %>
-	<li><%= link_to "Add New Folder", new_photo_project_path(@project),:class => "add-photo-link", :remote => true %></li>
+	<% if params[:action] == "document_photos" %>
+		<li><%= link_to "Add New Folder", new_photo_project_path(@project),:class => "add-photo-link", :remote => true %></li>
+	<% end %>
 </ul>

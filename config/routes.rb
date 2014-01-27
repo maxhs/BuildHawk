@@ -76,6 +76,7 @@ Buildhawk::Application.routes.draw do
       get :checklist
       get :checklist_item
       get :reports
+      post :search_reports
       get :new_report
       get :show_report
       post :report

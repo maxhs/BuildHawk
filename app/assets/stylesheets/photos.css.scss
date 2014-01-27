@@ -53,10 +53,13 @@
 	font-size:14px;
 	display: block;
 	border-radius: 8px;
-	padding: 7px 21px;
+	padding: 7px;
 	border: 1px solid #ccc;
-	margin: 21px auto;
-	line-height: 30px;
+	margin: 0 auto;
+	position:relative;
+	top:15px;
+	line-height: 27px;
+	font-size:15px;
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
 }
 
