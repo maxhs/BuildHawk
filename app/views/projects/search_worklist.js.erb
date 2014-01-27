@@ -1,0 +1,4 @@
+$('#project-worklist').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "search_worklist" %>');
+	$(this).fadeIn(170);
+});

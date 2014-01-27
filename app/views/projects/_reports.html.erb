@@ -3,8 +3,9 @@
 		<%= link_to "Add Report", new_report_project_path(@project), :class=>"btn btn-default pull-right", :style=>"min-width:24%;margin-top:0;", :remote => true %>
 		
 		<div style="margin-bottom: 20px">
-			<%= form_tag search_reports_project_path(@project), :method => :post, :remote => true do %>
-				<%= text_field_tag :search, nil, :placeholder=>"Search Reports...", :style=> "width:74%;", :class=>"form-control" %>
+			<%= form_tag search_reports_project_path(@project), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
+				<%= text_field_tag :search, nil, :placeholder=>"Search Reports...", :class=>"form-control" %>
+				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
 			<% end %>
 		</div>
 	</header>
@@ -48,3 +49,9 @@
 		</table>
 	</div>
 </div>
+<script>
+	$('#remove').click(function(){
+		$('#search').val('');
+		$('#reports-search').submit();
+	});
+</script>

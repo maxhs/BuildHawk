@@ -175,6 +175,29 @@ class ProjectsController < ApplicationController
 		@items = @punchlist.punchlist_items if @punchlist
 	end
 
+	def search_worklist
+		if params[:search] && params[:search].length > 0
+			search_term = "%#{params[:search]}%" 
+			@project = Project.find params[:id]
+			initial = PunchlistItem.search do
+				fulltext search_term
+				with :project_id, params[:id]
+			end
+			@items = initial.results.uniq
+			@prompt = "No search results"
+		else
+			@items = @project.punchlists.map(&:punchlist_items).flatten.sort_by{|r| r.created_at}
+		end
+
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :worklist
+		end
+	end
+
 	def reports
 		@reports = @project.reports.sort_by{|r| r.date_for_sort}
 	end

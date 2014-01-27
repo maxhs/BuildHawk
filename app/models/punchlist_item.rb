@@ -17,6 +17,22 @@ class PunchlistItem < ActiveRecord::Base
 
     default_scope { order('created_at') }
 
+    #websolr
+    searchable do
+      text    :body
+      text    :location
+      text    :assignee do
+        assignee.full_name if assignee
+      end
+      text    :sub_assignee do
+        sub_assignee.name if sub_assignee
+      end
+      integer :project_id do
+        punchlist.project.id
+      end
+      time    :created_at
+    end
+
     def notify
         truncated = truncate(body, length:20)
         message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"

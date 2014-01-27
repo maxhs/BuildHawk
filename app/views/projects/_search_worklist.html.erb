@@ -1,14 +1,4 @@
-<div class="border-box" style="padding-top:20px;">
-	<header>
-		<%= link_to "Add Item", new_worklist_item_project_path(@project), :class=>"btn btn-default pull-right", :style=>"width:24%;margin-top:0;", :remote => true %>
-		<div style="margin-bottom: 20px">
-			<%= form_tag search_worklist_project_path(@project), :id => "worklist-search", :method => :post, :class=>"input-group", :remote => true do %>
-				<%= text_field_tag :search, nil, :placeholder=>"Search Worklist...", :class=>"form-control" %>
-				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
-			<% end %>
-		</div>
-	</header>
-	<div id="project-worklist">	
+<div id="project-worklist">	
 		<table class="table table-bordered table-responsive" id="worklist-table">
 			<thead>
 				<tr>
@@ -60,10 +50,3 @@
 			</tbody>
 		</table>
 	</div>
-</div>
-<script>
-	$('#remove').click(function(){
-		$('#search').val('');
-		$('#worklist-search').submit();
-	});
-</script>
