@@ -44,7 +44,7 @@ class Checklist < ActiveRecord::Base
     end
 
     def recently_completed
-        items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).last(5)
+        items.select{|i| i.status == "Completed"}.sort_by(&:completed_date).reverse.first(5)
     end
 
     def progress_percentage
