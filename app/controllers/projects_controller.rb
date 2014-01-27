@@ -180,18 +180,22 @@ class ProjectsController < ApplicationController
 	end
 
 	def search_reports
-		search_term = "%#{params[:search]}%" if params[:search]
-		@project = Project.find params[:id]
-		puts "search term length? #{search_term.length}"
-		initial = Report.search do
-			fulltext search_term
-			with :project_id, params[:id]
+		if params[:search] && params[:search].length > 0
+			search_term = "%#{params[:search]}%" 
+			@project = Project.find params[:id]
+			initial = Report.search do
+				fulltext search_term
+				with :project_id, params[:id]
+			end
+			@reports = initial.results.uniq
+			@prompt = "No search results"
+		else
+			@reports = @project.reports.sort_by{|r| r.date_for_sort}
 		end
-		@reports = initial.results.uniq
-		@prompt = "No search results"
+
 		if request.xhr?
 			respond_to do |format|
-				format.js { render template: "projects/reports" }
+				format.js
 			end
 		else
 			render :reports

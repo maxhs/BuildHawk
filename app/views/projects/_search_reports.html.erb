@@ -1,0 +1,38 @@
+<div id="project-reports">
+	<table class="table table-bordered table-responsive" id="users">
+		<thead>
+			<tr>
+				<th>Report Date</th>
+				<th>Type</th>
+				<th>Last Updated</th>
+				<th>Photos</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<% if @reports && @reports.count > 0 %>
+				<% @reports.each do |report| %>
+					<tr>
+						<td><%= link_to "#{report.report_type} - #{report.created_date}", show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
+						<td><%= report.report_type %></td>
+						<td><% if report.updated_at %><%= parse_time report.updated_at %><% end %></td>
+						<td>
+							<%if report.photos && report.photos.count > 0 %>
+								<% if report.photos.count == 1 %>
+									1
+								<% else %>
+									<%= report.photos.count %>
+								<% end %>
+							<% else %>
+								0
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			<% else %>
+				<tr><td colspan="4" class="loading"><h4 style="font-weight:100;text-align:center;color:#aaa;font-style:italic;">No reports</h4></td></tr>
+			<% end %>
+			
+		</tbody>
+	</table>
+</div>
