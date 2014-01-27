@@ -31,7 +31,24 @@
 		display:block;
 	}
 }
-#add-photo-link {
+
+.add-document-link {
+	width: 140px;
+	font-size:13px;
+	display: inline-block;
+	border-radius: 8px;
+	padding: 7px;
+	text-align:center;
+	float:right;
+	border: 1px solid #ccc;
+	margin: 14px auto;
+	line-height: 20px;
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+}
+
+.add-photo-link {
+	clear:both;
+	text-align:center;
 	width: 180px;
 	font-size:14px;
 	display: block;
@@ -80,4 +97,14 @@
 #photo-focus {
 	display:inline-block;
 	width:75%;
+	min-height:80px;
+}
+
+.no-image-placeholder {
+	color: #aaa;
+	font-size: 1.25em;
+	margin: 30px auto;
+	font-style: italic;
+	font-weight: 200;
+	text-align: center;
 }

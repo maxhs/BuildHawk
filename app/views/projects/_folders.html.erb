@@ -1,8 +1,9 @@
 <ul>
+
 	<% @folders.each do |s| %>
 		<% if s && s.length > 0 %>
 			<li class="folder-name">
-				<h4><%= s %></h4>
+				<h4 style="display:inline-block"><%= s %></h4><%= link_to "Add Document", new_photo_project_path(@project, :folder => s), :class =>"add-document-link", :remote => true %>
 			</li>
 
 			<% @photos.each do |p| %>
@@ -15,4 +16,5 @@
 			
 		<% end %>
 	<% end %>
+	<li><%= link_to "Add New Folder", new_photo_project_path(@project),:class => "add-photo-link", :remote => true %></li>
 </ul>

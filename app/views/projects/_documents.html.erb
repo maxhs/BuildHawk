@@ -8,7 +8,6 @@
 			<li><%= link_to "Checklist", checklist_photos_project_path(@project), :id => "checklist-photos-nav", :remote => true %></li>
 			<li><%= link_to "Worklist", worklist_photos_project_path(@project), :id => "worklist-photos-nav", :remote => true %></li>
 			<li><%= link_to "Reports", report_photos_project_path(@project), :id => "report-photos-nav", :remote => true %></li>
-			<li><%= link_to "Add Document", new_photo_project_path(@project), :style=>"margin:0 auto;text-align:center",:id => "add-photo-link", :remote => true %></li>
 		</ul>
 	</div>
 	<div id="photo-section">
@@ -16,14 +15,21 @@
 			<%= render partial: "folders" %>
 		</div>
 
-		<div id="photo-focus">	
-			<%= render :partial => "image", collection: @photos, as: :p, cache: true %>
+		<div id="photo-focus">
+			<% if @photos && @photos.count > 0 %>	
+				<%= render :partial => "image", collection: @photos, as: :p, cache: true %>
+			<% else %>
+				<div class="no-image-placeholder">No Documents</div>
+			<% end %>
 		</div>
 	</div>
 </div>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			Shadowbox.clearCache();
-		    Shadowbox.setup(".shadow-photo", {});
-		});
-	</script>
+
+<script type="text/javascript">
+	$('#main * .navbar-nav > li > a').removeClass('current-page');
+	$('.nav-documents a').addClass('current-page');
+	$(document).ready(function(){
+		Shadowbox.clearCache();
+	    Shadowbox.setup(".shadow-photo", {});
+	});
+</script>

@@ -104,7 +104,6 @@ class ProjectsController < ApplicationController
 		initial = Project.search do
 			fulltext search_term
 			with :company_id, current_user.company.id
-			#facet(:reports_ids)
 		end
 		@projects = initial.results.uniq
 		@prompt = "No search results"
@@ -377,6 +376,7 @@ class ProjectsController < ApplicationController
 
 	def new_photo
 		@new_photo = Photo.new
+		@folder = params[:folder]
 	end
 
 	def photo
