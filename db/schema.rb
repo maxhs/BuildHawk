@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125232442) do
+ActiveRecord::Schema.define(version: 20140127220832) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20140125232442) do
 
   create_table "apn_registrations", force: true do |t|
     t.integer  "user_id"
-    t.string   "token"
+    t.text     "token",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 20140125232442) do
 
   create_table "reports", force: true do |t|
     t.string   "title"
-    t.string   "body"
+    t.text     "body",         limit: 255
     t.integer  "project_id"
     t.integer  "author_id"
     t.string   "report_type"
