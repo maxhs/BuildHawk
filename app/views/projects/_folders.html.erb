@@ -1,6 +1,6 @@
 <% if @folders && @folders.count %>
 	<ul>
-		<%= render partial: "folders/folder", collection: @folders, as: :folder, cache: true %>
+		<%= render partial: "folders/folder", collection: @folders, as: :folder, cache: false %>
 	</ul>
 	<% if params[:action] == "document_photos" %>
 		<div id="add-photo-link">Add New Folder</div>

@@ -12,9 +12,8 @@
 	</div>
 	<div id="photo-section">
 		<div id="photo-table">
-			<%= render partial: "folders" %>
+			
 		</div>
-
 		<div id="photo-focus">
 			<% if @photos && @photos.count > 0 %>	
 				<%= render :partial => "image", collection: @photos, as: :p, cache: true %>
