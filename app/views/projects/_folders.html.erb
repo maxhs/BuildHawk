@@ -1,27 +1,10 @@
 <% if @folders && @folders.count %>
 	<ul>
-		<% @folders.each do |f| %>
-			<% if f.name.length > 0 %>
-				<li class="folder" id="fid-<%=f.id%>">
-					<h4 style="display:inline-block"><%= f.name %></h4>
-					<%= link_to "Edit", edit_folder_path(f), :class=>"edit-folder no-link", :remote => true %>
-				
-
-				<% f.photos.each do |p| %>
-					<ul>
-						<li class="photo-name">
-							<%= link_to p.name, show_photo_project_path(@project,:photo_id => p.id), :class=>"no-link", :remote => true %>
-						</li>
-					</ul>
-				<% end %>
-				<%= link_to "Add Document", new_photo_project_path(@project, :folder_id => f.id), :class =>"add-document-link", :remote => true %>
-			<% end %>
-		<% end %>
-		<% if params[:action] == "document_photos" %>
-			<div id="add-photo-link">Add New Folder</div>
-		<% end %>
-		</li>
+		<%= render partial: "folders/folder", collection: @folders, as: :folder, cache: true %>
 	</ul>
+	<% if params[:action] == "document_photos" %>
+		<div id="add-photo-link">Add New Folder</div>
+	<% end %>
 <% end %>
 <script type="text/javascript">
 	$('#add-photo-link').click(function(){

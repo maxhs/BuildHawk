@@ -1,4 +1,5 @@
 $('#edit_folder_<%=@folder.id%>').fadeOut(200,function(){
-	$(this).replaceWith('<li class="folder-name" id="fid-<%=@folder.id%>"><h4 style="display:inline-block"><%= @folder.name %></h4><%= link_to "Edit", edit_folder_path(@folder), :class=>"edit-folder no-link", :remote => true %></li>');
+	$(this).replaceWith('<h4 class="folder-name"><%= @folder.name %></h4>');
 	$(this).fadeIn(200);
+	$('#fid-<%=@folder.id%> > .edit-folder').fadeIn(200);
 });
