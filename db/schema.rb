@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127220832) do
+ActiveRecord::Schema.define(version: 20140128175513) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -136,6 +136,13 @@ ActiveRecord::Schema.define(version: 20140127220832) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "folders", force: true do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notifications", force: true do |t|
     t.boolean  "read",              default: false
     t.boolean  "sent",              default: false
@@ -165,7 +172,7 @@ ActiveRecord::Schema.define(version: 20140127220832) do
     t.integer  "checklist_item_id"
     t.string   "phase"
     t.string   "name",                                     null: false
-    t.string   "folder",                                   null: false
+    t.integer  "folder_id"
   end
 
   add_index "photos", ["report_id", "checklist_item_id", "punchlist_item_id", "user_id"], name: "photos_ix"

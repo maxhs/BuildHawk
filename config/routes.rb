@@ -117,6 +117,7 @@ Buildhawk::Application.routes.draw do
   resources :photos
   resources :punchlists
   resources :reports
+  resources :folders
   resources :charges
 
   #mobile API

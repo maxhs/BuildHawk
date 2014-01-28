@@ -1,0 +1,19 @@
+// Place all the styles related to the Folders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.new_folder {
+	input[type="text"] {
+		width:95%;
+	}
+}
+
+.edit_folder {
+	input[type="text"] {
+		display:inline-block;
+	}
+}
+
+.remove-folder-link {
+	margin-left:1em;
+}

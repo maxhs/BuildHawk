@@ -274,7 +274,7 @@ class ProjectsController < ApplicationController
 
 	def documents
 		@photos = @project.photos.sort_by(&:created_date).reverse
-		@folders = @photos.map(&:folder).flatten
+		@folders = @project.folders
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -287,7 +287,7 @@ class ProjectsController < ApplicationController
 	def document_photos
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
 		@p = @photos.first
-		@folders = @photos.map(&:folder).flatten
+		@folders = @project.folders
 		@nav = "document-photos-nav"
 		if request.xhr?
 			respond_to do |format|
@@ -422,12 +422,11 @@ class ProjectsController < ApplicationController
 
 	def new_photo
 		@new_photo = Photo.new
-		@folder = params[:folder]
+		@folder = Folder.find params[:folder_id]
 	end
 
 	def photo
 		@photo = @project.photos.create! params[:photo]
-		@photo.update_attributes :company_id => params[:company_id],:user_id => params[:user_id]
 		if @photo.save 
 			redirect_to documents_project_path(@project)
 		else

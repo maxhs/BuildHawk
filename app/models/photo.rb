@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :user, :project_id, :project, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:punchlist_item_id, :phase, :name, :punchlist_item, :report, :folder
+					:punchlist_item_id, :phase, :name, :punchlist_item, :report, :folder, :folder_id
 
 	belongs_to :user
 	belongs_to :project
@@ -8,6 +8,8 @@ class Photo < ActiveRecord::Base
 	belongs_to :company
 	belongs_to :punchlist_item, counter_cache: true
 	belongs_to :checklist_item, counter_cache: true
+
+	belongs_to :folder
     
     before_create :ensure_defaults
 
@@ -24,13 +26,9 @@ class Photo < ActiveRecord::Base
 	acts_as_api
 
 	def ensure_defaults 
-		puts "name #{name} and folder #{folder} and source #{source}"
 		unless source == "Documents"
 			unless name
 				self.name = ""
-			end
-			unless folder
-				self.folder = ""
 			end
 		end
 	end
@@ -85,6 +83,9 @@ class Photo < ActiveRecord::Base
 	def has_assignee?
 		punchlist_item_id.present?
 	end
+	def has_folder?
+		folder_id.present?
+	end
 
 	api_accessible :dashboard do |t|
 		t.add :id
@@ -100,7 +101,7 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
-		t.add :folder
+		t.add :folder, :if => :has_folder?
 		t.add :assignee, :if => :has_assignee?
 	end
 

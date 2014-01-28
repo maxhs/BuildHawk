@@ -12,6 +12,7 @@ class Project < ActiveRecord::Base
     has_many :photos, :dependent => :destroy
     has_many :reports, :dependent => :destroy
   	has_one :checklist, :dependent => :destroy
+    has_many :folders, :dependent => :destroy
 
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true

@@ -11,6 +11,10 @@
 	position:relative;
 }
 
+#photo-section {
+	height:100% !important;
+}
+
 #add-photo {
 	width:50%;
 	min-width:400px;
@@ -35,18 +39,18 @@
 .add-document-link {
 	width: 140px;
 	font-size:13px;
-	display: inline-block;
+	display: block;
 	border-radius: 8px;
 	padding: 7px;
 	text-align:center;
-	float:right;
 	border: 1px solid #ccc;
-	margin: 14px auto;
+	margin: 15px 0;
 	line-height: 20px;
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
 }
 
-.add-photo-link {
+#add-photo-link {
+	cursor:pointer;
 	clear:both;
 	text-align:center;
 	width: 180px;
@@ -61,6 +65,15 @@
 	line-height: 27px;
 	font-size:15px;
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+}
+
+.edit-folder {
+	cursor:pointer;
+	margin-left:2em;
+}
+
+.edit-folder:hover {
+	color:#cc0000;
 }
 
 #filters {
@@ -88,6 +101,7 @@
 
 		li {
 			display:block;
+			clear:both;
 		}
 
 		.photo-name {
