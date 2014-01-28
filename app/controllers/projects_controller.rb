@@ -291,7 +291,7 @@ class ProjectsController < ApplicationController
 		@nav = "document-photos-nav"
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/photos"}
+				format.js
 			end
 		else 
 			render :documents
