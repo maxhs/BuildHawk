@@ -6,12 +6,10 @@
 	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
 		<div class="well sidebar-nav projects">
 			<div class="sidebarProjects">
-				<div><%= link_to "Create User", new_user_admin_index_path, :id => "new-user-link", :remote => true %></div>
-				<div><%= link_to "Create Sub", new_sub_admin_index_path, :id => "new-sub-link", :remote => true %></div>
 				<div><%= link_to "Add Project", new_project_admin_index_path, :id => "new-project-link", :remote => true %></div>
 				<div><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></div>
 				<div><%= link_to "Checklist Templates", checklists_admin_index_path, :id => "admin-checklists-link", :remote => true %></div>
-				<div><%= link_to "Contacts", users_admin_index_path, :id => "personnel-link", :remote => true %></div>
+				<div><%= link_to "Users/Subcontractors", users_admin_index_path, :id => "personnel-link", :remote => true %></div>
 				<% if current_user.company_admin %><div><%= link_to "Billing" %></div><% end %>
 			</div>
 		</div>
