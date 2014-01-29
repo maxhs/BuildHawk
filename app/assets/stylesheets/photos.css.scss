@@ -94,7 +94,7 @@
 	float:left;
 	list-style:none;
 	display:inline-block;
-	width:35%;
+	width:40%;
 	vertical-align:top;
 	ul {
 		padding:0;
@@ -113,8 +113,12 @@
 
 #photo-focus {
 	display:inline-block;
-	width:65%;
+	width:60%;
 	min-height:80px;
+}
+
+.full-focus {
+	width:100% !important;
 }
 
 .no-image-placeholder {

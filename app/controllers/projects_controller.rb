@@ -427,12 +427,10 @@ class ProjectsController < ApplicationController
 
 	def photo
 		@photo = @project.photos.create! params[:photo]
-		if @photo.save 
-			redirect_to documents_project_path(@project)
-		else
+		unless @photo.save 
 			flash[:notice] = "didn't work"
-			redirect_to documents_project_path(@project)
 		end
+		redirect_to document_photos_project_path(@project)
 	end
 
 	def delete_report

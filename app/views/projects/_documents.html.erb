@@ -14,7 +14,7 @@
 		<div id="photo-table">
 			
 		</div>
-		<div id="photo-focus">
+		<div id="photo-focus" class="full-focus">
 			<% if @photos && @photos.count > 0 %>	
 				<%= render :partial => "image", collection: @photos, as: :p, cache: true %>
 			<% else %>
