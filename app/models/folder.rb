@@ -3,4 +3,7 @@ class Folder < ActiveRecord::Base
   	belongs_to :project
 
   	has_many :photos
+
+  	acts_as_api
+
 end

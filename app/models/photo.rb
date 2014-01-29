@@ -80,6 +80,10 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
+	def folder_name
+		folder.name if folder
+	end
+
 	def has_assignee?
 		punchlist_item_id.present?
 	end
@@ -101,7 +105,8 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
-		t.add :folder, :if => :has_folder?
+		t.add :folder_name, :if => :has_folder?
+		t.add :folder_id, :if => :has_folder?
 		t.add :assignee, :if => :has_assignee?
 	end
 
