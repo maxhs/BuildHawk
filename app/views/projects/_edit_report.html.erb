@@ -76,7 +76,7 @@
 			</div>
 
 			<div class="row">
-				<%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=>"margin:0 auto;display:block;width:70px;text-align:center;float:right;" , :class => "delete-report-link" %>
+				<%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :style=>"margin:0 auto;display:block;width:70px;text-align:center;float:right;" , :class => "delete-report-link", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."} %>
 			</div>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>	
 		</div>
