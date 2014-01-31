@@ -8,6 +8,10 @@ class Sub < ActiveRecord::Base
 
     def clean_up
         ReportSub.where(:sub_id => id).destroy_all
+        PunchlistItem.where(:sub_assignee_id => id).each do |i|
+            puts "cleaning up punchlist item: #{i.id}"
+            i.update_attribute :sub_assignee_id, nil
+        end
     end
 
     has_attached_file :image, 
