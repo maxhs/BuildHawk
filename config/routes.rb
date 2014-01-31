@@ -95,6 +95,7 @@ Buildhawk::Application.routes.draw do
       post :update_report
       post :update_worklist_item
       delete :delete_checklist
+      get :destroy_confirmation
     end
     collection do
       post :search

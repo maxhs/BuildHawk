@@ -26,7 +26,7 @@
 			    </td></tr>
 			<% end %>
 			<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
-			<tr><td style="padding-top:23px;width:"><%= link_to "Remove Project", project_path(@project), :method => :delete, :class=>"pull-right delete-link", :data => {:confirm => "Are you sure you want to delete this project?"} %></td></tr>
+			<tr><td style="padding-top:23px;width:"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"pull-right delete-link", :remote => true %></td></tr>
 		</table>
 	<% end %>
 </div>

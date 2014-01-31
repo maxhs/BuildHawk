@@ -135,3 +135,26 @@
 		}
 	}
 }
+
+.delete-confirmation {
+	margin:2em auto;
+	width:50%;
+
+	h3 {
+		text-align:center;
+		margin: 2em auto;	
+	}
+		
+	p {
+		font-size:1.15em;
+	}
+}
+
+.delete-project-link.no-link {
+	color:#fff !important;
+	text-align:center;
+}
+
+.delete-project-link:hover {
+	
+}
