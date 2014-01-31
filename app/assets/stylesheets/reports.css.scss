@@ -16,9 +16,10 @@
 	}
 	
 	.form-title {
+		padding-top:7px;
 		padding-bottom:0;
 	}
-	
+
 	.weather-titles {
 		padding-bottom:0;
 		
@@ -34,5 +35,14 @@
 			min-height:100px;
 			width:80%;
 		}
+	}
+
+	.delete-report-link {
+		line-height: 1em;
+		margin: 7px auto 0;
+		display: block;
+		width: 70px;
+		text-align: center;
+		float: right;
 	}
 }
