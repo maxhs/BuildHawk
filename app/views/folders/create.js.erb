@@ -1,4 +1,4 @@
 $('#photo-table').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/folders" %>');
+	$(this).html('<%= j render :partial => "projects/folders" %><div id="add-photo-link">Add New Folder</div>');
 	$(this).fadeIn(170);
 });

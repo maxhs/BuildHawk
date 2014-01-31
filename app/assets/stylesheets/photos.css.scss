@@ -12,7 +12,7 @@
 }
 
 #photo-section {
-	height:100% !important;
+	overflow:auto;
 }
 
 #add-photo {
@@ -112,6 +112,7 @@
 }
 
 #photo-focus {
+	float:left;
 	display:inline-block;
 	width:60%;
 	min-height:80px;
