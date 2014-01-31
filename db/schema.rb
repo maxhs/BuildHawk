@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128175513) do
+ActiveRecord::Schema.define(version: 20140131220024) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -247,7 +247,7 @@ ActiveRecord::Schema.define(version: 20140128175513) do
 
   create_table "reports", force: true do |t|
     t.string   "title"
-    t.text     "body",         limit: 255
+    t.text     "body",                limit: 255
     t.integer  "project_id"
     t.integer  "author_id"
     t.string   "report_type"
@@ -259,6 +259,8 @@ ActiveRecord::Schema.define(version: 20140128175513) do
     t.string   "temp"
     t.string   "wind"
     t.string   "precip"
+    t.string   "humidity"
+    t.string   "precip_accumulation"
   end
 
   add_index "reports", ["author_id", "project_id"], name: "reports_ix"

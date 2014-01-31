@@ -1,7 +1,7 @@
 <div class="border-box">
 	<%= nested_form_for @report, :url => {:action => :report }, :html=> {:multipart => true}, :method => :post do |f| %>
 		<div id="add-report" class="container">
-			<div class="row">
+			<div class="row form-title">
 				<div class="col-md-12"><h4>Report Date</h4></div>
 			</div>
 
@@ -16,22 +16,34 @@
 				<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types) %></div>
 			</div>
 				
-			<div class="row">
+			<div class="row form-title">
 				<div class="col-md-12"><h4>General Remarks</h4></div>
 			</div>
 			<div class="row">
 				<div class="col-md-12"><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></div>
 			</div>
 
-			<div class="row">
+			<div class="row form-title">
 				<div class="col-md-12"><h4>Weather</h4></div>
 			</div>
-
 			<div class="row">
 				<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
 			</div>
 
+			<div class="row weather-titles">
+				<div class="col-md-3"><h4>Temperature</h4></div>
+				<div class="col-md-3"><h4>Wind</h4></div>
+				<div class="col-md-3"><h4>Precipitation</h4></div>
+				<div class="col-md-3"><h4>Humidity</h4></div>
+			</div>
 			<div class="row">
+				<div class="col-md-3"><%= f.text_field :temp, :value => @report.temp, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :wind, :value => @report.wind, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :precip, :value => @report.precip, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :humidity, :value => @report.humidity, :placeholder => "N/A" %></div>
+			</div>
+
+			<div class="row form-title">
 				<div class="col-md-6"><h4>Onsite personnel:</h4></div>
 				<div class="col-md-6"><h4>Subcontractors:</h4></div>
 			</div>

@@ -11,11 +11,21 @@
 		padding-bottom:5px;
 	}
 
-
 	input, textarea {
 		width:100%;
 	}
 	
+	.form-title {
+		padding-bottom:0;
+	}
+	
+	.weather-titles {
+		padding-bottom:0;
+		
+		h4 {
+			margin:10px auto 0;
+		}
+	}
 	.select-container {
 		width:50%;
 		float:left;
@@ -25,11 +35,4 @@
 			width:80%;
 		}
 	}
-	
-}
-#reports-page {
-
-	table.report {
-		margin-bottom:2em;
-	}	
 }
