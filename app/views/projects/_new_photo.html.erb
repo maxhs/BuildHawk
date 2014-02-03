@@ -10,7 +10,12 @@
 		<div class="hidden-fields"><%= @folder.name %></div>
 		<div class="form-label"><%= f.label "File Name *", :class => "hidden-fields" %></div>
 		<div><%= f.text_field :name, :placeholder => "File name", :class => "hidden-fields" %></div>
-		<div><button class="btn btn-success btn-md pull-right hidden-fields"><%= f.submit "Add" %></button></div>
+		<div>
+			<button class="btn btn-success btn-md pull-right hidden-fields has-spinner">
+				<span class="spinner"><i class="glyphicon icon-spin glyphicon-refresh"></i></span>
+				<%= f.submit "Add" %>
+			</button>
+		</div>
 	</div>
 <% end %>
 

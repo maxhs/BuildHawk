@@ -426,11 +426,15 @@ class ProjectsController < ApplicationController
 	end
 
 	def photo
-		@photo = @project.photos.create! params[:photo]
-		unless @photo.save 
+		@p = @project.photos.create! params[:photo]
+		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
+		@folders = @project.folders
+
+		unless @p.save 
 			flash[:notice] = "didn't work"
 		end
-		redirect_to document_photos_project_path(@project)
+
+		render :document_photos
 	end
 
 	def delete_report

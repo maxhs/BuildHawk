@@ -5,8 +5,9 @@ $('#photo-focus').fadeOut(170,function(){
 	$(this).removeClass('full-focus');
 	$(this).fadeIn(170);
 });
-
 $('#photo-table').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/folders" %>');
 	$(this).fadeIn(170);
 });
+Shadowbox.clearCache();
+Shadowbox.setup(".shadow-photo", {});
