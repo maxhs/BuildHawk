@@ -73,28 +73,16 @@ class ChecklistsController < ApplicationController
 
 	def create_checklist_item
 		index = params[:checklist_item][:item_index]
-		@checklist_item = ChecklistItem.create params[:checklist_item]
-		@checklist = @checklist_item.checklist
-		# @checklist.checklist_items.each do |i|
-		# 	i.update_attribute :item_index, i.item_index+1 if i.item_index > index.to_i
-		# end
-		if params[:project_id].present?
-			@project = Project.find params[:project_id]
-			if request.xhr?
-				respond_to do |format|
-					format.js {render :template => "projects/checklist"}
-				end
-			else
-				render :checklist
+		@item = ChecklistItem.create params[:checklist_item]
+		@subcategory = @item.subcategory
+		@checklist = @item.checklist
+
+		if request.xhr?
+			respond_to do |format|
+				format.js {render template:"admin/create_checklist_item"} 
 			end
-		else 
-			if request.xhr?
-				respond_to do |format|
-					format.js {render :template => "admin/editor"}
-				end
-			else
-				render "admin/editor"
-			end
+		else
+			render "admin/editor"
 		end
 	end
 

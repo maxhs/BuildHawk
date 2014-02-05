@@ -57,6 +57,7 @@ class ChecklistItemsController < ApplicationController
 
 	def destroy
 		@checklist_item = ChecklistItem.find params[:id]
+		@item_id = params[:id]
 		@checklist = @checklist_item.checklist
 		@project = @checklist_item.subcategory.category.checklist.project
 		@checklist_item.destroy

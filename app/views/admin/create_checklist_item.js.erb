@@ -1,0 +1,5 @@
+
+$('#new_checklist_item').fadeOut(200,function(){
+	$(this).remove();
+	$('#sub-<%= @subcategory.id %>').append('<%= j render partial:"admin/checklist_item_row", :locals => {:item => @item} %>');
+});
