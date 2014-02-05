@@ -48,7 +48,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
     end
 
     def review_report
-        report = Report.find params[:id]
+        report = Report.where(:created_date => params[:id]).last
         if report 
             respond_to do |format|
                 format.json { render_for_api :report, :json => report, :root => :report}
