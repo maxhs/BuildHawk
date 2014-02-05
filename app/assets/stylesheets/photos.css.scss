@@ -65,6 +65,14 @@
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
 }
 
+.image-details {
+	cursor:default;
+}
+
+form.edit_photo {
+	display:inline-block;
+}
+
 .edit-folder {
 	cursor:pointer;
 	margin-left:2em;

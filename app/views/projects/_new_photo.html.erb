@@ -19,7 +19,7 @@
 <% end %>
 
 <script type="text/javascript">
-	
+	$(function(){
 	    $("input:file").change(function (){
 	    	$(".hidden-fields").animate({'opacity':'1'},500);
 	    });
@@ -27,5 +27,5 @@
 	    	$('#photo-submit').html('Loading...');
 	    	$('.new_photo').submit();
 	    });
-	
+	});
 </script>

@@ -1,12 +1,36 @@
 <% if p.image_file_name %>
 	<div class="image-block" id="photo-<%=p.id%>">
-		<%= link_to p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-			<%= image_tag p.image.url(:small) %> 
+		<%= link_to image_tag(p.image.url(:small)), p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %> 
+			<%=  %> 
 			<div><span class="label">Date:</span><%= p.created_date%></div>
-			<div><% if p.source %><span class="label">Source:</span><%= p.source%><% end %></div> 
-			<div><% if p.user %><span class="label">Taken by:</span><%= p.user.full_name%><% else %>&nbsp;<% end %></div>
+			<div>
+				<% if p.source %>
+					<span class="label">Source:</span>
+					<% if p.source == "Documents" %>
+						<%= link_to "Project Docs", document_photos_project_path(@project), :remote => true %>
+					<% elsif p.source == "Checklist" %>
+						<%= link_to "Checklist", checklist_photos_project_path(@project), :remote => true %>
+					<% elsif p.source == "Worklist" %>
+						<%= link_to "Worklist", worklist_photos_project_path(@project), :remote => true %>
+					<% elsif p.source == "Reports" %>
+						<%= link_to "Reports", report_photos_project_path(@project), :remote => true %>
+					<% end %>
+				<% end %>
+			</div> 
+			<div>
+				<% if p.user %>
+					<% if p.source == "Documents"%>
+						<span class="label">Uploaded:</span>
+					<% else %>
+						<span class="label">Taken by:</span>
+					<% end %>
+					<%= p.user.full_name%>
+				<% else %>
+					&nbsp;
+				<% end %>
+
+			</div>
 			<%= link_to 'Delete Photo', photo_path(p), :method => :delete, :class=>"delete-link", :remote => true, :data => {:confirm => "Are you sure you want to delete this photo? This can't be undone."} %>
-		<% end %>
 	</div>
 <% end %>
 <script>

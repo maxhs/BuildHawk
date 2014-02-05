@@ -1,0 +1,4 @@
+$('#p-<%= @photo.id %> a').fadeOut(200,function(){
+	$(this).text('<%= @photo.name %>');
+	$(this).fadeIn(200);
+});
