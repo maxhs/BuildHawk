@@ -160,7 +160,7 @@ class AdminController < ApplicationController
 			@checklist.save
 		end
 		
-		@response_message = "Creating project..."
+		@response_message = "Creating project. This may take a few minutes..."
 		if request.xhr?
 			respond_to do |format|
 				format.js {render :template => "admin/background"}
