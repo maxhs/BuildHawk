@@ -70,8 +70,6 @@ GEM
     delayed_job_active_record (4.0.0)
       activerecord (>= 3.0, < 4.1)
       delayed_job (>= 3.0, < 4.1)
-    delayed_paperclip (2.6.1)
-      paperclip (>= 3.3.0)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -244,7 +242,6 @@ DEPENDENCIES
   daemons
   deep_cloneable (~> 1.6.0)
   delayed_job_active_record
-  delayed_paperclip
   devise
   geocoder
   httparty
