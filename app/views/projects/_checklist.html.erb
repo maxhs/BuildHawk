@@ -22,7 +22,7 @@
 				<% end %>	
 			</div>
 				<div id="checklist-items">
-					<%= render :partial => 'projects/phase', :locals => {:checklist => @checklist, :project => @project}, collection: @checklist.categories, :as => :c, cache: true %>
+					<%= render :partial => 'projects/phase', :locals => {:checklist => @checklist, :project => @project}, collection: @checklist.categories, :as => :c, cache: false %>
 				</div>
 		</div>
 	<% else %>

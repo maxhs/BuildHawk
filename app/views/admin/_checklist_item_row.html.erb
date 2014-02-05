@@ -47,7 +47,6 @@
 
 
 <% if item == item.subcategory.checklist_items.last %>
-
 		<%= link_to "New Checklist Item", new_checklist_item_checklist_path(item.checklist, :subcategory_id => item.subcategory.id, :item_index => item.item_index), :id=>"new-item-#{item.subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
 	</div><!-- end subcategory -->
 <% end %>

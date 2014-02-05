@@ -1,0 +1,15 @@
+
+<div class="subcategory">
+	<h3 style="display:inline-block"><%= subcategory.name %></h3>
+	<span style="padding-left:1em;color:#aaa;">(<%=subcategory.completed_count%> of <%= subcategory.checklist_items.count%>)</span>
+	<%= link_to "Edit Category", subcategory_checklist_path(@project, :subcategory_id => subcategory.id, :project_id => @project.id), :style=>"margin-left:20px;", :class=>"remote", :remote => true %>
+</div>
+<div id="sub-<%=subcategory.id%>">
+	<div class="subcategory-items">
+		<%= render partial:"projects/item", collection:subcategory.checklist_items, as: :item, cache: false %>
+	</div>
+<% if current_user.admin %>
+	<%= link_to "New Checklist Item", new_item_project_path(@project, :subcategory_id => subcategory.id, :item_index => subcategory.checklist_items.last.item_index), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
+	<%= link_to "New Category", new_subcategory_project_path(@project, :subcategory_id => subcategory.id, :order_index => subcategory.checklist_items.last.order_index, :category_id => subcategory.category.id), :id=>"new-subcategory-#{subcategory.id}", :class=>"remote new-subcategory", :remote => true %>
+<% end %>
+</div>

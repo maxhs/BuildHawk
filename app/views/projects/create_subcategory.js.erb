@@ -1,0 +1,5 @@
+
+$('#new_subcategory').fadeOut(200,function(){
+	$(this).remove();
+	$('#sub-<%= @previous_subcategory_id %>').after('<%= j render partial:"empty_subcategory" %>');
+});

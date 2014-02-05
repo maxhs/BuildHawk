@@ -176,6 +176,36 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def new_subcategory
+		@category = Category.find params[:category_id] 
+		@new_subcategory = @category.subcategories.new
+		@subcategory = Subcategory.find params[:subcategory_id]
+		@item_index = params[:item_index]
+		@checklist = @project.checklist
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :new_subcategory
+		end
+	end
+
+	def create_subcategory
+		@previous_subcategory_id = params[:previous_subcategory_id].html_safe
+		@subcategory = Subcategory.create params[:subcategory]
+		@subcategory.checklist_items.build
+		@checklist = Checklist.find params[:checklist_id]
+		@project = Project.find params[:id]
+		if request.xhr?
+			respond_to do |format|
+				format.js 
+			end
+		else
+			render :checklist
+		end
+	end
+
 	def update_checklist_item
 		@checklist_item = ChecklistItem.find params[:checklist_item_id]
 		@checklist_item.update_attributes params[:checklist_item]

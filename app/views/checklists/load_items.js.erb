@@ -4,7 +4,7 @@ if (itemsHolder.hasClass('revealed')){
 	itemsHolder.removeClass('revealed');
 } else {
 	itemsHolder.fadeOut(100,function(){
-		$(this).html('<%= j render partial:"projects/item", collection:@items, as: :item, cache: false %>');
+		$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %>');
 		$(this).addClass('revealed');
 		$(this).show(300);
 	});
