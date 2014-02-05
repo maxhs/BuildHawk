@@ -48,9 +48,10 @@ class Api::V1::ReportsController < Api::V1::ApiController
     end
 
     def review_report
-        if params[:id]
-            date_string = params[:id].gsub '-','/' 
-            report = Report.where(:created_date => date_string).last
+        project = Project.find params[:id]
+        if params[:date_string]
+            date_string = params[:date_string].gsub '-','/' 
+            report = project.reports.where(:created_date => date_string).last
         end
         if report 
             respond_to do |format|
