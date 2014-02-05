@@ -151,6 +151,9 @@ Buildhawk::Application.routes.draw do
       resources :users
       resources :comments
       resources :reports do
+        member do
+          get :review_report
+        end
         collection do
           post :photo
           delete :remove_personnel

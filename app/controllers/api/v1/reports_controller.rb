@@ -47,6 +47,17 @@ class Api::V1::ReportsController < Api::V1::ApiController
         end
     end
 
+    def review_report
+        report = Report.find params[:id]
+        if report 
+            respond_to do |format|
+                format.json { render_for_api :report, :json => report, :root => :report}
+            end
+        else
+            render :json => {:success => false}
+        end
+    end
+
     def create
         @current_user = User.find params[:report][:author_id]
         if params[:report][:report_users].present?
