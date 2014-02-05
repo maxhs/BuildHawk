@@ -101,16 +101,20 @@
 	}
 }
 
-.new-checklist-item {
+.new-checklist-item, .new-category, .new-subcategory {
 	border:1px solid #ddd;
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
 	padding:14px;
+	position:relative;
+	display:block;
+	top:10px;
+	margin:10px;
+	width:160px;
 }
 
-.new_checklist_item {
-	
+.new_checklist_item, .new_category {
 	table {
 		border-color:#fff;
 		border-width:0;

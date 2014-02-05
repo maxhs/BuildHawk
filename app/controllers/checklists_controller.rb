@@ -29,8 +29,18 @@ class ChecklistsController < ApplicationController
 
 	end
 
+	def load_items
+		@category = Category.find params[:id]
+		@project = @category.checklist.project
+		@items = @category.subcategories.map(&:checklist_items).flatten
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		end
+	end
+
 	def update
-		puts "checklist update params: #{params}"
 		@checklist = Checklist.find params[:id]
 		@checklist.update_attributes params[:checklist]
 		@company = current_user.company
@@ -88,6 +98,46 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
+	def new_category
+		@category = Category.new
+		@item_index = params[:item_index]
+		@subcategory = Subcategory.find params[:subcategory_id]
+
+		@checklist = @category.checklist
+		@category_name = @category.name
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :new_category
+		end
+	end
+
+	def create_category
+		index = params[:category][:item_index]
+		@category = Categry.create params[:category]
+		@checklist = @category.checklist
+
+		if params[:project_id].present?
+			@project = Project.find params[:project_id]
+			if request.xhr?
+				respond_to do |format|
+					format.js {render :template => "projects/checklist"}
+				end
+			else
+				render :checklist
+			end
+		else 
+			if request.xhr?
+				respond_to do |format|
+					format.js {render :template => "admin/editor"}
+				end
+			else
+				render "admin/editor"
+			end
+		end
+	end
 
 	def subcategory
 		@subcategory = Subcategory.find params[:subcategory_id]

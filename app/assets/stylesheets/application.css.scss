@@ -494,7 +494,8 @@ input[type="submit"] {
 body {
 	background-color:#eee !important;
 	
-	a {
+	a,.hide-reveal {
+		cursor:pointer;
 		color:#222;
 		-webkit-transition: all 0.25s ease-out;
 		-moz-transition: all 0.25s ease-out;
@@ -502,7 +503,7 @@ body {
 		transition: all 0.25s ease-out;
 	}
 
-	a:hover, a.current-page {
+	a:hover, a.current-page, .hide-reveal:hover {
 		color:#cc3333;
 		text-decoration:none;
 	}

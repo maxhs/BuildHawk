@@ -145,6 +145,37 @@ class ProjectsController < ApplicationController
 		@checklist_item = ChecklistItem.find params[:item_id]
 	end
 
+	def new_item 
+		@checklist_item = ChecklistItem.new
+		@item_index = params[:item_index]
+		@subcategory = Subcategory.find params[:subcategory_id]
+		@category = @subcategory.category
+		@checklist = @category.checklist
+		@category_name = @category.name
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :new_item
+		end
+	end
+
+	def create_item
+		index = params[:checklist_item][:item_index]
+		@item = ChecklistItem.create params[:checklist_item]
+		@checklist = @item.checklist
+		@subcategory = @item.subcategory
+		@project = Project.find params[:id]
+		if request.xhr?
+			respond_to do |format|
+				format.js 
+			end
+		else
+			render :checklist
+		end
+	end
+
 	def update_checklist_item
 		@checklist_item = ChecklistItem.find params[:checklist_item_id]
 		@checklist_item.update_attributes params[:checklist_item]
@@ -173,6 +204,28 @@ class ProjectsController < ApplicationController
 	def worklist
 		@punchlist = @project.punchlists.first
 		@items = @punchlist.punchlist_items if @punchlist
+	end
+
+	def search_items
+		if params[:search] && params[:search].length > 0
+			search_term = "%#{params[:search]}%" 
+			@project = Project.find params[:id]
+			initial = ChecklistItem.search do
+				fulltext search_term
+				with :checklist_id, params[:checklist_id]
+			end
+			@items = initial.results.uniq
+			@prompt = "No search results"
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			end
+		else 
+			@checklist = @project.checklist
+			render :checklist
+		end
+		
 	end
 
 	def search_worklist

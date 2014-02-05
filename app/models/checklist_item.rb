@@ -16,21 +16,19 @@ class ChecklistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
     # websolr
-    # searchable do
-    #   text    :body
-    #   text    :item_type
-    #   text    :status
-    #   text    :checklist do 
-    #     checklist.name if checklist
-    #   end
-    #   text    :subcategory do
-    #     subcategory.name if subcategory
-    #   end
-    #   text    :comments do
-    #     comments.map(&:body)
-    #   end
-    #   time    :created_at
-    # end
+    searchable do
+      text    :body
+      text    :item_type
+      text    :status
+      integer :checklist_id
+      text    :subcategory do
+        subcategory.name if subcategory
+      end
+      text    :comments do
+        comments.map(&:body)
+      end
+      time    :created_at
+    end
 
   	acts_as_api
 

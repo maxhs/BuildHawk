@@ -1,20 +1,13 @@
 <% if item.order_index == 0 %>
-	<% s = item.subcategory %>
-	<% if s.order_index == 0 %>
-		<% c = s.category %>
-		<div class="category">
-			<h2 style="display:inline-block"><%=c.name%></h2>
-			<%= link_to "Edit Phase", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :style=>"margin-left:20px;", :remote => true %>
-		</div>
-	<% end %>
 	<div class="subcategory">
-		<h3 style="display:inline-block"><%=s.name%></h3>
-		<span style="padding-left:1em;color:#aaa;">(<%=s.completed_count%> of <%=s.checklist_items.count%>)</span>
-		<%= link_to "Edit Category", subcategory_checklist_path(@project, :subcategory_id => s.id, :project_id => @project.id), :style=>"margin-left:20px;", :remote => true %>
+		<h3 style="display:inline-block"><%= item.subcategory.name %></h3>
+		<span style="padding-left:1em;color:#aaa;">(<%=item.subcategory.completed_count%> of <%= item.subcategory.checklist_items.count%>)</span>
+		<%= link_to "Edit Category", subcategory_checklist_path(@project, :subcategory_id => item.subcategory.id, :project_id => @project.id), :style=>"margin-left:20px;", :remote => true %>
 	</div>
-<% end %>			
+	<div id="sub-<%=item.subcategory.id%>">
+<% end %>	
 
-	<% if item.status == "Completed" %>
+<% if item.status == "Completed" %>
 		<div class="row checklist-item completed" id="item-<%=item.id%>">
 	<% elsif item.status == "Not Applicable" %>
 		<div class="row checklist-item not-applicable" id="item-<%=item.id%>">
@@ -57,9 +50,7 @@
 		</div>
 
 <% if current_user.admin && item == item.subcategory.checklist_items.last %>
-	<div style="margin:30px 20px 10px">
-		<%= link_to "New Checklist Item", new_checklist_item_checklist_path(@project, :subcategory_id => item.subcategory.id, :item_index => item.item_index, :project_id => @project.id), :class=>"new-checklist-item", :remote => true %>
-		<%= link_to "New Category", new_subcategory_checklist_path(@project, :subcategory_id => item.subcategory.id, :item_index => item.item_index, :project_id => @project.id), :class=>"new-subcategory", :remote => true %>
-		<%= link_to "New Phase", new_category_checklist_path(@project, :subcategory_id => item.subcategory.id, :item_index => item.item_index, :project_id => @project.id), :class=>"new-category", :remote => true %>
-	</div>
+	<%= link_to "New Checklist Item", new_item_project_path(@project, :subcategory_id => item.subcategory.id, :item_index => item.item_index), :id=>"new-item-#{item.subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
+
+	</div><!-- end subcategory -->
 <% end %>

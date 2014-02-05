@@ -1,0 +1,5 @@
+
+$('#new_checklist_item').fadeOut(200,function(){
+	$(this).remove();
+	$('#sub-<%= @subcategory.id %>').append('<%= j render partial:"projects/item", :locals => {:item => @item} %>');
+});

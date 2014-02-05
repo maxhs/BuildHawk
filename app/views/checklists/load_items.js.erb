@@ -1,0 +1,11 @@
+var itemsHolder = $('#<%= @category.id %>-items');
+if (itemsHolder.hasClass('revealed')){
+	itemsHolder.hide(300);
+	itemsHolder.removeClass('revealed');
+} else {
+	itemsHolder.fadeOut(100,function(){
+		$(this).html('<%= j render partial:"projects/item", collection:@items, as: :item, cache: true %>');
+		$(this).addClass('revealed');
+		$(this).show(300);
+	});
+}
