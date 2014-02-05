@@ -48,7 +48,10 @@ class Api::V1::ReportsController < Api::V1::ApiController
     end
 
     def review_report
-        report = Report.where(:created_date => params[:id]).last
+        if params[:id]
+            date_string = params[:id].gsub '-','/' 
+            report = Report.where(:created_date => date_string).last
+        end
         if report 
             respond_to do |format|
                 format.json { render_for_api :report, :json => report, :root => :report}
