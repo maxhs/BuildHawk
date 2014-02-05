@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
     has_many :notifications, :dependent => :destroy
     has_many :apn_registrations, :dependent => :destroy
 
-  	devise :database_authenticatable, :registerable, :recoverable, :trackable, :token_authenticatable #, :rememberable
+  	devise :database_authenticatable, :registerable, :recoverable, :trackable
 
   	accepts_nested_attributes_for :company, :allow_destroy => true
 

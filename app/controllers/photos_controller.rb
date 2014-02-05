@@ -19,7 +19,7 @@ class PhotosController < ApplicationController
 		@photo_id = params[:id]
 		photo.destroy
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
-		@p = @photos.last if @photos && @photos.count
+		@p = @photos.first if @photos && @photos.count
 		if request.xhr?
 			respond_to do |format|
 				format.js

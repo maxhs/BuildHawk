@@ -434,7 +434,7 @@ class ProjectsController < ApplicationController
 			flash[:notice] = "didn't work"
 		end
 
-		render :document_photos
+		redirect_to document_photos_project_path(@project)
 	end
 
 	def delete_report

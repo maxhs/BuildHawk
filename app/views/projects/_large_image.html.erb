@@ -3,13 +3,16 @@
 <% end %>
 <% if @p && @p.image_file_name %>
 	<div class="image-block large" id="photo-<%=@p.id%>">
-		<%= link_to @p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" do %> 
-			<%= image_tag @p.image.url(:large) %> 
+		<%= link_to image_tag(@p.image.url(:large)), @p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %> 
+		
+		<div class="image-details">
+			<% if @p.name.length > 0 %><div><span class="label">Name:</span><%= @p.name %></div> <% end %>
 			<div><span class="label">Date:</span><%= @p.created_date%></div>
 			<div><% if @p.source %><span class="label">Source:</span><%= @p.source%><% end %></div> 
 			<div><% if @p.user %><span class="label">Taken by:</span><%= @p.user.full_name%><% else %>&nbsp;<% end %></div>
-			<%= link_to 'Delete Photo', photo_path(@p), :method => :delete, :class=>"delete-link", :remote => true, :data => {:confirm => "Are you sure you want to delete this photo? This can't be undone."} %>
-		<% end %>
+		</div>
+		<%= link_to 'Delete Photo', photo_path(@p), :method => :delete, :class=>"delete-link", :remote => true, :data => {:confirm => "Are you sure you want to delete this photo? This can't be undone."} %>
+		
 	</div>
 <% else %>
 	<div class="no-image-placeholder">No Document</div>
