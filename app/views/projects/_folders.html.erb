@@ -2,10 +2,10 @@
 	<ul>
 		<%= render partial: "folders/folder", collection: @folders, as: :folder, cache: false %>
 	</ul>
-	<% if params[:action] == "document_photos" %>
-		<div id="add-photo-link">Add New Folder</div>
-	<% end %>
 <% end %>
+
+<div id="add-photo-link">Add New Folder</div>
+
 <script type="text/javascript">
 	$('#add-photo-link').click(function(){
 		$(this).fadeOut(200,function(){

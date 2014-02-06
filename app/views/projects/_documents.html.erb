@@ -13,6 +13,7 @@
 	<div id="photo-section">
 		<div id="photo-table">
 			<% if @folders && @folders.count > 0 %><%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: true %><% end %>
+			<div id="add-photo-link">Add New Folder</div>
 		</div>
 		<div id="photo-focus">
 			<% if @photos && @photos.count > 0 %>	
@@ -30,5 +31,11 @@
 	$(document).ready(function(){
 		Shadowbox.clearCache();
 	    Shadowbox.setup(".shadow-photo", {});
+	    $('#add-photo-link').click(function(){
+			$(this).fadeOut(200,function(){
+				$(this).replaceWith('<%= form_for Folder.new, :remote => true do |f| %><%= f.text_field :name, :placeholder => "New folder name..." %><%= f.hidden_field :project_id, :value => @project.id %><% end %>');
+				$(this).fadeIn(200);
+			});
+		});
 	});
 </script>
