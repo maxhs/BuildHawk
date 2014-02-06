@@ -442,7 +442,7 @@ class ProjectsController < ApplicationController
 		end
 	end	
 	def report_photos
-		@photos = @project.photos.where(:source => "Report")
+		@photos = @project.photos.where(:source => "Reports")
 		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
 		@nav = "report-photos-nav"
