@@ -174,8 +174,13 @@ class ChecklistsController < ApplicationController
 		@category = Category.find params[:category_id]
 		@checklist = Checklist.find params[:id]
 		@project = @checklist.project
-		@category.destroy
-		redirect_to checklist_project_path(@project)
+		if @category.destroy && request.xhr?
+			respond_to do |format|
+				format.js { render :template => "projects/checklist"}
+			end
+		else
+			redirect_to checklist_project_path(@project)
+		end
 	end
 
 	def destroy_subcategory

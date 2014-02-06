@@ -1,5 +1,5 @@
 
 $('#new_category').fadeOut(200,function(){
 	$(this).remove();
-	$('#sub-<%= @previous_category_id %>').after('<%= j render partial:"empty_category" %>');
+	$('#phase-<%= @previous_category_id %>').after('<%= j render partial:"empty_category" %>');
 });

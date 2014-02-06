@@ -179,7 +179,13 @@ class ProjectsController < ApplicationController
 	def new_subcategory
 		@category = Category.find params[:category_id] 
 		@new_subcategory = @category.subcategories.new
-		@subcategory = Subcategory.find params[:subcategory_id]
+		if params[:subcategory_id]
+			@subcategory = Subcategory.find params[:subcategory_id]
+			@subcategory_id = params[:subcategory_id]
+		else
+			@subcategory = @category.subcategories.build
+			@subcategory_id = 0
+		end
 		@item_index = params[:item_index]
 		@checklist = @project.checklist
 		if request.xhr?
@@ -195,6 +201,34 @@ class ProjectsController < ApplicationController
 		@previous_subcategory_id = params[:previous_subcategory_id].html_safe
 		@subcategory = Subcategory.create params[:subcategory]
 		@subcategory.checklist_items.build
+		@checklist = Checklist.find params[:checklist_id]
+		@project = Project.find params[:id]
+		if request.xhr?
+			respond_to do |format|
+				format.js 
+			end
+		else
+			render :checklist
+		end
+	end
+
+	def new_category
+		@category = Category.find params[:category_id]
+		@checklist = @category.checklist 
+		@new_category = @checklist.categories.new
+		@item_index = params[:item_index]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :new_category
+		end
+	end
+
+	def create_category
+		@previous_category_id = params[:previous_category_id].html_safe
+		@category = Category.create params[:category]
 		@checklist = Checklist.find params[:checklist_id]
 		@project = Project.find params[:id]
 		if request.xhr?
