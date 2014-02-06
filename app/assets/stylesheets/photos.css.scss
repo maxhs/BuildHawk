@@ -82,10 +82,18 @@ form.edit_photo {
 	color:#cc0000;
 }
 
+#documents-header {
+	display:inline-block;
+	width:15%;
+	text-align:center;
+	font-family:'Gotham Book','Helvetica';
+	min-width:95px;
+}
+
 #filters {
 	position:relative;
 	width:84%;
-	top:-5px;
+	top:-3px;
 	list-style:none;
 	display:inline-block;
 	text-transform:uppercase;
