@@ -3,20 +3,20 @@
 		<h4 id="documents-header">DOCUMENTS:</h4>
 		
 		<ul id="filters">
-			<li><%= link_to "Project Docs", document_photos_project_path(@project), :id => "document-photos-nav", :remote => true %></li>
+			<li><%= link_to "Project Docs", document_photos_project_path(@project), :id => "document-photos-nav", :class => "current-page", :remote => true %></li>
 			<li><%= link_to "Checklist", checklist_photos_project_path(@project), :id => "checklist-photos-nav", :remote => true %></li>
 			<li><%= link_to "Worklist", worklist_photos_project_path(@project), :id => "worklist-photos-nav", :remote => true %></li>
 			<li><%= link_to "Reports", report_photos_project_path(@project), :id => "report-photos-nav", :remote => true %></li>
-			<li><%= link_to "All", documents_project_path(@project), :id => "all-photos-nav", :class => "current-page", :remote => true %></li>
+			<li><%= link_to "All", documents_project_path(@project), :id => "all-photos-nav", :remote => true %></li>
 		</ul>
 	</div>
 	<div id="photo-section">
 		<div id="photo-table">
-			
+			<% if @folders && @folders.count > 0 %><%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: true %><% end %>
 		</div>
-		<div id="photo-focus" class="full-focus">
+		<div id="photo-focus">
 			<% if @photos && @photos.count > 0 %>	
-				<%= render :partial => "image", collection: @photos, as: :p, cache: true %>
+				<%= render :partial => "projects/large_image" %>
 			<% else %>
 				<div class="no-image-placeholder">No Documents</div>
 			<% end %>

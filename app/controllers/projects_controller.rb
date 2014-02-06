@@ -392,9 +392,10 @@ class ProjectsController < ApplicationController
 	def documents
 		@photos = @project.photos.sort_by(&:created_date).reverse
 		@folders = @project.folders
+		@nav = "all-photos-nav"
 		if request.xhr?
 			respond_to do |format|
-				format.js
+				format.js { render :template => "projects/photos"}
 			end
 		else 
 			render :documents

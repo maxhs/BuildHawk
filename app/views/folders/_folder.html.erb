@@ -1,11 +1,11 @@
-<% if folder.name.length > 0 %>
+<% if folder && folder.name.length > 0 %>
 	<li class="folder" id="fid-<%=folder.id%>">
 		<h4 class="folder-name"><%= folder.name %></h4>
-		<%= link_to "Edit", edit_folder_path(folder), :class=>"edit-folder no-link", :remote => true %>
+		<%= link_to "Edit", edit_folder_path(folder), :class=>"edit-folder remote", :remote => true %>
 		<ul>
 			<% folder.photos.each do |p| %>
 				<li class="photo-name" id="p-<%= p.id %>">
-					<%= link_to p.name, show_photo_project_path(@project,:photo_id => p.id), :class=>"no-link", :remote => true %>
+					<%= link_to p.name, show_photo_project_path(@project,:photo_id => p.id), :class=>"remote", :remote => true %>
 				</li>
 			<% end %>
 		</ul>
