@@ -84,15 +84,20 @@ form.edit_photo {
 
 #filters {
 	position:relative;
+	width:84%;
 	top:-5px;
 	list-style:none;
 	display:inline-block;
-	font-size:1.2em;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 
 	li {
+		width:19%;
 		display:inline-block;
-		padding:0 20px;
+		padding:0;
 		vertical-align:middle;
+		text-align:center;
 	}
 }
 

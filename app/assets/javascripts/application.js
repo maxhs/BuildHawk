@@ -38,7 +38,7 @@ if (history && history.pushState){
 
 $(document).ready(function(){
     var width = $(window).width()
-    $('#alert,#notice').css("left",width/4);
+    $('#alert,#notice').css("left",width/10);
 
     if ($('#notice').text().length !== 0) {
         $('#notice').css({}).delay(500).fadeIn("normal", function() {

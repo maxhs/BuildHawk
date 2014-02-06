@@ -3,7 +3,7 @@
 <% end %>
 <% if @p && @p.image_file_name %>
 	<div class="image-block large" id="photo-<%=@p.id%>">
-		<%= link_to image_tag(@p.image.url(:original)), @p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %> 
+		<%= link_to image_tag(@p.image.url(:large)), @p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %> 
 		
 		<div class="image-details">
 			<% if @p.name.length > 0 %>

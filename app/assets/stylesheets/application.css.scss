@@ -38,7 +38,7 @@ body {
 	font-size: 1.25em;
 	line-height: 40px;
 	vertical-align: middle;
-	width:50%;
+	width:80%;
 	height: 40px;
 	text-align: center;
 	position:fixed;
@@ -92,12 +92,11 @@ body {
 	}
 
 	#pagescontainer {
-		margin-top:100px;
+		margin-top:80px;
 		margin-bottom:60px;
 	}
 
-	.navbar {
-		margin-bottom: 20px;
+	.navbar-fixed-top {
 		background-color: #fff;
 		border: 1.5px solid #ddd;
 		.navbar-header{
@@ -127,7 +126,7 @@ body {
 			font-size:16px;
 			font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 			text-transform:uppercase;
-			padding:15px 25px;
+			letter-spacing:1px;
 		}
 
 		> a:hover {
@@ -137,11 +136,18 @@ body {
 
 	}
 	.project-nav {
-		li a {
-			font-size:16px !important;
-			text-transform:none;
-			font-weight:200;
-			padding:15px 35px;
+		width:100%;
+		
+		li { 
+		text-align:center;
+		width:16.5%;
+		padding:2px;
+		min-width:112px;
+			a {
+
+				font-weight:200;
+				padding:15px 0;
+			}
 		}
 	}
 
@@ -166,7 +172,7 @@ body {
 	}
 
 	.container {
-		width:95%;
+		width:100%;
 	}
 
 	footer {
@@ -439,19 +445,6 @@ input[type="submit"] {
 		}
 	}
 
-	#main, #sidebar {
-		> .admin, > .projects {
-			/*display: none;*/
-
-			ul > li > a {
-				font-size: 1.1em;
-			}
-
-			> .sidebarProjects > div > a {
-				font-size: 1.15em;
-			}
-		}
-	}
 	&.projects-page, &.projectform-page,  &.checklists-page, &.checklistitem-page, &.project-page, &.documents-page, &.report-page, &.reports-page, &.punchlists-page, &.punchlistform-page, &.dashboard-page {
 		#main, #sidebar {
 			> .projects {
