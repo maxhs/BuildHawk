@@ -9,7 +9,12 @@
 		<%= render partial:"projects/item", collection:subcategory.checklist_items, as: :item, cache: false %>
 	</div>
 <% if current_user.admin %>
-	<%= link_to "New Checklist Item", new_item_project_path(@project, :subcategory_id => subcategory.id, :item_index => subcategory.checklist_items.last.item_index), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
-	<%= link_to "New Category", new_subcategory_project_path(@project, :subcategory_id => subcategory.id, :order_index => subcategory.checklist_items.last.order_index, :category_id => subcategory.category.id), :id=>"new-subcategory-#{subcategory.id}", :class=>"remote new-subcategory", :remote => true %>
+	<% if subcategory.checklist_items.count > 0 %>
+		<% count = subcategory.checklist_items.count %>
+	<% else %>
+		<% coutn = 0 %>
+	<% end %> 
+	<%= link_to "New Checklist Item", new_item_project_path(@project, :subcategory_id => subcategory.id, :item_index => count), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
+	<%= link_to "New Category", new_subcategory_project_path(@project, :subcategory_id => subcategory.id, :order_index => count, :category_id => subcategory.category.id), :id=>"new-subcategory-#{subcategory.id}", :class=>"remote new-subcategory", :remote => true %>
 <% end %>
 </div>

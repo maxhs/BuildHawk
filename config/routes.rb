@@ -75,6 +75,8 @@ Buildhawk::Application.routes.draw do
       post :create_item
       get :new_subcategory
       post :create_subcategory
+      get :new_category
+      post :create_category
       get :edit_checklist_item
       post :worklist_item
       post :search_items
@@ -113,8 +115,6 @@ Buildhawk::Application.routes.draw do
     member do
       get :new_checklist_item
       post :create_checklist_item 
-      get :new_category
-      post :create_category
       get :category
       get :subcategory
       get :load_items

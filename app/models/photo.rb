@@ -14,7 +14,7 @@ class Photo < ActiveRecord::Base
     before_create :ensure_defaults
 
   	has_attached_file 	:image, 
-	                    :styles => { :large => ["2048x2048#", :jpg],
+	                    :styles => { :large => ["768x768#", :jpg],
 	                                 :small  => ["200x200#", :jpg],
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },

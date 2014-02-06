@@ -1,0 +1,4 @@
+<div class="category">
+	<h2 style="display:inline-block"><%=c.name%></h2>
+	<%= link_to "Edit Phase", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :style=>"margin-left:20px;", :remote => true %>
+</div>

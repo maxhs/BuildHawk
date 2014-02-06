@@ -1,0 +1,4 @@
+$('#new-category-<%= @category.id %>').fadeOut(200,function(){
+	$(this).replaceWith('<%= j render partial:"projects/new_category" %>');
+	$(this).fadeIn(200);
+});
