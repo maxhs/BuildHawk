@@ -5,6 +5,7 @@ class Sub < ActiveRecord::Base
   	belongs_to :company
     belongs_to :punchlist_item
 
+    after_save :clean_phone_number
     before_destroy :clean_up
 
     def clean_up
@@ -16,8 +17,10 @@ class Sub < ActiveRecord::Base
     end
 
     def clean_phone_number
-      self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
-      self.save
+        if self.phone_number.include?(' ')
+            self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            self.save
+        end
     end
 
     def formatted_phone
@@ -44,7 +47,6 @@ class Sub < ActiveRecord::Base
       	t.add :id
       	t.add :name
       	t.add :email
-        t.add :formatted_phone
       	t.add :phone_number
         t.add :count
   	end
