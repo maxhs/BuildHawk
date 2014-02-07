@@ -12,7 +12,7 @@
 	</div>
 	<div id="photo-section">
 		<div id="photo-table">
-			<% if @folders && @folders.count > 0 %><%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: true %><% end %>
+			<% if @folders && @folders.count > 0 %><%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: false %><% end %>
 			<div id="add-photo-link">Add New Folder</div>
 		</div>
 		<div id="photo-focus">

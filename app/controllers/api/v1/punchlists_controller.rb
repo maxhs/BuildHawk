@@ -4,7 +4,6 @@ class Api::V1::PunchlistsController < Api::V1::ApiController
     	project = Project.find params[:id]
     	if project.punchlists && project.punchlists.count > 0
     		punchlist = project.punchlists.first
-            puts "punchlist items count from api: #{punchlist.punchlist_items.count}"
     	else 
     		punchlist = project.punchlists.create
     	end
