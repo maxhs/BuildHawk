@@ -26,7 +26,7 @@
 					<td style="width:100px;padding:0;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% else %><span style="text-align:center;width:100px;display:block;color:#aaa;"> - </span><% end %></td>
 					<td style="width:23%;"><%= user.full_name %></td>
 					<td style="width:23%;"><%= user.email %></td>
-					<td style="width:23%;"><%= user.phone_number %></td>
+					<td style="width:23%;"><%= user.formatted_phone %></td>
 					<td style="width:23%;"><%= parse_time user.created_at%></td>
 					<td><%= link_to "Edit", edit_user_admin_index_path(:id => user.id), :remote => true %></td>
 				</tr>
@@ -56,7 +56,7 @@
 					<td style="width:100px;padding:8px 0;"><% if sub.image_file_name %><%= image_tag sub.image.url(:thumb), :class =>"admin-user-pic" %><% else %><span style="text-align:center;width:100px;display:block;color:#aaa;"> - </span><% end %></td>
 					<td style="width:23%;"><%= sub.name %></td>
 					<td style="width:23%;"><%= sub.email %></td>
-					<td style="width:23%;"><%= sub.phone_number %></td>
+					<td style="width:23%;"><%= sub.formatted_phone %></td>
 					<td style="width:23%;"><%= parse_time sub.created_at%></td>
 					<td><%= link_to "Edit", edit_sub_admin_index_path(:id => sub.id), :remote => true %></td>
 				</tr>

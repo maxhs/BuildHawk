@@ -1,4 +1,5 @@
 class Sub < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :company_id, :company, :email, :phone_number, :count, :punchlist_item_id,
                   :punchlist_item, :image, :image_file_name, :contact_name
   	belongs_to :company
@@ -12,6 +13,19 @@ class Sub < ActiveRecord::Base
             puts "cleaning up punchlist item: #{i.id}"
             i.update_attribute :sub_assignee_id, nil
         end
+    end
+
+    def clean_phone_number
+      puts "cleaning phone number"
+      self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+      self.save
+    end
+
+    def formatted_phone
+      if self.phone_number.length > 0
+        clean_phone_number if self.phone_number.include?(' ')
+        number_to_phone(self.phone_number, area_code:true)
+      end
     end
 
     has_attached_file :image, 
@@ -31,6 +45,7 @@ class Sub < ActiveRecord::Base
       	t.add :id
       	t.add :name
       	t.add :email
+        t.add :formatted_phone
       	t.add :phone_number
         t.add :count
   	end

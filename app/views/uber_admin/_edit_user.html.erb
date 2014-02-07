@@ -14,7 +14,7 @@
 			<div><%= f.label "Email" %></div>
 			<div><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></div>
 			<div><%= f.label "Phone Number" %></div>
-			<div><%= f.text_field :phone_number, :placeholder => "Phone number", :class=>"tt-hint form-control" %></div>
+			<div><%= f.text_field :phone_number, :value => @user.formatted_phone, :placeholder => "Phone number (e.g. (555) 555-5555)", :class=>"tt-hint form-control" %></div>
 			<div><%= f.label "Password" %></div>
 			<div><%= f.password_field :password, :placeholder => "Password (only required if changing)", :class=>"tt-hint form-control" %></div>
 			<div><%= f.label "Password confirmation" %></div>

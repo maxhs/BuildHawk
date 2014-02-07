@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
+    include ActionView::Helpers::NumberHelper
+
     attr_accessible :first_name, :last_name, :user_id, :email, :password, :phone_number, :push_permissions, :email_permissions,
     				:full_name, :company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin,
-            :authentication_token, :company_admin
+                    :authentication_token, :company_admin
 
     belongs_to :company
     
@@ -41,6 +43,19 @@ class User < ActiveRecord::Base
     
     def welcome
       UserMailer.welcome(self).deliver if self.email 
+    end
+
+    def clean_phone_number
+      puts "cleaning phone number"
+      self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+      self.save
+    end
+
+    def formatted_phone
+      if self.phone_number.length > 0
+        clean_phone_number if self.phone_number.include?(' ')
+        number_to_phone(self.phone_number, area_code:true)
+      end
     end
 
     def password_required?
@@ -88,7 +103,9 @@ class User < ActiveRecord::Base
 	    t.add :last_name
 	    t.add :full_name
 	    t.add :email
-	    t.add :phone_number
+	    t.add :formatted_phone
+      #get rid of phone number soon
+      t.add :phone_number
       t.add :authentication_token
       t.add :coworkers
       t.add :subcontractors
@@ -113,6 +130,8 @@ class User < ActiveRecord::Base
       t.add :first_name
       t.add :full_name
       t.add :email
+      t.add :formatted_phone
+      #get rid of phone number soon
       t.add :phone_number
     end
 
@@ -120,6 +139,8 @@ class User < ActiveRecord::Base
       t.add :first_name
       t.add :full_name
       t.add :email
+      t.add :formatted_phone
+      #get rid of phone number soon
       t.add :phone_number
       t.add :id
     end
@@ -134,6 +155,8 @@ class User < ActiveRecord::Base
       t.add :last_name
       t.add :full_name
       t.add :email
+      t.add :formatted_phone
+      #get rid of phone number soon
       t.add :phone_number
     end
 end
