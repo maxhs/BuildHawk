@@ -22,7 +22,7 @@ class Sub < ActiveRecord::Base
     end
 
     def formatted_phone
-      if self.phone_number.length > 0
+      if self.phone_number && self.phone_number.length > 0
         clean_phone_number if self.phone_number.include?(' ')
         number_to_phone(self.phone_number, area_code:true)
       end
