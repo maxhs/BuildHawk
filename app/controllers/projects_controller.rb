@@ -566,15 +566,6 @@ class ProjectsController < ApplicationController
 
 	end
 
-	def delete_worklist_item
-		@item = PunchlistItem.find params[:item_id]
-		@punchlist = @item.punchlist
-		@items = @punchlist.punchlist_items
-		@project = @punchlist.project
-		@item.destroy
-		render :worklist
-	end
-
 	def destroy_confirmation
 		if request.xhr?
 			respond_to do |format|

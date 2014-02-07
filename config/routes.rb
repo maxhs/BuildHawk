@@ -103,10 +103,10 @@ Buildhawk::Application.routes.draw do
       post :update_worklist_item
       delete :delete_checklist
       get :destroy_confirmation
+
     end
     collection do
       post :search
-      delete :delete_worklist_item
     end
   end
   resources :companies
@@ -125,6 +125,7 @@ Buildhawk::Application.routes.draw do
     end
   end
   resources :checklist_items
+  resources :punchlist_items, :only => [:destroy]
   resources :photos
   resources :punchlists
   resources :reports
@@ -152,7 +153,7 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :punchlists
+      resources :punchlists, :only => [:show]
       resources :punchlist_items do
         collection do
           post :photo

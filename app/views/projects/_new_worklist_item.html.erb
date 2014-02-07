@@ -1,22 +1,24 @@
 <%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :method => :post do |f| %>
-	<table id="add-punchlist" class="border-box" style="padding-top:20px;">
-		<tr><td><h3>Add a new Punchlist item</h3></td></tr>
-		<tr><td><%= f.text_field :body, :placeholder => "Describe the work item" %></td></tr>
-		<tr><td><%= f.text_field :location, :placeholder => "Add a location (optional)" %></td></tr>
-		<tr><td><h4>Select an assignee</h4>
-				<%= f.fields_for :assignee do |a| %>
-					<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), :class=>"assignee-select" %>
+	<div id="add-punchlist" class="border-box" style="padding-top:20px;">
+		<div id="punchlist-container">
+			<div><h3>Add a new Punchlist item</h3></div>
+			<div><%= f.text_field :body, :placeholder => "Describe the work item" %></div>
+			<div><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
+			<div><h4>Select an assignee</h4>
+					<%= f.fields_for :assignee do |a| %>
+						<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), :class=>"assignee-select" %>
+					<% end %>
+				</div>
+			<div><span style="margin-right:20px"><h4>Add a photo</h4></span>
+				<%= f.fields_for :photos do |photo| %>
+					<%= photo.file_field :image %>
+					<%= photo.hidden_field :project_id, :value => @project.id %>
+					<%= photo.hidden_field :user_id, :value => current_user.id %>
+					<%= photo.hidden_field :source, :value => "Worklist" %>
 				<% end %>
-			</td></tr>
-		<tr><td><span style="margin-right:20px"><h4>Add a photo</h4></span>
-			<%= f.fields_for :photos do |photo| %>
-				<%= photo.file_field :image %>
-				<%= photo.hidden_field :project_id, :value => @project.id %>
-				<%= photo.hidden_field :user_id, :value => current_user.id %>
-				<%= photo.hidden_field :source, :value => "Worklist" %>
-			<% end %>
-		</td></tr>
-		<tr><td><button class="btn btn-success btn-lg pull-right"><%= f.submit "Add" %></button></td></tr>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-	</table>
+			</div>
+			<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Add" %></button></div>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+		</div>
+	</div>
 <% end %>

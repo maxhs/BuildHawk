@@ -2,20 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table#add-punchlist {
+#add-punchlist {
 	width:100%; 
 	padding:20px;
 
-	tbody {
+	#punchlist-container {
 		width:80%;
 		margin:0 auto;
 		padding:0 20px 70px;
 		display:block;
-		tr, td {
+		
+		div {
 			padding-top:10px;
 			width:100%;
 			display:block;
 		}
+		
 		input {
 			width:100% !important;
 			display:block;
@@ -24,6 +26,6 @@ table#add-punchlist {
 	}	
 }
 
-table#worklist-table {
+#worklist-table {
 	margin-bottom:0;
 }
