@@ -16,7 +16,6 @@ class Sub < ActiveRecord::Base
     end
 
     def clean_phone_number
-      puts "cleaning phone number"
       self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
       self.save
     end

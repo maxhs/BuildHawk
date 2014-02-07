@@ -46,7 +46,6 @@ class User < ActiveRecord::Base
     end
 
     def clean_phone_number
-      puts "cleaning phone number"
       self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
       self.save
     end
@@ -63,7 +62,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
+      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
     end
 
     def url500
@@ -98,20 +97,20 @@ class User < ActiveRecord::Base
   	acts_as_api
 
   	api_accessible :user do |t|
-      t.add :id
+        t.add :id
 	    t.add :first_name
 	    t.add :last_name
 	    t.add :full_name
 	    t.add :email
 	    t.add :formatted_phone
-      #get rid of phone number soon
-      t.add :phone_number
-      t.add :authentication_token
-      t.add :coworkers
-      t.add :subcontractors
-      t.add :company
-      t.add :url100
-      t.add :url200
+        #get rid of phone number soon
+        t.add :phone_number
+        t.add :authentication_token
+        t.add :coworkers
+        t.add :subcontractors
+        t.add :company
+        t.add :url100
+        t.add :url200
   	end
 
   	api_accessible :feed do |t|
