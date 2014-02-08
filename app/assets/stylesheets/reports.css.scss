@@ -27,9 +27,17 @@
 			margin:10px auto 0;
 		}
 	}
+	
+	select#report_report_type {
+		width:120px;
+		font-size:2em;
+	}
+
 	.select-container {
 		width:50%;
 		float:left;
+
+		
 
 		select[multiple] {
 			min-height:100px;

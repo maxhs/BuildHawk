@@ -13,6 +13,9 @@ class Report < ActiveRecord::Base
     has_many :subs, :through => :report_subs
     has_many :photos, :dependent => :destroy
 
+    validates_presence_of :report_type
+    validates_presence_of :created_date
+
     accepts_nested_attributes_for :users, :allow_destroy => true
     accepts_nested_attributes_for :subs, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
