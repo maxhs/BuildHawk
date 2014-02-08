@@ -6,11 +6,9 @@ class Api::V1::ReportsController < Api::V1::ApiController
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             users.each do |u|
-                puts "u: #{u} and :#{u[:full_name]}"
                 user = User.find_by full_name: u[:full_name]
                 if user
                     ru = report.report_users.where(:user_id => user.id).first_or_create
-                    puts "adding a new report user: #{user.full_name}"
                 end
             end
             params[:report].delete(:report_users)
@@ -19,11 +17,8 @@ class Api::V1::ReportsController < Api::V1::ApiController
         if params[:report][:report_subs].present?
             subs = params[:report][:report_subs]
             subs.each do |s|
-                puts "s: #{s} and #{s[:name]}"
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
-                puts "added a sub for report: #{sub.name}"
                 the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                puts "got the sub: #{the_sub.id}"
                 the_sub.update_attribute :count, s[:count]
             end
             params[:report].delete(:report_subs)
@@ -74,23 +69,20 @@ class Api::V1::ReportsController < Api::V1::ApiController
             params[:report].delete(:report_subs)
         end
         @report = Report.create params[:report]
+        @report.update_attribute :mobile, true
         if subs
             subs.each do |s|
-                puts "s: #{s} and #{s[:name]}"
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
                 the_sub = @report.report_subs.where(:sub_id => sub.id).first_or_create
-                puts "got the sub: #{the_sub.id}"
                 the_sub.update_attribute :count, s[:count]
             end
         end
 
         if users
             users.each do |u|
-                puts "u: #{u} and :#{u[:full_name]}"
                 user = User.find_by full_name: u[:full_name]
                 if user
                     ru = @report.report_users.where(:user_id => user.id).first_or_create
-                    puts "creating a new report user: #{user.full_name}"
                 end
             end
         end
@@ -102,7 +94,8 @@ class Api::V1::ReportsController < Api::V1::ApiController
 
     def photo
         report = Report.find params[:photo][:report_id]
-        report.photos.create params[:photo]
+        photo = report.photos.create params[:photo]
+        photo.update_attribute :mobile, true
         respond_to do |format|
             format.json { render_for_api :report, :json => report, :root => :report}
         end

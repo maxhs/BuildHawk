@@ -159,7 +159,6 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :users
       resources :comments
       resources :reports do
         member do

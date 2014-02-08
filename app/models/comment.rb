@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-	  attr_accessible :body, :user_id, :report_id, :user, :checklist_item_id, :punchlist_item_id
+	  attr_accessible :body, :user_id, :report_id, :user, :checklist_item_id, :punchlist_item_id, :mobile
   	belongs_to :user
   	belongs_to :report
   	belongs_to :checklist_item, counter_cache: true

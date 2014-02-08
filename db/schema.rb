@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131220024) do
+ActiveRecord::Schema.define(version: 20140208055258) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20140131220024) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "mobile",            default: false
   end
 
   add_index "comments", ["user_id", "report_id", "checklist_item_id", "punchlist_item_id"], name: "comments_ix"
@@ -173,6 +174,7 @@ ActiveRecord::Schema.define(version: 20140131220024) do
     t.string   "phase"
     t.string   "name",                                     null: false
     t.integer  "folder_id"
+    t.boolean  "mobile",             default: false
   end
 
   add_index "photos", ["report_id", "checklist_item_id", "punchlist_item_id", "user_id"], name: "photos_ix"
@@ -213,6 +215,7 @@ ActiveRecord::Schema.define(version: 20140131220024) do
     t.integer  "photos_count"
     t.integer  "comments_count"
     t.integer  "sub_assignee_id"
+    t.boolean  "mobile",               default: false
   end
 
   add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
@@ -261,6 +264,7 @@ ActiveRecord::Schema.define(version: 20140131220024) do
     t.string   "precip"
     t.string   "humidity"
     t.string   "precip_accumulation"
+    t.boolean  "mobile",                          default: false
   end
 
   add_index "reports", ["author_id", "project_id"], name: "reports_ix"

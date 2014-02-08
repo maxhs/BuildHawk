@@ -45,15 +45,14 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
             sub = Sub.where(:name => params[:punchlist_item][:sub_assignee]).first_or_create
             params[:punchlist_item].delete(:sub_assignee)
         end
-        puts "params after deleting: #{params}"
+        
         @punchlist_item = @project.punchlists.last.punchlist_items.create params[:punchlist_item]
+        @punchlist_item.update_attribute :mobile, true
         
         if user
             @punchlist_item.update_attribute :assignee_id, user.id
-            puts "assignee is a user: #{user.full_name}"
         elsif sub
             @punchlist_item.update_attribute :sub_assignee_id, sub.id
-            puts "sub assignee is a sub: #{sub.name}"
         end
 
         if @punchlist_item.save
@@ -65,7 +64,8 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
 
     def photo
         @punchlist_item = PunchlistItem.find params[:id]
-        @punchlist_item.photos.create params[:photo]
+        photo = @punchlist_item.photos.create params[:photo]
+        photo.update_attribute :mobile, true
         respond_to do |format|
             format.json { render_for_api :punchlist, :json => @punchlist_item, :root => :punchlist_item}
         end

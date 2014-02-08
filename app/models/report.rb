@@ -1,7 +1,7 @@
 class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :author_id, :project_id, :report_fields, :weather, :photos_attributes, 
                   :users_attributes, :report_users_attributes, :users, :user_ids, :created_date, :subs, :sub_ids, :subs_attributes,
-                  :report_subs_attributes, :weather_icon, :temp, :wind, :precip, :humidity, :precip_accumulation
+                  :report_subs_attributes, :weather_icon, :temp, :wind, :precip, :humidity, :precip_accumulation, :mobile
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
@@ -23,10 +23,6 @@ class Report < ActiveRecord::Base
       text    :weather
       text    :created_date
       integer :project_id
-      #text    :temp
-      #text    :wind
-      #text    :report_fields
-      #text    :report_type
       text    :users do
         users.map(&:full_name)
       end
@@ -34,7 +30,7 @@ class Report < ActiveRecord::Base
     end
 
     def possible_types
-      ["Daily","Safety"]
+      ["Daily","Safety","Weekly"]
     end
 
     def date_for_sort

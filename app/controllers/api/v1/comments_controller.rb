@@ -26,6 +26,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
 
     def create
         comment = Comment.create params[:comment]
+        comment.update_attribute :mobile, true
         if params[:comment][:checklist_item_id].present?
             checklist_item = ChecklistItem.find params[:comment][:checklist_item_id]
             comments = checklist_item.comments
