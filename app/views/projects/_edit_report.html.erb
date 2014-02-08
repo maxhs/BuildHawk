@@ -61,7 +61,7 @@
 			</div>
 
 			<% if @report.photos && @report.photos.count > 0 %>
-				<div class="row">
+				<div class="row" style="margin-top:20px;">
 					<% @report.photos.each do |p| %>
 						<% if p.image_file_name%>
 							<%= render :partial => "image", :locals => {:p => p} %> 
@@ -70,22 +70,22 @@
 				</div>
 			<% end %>
 
-			<div class="row">
-				<div class="col-md-12"><h4>Add a photo</h4></div>
-			</div>
-	
-			<div class="row">
-				<div class="col-md-12">
-					<%= f.fields_for :photos, @report.photos.build do |photo| %>
-						<%= photo.file_field :image %>
-						<%= photo.hidden_field :report_id, :value => @report.id %>
-						<%= photo.hidden_field :project_id, :value => @project.id %>
-						<%= photo.hidden_field :source, :value => "Reports" %>
-					<% end %>
-				</div>
-			</div>
-
 			<div class="thin-form">	
+				<div class="row">
+					<div class="col-md-12"><h4>Add a photo</h4></div>
+				</div>
+		
+				<div class="row">
+					<div class="col-md-12">
+						<%= f.fields_for :photos, @report.photos.build do |photo| %>
+							<%= photo.file_field :image %>
+							<%= photo.hidden_field :report_id, :value => @report.id %>
+							<%= photo.hidden_field :project_id, :value => @project.id %>
+							<%= photo.hidden_field :source, :value => "Reports" %>
+						<% end %>
+					</div>
+				</div>
+			
 				<div class="row">
 					<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
 				</div>
