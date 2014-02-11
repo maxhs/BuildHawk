@@ -3,9 +3,8 @@ class ReportsController < ApplicationController
 	def update
 		@project = Project.find params[:id]
 		@report = Report.find params[:report_id]
-		unless params[:report][:created_date] == @report.created_date
-			puts "why is it getting in here?"
-			if Report.where(:created_date => params[:report][:created_date]).first
+		unless params[:report][:created_date] == @report.created_date && params[:report][:report_type] == @report.report_type
+			if Report.where(:created_date => params[:report][:created_date], :report_type => params[:report][:report_type]).first
 				if request.xhr?
 					respond_to do |format|
 						format.js { render :template => "reports/existing"}
@@ -31,7 +30,7 @@ class ReportsController < ApplicationController
 
 	def create
 		@project = Project.find params[:id]
-		if Report.where(:created_date => params[:report][:created_date]).first
+		if Report.where(:created_date => params[:report][:created_date], :report_type => params[:report][:report_type]).first
 			if request.xhr?
 				respond_to do |format|
 					format.js { render :template => "reports/existing"}

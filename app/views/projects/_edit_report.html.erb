@@ -14,7 +14,7 @@
 
 				<div class="row form-title">
 					<div class="col-md-4"><h4 style="display:inline-block;">Report Type:</h4></div>
-					<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types) %></div>
+					<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
 				</div>
 					
 				<div class="row form-title">
