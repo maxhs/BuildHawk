@@ -1,6 +1,6 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('.nav-reports a').addClass('current-page');
 $('#pages').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "reports", :locals => {:reports => @reports } %>');
+	$(this).html('<%= j render :partial => "projects/reports", :locals => {:reports => @reports } %>');
 	$(this).fadeIn(170);
 });

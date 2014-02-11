@@ -55,6 +55,10 @@ class Project < ActiveRecord::Base
         checklist.categories if checklist
     end
 
+    def ordered_reports
+      reports.sort_by{|r| r.date_for_sort}.reverse
+    end
+
     def has_checklist?
       checklist.present?
     end

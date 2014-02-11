@@ -316,7 +316,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def reports
-		@reports = @project.reports.sort_by{|r| r.date_for_sort}
+		@reports = @project.ordered_reports
 	end
 
 	def search_reports
@@ -330,7 +330,7 @@ class ProjectsController < ApplicationController
 			@reports = initial.results.uniq
 			@prompt = "No search results"
 		else
-			@reports = @project.reports.sort_by{|r| r.date_for_sort}
+			@reports = @project.ordered_reports
 		end
 
 		if request.xhr?
@@ -357,36 +357,11 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def report
-		@report = @project.reports.create params[:report]
-		@reports = @project.reports
-		if request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/reports"}
-			end
-		else 
-			redirect_to reports_project_path(@project)
-		end
-	end
-
 	def show_report
 		@report_title = ""
 		@report = Report.find params[:report_id]
 		@report.users.build
 		@report.subs.build
-	end
-
-	def update_report
-		@report = Report.find params[:report_id]
-		@report.update_attributes params[:report]
-		@reports = @project.reports
-		if request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/reports"}
-			end
-		else 
-			render :reports
-		end
 	end
 
 	def documents
