@@ -1,5 +1,9 @@
 $('#photo-<%= @photo_id %>').fadeOut(200,function(){
-	$(this).html('<%= j render partial: "projects/large_image", :locals => {:p => @p} %>');
+	if ($(this).hasClass('large')){
+		$(this).replaceWith('<%= j render partial: "projects/large_image", :locals => {:p => @p} %>');
+	} else {
+		$(this).remove();
+	}
 	$(this).fadeIn();
 });
 $('#p-<%= @photo_id %>').fadeOut(200,function(){
