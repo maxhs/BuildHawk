@@ -15,7 +15,7 @@
 //= require jquery_nested_form
 //= require jquery.ui.progressbar
 //= require bootstrap
-//= require dropzone.min
+//= require dropzone
 //= require jquery.remotipart
 //= require nprogress
 //= require nprogress-ajax

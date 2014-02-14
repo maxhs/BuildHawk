@@ -76,6 +76,8 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dropzonejs-rails (0.4.13)
+      rails (> 3.1)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
@@ -243,6 +245,7 @@ DEPENDENCIES
   deep_cloneable (~> 1.6.0)
   delayed_job_active_record
   devise
+  dropzonejs-rails
   geocoder
   httparty
   jquery-rails
