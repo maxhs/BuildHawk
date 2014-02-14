@@ -10,6 +10,7 @@
 }
 .add-photo {
 	cursor:pointer;
+	margin:10px auto;
 }
 
 #add-folder-link:hover {
@@ -18,6 +19,7 @@
 
 .edit_folder {
 	input[type="text"] {
+		width:50%;
 		display:inline-block;
 	}
 }
