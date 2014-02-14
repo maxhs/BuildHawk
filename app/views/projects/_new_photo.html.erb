@@ -1,28 +1,15 @@
-<%= form_for @new_photo, :url => {:action => :photo, :multipart => true }, :method => :post do |f| %>
+<%= form_for @new_photo, :url => {:action => :photo, :multipart => true }, :remote => true, :method => :post do |f| %>
 	<div id="add-photo">
-		<h4 style="text-align:center;">New Document <span style="color:#aaa;font-size:16px;font-weight:normal;padding-left:10px;">(.png, .jpg/.jpeg, .gif, .pdf)</span></h4>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-		<%= f.hidden_field :company_id, :value => @company.id %>
-		<%= f.hidden_field :user_id, :value => current_user.id %>
 		<%= f.hidden_field :folder_id, :value => @folder.id %>
-		<div><%= f.file_field :image, :style=>"padding-bottom:10px;" %></div>
-		<div class="form-label"><%= f.label "Folder (blueprints, contracts, etc)", :class => "hidden-fields" %></div>
-		<div class="hidden-fields"><%= @folder.name %></div>
-		<div class="form-label"><%= f.label "File Name *", :class => "hidden-fields" %></div>
-		<div><%= f.text_field :name, :placeholder => "File name", :class => "hidden-fields" %></div>
-		<div>
-			<button class="btn btn-success btn-md pull-right hidden-fields" id="photo-submit">
-				<%= f.submit "Add" %>
-			</button>
-		</div>
 	</div>
 <% end %>
 
 <script type="text/javascript">
 	$(function(){
-	    $("input:file").change(function (){
-	    	$(".hidden-fields").animate({'opacity':'1'},500);
-	    });
+		$('#new_photo').dropzone({
+
+		});
 	    $('#photo-submit').click(function(){
 	    	$('#photo-submit').html('Loading...');
 	    	$('.new_photo').submit();

@@ -381,6 +381,7 @@ class ProjectsController < ApplicationController
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
 		@p = @photos.first
 		@folders = @project.folders
+		@new_photo = Photo.new
 		@nav = "document-photos-nav"
 		if request.xhr?
 			respond_to do |format|
@@ -513,21 +514,26 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def new_photo
-		@new_photo = Photo.new
-		@folder = Folder.find params[:folder_id]
-	end
-
 	def photo
-		@p = @project.photos.create! params[:photo]
+		@p = Photo.new(image: params[:file])
+		if params[:file].original_filename
+			@p.name = params[:file].original_filename
+			@p.save
+		end
+		@p.update_attributes :folder_id => params[:photo][:folder_id], :user_id => current_user.id, :project_id => @project.id, :company_id => @company.id
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
 		@folders = @project.folders
 
 		unless @p.save 
 			flash[:notice] = "didn't work"
 		end
-
-		redirect_to document_photos_project_path(@project)
+		if request.xhr?
+			respond_to do |format|
+				format.json
+			end
+		else
+			redirect_to document_photos_project_path(@project)
+		end
 	end
 
 	def delete_report

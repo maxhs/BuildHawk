@@ -3,14 +3,3 @@
 		<%= render partial: "folders/folder", collection: @folders, as: :folder, cache: false %>
 	</ul>
 <% end %>
-
-<div id="add-photo-link">Add New Folder</div>
-
-<script type="text/javascript">
-	$('#add-photo-link').click(function(){
-		$(this).fadeOut(200,function(){
-			$(this).replaceWith('<%= form_for Folder.new, :remote => true do |f| %><%= f.text_field :name, :placeholder => "New folder name..." %><%= f.hidden_field :project_id, :value => @project.id %><% end %>');
-			$(this).fadeIn(200);
-		});
-	});
-</script>

@@ -2,7 +2,7 @@
 	<% if @checklist %>
 		<div class="project-checklist-table border-box">
 			<header>
-				<%= form_tag search_items_project_path(@project, :checklist_id => @checklist.id), :id => "checklist-search", :method => :post, :class=>"input-group", :remote => true do %>
+				<%= form_tag search_items_project_path(@project, :checklist_id => @checklist.id), :id => "checklist-search", :method => :post, :class=>"input-group", :style=>"width:100%;", :remote => true do %>
 					<%= text_field_tag :search, nil, :placeholder=>"Search for checklist items...", :class=>"form-control" %>
 					<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
 				<% end %>

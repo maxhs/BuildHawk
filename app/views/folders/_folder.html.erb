@@ -9,6 +9,22 @@
 				</li>
 			<% end %>
 		</ul>
-		<%= link_to "Add Document", new_photo_project_path(@project, :folder_id => folder.id), :class =>"add-document-link", :remote => true %>
+		<div id="fid-<%=folder.id%>-add-document" class="add-photo">
+
+			<%= form_for @new_photo, :url => {:action => :photo, :multipart => true }, :remote => true, :method => :post do |f| %>
+				<div>(+) upload</div>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+				<%= f.hidden_field :folder_id, :value => folder.id %>
+				
+			<% end %>
+
+			<script type="text/javascript">
+				$(function(){
+					$('#fid-<%=folder.id%>-add-document form').dropzone({
+
+					});
+				});
+			</script>
+		</div>
 	</li>
 <% end %>

@@ -9,7 +9,7 @@
 			<% if @p.name.length > 0 %>
 				<div><span class="label">Name:</span>
 					<%= form_for @p, :method => :patch, :remote => true do |f| %>
-						<%= f.text_field :name, :style=>"padding:0;border:0;" %>
+						<%= f.text_field :name, :style=>"padding:0;border:0; display:inline-block" %><span style="color:#222;font-size:13px;" id="click-to-edit" class="font-smoothing">(click name to edit)</span>
 					<% end %>
 				</div> 
 			<% end %>
@@ -26,4 +26,16 @@
 <script>
 	Shadowbox.clearCache();
 	Shadowbox.setup(".shadow-photo", {});
+	$("#photo_name").focus(function(){
+		$('#click-to-edit').fadeOut(170,function(){
+			$(this).text('(enter/return to save)');
+			$(this).fadeIn(170);
+		});
+	});
+	$("#photo_name").focusout(function(){
+		$('#click-to-edit').fadeOut(170,function(){
+			$(this).text('(click name to edit)');
+			$(this).fadeIn(170);
+		});
+	});
 </script>

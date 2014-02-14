@@ -15,25 +15,18 @@
 	overflow:auto;
 }
 
-#add-photo {
-	width:50%;
-	min-width:400px;
+.new_photo {
+	border:1px solid #eee;
 	margin:0 auto;
 	display:block;
-	border:1px solid #eee;
 	border-radius:3px;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
-	padding:20px 20px 80px;
-
-	.hidden-fields{
-		opacity:0;
-	}
-
-	input {
-		width:100%;
-		display:block;
-	}
+	padding:20px;
+	text-transform:uppercase;
+	text-align:center;
+	font-family:'Gotham Book';
+	letter-spacing:1px;
 }
 
 .add-document-link {
@@ -49,20 +42,25 @@
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
 }
 
-#add-photo-link {
+#add-folder-link {
 	cursor:pointer;
 	clear:both;
+	text-transform:uppercase;
 	text-align:center;
-	width: 180px;
+	font-family:'Gotham Book';
+	letter-spacing:1px;
+	width: 200px;
 	font-size:14px;
 	display: block;
-	border-radius: 8px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 	padding: 7px;
-	border: 1px solid #ccc;
-	margin: 0 auto;
+	border: 1px solid #ddd;
+	margin: 20px auto 0;
 	line-height: 27px;
 	font-size:15px;
-	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.15);
 }
 
 .image-details {
@@ -70,7 +68,11 @@
 }
 
 form.edit_photo {
+	width:90%;
 	display:inline-block;
+	input {
+		width:77%;
+	}
 }
 
 .edit-folder {

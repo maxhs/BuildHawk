@@ -597,6 +597,13 @@ body {
 	margin:7px;
 }
 
+.dz-preview {
+	display:inline-block;
+}
+.dz-error-message, .dz-success-mark, .dz-error-mark {
+	display:none;
+}
+
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
 	#habla_beta_container_do_not_rely_on_div_classes_or_names {
 		display:none !important;

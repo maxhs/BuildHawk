@@ -4,11 +4,15 @@
 
 .new_folder {
 	input[type="text"] {
-		width:95%;
+		width:100%;
+		margin-top:20px;
 	}
 }
+.add-photo {
+	cursor:pointer;
+}
 
-#add-photo-link:hover {
+#add-folder-link:hover {
 	color:#cc0000;
 }
 
@@ -24,4 +28,8 @@
 
 .folder-name {
 	display:inline-block;
+}
+
+.folder {
+	clear:both;
 }
