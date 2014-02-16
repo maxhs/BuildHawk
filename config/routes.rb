@@ -173,5 +173,7 @@ Buildhawk::Application.routes.draw do
     end
   end
 
-  mount Resque::Server.new, :at => "/resque"
+  authenticate :user do
+    mount Resque::Server.new, :at => "/resque"
+  end
 end
