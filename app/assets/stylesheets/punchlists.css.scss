@@ -12,16 +12,15 @@
 		padding:0 20px 70px;
 		display:block;
 		
-		div {
-			padding-top:10px;
-			width:100%;
-			display:block;
-		}
-		
 		input {
 			width:100% !important;
 			display:block;
+			padding-bottom:10px;
 			margin:0 auto;
+		}
+
+		input[type="text"] {
+			margin-bottom:5px;
 		}
 	}	
 }
