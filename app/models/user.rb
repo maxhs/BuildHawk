@@ -75,26 +75,26 @@ class User < ActiveRecord::Base
     end
 
     def url200
-      if image_file_name
-        image.url(:small)
-      end
+        if image_file_name
+            image.url(:small)
+        end
     end
 
     def url100
-      if image_file_name
-        image.url(:small)
-      end
+        if image_file_name
+            image.url(:small)
+        end
     end
 
     def notify_all_devices(options)
-      apn_registrations.map{|r| r.token}.each do |token|
-        puts "should be sending a push to #{token}"
-        APN.notify_async token, options
-      end
+        apn_registrations.map{|r| r.token}.each do |token|
+            puts "should be sending a push to #{token}"
+            APN.notify_async token, options
+        end
     end
 
     def subcontractors
-      company.subs
+        company.subs
     end
 
   	acts_as_api

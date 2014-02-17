@@ -261,7 +261,6 @@ DEPENDENCIES
   rails (= 4.0.0)
   rails-observers
   rails_12factor
-  redis
   remotipart
   resque
   resque-scheduler
