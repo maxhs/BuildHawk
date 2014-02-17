@@ -173,7 +173,11 @@ Buildhawk::Application.routes.draw do
     end
   end
 
-  authenticate :user do
+  resque_constraint = lambda do |request|
+    request.env['warden'].authenticate? and request.env['warden'].user.uber_admin?
+  end
+  
+  constraints resque_constraint do
     mount Resque::Server.new, :at => "/resque"
   end
 end
