@@ -1,58 +1,63 @@
 <div id="project-dashboard">
 	<h3>Upcoming Critical Items</h3>
 		<% if @upcoming_items && @upcoming_items.count > 0 %>
-			<table style="width:100%;">
+			<div style="width:100%;">
 				<% @upcoming_items.each do |item| %>
-					<tr>
-						<td class="col-md-8">- <%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></td>
-						<td class="col-md-2"><%= parse_date item.critical_date %></td>
-					<tr>
+					<div class="row">
+						<div class="col-md-8">- <%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></div>
+						<div class="col-md-2"><%= parse_date item.critical_date %></div>
+					<div>
 				<% end %>
-			</table>
+			</div>
 		<% else %>
 			<div style="color:#aaa;font-style:italic;font-weight:200;">(No upcoming items)</div>
 		<% end %>
 
 	<h3>Recent Updates </h3>
 		<% if @recently_completed && @recently_completed.count > 0 %>
-			<table style="width:100%;">
-				<th>Type</th>
-				<th>Last Updated</th>
-				<th>Item</th>
+			<div style="width:100%;">
+				<div class="row">
+					<div class="col-md-2 header-label">Type</div>
+					<div class="col-md-2 header-label">Last Updated</div>
+					<div class="col-md-2 header-label">Item</div>
+				</div>
+
 				<% @recently_completed.each do |item| %>
-				<% class_name = item.class.name %>
-					<% if class_name == "ChecklistItem" %>
-						<tr>	
-							<td class="col-md-1">Checklist </td>
-							<td class="col-md-1">(<%= parse_date item.updated_at %>)</td>
-							<td class="col-md-8"><%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></td>
-							
-						</tr>
-					<% elsif class_name == "Report" %>
-						<tr>	
-							<td class="col-md-1">Report</td>
-							<td class="col-md-1">(<%= parse_date item.updated_at %>)</td>
-							<td class="col-md-8"><%= link_to item.body, show_report_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></td>
-							
-						</tr>
-					<% elsif class_name == "PunchlistItem" %>
-						<tr>	
-							<td class="col-md-1">Worklist </td>
-							<td class="col-md-1">(<%= parse_date item.updated_at %>)</td>
-							<td class="col-md-8"><%= link_to item.body, edit_worklist_item_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></td>
-							
-						</tr>
-					<% elsif class_name == "Photo" %>
-						<tr>	
-							<td class="col-md-1">Document</td>
-							<td class="col-md-1">(<%= parse_date item.updated_at %>)</td>
-							<td class="col-md-8"><%= link_to item.image_file_name, item.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %></td>
-						</tr>
+					<% if item.updated_at != @project.updated_at %>
+						<% class_name = item.class.name %>
+						<% if class_name == "ChecklistItem" %>
+							<div class="row">	
+								<div class="col-md-2">Checklist </div>
+								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
+								<div class="col-md-8"><%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></div>
+							</div>
+						<% elsif class_name == "Report" %>
+							<div class="row">	
+								<div class="col-md-2">Report</div>
+								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
+								<div class="col-md-8"><%= link_to item.body, show_report_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
+								
+							</div>
+						<% elsif class_name == "PunchlistItem" %>
+							<div class="row">	
+								<div class="col-md-2">Worklist </div>
+								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
+								<div class="col-md-8"><%= link_to item.body, edit_worklist_item_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
+							</div>
+						<% elsif class_name == "Photo" %>
+							<div class="row">	
+								<div class="col-md-2">Document</div>
+								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
+								<div class="col-md-8"><%= link_to item.image_file_name, item.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %></div>
+							</div>
+						<% end %>
+					<% elsif item == @recently_completed.last %>
+						<div style="color:#aaa;font-style:italic;margin-bottom:20px;margin-top:10px;font-weight:200;">(No recently completed items)</div>
 					<% end %>
 				<% end %>
-			</table>
+			</div>
 		<% else %>
-			<div style="color:#aaa;font-style:italic;margin-bottom:20px;font-weight:200;">(No recently completed items)</div>
+			<div style="color:#aaa;font-style:italic;margin-bottom:20px;margin-top:10px;font-weight:200;">(No recently completed items)</div>
 		<% end %>
 
 	<% if @recent_photos && @recent_photos.count > 0 %>

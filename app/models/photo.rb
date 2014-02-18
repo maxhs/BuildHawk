@@ -8,7 +8,6 @@ class Photo < ActiveRecord::Base
 	belongs_to :company
 	belongs_to :punchlist_item, counter_cache: true
 	belongs_to :checklist_item, counter_cache: true
-
 	belongs_to :folder
     
     before_create :ensure_defaults
