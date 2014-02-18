@@ -7,6 +7,7 @@ class ReportMailer < ActionMailer::Base
   		mail(
       		:subject => "#{report.project.name} - #{report.created_date}",
       		:to      => recipient.email,
+      		:from 	 => "reports@buildhawk.com",
       		:tag     => 'Report'
     	)
   	end

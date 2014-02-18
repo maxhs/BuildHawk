@@ -9,7 +9,7 @@
 
 <div>
 	<h3>Personnel on site</h3>
-		<% if @report.personnel.count > 0 %>
+	<% if @report.personnel.count > 0 %>
 		<ul>
 			<% @report.personnel.each do |p| %>
 				<% if p.has_attribute?("user") %> 
@@ -20,13 +20,13 @@
 			<% end %>
 		</ul>
 	<% else %>
-		<p style="font-style:italic;text-align:center;font-weight:200">No personnel on site </p>
+		<p style="text-align:center;">No personnel on site </p>
 	<% end %>
 </div>
 
 <% if @report.photos && @report.photos.count > 0 %>
 	<h3>Report Photos:</h3>
-	<div style="margin-top:20px;">
+	<div style="margin-top:20px;margin-bottom:20px;">
 		<% @report.photos.each do |p| %>
 			<% if p.image_file_name %>
 				<%= link_to image_tag(p.image.url(:small)), show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left; margin:10px;" %>
@@ -36,7 +36,7 @@
 	</div>
 <% end %>
 
-<div style="clear:both;margin-top:40px;">
+<div style="clear:both;">
 	<h3>Weather Details</h3>
 	<p><%= @report.weather %></p>
 </div>
