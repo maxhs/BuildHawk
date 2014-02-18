@@ -1,5 +1,5 @@
 class ReportMailer < ActionMailer::Base
-  	layout "mailer"
+  	layout "report_mailer"
 
   	def report(report,recipient)
   		@recipient = recipient

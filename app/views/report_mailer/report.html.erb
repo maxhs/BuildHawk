@@ -1,5 +1,14 @@
-<p><%= @recipient.first_name %>,</p>
-
-<h2><%= @report.report_type %> - <%= @report.created_date %></h2>
+<h2 style="text-align:center"><%= @report.report_type %> - <%= @report.created_date %></h2>
+<h3 style="text-align:center"><%= @report.project.name %> </h3>
 
 <p><%= @report.body %></p>
+
+<% if @report.photos && @report.photos.count > 0 %>
+	<div style="margin-top:20px;">
+		<% @report.photos.each do |p| %>
+			<% if p.image_file_name%>
+				<%= link_to image_tag(p.image.url(:small)), show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left; margin:10px;" %> 
+			<% end %>
+		<% end %>
+	</div>
+<% end %>
