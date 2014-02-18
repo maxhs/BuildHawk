@@ -6,12 +6,21 @@
 	<p><%= @report.body %></p>
 </div>
 
+<div>
+	<h3>Report Personnel</h3>
+	<% if @report.personnel.count > 0 %>
+		<%= @report.personnel %>
+	<% else %>
+		<p style="text-align:center;font-style:italic;">No report personnel listed...</p> 
+	<% end %>
+</div>
+
 <% if @report.photos && @report.photos.count > 0 %>
 	<h3>Report Photos:</h3>
 	<div>
 		<% @report.photos.each do |p| %>
 			<% if p.image_file_name %>
-				<%= link_to image_tag(p.image.url(:small)), show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;width:100px;" %>
+				<%= link_to image_tag(p.image.url(:small)), show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;width:100px;display:block;" %>
 				<span><%=p.name%></span>
 			<% end %>
 		<% end %>
