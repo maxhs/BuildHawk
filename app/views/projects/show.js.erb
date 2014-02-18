@@ -1,7 +1,7 @@
 $('.sidebarProjects > div a').removeClass('current-page');
 $('#<%=@project.id%>-link').addClass('current-page');
 $('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "show", :locals => {:project => @project} %>');
+	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
 	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

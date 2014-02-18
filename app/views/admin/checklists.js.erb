@@ -5,3 +5,8 @@ $('#pages').fadeOut(100,function(){
 	$(this).fadeIn(100);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });
+<% if @response_message %>
+	$('#alert').text("<%= @response_message %>").delay(3000).fadeOut(500, function(){
+		$(this).text("");
+	});
+<% end %>

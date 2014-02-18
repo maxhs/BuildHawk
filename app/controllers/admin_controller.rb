@@ -111,15 +111,18 @@ class AdminController < ApplicationController
 	end
 
 	def create_template
-		Resque.enqueue(CreateTemplate,params[:company_id])
-		@response_message = "Creating checklist template..."
+		#Resque.enqueue(CreateTemplate,params[:company_id])
+      	company = Company.find params[:company_id]
+      	checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
+      	checklist.update_attributes :name => "New Checklist Template", :company_id => company.id, :core => false
+      	@checklists = company.checklists
+		@response_message = "Done creating checklist template."
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "admin/background"}
+				format.js {render :template => "admin/checklists"}
 			end
 		else
-			flash[:notice] = "Creating checklist template..."
-			redirect_to checklists_admin_index_path
+			render :checklists
 		end
 	end
 
@@ -154,19 +157,28 @@ class AdminController < ApplicationController
 		if params[:project][:checklist].present?
 			list = Checklist.find_by(name: params[:project][:checklist])
 			params[:project].delete(:checklist)
-			Resque.enqueue(CreateProject,params[:project],list.id)
+			#Resque.enqueue(CreateProject,params[:project],list.id)
 		else 
-			Resque.enqueue(CreateProject,params[:project],nil)
+			#Resque.enqueue(CreateProject,params[:project],nil)
 			@checklist.save
 		end
-		
-		@response_message = "Creating project. This may take a few minutes..."
+  		if list
+  			@checklist = list.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+  			@checklist.save
+  		else 
+  			@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+  			@checklist.save
+  		end
+  		@project = Project.create params[:project]
+  		@project.checklist = @checklist
+		@projects = @project.company.projects
+
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "admin/background"}
+				format.js
 			end
 		else
-			flash[:notice] = "Creating project..."
+			flash[:notice] = "Done creating project."
 			redirect_to admin_index_path
 		end
 	end
