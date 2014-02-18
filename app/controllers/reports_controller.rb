@@ -52,5 +52,16 @@ class ReportsController < ApplicationController
 		end
 	end
 
-
+	def generate
+		@report = Report.find params[:id]
+		ReportMailer.report(@report,current_user).deliver
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "projects/report_generated"}
+			end
+		else 
+			flash[:notice] = "Report emailed to #{current_user.email}".html_safe
+			redirect_to show_report_project_path(@project)
+		end
+	end
 end

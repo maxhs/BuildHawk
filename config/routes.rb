@@ -129,7 +129,11 @@ Buildhawk::Application.routes.draw do
   resources :punchlist_items, :only => [:destroy]
   resources :photos
   resources :punchlists
-  resources :reports
+  resources :reports do
+    member do
+      get :generate
+    end
+  end
   resources :folders
   resources :charges
 
