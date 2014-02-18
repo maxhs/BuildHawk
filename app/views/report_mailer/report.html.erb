@@ -1,10 +1,10 @@
-<h2 style="text-align:center"><%= @report.report_type %> - <%= @report.created_date %></h2>
-<h3 style="text-align:center"><%= @report.project.name %> </h3>
+<h1 style="text-align:center"><%= @report.report_type %> - <%= @report.created_date %></h1>
+<h2 style="text-align:center"><%= @report.project.name %> </h2>
 
 <p><%= @report.body %></p>
 
 <% if @report.photos && @report.photos.count > 0 %>
-	<h4>Report Photos:</h4>
+	<h3>Report Photos:</h3>
 	<div style="margin-top:20px;">
 		<% @report.photos.each do |p| %>
 			<% if p.image_file_name %>
@@ -15,18 +15,19 @@
 	</div>
 <% end %>
 
-<div>
+<div style="clear:both">
+	<h3>Weather Details</h3>
 	<p><%= @report.weather %></p>
 </div>
 <div>
-	Temp: <%= @report.temp %>
+	<h4>Temp:</h4> <%= @report.temp %>
 </div>
 <div>
-	Wind: <%= @report.wind %>
+	<h4>Wind:</h4> <%= @report.wind %>
 </div>
 <div>
-	Humidity: <%= @report.humidity %>
+	<h4>Humidity:</h4> <%= @report.humidity %>
 </div>
 <div>
-	Precip: <%= @report.precip %>
+	<h4>Precip:</h4> <%= @report.precip %>
 </div>
