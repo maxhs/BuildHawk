@@ -11,6 +11,10 @@ class Checklist < ActiveRecord::Base
   	has_many :categories, :dependent => :destroy
   	accepts_nested_attributes_for :categories, :allow_destroy => true
 
+    amoeba do
+        include_field :categories
+    end
+
     after_create :assign_items
 
   	def completed_count

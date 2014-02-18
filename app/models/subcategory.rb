@@ -6,6 +6,10 @@ class Subcategory < ActiveRecord::Base
     after_save :check_completed
     after_create :order_indices
 
+    amoeba do
+        include_field :checklist_items
+    end
+
     default_scope { order('order_index') }
 
     def item_count

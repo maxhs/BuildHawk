@@ -38,6 +38,8 @@ GEM
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       rack (>= 1.1.0)
+    amoeba (2.0.0)
+      activerecord (>= 3.0)
     apn_sender (2.0.0)
       activesupport (>= 3.1)
       connection_pool
@@ -230,6 +232,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_api
+  amoeba
   apn_sender
   aws-sdk
   cocaine

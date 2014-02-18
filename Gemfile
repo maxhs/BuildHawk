@@ -39,7 +39,7 @@ gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'dropzonejs-rails'
-
+gem 'amoeba'
 #gem 'actionpack-page_caching'
 #gem 'actionpack-action_caching'
 #gem 'turbolinks'

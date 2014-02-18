@@ -113,7 +113,7 @@ class AdminController < ApplicationController
 	def create_template
 		#Resque.enqueue(CreateTemplate,params[:company_id])
       	company = Company.find params[:company_id]
-      	checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
+      	checklist = Checklist.where(:core => true).last.amoeba_dup# :include => {:categories => {:subcategories => :checklist_items}}
       	checklist.update_attributes :name => "New Checklist Template", :company_id => company.id, :core => false
       	@checklists = company.checklists
 		@response_message = "Done creating checklist template."

@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
-  include ActionView::Helpers::NumberHelper
-	  attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :subcategories_attributes, :order_index
+    include ActionView::Helpers::NumberHelper
+	attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :subcategories_attributes, :order_index
   	belongs_to :checklist
   	has_many :subcategories, :dependent => :destroy
   	accepts_nested_attributes_for :subcategories, :allow_destroy => true
@@ -8,6 +8,10 @@ class Category < ActiveRecord::Base
     after_create :order_indices
 
     default_scope { order('order_index') }
+    
+    amoeba do
+        include_field :subcategories
+    end
 
     def item_count
       subcategories.joins(:checklist_items).count if subcategories
