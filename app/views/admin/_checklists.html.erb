@@ -12,10 +12,3 @@
 	<% end %>
 </table>
 <%= link_to "Create New Checklist Template", create_template_admin_index_path(:company_id => current_user.company.id), :id =>"new-checklist-link", :class => "no-link", :method => :post, :remote => true %>
-<script>
-	$('#new-checklist-link').on('click',function(){
-		$('#alert').fadeIn(200,function(){
-			$(this).text("Creating template...");
-		});
-	});
-</script>

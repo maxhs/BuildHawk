@@ -1,3 +1,7 @@
-$('#alert').text("<%= @response_message %>").fadeIn(200).delay(6000).fadeOut(500, function(){
-	$(this).text("");
+$('#alert').html("<span><%= @response_message %></span> <a href='/admin/checklists' id='alert-refresh' style='text-decoration:underline;' data-remote=true >Refresh</a> / <a id='dismiss'>Dismiss</a>").fadeIn(200);
+$('#dismiss').on('click',function(){
+	$('#alert').fadeOut(200,function(){
+		$('#alert-refresh').remove();
+		$('#dismiss').remove();
+	});
 });
