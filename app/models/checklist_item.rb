@@ -18,16 +18,9 @@ class ChecklistItem < ActiveRecord::Base
     # websolr
     searchable do
       text    :body
-      text    :item_type
-      text    :status
+      #text    :item_type
+      #text    :status
       integer :checklist_id
-      text    :subcategory do
-        subcategory.name if subcategory
-      end
-      text    :comments do
-        comments.map(&:body)
-      end
-      time    :created_at
     end
 
   	acts_as_api

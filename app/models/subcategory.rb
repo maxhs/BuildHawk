@@ -7,7 +7,8 @@ class Subcategory < ActiveRecord::Base
     after_create :order_indices
 
     amoeba do
-        include_field :checklist_items
+        enable
+        clone :checklist_items
     end
 
     default_scope { order('order_index') }

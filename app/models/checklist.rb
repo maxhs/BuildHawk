@@ -12,7 +12,8 @@ class Checklist < ActiveRecord::Base
   	accepts_nested_attributes_for :categories, :allow_destroy => true
 
     amoeba do
-        include_field :categories
+        clone :categories
+        set :core => false
     end
 
     after_create :assign_items

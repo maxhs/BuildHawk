@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
     default_scope { order('order_index') }
     
     amoeba do
-        include_field :subcategories
+        clone :subcategories
     end
 
     def item_count
