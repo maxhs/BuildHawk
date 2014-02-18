@@ -25,10 +25,8 @@ gem 'protected_attributes'
 gem 'rails-observers'
 gem 'multi_fetch_fragments'
 gem "non-stupid-digest-assets"
-#gem "redis"
 gem "resque"
 gem 'resque-scheduler'
-gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'delayed_job_active_record'
 gem 'apn_sender', :require => 'apn'
