@@ -115,7 +115,7 @@ class AdminController < ApplicationController
 		@response_message = "Creating checklist template. This may take a few minutes..."
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "admin/background"}
+				format.js {render :template => "admin/background_template"}
 			end
 		else
 			flash[:notice] = @response_message
@@ -163,7 +163,7 @@ class AdminController < ApplicationController
 		@response_message = "Creating project. This may take a few minutes..."
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "admin/background"}
+				format.js {render :template => "admin/background_project"}
 			end
 		else
 			flash[:notice] = @response_message

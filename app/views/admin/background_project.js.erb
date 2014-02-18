@@ -1,0 +1,7 @@
+$('#alert').html("<span><%= @response_message %></span> <a href='/projects' id='alert-refresh' style='text-decoration:underline;' data-remote=true >Refresh</a> / <a id='dismiss'>Dismiss</a>").fadeIn(200);
+$('#dismiss').on('click',function(){
+	$('#alert').fadeOut(200,function(){
+		$('#alert-refresh').remove();
+		$('#dismiss').remove();
+	});
+});
