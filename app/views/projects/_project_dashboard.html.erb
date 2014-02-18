@@ -15,45 +15,43 @@
 
 	<h3>Recent Updates </h3>
 		<% if @recently_completed && @recently_completed.count > 0 %>
-			<div style="width:100%;">
+			<div id="recent-items">
 				<div class="row">
-					<div class="col-md-2 header-label">Type</div>
-					<div class="col-md-2 header-label">Last Updated</div>
-					<div class="col-md-2 header-label">Item</div>
+					<div class="col-xs-2 header-label">Type</div>
+					<div class="col-xs-2 header-label">Last Updated</div>
+					<div class="col-xs-2 header-label">Item</div>
 				</div>
 
 				<% @recently_completed.each do |item| %>
-					<% if item.updated_at != @project.updated_at %>
-						<% class_name = item.class.name %>
-						<% if class_name == "ChecklistItem" %>
-							<div class="row">	
-								<div class="col-md-2">Checklist </div>
-								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
-								<div class="col-md-8"><%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></div>
-							</div>
-						<% elsif class_name == "Report" %>
-							<div class="row">	
-								<div class="col-md-2">Report</div>
-								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
-								<div class="col-md-8"><%= link_to item.body, show_report_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
-								
-							</div>
-						<% elsif class_name == "PunchlistItem" %>
-							<div class="row">	
-								<div class="col-md-2">Worklist </div>
-								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
-								<div class="col-md-8"><%= link_to item.body, edit_worklist_item_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
-							</div>
-						<% elsif class_name == "Photo" %>
-							<div class="row">	
-								<div class="col-md-2">Document</div>
-								<div class="col-md-2">(<%= parse_date item.updated_at %>)</div>
-								<div class="col-md-8"><%= link_to item.image_file_name, item.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %></div>
-							</div>
-						<% end %>
-					<% elsif item == @recently_completed.last %>
-						<div style="color:#aaa;font-style:italic;margin-bottom:20px;margin-top:10px;font-weight:200;">(No recently completed items)</div>
+
+					<% class_name = item.class.name %>
+					<% if class_name == "ChecklistItem" %>
+						<div class="row">	
+							<div class="col-xs-2">Checklist </div>
+							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
+							<div class="col-xs-8"><%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></div>
+						</div>
+					<% elsif class_name == "Report" %>
+						<div class="row">	
+							<div class="col-xs-2">Report</div>
+							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
+							<div class="col-xs-8"><%= link_to item.body, show_report_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
+							
+						</div>
+					<% elsif class_name == "PunchlistItem" %>
+						<div class="row">	
+							<div class="col-xs-2">Worklist </div>
+							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
+							<div class="col-xs-8"><%= link_to item.body, edit_worklist_item_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
+						</div>
+					<% elsif class_name == "Photo" %>
+						<div class="row">	
+							<div class="col-xs-2">Document</div>
+							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
+							<div class="col-xs-8"><%= link_to item.image_file_name, item.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %></div>
+						</div>
 					<% end %>
+
 				<% end %>
 			</div>
 		<% else %>
@@ -62,7 +60,7 @@
 
 	<% if @recent_photos && @recent_photos.count > 0 %>
 		<h3>Recently Added Documents</h3>
-		<div class="row" style="margin-bottom:20px;">
+		<div id="recent-documents" class="row">
 			<div class="col-md-12" style="overflow: hidden;">
 				<% @recent_photos.each do |p| %>
 					<% if p.image_file_name%>
@@ -74,22 +72,22 @@
 	<% end %>
 
 	<% if @checklist %>
-		<table style="width:100%;">
-			<theader>
-				<th class="col-sm-4"><h4>Phase</h4></th>
-				<th class="col-sm-2">% Completion</th>
-				<th class="col-sm-2">Completion Date</th>
-				<th class="col-sm-2">Milestone</th>
-				<th class="col-sm-2">+/-</th>
-			</theader>
-			<tbody>
+		<div id="checklist-section">
+			<div class="row">
+				<div class="col-sm-4 header-label"><h4>Phase</h4></div>
+				<div class="col-sm-2 header-label center"><h4>% Completion</h4></div>
+				<div class="col-sm-2 header-label center"><h4>Completion Date</h4></div>
+				<div class="col-sm-2 header-label center"><h4>Milestone</h4></div>
+				<div class="col-sm-2 header-label center"><h4>+/-</h4></div>
+			</div>
+			
 				<% @checklist.categories.sort_by{|c|c.name.to_i}.each do |cat| %>
-					<tr style="font-size:1.1em;border-bottom:1px solid #eee;">
-						<td class="col-sm-4" style="padding:17px 0;"><%= link_to cat.name, checklist_project_path(@project), :remote => true %></td>
-						<td class="col-sm-2"><span><%= cat.progress_percentage %></span></td>
-						<td class="col-sm-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></td>
-						<td class="col-sm-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></td>
-						<td class="col-sm-2">
+					<div class="row" style="font-size:1.1em;border-bottom:1px solid #eee;">
+						<div class="col-sm-4" style="padding:17px 0;"><%= link_to cat.name, checklist_project_path(@project), :remote => true %></div>
+						<div class="col-sm-2"><span style="text-align:center;display:inline-block;width:100%;"><%= cat.progress_percentage %></span></div>
+						<div class="col-sm-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></div>
+						<div class="col-sm-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></div>
+						<div class="col-sm-2">
 							<% if cat.milestone_date && cat.completed_date %> 
 								<% diff = (cat.milestone_date.to_date-cat.completed_date.to_date).to_i %>
 								<% if diff < 0 %>
@@ -97,13 +95,12 @@
 								<% else %>
 									<span style="color:green">+<%= diff %></span>
 								<% end %>
-
 							<% end %> 
-						</td>
-					</tr>
+						</div>
+					</div>
 				<% end %>
-			</tbody>
-		</table>
+			
+		</div>
 	<% else %>
 		<div style="color:#aaa;text-align:center;font-size:1.25em; font-style:italic;margin-top:50px;">This project does not have a checklist attached to it</div>
 	<% end %>

@@ -150,9 +150,31 @@
 	padding: 5px 20px;
 	background-color: #fff;
 
+	#recent-items {
+		.row {
+			padding:5px 0;
+			border-bottom:1px solid #eee;
+		}
+		
+	}
+
+	#recent-documents {
+		margin-top:40px;
+		margin-bottom:20px;
+	}
+
+	#checklist-section {
+		margin-top:40px;
+		padding:20px 20px 0 20px;
+	}
+
 	.header-label {
 		font-weight:700;
 		color:#000;
+	}
+
+	.header-label.center h4 {
+		text-align:center
 	}
 }
 
