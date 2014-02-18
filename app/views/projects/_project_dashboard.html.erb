@@ -27,26 +27,26 @@
 					<% class_name = item.class.name %>
 					<% if class_name == "ChecklistItem" %>
 						<div class="row">	
-							<div class="col-xs-2">Checklist </div>
+							<div class="col-xs-2"><%= link_to 'Checklist', checklist_project_path(@project), remote: true %></div>
 							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
 							<div class="col-xs-8"><%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true %></div>
 						</div>
 					<% elsif class_name == "Report" %>
 						<div class="row">	
-							<div class="col-xs-2">Report</div>
+							<div class="col-xs-2"><%= link_to 'Report', reports_project_path(@project), remote: true %></div>
 							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
 							<div class="col-xs-8"><%= link_to item.body, show_report_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
 							
 						</div>
 					<% elsif class_name == "PunchlistItem" %>
 						<div class="row">	
-							<div class="col-xs-2">Worklist </div>
+							<div class="col-xs-2"><%= link_to 'Worklist', worklist_project_path(@project), remote: true %></div>
 							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
 							<div class="col-xs-8"><%= link_to item.body, edit_worklist_item_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
 						</div>
 					<% elsif class_name == "Photo" %>
 						<div class="row">	
-							<div class="col-xs-2">Document</div>
+							<div class="col-xs-2"><%= link_to 'Document', document_photos_project_path(@project), remote: true%></div>
 							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
 							<div class="col-xs-8"><%= link_to item.image_file_name, item.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %></div>
 						</div>

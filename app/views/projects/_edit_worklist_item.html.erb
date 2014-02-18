@@ -1,8 +1,8 @@
 <%= nested_form_for @punchlist_item, :url => {:action => :update_worklist_item, :multipart => true }, :method => :post do |f| %>
 	<div id="add-punchlist" class="border-box" style="padding-top:0;padding-bottom:30px;">
 		<div id="punchlist-container">
-			<div><h3>Edit Work List item</h3></div>
-			<div><%= f.text_field :body, :placeholder => "Describe the work item" %></div>
+			<div><h3>Edit item</h3></div>
+			<div><%= f.text_field :body, :placeholder => "Describe the worklist item" %></div>
 			<div><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
 			<div><h4>Select an assignee</h4>
 				<%= f.fields_for :assignee do |a| %>
