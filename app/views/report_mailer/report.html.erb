@@ -4,11 +4,29 @@
 <p><%= @report.body %></p>
 
 <% if @report.photos && @report.photos.count > 0 %>
+	<h4>Report Photos:</h4>
 	<div style="margin-top:20px;">
 		<% @report.photos.each do |p| %>
-			<% if p.image_file_name%>
-				<%= link_to image_tag(p.image.url(:small)), show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left; margin:10px;" %> 
+			<% if p.image_file_name %>
+				<%= link_to image_tag(p.image.url(:small)), show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left; margin:10px;" %>
+				<span><%=p.name%> 
 			<% end %>
 		<% end %>
 	</div>
 <% end %>
+
+<div>
+	<p><%= @report.weather %></p>
+</div>
+<div>
+	Temp: <%= @report.temp %>
+</div>
+<div>
+	Wind: <%= @report.wind %>
+</div>
+<div>
+	Humidity: <%= @report.humidity %>
+</div>
+<div>
+	Precip: <%= @report.precip %>
+</div>
