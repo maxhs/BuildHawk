@@ -8,10 +8,6 @@ class Category < ActiveRecord::Base
     after_create :order_indices
 
     default_scope { order('order_index') }
-    
-    amoeba do
-        clone :subcategories
-    end
 
     def item_count
       subcategories.joins(:checklist_items).count if subcategories

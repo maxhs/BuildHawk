@@ -60,13 +60,13 @@ class ChecklistItem < ActiveRecord::Base
 
   	api_accessible :projects do |t|
   		t.add :id
-      t.add :body
+        t.add :body
   		t.add :critical_date
   		t.add :completed_date
   		t.add :status
-      t.add :item_type
-      t.add :photos_count
-      t.add :comments_count
+        t.add :item_type
+        t.add :photos_count
+        t.add :comments_count
   	end
 
     api_accessible :checklist, :extend => :projects do |t|
@@ -78,10 +78,20 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     api_accessible :detail, :extend => :projects do |t|
-      t.add :photos
-      t.add :comments
-      t.add :category_name
-      t.add :project_id
+        t.add :photos
+        t.add :comments
+        t.add :category_name
+        t.add :project_id
+    end
+
+    protected
+ 
+    def resque_solr_update
+        Resque.enqueue(SolrUpdate, self.class.to_s, id)
+    end
+
+    def resque_solr_remove
+        Resque.enqueue(SolrRemove, self.class.to_s, id)
     end
 
 end
