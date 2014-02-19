@@ -1,14 +1,32 @@
 <%= nested_form_for @punchlist_item, :url => {:action => :update_worklist_item, :multipart => true }, :method => :post do |f| %>
-	<div id="add-punchlist" class="border-box" style="padding-top:0;padding-bottom:30px;">
+	<div id="add-punchlist" class="border-box" style="padding-bottom:30px;">
 		<div id="punchlist-container">
-			<div><h3>Edit item</h3></div>
-			<div><%= f.text_field :body, :placeholder => "Describe the worklist item" %></div>
-			<div><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
-			<div><h4>Select an assignee</h4>
-				<%= f.fields_for :assignee do |a| %>
-					<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;" %>
-				<% end %>
+			<div class="row">
+				<div class="col-xs-2"><h4>Item:</h4></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the worklist item" %></div>
 			</div>
+			<div class="row">
+				<div class="col-xs-2"><h4>Location:</h4></div><div class="col-xs-10"><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
+			</div>
+			<div class="row" style="font-size:1.15em;margin-top:1em;margin-bottom:1em;">
+				<div class="col-xs-2"><h4>Status:</h4></div>
+				<div class="col-xs-3" style="padding-top:9px;font-family:'Gotham Book'"><%= f.radio_button :completed, false %>IN PROGRESS</div><div class="col-xs-3" style="padding-top:9px;font-family:'Gotham Book'"><%= f.radio_button :completed, true %>COMPLETED</div>
+			</div>
+		
+			<% if @punchlist_item.completed %>
+				<div class="col-md-6" style="text-align:center; width:50%;display:inline-block;">
+					<h4>Completed By:</h4>
+					<%= @punchlist_item.completed_by_user.full_name %>
+				</div>
+			<% else %>
+
+				<div>
+					<h4>Select an assignee</h4>
+					<%= f.fields_for :assignee do |a| %>
+						<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;" %>
+					<% end %>
+				</div>
+
+			<% end %>
 			<% if @punchlist_item.photos && @punchlist_item.photos.count > 0 %>
 				<div style="padding:30px 0;padding-top:20px;">
 					<% @punchlist_item.photos.each do |p| %>

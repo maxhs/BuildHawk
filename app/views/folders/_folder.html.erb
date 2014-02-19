@@ -12,7 +12,7 @@
 		<div id="fid-<%=folder.id%>-add-document" class="add-photo">
 
 			<%= form_for Photo.new, url: photo_project_path(@project), :multipart => true , :remote => true, :method => :post do |f| %>
-				<div>(+) upload</div>
+				<div class="dz-message">(+) upload</div>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 				<%= f.hidden_field :folder_id, :value => folder.id %>
 			<% end %>
@@ -20,7 +20,7 @@
 			<script type="text/javascript">
 				$(function(){
 					$('#fid-<%=folder.id%>-add-document form').dropzone({
-
+						clickable:true
 					});
 				});
 			</script>
