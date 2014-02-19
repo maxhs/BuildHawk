@@ -345,12 +345,28 @@ select[multiple] {
 
 .btn {
 	display:block !important;
-	margin:20px auto;
+	margin:10px auto;
+	min-width:70px;
 }
 
 .btn-success {
 	background-color:#336699 !important;
 	border-color:#336699 !important;
+	opacity:.9;
+}
+
+.btn-success:hover {
+	opacity:1;
+}
+
+.btn-danger, .btn-danger a {
+	color:#fff;
+}
+
+.btn-danger:hover {
+	a{
+		color:#fff;
+	}
 }
 
 .form-label {

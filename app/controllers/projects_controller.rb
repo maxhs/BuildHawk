@@ -505,6 +505,12 @@ class ProjectsController < ApplicationController
 			end
 		end
 		@punchlist_item.update_attributes params[:punchlist_item]
+		if @punchlist_item.completed == true
+			@punchlist_item.update_attributes :completed_by_user_id => user.id, :completed_at => Time.now
+		else
+			@punchlist_item.update_attributes :completed_by_user_id => nil, :completed_at => nil
+		end
+		
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/worklist"}

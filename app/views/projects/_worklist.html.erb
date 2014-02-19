@@ -14,7 +14,7 @@
 				<tr>
 					<th>Photo</th>
 					<th>Name</th>
-					<th>Assignment</th>
+					<th>Assignee</th>
 					<th>Completed</th>
 					<th>Created On</th>
 				</tr>
@@ -50,7 +50,7 @@
 								<% end %>
 							</td>
 							<td>
-								<% if item.completed_at %>
+								<% if item.completed %>
 									<%= parse_time item.completed_at %>
 								<% end %>
 							</td>
