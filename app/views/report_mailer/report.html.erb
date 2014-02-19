@@ -28,14 +28,16 @@
 	<div>
 		<% @report.photos.each do |p| %>
 			<% if p.image_file_name %>
-				<%= link_to image_tag(p.image.url(:small), :style => "width:100px;display:block;margin:10px;"), show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left;" %>
-				<span><%=p.name%></span>
+				<%= link_to show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left;" do %>
+					<%= image_tag(p.image.url(:small), :style => "width:100px;display:block;margin:10px;") %> 
+					<div><%= p.name %></div>
+				<% end %>
 			<% end %>
 		<% end %>
 	</div>
 <% end %>
 
-<div style="clear:both;">
+<div style="clear:both;padding-top:20px;margin-top:20px;">
 	<h3>Weather Details</h3>
 	<p><%= @report.weather %></p>
 </div>
