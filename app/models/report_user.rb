@@ -3,6 +3,9 @@ class ReportUser < ActiveRecord::Base
 	belongs_to :report
 	belongs_to :user
 
+	def sub
+		return false
+	end
 	acts_as_api
 
   	api_accessible :report do |t|
