@@ -14,7 +14,7 @@
 			<% if p.user.present? %>
 				<li><%= p.user.full_name %></li>
 			<% elsif p.sub.present? %>
-				<li><%= p.sub.name %>&bull;<%= p.count%> on site</li>
+				<li><%= p.sub.name %>  &bull;  <%= p.count%> on site</li>
 			<% end %>
 		<% end %>
 	</ul>
