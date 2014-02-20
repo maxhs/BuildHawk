@@ -521,17 +521,19 @@ class ProjectsController < ApplicationController
 	end
 
 	def photo
-		if params[:photo][:image].present?
-			params[:photo][:image].each do |image|
-				Photo.create :image => image, :folder_id => params[:photo][:folder_id], :user_id => current_user.id, :project_id => @project.id, :company_id => @company.id, :name => image.original_filename
-			end
+		@p = Photo.new(image: params[:file])
+		if params[:file].original_filename
+			@p.name = params[:file].original_filename
+			@p.save
 		end
-	
+		@p.update_attributes :folder_id => params[:photo][:folder_id], :user_id => current_user.id, :project_id => @project.id, :company_id => @company.id
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
-		@p = @photos.last
 		@folders = @project.folders
 
-		if remotipart_submitted?
+		unless @p.save 
+			flash[:notice] = "didn't work"
+		end
+		if request.xhr?
 			puts "should be doing stuff!"
 			respond_to do |format|
 				format.js
