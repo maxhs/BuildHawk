@@ -59,10 +59,20 @@
 }
 
 .export-report {
-	margin-top:20px;
+	margin-top:0px;
 	border-radius:3px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	font-size:1.2em;
-	background:transparent;
+	background:#336699;
+	a {
+		color:#fff;
+		font-family:'Gotham Book',"Helvetica",sans-serif;
+	}
+}
+
+.export-report:hover {
+	a {
+		color:#fff;
+	}
 }

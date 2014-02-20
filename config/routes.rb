@@ -126,7 +126,11 @@ Buildhawk::Application.routes.draw do
     end
   end
   resources :checklist_items
-  resources :punchlist_items, :only => [:destroy]
+  resources :punchlist_items, :only => [:destroy] do
+    member do
+      get :generate
+    end
+  end
   resources :photos
   resources :punchlists
   resources :reports do

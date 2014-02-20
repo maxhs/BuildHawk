@@ -1,6 +1,6 @@
 <div class="border-box">
 	<div style="float:right">
-		<button class="export-report"><%= link_to 'Export', generate_report_path(@report), :class=>"remote", remote: true %></button>
+		<button class="export-report btn btn-md" style="margin-top:20px;"><%= link_to 'Export', generate_report_path(@report), :class=>"remote", remote: true %></button>
 	</div>
 	<%= nested_form_for @report, :url => {:controller => :reports, :action => :update, :report_id => @report.id}, :multipart => true, :remote => true, :method => :patch do |f| %>
 		<div id="add-report" class="container">

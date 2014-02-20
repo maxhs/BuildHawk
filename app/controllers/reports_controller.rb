@@ -57,7 +57,7 @@ class ReportsController < ApplicationController
 		ReportMailer.report(@report,current_user).deliver
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/report_generated"}
+				format.js
 			end
 		else 
 			flash[:notice] = "Report emailed to #{current_user.email}".html_safe
