@@ -15,14 +15,32 @@
 	overflow:auto;
 }
 
+#upload-file-container {
+	padding:1em;
+	border:1px solid #eee; 
+	margin:0 auto; 
+	cursor:pointer;
+	position:relative;
+	width:100%;
+
+	input[type="file"] {
+		position:absolute;
+		left:0;
+		top:0;
+		width:100%;
+	  	opacity:0;
+	  	height:50px;
+	  	padding:0;
+	  	cursor:pointer;
+  	}
+}
+
 .new_photo {
-	border:1px solid #eee;
 	margin:0 auto;
 	display:block;
 	border-radius:3px;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
-	padding:20px;
 	text-transform:uppercase;
 	text-align:center;
 	font-family:'Gotham Book';
