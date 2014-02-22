@@ -9,7 +9,7 @@
 /solr/data
 
 # Ignore stripe keys
-/config/initializers/stripe.rb
+#/config/initializers/stripe.rb
 
 # Ignore bundler config.
 /.bundle
