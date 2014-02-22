@@ -55,6 +55,10 @@ class ChecklistItemsController < ApplicationController
 				
 	end
 
+	def generate
+		@item = ChecklistItem.find params[:id]
+	end
+
 	def destroy
 		@checklist_item = ChecklistItem.find params[:id]
 		@item_id = params[:id]

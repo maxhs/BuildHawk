@@ -125,7 +125,11 @@ Buildhawk::Application.routes.draw do
       delete :destroy_subcategory
     end
   end
-  resources :checklist_items
+  resources :checklist_items do
+    member do
+      get :generate
+    end
+  end
   resources :punchlist_items, :only => [:destroy] do
     member do
       get :generate

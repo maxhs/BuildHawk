@@ -1,5 +1,5 @@
 class PunchlistItemMailer < ActionMailer::Base
-  	layout "punchlist_item_mailer"
+  	layout "item_mailer"
 
   	def punchlist_item(punchlist_item,recipient)
   		@recipient = recipient

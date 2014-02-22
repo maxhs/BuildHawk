@@ -112,7 +112,7 @@ class Api::V1::ReportsController < Api::V1::ApiController
             end
         elsif params[:user_id].present?
             ru = report.report_users.where(:user_id => params[:user_id]).first
-            if ru.destroy
+            if ru && ru.destroy
                 render :json=>{:success=>true}
             else
                 render :json=>{:success=>false}

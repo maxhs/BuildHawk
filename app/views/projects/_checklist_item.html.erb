@@ -1,4 +1,7 @@
 <div class="checklist-item-form border-box">
+	<div style="float:right">
+		<button class="export-report btn btn-md"><%= link_to 'Export', generate_checklist_item_path(@checklist_item), :class=>"remote", :data=>{:confirm=>"This will send the checklist email to the assignee. Do you want to continue?"}, remote: true %></button>
+	</div>
 	<div class="row">
 		<span class="col-md-5 header-description"><h2><%= @checklist_item.category_name %></h2></span>
 	</div>
