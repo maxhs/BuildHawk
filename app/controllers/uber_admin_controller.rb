@@ -1,5 +1,6 @@
 class UberAdminController < ApplicationController
-
+	layout 'uber_admin'
+	
 	def index
 		@companies = Company.all
 		if request.xhr?

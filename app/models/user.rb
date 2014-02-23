@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 
-    attr_accessible :first_name, :last_name, :user_id, :email, :password, :push_permissions, :email_permissions,
+    attr_accessible :first_name, :last_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone_number,
     				:full_name, :company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin,
                     :authentication_token, :company_admin
 
