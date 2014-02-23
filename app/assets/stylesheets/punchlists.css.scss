@@ -2,28 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#add-punchlist {
-	width:100%; 
-	padding:20px 20px 0 20px;
 
-	#punchlist-container {
-		width:80%;
-		margin:0 auto;
-		padding:40px 20px 70px;
-		display:block;
+#punchlist-item-container {
+	width:80%;
+	margin:0 auto;
+	padding:40px 20px 70px;
+	display:block;
 
-		input[type="radio"]{
-			display:inline-block;
-			margin-right:10px;
-			margin-left:10px;
-		}
+	input[type="radio"]{
+		display:inline-block;
+		margin-right:10px;
+		margin-left:10px;
+	}
 
-		input[type="text"] {
-			margin-bottom:2px;
-			width:100% !important;
-		}
-	}	
-}
+	input[type="text"] {
+		margin-bottom:2px;
+		width:100% !important;
+	}
+}	
+
 
 #worklist-table {
 	margin-bottom:0;

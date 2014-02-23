@@ -1,16 +1,59 @@
 class PunchlistItemsController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :find_company
 
-	def edit
-		@punchlist_item = PunchlistItem.find params[:id]
-		@punchlist = @punchlist_item.punchlist
-		@project = @punchlist.project
+	def new
+		@item = PunchlistItem.new
+		@item.photos.build
+		@item.build_assignee
 
+		@project = Project.find params[:project_id]
 		@company = current_user.company
 		@projects = @company.projects
-		@users = @company.users
+		@users = @project.company.users
 
-		@punchlist_item.build_assignee if @punchlist_item.assignee.nil?
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :new
+		end
+	end
+
+	def create
+		@project = Project.find params[:project_id]
+		if @project.punchlists.count == 0
+			@punchlist = @project.punchlists.create
+		else
+			@punchlist = @project.punchlists.first
+		end
+		if params[:punchlist_item][:assignee_attributes].present?
+			assignee = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
+			sub_assignee = Sub.where(:name => params[:punchlist_item][:assignee_attributes][:full_name]).first unless assignee
+			params[:punchlist_item].delete(:assignee_attributes)
+		end
+
+		@item = @punchlist.punchlist_items.create params[:punchlist_item]
+		
+		if assignee
+			@item.update_attribute :assignee_id, assignee.id
+		elsif sub_assignee
+			@item.update_attribute :sub_assignee_id, sub_assignee.id
+		end
+
+		@items = @punchlist.punchlist_items if @punchlist
+		if request.xhr?
+			respond_to do |format|
+				format.js { render :template => "projects/worklist"}
+			end
+		else 
+			redirect_to worklist_project_path(@project)
+		end
+	end
+
+	def edit
+		@item.build_assignee if @item.assignee.nil?
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -21,27 +64,22 @@ class PunchlistItemsController < ApplicationController
 	end
 
 	def update
-		@punchlist_item = PunchlistItem.find params[:punchlist_item_id]
 		if params[:punchlist_item][:assignee_attributes].present?
 			user = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
 			params[:punchlist_item].delete(:assignee_attributes)
 			if user
-				@punchlist_item.update_attribute :assignee_id, user.id
+				@item.update_attribute :assignee_id, user.id
 			else
-				@punchlist_item.update_attribute :assignee_id, nil
+				@item.update_attribute :assignee_id, nil
 			end
 		end
-		@punchlist_item.update_attributes params[:punchlist_item]
-		if @punchlist_item.completed == true
-			@punchlist_item.update_attributes :completed_by_user_id => user.id, :completed_at => Time.now
+		@item.update_attributes params[:punchlist_item]
+		if @item.completed == true
+			@item.update_attributes :completed_by_user_id => user.id, :completed_at => Time.now
 		else
-			@punchlist_item.update_attributes :completed_by_user_id => nil, :completed_at => nil
+			@item.update_attributes :completed_by_user_id => nil, :completed_at => nil
 		end
 
-		@punchlist = @punchlist_item.punchlist
-		@items = @punchlist.punchlist_items
-		@project = @punchlist.project 
-		
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/worklist"}
@@ -49,15 +87,10 @@ class PunchlistItemsController < ApplicationController
 		else 
 			redirect_to worklist_project_path(@project)
 		end
-
 	end
 		
 	def destroy
-		item = PunchlistItem.find params[:id]
-		@punchlist = item.punchlist
-		@items = @punchlist.punchlist_items
-		@project = @punchlist.project
-		item.destroy
+		@item.destroy
 		if request.xhr?
 			respond_to do |format|
 				format.js {render template: "projects/worklist"}
@@ -68,8 +101,7 @@ class PunchlistItemsController < ApplicationController
 	end
 
 	def generate
-		@item = PunchlistItem.find params[:id]
-		@project = @item.punchlist.project
+
 		if @item.assignee
 			@recipient = @item.assignee
 			PunchlistItemMailer.punchlist_item(@item,@recipient).deliver
@@ -83,6 +115,18 @@ class PunchlistItemsController < ApplicationController
 			end
 		else
 			redirect_to worklist_project_path(@project)
+		end
+	end
+
+	def find_company
+		if params[:id]
+			@item = PunchlistItem.find params[:id] 
+			@punchlist = @item.punchlist
+			@project = @punchlist.project
+			@items = @punchlist.punchlist_items
+			@company = current_user.company
+			@projects = @company.projects
+			@users = @company.users
 		end
 	end
 end

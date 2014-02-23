@@ -444,51 +444,6 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def new_worklist_item
-		@punchlist_item = PunchlistItem.new
-		@punchlist_item.photos.build
-		@punchlist_item.build_assignee
-		@users = @project.company.users
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else 
-			redirect_to worklist_project_path(@project)
-		end
-	end
-
-	def worklist_item
-		@project = Project.find params[:id]
-		if @project.punchlists.count == 0
-			@punchlist = @project.punchlists.create
-		else
-			@punchlist = @project.punchlists.first
-		end
-		if params[:punchlist_item][:assignee_attributes].present?
-			assignee = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
-			sub_assignee = Sub.where(:name => params[:punchlist_item][:assignee_attributes][:full_name]).first unless assignee
-			params[:punchlist_item].delete(:assignee_attributes)
-		end
-
-		@punchlist_item = @punchlist.punchlist_items.create params[:punchlist_item]
-		
-		if assignee
-			@punchlist_item.update_attribute :assignee_id, assignee.id
-		elsif sub_assignee
-			@punchlist_item.update_attribute :sub_assignee_id, sub_assignee.id
-		end
-
-		@items = @punchlist.punchlist_items if @punchlist
-		if request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/worklist"}
-			end
-		else 
-			render :worklist
-		end
-	end
-
 	def photo
 		@p = Photo.new(image: params[:file])
 		if params[:file].original_filename

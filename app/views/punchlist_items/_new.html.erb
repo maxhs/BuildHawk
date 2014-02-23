@@ -1,10 +1,15 @@
-<%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
+<%= nested_form_for @item, :url => punchlist_items_path, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
-	<div id="add-punchlist" class="border-box">
-		<div id="punchlist-container">
-			<div><h3>Add a new Punchlist item</h3></div>
-			<div><%= f.text_field :body, :placeholder => "Describe the work item" %></div>
-			<div><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
+	<%= hidden_field_tag :project_id, @project.id %> 
+	<div class="border-box">
+		<div id="punchlist-item-container">
+			<h3>New Worklist Item</h3>
+			<div class="row">
+				<div class="col-xs-2"><h4>Item:</h4></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the worklist item" %></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-2"><h4>Location:</h4></div><div class="col-xs-10"><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
+			</div>
 			<%= f.fields_for :assignee do |a| %>
 				<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
 				<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
@@ -18,7 +23,7 @@
 					<%= photo.hidden_field :source, :value => "Worklist" %>
 				<% end %>
 			</div>
-			<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Add" %></button></div>
+			<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Add", :style=>"width:100%;" %></button></div>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		</div>
 	</div>
