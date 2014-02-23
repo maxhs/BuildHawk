@@ -67,7 +67,7 @@ class PunchlistItemsController < ApplicationController
 		if params[:punchlist_item][:assignee_attributes].present?
 			assignee = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
 			params[:punchlist_item].delete(:assignee_attributes)
-			if user
+			if assignee
 				@item.update_attribute :assignee_id, assignee.id
 			else
 				@item.update_attribute :assignee_id, nil
