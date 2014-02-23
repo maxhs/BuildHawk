@@ -1,5 +1,5 @@
 <%= nested_form_for @punchlist_item, :url => punchlist_item_path(@punchlist_item), :multipart => true, :method => :patch, :remote => true do |f| %>
-	<div id="add-punchlist" class="border-box" style="padding-bottom:30px;">
+	<div id="add-punchlist" class="border-box">
 		<div style="float:right">
 			<button class="export-report btn btn-md"><%= link_to 'Export', generate_punchlist_item_path(@punchlist_item), :class=>"remote", :data=>{:confirm=>"This will send a worklist email to the assignee. Do you want to continue?"}, remote: true %></button>
 		</div>
@@ -20,14 +20,12 @@
 					</div>
 				<% else %>
 			</div>
-
-				<div>
-					<h4>Select an assignee</h4>
-					<%= f.fields_for :assignee do |a| %>
-						<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;" %>
-					<% end %>
-				</div>
-
+		
+			<%= f.fields_for :assignee do |a| %>
+				<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
+				<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+			<% end %>
+				
 			<% end %>
 			<% if @punchlist_item.photos && @punchlist_item.photos.count > 0 %>
 				<div style="padding:30px 0;padding-top:20px;">
@@ -39,7 +37,8 @@
 				</div>
 			<% end %>
 
-			<div><h4 style="text-align:center;">Add a photo</h4>
+			<div>
+				<h4 style="text-align:center;">Add a photo</h4>
 				<%= f.fields_for :photos, @punchlist_item.photos.build do |photo| %>
 					<%= photo.file_field :image %>
 					<%= photo.hidden_field :project_id, :value => @project.id %>

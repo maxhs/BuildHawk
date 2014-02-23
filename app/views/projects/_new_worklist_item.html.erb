@@ -1,16 +1,16 @@
 <%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
-	<div id="add-punchlist" class="border-box" style="padding-top:20px;">
+	<div id="add-punchlist" class="border-box">
 		<div id="punchlist-container">
 			<div><h3>Add a new Punchlist item</h3></div>
 			<div><%= f.text_field :body, :placeholder => "Describe the work item" %></div>
 			<div><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
-			<div><h4>Select an assignee</h4>
-					<%= f.fields_for :assignee do |a| %>
-						<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), :class=>"assignee-select" %>
-					<% end %>
-				</div>
-			<div><span style="margin-right:20px"><h4>Add a photo</h4></span>
+			<%= f.fields_for :assignee do |a| %>
+				<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
+				<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+			<% end %>
+			<div>
+				<h4 style="text-align:center;">Add a photo</h4>
 				<%= f.fields_for :photos do |photo| %>
 					<%= photo.file_field :image %>
 					<%= photo.hidden_field :project_id, :value => @project.id %>
