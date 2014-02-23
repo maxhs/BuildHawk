@@ -5,7 +5,9 @@ class PunchlistItemsController < ApplicationController
 		@punchlist_item = PunchlistItem.find params[:id]
 		@punchlist = @punchlist_item.punchlist
 		@project = @punchlist.project
+
 		@company = current_user.company
+		@projects = @company.projects
 		@users = @company.users
 
 		@punchlist_item.build_assignee if @punchlist_item.assignee.nil?
@@ -14,7 +16,7 @@ class PunchlistItemsController < ApplicationController
 				format.js
 			end
 		else 
-			render :edit_worklist_item
+			render :edit
 		end
 	end
 
