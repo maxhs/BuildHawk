@@ -39,9 +39,9 @@ class PunchlistItem < ActiveRecord::Base
         if completed && completed == true && user_id
             user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
             if user
-                message = "\"#{truncated}\" was just completed by #{user.full_name}"
+                message = "#{punchlist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
             else
-                message = "\"#{truncated}\" was just completed"
+                message = "#{punchlist.project.name} - \"#{truncated}\" was just completed"
             end
             Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id, :notification_type => "Worklist").first_or_create
         else
