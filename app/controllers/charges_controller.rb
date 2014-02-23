@@ -1,16 +1,21 @@
 class ChargesController < ApplicationController
 	before_filter :authenticate_user!
-	def new
+	def index
 		company = current_user.company
+		@charges = company.charges
 	  	active_projects = company.projects.where(:active => true).count
 	  	@amount = active_projects * 1000 / 100
 	  	puts "the amount is: #{@amount}"
 	end
 
+	def new
+		redirect_to charges_path
+	end
+
 	def create
 	  # Amount in cents
 	  company = current_user.company
-	  active_projects = company.projects.where(:active => true).flatten
+	  active_projects = company.projects.where(:active => true).count
 	  @amount = active_projects * 1000
 	  puts "the amount is: #{@amount}"
 	  customer = Stripe::Customer.create(
@@ -28,6 +33,18 @@ class ChargesController < ApplicationController
 	rescue Stripe::CardError => e
 	  flash[:error] = e.message
 	  redirect_to charges_path
+	end
+
+	def promo_code
+		charge = Charge.find params[:id]
+		charge.update_attribute :promo_code, params[:charge][:promo_code]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to charges_path
+		end
 	end
 
 end

@@ -1,0 +1,24 @@
+<div id="billing" class="border-box">
+	<h1>BILLING MANAGEMENT</h1>
+	<div id="billing-container" class="border-box">
+		<div class="row">
+			<div class="col-xs-2"><h4>Date</h4></div>
+			<div class="col-xs-2"><h4>Amount</h4></div>
+			<div class="col-xs-3"><h4>Description</h4></div>
+			<div class="col-xs-3"><h4>Promo Code</h4></div>
+			<div class="col-xs-2"><h4>Paid</h4></div>
+		</div>
+		<%= render partial:"charges/charge", collection: @charges, as: :charge %>
+		<div class="row summary">
+			<div class="col-xs-2"><h5 style="text-align:center;">Balance:</h5></div>
+			<div class="col-xs-2"><h5><%= number_to_currency current_user.company.balance %> </h5></div>
+			<div class="col-xs-3"><h5>&nbsp;</h5></div>
+			<div class="col-xs-3"><h5>&nbsp;</h5></div>
+			<div class="col-xs-2"><h5>&nbsp;</h5></div>
+		</div>
+	</div>
+	<%= form_tag charges_path, :id => "charge-form" do %>
+		<label>Outstanding Balance: <%= number_to_currency current_user.company.balance %></label>
+		<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<%= Rails.configuration.stripe[:publishable_key] %>" data-description="Monthly fee" data-amount="<%=@amount*100%>"></script>
+	<% end %>
+</div>

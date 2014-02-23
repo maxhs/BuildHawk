@@ -5,4 +5,7 @@ module ApplicationHelper
 	def parse_date(time)
 		time.strftime("%m/%d/%Y") if time
 	end
+	def parse_billing_date(time)
+		time.strftime("%B %Y") if time
+	end
 end

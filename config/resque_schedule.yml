@@ -1,5 +1,5 @@
-monthly_digest:
+monthly_billing:
   cron: "0 0 1 * *"
-  class: MonthlyDigest
+  class: MonthlyBilling
   args:
-  description: Sends the monthly digest
+  description: Handle monthly billing

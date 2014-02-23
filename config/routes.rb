@@ -143,7 +143,11 @@ Buildhawk::Application.routes.draw do
     end
   end
   resources :folders
-  resources :charges
+  resources :charges do
+    member do 
+      patch :promo_code
+    end
+  end
 
   #mobile API
   namespace :api do

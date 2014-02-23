@@ -2,14 +2,15 @@ class Company < ActiveRecord::Base
 	attr_accessible :name, :phone_number, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name
   
 	has_many :users, :dependent => :destroy
-  has_many :subs, :dependent => :destroy
+    has_many :subs, :dependent => :destroy
 	has_many :projects, :dependent => :destroy
 	has_many :photos, :dependent => :destroy
 	has_many :checklists, :dependent => :destroy
-  validates_uniqueness_of :name
+    has_many :charges
+    validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
   
-  has_attached_file :image, 
+    has_attached_file :image, 
                   :styles => { :medium => ["600x600#", :jpg],
                                :small  => ["200x200#", :jpg],
                                :thumb  => ["100x100#", :jpg]
@@ -19,6 +20,10 @@ class Company < ActiveRecord::Base
                   :url            => "buildhawk.s3.amazonaws.com",
                   :path           => "company_image_:id_:style.:extension"
 
+
+    def balance
+        charges.where(:paid => false).map(&:amount).flatten.inject(:+)
+    end
 
 	acts_as_api
 
