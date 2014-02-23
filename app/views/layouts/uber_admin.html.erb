@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BuildHawk</title>
+	<%= stylesheet_link_tag    "application", media: "all" %>
+ 	<%= javascript_include_tag "application" %>
+	<link rel="shortcut icon" href="<%=root_url %>/favicon.ico?v=1" />
+	<%= csrf_meta_tags %>
+	<script type="text/javascript">
+	    Shadowbox.init({
+	    	skipSetup:true,
+	    	onOpen:function(){
+	    		$('#top-nav').css('opacity','.1');
+	    	},
+	    	onClose:function(){
+	    		$('#top-nav').css('opacity','1');},
+	    		handleOversize: "drag",
+	    		overlayOpacity: "0.8"
+	    })
+	    window.onload = function() {
+		    Shadowbox.setup(".shadow-photo");
+		}
+		
+		window.Dropzone;
+		jQuery.ajaxSetup({ cache: false });
+
+		var width = $(window).width()
+	    $('#alert,#notice').css("left",width/4);
+
+	  	if ($('#notice').text().length) {
+	        $($('#notice')).fadeIn(400, function() {
+	            $(this).delay(2500).fadeOut();
+	        });
+	    } else if ($('#alert').text().length) {
+	        $($('#alert')).fadeIn(400, function() {
+	            $(this).delay(2500).fadeOut();
+	        });
+	    }
+	</script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-43601553-1']);
+	  _gaq.push(['_setDomainName', 'buildhawk.com']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</head>
+<body>
+	<p class="notice" id="notice"><%= notice %></p>
+    <p class="alert" id="alert"><%= alert %></p>
+
+    <div id="wrap">
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-fixed-top" id="top-nav" style="min-height: 50px;">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/" data-remote='true'><%= image_tag('logo.png') %></a>
+				</div>
+				
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						
+						<li class="nav-projects" id="nav-projects"><%= link_to "Projects", projects_path, :remote => true %></li>
+						<% if current_user.admin %>
+							<li class="nav-admin" id="nav-admin"><%= link_to "Admin", admin_index_path, :remote => true %></li> 
+						<% end %>
+						<% if current_user.uber_admin %>
+							<li class="nav-uber-admin" id="nav-uber-admin"><%= link_to "Uber Admin", uber_admin_index_path, :class=>"current-page", :remote => true %></li> 
+						<% end %>
+
+					</ul>
+					<ul class="nav navbar-nav pull-right">
+						
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><%=current_user.full_name%></span> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><%= link_to "My Settings", edit_user_path(current_user), :remote => true %></li>
+									<li><%= link_to "Logout", logout_path %></li>
+								</ul>
+							</li>
+						
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+
+		<div id="pagescontainer" class="container">
+			<%= yield %>
+		</div>
+	</div>
+
+	<div id="push"></div>
+</div>
+
+<footer>
+	<div id="container">
+		<ul>
+			<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="/terms">Terms of Service</a></li>
+			<li><a href="/privacy">Privacy Policy</a></li>
+		</ul>
+
+		<div id="copyright">&copy; BuildHawk, 2013</div>
+	</div>
+</footer>
+
+</body>
+
+</html>
