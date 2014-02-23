@@ -86,14 +86,9 @@ body {
 		height: auto !important;
 		height: 100%;
 		/* Negative indent footer by its height */
-		margin: 75px auto -75px;
+		margin: 65px auto -75px;
 		/* Pad bottom by footer height */
 		padding: 0 0 75px;
-	}
-
-	#pagescontainer {
-		margin-top:80px;
-		margin-bottom:60px;
 	}
 
 	.navbar-fixed-top {
@@ -450,6 +445,9 @@ input[type="submit"] {
 
 #wrap {
 	#main {
+		padding-right:0;
+		padding-left:0;
+
 		.navbar {
 			background-color:#fff;
 			.container {
@@ -465,19 +463,8 @@ input[type="submit"] {
 		}
 	}
 
-	&.projects-page, &.projectform-page,  &.checklists-page, &.checklistitem-page, &.project-page, &.documents-page, &.report-page, &.reports-page, &.punchlists-page, &.punchlistform-page, &.dashboard-page {
-		#main, #sidebar {
-			> .projects {
-				display: block;
-			}
-			> .admin {
-				display: none;
-			}
-
-			form {
-				margin-left:10%;
-			}
-		}
+	#sidebar {
+		padding-left:0;
 	}
 
 	#checklists-page {

@@ -1,5 +1,7 @@
-<%= render :partial => "admin/sidebar" %>
-	<div id="pages">
-		<%= render :partial => 'admin/checklists', :locals => {:checklists => @checklists} %>
+<div class="container">
+		<%= render :partial => "admin/sidebar" %>
+		<div id="pages">
+			<%= render :partial => 'admin/checklists', :locals => {:checklists => @checklists} %>
+		</div>
 	</div>
 </div>
