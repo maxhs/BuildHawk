@@ -65,17 +65,17 @@ class PunchlistItemsController < ApplicationController
 
 	def update
 		if params[:punchlist_item][:assignee_attributes].present?
-			user = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
+			assignee = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
 			params[:punchlist_item].delete(:assignee_attributes)
 			if user
-				@item.update_attribute :assignee_id, user.id
+				@item.update_attribute :assignee_id, assignee.id
 			else
 				@item.update_attribute :assignee_id, nil
 			end
 		end
 		@item.update_attributes params[:punchlist_item]
 		if @item.completed == true
-			@item.update_attributes :completed_by_user_id => user.id, :completed_at => Time.now
+			@item.update_attributes :completed_by_user_id => current_user.id, :completed_at => Time.now
 		else
 			@item.update_attributes :completed_by_user_id => nil, :completed_at => nil
 		end

@@ -29,7 +29,7 @@ class PunchlistItem < ActiveRecord::Base
         sub_assignee.name if sub_assignee
       end
       integer :project_id do
-        punchlist.project.id
+        punchlist.project.id if punchlist
       end
       time    :created_at
     end
@@ -43,7 +43,7 @@ class PunchlistItem < ActiveRecord::Base
             # else
                 message = "#{punchlist.project.name} - \"#{truncated}\" was just completed"
             #end
-            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id, :notification_type => "Worklist").first_or_create
+            Notification.where(:message => message,:user_id => self.user_id, :punchlist_item_id => self.id, :notification_type => "Worklist").first_or_create
         else
             message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
             Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist").first_or_create
