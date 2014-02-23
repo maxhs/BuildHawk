@@ -1,8 +1,9 @@
 <%= nested_form_for @punchlist_item, :url => punchlist_item_path(@punchlist_item), :multipart => true, :method => :patch, :remote => true do |f| %>
 	<div id="add-punchlist" class="border-box">
 		<div style="float:right">
-			<button class="export-report btn btn-md"><%= link_to 'Export', generate_punchlist_item_path(@punchlist_item), :class=>"remote", :data=>{:confirm=>"This will send a worklist email to the assignee. Do you want to continue?"}, remote: true %></button>
+			<button class="export btn btn-md"><%= link_to 'Export', generate_punchlist_item_path(@punchlist_item), :class=>"remote", :data=>{:confirm=>"This will send a worklist email to the assignee. Do you want to continue?"}, remote: true %></button>
 		</div>
+
 		<div id="punchlist-container">
 			<div class="row">
 				<div class="col-xs-2"><h4>Item:</h4></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the worklist item" %></div>
@@ -10,23 +11,26 @@
 			<div class="row">
 				<div class="col-xs-2"><h4>Location:</h4></div><div class="col-xs-10"><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
 			</div>
-			<div class="row" style="font-size:1.15em;margin-top:1em;margin-bottom:1em;">
+			<div class="row" style="font-size:1.15em;margin-top:1em;margin-bottom:3em;">
 				<div class="col-xs-2"><h4>Status:</h4></div>
 				<div class="col-xs-3" style="padding-top:9px;font-family:'Gotham Book'"><%= f.radio_button :completed, false %>IN PROGRESS</div><div class="col-xs-3" style="padding-top:9px;font-family:'Gotham Book'"><%= f.radio_button :completed, true %>COMPLETED</div>
+				
 				<% if @punchlist_item.completed %>
-					<div class="col-md-4" style="text-align:center;">
-						<h4 style="margin:0;">Completed By:</h4>
-						<%= @punchlist_item.completed_by_user.full_name %>
+						<div class="col-md-4" style="text-align:center;">
+							<h4 style="margin:0;">Completed By:</h4>
+							<%= @punchlist_item.completed_by_user.full_name %>
+						</div>
 					</div>
 				<% else %>
-			</div>
+					</div>
 		
-			<%= f.fields_for :assignee do |a| %>
-				<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
-				<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
-			<% end %>
+						<%= f.fields_for :assignee do |a| %>
+							<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
+							<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+						<% end %>
 				
-			<% end %>
+				<% end %>
+			
 			<% if @punchlist_item.photos && @punchlist_item.photos.count > 0 %>
 				<div style="padding:30px 0;padding-top:20px;">
 					<% @punchlist_item.photos.each do |p| %>
@@ -37,24 +41,24 @@
 				</div>
 			<% end %>
 
-			<div>
-				<h4 style="text-align:center;">Add a photo</h4>
-				<%= f.fields_for :photos, @punchlist_item.photos.build do |photo| %>
-					<%= photo.file_field :image %>
-					<%= photo.hidden_field :project_id, :value => @project.id %>
-					<%= photo.hidden_field :user_id, :value => current_user.id %>
-					<% if @punchlist_item.id %><%= photo.hidden_field :punchlist_item_id, :value => @punchlist_item.id %><% end %>
-					<%= photo.hidden_field :source, :value => "Worklist" %>
-				<% end %>
-			</div>
+			
+			<h4>Add a photo</h4>
+			<%= f.fields_for :photos, @punchlist_item.photos.build do |photo| %>
+				<%= photo.file_field :image %>
+				<%= photo.hidden_field :project_id, :value => @project.id %>
+				<%= photo.hidden_field :user_id, :value => current_user.id %>
+				<% if @punchlist_item.id %><%= photo.hidden_field :punchlist_item_id, :value => @punchlist_item.id %><% end %>
+				<%= photo.hidden_field :source, :value => "Worklist" %>
+			<% end %>
+			
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<%= hidden_field_tag :punchlist_item_id, @punchlist_item.id %>
-			<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></div>
-<% end %>
-
-		<div style="clear:both;">
+			
+		<div>
 			<button class="btn btn-danger btn-md pull-right"><%= link_to "Delete", punchlist_item_path(@punchlist_item), :method => :delete, :class=> "delete-link remote", :data => {:confirm => "Are you sure you want to delete this item?"}, :remote => true %></button>
+			<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
 		</div>
+<% end %>
 	</div>
 </div>
 

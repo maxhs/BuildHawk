@@ -10,7 +10,7 @@
 				<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
 			<% end %>
 			<div>
-				<h4 style="text-align:center;">Add a photo</h4>
+				<h4>Add a photo</h4>
 				<%= f.fields_for :photos do |photo| %>
 					<%= photo.file_field :image %>
 					<%= photo.hidden_field :project_id, :value => @project.id %>
