@@ -42,7 +42,7 @@
 						<div class="row">	
 							<div class="col-xs-2"><%= link_to 'Worklist', worklist_project_path(@project), remote: true %></div>
 							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
-							<div class="col-xs-8"><%= link_to item.body, edit_worklist_item_project_path(@project, :report_id => item.id), :class => "recently-completed", :remote => true %></div>
+							<div class="col-xs-8"><%= link_to item.body, edit_punchlist_item_path(item, :project_id => @project.id), :class => "recently-completed", :remote => true %></div>
 						</div>
 					<% elsif class_name == "Photo" %>
 						<div class="row">	

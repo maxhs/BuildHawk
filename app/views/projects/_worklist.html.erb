@@ -12,6 +12,7 @@
 		<table class="table table-bordered table-responsive" id="worklist-table">
 			<thead>
 				<tr>
+					<th><button class="export" id="export-worklist-items">Export</button></th>
 					<th>Photo</th>
 					<th>Name</th>
 					<th>Assignee</th>
@@ -24,6 +25,9 @@
 				<% if @items && @items.count > 0 %>
 					<% @items.each do |item| %>
 						<tr>
+							<td style="width:76px;">
+								<span class="worklist-item-checkbox"><%= check_box_tag :select, item.id %></span>
+							</td>
 							<% if item.photos && item.photos.count > 0 %>
 								<td style="width:100px;height:100px;">
 									<% photo = item.photos.where("image_file_name IS NOT NULL").first %>
@@ -69,4 +73,19 @@
 		$('#search').val('');
 		$('#worklist-search').submit();
 	});
+	$('#export-worklist-items').click(function(){
+		$('#project-worklist').before('<%= j render partial:"punchlist_export" %>');
+		var values = [];
+		$('.worklist-item-checkbox input').each(function(i,obj){
+			if (obj.checked) {
+				values.push(obj.value);		
+			}
+		});
+		$('#export-worklist-modal form').append('<input type="hidden" id="items" value="'+values+'">');
+		$('#export-worklist-modal').animate({"left":"40%",'opacity':'1'},200);
+		$('#cancel-worklist-modal').on('click',function(){
+			$('#export-worklist-modal').animate({"left":"100%",'opacity':'0'},200);
+		})
+	});
+
 </script>

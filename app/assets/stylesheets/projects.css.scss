@@ -200,3 +200,39 @@
 .delete-project-link:hover {
 	
 }
+
+#export-worklist-modal {
+	width:50%;
+	height:50%;
+	left:100%;
+	opacity:0;
+	z-index:10;
+	background:#fff;
+	position:fixed;
+	padding:20px;
+	overflow-y:scroll;
+
+	#cancel-worklist-modal {
+		float:right;
+		width:18px;
+		height:18px;
+		display:block;
+		cursor:pointer;
+	}
+
+	h3 {
+		margin-top:0;
+		text-align:center;
+	}
+
+	form {
+		input[type="text"] {
+			width:100%;
+			margin:1em auto;
+		}
+
+		.checkboxes {
+			line-height:2em;
+		}
+	}
+}

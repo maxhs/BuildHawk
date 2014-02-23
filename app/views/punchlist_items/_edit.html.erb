@@ -1,8 +1,5 @@
 <%= nested_form_for @item, url: punchlist_item_path(@item), :multipart => true, :method => :patch, :remote => true do |f| %>
 	<div class="border-box">
-		<div style="float:right;padding-top:20px;">
-			<button class="export btn btn-md"><%= link_to 'Export', generate_punchlist_item_path(@item), :class=>"remote", :data=>{:confirm=>"This will send a worklist email to the assignee. Do you want to continue?"}, remote: true %></button>
-		</div>
 
 		<div id="punchlist-item-container">
 			<div class="row">

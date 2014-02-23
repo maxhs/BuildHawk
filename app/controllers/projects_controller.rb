@@ -270,6 +270,15 @@ class ProjectsController < ApplicationController
 		@items = @punchlist.punchlist_items if @punchlist
 	end
 
+	def export_worklist
+		item_array = []
+		params[:items].each do |i|
+			puts "i: #{i}"
+			item_array << PunchlistItem.find(i)
+		end
+		puts "item array: #{item_array}"
+	end
+
 	def search_items
 		if params[:search] && params[:search].length > 0
 			search_term = "%#{params[:search]}%" 

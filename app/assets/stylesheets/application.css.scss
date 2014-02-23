@@ -402,6 +402,13 @@ select[multiple] {
 	}
 }
 
+.cancel-x {
+	background-image: image-url('blackX.png');
+	background-repeat:no-repeat;
+	background-position:center; 
+	background-size:18px 18px;
+}
+
 .form-label {
 	padding-top:15px;
 }
