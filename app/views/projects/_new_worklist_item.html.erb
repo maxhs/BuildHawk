@@ -1,4 +1,5 @@
-<%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :method => :post do |f| %>
+<%= nested_form_for @punchlist_item, :url => {:action => :worklist_item}, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
 	<div id="add-punchlist" class="border-box" style="padding-top:20px;">
 		<div id="punchlist-container">
 			<div><h3>Add a new Punchlist item</h3></div>

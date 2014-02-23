@@ -2,9 +2,10 @@ class PunchlistItem < ActiveRecord::Base
     include ActionView::Helpers::TextHelper
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :punchlist_id, :punchlist,
 					:photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id,
-                    :sub_assignee_id, :sub_assignee, :photos_count, :comments_count, :mobile
+                    :sub_assignee_id, :sub_assignee, :photos_count, :comments_count, :mobile, :user_id
 
     belongs_to :punchlist
+    belongs_to :user
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
     belongs_to :sub_assignee, :class_name => "Sub"
@@ -35,8 +36,18 @@ class PunchlistItem < ActiveRecord::Base
 
     def notify
         truncated = truncate(body, length:20)
-        message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
-        Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist",:user => self.assignee).first_or_create
+        if completed && completed == true && user_id
+            user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
+            if user
+                message = "\"#{truncated}\" was just completed by #{user.full_name}"
+            else
+                message = "\"#{truncated}\" was just completed"
+            end
+            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id, :notification_type => "Worklist").first_or_create
+        else
+            message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
+            Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist").first_or_create
+        end
     end
 
     acts_as_api

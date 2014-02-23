@@ -1,4 +1,4 @@
-<%= nested_form_for @punchlist_item, :url => {:action => :update_worklist_item, :multipart => true }, :method => :post do |f| %>
+<%= nested_form_for @punchlist_item, :url => punchlist_item_path(@punchlist_item), :multipart => true, :method => :patch, :remote => true do |f| %>
 	<div id="add-punchlist" class="border-box" style="padding-bottom:30px;">
 		<div style="float:right">
 			<button class="export-report btn btn-md"><%= link_to 'Export', generate_punchlist_item_path(@punchlist_item), :class=>"remote", :data=>{:confirm=>"This will send a worklist email to the assignee. Do you want to continue?"}, remote: true %></button>
@@ -20,8 +20,6 @@
 					</div>
 				<% else %>
 			</div>
-		
-			
 
 				<div>
 					<h4>Select an assignee</h4>

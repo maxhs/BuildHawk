@@ -466,12 +466,20 @@ class ProjectsController < ApplicationController
 			@punchlist = @project.punchlists.first
 		end
 		if params[:punchlist_item][:assignee_attributes].present?
-			user = User.find_by(full_name: params[:punchlist_item][:assignee_attributes][:full_name])
+			assignee = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
+			sub_assignee = Sub.where(:name => params[:punchlist_item][:assignee_attributes][:full_name]).first unless assignee
 			params[:punchlist_item].delete(:assignee_attributes)
 		end
+
 		@punchlist_item = @punchlist.punchlist_items.create params[:punchlist_item]
+		
+		if assignee
+			@punchlist_item.update_attribute :assignee_id, assignee.id
+		elsif sub_assignee
+			@punchlist_item.update_attribute :sub_assignee_id, sub_assignee.id
+		end
+
 		@items = @punchlist.punchlist_items if @punchlist
-		@punchlist_item.update_attribute :assignee_id, user.id if user
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/worklist"}
@@ -490,33 +498,6 @@ class ProjectsController < ApplicationController
 			end
 		else 
 			render :edit_worklist_item
-		end
-	end
-
-	def update_worklist_item
-		@punchlist_item = PunchlistItem.find params[:punchlist_item_id]
-		if params[:punchlist_item][:assignee_attributes].present?
-			user = User.find_by(full_name: params[:punchlist_item][:assignee_attributes][:full_name])
-			params[:punchlist_item].delete(:assignee_attributes)
-			if user
-				@punchlist_item.update_attribute :assignee_id, user.id
-			else
-				@punchlist_item.update_attribute :assignee_id, nil
-			end
-		end
-		@punchlist_item.update_attributes params[:punchlist_item]
-		if @punchlist_item.completed == true
-			@punchlist_item.update_attributes :completed_by_user_id => user.id, :completed_at => Time.now
-		else
-			@punchlist_item.update_attributes :completed_by_user_id => nil, :completed_at => nil
-		end
-		
-		if request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/worklist"}
-			end
-		else 
-			redirect_to worklist_project_path(@project)
 		end
 	end
 

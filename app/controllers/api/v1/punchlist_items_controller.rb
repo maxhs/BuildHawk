@@ -39,7 +39,7 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
         @project = Project.find params[:project_id]
 
         if params[:punchlist_item][:user_assignee].present? 
-            user = User.where(:full_name => params[:punchlist_item][:user_assignee]).first
+            assignee = User.where(:full_name => params[:punchlist_item][:user_assignee]).first
             params[:punchlist_item].delete(:user_assignee)
         elsif params[:punchlist_item][:sub_assignee].present?
             sub = Sub.where(:name => params[:punchlist_item][:sub_assignee]).first_or_create
@@ -49,8 +49,8 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
         @punchlist_item = @project.punchlists.last.punchlist_items.create params[:punchlist_item]
         @punchlist_item.update_attribute :mobile, true
         
-        if user
-            @punchlist_item.update_attribute :assignee_id, user.id
+        if assignee
+            @punchlist_item.update_attribute :assignee_id, assignee.id
         elsif sub
             @punchlist_item.update_attribute :sub_assignee_id, sub.id
         end
