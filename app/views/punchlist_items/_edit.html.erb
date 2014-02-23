@@ -35,7 +35,7 @@
 				<div style="padding:30px 0;padding-top:20px;">
 					<% @item.photos.each do |p| %>
 						<% if p.image_file_name%>
-							<%= render :partial => "image", :locals => {:p => p} %>
+							<%= render :partial => "projects/image", :locals => {:p => p} %>
 						<% end %>
 					<% end %>
 				</div>
