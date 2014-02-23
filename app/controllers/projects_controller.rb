@@ -489,18 +489,6 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def edit_worklist_item
-		@punchlist_item = PunchlistItem.find params[:item_id]
-		@punchlist_item.build_assignee if @punchlist_item.assignee.nil?
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else 
-			render :edit_worklist_item
-		end
-	end
-
 	def photo
 		@p = Photo.new(image: params[:file])
 		if params[:file].original_filename

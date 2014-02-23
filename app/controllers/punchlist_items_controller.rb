@@ -1,4 +1,23 @@
 class PunchlistItemsController < ApplicationController
+	before_filter :authenticate_user!
+
+	def edit
+		@punchlist_item = PunchlistItem.find params[:id]
+		@punchlist = @punchlist_item.punchlist
+		@project = @punchlist.project
+		@company = current_user.company
+		@users = @company.users
+
+		@punchlist_item.build_assignee if @punchlist_item.assignee.nil?
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :edit_worklist_item
+		end
+	end
+
 	def update
 		@punchlist_item = PunchlistItem.find params[:punchlist_item_id]
 		if params[:punchlist_item][:assignee_attributes].present?

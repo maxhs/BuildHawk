@@ -35,9 +35,9 @@
 							
 							<td>
 								<% if item.body.length > 0 %>
-									<%= link_to item.body, edit_worklist_item_project_path(@project, :item_id => item.id), :remote => true %> 
+									<%= link_to item.body, edit_punchlist_item_path(item), :remote => true %> 
 								<% else %>
-									<%= link_to edit_worklist_item_project_path(@project, :item_id => item.id), :remote => true do %> <div style="width:100%;display:block;">&nbsp;</div><% end %>
+									<%= link_to edit_punchlist_item_path(item), :remote => true do %> <div style="width:100%;display:block;">&nbsp;</div><% end %>
 								<% end %>
 							</td>	
 							<td>
