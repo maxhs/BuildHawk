@@ -1,0 +1,7 @@
+$('#alert').text("Checklist Item successfully exported").fadeIn(200).delay(2000).fadeOut(500, function(){
+	$(this).text("");
+	$('#export-checklsit-modal').animate({"left":"100%",'opacity':'0'},300);
+	$('.modal-backdrop.in').fadeOut(300,function(){
+		$(this).remove();
+	});
+});

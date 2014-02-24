@@ -78,6 +78,7 @@ Buildhawk::Application.routes.draw do
       post :create_category
       get :edit_checklist_item
       post :export_worklist
+      post :export_checklist
       post :search_items
       post :search_worklist
       get :checklist
@@ -99,7 +100,6 @@ Buildhawk::Application.routes.draw do
       delete :delete_report
       delete :delete_photo
       post :update_report
-      post :update_worklist_item
       delete :delete_checklist
       get :destroy_confirmation
 

@@ -197,7 +197,7 @@
 	
 }
 
-#export-worklist-modal {
+#export-worklist-modal,#export-checklist-modal {
 	width:50%;
 	left:100%;
 	opacity:0;
@@ -207,7 +207,7 @@
 	padding:20px;
 	overflow-y:scroll;
 
-	#cancel-worklist-modal {
+	#cancel-worklist-modal,#cancel-checklist-modal {
 		margin-top:-17px;
 		margin-right:-17px;
 		float:right;
@@ -219,7 +219,7 @@
 		opacity:.8;
 	}
 
-	#cancel-worklist-modal:hover {
+	#cancel-worklist-modal:hover,#cancel-checklist-modal:hover {
 		opacity:1;
 	}
 

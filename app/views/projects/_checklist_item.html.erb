@@ -1,6 +1,6 @@
-<div class="border-box">
+<div id="item-container" class="border-box">
 	<div style="float:right;padding-top:20px;">
-		<button class="export btn btn-md"><%= link_to 'Export', generate_checklist_item_path(@checklist_item), :class=>"remote", :data=>{:confirm=>"This will send the checklist email to the assignee. Do you want to continue?"}, remote: true %></button>
+		<button class="export btn btn-md" id="export-checklist-item">Export</button>
 	</div>
 
 	<div class="checklist-item-form">
@@ -95,5 +95,19 @@
 	    $('#clear-critical-date').click(function(){
 	    	$('#dp').val('');
 	    });
+	});
+	$('#export-checklist-item').click(function(){
+		if (!$('#export-checklist-modal').length > 0){
+			$('#item-container').prepend('<%= j render partial:"checklist_item_export" %>');
+		}
+
+		$('body').append('<div class="modal-backdrop in"></div>');
+		$('#export-checklist-modal').animate({"left":"25%",'opacity':'1'},300);
+		$('#cancel-checklist-modal,.modal-backdrop.in').on('click',function(){
+			$('#export-checklist-modal').animate({"left":"100%",'opacity':'0'},300);
+			$('.modal-backdrop.in').fadeOut(300,function(){
+				$(this).remove();
+			});
+		});
 	});
 </script>
