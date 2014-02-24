@@ -74,17 +74,22 @@
 		$('#worklist-search').submit();
 	});
 	$('#export-worklist-items').click(function(){
-		$('#project-worklist').before('<%= j render partial:"punchlist_export" %>');
+		if (!$('#export-worklist-modal').length > 0){
+			console.log('adding modal to dom');
+			$('#project-worklist').before('<%= j render partial:"punchlist_export" %>');
+		}
+
 		var values = [];
 		$('.worklist-item-checkbox input').each(function(i,obj){
 			if (obj.checked) {
 				values.push(obj.value);		
 			}
 		});
+			
 		$('#export-worklist-modal form').append('<input type="hidden" id="items" value="'+values+'">');
-		$('#export-worklist-modal').animate({"left":"40%",'opacity':'1'},200);
+		$('#export-worklist-modal').animate({"left":"25%",'opacity':'1'},300);
 		$('#cancel-worklist-modal').on('click',function(){
-			$('#export-worklist-modal').animate({"left":"100%",'opacity':'0'},200);
+			$('#export-worklist-modal').animate({"left":"100%",'opacity':'0'},300);
 		})
 	});
 

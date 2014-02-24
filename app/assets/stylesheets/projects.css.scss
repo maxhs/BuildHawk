@@ -26,8 +26,7 @@
 }
 
 #new-project-form, #edit-project-form {
-	max-width:600px;
-	width:80%;
+	width:75%;
 	margin:0 auto;
 
 	form, input {
@@ -203,7 +202,6 @@
 
 #export-worklist-modal {
 	width:50%;
-	height:50%;
 	left:100%;
 	opacity:0;
 	z-index:10;
@@ -213,11 +211,19 @@
 	overflow-y:scroll;
 
 	#cancel-worklist-modal {
+		margin-top:-17px;
+		margin-right:-17px;
 		float:right;
 		width:18px;
 		height:18px;
 		display:block;
 		cursor:pointer;
+		padding:15px;
+		opacity:.8;
+	}
+
+	#cancel-worklist-modal:hover {
+		opacity:1;
 	}
 
 	h3 {
