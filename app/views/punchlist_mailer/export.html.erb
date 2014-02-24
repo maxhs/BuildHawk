@@ -4,7 +4,7 @@
 
 <% @item_array.each do |item| %>
 
-	<div style="width:100%;">
+	<div style="width:100%;clear:both;">
 		<% if item.photos && item.photos.count > 0 && item.photos.first.image_file_name %>
 			<% photo = item.photos.first %>
 				<%= link_to edit_punchlist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
@@ -13,6 +13,12 @@
 				<% end %>
 			<% end %>
 		<%= item.body %> 
+		
+		<% if item.completed %>
+			<div><h4>Status:</h4><span style="padding-left:2em;font-weight:normal;">Complete</span></div>
+		<% else %>
+			<div><h4>Status:</h4><span style="padding-left:2em;color:#cc0000;font-weight:normal;">IN PROGRESS</span></div>
+		<% end %>
 	</div>
 
 <% end %>
