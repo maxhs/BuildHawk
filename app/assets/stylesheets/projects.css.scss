@@ -63,17 +63,15 @@
 #company-dashboard {
 	.company-project {
 		background-color:#fff;
-		min-height:200px;
 		border: 1px solid #ddd;
 		border-radius: 4px;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
-		margin-bottom:15px;
 		padding:5px 20px 20px;
-
-		table {
-			width:100%;
-			tr {
+		margin-bottom:10px;
+		
+			.row {
+				margin:-1px 0 0;
 				line-height:33px;
 				vertical-align:middle;
 				border:1px solid #ddd;
@@ -91,7 +89,6 @@
 				line-height:23px;
 				padding-top:7px;
 			}
-		}
 	}
 
 	.ui-progressbar {
