@@ -1,7 +1,23 @@
-<h2 style="text-align:center"><%= @project.name %> </h2>
+<h1 style="text-align:center;margin:0 auto;"> <%= @project.name %> </h1>
+<h2 style="text-align:center;margin:10px auto; 5px"> <%= @checklist_item.subcategory.category.name %> </h2>
+<h3 style="text-align:center;margin:0 auto;"> <%= @checklist_item.subcategory.name %> </h3>
+
 
 <div>
-	<h3>Checklist Item:</h3>
 	<p><%= @checklist_item.body %></p>
 </div>
 
+
+<% if @checklist_item.photos && @checklist_item.photos.count > 0 %>
+	<h3>Photos:</h3>
+	<div>
+		<% @checklist_item.photos.each do |p| %>
+			<% if p.image_file_name %>
+				<%= link_to checklist_item_project_url(@project, :checklist_item_id => @checklist_item.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
+					<%= image_tag(p.image.url(:small), :style => "width:100px;display:block;") %> 
+					<div style="text-align:center"><%= p.created_date %></div>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div>
+<% end %>

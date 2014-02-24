@@ -1,5 +1,5 @@
 class PunchlistMailer < ActionMailer::Base
-  	layout "item_mailer"
+  	layout "list_mailer"
 
   	def export(recipient_email, item_array, project)
   		@recipient = User.where(:email => recipient_email).first
