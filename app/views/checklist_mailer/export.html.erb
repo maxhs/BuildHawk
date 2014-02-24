@@ -19,7 +19,7 @@
 			<% if p.image_file_name %>
 				<%= link_to checklist_item_project_url(@project, :checklist_item_id => @checklist_item.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;text-decoration:none;" do %>
 					<%= image_tag(p.image.url(:small), :style => "width:100px;display:block;") %> 
-					<div style="text-align:center"><%= p.created_date, :style=>"text-decoration:none;" %></div>
+					<div style="text-align:center"><%= p.created_date %></div>
 				<% end %>
 			<% end %>
 		<% end %>
