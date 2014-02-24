@@ -276,14 +276,19 @@ class ProjectsController < ApplicationController
 			puts "i: #{i}"
 			item_array << PunchlistItem.find(i)
 		end
-		params[:recipient].each do |r|
-			puts "r: #{r}"
-			recipient = User.find r[:id]
-			PunchlistMailer.export(recipient, item_array).deliver
+		params[:names].each do |r|
+			unless r == current_user
+				puts "r: #{r}"
+				recipient = User.where(:full_name => r).first
+				recipient = Sub.where(:name => r).first unless recipient
+				PunchlistMailer.export(recipient.email, item_array, @project).deliver
+			end
 		end
-		parames[:email].split(',').each do |e|
-			#PunchlistMailer.export(item_array).deliver
+		params[:email].split(',').each do |e|
+			PunchlistMailer.export(e, item_array, @project).deliver
 		end
+		
+		PunchlistMailer.export(current_user.email, item_array, @project).deliver
 		
 		if request.xhr?
 			respond_to do |format|

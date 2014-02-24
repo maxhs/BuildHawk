@@ -25,6 +25,10 @@ class Company < ActiveRecord::Base
         charges.where(:paid => false).map(&:amount).flatten.inject(:+)
     end
 
+    def personnel
+        return users.map(&:full_name) + subs.map(&:name)
+    end
+
 	acts_as_api
 
   	api_accessible :company do |t|

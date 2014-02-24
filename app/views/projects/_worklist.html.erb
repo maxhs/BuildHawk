@@ -85,12 +85,16 @@
 				values.push(obj.value);		
 			}
 		});
-			
-		$('#export-worklist-modal form').append('<input type="hidden" id="items" name="items" value="'+values+'">');
+		$('body').append('<div class="modal-backdrop in"></div>');
+
+		$('#export-worklist-modal form').append('<input type="hidden" id="items" name="items" value="'+values+'">').fadeIn(200);
 		$('#export-worklist-modal').animate({"left":"25%",'opacity':'1'},300);
 		$('#cancel-worklist-modal').on('click',function(){
 			$('#export-worklist-modal').animate({"left":"100%",'opacity':'0'},300);
-		})
+			$('.modal-backdrop.in').fadeOut(300,function(){
+				$(this).remove();
+			});
+		});
 	});
 
 </script>
