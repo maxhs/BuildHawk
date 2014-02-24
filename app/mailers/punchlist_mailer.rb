@@ -7,7 +7,7 @@ class PunchlistMailer < ActionMailer::Base
   		@project = project
   		@item_array = item_array
   		mail(
-      		:subject => "Worklist Items",
+      		:subject => "#{project.name} - Worklist Report",
       		:to      => recipient_email,
       		:from 	 => "support@buildhawk.com",
       		:tag     => 'Worklist Export'
