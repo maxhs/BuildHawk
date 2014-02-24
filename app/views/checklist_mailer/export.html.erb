@@ -1,10 +1,10 @@
-<h1 style="text-align:center;margin:0 auto;"> <%= @project.name %> </h1>
+<h1 style="text-align:center;margin:0 auto;"><%= @project.name %> - Checklist Report</h1>
 <h2 style="text-align:center;margin:10px auto 0px;text-align:left;"> <%= @checklist_item.subcategory.category.name %> </h2>
 <h3 style="text-align:center;margin:0 auto;text-align:left;"> <%= @checklist_item.subcategory.name %> </h3>
 
-<div style="margin:20px auto;">
-	<p><%= @checklist_item.body %></p>
-	<p><h4 style="display:inline-block">Status:</h4><%= @checklist_item.status %></p>
+<div style="margin:20px auto 10px;">
+	<div><%= @checklist_item.body %></div>
+	<div><h4 style="display:inline-block;padding-right:20px;">Status:</h4><%= @checklist_item.status %></div>
 </div>
 
 <% if @checklist_item.photos && @checklist_item.photos.count > 0 %>

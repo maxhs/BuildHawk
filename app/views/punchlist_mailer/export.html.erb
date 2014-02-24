@@ -7,7 +7,7 @@
 	<div style="width:100%;clear:both;">
 		<% if item.photos && item.photos.count > 0 && item.photos.first.image_file_name %>
 			<% photo = item.photos.first %>
-				<%= link_to edit_punchlist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:0 10px; 10px 0" do %>
+				<%= link_to edit_punchlist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:0 10px 10px 0;" do %>
 					<%= image_tag(photo.image.url(:small), :style => "width:100px;display:block;") %> 
 					<div style="text-align:center"><%= photo.created_date %></div>
 				<% end %>
