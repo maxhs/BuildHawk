@@ -3,8 +3,8 @@
 	<h3>Select Recipient(s)</h3>
 	<%= form_tag export_worklist_project_path(@project), :remote => true, :method => :post do %>
 		<% current_user.company.users.each do |user| %>
-			<%= fields_for :recipient, user do |user_fields| %>
-				<div class="checkboxes"><%= user_fields.check_box :id, {}, user.id %><span style="padding-left:1em;"><%= user.full_name %></span></div>
+			<%= fields_for :recipient do %>
+				<div class="checkboxes"><%= check_box_tag user.full_name, user.id %><span style="padding-left:1em;"><%= user.full_name %></span></div>
 			<% end %>
 		<% end %>
 		<%= text_field_tag :email, "", :placeholder => "Enter email addresses (separated by commas" %>

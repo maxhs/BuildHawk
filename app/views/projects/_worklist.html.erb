@@ -86,7 +86,7 @@
 			}
 		});
 			
-		$('#export-worklist-modal form').append('<input type="hidden" id="items" value="'+values+'">');
+		$('#export-worklist-modal form').append('<input type="hidden" id="items" name="items" value="'+values+'">');
 		$('#export-worklist-modal').animate({"left":"25%",'opacity':'1'},300);
 		$('#cancel-worklist-modal').on('click',function(){
 			$('#export-worklist-modal').animate({"left":"100%",'opacity':'0'},300);

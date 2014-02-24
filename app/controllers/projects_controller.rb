@@ -272,11 +272,26 @@ class ProjectsController < ApplicationController
 
 	def export_worklist
 		item_array = []
-		params[:items].each do |i|
+		params[:items].split(',').each do |i|
 			puts "i: #{i}"
 			item_array << PunchlistItem.find(i)
 		end
-		puts "item array: #{item_array}"
+		params[:recipient].each do |r|
+			puts "r: #{r}"
+			recipient = User.find r[:id]
+			PunchlistMailer.export(recipient, item_array).deliver
+		end
+		parames[:email].split(',').each do |e|
+			#PunchlistMailer.export(item_array).deliver
+		end
+		
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :worklist
+		end
 	end
 
 	def search_items
