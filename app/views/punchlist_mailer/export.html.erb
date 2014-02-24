@@ -1,10 +1,19 @@
 <h1 style="text-align:center"> <%= @project.name %> </h1>
 <h2 style="text-align:center"> Worklist Report </h2>
 
-<ul>
+<ul style="list-item:none">
 <% @item_array.each do |item| %>
 
-	<li><%= item.body %> </li>
+	<li>
+		<% if item.photos && item.photos.count > 0 && item.photos.first.image_file_name %>
+			<% photo = item.photos.first %>
+				<%= link_to edit_punchlist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
+					<%= image_tag(photo.image.url(:small), :style => "width:100px;display:block;") %> 
+					<div style="text-align:center"><%= photo.created_date %></div>
+				<% end %>
+			<% end %>
+		<%= item.body %> 
+	</li>
 
 <% end %>
 </ul>

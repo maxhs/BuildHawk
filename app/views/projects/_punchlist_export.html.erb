@@ -4,8 +4,11 @@
 	<%= form_tag export_worklist_project_path(@project), :remote => true, :method => :post do %>
 		<% current_user.company.personnel.each do |person| %>
 			
-			<div class="checkboxes"><%= check_box_tag "names[]", person %><span style="padding-left:1em;"><%= person %></span></div>
-			
+			<% if person == current_user.full_name %>
+				<div class="checkboxes"><%= check_box_tag "names[]", person, :checked => true %><span style="padding-left:1em;"><%= person %></span></div>
+			<% else %>
+				<div class="checkboxes"><%= check_box_tag "names[]", person %><span style="padding-left:1em;"><%= person %></span></div>
+			<% end %>
 		<% end %>
 		<%= text_field_tag :email, "", :placeholder => "Enter email addresses (separated by commas" %>
 		<button class="btn btn-success btn-md" style="text-align:center;margin:0 auto;"><%= submit_tag "Send", :date => { :confirm => "This will send a worklist report to you and each of the selected parties. Continue?" }  %></button>
