@@ -2,7 +2,10 @@
 <h2 style="text-align:center;margin:10px auto 0px;text-align:left;"> <%= @checklist_item.subcategory.category.name %> </h2>
 <h3 style="text-align:center;margin:0 auto;text-align:left;"> <%= @checklist_item.subcategory.name %> </h3>
 
-<p style="margin:10px auto;"><%= @checklist_item.body %></p>
+<div style="margin:20px auto;">
+	<p><%= @checklist_item.body %></p>
+	<p><h4 style="display:inline-block">Status:</h4><%= @checklist_item.status %></p>
+</div>
 
 <% if @checklist_item.photos && @checklist_item.photos.count > 0 %>
 	<h3>Photos:</h3>
