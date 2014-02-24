@@ -5,7 +5,9 @@
 <div style="margin:20px auto 10px;">
 	<div><%= @checklist_item.body %></div>
 	<div>
-		<h4 style="display:inline-block;padding-right:20px;">Critical Date:</h4><%= @checklist_item.critical_date.strftime("%m/%d/%Y") %><br/>
+		<% if @checklist_item.critical_date %>
+			<h4 style="display:inline-block;padding-right:20px;">Critical Date:</h4><%= @checklist_item.critical_date.strftime("%m/%d/%Y") %><br/>
+		<% end %>
 		<h4 style="display:inline-block;padding-right:20px;">Status:</h4><%= @checklist_item.status %>
 	</div>
 </div>
