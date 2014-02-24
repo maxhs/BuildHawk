@@ -4,7 +4,7 @@
 <ul style="list-item:none">
 <% @item_array.each do |item| %>
 
-	<li>
+	<li style="list-style-type:none;">
 		<% if item.photos && item.photos.count > 0 && item.photos.first.image_file_name %>
 			<% photo = item.photos.first %>
 				<%= link_to edit_punchlist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
