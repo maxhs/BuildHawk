@@ -6,9 +6,9 @@
 	<div><%= @checklist_item.body %></div>
 	<div>
 		<% if @checklist_item.critical_date %>
-			<h4 style="display:inline-block;padding-right:20px;">Critical Date:</h4><%= @checklist_item.critical_date.strftime("%m/%d/%Y") %><br/>
+			<h4 style="display:inline-block;padding-right:20px;margin:10px auto 0;">Critical Date:</h4><%= @checklist_item.critical_date.strftime("%m/%d/%Y") %><br/>
 		<% end %>
-		<h4 style="display:inline-block;padding-right:20px;">Status:</h4><%= @checklist_item.status %>
+		<h4 style="display:inline-block;padding-right:20px;margin:2px auto 0;">Status:</h4><%= @checklist_item.status %>
 	</div>
 </div>
 
@@ -17,9 +17,9 @@
 	<div>
 		<% @checklist_item.photos.each do |p| %>
 			<% if p.image_file_name %>
-				<%= link_to checklist_item_project_url(@project, :checklist_item_id => @checklist_item.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
+				<%= link_to checklist_item_project_url(@project, :checklist_item_id => @checklist_item.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;text-decoration:none;" do %>
 					<%= image_tag(p.image.url(:small), :style => "width:100px;display:block;") %> 
-					<div style="text-align:center"><%= p.created_date %></div>
+					<div style="text-align:center"><%= p.created_date, :style=>"text-decoration:none;" %></div>
 				<% end %>
 			<% end %>
 		<% end %>

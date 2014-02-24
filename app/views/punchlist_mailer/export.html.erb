@@ -17,7 +17,7 @@
 
 		<% if item.assignee || item.sub_assignee %>
 			<div>
-				<h4 style="display:inline-block;margin:10px 0;">Assigned:</h4>
+				<h4 style="display:inline-block;margin:10px auto 0;">Assigned:</h4>
 				<span>
 					<% if item.assignee %>
 						<%= item.assignee.full_name %>
@@ -27,12 +27,12 @@
 				</span>
 			</div>
 		<% end %>
-		<div><h4 style="display:inline-block;margin:0 auto;">Date:</h4><%= item.created_at.strftime("%b %e, %l:%M %p") %></div>
+		<div><h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Date:</h4><%= item.created_at.strftime("%b %e, %l:%M %p") %></div>
 		
 		<% if item.completed %>
-			<div><h4 style="display:inline-block;margin:0 auto;">Status:</h4><span style="padding-left:2em;font-weight:normal;">Complete</span></div>
+			<div><h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Status:</h4><span>Complete</span></div>
 		<% else %>
-			<div><h4 style="display:inline-block;margin:0 auto;">Status:</h4><span style="padding-left:2em;color:#cc0000;font-weight:normal;">IN PROGRESS</span></div>
+			<div><h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Status:</h4><span style="color:#cc0000;">IN PROGRESS</span></div>
 		<% end %>
 	</div>
 
