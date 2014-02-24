@@ -4,7 +4,10 @@
 
 <div style="margin:20px auto 10px;">
 	<div><%= @checklist_item.body %></div>
-	<div><h4 style="display:inline-block;padding-right:20px;">Status:</h4><%= @checklist_item.status %></div>
+	<div>
+		<h4 style="display:inline-block;padding-right:20px;">Critical Date:</h4><%= @checklist_item.critical_date.strftime("%m/%d/%Y") %><br/>
+		<h4 style="display:inline-block;padding-right:20px;">Status:</h4><%= @checklist_item.status %>
+	</div>
 </div>
 
 <% if @checklist_item.photos && @checklist_item.photos.count > 0 %>
