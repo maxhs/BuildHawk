@@ -38,6 +38,7 @@ Buildhawk::Application.routes.draw do
       get :checklists
       post :create_template
       get :new_project
+      get :project_groups
       post :create_project
       get :billing
       get :editor
@@ -65,8 +66,10 @@ Buildhawk::Application.routes.draw do
       post :update_user
       delete :destroy_company
       delete :destroy_user
+      get :promo_codes
     end
   end
+  resources :promo_codes
   resources :projects do
     member do
       get :worklist

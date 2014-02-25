@@ -35,6 +35,7 @@ class PunchlistItem < ActiveRecord::Base
     end
 
     def notify
+        puts "punchlist item changed"
         truncated = truncate(body, length:20)
         if completed && completed == true && user_id
             # user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
@@ -44,6 +45,9 @@ class PunchlistItem < ActiveRecord::Base
                 message = "#{punchlist.project.name} - \"#{truncated}\" was just completed"
             #end
             Notification.where(:message => message,:user_id => self.user_id, :punchlist_item_id => self.id, :notification_type => "Worklist").first_or_create
+        elsif self.assignee && self.assignee.notifications.where(:punchlist_item_id => self.id).count > 0
+            message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" has been modified"
+            Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist").create
         else
             message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
             Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist").first_or_create

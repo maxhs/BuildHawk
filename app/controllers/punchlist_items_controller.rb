@@ -68,17 +68,22 @@ class PunchlistItemsController < ApplicationController
 			assignee = User.where(:full_name => params[:punchlist_item][:assignee_attributes][:full_name]).first
 			params[:punchlist_item].delete(:assignee_attributes)
 			if assignee
-				@item.update_attribute :assignee_id, assignee.id
+				params[:punchlist_item][:assignee_id] = assignee.id 
 			else
-				@item.update_attribute :assignee_id, nil
+				params[:punchlist_item][:assignee_id] = nil 
 			end
 		end
-		@item.update_attributes params[:punchlist_item]
-		if @item.completed == true
-			@item.update_attributes :completed_by_user_id => current_user.id, :completed_at => Time.now
+				
+		if params[:punchlist_item][:completed] == "true"
+			params[:punchlist_item][:completed_by_user_id] = current_user.id
+			params[:punchlist_item][:completed_at] = Time.now
 		else
-			@item.update_attributes :completed_by_user_id => nil, :completed_at => nil
+
+			params[:punchlist_item][:completed_by_user_id] = nil
+			params[:punchlist_item][:completed_at] = nil
 		end
+		puts "params punchlist item: #{params[:punchlist_item]}"
+		@item.update_attributes params[:punchlist_item]
 
 		if request.xhr?
 			respond_to do |format|

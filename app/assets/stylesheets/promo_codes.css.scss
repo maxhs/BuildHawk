@@ -1,0 +1,16 @@
+// Place all the styles related to the PromoCodes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#promo-container {
+	padding:20px;
+	h4, h5 {
+		display:inline-block;
+		text-align:right;
+	}
+
+	input[type="text"] {
+		width:100%;
+		margin:0 auto;
+	}
+}

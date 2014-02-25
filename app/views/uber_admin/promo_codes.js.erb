@@ -1,0 +1,7 @@
+$('.sidebarProjects div a').removeClass('current-page');
+$('#uber-admin-codes-link').addClass('current-page');
+$('#pages').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "promo_codes" %>');
+	$(this).fadeIn(170);
+	$("html, body").animate({ scrollTop: 0 }, 300);
+});

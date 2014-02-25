@@ -123,4 +123,9 @@ class UberAdminController < ApplicationController
 		@users = User.all
 	end
 
+	def promo_codes
+		@promo_codes = PromoCode.all
+		@new_code = PromoCode.new
+	end
+
 end

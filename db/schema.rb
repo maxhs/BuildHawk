@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223002240) do
+ActiveRecord::Schema.define(version: 20140225011010) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20140223002240) do
   add_index "comments", ["user_id", "report_id", "checklist_item_id", "punchlist_item_id"], name: "comments_ix"
 
   create_table "companies", force: true do |t|
-    t.string   "name",               default: "", null: false
+    t.string   "name",               default: "",    null: false
     t.string   "email"
     t.string   "phone_number"
     t.boolean  "pre_register"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20140223002240) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "valid_billing",      default: false
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -188,6 +189,14 @@ ActiveRecord::Schema.define(version: 20140223002240) do
 
   add_index "photos", ["report_id", "checklist_item_id", "punchlist_item_id", "user_id"], name: "photos_ix"
 
+  create_table "project_groups", force: true do |t|
+    t.integer  "company_id"
+    t.string   "name",           default: ""
+    t.integer  "projects_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "project_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -198,16 +207,26 @@ ActiveRecord::Schema.define(version: 20140223002240) do
   add_index "project_users", ["project_id", "user_id"], name: "project_users_ix"
 
   create_table "projects", force: true do |t|
-    t.boolean  "active",       default: true
+    t.boolean  "active",           default: true
     t.integer  "company_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "checklist_id"
-    t.boolean  "core",         default: false
+    t.boolean  "core",             default: false
+    t.integer  "project_group_id"
   end
 
   add_index "projects", ["company_id"], name: "projects_company_id_ix"
+
+  create_table "promo_codes", force: true do |t|
+    t.integer  "user_id"
+    t.string   "code"
+    t.decimal  "percentage", precision: 5, scale: 0
+    t.integer  "days"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "punchlist_items", force: true do |t|
     t.text     "body"

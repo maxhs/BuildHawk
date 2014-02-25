@@ -1,0 +1,18 @@
+<div id="promo-container" class="border-box">
+	<div><h4>Add New Promo Code:</h4></div>
+	<div class="row">
+		<%= form_for @new_code, remote: true do |f|%>
+			<div class="col-xs-4"><%= f.text_field :code, :placeholder => "Promo code...", :style=>"display:inline-block" %></div>
+			<div class="col-xs-2"><h5 style="margin-right:1em;">Days:</h5><%= f.select :days, 0..31 %></div>
+			<div class="col-xs-4"><h5 style="margin-right:1em;">Discount:</h5><%= f.text_field :percentage, :placeholder =>"e.g. 50", :style=>"width:100px;display:inline-block" %>%</div>
+			<div class="col-xs-2"><button class="btn btn-success btn-md" style="margin:0;"><%= f.submit "Create" %></button></div>
+		<% end %>
+	</div>
+	<table>
+		<% @promo_codes.each do |code| %>
+			<tr>
+				<td><%= code.percentage %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>

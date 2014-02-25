@@ -76,7 +76,7 @@
 	$('#export-worklist-items').click(function(){
 		if (!$('#export-worklist-modal').length > 0){
 			console.log('adding modal to dom');
-			$('#project-worklist').before('<%= j render partial:"punchlist_export" %>');
+			$('#project-worklist').before('<%= j render partial:"projects/punchlist_export" %>');
 		}
 
 		var values = [];

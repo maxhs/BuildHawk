@@ -1,11 +1,12 @@
 class Project < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 	  attr_accessible :name, :company_id, :active, :users, :address_attributes, :users_attributes, :projects_users_attributes, :checklist, :photos,
-                    :user_ids, :core
+                    :user_ids, :core, :project_group_id
   	
   	has_many :project_users, :dependent => :destroy
   	has_many :users, :through => :project_users 
   	
+    belongs_to :project_group, counter_cache: true
   	belongs_to :company
   	has_one :address
   	has_many :punchlists, :dependent => :destroy

@@ -180,4 +180,10 @@ class AdminController < ApplicationController
 	
 	end
 
+	def project_groups
+		@company = current_user.company
+		@project_groups = @company.project_groups
+		@new_group = @company.project_groups.new
+	end
+
 end
