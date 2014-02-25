@@ -22,6 +22,7 @@ class Notification < ActiveRecord::Base
 		        :badge          	=> self.user.notifications.where(:read => false).count
 		    )
 			self.sent = true
+			self.save
 		end
 	end 
 

@@ -42,7 +42,7 @@ class PunchlistItem < ActiveRecord::Base
             # if user
             #     message = "#{punchlist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
             # else
-                message = "#{punchlist.project.name} - \"#{truncated}\" was just completed"
+                message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" was just completed"
             #end
             Notification.where(:message => message,:user_id => self.user_id, :punchlist_item_id => self.id, :notification_type => "Worklist").first_or_create
         elsif user_id && user.notifications.where(:punchlist_item_id => id).count > 0
