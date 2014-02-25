@@ -45,12 +45,12 @@ class PunchlistItem < ActiveRecord::Base
                 message = "#{punchlist.project.name} - \"#{truncated}\" was just completed"
             #end
             Notification.where(:message => message,:user_id => self.user_id, :punchlist_item_id => self.id, :notification_type => "Worklist").first_or_create
-        elsif self.assignee && self.assignee.notifications.where(:punchlist_item_id => self.id).count > 0
+        elsif user_id && user.notifications.where(:punchlist_item_id => id).count > 0
             message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" has been modified"
-            Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist").create
-        else
+            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id,:notification_type => "Worklist").create
+        elsif assignee
             message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
-            Notification.where(:message => message,:user_id => self.assignee.id, :punchlist_item_id => self.id,:notification_type => "Worklist").first_or_create
+            Notification.where(:message => message,:user_id => assignee.id, :punchlist_item_id => id,:notification_type => "Worklist").first_or_create
         end
     end
 
