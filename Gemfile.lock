@@ -241,6 +241,7 @@ DEPENDENCIES
   jquery-ui-rails
   multi_fetch_fragments
   nested_form
+  nokogiri
   non-stupid-digest-assets
   nprogress-rails
   paperclip
