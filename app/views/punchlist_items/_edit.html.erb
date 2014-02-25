@@ -15,7 +15,8 @@
 		<% if @item.completed_by_user %>
 				<div class="col-md-4" style="text-align:center;">
 					<h4 style="margin:0;">Completed By:</h4>
-					<%= @item.completed_by_user.full_name %>
+					<div><%= @item.completed_by_user.full_name %></div>
+					<div><%= parse_time @item.completed_at %></div>
 				</div>
 			</div>
 		<% else %>

@@ -30,6 +30,7 @@ class Api::V1::PunchlistItemsController < Api::V1::ApiController
             else
                 params[:punchlist_item][:completed] = false
                 params[:punchlist_item][:completed_at] = nil
+                params[:punchlist_item][:completed_by_user_id] = nil
                 #@punchlist_item.update_attributes :completed => false, :completed_at => nil
             end
             params[:punchlist_item].delete(:status)
