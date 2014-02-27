@@ -102,7 +102,6 @@ body {
 	.navbar-fixed-top {
 		background-color: #fff;
 		border: 1.5px solid #ddd;
-		font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 
 		.navbar-header{
 			.navbar-brand {
@@ -129,6 +128,7 @@ body {
 		}
 		> li > a {
 			font-size:19px;
+			font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 		}
 
 		> a:hover {

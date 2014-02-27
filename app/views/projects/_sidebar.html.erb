@@ -1,7 +1,3 @@
-<script type="text/javascript">
-	$('#nav-projects a').addClass('current-page');
-</script>
-
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
 	<div class="well sidebar-nav projects">
 		<div id "search-section">
@@ -14,7 +10,7 @@
 				<% @projects.each do |project| %>
 					<% if project.checklist && project.checklist.item_count > 0 %>
 						<div class="project"><%= link_to "#{project.name} - (#{number_to_percentage(project.checklist.completed_count.to_f/project.checklist.item_count*100, :precision =>1)})" , project_path(project), :id=>"#{project.id}-link", :remote => true %>
-						<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
+							<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
 						</div>
 							
 						<script type="text/javascript">

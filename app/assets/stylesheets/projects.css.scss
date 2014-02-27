@@ -14,8 +14,8 @@
 	-moz-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
 	-webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
 	box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
-	//font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
-	font-size:16px;
+	font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
+	font-size:15px;
 }
 
 #edit-project {
@@ -28,8 +28,6 @@
 #new-project-form, #edit-project-form {
 	width:75%;
 	margin:0 auto;
-
-	
 
 	form, input {
 		width:100%;
@@ -157,16 +155,13 @@
 			padding:5px 0;
 			border-bottom:1px solid #eee;
 		}
-		
 	}
 
-	#recent-documents {
-		margin-top:40px;
-		margin-bottom:20px;
+	h3 {
+		margin:30px auto 20px;
 	}
 
 	#checklist-section {
-		margin-top:40px;
 		padding:20px 20px 0 20px;
 	}
 
