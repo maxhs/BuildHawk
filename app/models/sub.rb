@@ -17,8 +17,8 @@ class Sub < ActiveRecord::Base
     end
 
     def clean_phone_number
-        if self.phone_number.include?(' ')
-            self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+        if phone_number && phone_number.include?(' ')
+            self.phone_number = phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             self.save
         end
     end

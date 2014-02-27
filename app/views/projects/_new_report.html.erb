@@ -44,17 +44,35 @@
 				</div>
 
 				<div class="row form-title">
-					<div class="col-md-6"><h4>Onsite personnel:</h4></div>
-					<div class="col-md-6"><h4>Subcontractors:</h4></div>
+					<div class="col-md-6"><h4>Personnel:</h4></div>
+					<div class="col-md-6"><h4>Subcontractors (onsite):</h4></div>
 				</div>
 
 				<div class="row">
-					<div class="select-container col-md-6">
-						<%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :include_blank => false, :multiple => true %>
+					<div class="user-container col-md-6">
+						<% @users.each do |user| %>
+							<% if @report.users.include?(user) %>
+								<div><%= check_box_tag "report[user_ids][]", user.id, checked: true %><span style="padding-left:1em;"><%= user.full_name %></span></div>
+							<% else %>
+								<div><%= check_box_tag "report[user_ids][]", user.id %><span style="padding-left:1em;"><%= user.full_name %></span></div>
+							<% end %>
+						<% end %>
 					</div>
-					<div class="select-container col-md-6">
-						
-						<%= f.select :sub_ids, @subs.all.collect {|u| [u.name, u.id]}, {}, :include_blank => false, :multiple => true %>
+					<div class="sub-container col-md-6">
+						<% @subs.each do |sub| %>
+							<div id='sub-<%=sub.id%>' class="sub">
+								<% if @report.subs.include?(sub) %>
+									<%= check_box_tag "report[sub_ids][]", sub.id, checked: true %><span style="padding-left:1em;"><%= sub.name %></span>
+								<% else %>
+									<%= check_box_tag "report[sub_ids][]", sub.id %><span style="padding-left:1em;"><%= sub.name %></span>
+								<% end %>
+
+								<%= f.fields_for :report_subs, @report.report_subs.new do |rs| %>
+									<%= rs.hidden_field :sub_id, :value => sub.id %>
+									<%= rs.text_field :count, placeholder:"count", style: "max-width:40px;margin-left:1em;display:inline-block;text-align:center;" %>
+								<% end %>
+							</div>
+						<% end %>
 					</div>
 				</div>
 
@@ -84,7 +102,7 @@
 				</div>
 				
 				<div class="row">
-					<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
+					<button class="btn btn-success btn-md pull-right"><%= f.submit "Add" %></button>
 				</div>
 
 				<div class="row">

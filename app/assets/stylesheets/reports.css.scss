@@ -13,6 +13,11 @@
 	input, textarea {
 		width:100%;
 	}
+
+	input[type="checkbox"] {
+		width:auto;
+		margin-left:0;
+	}
 	
 	.form-title {
 		padding-top:7px;
@@ -32,15 +37,10 @@
 		font-size:2em;
 	}
 
-	.select-container {
-		width:50%;
-		float:left;
-
-		
-
-		select[multiple] {
-			min-height:100px;
-			width:80%;
+	.sub-container {
+		.fields {
+			display:inline-block;
+			line-height:1em;
 		}
 	}
 

@@ -1,7 +1,7 @@
 class ReportSub < ActiveRecord::Base
 	attr_accessible :report_id, :sub_id, :count
-	belongs_to :report
-	belongs_to :sub
+	belongs_to :report, autosave: true
+	belongs_to :sub, autosave: true
 
 	def user
 		return false

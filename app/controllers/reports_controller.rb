@@ -3,6 +3,26 @@ class ReportsController < ApplicationController
 	def update
 		@project = Project.find params[:id]
 		@report = Report.find params[:report_id]
+
+		if params[:report_subs].present?
+			params[:report_subs].each do |rs|
+				if rs[1].to_i > 0
+					report_sub = @report.report_subs.where(:sub_id => rs.first).first
+					unless report_sub
+						report_sub = @report.report_subs.create :sub_id => rs.first
+						params[:report][:sub_ids] = [] unless params[:report][:sub_ids]
+						params[:report][:sub_ids] << rs.first
+					end
+					report_sub.update_attribute :count, rs[1]
+				elsif params[:report][:sub_ids].present?
+					params[:report][:sub_ids].delete(rs.first)
+				end
+			end
+		end
+
+		unless params[:report][:sub_ids].present?
+			params[:report][:sub_ids] = nil
+		end
 		unless params[:report][:created_date] == @report.created_date && params[:report][:report_type] == @report.report_type
 			if @project.reports.where(:created_date => params[:report][:created_date], :report_type => params[:report][:report_type]).first
 				if request.xhr?
@@ -18,6 +38,7 @@ class ReportsController < ApplicationController
 		end
 		
 		@report.update_attributes params[:report]
+		
 		@reports = @project.ordered_reports
 		if request.xhr?
 			respond_to do |format|

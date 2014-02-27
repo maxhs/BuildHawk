@@ -392,6 +392,7 @@ class ProjectsController < ApplicationController
 		@report = Report.new
 		@report.users.build
 		@report.subs.build
+		@report.report_subs.build
 		@report_title = "Add a New Report"
 		if request.xhr?
 			respond_to do |format|

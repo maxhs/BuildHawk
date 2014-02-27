@@ -144,6 +144,7 @@ Buildhawk::Application.routes.draw do
     end
   end
   resources :folders
+  resources :subs, :only => [:update]
   resources :charges do
     member do 
       patch :promo_code
