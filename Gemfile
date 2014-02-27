@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
-ruby "2.1.1"
 gem 'rails', '4.0.0'
 
-gem 'sqlite3', :group => :development
+gem 'sqlite3', '1.3.8', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
 gem 'nokogiri'
@@ -39,20 +38,4 @@ gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
-#gem 'actionpack-page_caching'
-#gem 'actionpack-action_caching'
-#gem 'turbolinks'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+ruby "2.1.1"

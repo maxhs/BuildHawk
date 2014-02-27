@@ -30,9 +30,14 @@
 			
 		    <div class="row">
 		    	<div class="col-xs-2"><h4>Personnel Assigned:</h4></div>
-		    	<div class="col-xs-10">
-		    		<%= f.select :user_ids, @users.all.collect {|u| [u.full_name, u.id]}, {}, :style=>"min-height:140px;", :multiple => true %>
-		    		<div style="color:#aaa;">(&#8984; or ctrl click to deselect)</div>
+		    	<div class="col-xs-10" style="max-height:50%;overflow-y:scroll;padding-top:5px;">
+		    		<% @users.each do |user| %>
+		    			<% if @project.users.include?(user) %>
+		    				<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id, checked: true %><span style="padding-left:10px;"><%= user.full_name %></span></div>
+	    				<% else %>
+	    					<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span></div>
+	    				<% end %>
+		    		<% end %>
 		    	</div>
 		    </div>
 

@@ -32,6 +32,9 @@
 	form, input {
 		width:100%;
 	}
+	input[type="checkbox"] {
+		width:auto;
+	}
 }
 
 .search-project {
