@@ -40,8 +40,9 @@ class Sub < ActiveRecord::Base
                   :url            => "buildhawk.s3.amazonaws.com",
                   :path           => "sub_image_:id_:style.:extension"
 
-  	acts_as_api
-
+    validates_attachment :image, :content_type => { :content_type => /\Aimage/ }
+  	
+    acts_as_api
 
   	api_accessible :report do |t|
       	t.add :id

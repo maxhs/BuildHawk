@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
                       :url            => "buildhawk.s3.amazonaws.com",
                       :path           => "user_image_:id_:style.:extension"
 
+    validates_attachment :image, :content_type => { :content_type => /\Aimage/ }
     validates_presence_of :first_name
     validates_presence_of :last_name
     validates_presence_of :email

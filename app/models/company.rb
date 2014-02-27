@@ -21,7 +21,8 @@ class Company < ActiveRecord::Base
                   :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
                   :url            => "buildhawk.s3.amazonaws.com",
                   :path           => "company_image_:id_:style.:extension"
-
+                  
+    validates_attachment :image, :content_type => { :content_type => /\Aimage/ }
 
     def balance
         charges.where(:paid => false).map(&:amount).flatten.inject(:+)
