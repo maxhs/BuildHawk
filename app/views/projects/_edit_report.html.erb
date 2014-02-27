@@ -16,7 +16,7 @@
 				</div>
 
 				<div class="row form-title">
-					<div class="col-md-4"><h4 style="display:inline-block;">Report Type:</h4></div>
+					<div class="col-md-4"><h4 style="display:inline-block;">Report Type</h4></div>
 					<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
 				</div>
 					
@@ -48,8 +48,8 @@
 				</div>
 
 				<div class="row form-title">
-					<div class="col-md-6"><h4>Personnel:</h4></div>
-					<div class="col-md-6"><h4>Subcontractors (onsite):</h4></div>
+					<div class="col-md-6"><h4>Personnel</h4></div>
+					<div class="col-md-6"><h4>Subcontractors (# onsite)</h4></div>
 				</div>
 
 				<div class="row">
@@ -65,13 +65,14 @@
 					<div class="sub-container col-md-6">
 						<% @subs.each do |sub| %>
 							<div>
-								<% if @report.subs.include?(sub) %>
+								<!--<% if @report.subs.include?(sub) %>
 									<%= check_box_tag "report[sub_ids][]", sub.id, checked: true %><span style="padding-left:1em;"><%= sub.name %></span>
 								<% else %>
 									<%= check_box_tag "report[sub_ids][]", sub.id %><span style="padding-left:1em;"><%= sub.name %></span>
-								<% end %>
+								<% end %>-->
 								<% report_sub = @report.report_subs.where(:sub_id => sub.id).first_or_initialize %>
-								<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;margin-left:1em;display:inline-block;text-align:center;" %>
+								<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;display:inline-block;text-align:center;" %>
+								<span style="padding-left:1em;"><%= sub.name %></span>
 							</div>
 						<% end %>
 					</div>

@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="row form-title">
-					<div class="col-md-4"><h4 style="display:inline-block;">Report Type:</h4></div>
+					<div class="col-md-4"><h4 style="display:inline-block;">Report Type</h4></div>
 					<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types) %></div>
 				</div>
 					
@@ -44,8 +44,8 @@
 				</div>
 
 				<div class="row form-title">
-					<div class="col-md-6"><h4>Personnel:</h4></div>
-					<div class="col-md-6"><h4>Subcontractors (onsite):</h4></div>
+					<div class="col-md-6"><h4>Personnel</h4></div>
+					<div class="col-md-6"><h4>Subcontractors (# onsite)</h4></div>
 				</div>
 
 				<div class="row">
@@ -60,17 +60,14 @@
 					</div>
 					<div class="sub-container col-md-6">
 						<% @subs.each do |sub| %>
-							<div id='sub-<%=sub.id%>' class="sub">
+							<div>
 								<% if @report.subs.include?(sub) %>
 									<%= check_box_tag "report[sub_ids][]", sub.id, checked: true %><span style="padding-left:1em;"><%= sub.name %></span>
 								<% else %>
 									<%= check_box_tag "report[sub_ids][]", sub.id %><span style="padding-left:1em;"><%= sub.name %></span>
 								<% end %>
-
-								<%= f.fields_for :report_subs, @report.report_subs.new do |rs| %>
-									<%= rs.hidden_field :sub_id, :value => sub.id %>
-									<%= rs.text_field :count, placeholder:"count", style: "max-width:40px;margin-left:1em;display:inline-block;text-align:center;" %>
-								<% end %>
+								<% report_sub = @report.report_subs.where(:sub_id => sub.id).first_or_initialize %>
+								<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;margin-left:1em;display:inline-block;text-align:center;" %>
 							</div>
 						<% end %>
 					</div>
