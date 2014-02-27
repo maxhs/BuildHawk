@@ -4,7 +4,7 @@
 
 .well {
 	min-height: 20px;
-	padding: 0px 20px;
+	padding: 0px 10px;
 	margin-bottom: 20px;
 	background-color: #fff;
 	border: 1px solid #ddd;
@@ -14,26 +14,29 @@
 	-moz-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
 	-webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
 	box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
-	font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
-	font-weight:200;
-	
-	font-size:14px;
+	//font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
+	font-size:16px;
+}
 
-	a {
-		text-transform:uppercase;
+#edit-project {
+	.edit-header {
+		text-align:center;
+		margin:0 auto 20px;
 	}
-	
 }
 
 #new-project-form, #edit-project-form {
 	width:75%;
 	margin:0 auto;
 
+	
+
 	form, input {
 		width:100%;
 	}
 	input[type="checkbox"] {
 		width:auto;
+		margin-left:0;
 	}
 }
 

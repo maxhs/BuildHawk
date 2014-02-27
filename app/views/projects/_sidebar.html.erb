@@ -6,7 +6,7 @@
 	<div class="well sidebar-nav projects">
 		<div id "search-section">
 			<%= form_tag search_projects_path, :method => :post, :remote => true do %>
-		   		<%= text_field_tag :search, params[:search], :style=>"width:100%;margin-top:20px;", :id => "search-form", :placeholder => "Search", :class=>"tt-hint form-control" %>
+		   		<%= text_field_tag :search, params[:search], :style=>"width:100%;margin:10px auto 0;", :id => "search-form", :placeholder => "Search", :class=>"tt-hint form-control" %>
 			<% end %>
 		</div>
 		<% if @projects && @projects.count > 0 %>

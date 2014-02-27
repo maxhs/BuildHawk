@@ -1,5 +1,5 @@
-<div "project-edit" class="border-box" style="padding-top:20px;">
-	<h3 style="text-align:center;">Edit Project</h3>
+<div id="edit-project" class="border-box" style="padding-top:20px;">
+	<h3 class="edit-header">Edit Project</h3>
 	<%= nested_form_for @project, :method => :put, :remote => true do |f| %>
 		<div id="edit-project-form">
 			<%= hidden_field_tag :company_id, current_user.company.id %>
@@ -49,7 +49,7 @@
 			<% end %>
 			<div class="row">
 				
-				<button class="btn btn-danger btn-md pull-right" style="width:130px"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"pull-right delete-link", :remote => true, :style=>"width:100%;" %></button>
+				<button class="btn btn-danger btn-md pull-right" style="width:136px"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"pull-right delete-link", :remote => true, :style=>"width:100%;" %></button>
 				<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
 			</div>
 		</div>

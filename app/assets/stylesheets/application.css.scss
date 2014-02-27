@@ -102,6 +102,7 @@ body {
 	.navbar-fixed-top {
 		background-color: #fff;
 		border: 1.5px solid #ddd;
+		font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 
 		.navbar-header{
 			.navbar-brand {
@@ -127,10 +128,7 @@ body {
 			background:transparent;
 		}
 		> li > a {
-			font-size:16px;
-			font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
-			text-transform:uppercase;
-			letter-spacing:1px;
+			font-size:19px;
 		}
 
 		> a:hover {
@@ -143,14 +141,15 @@ body {
 		width:100%;
 		
 		li { 
-		text-align:center;
-		width:16.5%;
-		padding:2px;
-		min-width:112px;
-			a {
+			text-align:center;
+			width:16.5%;
+			padding:2px;
+			min-width:112px;
 
-				font-weight:200;
-				padding:15px 0;
+			a {
+				font-weight:400;
+				font-size:17px;
+				padding:7.5% 0;
 			}
 		}
 	}
@@ -350,6 +349,7 @@ select[multiple] {
 	display:block !important;
 	margin:10px auto;
 	min-width:70px;
+	font-family:'Gotham Book','Helvetica',sans-serif;
 }
 
 .btn-success {
@@ -422,6 +422,7 @@ input[type="submit"] {
 	background:transparent;
 	border:0;
 	color:#fff;
+	font-family:'Gotham Book','Helvetica',sans-serif;
 }
 
 .image-block{
@@ -461,7 +462,6 @@ input[type="submit"] {
 	display: inline-block;
 	opacity: 0;
 	max-width: 0;
-
 	-webkit-transition: opacity 0.25s, max-width 0.45s; 
 	-moz-transition: opacity 0.25s, max-width 0.45s;
 	-o-transition: opacity 0.25s, max-width 0.45s;
@@ -479,7 +479,8 @@ input[type="submit"] {
 
 .sidebarProjects {
 	> div {
-		margin: 20px 0;
+		padding-bottom: 5px;
+		margin: 10px 5px 5px;
 	}
 }
 

@@ -8,7 +8,6 @@ class ReportsController < ApplicationController
 			params[:report_subs].each do |rs|
 				report_sub = @report.report_subs.where(:sub_id => rs.first).first
 				if rs[1].to_i > 0
-					puts "over 0 for rs: #{rs}"	
 					unless report_sub
 						report_sub = @report.report_subs.create :sub_id => rs.first
 						#params[:report][:sub_ids] = [] unless params[:report][:sub_ids]
