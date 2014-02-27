@@ -21,6 +21,7 @@ class Photo < ActiveRecord::Base
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :url            => "buildhawk.s3.amazonaws.com",
 	                    :path           => "photo_image_:id_:style.:extension"
+	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
 
 	acts_as_api
