@@ -14,7 +14,7 @@
 	-moz-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
 	-webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
 	box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);
-	font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
+	//font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 	font-size:15px;
 }
 
@@ -125,7 +125,7 @@
 	.ui-progressbar {
 		display:inline-block;
 		border:1px solid #ccc;
-		width:90%;
+		width:100%;
 		height:14px;
 		vertical-align:middle;
 		margin-top:-2px;

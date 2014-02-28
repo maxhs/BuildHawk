@@ -34,6 +34,11 @@ body {
 	color:#cc3333;
 }
 
+ul, ol {
+	margin:0;
+	padding:0;
+}
+
 .alert, .notice {
 	font-size: 1.25em;
 	line-height: 40px;
@@ -55,7 +60,7 @@ body {
 	-moz-box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
 	padding:0 !important;
 	margin:0 auto;
-	font-family:"Gotham Book", 'Helvetica Neue','Helvetica',sans-serif;
+	//font-family:"Gotham Book", 'Helvetica Neue','Helvetica',sans-serif;
 }
 
 .border-box {
@@ -95,6 +100,7 @@ body {
 		margin-bottom:15px;
 		background:#fff;
 		.container {
+			padding-right:0;
 			width:100%;
 		}
 	}
@@ -102,6 +108,10 @@ body {
 	.navbar-fixed-top {
 		background-color: #fff;
 		border: 1.5px solid #ddd;
+
+		.navbar-collapse {
+			padding-right:0;
+		}
 
 		.navbar-header{
 			.navbar-brand {
@@ -126,9 +136,11 @@ body {
 		li:hover, li:hover a {
 			background:transparent;
 		}
-		> li > a {
-			font-size:20px;
+		a {
+			font-size:17px;
+			letter-spacing:1px;
 			font-family:'Gotham Book','Helvetica Neue','Helvetica',sans-serif;
+			text-transform:uppercase;
 		}
 
 		> a:hover {
@@ -140,17 +152,26 @@ body {
 	.project-nav {
 		width:100%;
 		
+		li:last-child {
+			border:0;
+		}
 		li { 
 			text-align:center;
-			width:16.5%;
+			width:16.666666666667%;
 			padding:2px;
 			min-width:112px;
-
+			border-right:1px solid #eee;
 			a {
-				font-weight:400;
-				font-size:17px;
+				font-weight:300;
+				font-size:15px;
 				padding:7.5% 0;
+				letter-spacing:1px;
+				
 			}
+		}
+
+		li:hover {
+			background:#eee;
 		}
 	}
 
@@ -373,7 +394,7 @@ select[multiple] {
 
 .btn-danger:hover {
 	a{
-		color:#fff;
+		color:#fff !important;
 	}
 }
 
@@ -437,12 +458,6 @@ input[type="submit"] {
 	.label {
 		color:#aaa;
 		padding-right:7px;
-	}
-
-	.delete-link {
-		float:right;
-		margin:7px auto 0;
-		font-size:.9em;
 	}
 
 	img {
@@ -523,7 +538,7 @@ input[type="submit"] {
 body {
 	background-color:#eee !important;
 	
-	a,.hide-reveal {
+	a, a:focus, .hide-reveal {
 		cursor:pointer;
 		color:#222;
 		-webkit-transition: all 0.25s ease-out;
@@ -533,7 +548,7 @@ body {
 	}
 
 	a:hover, a.current-page, .hide-reveal:hover {
-		color:#cc3333;
+		color:#cc3333 !important;
 		text-decoration:none;
 	}
 
