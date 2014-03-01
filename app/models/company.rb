@@ -9,6 +9,7 @@ class Company < ActiveRecord::Base
 	has_many :checklists, :dependent => :destroy
     has_many :charges
     has_many :project_groups, :dependent => :destroy
+
     validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
   

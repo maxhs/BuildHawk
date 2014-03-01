@@ -1,0 +1,6 @@
+<tr id="code-<%=code.id%>">
+	<td><%= code.code %></td>
+	<td><%= number_with_precision code.percentage, precision: 2 %>%</td>
+	<td><%= code.days %></td>
+	<td><%= link_to "Edit", edit_promo_code_path(code), remote: true, :class=>"remote" %></td>
+</tr>

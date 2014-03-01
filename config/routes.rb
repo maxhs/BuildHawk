@@ -69,7 +69,12 @@ Buildhawk::Application.routes.draw do
       get :promo_codes
     end
   end
-  resources :promo_codes
+  resources :promo_codes do
+    member do
+      get :cancel_editing
+    end
+  end
+
   resources :projects do
     member do
       get :worklist

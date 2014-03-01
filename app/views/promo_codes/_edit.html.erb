@@ -1,0 +1,8 @@
+<tr id="code-<%=code.id%>">
+	<%= form_for code, method: :patch, remote: true do |f|%>
+		<td><%= f.text_field :code %></td>
+		<td><%= f.text_field :percentage %></td>
+		<td><%= f.text_field :days %></td>
+		<td><%= link_to "Cancel", cancel_editing_promo_code_path, remote: true, :class=>"remote" %></td>
+	<% end %>
+</tr>
