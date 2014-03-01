@@ -1,1 +1,1 @@
-$('#all-codes').html('<%= j render partial:"promo_codes/code" %>);
+$('#all-codes').append('<%= j render partial:"promo_codes/code", :locals => {:code => @promo_code} %>');

@@ -15,7 +15,31 @@
 	}
 
 	#all-codes {
-		margin-top:20px;
+		margin:20px auto 0;
+		
 		width:100%;
+	}
+
+	.code {
+		border-bottom:1px solid #eee;
+		height:50px;
+		line-height:50px;
+		vertical-align:middle;
+	}
+
+	.edit.code {
+		input {
+			display:inline-block;
+			margin:0;
+			padding:0 0 0 7px;
+			margin-left:-8px;
+			width:auto;
+			max-width:60px;
+			line-height:40px;
+		}
+
+		.code-name {
+			max-width:120px;
+		} 
 	}
 }

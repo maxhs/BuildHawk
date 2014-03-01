@@ -222,8 +222,9 @@ ActiveRecord::Schema.define(version: 20140225011010) do
   create_table "promo_codes", force: true do |t|
     t.integer  "user_id"
     t.string   "code"
-    t.decimal  "percentage", precision: 5, scale: 0
+    t.decimal  "percentage", precision: 5, scale: 2
     t.integer  "days"
+    t.integer  "use_count",                          default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
