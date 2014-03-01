@@ -8,6 +8,12 @@
 		display:inline-block;
 		text-align:right;
 	}
+	#add-promo-section {
+		padding:0 0 40px; 
+		border-bottom:1px solid #eee;
+		overflow:auto;
+		overflow-x:hidden;
+	}
 
 	input[type="text"] {
 		width:100%;
@@ -16,7 +22,7 @@
 
 	#all-codes {
 		margin:20px auto 0;
-		
+
 		width:100%;
 	}
 
