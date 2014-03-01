@@ -2,6 +2,7 @@ class CreatePromoCodes < ActiveRecord::Migration
   def change
     create_table :promo_codes do |t|
     	t.belongs_to :user
+    	t.belongs_to :company
     	t.string :code
     	t.decimal :percentage, precision: 5, scale: 2
     	t.integer :days

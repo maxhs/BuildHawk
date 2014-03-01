@@ -2,15 +2,15 @@ class Company < ActiveRecord::Base
 	attr_accessible :name, :phone_number, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name,
                     :valid_billing
   
-	has_many :users, :dependent => :destroy
-    has_many :subs, :dependent => :destroy
+   has_many :users, :dependent => :destroy
+   has_many :subs, :dependent => :destroy
 	has_many :projects, :dependent => :destroy
 	has_many :photos, :dependent => :destroy
 	has_many :checklists, :dependent => :destroy
-    has_many :charges
-    has_many :project_groups, :dependent => :destroy
+   has_many :charges
+   has_many :project_groups, :dependent => :destroy
 
-    validates_uniqueness_of :name
+   validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
   
     has_attached_file :image, 

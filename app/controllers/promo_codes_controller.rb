@@ -9,7 +9,7 @@ class PromoCodesController < ApplicationController
 	end
 
 	def edit
-		
+		@companies = Company.all
 		if request.xhr?
 			respond_to do |format|
 				format.js

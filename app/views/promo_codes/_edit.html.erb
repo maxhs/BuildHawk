@@ -1,11 +1,12 @@
 <div id="code-<%=code.id%>" class="edit code row">
 	<%= form_for code, method: :patch, remote: true do |f| %>
 		<div class="col-xs-3"><%= f.text_field :code, :class=>"code-name" %></div>
+		<div class="col-xs-2"><%= f.select :company_id, options_from_collection_for_select(@companies,:id,:name) %></div>
 		<div class="col-xs-2"><%= f.text_field :percentage, :value => number_with_precision(f.object.percentage, precision: 2) %></div>
 		<div class="col-xs-1"><%= f.text_field :days %></div>
 		<div class="col-xs-1"><%= code.use_count %></div>
 	<% end %>
-		<div class="col-xs-5">
+		<div class="col-xs-3">
 			<%= link_to "Cancel", cancel_editing_promo_code_path, remote: true, :class=>"remote", :style=>"margin:-5px 15px 0 0;" %>
 			<button class="btn btn-danger btn-sm" style="margin:0;display:inline-block !important"><%= link_to "Delete", promo_code_path(code), :method => :delete, remote:true, data: {confirm: "Are you sure you want to delete this promo code?"}, :class=>"remote" %></button>
 		</div>

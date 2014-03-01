@@ -124,6 +124,7 @@ class UberAdminController < ApplicationController
 	end
 
 	def promo_codes
+		@companies = Company.all
 		@promo_codes = PromoCode.all
 		@new_code = PromoCode.new
 	end

@@ -4,8 +4,9 @@
 		<%= form_for @new_code, remote: true do |f|%>
 			<div class="row">
 				<div class="col-xs-4"><%= f.text_field :code, :placeholder => 'Promo code (e.g. "NEW-USER-14")', :style=>"display:inline-block" %></div>
+				<div class="col-xs-2"><h5 style="margin-right:1em;">Company:</h5><%= f.select :company_id, options_from_collection_for_select(@companies,:id,:name) %></div>
 				<div class="col-xs-2"><h5 style="margin-right:1em;">Days:</h5><%= f.select :days, 0..31 %></div>
-				<div class="col-xs-4"><h5 style="margin-right:1em;">Discount:</h5><%= f.text_field :percentage, :placeholder =>"e.g. 50", :style=>"width:100px;display:inline-block" %>%</div>
+				<div class="col-xs-2"><h5 style="margin-right:1em;">Discount:</h5><%= f.text_field :percentage, :placeholder =>"e.g. 50", :style=>"width:100px;display:inline-block" %>%</div>
 				<div class="col-xs-2"><button class="btn btn-success btn-md" style="margin:0;"><%= f.submit "Create" %></button></div>
 			</div>
 		<% end %>
@@ -13,10 +14,11 @@
 	<div id="all-codes">
 		<div class="row">
 			<div class="col-xs-3"><h4>Code</h4></div>
+			<div class="col-xs-2"><h4>Company</h4></div>
 			<div class="col-xs-2"><h4>Percentage</h4></div>
 			<div class="col-xs-1"><h4>Days</h4></div>
 			<div class="col-xs-1"><h4># of Uses</h4></div>
-			<div class="col-xs-5">&nbsp;</div>
+			<div class="col-xs-3">&nbsp;</div>
 		</div>
 		<%= render partial:'promo_codes/code',collection: @promo_codes %>
 	</div>
