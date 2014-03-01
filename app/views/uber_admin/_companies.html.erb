@@ -6,6 +6,7 @@
 				<th>Company Name</th>
 				<th>Projects</th>
 				<th>Users</th>
+				<th>Subs</th>
 				<th>Created On</th>
 				<th>Edit</th>
 			</tr>
@@ -18,6 +19,7 @@
 					<td><%= link_to company.name, projects_path(:company_id => company.id), :remote => true %></td>
 					<td><%= company.projects.count %></td>
 					<td><%= company.users.count %></td>
+					<td><%= company.subs.count %></td>
 					<td><%= parse_time company.created_at %></td>
 					<td><%= link_to "Edit", edit_company_uber_admin_index_path(:company_id => company.id), :remote => true  %></td>
 				</tr>
