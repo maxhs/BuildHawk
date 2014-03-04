@@ -3,10 +3,11 @@ timeout 30
 preload_app true
 
 before_fork do |server, worker| 
-  # If you are using Redis but not Resque, change this
+  
   if defined?(Resque)
     Resque.redis.quit
   end
+
   Signal.trap 'TERM' do
     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
     Process.kill 'QUIT', Process.pid
@@ -17,8 +18,10 @@ before_fork do |server, worker|
 end
 
 after_fork do |server, worker|
+
   if defined?(Resque)
-    Resque.redis = ENV['REDIS_URI']
+    uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
+    Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
 
   Signal.trap 'TERM' do
