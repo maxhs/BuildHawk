@@ -6,7 +6,6 @@ before_fork do |server, worker|
   # If you are using Redis but not Resque, change this
   if defined?(Resque)
     Resque.redis.quit
-    Rails.logger.info('Disconnected from Redis')
   end
   Signal.trap 'TERM' do
     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
@@ -20,7 +19,6 @@ end
 after_fork do |server, worker|
   if defined?(Resque)
     Resque.redis = ENV['REDIS_URI']
-    Rails.logger.info('Connected to Redis')
   end
 
   Signal.trap 'TERM' do
