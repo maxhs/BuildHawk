@@ -112,16 +112,11 @@ class AdminController < ApplicationController
 	end
 
 	def create_template
-		#Resque.enqueue(CreateTemplate,params[:company_id])
-		#@response_message = "Creating checklist template. This may take a few minutes..."
-		@company = current_user.company 
-		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
-      	@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id, :core => false
-		@checklists = @company.checklists
+		Resque.enqueue(CreateTemplate,params[:company_id])
+		@response_message = "Creating checklist template. This may take a few minutes..."
 		if request.xhr?
 			respond_to do |format|
-				#format.js {render :template => "admin/background_template"}
-				format.js {render template: "admin/checklists"}
+				format.js {render :template => "admin/background_template"}
 			end
 		else
 			flash[:notice] = @response_message
@@ -156,50 +151,26 @@ class AdminController < ApplicationController
 	end
 
 	def create_project
-		@company = current_user.company
+		@checklist = Checklist.new
 		if params[:project][:checklist].present?
-			@checklist = Checklist.where(:name => params[:project][:checklist]).first
+			list = Checklist.find_by(name: params[:project][:checklist])
 			params[:project].delete(:checklist)
+			Resque.enqueue(CreateProject,params[:project],list.id)
 		else 
-			@checklist = Checklist.where(:core => true).last
+			Resque.enqueue(CreateProject,params[:project],nil)
+			@checklist.save
 		end
-
-		params[:project][:checklist] = @checklist if @checklist
-
-		@project = current_user.company.projects.create params[:project]
-
+		
+		@response_message = "Creating project. This may take a few minutes..."
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "projects/show"}
+				format.js {render :template => "admin/background_project"}
 			end
 		else
 			flash[:notice] = @response_message
 			redirect_to admin_index_path
 		end
 	end
-
-	#resque
-	# def create_project
-	# 	@checklist = Checklist.new
-	# 	if params[:project][:checklist].present?
-	# 		list = Checklist.find_by(name: params[:project][:checklist])
-	# 		params[:project].delete(:checklist)
-	# 		Resque.enqueue(CreateProject,params[:project],list.id)
-	# 	else 
-	# 		Resque.enqueue(CreateProject,params[:project],nil)
-	# 		@checklist.save
-	# 	end
-		
-	# 	@response_message = "Creating project. This may take a few minutes..."
-	# 	if request.xhr?
-	# 		respond_to do |format|
-	# 			format.js {render :template => "admin/background_project"}
-	# 		end
-	# 	else
-	# 		flash[:notice] = @response_message
-	# 		redirect_to admin_index_path
-	# 	end
-	# end
 
 	def billing
 		@company = current_user.company
