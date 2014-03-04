@@ -21,8 +21,8 @@ module Buildhawk
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
         
-    config.logger = Logger.new(STDOUT)
-    
+    #config.logger = Logger.new(STDOUT)
+
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     # Precompile additional assets
     config.assets.precompile += %w( .png .jpg .jpeg .svg .eot .woff .ttf )
