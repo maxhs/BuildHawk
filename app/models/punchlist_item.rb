@@ -47,8 +47,10 @@ class PunchlistItem < ActiveRecord::Base
             Notification.where(:message => message,:user_id => self.user_id, :punchlist_item_id => self.id, :notification_type => "Worklist").first_or_create
         elsif user_id
             message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" has been modified"
-            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id,:notification_type => "Worklist").create
-        elsif assignee
+            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id,:notification_type => "Worklist").first_or_create
+        end
+
+        if assignee
             message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
             Notification.where(:message => message,:user_id => assignee.id, :punchlist_item_id => id,:notification_type => "Worklist").first_or_create
         end
