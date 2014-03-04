@@ -23,9 +23,10 @@ after_fork do |server, worker|
   end
 
   if defined?(Resque)
+    puts "trying to reconnect to resque/redis"
     uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
-    #Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-    Resque.redis = ENV['<REDIS_URI>']
+    Resque.redis = Redis.where(:host => uri.host, :port => uri.port, :password => uri.password)
+    #Resque.redis = (ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
     Rails.logger.info('Connected to Redis')
   end
 

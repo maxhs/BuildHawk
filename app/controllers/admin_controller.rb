@@ -151,26 +151,51 @@ class AdminController < ApplicationController
 	end
 
 	def create_project
-		@checklist = Checklist.new
+		@company = current_user.company
 		if params[:project][:checklist].present?
-			list = Checklist.find_by(name: params[:project][:checklist])
+			@checklist = Checklist.where(:name => params[:project][:checklist]).first
 			params[:project].delete(:checklist)
-			Resque.enqueue(CreateProject,params[:project],list.id)
+			
 		else 
-			Resque.enqueue(CreateProject,params[:project],nil)
-			@checklist.save
+			@checklist = Checklist.where(:core => true).last
 		end
-		
-		@response_message = "Creating project. This may take a few minutes..."
+
+		params[:project][:checklist_id] = @checklist.id if @checklist
+
+		@project = current_user.company.projects.create params[:project]
+
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "admin/background_project"}
+				format.js {render :template => "projects/show"}
 			end
 		else
 			flash[:notice] = @response_message
 			redirect_to admin_index_path
 		end
 	end
+
+	#resque
+	# def create_project
+	# 	@checklist = Checklist.new
+	# 	if params[:project][:checklist].present?
+	# 		list = Checklist.find_by(name: params[:project][:checklist])
+	# 		params[:project].delete(:checklist)
+	# 		Resque.enqueue(CreateProject,params[:project],list.id)
+	# 	else 
+	# 		Resque.enqueue(CreateProject,params[:project],nil)
+	# 		@checklist.save
+	# 	end
+		
+	# 	@response_message = "Creating project. This may take a few minutes..."
+	# 	if request.xhr?
+	# 		respond_to do |format|
+	# 			format.js {render :template => "admin/background_project"}
+	# 		end
+	# 	else
+	# 		flash[:notice] = @response_message
+	# 		redirect_to admin_index_path
+	# 	end
+	# end
 
 	def billing
 		@company = current_user.company
