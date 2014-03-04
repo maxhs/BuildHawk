@@ -51,7 +51,7 @@
 				
 				<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
 	<% end %>
-				<button class="btn btn-danger btn-md pull-right" style="width:136px"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"pull-right delete-link", :remote => true, :style=>"width:100%;" %></button>
+				<button class="btn btn-danger btn-md pull-right" style="width:136px;clear:both;"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"pull-right delete-link", :remote => true, :style=>"width:100%;" %></button>
 				
 			</div>
 		</div>
