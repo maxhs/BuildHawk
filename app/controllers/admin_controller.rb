@@ -160,7 +160,7 @@ class AdminController < ApplicationController
 			@checklist = Checklist.where(:core => true).last
 		end
 
-		params[:project][:checklist_id] = @checklist.id if @checklist
+		params[:project][:checklist] = @checklist if @checklist
 
 		@project = current_user.company.projects.create params[:project]
 
