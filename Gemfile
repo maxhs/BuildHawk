@@ -23,14 +23,14 @@ gem 'sass-rails'
 gem 'protected_attributes'
 gem 'rails-observers'
 gem 'multi_fetch_fragments'
-gem "non-stupid-digest-assets"
+gem 'non-stupid-digest-assets'
 gem 'resque', '1.24.1'
 gem 'resque-scheduler', '2.2.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'delayed_job_active_record'
 gem 'apn_sender', :require => 'apn'
 gem 'daemons'
-gem "sunspot_rails", "~> 2.1.0"
+gem 'sunspot_rails', '~> 2.1.0'
 gem 'sunspot_solr'
 gem 'unicorn-rails'
 gem 'newrelic_rpm'
@@ -39,4 +39,4 @@ gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
-ruby "2.1.1"
+ruby '2.1.1'
