@@ -112,11 +112,16 @@ class AdminController < ApplicationController
 	end
 
 	def create_template
-		Resque.enqueue(CreateTemplate,params[:company_id])
-		@response_message = "Creating checklist template. This may take a few minutes..."
+		#Resque.enqueue(CreateTemplate,params[:company_id])
+		#@response_message = "Creating checklist template. This may take a few minutes..."
+		@company = current_user.company 
+		@checklist = Checklist.where(:core => true).last.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => :core
+      	@checklist.update_attributes :name => "New Checklist Template", :company_id => @company.id, :core => false
+		@checklists = @company.checklists
 		if request.xhr?
 			respond_to do |format|
-				format.js {render :template => "admin/background_template"}
+				#format.js {render :template => "admin/background_template"}
+				format.js {render template: "admin/checklists"}
 			end
 		else
 			flash[:notice] = @response_message
@@ -155,7 +160,6 @@ class AdminController < ApplicationController
 		if params[:project][:checklist].present?
 			@checklist = Checklist.where(:name => params[:project][:checklist]).first
 			params[:project].delete(:checklist)
-			
 		else 
 			@checklist = Checklist.where(:core => true).last
 		end

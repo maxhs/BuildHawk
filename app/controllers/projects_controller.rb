@@ -94,8 +94,7 @@ class ProjectsController < ApplicationController
 	end 
 
 	def destroy
-		@project.update_attribute :company_id, nil
-        @project.background_destroy
+        @project.destroy
 		redirect_to projects_path
 	end
 

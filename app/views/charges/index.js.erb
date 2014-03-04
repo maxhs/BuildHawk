@@ -1,4 +1,4 @@
-$('#sidebarProjects a').removeClass('current-page');
+$('.sidebarAdmin a').removeClass('current-page');
 $('#billing-link').addClass('current-page');
 $('#main').fadeOut(200,function(){
 	$(this).html('<%= j render partial:"charges/index" %>');
