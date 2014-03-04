@@ -150,16 +150,16 @@ GEM
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
     remotipart (1.2.1)
-    resque (1.25.1)
+    resque (1.24.1)
       mono_logger (~> 1.0)
       multi_json (~> 1.0)
       redis-namespace (~> 1.2)
       sinatra (>= 0.9.2)
       vegas (~> 0.1.2)
-    resque-scheduler (2.5.4)
-      redis (~> 3.0.4)
-      resque (~> 1.25.1)
-      rufus-scheduler (~> 2.0.24)
+    resque-scheduler (2.2.0)
+      redis (>= 3.0.0)
+      resque (>= 1.20.0, < 1.25)
+      rufus-scheduler (~> 2.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     roo (1.13.2)
@@ -256,10 +256,9 @@ DEPENDENCIES
   rails (= 4.0.0)
   rails-observers
   rails_12factor
-  redis
   remotipart
-  resque
-  resque-scheduler
+  resque (= 1.24.1)
+  resque-scheduler (= 2.2.0)
   roo
   sass-rails
   shadowbox-rails
