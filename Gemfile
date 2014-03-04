@@ -24,6 +24,7 @@ gem 'protected_attributes'
 gem 'rails-observers'
 gem 'multi_fetch_fragments'
 gem "non-stupid-digest-assets"
+gem 'redis'
 gem "resque"
 gem 'resque-scheduler'
 gem 'uglifier', '>= 1.3.0'
