@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225011010) do
+ActiveRecord::Schema.define(version: 20140306032636) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -193,6 +193,13 @@ ActiveRecord::Schema.define(version: 20140225011010) do
     t.integer  "company_id"
     t.string   "name",           default: ""
     t.integer  "projects_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_subs", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "sub_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

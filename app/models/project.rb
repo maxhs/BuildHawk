@@ -1,10 +1,13 @@
 class Project < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 	  attr_accessible :name, :company_id, :active, :users, :address_attributes, :users_attributes, :projects_users_attributes, :checklist, :photos,
-                    :user_ids, :core, :project_group_id
+                    :user_ids, :core, :project_group_id, :subs, :subs_attributes, :project_subs_attributes
   	
   	has_many :project_users, :dependent => :destroy, autosave: true
   	has_many :users, :through => :project_users , autosave: true
+
+    has_many :project_subs, :dependent => :destroy, autosave: true
+    has_many :subs, :through => :project_subs , autosave: true
   	
     belongs_to :project_group, counter_cache: true
   	belongs_to :company
@@ -17,6 +20,7 @@ class Project < ActiveRecord::Base
 
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true
+    accepts_nested_attributes_for :subs, :allow_destroy => true
 
     # websolr
     searchable do
@@ -85,24 +89,24 @@ class Project < ActiveRecord::Base
     acts_as_api
 
   	api_accessible :projects do |t|
-      t.add :id
+        t.add :id
   		t.add :name
   		t.add :address
   		t.add :company
   		t.add :punchlists
-      t.add :active
+        t.add :active
   	end
 
     api_accessible :user do |t|
-      t.add :name
-      t.add :address
+        t.add :name
+        t.add :address
     end
 
     api_accessible :dashboard do |t|
-      t.add :progress, :if => :has_checklist?
-      t.add :upcoming_items
-      t.add :recently_completed, :if => :has_checklist?
-      t.add :recent_documents, :if => :has_checklist?
-      t.add :categories, :if => :has_categories?
+        t.add :progress, :if => :has_checklist?
+        t.add :upcoming_items
+        t.add :recently_completed, :if => :has_checklist?
+        t.add :recent_documents, :if => :has_checklist?
+        t.add :categories, :if => :has_categories?
     end
 end
