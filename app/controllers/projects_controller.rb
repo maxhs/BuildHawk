@@ -64,6 +64,7 @@ class ProjectsController < ApplicationController
 			@project.build_address
 		end
 		@users = @project.company.users
+		@subs = @project.company.subs
 		if request.xhr?
 			respond_to do |format|
 				format.js
