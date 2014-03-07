@@ -118,6 +118,7 @@ Buildhawk::Application.routes.draw do
   end
   resources :companies
   resources :comments
+  resources :project_groups
   resources :checklists do 
     member do
       get :new_checklist_item

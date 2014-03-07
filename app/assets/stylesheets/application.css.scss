@@ -69,6 +69,10 @@ ul, ol {
 	font-family:"Gotham Book", 'Helvetica Neue','Helvetica',sans-serif;
 }
 
+.centered {
+	text-align:center;
+}
+
 .border-box {
 	background-color:#fff;
 	padding:0 20px 20px;
@@ -447,7 +451,6 @@ select[multiple] {
 }
 
 .btn {
-	display:block !important;
 	margin:10px auto;
 	min-width:70px;
 	font-family:'Gotham Book','Helvetica',sans-serif;
@@ -575,7 +578,6 @@ input[type="submit"] {
 .sidebarProjects {
 	div {
 		margin: 5px auto 10px;
-		border-bottom:1px solid #eee;
 	}
 }
 

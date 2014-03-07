@@ -1,0 +1,16 @@
+// Place all the styles related to the ProjectGroups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#project-groups {
+
+	padding-top:20px;
+
+	.new_project_group {
+		width:75%;
+		margin:0 auto;
+		input[type="text"] {
+			width:100%;
+		}
+	}
+}
