@@ -249,13 +249,16 @@ body {
 	}
 
 	.dropdown-menu {
-		width:100%;
-		> li > a {
-			line-height:2.25em;
-			font-size:1.25em;
-			font-weight:300;
-			padding:3px 40px;
-			text-align:right;
+		width:auto;
+
+		li{ 
+			a {
+				line-height:2.25em;
+				font-size:1.25em;
+				font-weight:300;
+				padding:3px 40px;
+				text-align:right;
+			}
 		}
 	}
 
