@@ -22,11 +22,13 @@ $nprogress-color: #cc0000;
 @import "shadowbox";
 @import 'bootstrap';
 
-html, body {
+html {
 	height: 100%;
+	background:#fff;
 }
 
 body {
+	height:100%;
 	background-color:#eee;
 }
 
@@ -102,7 +104,7 @@ body {
 	}
 
 	.navbar {
-		margin-bottom:15px;
+		margin-bottom:0;
 		background:#fff;
 		.container {
 			padding-right:0;

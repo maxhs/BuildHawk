@@ -12,10 +12,8 @@
 
 	#first-splash {
 		background:#fff;
-		height:560px;
 		font-size:1.1em;
-		padding-top:20px;
-		padding-bottom:20px;
+		padding:2.5% 0 5%;
 
 		#macbook-iphone {
 			max-width: 45%;
@@ -159,21 +157,20 @@
 	}
 
 	#about {
-		background:#f8f8f8;
-		height:880px;
+		background:#efefef;
+		padding:40px 0;
 
 		ul#pitch {
 			max-width:1140px;
 			margin:0 auto;
 			font-size:1.15em;
 			height:90%;
-			padding:2.5% 0 0 0;
 
 			li {
 				margin: 0 auto;
 				list-style: none;
 				height: 25%;
-				border-bottom: 1px solid #eee;
+				border-bottom: 1px solid #ddd;
 				padding-top: 2%;
 			}
 
@@ -314,7 +311,6 @@
 
 #team, #faq, #about {
 	height:100% !important;
-	margin-top:80px;
 	
 	#user-voice-container {
 		max-width:1140px;
