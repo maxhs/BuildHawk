@@ -2,7 +2,7 @@
 	$('#<%=@project.id%>-link').addClass('current-page');
 </script>
 <!-- Fixed navbar -->
-<div class="navbar" style="border-color:#ddd;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;">
+<div class="navbar" style="border-color:#ddd;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;margin-bottom:15px;">
 	<div class="container" style="padding:0;">
 		<ul class="project-nav nav navbar-nav">
 			<li class="nav-dashboard"><%= link_to "Dashboard", project_path(@project), :class => "current-page", :remote => true %></li>

@@ -91,21 +91,86 @@ ul, ol {
 }
 
 body {
-	font-weight:400;
+	background-color:#eee !important;
 	
+	a, a:focus, .hide-reveal {
+		cursor:pointer;
+		color:#222;
+		-webkit-transition: all 0.2s ease-out;
+		-moz-transition: all 0.2s ease-out;
+		-ms-transition: all 0.2s ease-out;
+		-o-transition: all 0.2s ease-out;
+		transition: all 0.2s ease-out;
+	}
+
+	a:hover, a.current-page, .hide-reveal:hover {
+		color:#cc3333 !important;
+		text-decoration:none;
+	}
+
+	#pages {
+
+		#login-page, #register-page, #forgot-page, #reset-page {
+			margin: 100px auto; 
+			max-width: 350px;
+			padding: 10px;
+		}
+
+		#terms {
+			width:50%;
+			margin:0 auto;
+		}
+	}
+
 	#wrap {
-		min-height: 100%;
 		height: auto !important;
+		min-height:100%;
 		height: 100%;
-		/* Negative indent footer by its height */
-		margin: 65px auto -75px;
-		/* Pad bottom by footer height */
-		padding: 0 0 75px;
+		width:100%;
+		background:#eee;
+		margin:0 auto -120px;
+
+		#pagescontainer {
+			padding-top:65px;
+		}
+		#main {
+			padding-right:0;
+			padding-left:0;
+			margin-bottom:20px;
+		}
+
+		#sidebar {
+			padding-left:0;
+		}
+
+		#checklists-page {
+			.row {
+				border-bottom:1px solid #eee;
+				margin:0;
+				padding:12px;
+				&.cat {
+					border-bottom: none;
+					.col-md-2, .col-md-1 {
+						padding-top: 35px;
+						text-align: center;
+					}
+				}
+			}
+
+			.row.completed {
+				background-color:#fafafa;
+				a {
+					color:#bbb;
+				}
+
+			}
+		}
 	}
 
 	.navbar {
 		margin-bottom:0;
 		background:#fff;
+
 		.container {
 			padding-right:0;
 			width:100%;
@@ -162,7 +227,6 @@ body {
 		
 		li:last-child {
 			border:0;
-			padding-bottom:2px;
 		}
 		li { 
 			text-align:center;
@@ -208,12 +272,16 @@ body {
 		width:100%;
 	}
 
+	#push {
+		clear:both;
+		height:120px;
+	}
+
 	footer {
 		height:120px;
 		padding-top:35px;
 		border-top:1px solid #ddd;
 		background-color: #fff;
-		min-height: 75px;
 		font-size: 11px;
 		img {
 			padding-top: 25px;
@@ -516,73 +584,7 @@ input[type="submit"] {
 	}
 }
 
-#wrap {
-	#main {
-		padding-right:0;
-		padding-left:0;
-		margin-bottom:20px;
-	}
-
-	#sidebar {
-		padding-left:0;
-	}
-
-	#checklists-page {
-		.row {
-			border-bottom:1px solid #eee;
-			margin:0;
-			padding:12px;
-			&.cat {
-				border-bottom: none;
-				.col-md-2, .col-md-1 {
-					padding-top: 35px;
-					text-align: center;
-				}
-			}
-		}
-
-		.row.completed {
-			background-color:#fafafa;
-			a {
-				color:#bbb;
-			}
-
-		}
-	}
-	
-}
-
 body {
-	background-color:#eee !important;
-	
-	a, a:focus, .hide-reveal {
-		cursor:pointer;
-		color:#222;
-		-webkit-transition: all 0.25s ease-out;
-		-moz-transition: all 0.25s ease-out;
-		-o-transition: all 0.25s ease-out;
-		transition: all 0.25s ease-out;
-	}
-
-	a:hover, a.current-page, .hide-reveal:hover {
-		color:#cc3333 !important;
-		text-decoration:none;
-	}
-
-	#pages {
-
-		#login-page, #register-page, #forgot-page, #reset-page {
-			margin: 100px auto; 
-			max-width: 350px;
-			padding: 10px;
-		}
-
-		#terms {
-			width:50%;
-			margin:0 auto;
-		}
-	}
-
 	#home-page, #login-page, #about-page {
 		width:100%;
 		margin:0 auto;
@@ -640,6 +642,8 @@ body {
 		}
 	}
 }
+
+
 
 .btn-lg {
 	line-height:1;
