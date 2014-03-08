@@ -54,8 +54,10 @@ class User < ActiveRecord::Base
     end
 
     def clean_name
-        self.full_name = "#{first_name} #{last_name}"
-        self.save
+        unless full_name = "#{first_name} #{last_name}" 
+            self.full_name = "#{first_name} #{last_name}"
+            self.save
+        end
     end
 
     def formatted_phone
