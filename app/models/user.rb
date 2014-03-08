@@ -38,11 +38,12 @@ class User < ActiveRecord::Base
 
     after_create :welcome
     after_save :clean_phone_number
+    after_save :clean_name
     
     def welcome
-      UserMailer.welcome(self).deliver if self.email 
-      self.full_name = "#{first_name} #{last_name}"
-      self.save
+        UserMailer.welcome(self).deliver if self.email 
+        self.full_name = "#{first_name} #{last_name}"
+        self.save
     end
 
     def clean_phone_number
@@ -50,6 +51,11 @@ class User < ActiveRecord::Base
             self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             self.save
         end
+    end
+
+    def clean_name
+        self.full_name = "#{first_name} #{last_name}"
+        self.save
     end
 
     def formatted_phone

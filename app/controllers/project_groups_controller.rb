@@ -6,4 +6,13 @@ class ProjectGroupsController < ApplicationController
 		@project_group = ProjectGroup.create params[:project_group]
 		@project_groups = @company.project_groups
 	end
+
+	def edit
+		@project_group = ProjectGroup.find params[:id]
+	end
+
+	def update
+		@project_group = ProjectGroup.find params[:id]
+		@project_group.update_attributes params[:project_group]
+	end
 end
