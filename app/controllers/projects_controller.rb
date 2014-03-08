@@ -59,6 +59,7 @@ class ProjectsController < ApplicationController
 
 	def edit
 		@project = Project.find params[:id]
+		@project_groups = @project.company.project_groups
 		@project.users.build
 		unless @project.address
 			@project.build_address
@@ -82,7 +83,15 @@ class ProjectsController < ApplicationController
 		end
 		@project = Project.find params[:id]
 		@project.update_attributes params[:project]
-		@checklist = @project.checklist
+		if @project.checklist 
+			@checklist = @project.checklist
+			items = @checklist.checklist_items
+			@item_count = items.count
+			@recently_completed = @project.recent_feed
+			current_time = Time.now
+			@upcoming_items = items.select{|i| i.critical_date if i.critical_date && i.critical_date > current_time}.sort_by(&:critical_date).last(5)
+			@recent_photos = @project.photos.last(5).sort_by(&:created_at).reverse
+		end
 		@projects = @project.company.projects
 		if request.xhr?
 			respond_to do |format|

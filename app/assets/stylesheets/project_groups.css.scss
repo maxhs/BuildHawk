@@ -3,14 +3,27 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #project-groups {
-
 	padding-top:20px;
 
 	.new_project_group {
-		width:75%;
 		margin:0 auto;
 		input[type="text"] {
 			width:100%;
 		}
 	}
+}
+
+#groups-container {
+	margin-top:20px;
+
+	.row {
+		padding:10px;
+		border-bottom:1px solid #eee;
+	}
+}
+
+#project_project_group_id {
+	position:relative;
+	top:9px;
+	font-size:1.25em;
 }

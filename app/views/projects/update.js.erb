@@ -4,7 +4,13 @@ $('#alert').text("Project Updated").fadeIn(200).delay(2000).fadeOut(500, functio
 $('.sidebarProjects > div a').removeClass('current-page');
 $('#<%=@project.id%>-link').addClass('current-page');
 $('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project, :checklist => @checklist } %>');
+	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
 	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });
+if (history && history.pushState){
+    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>');
+    $(window).bind("popstate", function(){
+      $.getScript(location.href);
+    });
+}

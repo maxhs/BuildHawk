@@ -29,6 +29,11 @@
 			<% end %>
 			
 		    <div class="row personnel">
+		    	<div class="col-xs-2"><h4>Project Group:</h4></div>
+		    	<div class="col-xs-10"><%= f.select :project_group_id, options_for_select(@project_groups.map(&:name).unshift("No Assignment")) %></div>
+		    </div>
+
+		    <div class="row personnel">
 		    	<div class="col-xs-2"><h4>Personnel Assigned:</h4></div>
 		    	<div class="col-xs-10" style="max-height:50%;overflow-y:scroll;padding-top:5px;">
 		    		<% @users.each do |user| %>

@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :find_user
 	layout 'admin'	
 
 	def index
@@ -183,8 +184,16 @@ class AdminController < ApplicationController
 
 	def project_groups
 		@company = current_user.company
-		@project_groups = @company.project_groups
-		@new_group = @company.project_groups.new
+		@project_groups = @company.project_groups.where("id IS NOT NULL")
+	end
+
+	def find_user
+		if params[:user_id].present?
+			@user = User.where(:id => params[:user_id]).first
+		else
+			@user = current_user
+		end
+
 	end
 
 end

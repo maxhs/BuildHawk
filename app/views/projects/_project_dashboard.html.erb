@@ -84,7 +84,7 @@
 			
 				<% @checklist.categories.sort_by{|c|c.name.to_i}.each do |cat| %>
 					<div class="row" style="font-size:1.1em;border-bottom:1px solid #eee;">
-						<div class="col-sm-4" style="padding:17px 0;"><%= link_to cat.name, checklist_project_path(@project), :remote => true %></div>
+						<div class="col-sm-4"><%= link_to cat.name, checklist_project_path(@project), :remote => true %></div>
 						<div class="col-sm-2"><span style="text-align:center;display:inline-block;width:100%;"><%= cat.progress_percentage %></span></div>
 						<div class="col-sm-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></div>
 						<div class="col-sm-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></div>

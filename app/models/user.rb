@@ -55,7 +55,6 @@ class User < ActiveRecord::Base
 
     def clean_name
         unless full_name == "#{first_name} #{last_name}" 
-            puts "cleaning name"
             self.full_name = "#{first_name} #{last_name}"
             self.save
         end

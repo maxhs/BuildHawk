@@ -523,6 +523,7 @@ input, textarea {
 }
 
 input[type="submit"] {
+	margin:0 auto;
 	background:transparent;
 	border:0;
 	color:#fff;
@@ -647,8 +648,6 @@ body {
 		}
 	}
 }
-
-
 
 .btn-lg {
 	line-height:1;
