@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
     validates_presence_of :password, :if => :password_required?
 
     after_create :welcome
-    after_save :clean_phone_number
-    after_save :clean_name
+    after_commit :clean_phone_number
+    after_commit :clean_name
     
     def welcome
         UserMailer.welcome(self).deliver if self.email 
