@@ -30,7 +30,7 @@
 			
 		    <div class="row personnel">
 		    	<div class="col-xs-2"><h4>Project Group:</h4></div>
-		    	<div class="col-xs-10"><%= f.select :project_group_id, options_for_select(@project_groups.map(&:name).unshift("No Assignment")) %></div>
+		    	<div class="col-xs-10"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment")) %></div>
 		    </div>
 
 		    <div class="row personnel">

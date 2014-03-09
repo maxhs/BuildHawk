@@ -20,6 +20,7 @@
 //= require nprogress
 //= require nprogress-ajax
 //= require shadowbox
+//= require turbolinks
 //= require_tree .
 
 if (history && history.pushState){

@@ -3,10 +3,9 @@
 		<% @company.projects.each do |project| %>
 			<div class="company-project" class="border-box">
 				
-					<div style="col-xs-12">
-						<h4><%= link_to project.name, project_path(project) %></h4>
-					</div>
-				
+				<div style="col-xs-12">
+					<h4><%= link_to project.name, project_path(project), remote: true %></h4>
+				</div>
 				
 				<div class="row">
 					<div class="dashboard-label col-xs-2">Map:</div>

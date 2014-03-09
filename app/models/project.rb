@@ -24,32 +24,32 @@ class Project < ActiveRecord::Base
 
     # websolr
     searchable do
-      text    :name
-      text    :address do
-        address.formatted_address
-      end
-      integer :company_id
-      time    :created_at
+        text    :name
+        text    :address do
+            address.formatted_address
+        end
+        integer :company_id
+        time    :created_at
     end
 
     def checklist_items
-      checklist.checklist_items
+        checklist.checklist_items
     end
 
     def add_punchlist
-      punchlists.create
+        punchlists.create
     end
 
     def upcoming_items
-      checklist.upcoming_items if checklist
+        checklist.upcoming_items if checklist
     end
 
     def recently_completed
-      checklist.recently_completed if checklist
+        checklist.recently_completed if checklist
     end
 
     def progress
-      number_to_percentage(checklist.completed_count*100/checklist.item_count.to_f, :precision => 1) if checklist
+        number_to_percentage(checklist.completed_count*100/checklist.item_count.to_f, :precision => 1) if checklist
     end
 
     def recent_documents
@@ -61,15 +61,19 @@ class Project < ActiveRecord::Base
     end
 
     def ordered_reports
-      reports.sort_by{|r| r.date_for_sort}.reverse
+        reports.sort_by{|r| r.date_for_sort}.reverse
     end
 
     def has_checklist?
-      checklist.present?
+        checklist.present?
     end
 
     def has_categories?
-      !categories.nil?
+        !categories.nil?
+    end
+
+    def has_group?
+        !project_group_id.nil?
     end
 
     def background_destroy
@@ -95,6 +99,7 @@ class Project < ActiveRecord::Base
   		t.add :company
   		t.add :punchlists
         t.add :active
+        t.add :project_group, :if => :has_group?
   	end
 
     api_accessible :user do |t|

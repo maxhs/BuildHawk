@@ -157,9 +157,49 @@ Buildhawk::Application.routes.draw do
     end
   end
 
-  #mobile API
+  #mobile API v1
   namespace :api do
     namespace :v1 do
+      resources :photos
+      resources :sessions, :only => [:create, :forgot_password] do
+        collection do 
+          post :forgot_password
+        end 
+      end
+      resources :companies 
+      resources :projects do
+        collection do
+          get :dash
+        end
+      end
+      resources :checklists
+      resources :checklist_items do
+        collection do
+          post :photo
+        end
+      end
+      resources :punchlists, :only => [:show]
+      resources :punchlist_items do
+        collection do
+          post :photo
+        end
+      end
+      resources :comments
+      resources :reports do
+        member do
+          get :review_report
+        end
+        collection do
+          post :photo
+          delete :remove_personnel
+        end
+      end
+    end
+  end
+
+  #mobile API v2
+  namespace :api do
+    namespace :v2 do
       resources :photos
       resources :sessions, :only => [:create, :forgot_password] do
         collection do 
