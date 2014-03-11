@@ -103,7 +103,7 @@ class Project < ActiveRecord::Base
   		t.add :company
   		t.add :punchlists
         t.add :active
-        t.add :project_group, :if => :has_group?
+        t.add :group
   	end
 
     api_accessible :user do |t|
