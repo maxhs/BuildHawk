@@ -8,6 +8,6 @@ class ProjectGroup < ActiveRecord::Base
 
   	api_accessible :projects do |t|
   		t.add :name
-  		t.add :projects
+  		t.add :id
   	end
 end
