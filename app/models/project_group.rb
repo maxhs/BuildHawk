@@ -3,4 +3,11 @@ class ProjectGroup < ActiveRecord::Base
 
 	belongs_to :company
 	has_many :projects
+
+	acts_as_api
+
+  	api_accessible :projects do |t|
+  		t.add :name
+  		t.add :projects
+  	end
 end

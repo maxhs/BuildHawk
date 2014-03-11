@@ -72,8 +72,12 @@ class Project < ActiveRecord::Base
         !categories.nil?
     end
 
-    def has_group?
-        !project_group_id.nil?
+    def group
+        if project_group_id
+            return project_group
+        else
+            return false
+        end
     end
 
     def background_destroy
@@ -81,13 +85,13 @@ class Project < ActiveRecord::Base
     end
 
     def recent_feed
-      limit = 5
-      feed = []
-      feed += ChecklistItem.where(:checklist_id => checklist.id).order('updated_at DESC').limit(limit)
-      feed += Report.where(:project_id => id).order('updated_at DESC').limit(limit)
-      feed += PunchlistItem.where(:punchlist_id => punchlists.first.id).order('updated_at DESC').limit(limit) if punchlists && punchlists.first
-      feed += Photo.where(:project_id => id).order('updated_at DESC').limit(limit)
-      return feed.flatten.sort_by(&:updated_at).reverse.first(5)
+        limit = 5
+        feed = []
+        feed += ChecklistItem.where(:checklist_id => checklist.id).order('updated_at DESC').limit(limit)
+        feed += Report.where(:project_id => id).order('updated_at DESC').limit(limit)
+        feed += PunchlistItem.where(:punchlist_id => punchlists.first.id).order('updated_at DESC').limit(limit) if punchlists && punchlists.first
+        feed += Photo.where(:project_id => id).order('updated_at DESC').limit(limit)
+        return feed.flatten.sort_by(&:updated_at).reverse.first(5)
     end
 
     acts_as_api
