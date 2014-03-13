@@ -5,7 +5,7 @@ class ProjectGroup < ActiveRecord::Base
 	has_many :projects
 
 	def group_projects
-		Hash[projects.map(&:name)]
+		projects.as_json
 	end
 	
 	acts_as_api
