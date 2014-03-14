@@ -25,6 +25,10 @@ class Category < ActiveRecord::Base
       number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
     end
 
+    def progress_count
+      not_applicable_count + completed_count
+    end
+
     def order_indices
       sub_index = 0
       subcategories.sort_by{|c|c.name.to_i}.each do |i|
@@ -53,5 +57,6 @@ class Category < ActiveRecord::Base
       t.add :name
       t.add :item_count
       t.add :completed_count
+      t.add :progress_count
     end
 end
