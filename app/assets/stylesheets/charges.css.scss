@@ -3,6 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #billing {
+
+	button .edit-link {
+		color:#fff;
+	}
+	.edit-link:hover {
+		color:#fff !important;
+	}
+
 	h1 {
 		font-family:'Gotham Book','Helvetica',sans-serif;
 		text-align:center;
@@ -11,7 +19,7 @@
 
 	#billing-container {
 		padding-bottom:0;
-		margin:20px auto 40px;
+		margin:20px auto;
 
 		.header.row {
 

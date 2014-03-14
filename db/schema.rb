@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306032636) do
+ActiveRecord::Schema.define(version: 20140313213106) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20140306032636) do
   add_index "comments", ["user_id", "report_id", "checklist_item_id", "punchlist_item_id"], name: "comments_ix"
 
   create_table "companies", force: true do |t|
-    t.string   "name",               default: "",    null: false
+    t.string   "name",               default: "", null: false
     t.string   "email"
     t.string   "phone_number"
     t.boolean  "pre_register"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20140306032636) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.boolean  "valid_billing",      default: false
+    t.string   "customer_token"
   end
 
   create_table "delayed_jobs", force: true do |t|

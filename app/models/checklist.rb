@@ -48,7 +48,7 @@ class Checklist < ActiveRecord::Base
     end
 
     def progress_percentage
-      number_to_percentage(completed_count.to_f/item_count.to_f*100,:precision=>1)
+      number_to_percentage((completed_count+items.select{|i| i.status == "Completed"}.count)/item_count.to_f*100,:precision=>1)
     end
 
     def progress

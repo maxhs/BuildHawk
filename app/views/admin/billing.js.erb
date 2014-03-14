@@ -1,0 +1,29 @@
+<% unless @user.company.customer_token %>
+	$('#alert').text("Please setup your billing preferences in order to create new projects").fadeIn(500).delay(4000).fadeOut(500, function(){
+		$(this).text("");
+	});
+<% end %>
+
+$('.sidebarAdmin div a').removeClass('current-page');
+$('#billing-link').addClass('current-page');
+$('#main').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "billing" %>');
+	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
+});
+
+var stripeResponseHandler = function(status, response) {
+	var form = $('#payment-form');
+	if (response.error) {
+	    // Show the errors on the form
+	    form.find('.payment-errors').text(response.error.message);
+	    form.find('button').prop('disabled', false);
+	} else {
+	    // token contains id, last4, and card type
+	    var token = response.id;
+	    // Insert the token into the form so it gets submitted to the server
+	    form.append($('<input type="hidden" name="stripeToken" />').val(token));
+	    // and submit
+	    form.get(0).submit();
+	}
+};

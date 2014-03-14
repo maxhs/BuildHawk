@@ -18,6 +18,7 @@ Buildhawk::Application.routes.draw do
   get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
   post "/users/:id", :to => "users#update"
   post "/checklist_items/:id", :to => "checklist_items#update"
+  post "/admin/billing", :to => "admin#update_billing"
 
   resources :users
   resources :home do 
@@ -41,6 +42,7 @@ Buildhawk::Application.routes.draw do
       get :project_groups
       post :create_project
       get :billing
+      get :edit_billing
       get :editor
       delete :delete_checklist
     end

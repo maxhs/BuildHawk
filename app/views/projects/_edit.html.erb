@@ -3,7 +3,7 @@
 	<%= nested_form_for @project, :method => :put, :remote => true do |f| %>
 		<div id="edit-project-form">
 			<%= hidden_field_tag :company_id, current_user.company.id %>
-			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 			<div class="row">
 				<div class="col-xs-2 project-label"><h4>Name</h4></div>
 				<div class="col-xs-10"><%= f.text_field :name, :placeholder => "Project name" %></div>

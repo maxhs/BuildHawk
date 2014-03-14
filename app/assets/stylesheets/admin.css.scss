@@ -54,3 +54,14 @@
 .admin-user-pic {
 	max-width:200px;
 }
+
+#new-billing-container, #edit-billing-container {
+	width:50%;
+	margin:0 auto;
+	input{
+		display:inline-block;
+	}
+	input.card-info {
+		widht:70%;
+	}
+}

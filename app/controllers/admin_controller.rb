@@ -2,6 +2,7 @@ class AdminController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :find_user
 	layout 'admin'	
+	require 'stripe'
 
 	def index
 		@core_checklist = Checklist.where(:core => true).last
@@ -140,16 +141,28 @@ class AdminController < ApplicationController
 	end
 
 	def new_project
-		@project = Project.new
-		@project.build_address
-		@project.project_users.build
-		@users = current_user.company.users
-		@subs = current_user.company.subs
-		if request.xhr?
-			respond_to do |format|
-				format.js
+		@company = @user.company
+		if @company.customer_token
+			@project = Project.new
+			@project.build_address
+			@project.project_users.build
+			@users = current_user.company.users
+			@subs = current_user.company.subs
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
 			end
+		else
+			@charges = @company.charges
+		  	active_projects = @company.projects.where(:active => true).count
+		  	@amount = active_projects * 1000 / 100
+		  	puts "the amount is: #{@amount}"
+
+			redirect_to billing_admin_index_path
+			
 		end
+
 	end
 
 	def create_project
@@ -175,11 +188,40 @@ class AdminController < ApplicationController
 	end
 
 	def billing
-		@company = current_user.company
+		@company = @user.company
+		customer = Stripe::Customer.retrieve(@company.customer_token) if @company.customer_token
+		invoices = Stripe::Invoice.all(
+			:customer => customer.id,
+		)
+		@subtotal = 0
+		@charges = invoices["data"].as_json
+		@charges.map{|c| @subtotal += c["amount_due"]}
+		puts "due: #{@subtotal} and charges: #{@charges}"
+	  	active_projects = @company.projects.where(:active => true).count
+	  	@amount = active_projects * 1000 / 100
+	end
+
+	def edit_billing
+
 	end
 
 	def update_billing
-	
+		token = params[:stripeToken]
+		if @company.customer_token
+			customer = Stripe::Customer.retrieve(@company.customer_token)
+			customer.card = token
+			customer.save
+		else
+			customer = Stripe::Customer.create(
+			  :card => token,
+			  :plan => "normalhawk",
+			  :email => @user.email
+			)
+		end
+		puts "stripe customer id: #{customer.id}"
+		@company.update_attribute :customer_token, customer.id
+
+		redirect_to billing_admin_index_path
 	end
 
 	def project_groups
@@ -193,7 +235,7 @@ class AdminController < ApplicationController
 		else
 			@user = current_user
 		end
-
+		@company = @user.company
 	end
 
 end

@@ -1,0 +1,18 @@
+$('.sidebarAdmin div a').removeClass('current-page');
+$('#billing-link').addClass('current-page');
+$('#main').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "edit_billing" %>');
+	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
+});
+var stripeResponseHandler = function(status, response) {
+	var form = $('#payment-form');
+	if (response.error) {
+	    form.find('.payment-errors').text(response.error.message);
+	    form.find('button').prop('disabled', false);
+	} else {
+	    var token = response.id;
+	    form.append($('<input type="hidden" name="stripeToken" />').val(token));
+	    form.get(0).submit();
+	}
+};
