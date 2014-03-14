@@ -158,9 +158,7 @@ class AdminController < ApplicationController
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
 		  	puts "the amount is: #{@amount}"
-
 			redirect_to billing_admin_index_path
-			
 		end
 
 	end
@@ -189,14 +187,17 @@ class AdminController < ApplicationController
 
 	def billing
 		@company = @user.company
-		customer = Stripe::Customer.retrieve(@company.customer_token) if @company.customer_token
-		invoices = Stripe::Invoice.all(
-			:customer => customer.id,
-		)
-		@subtotal = 0
-		@charges = invoices["data"].as_json
-		@charges.map{|c| @subtotal += c["amount_due"]}
-		puts "due: #{@subtotal} and charges: #{@charges}"
+		if @company.customer_token
+			customer = Stripe::Customer.retrieve(@company.customer_token)
+			invoices = Stripe::Invoice.all(
+				:customer => customer.id,
+			)
+
+			@subtotal = 0
+			@charges = invoices["data"].as_json
+			@charges.map{|c| @subtotal += c["amount_due"]}
+			puts "due: #{@subtotal} and charges: #{@charges}"
+		end
 	  	active_projects = @company.projects.where(:active => true).count
 	  	@amount = active_projects * 1000 / 100
 	end
