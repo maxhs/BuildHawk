@@ -13,6 +13,15 @@ class Checklist < ActiveRecord::Base
 
     after_create :assign_items
 
+    def items
+        if checklist_items.count > 0
+            checklist_items
+        else 
+            checklist_items << categories.sort_by{|c|c.name.to_i}.map(&:subcategories).flatten.map(&:checklist_items).flatten
+            return checklist_items
+        end
+    end
+
   	def completed_count
         if checklist_items.count
             items = checklist_items
@@ -22,6 +31,10 @@ class Checklist < ActiveRecord::Base
         return items.select{|i| i.status == "Completed"}.count
   	end
 
+    def not_applicable_count
+        items.select{|i| i.status == "Not Applicable"}.count
+    end
+
   	def item_count
         if checklist_items.count
             checklist_items.count
@@ -30,14 +43,7 @@ class Checklist < ActiveRecord::Base
         end
   	end
 
-  	def items
-        if checklist_items.count > 0
-            checklist_items
-        else 
-  		    checklist_items << categories.sort_by{|c|c.name.to_i}.map(&:subcategories).flatten.map(&:checklist_items).flatten
-            return checklist_items
-        end
-  	end
+
 
     def upcoming_items
         items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
@@ -48,11 +54,11 @@ class Checklist < ActiveRecord::Base
     end
 
     def progress_percentage
-      number_to_percentage((completed_count+items.select{|i| i.status == "Completed"}.count)/item_count.to_f*100,:precision=>1)
+        number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
     end
 
     def progress
-        completed_count.to_f/item_count.to_f*100
+        (completed_count+not_applicable_count)/item_count.to_f*100
     end
 
     class << self

@@ -17,8 +17,12 @@ class Category < ActiveRecord::Base
       subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
     end
 
+    def not_applicable_count 
+      subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Not Applicable"}).count if subcategories
+    end
+
     def progress_percentage
-      number_to_percentage(completed_count.to_f/item_count.to_f*100,:precision=>1)
+      number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
     end
 
     def order_indices
