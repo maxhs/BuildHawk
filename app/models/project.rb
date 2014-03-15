@@ -65,14 +65,6 @@ class Project < ActiveRecord::Base
         reports.sort_by{|r| r.date_for_sort}.reverse
     end
 
-    def has_checklist?
-        checklist.present?
-    end
-
-    def has_categories?
-        !categories.nil?
-    end
-
     def has_group?
         !project_group_id.nil?
     end
@@ -119,10 +111,10 @@ class Project < ActiveRecord::Base
     end
 
     api_accessible :dashboard do |t|
-        t.add :progress, :if => :has_checklist?
+        t.add :progress
         t.add :upcoming_items
-        t.add :recently_completed, :if => :has_checklist?
-        t.add :recent_documents, :if => :has_checklist?
-        t.add :categories, :if => :has_categories?
+        t.add :recently_completed
+        t.add :recent_documents
+        t.add :categories
     end
 end

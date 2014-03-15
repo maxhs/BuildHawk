@@ -16,10 +16,14 @@ class Api::V1::ProjectsController < Api::V1::ApiController
     end
 
     def dash
-    	@project = Project.find params[:id]
-    	respond_to do |format|
-        	format.json { render_for_api :dashboard, :json => @project}
-      	end
+        @project = Project.find params[:id]
+        unless @project.checklist.nil?
+            respond_to do |format|
+                format.json { render_for_api :dashboard, :json => @project}
+            end
+        else
+            render :json => {success: false}
+        end
     end
 
 end
