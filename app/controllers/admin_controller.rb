@@ -142,7 +142,7 @@ class AdminController < ApplicationController
 
 	def new_project
 		@company = @user.company
-		if @company.customer_token
+		unless @company.customer_token.nil? && current_user.uber_admin
 			@project = Project.new
 			@project.build_address
 			@project.project_users.build
@@ -157,7 +157,6 @@ class AdminController < ApplicationController
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
-		  	puts "the amount is: #{@amount}"
 			redirect_to billing_admin_index_path
 		end
 
