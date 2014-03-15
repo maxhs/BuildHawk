@@ -69,14 +69,6 @@ class Project < ActiveRecord::Base
         !project_group_id.nil?
     end
 
-    def group
-        if project_group_id
-            return project_group
-        else
-            return {:id => id,:name => name, :address => address}
-        end
-    end
-
     def background_destroy
       Resque.enqueue(DestroyProject,id)
     end
