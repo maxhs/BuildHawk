@@ -113,8 +113,8 @@ class User < ActiveRecord::Base
 	    t.add :email
         t.add :phone_number
         t.add :authentication_token
-        t.add :coworkers
-        t.add :subcontractors
+        #t.add :coworkers
+        #t.add :subcontractors
         t.add :company
         t.add :url100
         t.add :url200
