@@ -1,6 +1,6 @@
 $('.sidebarAdmin div a').removeClass('current-page');
 $('#admin-reports-link').addClass('current-page');
-$('#pages').fadeOut(100,function(){
+$('#main').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "reports", :locals => {:reports => @reports } %>');
 	$(this).fadeIn(100);
 	$("html, body").animate({ scrollTop: 0 }, 300);
