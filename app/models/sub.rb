@@ -71,4 +71,8 @@ class Sub < ActiveRecord::Base
     api_accessible :checklist, :extend => :report do |t|
 
     end
+    
+    api_accessible :login, :extend => :report do |t|
+
+    end
 end
