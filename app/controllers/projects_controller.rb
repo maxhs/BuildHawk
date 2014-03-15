@@ -81,6 +81,9 @@ class ProjectsController < ApplicationController
 			params[:project].delete(:checklist)
 			params[:project][:checklist] = checklist
 		end
+		if params[:project][:project_group_id] == "No Assignment"
+			params[:project][:project_group_id] = nil
+		end
 		@project = Project.find params[:id]
 		@project.update_attributes params[:project]
 		if @project.checklist 
