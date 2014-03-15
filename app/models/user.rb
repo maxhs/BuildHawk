@@ -120,6 +120,11 @@ class User < ActiveRecord::Base
         t.add :url200
   	end
 
+    api_accessible :login, :extend => :user do |t|
+        t.add :coworkers
+        t.add :subcontractors
+    end
+
   	api_accessible :feed do |t|
 	
   	end

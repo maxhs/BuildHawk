@@ -17,7 +17,7 @@ class Api::V2::SessionsController < Api::V2::ApiController
             end
   			
             respond_to do |format|
-  		  		format.json { render_for_api :user, :json => @user, :root => :user}
+  		  		format.json { render_for_api :login, :json => @user, :root => :user}
   			end
   		else
   			render json: { message: 'Incorrect password' }, status: 401
