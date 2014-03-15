@@ -108,6 +108,8 @@ class Project < ActiveRecord::Base
   		t.add :company
   		t.add :punchlists
         t.add :active
+        t.add :subs
+        t.add :users
         t.add :project_group, :if => :has_group?
   	end
 

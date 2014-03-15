@@ -12,16 +12,16 @@ class Punchlist < ActiveRecord::Base
 
   	api_accessible :user do |t|
   		t.add :punchlist_items
-      t.add :personnel
+      #t.add :personnel
   	end
 
   	api_accessible :projects do |t|
   		t.add :punchlist_items
-      t.add :personnel
+      #t.add :personnel
   	end
 
     api_accessible :punchlist do |t|
       t.add :punchlist_items
-      t.add :personnel
+      #t.add :personnel
     end
 end
