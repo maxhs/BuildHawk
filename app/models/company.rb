@@ -49,14 +49,16 @@ class Company < ActiveRecord::Base
         t.add :name
   	end
 
-  	api_accessible :user do |t|
-  		t.add :name
-        t.add :id
-  	end
+    api_accessible :user, :extend => :projects do |t|
+      
+    end
 
-    api_accessible :report do |t|
-      t.add :name
-      t.add :id
+    api_accessible :login, :extend => :projects do |t|
+      
+    end
+
+    api_accessible :report, :extend => :projects do |t|
+      
     end
 
     api_accessible :dashboard do |t|
