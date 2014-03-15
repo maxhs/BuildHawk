@@ -5,7 +5,7 @@ class ProjectGroup < ActiveRecord::Base
 	has_many :projects
 
 	def group_projects
-		projects.as_json
+		projects.as_json(:include => :address)
 	end
 	
 	acts_as_api
