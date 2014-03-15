@@ -1,4 +1,4 @@
-class Api::V2::PunchlistItemsController < Api::V1::ApiController
+class Api::V2::PunchlistItemsController < Api::V2::ApiController
 
     def update
     	@punchlist_item = PunchlistItem.find params[:id]

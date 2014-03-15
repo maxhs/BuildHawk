@@ -1,11 +1,20 @@
-class Api::V2::ProjectsController < Api::V1::ApiController
+class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
     	@user = User.find params[:user_id]
-    	projects = @user.projects
-    	respond_to do |format|
-        	format.json { render_for_api :projects, :json => projects, :root => :projects}
-      	end
+    	projects = @user.projects.where(:project_group_id => nil)
+        groups = @user.projects.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        if groups && groups.count > 0 
+            groups.each do |g|
+                projects << ProjectGroup.find(g).projects.first
+            end 
+        end
+        
+        if projects && projects.count > 0
+        	respond_to do |format|
+            	format.json { render_for_api :projects, :json => projects, :root => :projects}
+          	end
+        end
     end
 
     def show

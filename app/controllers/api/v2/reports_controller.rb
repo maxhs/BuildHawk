@@ -1,4 +1,4 @@
-class Api::V2::ReportsController < Api::V1::ApiController
+class Api::V2::ReportsController < Api::V2::ApiController
 
     def update
         @current_user = User.find params[:report][:author_id] 

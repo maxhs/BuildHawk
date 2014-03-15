@@ -73,6 +73,10 @@ class Project < ActiveRecord::Base
         !categories.nil?
     end
 
+    def has_group?
+        !project_group_id.nil?
+    end
+
     def group
         if project_group_id
             return project_group
@@ -104,7 +108,7 @@ class Project < ActiveRecord::Base
   		t.add :company
   		t.add :punchlists
         t.add :active
-        t.add :group
+        t.add :project_group, :if => :has_group?
   	end
 
     api_accessible :user do |t|

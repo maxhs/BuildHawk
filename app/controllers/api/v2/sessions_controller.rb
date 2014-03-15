@@ -1,4 +1,4 @@
-class Api::V2::SessionsController < Api::V1::ApiController
+class Api::V2::SessionsController < Api::V2::ApiController
 
     def create
         if params[:user][:device_token].present?

@@ -1,4 +1,4 @@
-class Api::V2::PunchlistsController < Api::V1::ApiController
+class Api::V2::PunchlistsController < Api::V2::ApiController
 
     def show
     	project = Project.find params[:id]

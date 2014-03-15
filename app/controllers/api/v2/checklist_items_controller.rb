@@ -1,4 +1,4 @@
-class Api::V2::ChecklistItemsController < Api::V1::ApiController
+class Api::V2::ChecklistItemsController < Api::V2::ApiController
 
     def update
     	item = ChecklistItem.find params[:id]

@@ -1,4 +1,4 @@
-class Api::V2::PhotosController < Api::V1::ApiController
+class Api::V2::PhotosController < Api::V2::ApiController
 
     def update
 

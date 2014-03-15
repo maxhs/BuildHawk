@@ -1,4 +1,4 @@
-class Api::V2::CommentsController < Api::V1::ApiController
+class Api::V2::CommentsController < Api::V2::ApiController
 
     def index
     	@user = User.find params[:user_id]
