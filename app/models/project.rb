@@ -77,7 +77,7 @@ class Project < ActiveRecord::Base
         if project_group_id
             return project_group
         else
-            return false
+            return {:id => id,:name => name, :address => address}
         end
     end
 
