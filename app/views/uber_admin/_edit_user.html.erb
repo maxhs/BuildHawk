@@ -5,7 +5,7 @@
 			<%= hidden_field_tag :user_id, @user.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<div><%= f.label "Company" %></div>
-			<div><%= @user.company.name %> </div>
+			<div><h4 style="text-align:left;margin-bottom:15px;"><%= @user.company.name %></h4></div>
 			<div><%= f.label "First name" %></div>
 			<div><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></div>
 			<div><%= f.label "Last name" %></div>
@@ -23,20 +23,24 @@
 			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Company Admin</div> <%= f.check_box :company_admin %></div>
 			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Uber Admin</div> <%= f.check_box :uber_admin %></div>
 
-			<% if @user.image_file_name %>
-				<div>
-					<%= image_tag @user.image.url(:small), :class => "user-pic" %>
-				</div>
-				<div>
-					Replace photo: <%= f.file_field :image %>
-				</div>
-			<% else %>
-				<div>
-					Add a photo: <%= f.file_field :image %>
-				</div>
-			<% end %>
-
-			<div><button class="btn btn-success btn-lg pull-right"><%= f.submit "Save" %></button></div>
-			<div><%= link_to "Delete User", destroy_user_uber_admin_index_path(:user_id => @user.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete this user?"}, :style=>"float:right;clear:both;padding:15px;" %></div
+			<div id="photo-section">
+				<% if @user.image_file_name %>
+					<div>
+						<%= image_tag @user.image.url(:small), :class => "user-pic" %>
+					</div>
+					<div>
+						<h4>Replace photo:</h4><%= f.file_field :image %>
+					</div>
+				<% else %>
+					<div>
+						<h4>Add a photo:</h4><%= f.file_field :image %>
+					</div>
+				<% end %>
+			</div>
+			
+			<div style="float:right;"><button class="btn btn-success btn-md"><%= f.submit "Save" %></button></div>
+			
 	<% end %>
+		<div class="delete-button"><%= link_to "Delete User", destroy_user_uber_admin_index_path(:user_id => @user.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete #{@user.full_name}?"}, :class => "btn btn-danger btn-md remote" %></div>
+	</div>
 </div>

@@ -7,10 +7,11 @@
 	display:block;
 	width:600px;
 	margin:0 auto;
-	padding:30px 30px 93px;
+	padding:30px;
 	border-radius:4px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
+	overflow:auto;
 
 	h2, h3 {
 		text-align:center;
@@ -25,8 +26,13 @@
 		width:100%;
 	}
 
+	#photo-section{
+		margin:20px auto;
+		text-align:center;
+	}
+
 	.user-pic {
-		margin:20px;
+		margin:40px auto;
 		display:block;
 	}
 }

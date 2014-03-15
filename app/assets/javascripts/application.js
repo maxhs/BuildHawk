@@ -27,7 +27,7 @@ if (history && history.pushState){
     $(function(){
         $('body').on('click', 'a',function(e){
             if ($(e.target).is('.remote, .shadow-photo, .documents-photo, .delete-checklist-link, .delete-link, .no-link, #clear-critical-date')) {
-            
+                console.log('yup');
             } else {
                 history.pushState(null, null, this.href);
             }
@@ -54,3 +54,18 @@ $(document).ready(function(){
     });
   }
 });
+
+function setupWindow() {
+    var width = $(window).width()
+    $('#alert,#notice').css("left",width/4);
+
+    if ($('#notice').text().length) {
+        $($('#notice')).fadeIn(400, function() {
+            $(this).delay(2500).fadeOut();
+        });
+    } else if ($('#alert').text().length) {
+        $($('#alert')).fadeIn(400, function() {
+            $(this).delay(2500).fadeOut();
+        });
+    }
+}

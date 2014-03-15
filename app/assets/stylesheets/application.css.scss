@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap
  *= require datetimepicker
  *= require jquery.ui.progressbar
  *= require_tree .
@@ -19,7 +18,7 @@ $nprogress-color: #cc0000;
 
 @import 'nprogress';
 @import 'nprogress-bootstrap';
-@import "shadowbox";
+@import 'shadowbox';
 @import 'bootstrap';
 
 html {
@@ -54,8 +53,12 @@ ul, ol {
 	display:none;
 	color:#000;
 	background:#fff;
-	border-radius: 0 0 4px 4px;
-	-webkit-border-radius: 0 0 4px 4px;
+	border-radius:0;
+	-webkit-border-radius:0;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
 	-moz-border-radius: 0 0 4px 4px;
 	box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
 	-webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
@@ -87,6 +90,17 @@ ul, ol {
 	line-height: 16px;
 	text-align: center;
 	width: 80px;
+}
+
+.delete-button {
+	float:right;
+	clear:both;
+
+	a, a:hover {
+		margin:0;
+		line-height:26px;
+		color:#fff !important;
+	}
 }
 
 .date-input, #dp {
@@ -219,9 +233,9 @@ body {
 			text-transform:uppercase;
 		}
 
-		> a:hover {
+		a:hover {
 			background-color:transparent;
-			color:#cc0000 !important;
+			color:#cc0000;
 		}
 
 	}
@@ -305,7 +319,7 @@ body {
 		}
 
 		a:hover {
-			color:#cc0000 !important;
+			color:#cc0000;
 		}
 
 		.links {

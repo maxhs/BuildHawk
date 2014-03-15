@@ -17,25 +17,11 @@
 	    		handleOversize: "drag",
 	    		overlayOpacity: "0.8"
 	    })
-	    window.onload = function() {
-		    Shadowbox.setup(".shadow-photo");
-		}
 		
 		window.Dropzone;
 		jQuery.ajaxSetup({ cache: false });
 
-		var width = $(window).width()
-	    $('#alert,#notice').css("left",width/4);
-
-	  	if ($('#notice').text().length) {
-	        $($('#notice')).fadeIn(400, function() {
-	            $(this).delay(2500).fadeOut();
-	        });
-	    } else if ($('#alert').text().length) {
-	        $($('#alert')).fadeIn(400, function() {
-	            $(this).delay(2500).fadeOut();
-	        });
-	    }
+		setupWindow();
 	</script>
 
 	
