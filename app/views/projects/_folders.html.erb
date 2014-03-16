@@ -4,3 +4,11 @@
 	</ul>
 <% end %>
 <div id="add-folder-link">ADD NEW FOLDER</div>
+<script type="text/javascript">
+	$('#add-folder-link').on('click',function(){
+		$(this).fadeOut(200,function(){
+			$(this).replaceWith('<%= form_for Folder.new, :remote => true do |f| %><%= f.text_field :name, :placeholder => "New folder name..." %><%= f.hidden_field :project_id, :value => @project.id %><button class="btn btn-md btn-success pull-right"><%= f.submit "Create" %></button><% end %>');
+			$(this).fadeIn(200);
+		});
+	});
+</script>

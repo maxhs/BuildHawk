@@ -21,18 +21,3 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$('#main * .navbar-nav > li > a').removeClass('current-page');
-	$('.nav-documents a').addClass('current-page');
-	$(document).ready(function(){
-		Shadowbox.clearCache();
-	    Shadowbox.setup(".shadow-photo", {});
-	    $('#add-folder-link').click(function(){
-			$(this).fadeOut(200,function(){
-				$(this).replaceWith('<%= form_for Folder.new, :remote => true do |f| %><%= f.text_field :name, :placeholder => "New folder name..." %><%= f.hidden_field :project_id, :value => @project.id %><% end %>');
-				$(this).fadeIn(200);
-			});
-		});
-	});
-</script>

@@ -1,6 +1,6 @@
 <% if p.image_file_name %>
 	<div class="image-block" id="photo-<%=p.id%>">
-		<%= link_to image_tag(p.image.url(:small)), p.image.url(:original), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %> 
+		<%= link_to image_tag(p.image.url(:small)), p.image.url(:original), :class => "shadow-photo remote", :rel => "shadowbox[Mixed]" %> 
 			<%=  %> 
 			<div><span class="label">Date:</span><%= p.created_date%></div>
 			<div>

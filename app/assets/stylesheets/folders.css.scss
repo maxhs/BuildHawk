@@ -4,8 +4,11 @@
 
 .new_folder {
 	input[type="text"] {
-		width:100%;
-		margin-top:20px;
+		width:70%;
+		display:inline-block;
+		margin-top:10px;
+		margin-right:10px;
+		height:40px;
 	}
 }
 .add-photo {
@@ -19,13 +22,16 @@
 
 .edit_folder {
 	input[type="text"] {
-		width:50%;
+		width:70%;
 		display:inline-block;
 	}
 }
 
 .remove-folder-link {
-	margin-left:1em;
+	height:36px;
+	line-height:22px;
+	vertical-align:middle;
+	margin:0;
 }
 
 .folder-name {
