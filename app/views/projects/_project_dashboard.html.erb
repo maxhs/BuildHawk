@@ -75,20 +75,20 @@
 		<h3>Checklist Progress</h3>
 		<div id="checklist-section">
 			<div class="row">
-				<div class="col-sm-4 header-label"><h4>Phase</h4></div>
-				<div class="col-sm-2 header-label center"><h4>% Completion</h4></div>
-				<div class="col-sm-2 header-label center"><h4>Completion Date</h4></div>
-				<div class="col-sm-2 header-label center"><h4>Milestone</h4></div>
-				<div class="col-sm-2 header-label center"><h4>+/-</h4></div>
+				<div class="col-xs-4 header-label"><h4>Phase</h4></div>
+				<div class="col-xs-2 header-label center"><h4>% Completion</h4></div>
+				<div class="col-xs-2 header-label center"><h4>Completion Date</h4></div>
+				<div class="col-xs-2 header-label center"><h4>Milestone</h4></div>
+				<div class="col-xs-2 header-label center"><h4>+/-</h4></div>
 			</div>
 			
 				<% @checklist.categories.sort_by{|c|c.name.to_i}.each do |cat| %>
 					<div class="row" style="font-size:1.1em;border-bottom:1px solid #eee;">
-						<div class="col-sm-4"><%= link_to cat.name, checklist_project_path(@project), :remote => true %></div>
-						<div class="col-sm-2"><span style="text-align:center;display:inline-block;width:100%;"><%= cat.progress_percentage %></span></div>
-						<div class="col-sm-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></div>
-						<div class="col-sm-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></div>
-						<div class="col-sm-2">
+						<div class="col-xs-4"><%= link_to cat.name, checklist_project_path(@project), :remote => true %></div>
+						<div class="col-xs-2"><span style="text-align:center;display:inline-block;width:100%;"><%= cat.progress_percentage %></span></div>
+						<div class="col-xs-2"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></div>
+						<div class="col-xs-2"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></div>
+						<div class="col-xs-2">
 							<% if cat.milestone_date && cat.completed_date %> 
 								<% diff = (cat.milestone_date.to_date-cat.completed_date.to_date).to_i %>
 								<% if diff < 0 %>
