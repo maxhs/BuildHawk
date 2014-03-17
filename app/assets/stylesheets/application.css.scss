@@ -252,12 +252,14 @@ body {
 			padding:3px;
 			min-width:112px;
 			border-right:1px solid #eee;
+			height:100% !important;
+
 			a {
 				font-weight:300;
 				font-size:15px;
 				padding:7.5% 0;
 				letter-spacing:1px;
-				
+				height:100% !important;
 			}
 		}
 

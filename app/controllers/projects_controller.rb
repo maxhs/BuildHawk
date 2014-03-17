@@ -22,9 +22,13 @@ class ProjectsController < ApplicationController
 
 	def index
 		if params[:company_id]
-			puts "fetching projects for uber admin"
 			@company = Company.find params[:company_id]
 			@projects = @company.projects
+		end
+
+		#Display demo projects for new companies IF they have no projects
+		unless @projects.count > 0
+			@projects = Project.where(:core => true)
 		end
 
 		if request.xhr?
