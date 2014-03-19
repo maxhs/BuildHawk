@@ -57,7 +57,6 @@
     <p class="alert" id="alert"><%= alert %></p>
 
     <div id="wrap">
-		<!-- Fixed navbar -->
 		<div class="navbar navbar-fixed-top" id="top-nav" style="min-height: 50px;">
 			<div class="container">
 				<div class="navbar-header">
@@ -74,7 +73,6 @@
 
 					</ul>
 					<ul class="nav navbar-nav pull-right">
-						
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><%=current_user.full_name%></span> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -82,7 +80,6 @@
 								<li><%= link_to "Logout", logout_path %></li>
 							</ul>
 						</li>
-
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
@@ -106,7 +103,6 @@
 			<li><a href="/terms">Terms of Service</a></li>
 			<li><a href="/privacy">Privacy Policy</a></li>
 		</ul>
-
 		<div id="copyright">&copy; BuildHawk, 2013</div>
 	</div>
 </footer>
