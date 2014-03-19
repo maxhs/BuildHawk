@@ -8,6 +8,8 @@ class Sub < ActiveRecord::Base
     after_save :clean_phone_number
     before_destroy :clean_up
 
+    default_scope { order('name ASC') }
+
     def clean_up
         ReportSub.where(:sub_id => id).destroy_all
         PunchlistItem.where(:sub_assignee_id => id).each do |i|
