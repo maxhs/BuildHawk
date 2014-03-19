@@ -5,6 +5,9 @@
 #splash {
 	font-weight:200;
 	
+	section {
+		overflow:auto;
+	}
 	.splash-container {
 		margin:30px auto;
 		max-width:1140px;
