@@ -190,7 +190,7 @@ body {
 		background:#fff;
 
 		.container {
-			padding-right:0;
+			padding:0;
 			width:100%;
 		}
 	}
@@ -203,15 +203,14 @@ body {
 			padding-right:0;
 		}
 
-		.navbar-header{
-			.navbar-brand {
-				padding:0 20px;
-				margin-left:0;
+		
+		.navbar-brand {
+			padding:0 20px;
+			margin-left:0;
 
-				img {
-					margin-top:10px;
-					height:30px;
-				}
+			img {
+				margin-top:10px;
+				height:30px;
 			}
 		}
 	}
@@ -930,12 +929,23 @@ body {
 		}
 	}
 
+	.nav {
+		li {
+			display:inline-block;
+		}
+	}
+
+	.navbar-brand {
+		margin-left:0;
+	}
+
+	#pages-container {
+		padding-top:110px;
+	}
   	footer {
   		display:none;
   	}
 }
-
-
 
 @font-face {
     font-family: 'Gotham Book';
