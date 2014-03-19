@@ -6,29 +6,29 @@
 	<div class="checklist-item-form">
 	
 		<div class="row">
-			<span class="col-md-5 header-description"><h2><%= @checklist_item.category_name %></h2></span>
+			<span class="col-xs-5 header-description"><h2><%= @checklist_item.category_name %></h2></span>
 		</div>
 		<div class="row">
-			<span class="col-md-5 header-description"><h4><%= @checklist_item.subcategory_name %></h4></span>
+			<span class="col-xs-5 header-description"><h4><%= @checklist_item.subcategory_name %></h4></span>
 		</div>
 		<div class="row">
-			<span class="col-md-12 item-body">- <%= @checklist_item.body %></span>
+			<span class="col-xs-12 item-body">- <%= @checklist_item.body %></span>
 		</div>
 
 		<%= nested_form_for @checklist_item, :url => {:controller => :checklist_items, :action => :update, :id => @checklist_item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
 			<div class="row">
-				<div class="col-md-6" style="text-align:center; display:inline-block;float:left;">
+				<div class="col-xs-6" style="text-align:center; display:inline-block;float:left;">
 					<h4>Status:</h4>
 					<%= f.select :status, ["In-Progress","Completed","Not Applicable","No Status"], {:include_blank => false}, :multiple => true, :style => "width:400px !important;" %>
 				</div>
 			
 				<% if @checklist_item.status == "Completed" && @checklist_item.completed_by_user %>
-					<div class="col-md-6" style="text-align:center; width:50%;display:inline-block;">
+					<div class="col-xs-6" style="text-align:center; width:50%;display:inline-block;">
 						<h4>Completed By:</h4>
 						<%= @checklist_item.completed_by_user.full_name %>
 					</div>
 				<% else %>
-					<div class="col-md-6" style="text-align:center;padding-top:20px;display:inline-block;">
+					<div class="col-xs-6" style="text-align:center;padding-top:20px;display:inline-block;">
 						<h4>Critical Date:</h4>
 						<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
 							<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
@@ -38,7 +38,7 @@
 				<% end %>
 
 				<% if @checklist_item.photos && @checklist_item.photos.count > 0 %>
-					<div class="col-md-12" style="padding:30px 0;padding-top:60px;clear:both;">
+					<div class="col-xs-12" style="padding:30px 0;padding-top:60px;clear:both;">
 						<% @checklist_item.photos.each do |p| %>
 							<% if p.image_file_name%>
 								<%= render :partial => "image", :locals => {:p => p} %>
@@ -47,7 +47,7 @@
 					</div>
 				<% end %>
 
-				<div class="col-md-12" style="text-align:center;padding:20px;clear:both;"><h4>Add a photo:</h4>
+				<div class="col-xs-12" style="text-align:center;padding:20px;clear:both;"><h4>Add a photo:</h4>
 					<%= f.fields_for :photos, @checklist_item.photos.build do |photo| %>
 						<%= photo.file_field :image, :style=>"margin:0 auto;" %>
 						<%= photo.hidden_field :user_id, :value => current_user.id %>
@@ -58,7 +58,7 @@
 					<% end %>
 				</div>
 
-				<div class="col-md-12">	
+				<div class="col-xs-12">	
 					<% if current_user.admin %>
 						<div>
 							<button class="btn btn-danger btn-md pull-right"><%= link_to "Delete Item", checklist_item_path(@checklist_item), :method => :delete, :data => {:confirm => "Are you sure you want to delete this item?"}, :style=>"margin:0 auto;display:block;width:84px;text-align:center" %></button>

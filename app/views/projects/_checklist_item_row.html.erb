@@ -23,14 +23,14 @@
 	<% end %>
 
 		<% if current_user.admin %>
-			<div class="col-md-6 checklist-body" style="margin-left:20px;margin-right:-20px;">
+			<div class="col-xs-6 checklist-body" style="margin-left:20px;margin-right:-20px;">
 		<% else %>
-			<div class="col-md-8 checklist-body" style="margin-left:20px;margin-right:-20px;">
+			<div class="col-xs-8 checklist-body" style="margin-left:20px;margin-right:-20px;">
 		<% end %>
 				<%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :remote => true %>
 			</div>
 
-			<div class="col-md-2" style="text-align: center;">
+			<div class="col-xs-2" style="text-align: center;">
 				<% if item.critical_date %>
 					<%= parse_date item.critical_date %>
 				<% else %>
@@ -38,7 +38,7 @@
 				<% end %>
 			</div>
 
-			<div class="col-md-2" style="text-align: center;">
+			<div class="col-xs-2" style="text-align: center;">
 				<% if item.completed_date %>
 					<%= parse_date item.completed_date %>
 				<% else %>
@@ -47,10 +47,10 @@
 			</div>
 			
 		<% if current_user.admin %>
-			<div class="col-md-1" style="text-align: center;">
+			<div class="col-xs-1" style="text-align: center;">
 				<%= link_to 'Edit', edit_checklist_item_path(item), :remote => true %>
 			</div>
-			<div class="col-md-1" style="text-align: center;">
+			<div class="col-xs-1" style="text-align: center;">
 				<%= link_to 'Delete', delete_item_project_path(@project, :checklist_item_id => item.id), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, :method => :delete, :class=>"delete-link", :remote => true %>
 			</div>
 		<% end %>
