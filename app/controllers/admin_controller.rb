@@ -18,8 +18,22 @@ class AdminController < ApplicationController
 	end
 
 	def users
-		@users = current_user.company.users
-		@subs = current_user.company.subs
+		@company = @user.company
+		unless @company.customer_token.nil? && current_user.uber_admin
+			@users = current_user.company.users
+			@subs = current_user.company.subs
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			end
+		else
+			@charges = @company.charges
+		  	active_projects = @company.projects.where(:active => true).count
+		  	@amount = active_projects * 1000 / 100
+			redirect_to billing_admin_index_path
+		end
+
 	end
 
 	def new_user
@@ -102,7 +116,20 @@ class AdminController < ApplicationController
 	end
 
 	def reports
-		@projects = current_user.company.projects
+		@company = @user.company
+		unless @company.customer_token.nil? && current_user.uber_admin
+			@projects = current_user.company.projects
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			end
+		else
+			@charges = @company.charges
+		  	active_projects = @company.projects.where(:active => true).count
+		  	@amount = active_projects * 1000 / 100
+			redirect_to billing_admin_index_path
+		end
 	end
 
 	def checklists
@@ -111,6 +138,7 @@ class AdminController < ApplicationController
 
 	def editor
 		@checklist = Checklist.find params[:checklist_id]
+		@project = @checklist.project
 	end
 
 	def create_template
@@ -159,7 +187,6 @@ class AdminController < ApplicationController
 		  	@amount = active_projects * 1000 / 100
 			redirect_to billing_admin_index_path
 		end
-
 	end
 
 	def create_project

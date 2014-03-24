@@ -21,9 +21,9 @@
 					<div class="col-xs-2" style="text-align: center;">Completed</div>
 				<% end %>	
 			</div>
-				<div id="checklist-items">
-					<%= render :partial => 'projects/phase', :locals => {:checklist => @checklist, :project => @project}, collection: @checklist.categories, :as => :c, cache: false %>
-				</div>
+			<div id="checklist-items">
+				<%= render :partial => 'projects/phase', collection: @checklist.categories, :as => :c, cache: false %>
+			</div>
 		</div>
 	<% else %>
 		<div style="text-align:center;font-style:italic"><h3 style="color:#aaa;font-weight:100;padding-top:100px;">No checklist items</h3></div>

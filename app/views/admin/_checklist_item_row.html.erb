@@ -14,7 +14,7 @@
 	<div id="sub-<%=s.id%>">
 <% end %>
 
-<%= link_to edit_checklist_item_path(item), :remote => true do %>
+<%= link_to edit_checklist_item_path(item), :class => "remote", :remote => true do %>
 	<div class="row checklist-item" id="item-<%=item.id%>">
 		<div class="col-md-6 checklist-body" style="margin-left:20px;margin-right:-20px;">
 			<%=item.body%>

@@ -4,7 +4,11 @@ if (itemsHolder.hasClass('revealed')){
 	itemsHolder.removeClass('revealed');
 } else {
 	itemsHolder.fadeOut(100,function(){
-		$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "New Phase", new_category_project_path(@project, :category_id => @category.id, :order_index => @category.order_index), :id=>"new-category-#{@category.id}", :class=>"remote new-category", :remote => true %>');
+		<% if @project %>
+			$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "New Phase", new_category_project_path(@project, :category_id => @category.id, :order_index => @category.order_index), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
+		<% else %>
+			$(this).html('<%= j render partial:"admin/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "New Phase", new_category_project_path(@category, :category_id => @category.id, :order_index => @category.order_index), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
+		<% end %>
 		$(this).addClass('revealed');
 		$(this).show(300);
 	});

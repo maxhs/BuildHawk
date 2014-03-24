@@ -87,7 +87,6 @@ ul, ol {
 }
 
 .delete-link{
-	line-height: 16px;
 	text-align: center;
 	width: 80px;
 }
@@ -484,8 +483,11 @@ select[multiple] {
 }
 
 .btn-danger {
+	padding:0;
+	line-height:39px;
 	height:39px;
 	margin-left:1em;
+	margin:0;
 }
 
 .btn-success:hover {
