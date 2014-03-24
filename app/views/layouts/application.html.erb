@@ -18,7 +18,7 @@
 	    		overlayOpacity: "0.8"
 	    })
 		window.Dropzone;
-		jQuery.ajaxSetup({ cache: false });
+		
 		setupWindow();
 	</script>
 
@@ -101,5 +101,10 @@
 	</div>
 </footer>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.ajaxSetup({ cache: false });
+	});
+</script>
 </body>
 </html>

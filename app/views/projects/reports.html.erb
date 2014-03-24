@@ -1,10 +1,6 @@
 <%= render :partial => "projects/sidebar" %>
-
-<%= render :partial => "projects/project_nav" %>
-
-	<p class="pull-left visible-xs" style="margin-right: 10px;">
-		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-	</p>
+<div class="col-xs-12 col-sm-9" id="main">
+	<%= render :partial => "projects/project_nav" %>
 	<div id="pages">
 		<%= render :partial => "reports", :locals => {:reports => @reports} %>
 	</div>

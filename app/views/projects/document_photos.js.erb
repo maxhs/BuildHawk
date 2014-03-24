@@ -1,5 +1,5 @@
-$('#filters > li > a').removeClass('current-page');
-$('#<%= @nav %>').addClass('current-page');
+$('#main a').removeClass('current-page');
+$('#<%= @nav %>, .nav-documents.admin a').addClass('current-page');
 $('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "documents" %>');
 	$(this).fadeIn(170);
