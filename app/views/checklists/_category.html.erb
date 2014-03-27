@@ -1,7 +1,7 @@
 <div class="border-box">
 	<div class="category-form container">
 		<div class="row">
-			<span class="col-xs-5 header-description"><h2><%= @category.name %></h2></span>
+			<span class="header-description"><h2><%= @category.name %></h2></span>
 		</div>
 		<%= nested_form_for @category, :url => update_category_checklist_path(@category.checklist, :category_id => @category.id), :remote => true, :method => :patch do |f| %>
 			<div class="row">

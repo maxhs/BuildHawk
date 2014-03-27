@@ -126,6 +126,8 @@ Buildhawk::Application.routes.draw do
   resources :checklists do 
     collection do 
       post :order_categories
+      post :order_subcategories
+      post :order_items
     end
     member do
       get :new_checklist_item

@@ -9,6 +9,7 @@ class ChecklistItem < ActiveRecord::Base
   	has_many :photos
   	has_many :comments, :dependent => :destroy
 
+    acts_as_list scope: :subcategory, column: :item_index
     default_scope { order('item_index') }
 
     after_commit :check_completed
@@ -51,11 +52,11 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def project_id
-      if checklist
-        checklist.project.id
-      else
-        subcategory.category.checklist.project.id
-      end
+        if checklist
+            checklist.project.id
+        else
+            subcategory.category.checklist.project.id
+        end
     end
 
   	api_accessible :projects do |t|

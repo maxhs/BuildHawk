@@ -36,6 +36,7 @@
 		padding:20px 0;
 		border-bottom:1px solid #ddd;
 		font-size:15px;
+		margin:0;
 	}
 
 	.row.checklist-item.completed {
@@ -47,8 +48,11 @@
 		text-decoration:line-through;
 	}
 
+	ul {
+		list-style:none;
+	}
 	#checklist-items {
-		overflow:auto;
+		
 		#categories {
 			list-style:none;
 			li {
@@ -148,7 +152,10 @@
 	}
 }
 
-.subcategory.row {
+.subcategory {
+	.header.row {
+		padding-top:0px;
+	}
 	.category-label {
 		line-height:63px;
 		vertical-align:middle;
@@ -168,6 +175,7 @@
 	margin:10px;
 	width:160px;
 	text-align:center;
+	clear:both;
 }
 
 .new_checklist_item, .new_category {

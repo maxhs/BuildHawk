@@ -6,32 +6,33 @@ class Subcategory < ActiveRecord::Base
     after_save :check_completed
     after_create :order_indices
 
+    acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
     def item_count
-      checklist_items.count
+        checklist_items.count
     end
 
     def completed_count
-      checklist_items.where(:status => "Completed").count if checklist_items
+        checklist_items.where(:status => "Completed").count if checklist_items
     end
 
     def check_completed
-      if category.completed_count != 0 && category.completed_count == category.item_count
-        category.update_attribute :completed_date, Date.today
-        status = "Completed"
-      elsif completed_date != nil
-        completed_date = nil
-        status = nil
-      end
+        if category.completed_count != 0 && category.completed_count == category.item_count
+            category.update_attribute :completed_date, Date.today
+            status = "Completed"
+        elsif completed_date != nil
+            completed_date = nil
+            status = nil
+        end
     end
 
     def order_indices
-      item_index = 0
-      checklist_items.each do |i|
-        i.update_attribute :order_index, item_index
-        item_index+=1
-      end
+        item_index = 0
+        checklist_items.each do |i|
+            i.update_attribute :order_index, item_index
+            item_index+=1
+        end
     end
 
   	acts_as_api
@@ -45,9 +46,9 @@ class Subcategory < ActiveRecord::Base
   	end
 
     api_accessible :checklist do |t|
-      t.add :checklist_items
-      t.add :name
-      t.add :completed_date
-      t.add :milestone_date
+        t.add :checklist_items
+        t.add :name
+        t.add :completed_date
+        t.add :milestone_date
     end
 end

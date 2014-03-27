@@ -187,18 +187,6 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
-	def order_categories
-		@checklist = Checklist.find params[:id]
-		@project = @checklist.project unless @checklist.project.nil?
-		params[:phase].each_with_index do |p,i|
-			@phase = Category.find p
-			@phase.update_attribute :order_index, i
-		end
-		respond_to do |format|
-			format.js
-		end
-	end
-
 	def destroy_subcategory
 		@subcategory = Subcategory.find params[:subcategory_id]
 		@checklist = Checklist.find params[:id]
@@ -212,4 +200,40 @@ class ChecklistsController < ApplicationController
 		end
 	end
 	
+	def order_categories
+		@checklist = Checklist.find params[:id]
+		@project = @checklist.project unless @checklist.project.nil?
+		params[:phase].each_with_index do |p,i|
+			@phase = Category.find p
+			@phase.update_attribute :order_index, i
+		end
+		respond_to do |format|
+			format.js  { render :template => "checklists/reorder"}
+		end
+	end
+
+	def order_subcategories
+		@category = Category.find params[:id]
+		@project = @category.checklist.project unless @category.checklist.project.nil?
+		params[:subcategory].each_with_index do |p,i|
+			subcategory = Subcategory.find p
+			subcategory.update_attribute :order_index, i
+		end
+		respond_to do |format|
+			format.js  { render :template => "checklists/reorder"}
+		end 
+	end
+
+	def order_items
+		subcategory = Subcategory.find params[:id]
+		@project = subcategory.category.checklist.project
+		params[:item].each_with_index do |item,i|
+			@item = ChecklistItem.find item
+			#why am I using item index here? I don't know.
+			@item.update_attribute :item_index, i
+		end
+		respond_to do |format|
+			format.js { render :template => "checklists/reorder"}
+		end
+	end
 end
