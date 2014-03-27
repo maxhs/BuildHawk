@@ -1,7 +1,8 @@
 var itemsHolder = $('#<%= @category.id %>-items');
 if (itemsHolder.hasClass('revealed')){
+	$('#new-category-<%=@category.id%>').hide(200);
 	itemsHolder.hide(300,function(){
-		$('.new-subcategory').css('opacity',0);
+		
 	});
 	itemsHolder.removeClass('revealed');
 	
@@ -9,13 +10,14 @@ if (itemsHolder.hasClass('revealed')){
 	
 	itemsHolder.fadeOut(200,function(){
 		<% if @project %>
-			$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: true %><%= link_to "New Phase", new_category_project_path(@project, :category_id => @category.id, :order_index => @category.order_index), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
+			$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "New Phase", new_category_project_path(@project, :category_id => @category.id, :order_index => @category.order_index), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
 		<% else %>
-			$(this).html('<%= j render partial:"admin/subcategory", collection:@subcategories, as: :subcategory, cache: true %><%= link_to "New Phase", new_category_project_path(@category, :category_id => @category.id, :order_index => @category.order_index), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
+			$(this).html('<%= j render partial:"admin/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "New Phase", new_category_project_path(@category, :category_id => @category.id, :order_index => @category.order_index), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
 		<% end %>
 		$(this).addClass('revealed');
+
 		$(this).show(300,function(){
-			$('.new-subcategory').css('opacity',1);
+			$('#new-category-<%=@category.id%>').show(200);
 		});
 
 	});
