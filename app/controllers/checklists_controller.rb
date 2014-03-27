@@ -152,15 +152,16 @@ class ChecklistsController < ApplicationController
 		end
 
 		@checklist = @category.checklist
-		if params[:project_id].present?
-			@project = Project.find params[:project_id]
-			# if request.xhr?
-			# 	respond_to do |format|
-			# 		format.js { render :template => "projects/checklist" }
-			# 	end
-			# else
-			 	render :checklist
-			#end
+		unless @checklist.project.nil?
+			@project = @checklist.project
+			@projects = @checklist.project.company.projects
+			if request.xhr?
+			 	respond_to do |format|
+			 		format.js { render :template => "projects/checklist" }
+			 	end
+			else
+			 	redirect_to checklist_project_path(@project)
+			end
 		else 
 			if request.xhr?
 				respond_to do |format|
