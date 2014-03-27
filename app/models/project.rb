@@ -73,6 +73,14 @@ class Project < ActiveRecord::Base
       Resque.enqueue(DestroyProject,id)
     end
 
+    def duplicate_project
+        new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+        new_project = self.dup :include => [:reports, {:photos => [:image, :user, :checklist_item, :punchlist_item, :report, :project,:folder}, :punchlists, :address, :folders, :users, :project_users, :subs, :project_subs]
+        new_project.checklist = new_checklist
+        new_project.save
+        return new_project
+    end
+
     def recent_feed
         limit = 5
         feed = []
