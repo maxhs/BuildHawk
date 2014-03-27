@@ -1,11 +1,10 @@
 <%= nested_form_for @new_subcategory, url: create_subcategory_project_path(@project, :checklist_id => @checklist.id), :remote => true, :method => :post do |f| %>
-	<%= f.hidden_field :order_index, :value => @item_index.to_i + 1 %>
+	<%= f.hidden_field :order_index, :value => 0 %>
 	<%= f.hidden_field :category_id, :value => @category.id %>
-	<%= hidden_field_tag :previous_subcategory_id, @subcategory.id %>
 
 	<div class="row">
 		<div class="col-md-11"><%= f.text_field :name, :placeholder => "Name the new category...", :style=>"width:100%;" %></div>
-		<button class="btn btn-success btn-md pull-right col-md-1" style="margin:0;"><%= f.submit "Add", :class => "no-link", :style=>"margin:0 auto;" %></button>
+		<button class="btn btn-success btn-md pull-right col-md-1" style="margin:0;"><%= f.submit "ADD", :class => "no-link", :style=>"margin:0 auto;" %></button>
 	</div>
 
 <% end %>

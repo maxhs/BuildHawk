@@ -31,12 +31,12 @@
 			<% end %>
 		</div>
 		
-	<% if current_user.admin %>
+	<% if current_user.admin && item.status != "Completed" %>
 		<div class="col-md-1" style="text-align: center;">
-			<%= link_to 'Edit', edit_checklist_item_path(item), :remote => true %>
+			<%= link_to 'Edit', edit_checklist_item_path(item), :class => "btn btn-md btn-success", remote: true %>
 		</div>
 		<div class="col-md-1" style="text-align: center;">
-			<%= link_to 'Delete', delete_item_project_path(@project, :checklist_item_id => item.id), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, :method => :delete, :class=>"delete-link", :remote => true %>
+			<%= link_to 'Delete', delete_item_project_path(@project, :checklist_item_id => item.id), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, :method => :delete, :class=>"btn btn-md btn-danger", :remote => true %>
 		</div>
 	<% end %>
 

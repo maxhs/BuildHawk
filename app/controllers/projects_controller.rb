@@ -196,14 +196,6 @@ class ProjectsController < ApplicationController
 	def new_subcategory
 		@category = Category.find params[:category_id] 
 		@new_subcategory = @category.subcategories.new
-		if params[:subcategory_id]
-			@subcategory = Subcategory.find params[:subcategory_id]
-			@subcategory_id = params[:subcategory_id]
-		else
-			@subcategory = @category.subcategories.build
-			@subcategory_id = 0
-		end
-		@item_index = params[:item_index]
 		@checklist = @project.checklist
 		if request.xhr?
 			respond_to do |format|
@@ -215,8 +207,8 @@ class ProjectsController < ApplicationController
 	end
 
 	def create_subcategory
-		@previous_subcategory_id = params[:previous_subcategory_id].html_safe
 		@subcategory = Subcategory.create params[:subcategory]
+		@subcategory.move_to_top
 		@subcategory.checklist_items.build
 		@checklist = Checklist.find params[:checklist_id]
 		@project = Project.find params[:id]

@@ -1,4 +1,1 @@
-$('#new-item-<%= @subcategory.id %>').fadeOut(200,function(){
-	$(this).replaceWith('<%= j render partial:"projects/new_item" %>');
-	$(this).fadeIn(200);
-});
+$('#subcategory-<%= @subcategory.id %> .header').after('<%= j render partial:"projects/new_item" %>');

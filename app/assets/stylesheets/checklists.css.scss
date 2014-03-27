@@ -27,14 +27,17 @@
 	}
 
 	.phase-label {
-		line-height:63px;
+		line-height:53px;
 		vertical-align:middle;
 		text-align:center;
+		a:hover {
+			color:#fff !important;
+		}
 	}
 
 	.row {
-		padding:20px 0;
-		border-bottom:1px solid #ddd;
+		padding:15px 0;
+		border-bottom:1px solid #eee;
 		font-size:15px;
 		margin:0;
 	}
@@ -52,6 +55,16 @@
 		list-style:none;
 	}
 	#checklist-items {
+		.btn {
+			margin:0;
+			a:hover {
+				color:#fff;
+			}
+		}
+		.btn-danger {
+			line-height:32px;
+			height:34px;
+		}
 		
 		#categories {
 			list-style:none;
@@ -154,10 +167,10 @@
 
 .subcategory {
 	.header.row {
-		padding-top:0px;
+		padding-top:0 0 10px;
 	}
 	.category-label {
-		line-height:63px;
+		line-height:53px;
 		vertical-align:middle;
 		text-align:center;
 	}
@@ -168,14 +181,20 @@
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	padding:14px;
+	padding:11px;
 	position:relative;
-	display:block;
-	top:10px;
-	margin:10px;
-	width:160px;
+	display:inline-block;
+	margin:0 10px;
+	width:auto;
 	text-align:center;
 	clear:both;
+	font-family:"Gotham Book",'Helvetica',sans-serif;
+	text-transform:uppercase;
+}
+.new-subcategory {
+	top:6px;
+	vertical-align:top;
+	opacity:0;
 }
 
 .new_checklist_item, .new_category {

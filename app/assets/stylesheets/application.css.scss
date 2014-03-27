@@ -486,16 +486,15 @@ select[multiple] {
 	padding:0;
 	line-height:39px;
 	height:39px;
-	margin-left:1em;
-	margin:0;
+	margin:5px 0 0;
 }
 
 .btn-success:hover {
 	opacity:1;
 }
 
-.btn-danger, .btn-danger a {
-	color:#fff;
+.btn-danger, .btn-danger a, .btn-danger a:hover, .btn-danger:hover, .btn:hover {
+	color:#fff !important;
 }
 
 .btn-danger:hover {
