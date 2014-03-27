@@ -130,6 +130,8 @@ class ChecklistsController < ApplicationController
 
 	def category
 		@category = Category.find params[:category_id]
+		@project = Project.find params[:project_id] if params[:project_id]
+		@projects = @project.company.projects 
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -152,13 +154,13 @@ class ChecklistsController < ApplicationController
 		@checklist = @category.checklist
 		if params[:project_id].present?
 			@project = Project.find params[:project_id]
-			if request.xhr?
-				respond_to do |format|
-					format.js { render :template => "projects/checklist" }
-				end
-			else
-				render :checklist
-			end
+			# if request.xhr?
+			# 	respond_to do |format|
+			# 		format.js { render :template => "projects/checklist" }
+			# 	end
+			# else
+			 	render :checklist
+			#end
 		else 
 			if request.xhr?
 				respond_to do |format|

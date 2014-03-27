@@ -1,7 +1,11 @@
+	<% if @project %>
+		<%= render :partial => "projects/sidebar" %>
+		<div class="col-xs-12 col-sm-9" id="main">
+		<%= render :partial => "projects/project_nav" %>
+	<% else %>
+		<%= render :partial => "admin/sidebar" %>
+	<% end %>
 
-	<p class="pull-left visible-xs" style="margin-right: 10px;">
-		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-	</p>
 	<div id="pages">
 		<%= render :partial => "checklists/category", :locals => {:category => @category} %>
 	</div>

@@ -4,24 +4,24 @@
 	</div>
 	<%= nested_form_for @subcategory, :url => update_subcategory_checklist_path(@subcategory.category.checklist, :subcategory_id => @subcategory.id), :remote => true, :method => :patch do |f| %>
 
-				<div>
-					<h4>Category Name:</h4>
-				</div>
-				<div>
-					<%= f.text_field :name %>
-				</div>
-				<div>
-					<h4>Milestone Date:</h4>
-				</div>
-				<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-					<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
-					<span class="add-on"><i class="icon-th"></i></span>
-				</div>
+		<div>
+			<h4>Category Name:</h4>
+		</div>
+		<div>
+			<%= f.text_field :name %>
+		</div>
+		<div>
+			<h4>Milestone Date:</h4>
+		</div>
+		<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+			<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+			<span class="add-on"><i class="icon-th"></i></span>
+		</div>
 
-				<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Update", :class => "no-link" %></button></div>
-				<div style="padding-top:23px;clear:both;">
-					<%= link_to "Delete", destroy_subcategory_checklist_path(@subcategory.category.checklist, :subcategory_id => @subcategory), :method => :delete, :data => {:confirm => "Are you sure you want to delete this category?"}, :class=>"pull-right delete-link", :remote => true %>
-				</div>
+		<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Update", :class => "no-link" %></button></div>
+		<div style="padding-top:23px;clear:both;">
+			<%= link_to "Delete", destroy_subcategory_checklist_path(@subcategory.category.checklist, :subcategory_id => @subcategory), :method => :delete, :data => {:confirm => "Are you sure you want to delete this category?"}, :class=>"pull-right delete-link", :remote => true %>
+		</div>
 	<% end %>
 </div>
 <script type="text/javascript">
