@@ -55,17 +55,18 @@
 		list-style:none;
 	}
 	#checklist-items {
-		.btn {
-			margin:0;
-			a:hover {
-				color:#fff;
+		.row{
+			.btn {
+				margin:0;
+				a:hover {
+					color:#fff;
+				}
+			}
+			.btn-danger {
+				line-height:32px;
+				height:34px;
 			}
 		}
-		.btn-danger {
-			line-height:32px;
-			height:34px;
-		}
-		
 		#categories {
 			list-style:none;
 			li {
@@ -190,6 +191,7 @@
 	clear:both;
 	font-family:"Gotham Book",'Helvetica',sans-serif;
 	text-transform:uppercase;
+	font-size:15px;
 }
 .new-subcategory {
 	top:6px;

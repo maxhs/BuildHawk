@@ -181,6 +181,7 @@ class ProjectsController < ApplicationController
 	def create_item
 		index = params[:checklist_item][:item_index]
 		@item = ChecklistItem.create params[:checklist_item]
+		@item.move_to_top
 		@checklist = @item.checklist
 		@subcategory = @item.subcategory
 		@project = Project.find params[:id]

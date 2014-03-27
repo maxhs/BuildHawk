@@ -1,4 +1,4 @@
 $('#new_checklist_item').fadeOut(200,function(){
-	$(this).remove();
-	$('#sub-<%= @subcategory.id %> .subcategory-items').append('<%= j render partial:"projects/item", :locals => {:item => @item} %>');
+	$(this).replaceWith('<%= j render partial:"projects/item", :locals => {:item => @item} %>');
+		$(this).fadeIn(200);
 });
