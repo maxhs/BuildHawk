@@ -46,6 +46,19 @@
 	.row.checklist-item.not-applicable div {
 		text-decoration:line-through;
 	}
+
+	#checklist-items {
+		overflow:auto;
+		#categories {
+			list-style:none;
+			li {
+				.phase-label {
+					float:none;
+					display:inline-block;
+				}
+			}
+		}
+	}
 }
 
 .category-form.container {

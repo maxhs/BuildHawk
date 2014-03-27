@@ -187,6 +187,18 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
+	def order_categories
+		@checklist = Checklist.find params[:id]
+		@project = @checklist.project unless @checklist.project.nil?
+		params[:phase].each_with_index do |p,i|
+			@phase = Category.find p
+			@phase.update_attribute :order_index, i
+		end
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	def destroy_subcategory
 		@subcategory = Subcategory.find params[:subcategory_id]
 		@checklist = Checklist.find params[:id]

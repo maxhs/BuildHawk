@@ -23,7 +23,9 @@
 					<% end %>	
 				</div>
 			
-				<%= render :partial => 'projects/phase', collection: @checklist.categories, :as => :c, cache: false %>
+				<ul id="categories">
+					<%= render :partial => 'projects/phase', collection: @checklist.categories, :as => :c, cache: false %>
+				</ul>
 			</div>
 		</div>
 	<% else %>
@@ -35,5 +37,27 @@
 	$('#remove').click(function(){
 		$('#search').val('');
 		$('#checklist-search').submit();
+	});
+	$(document).ready(function(){
+		
+		$('#categories').sortable({
+          axis: 'y',
+          dropOnEmpty:true,
+          cursor: 'move',
+          items: 'li',
+          opacity: 0.4,
+          scroll: true,
+          stop: function(){
+            $.ajax({
+                type: 'post',
+                data: $('#categories').sortable('serialize') + '&id=<%=@checklist.id-%>',
+                dataType: 'script',
+                complete: function(request){
+                    //$('#categories').effect('highlight');
+                  },
+                url: '/checklists/order_categories'})
+            }
+        })
+       
 	});
 </script>

@@ -14,7 +14,7 @@
 </div>
 <div id="sub-<%=subcategory.id%>">
 	<div class="subcategory-items">
-		<%= render partial:"projects/item", collection:subcategory.checklist_items, as: :item, cache: false %>
+		<%= render partial:"projects/item", collection:subcategory.checklist_items, as: :item, cache: true %>
 	</div>
 	<% if current_user.admin %>
 		<% if subcategory.checklist_items.count > 0 %>

@@ -38,6 +38,8 @@ GEM
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       rack (>= 1.1.0)
+    acts_as_list (0.4.0)
+      activerecord (>= 3.0)
     apn_sender (2.0.0)
       activesupport (>= 3.1)
       connection_pool
@@ -237,6 +239,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_api
+  acts_as_list
   apn_sender (= 2.0.0)
   aws-sdk
   cocaine

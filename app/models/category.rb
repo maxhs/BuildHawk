@@ -7,6 +7,7 @@ class Category < ActiveRecord::Base
 
     after_create :order_indices
 
+    acts_as_list scope: :checklist, column: :order_index
     default_scope { order('order_index') }
 
     def item_count

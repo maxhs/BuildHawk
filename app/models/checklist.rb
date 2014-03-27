@@ -43,8 +43,6 @@ class Checklist < ActiveRecord::Base
         end
   	end
 
-
-
     def upcoming_items
         items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
     end
@@ -94,7 +92,6 @@ class Checklist < ActiveRecord::Base
     end
 
     def assign_items
-
         checklist_items << categories.sort_by{|c|c.name.to_i}.map(&:subcategories).flatten.map(&:checklist_items).flatten 
         sub_index = 0
         categories.sort_by{|c|c.name.to_i}.each do |i|
