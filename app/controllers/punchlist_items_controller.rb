@@ -6,12 +6,12 @@ class PunchlistItemsController < ApplicationController
 		@item = PunchlistItem.new
 		@item.photos.build
 		@item.build_assignee
-
 		@project = Project.find params[:project_id]
-		@company = current_user.company
+		@company = @project.company
 		@projects = @company.projects
-		@users = @project.company.users
-
+		@users = @project.users
+		@subs = @project.subs
+	
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -129,9 +129,10 @@ class PunchlistItemsController < ApplicationController
 			@punchlist = @item.punchlist
 			@project = @punchlist.project
 			@items = @punchlist.punchlist_items
-			@company = current_user.company
+			@company = @project.company
 			@projects = @company.projects
-			@users = @company.users
+			@users = @project.users
+			@subs = @project.subs
 		end
 	end
 end
