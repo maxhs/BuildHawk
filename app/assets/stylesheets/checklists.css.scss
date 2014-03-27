@@ -135,6 +135,14 @@
 	}
 }
 
+.subcategory.row {
+	.category-label {
+		line-height:63px;
+		vertical-align:middle;
+		text-align:center;
+	}
+}
+
 .new-checklist-item, .new-category, .new-subcategory {
 	border:1px solid #ddd;
 	border-radius:5px;
