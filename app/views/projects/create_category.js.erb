@@ -1,5 +1,4 @@
-
 $('#new_category').fadeOut(200,function(){
 	$(this).remove();
-	$('#phase-<%= @previous_category_id %>').after('<%= j render partial:"empty_category" %>');
+	$('#categories').prepend('<%= j render partial:"empty_category", locals: {:c => @category} %>');
 });

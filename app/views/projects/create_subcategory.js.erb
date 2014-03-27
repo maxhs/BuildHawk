@@ -1,7 +1,5 @@
 
 $('#new_subcategory').fadeOut(200,function(){
-
-		$(this).replaceWith('<%= j render partial:"empty_subcategory", locals: {:subcategory => @subcategory} %>');
-		$(this).fadeIn(200);
-
+	$(this).replaceWith('<%= j render partial:"empty_subcategory", locals: {:subcategory => @subcategory} %>');
+	$(this).fadeIn(200);
 });

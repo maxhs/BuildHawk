@@ -223,10 +223,9 @@ class ProjectsController < ApplicationController
 	end
 
 	def new_category
-		@category = Category.find params[:category_id]
-		@checklist = @category.checklist 
+		@project = Project.find params[:id]
+		@checklist = @project.checklist
 		@new_category = @checklist.categories.new
-		@item_index = params[:item_index]
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -237,10 +236,10 @@ class ProjectsController < ApplicationController
 	end
 
 	def create_category
-		@previous_category_id = params[:previous_category_id].html_safe
 		@category = Category.create params[:category]
-		@checklist = Checklist.find params[:checklist_id]
+		@category.move_to_top
 		@project = Project.find params[:id]
+		@checklist = @project.checklist
 		if request.xhr?
 			respond_to do |format|
 				format.js 
