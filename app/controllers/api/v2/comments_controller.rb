@@ -45,7 +45,12 @@ class Api::V2::CommentsController < Api::V2::ApiController
     end
 
     def destroy
-
+        comment = Comment.find params[:id]
+        if comment.destroy
+            render :json => {success: true}
+        else
+            render :json => {success: false}
+        end
     end
 
 end
