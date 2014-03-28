@@ -1,8 +1,8 @@
 var itemsHolder = $('#<%= @category.id %>-items');
 if (itemsHolder.hasClass('revealed')){
-	$('#new-category-<%=@category.id%>').fadeOut(200);
+	
 	itemsHolder.hide(300,function(){
-		
+		$('#new-category-<%=@category.id%>').fadeOut(200);
 	});
 	itemsHolder.removeClass('revealed');
 	

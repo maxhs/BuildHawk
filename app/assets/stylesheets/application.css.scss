@@ -470,7 +470,10 @@ select[multiple] {
 	border: 1px solid #eee;
 }
 
-.btn {
+.btn, .btn input {
+	padding:0 5px;
+	line-height:39px;
+	height:39px;
 	margin:2px;
 	min-width:70px;
 	font-family:'Gotham Book','Helvetica',sans-serif;
@@ -482,25 +485,12 @@ select[multiple] {
 	opacity:.9;
 }
 
-.btn-danger {
-	padding:0;
-	line-height:39px;
-	height:39px;
-	margin:2px 0 0;
-}
-
 .btn-success:hover {
 	opacity:1;
 }
 
 .btn-danger, .btn-danger a, .btn-danger a:hover, .btn-danger:hover, .btn:hover {
 	color:#fff !important;
-}
-
-.btn-danger:hover {
-	a{
-		color:#fff !important;
-	}
 }
 
 .export {
@@ -516,7 +506,6 @@ select[multiple] {
 		color:#222;
 		text-transform:uppercase;
 		letter-spacing:1px;
-		//font-family:'Gotham Book',"Helvetica",sans-serif;
 	}
 }
 

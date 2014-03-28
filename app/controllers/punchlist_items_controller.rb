@@ -95,14 +95,8 @@ class PunchlistItemsController < ApplicationController
 	end
 		
 	def destroy
-		@item.destroy
-		if request.xhr?
-			respond_to do |format|
-				format.js {render template: "projects/worklist"}
-			end
-		else
-			redirect_to worklist_project_path(@project)
-		end
+		@item.destroy!
+		redirect_to worklist_project_path(@project)
 	end
 
 	def generate
