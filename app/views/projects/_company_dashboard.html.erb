@@ -10,7 +10,9 @@
 				<div class="row">
 					<div class="dashboard-label col-xs-2">Map:</div>
 					<div class="col-xs-10">
-						<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
+						<% if project.address %>
+							<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
+						<% end %>
 					</div>
 				</div>
 

@@ -23,13 +23,13 @@
 .edit_folder {
 	input[type="text"] {
 		width:70%;
+		font-size:16px;
+		height:39px;
 		display:inline-block;
 	}
 }
 
 .remove-folder-link {
-	height:36px;
-	line-height:22px;
 	vertical-align:middle;
 	margin:0;
 }

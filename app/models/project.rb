@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
   	has_one :checklist, :dependent => :destroy
     has_many :folders, :dependent => :destroy
 
+    after_create :default_folders
+
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true
     accepts_nested_attributes_for :subs, :allow_destroy => true
@@ -26,10 +28,20 @@ class Project < ActiveRecord::Base
     searchable do
         text    :name
         text    :address do
-            address.formatted_address
+            address.formatted_address if address
         end
         integer :company_id
         time    :created_at
+    end
+
+    def default_folders
+        ["Subcontractors","Floor Plans","Permit Docs","Schedule","Selections"].each do |f|
+            self.folders.create(
+                :name => f
+            )
+            puts "creating a folder named f"
+        end
+        self.save
     end
 
     def checklist_items
