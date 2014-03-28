@@ -12,8 +12,10 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         
         if projects && projects.count > 0
         	respond_to do |format|
-            	format.json { render_for_api :projects, :json => projects, :root => :projects}
+            	format.json { render_for_api :projects, :json => projects.order("name ASC"), :root => :projects}
           	end
+        else
+            render :json => {success: false}
         end
     end
 
