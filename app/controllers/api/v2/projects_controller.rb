@@ -2,7 +2,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
     	@user = User.find params[:user_id]
-    	projects = @user.projects.where(:project_group_id => nil)
+    	projects = @user.projects.where(:project_group_id => nil).order("name ASC")
         groups = @user.projects.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
         if groups && groups.count > 0 
             groups.each do |g|
@@ -12,7 +12,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         
         if projects && projects.count > 0
         	respond_to do |format|
-            	format.json { render_for_api :projects, :json => projects.order("name ASC"), :root => :projects}
+            	format.json { render_for_api :projects, :json => projects, :root => :projects}
           	end
         else
             render :json => {success: false}

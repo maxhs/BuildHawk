@@ -39,7 +39,6 @@ class Project < ActiveRecord::Base
             self.folders.create(
                 :name => f
             )
-            puts "creating a folder named f"
         end
         self.save
     end
@@ -66,7 +65,7 @@ class Project < ActiveRecord::Base
     end
 
     def recent_documents
-        photos.where("image_file_name IS NOT NULL").last(8)
+        photos.where("image_file_name IS NOT NULL").last(8).reverse
     end
 
     def categories
