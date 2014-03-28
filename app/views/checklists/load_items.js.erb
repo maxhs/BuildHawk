@@ -1,6 +1,6 @@
 var itemsHolder = $('#<%= @category.id %>-items');
 if (itemsHolder.hasClass('revealed')){
-	$('#new-category-<%=@category.id%>').hide(200);
+	$('#new-category-<%=@category.id%>').fadeOut(200);
 	itemsHolder.hide(300,function(){
 		
 	});
@@ -17,7 +17,7 @@ if (itemsHolder.hasClass('revealed')){
 		$(this).addClass('revealed');
 
 		$(this).show(300,function(){
-			$('#new-category-<%=@category.id%>').show(200);
+			$('#new-category-<%=@category.id%>').fadeIn(200);
 		});
 	});
 }
