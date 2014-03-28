@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-	  attr_accessible :body, :user_id, :report_id, :user, :checklist_item_id, :punchlist_item_id, :mobile
+	  attr_accessible :body, :user_id, :report_id, :checklist_item_id, :punchlist_item_id, :mobile
   	belongs_to :user
   	belongs_to :report
   	belongs_to :checklist_item, counter_cache: true
@@ -16,6 +16,7 @@ class Comment < ActiveRecord::Base
   	end
 
   	api_accessible :projects do |t|
+      t.add :id
       t.add :body
       t.add :user
       t.add :created_at
