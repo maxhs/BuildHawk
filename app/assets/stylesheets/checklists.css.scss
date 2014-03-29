@@ -172,6 +172,14 @@
 }
 
 .subcategory {
+	.title {
+		display:inline-block;
+		margin:10px auto;
+		cursor:pointer;
+	}
+	.title:hover {
+		color:#cc0000;
+	}
 	.header.row {
 		padding-top:0 0 10px;
 	}
@@ -180,14 +188,17 @@
 		vertical-align:middle;
 		text-align:center;
 	}
+	.items-container.collapsed {
+		display:none;
+	}
 }
 
 .new-checklist-item, .new-phase, .new-subcategory {
-	border:1px solid #ddd;
+	border:1px solid #eee;
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	padding:11px;
+	padding:7px;
 	position:relative;
 	display:inline-block;
 	margin:0 10px;
@@ -195,8 +206,7 @@
 	text-align:center;
 	clear:both;
 	font-family:"Gotham Book",'Helvetica',sans-serif;
-	text-transform:uppercase;
-	font-size:15px;
+	font-size:14px;
 }
 
 .new-phase {

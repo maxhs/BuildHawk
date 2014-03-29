@@ -3,7 +3,7 @@
 		<% if current_user.admin %>
 			<span class="col-xs-6">
 				<h2 style="display:inline-block;margin:10px auto;"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"remote", :remote => true %></h2>
-				<%= link_to "(+) Category", new_subcategory_project_path(@project, :category_id => c.id), :id=>"new-category-#{c.id}", :class=>"remote new-subcategory", remote: true %>
+				<%= link_to "Add Category", new_subcategory_project_path(@project, :category_id => c.id), :id=>"new-category-#{c.id}", :class=>"remote new-subcategory", remote: true %>
 			</span>
 			<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	
 			<span class="col-xs-2 phase-label"><%= parse_date(c.completed_date) %></span>
