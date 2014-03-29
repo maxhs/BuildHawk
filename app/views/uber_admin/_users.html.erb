@@ -11,6 +11,7 @@
 		<thead>
 			<th>Photo</th>
 			<th>Name</th>
+			<th>Company</th>
 			<th>Email</th>
 			<th>Created On</th>
 		</thead>
@@ -20,6 +21,7 @@
 				<tr class="user-row">
 					<td style="width:100px;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
 					<td class="user-name"><%= link_to user.full_name, edit_user_uber_admin_index_path(:user_id => user.id), :remote => true %></td>
+					<td><%= user.company.name %></td>
 					<td><%= user.email %></td>
 					<td><%= parse_time user.created_at %></td>
 				</tr>

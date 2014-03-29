@@ -1,8 +1,9 @@
 $('a').removeClass('current-page');
-$('#nav-uber-admin a').addClass('current-page');
 $('#pagescontainer').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
 	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);
+	$('#nav-uber-admin a').addClass('current-page');
+	$('#uber-admin-companies-link').addClass('current-page');
 });
 mixpanel.track("Uber admin");

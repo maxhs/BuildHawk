@@ -34,7 +34,6 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
-
 	def url200
 		if image_file_name
 			image.url(:small)

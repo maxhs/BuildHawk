@@ -142,16 +142,21 @@ class AdminController < ApplicationController
 	end
 
 	def create_template
-		Resque.enqueue(CreateTemplate,params[:company_id])
-		@response_message = "Creating checklist template. This may take a few minutes..."
-		if request.xhr?
-			respond_to do |format|
-				format.js {render :template => "admin/background_template"}
+		if Rails.env.production?
+	    
+			Resque.enqueue(CreateTemplate,params[:company_id])
+			@response_message = "Creating checklist template. This may take a few minutes..."
+			if request.xhr?
+				respond_to do |format|
+					format.js {render :template => "admin/background_template"}
+				end
+			else
+				flash[:notice] = @response_message
+				redirect_to checklists_admin_index_path
 			end
-		else
-			flash[:notice] = @response_message
-			redirect_to checklists_admin_index_path
-		end
+		elsif Rails.env.development?
+	      	puts "should be creating a template in development environment"
+	    end
 	end
 
 	def delete_checklist
@@ -190,25 +195,29 @@ class AdminController < ApplicationController
 	end
 
 	def create_project
-		@checklist = Checklist.new
-		if params[:project][:checklist].present?
-			list = Checklist.find_by(name: params[:project][:checklist])
-			params[:project].delete(:checklist)
-			Resque.enqueue(CreateProject,params[:project],list.id)
-		else 
-			Resque.enqueue(CreateProject,params[:project],nil)
-			@checklist.save
-		end
-		
-		@response_message = "Creating project. This may take a few minutes..."
-		if request.xhr?
-			respond_to do |format|
-				format.js {render :template => "admin/background_project"}
+		if Rails.env.production?
+			@checklist = Checklist.new
+			if params[:project][:checklist].present?
+				list = Checklist.find_by(name: params[:project][:checklist])
+				params[:project].delete(:checklist)
+				Resque.enqueue(CreateProject,params[:project],list.id)
+			else 
+				Resque.enqueue(CreateProject,params[:project],nil)
+				@checklist.save
 			end
-		else
-			flash[:notice] = @response_message
-			redirect_to admin_index_path
-		end
+			
+			@response_message = "Creating project. This may take a few minutes..."
+			if request.xhr?
+				respond_to do |format|
+					format.js {render :template => "admin/background_project"}
+				end
+			else
+				flash[:notice] = @response_message
+				redirect_to admin_index_path
+			end
+		elsif Rails.env.development?
+	      	puts "should be creating a new project in development environment"
+	    end
 	end
 
 	def billing

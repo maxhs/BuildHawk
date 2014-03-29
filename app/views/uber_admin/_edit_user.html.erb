@@ -41,6 +41,6 @@
 			<div style="float:right;"><button class="btn btn-success btn-md"><%= f.submit "Save" %></button></div>
 			
 	<% end %>
-		<div class="delete-button"><%= link_to "Delete User", destroy_user_uber_admin_index_path(:user_id => @user.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete #{@user.full_name}?"}, :class => "btn btn-danger btn-md remote" %></div>
+		<%= link_to "Delete", destroy_user_uber_admin_index_path(:user_id => @user.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete #{@user.full_name}?"}, :class => "btn btn-danger btn-md remote", :style => "float:right;clear:both;" %>
 	</div>
 </div>
