@@ -102,6 +102,12 @@ ul, ol {
 	}
 }
 
+.button-container {
+	width:100%;
+	text-align:center;
+	margin:5% auto;
+}
+
 body {
 	background-color:#eee !important;
 	
@@ -534,6 +540,8 @@ input[type="submit"] {
 	background:transparent;
 	border:0;
 	color:#fff;
+	text-transform:uppercase;
+	font-weight:200;
 	font-family:'Gotham Book','Helvetica',sans-serif;
 }
 

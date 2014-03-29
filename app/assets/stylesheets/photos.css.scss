@@ -156,7 +156,13 @@ form.edit_photo {
 		}
 
 		.photo-name {
-			padding-left:15px;
+			padding:3px 0 1px 15px;
+
+			.photo-timestamp {
+				float:right;
+				color:#aaa;
+				font-weight:200;
+			}
 		}
 	}
 	

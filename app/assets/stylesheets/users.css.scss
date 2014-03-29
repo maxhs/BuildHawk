@@ -47,13 +47,18 @@ input[type="checkbox"] {
 	float:right;
 	clear:both;
 	text-align:center;
-	width: 180px;
 	display: block;
 	border-radius: 8px;
-	padding: 7px;
-	border: 1px solid #ccc;
+	padding: 5px 15px;
+	border: 1px solid rgba(0,0,0,0);
 	margin: 0 auto;
 	line-height: 27px;
 	font-size:15px;
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+	text-transform:uppercase;
+	font-family:"Gotham Book","Helvetica",sans-serif;
+}
+
+#add-user-button:hover, #add-sub-button:hover {
+	border: 1px solid #ccc;
 }

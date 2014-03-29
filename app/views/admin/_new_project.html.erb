@@ -48,7 +48,10 @@
 		    	</div>
 	        </div>
 	         <div class="row personnel">
-	        	<div class="col-xs-3"><h4>Subs:</h4></div>
+	        	<div class="col-xs-3">
+	        		<h4>Subs:</h4>
+	        		<%= link_to "Add Sub", new_sub_admin_index_path, :id => "add-sub-button", :style=>"float:left", :remote => true %>
+	        	</div>
 	        	<div class="col-xs-9">
 					<% @subs.each do |sub| %>
 		    			<% if @project.subs.include?(sub) %>
@@ -59,7 +62,7 @@
 		    		<% end %>
 		    	</div>
 	        </div>
-			<div><button class="btn btn-success btn-lg pull-right"><%= f.submit "Create", :id=>"new-project-submit" %></button></div>
+			<div class="button-container"><button class="btn btn-success btn-md"><%= f.submit "CREATE", :id=>"new-project-submit" %></button></div>
 		</div>
 	</div>
 <% end %>

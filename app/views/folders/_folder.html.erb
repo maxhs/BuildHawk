@@ -5,7 +5,9 @@
 		<ul>
 			<% folder.photos.sort_by(&:name).each do |p| %>
 				<li class="photo-name" id="p-<%= p.id %>">
-					<%= link_to p.name, show_photo_project_path(@project,:photo_id => p.id), :class=>"remote", :remote => true %>
+					<%= link_to show_photo_project_path(@project,:photo_id => p.id), :class=>"remote", :remote => true do %>
+						<%= p.name %><span class="photo-timestamp"><%= parse_datetime p.created_at %></span>
+					<% end %>
 				</li>
 			<% end %>
 		</ul>
