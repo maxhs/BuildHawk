@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
 			@projects = @company.projects
 		end
 
-		@projects = Project.where(:core => true)
+		@projects += Project.where(:core => true).flatten
 
 		if request.xhr?
 			respond_to do |format|
