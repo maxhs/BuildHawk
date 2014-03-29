@@ -12,11 +12,26 @@
 			</div>
 			<% if @project %>
 				<div class="row">
-					<h4>Milestone Date:</h4>
-				</div>
-				<div class="input-append date row" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-					<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
-					<div id="clear-critical-date"> Clear Date</div>
+					<div class="col-xs-6">
+						<h4>Milestone Date:</h4>
+				
+						<div class="input-append date row" data-date-format="dd-mm-yyyy">
+							<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+							<div id="clear-critical-date"> Clear Date</div>
+						</div>
+					</div>
+					
+					<% if current_user.admin? || current_user.uber_admin? %>
+					<div class="col-xs-6">
+						<h4>Completion Date:</h4>
+					
+						<div class="input-append date row" data-date-format="dd-mm-yyyy">
+							<%= f.text_field :completed_date, :value => parse_date(f.object.completed_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp-completed" %>
+							<div id="clear-completed-date"> Clear Date</div>
+						</div>
+					</div>
+				
+				<% end %>
 				</div>
 			<% end %>
 
@@ -29,9 +44,12 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#dp").datepicker();
+		$("#dp,#dp-completed").datepicker();
 		$('#clear-critical-date').on('click',function(){
 			$('#dp').val('');
+		});
+		$('#clear-completed-date').on('click',function(){
+			$('#dp-completed').val('');
 		});
 	});
 </script>

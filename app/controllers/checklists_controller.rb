@@ -148,6 +148,10 @@ class ChecklistsController < ApplicationController
 			datetime = Date.strptime(params[:category][:milestone_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
 			@category.update_attribute :milestone_date, datetime
 		end
+		if params[:category][:completed_date].present?
+			datetime = Date.strptime(params[:category][:completed_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
+			@category.update_attribute :completed_date, datetime
+		end
 		if params[:category][:name].present?
 			@category.update_attribute :name, params[:category][:name]
 		end

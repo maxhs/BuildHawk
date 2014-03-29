@@ -102,11 +102,6 @@ ul, ol {
 	}
 }
 
-.date-input, #dp {
-	cursor:pointer;
-	width:auto;
-}
-
 body {
 	background-color:#eee !important;
 	
@@ -502,7 +497,7 @@ select[multiple] {
 	background:#fff;
 	border:1px solid #eee;
 	box-shadow:1px 1px 2px 0 rgba(0,0,0,.5);
-	
+
 	a {
 		color:#222;
 		text-transform:uppercase;
