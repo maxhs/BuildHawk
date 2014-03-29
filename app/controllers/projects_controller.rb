@@ -26,10 +26,7 @@ class ProjectsController < ApplicationController
 			@projects = @company.projects
 		end
 
-		#Display demo projects for new companies IF they have no projects
-		unless @projects.count > 0
-			@projects = Project.where(:core => true)
-		end
+		@projects = Project.where(:core => true)
 
 		if request.xhr?
 			respond_to do |format|
