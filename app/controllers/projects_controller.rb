@@ -25,8 +25,9 @@ class ProjectsController < ApplicationController
 			@company = Company.find params[:company_id]
 			@projects = @company.projects
 		end
-
+		
 		@projects += Project.where(:core => true).flatten
+		@projects = @projects.uniq
 
 		if request.xhr?
 			respond_to do |format|
