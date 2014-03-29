@@ -1,6 +1,11 @@
 <%= render :partial => "projects/sidebar" %>
 <div class="col-xs-12 col-sm-9" id="main">
 	<div id="pages">
-		<%= render :partial => "projects/company_dashboard" %>
+		<div id="company-dashboard">
+			<%= render :partial => "projects/company_dashboard", collection: @projects, cache: true %>
+			<% unless @company.projects && @company.projects.count > 0 %>
+				<div id="dashboard-placeholder" class="font-smoothing">Your company does not have any active projects.<br/>But you can take a look around by viewing the above samples.</div>
+			<% end %>
+		</div>
 	</div>
 </div>
