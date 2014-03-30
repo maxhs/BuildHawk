@@ -36,7 +36,7 @@
 	}
 
 	.row {
-		padding:15px 0;
+		padding:10px 0;
 		border-bottom:1px solid #eee;
 		font-size:15px;
 		margin:0;
@@ -172,6 +172,8 @@
 }
 
 .subcategory {
+	padding-left:2%;
+	
 	.title {
 		display:inline-block;
 		margin:10px auto;
@@ -180,16 +182,13 @@
 	.title:hover {
 		color:#cc0000;
 	}
-	.header.row {
-		padding-top:0 0 10px;
-	}
 	.category-label {
 		line-height:53px;
 		vertical-align:middle;
 		text-align:center;
 	}
 	.items-container.collapsed {
-		display:none;
+		display:none !important;
 	}
 }
 
@@ -207,6 +206,7 @@
 	clear:both;
 	font-family:"Gotham Book",'Helvetica',sans-serif;
 	font-size:14px;
+	line-height:1em;
 }
 
 .new-phase {

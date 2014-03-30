@@ -12,6 +12,6 @@
 		<div class="row">
 			<h4>Item:</h4><%= f.text_area :body, :style => "width:100%;margin-bottom:14px;" %>
 		</div>
-		<button class="btn btn-success btn-md pull-right" style="margin: 0 auto;"><%= f.submit "Update" %></button>
+		<%= f.submit "Update", :class => "btn btn-success btn-md pull-right" %>
 	</div>
 <% end %>

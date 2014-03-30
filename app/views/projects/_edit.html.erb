@@ -66,12 +66,12 @@
 			    	<div class="col-xs-9" style="padding-top:9px;"><%= f.check_box :core, :style=>"padding:7px; display:inline-block; width:33px;" %> (Check to use as demo)</div>
 			    </div>
 			<% end %>
-			<div class="row">
+			
 				
-				<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
+				<%= f.submit "Save", :class => "btn btn-success btn-md pull-right", :style => "margin:50px auto 15px" %>
 	<% end %>
-				<button class="btn btn-danger btn-md pull-right" style="width:136px;clear:both;margin-top:0;"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"pull-right delete-link", :remote => true, :style=>"width:100%;" %></button>
+				<div class="button-container" style="width:25%;"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"btn btn-danger btn-md pull-right remote", :remote => true, :style=>"width:100%;" %>
 				
-			</div>
+			
 		</div>
 </div>

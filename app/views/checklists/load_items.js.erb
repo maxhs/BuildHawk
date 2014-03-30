@@ -16,7 +16,6 @@ if (itemsHolder.hasClass('revealed')){
 		<% end %>
 		$(this).addClass('revealed');
 		$(this).show(300,function(){
-			$('.items-container').addClass('collapsed');
 			$('#new-category-<%=@category.id%>').fadeIn(200);
 		});
 	});

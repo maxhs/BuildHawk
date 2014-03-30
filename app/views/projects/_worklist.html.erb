@@ -1,6 +1,6 @@
 <div class="border-box" style="padding-top:20px;">
 	<header>
-		<%= link_to "Add Item", new_punchlist_item_path(:project_id => @project.id), :class=>"btn btn-default pull-right", :style=>"width:24%;margin-top:0;", :remote => true %>
+		<%= link_to "Add Item", new_punchlist_item_path(:project_id => @project.id), :class=>"btn btn-default pull-right search-button", remote: true %>
 		<div style="margin-bottom: 20px">
 			<%= form_tag search_worklist_project_path(@project), :id => "worklist-search", :method => :post, :class=>"input-group", :remote => true do %>
 				<%= text_field_tag :search, nil, :placeholder=>"Search Worklist...", :class=>"form-control" %>

@@ -40,6 +40,11 @@ ul, ol {
 	padding:0;
 }
 
+h1, h2, h3, h4, h5 {
+	font-family:"Montserrat","Gotham Book","Helvetica",sans-serif;
+	text-transform:uppercase;
+}
+
 .alert, .notice {
 	font-size: 1.25em;
 	line-height: 40px;
@@ -84,11 +89,6 @@ ul, ol {
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	overflow:auto;
-}
-
-.delete-link{
-	text-align: center;
-	width: 80px;
 }
 
 .delete-button {
@@ -229,8 +229,9 @@ body {
 		a {
 			font-size:20px;
 			letter-spacing:1px;
-			font-family:'Bebas','Gotham Book','Helvetica Neue','Helvetica',sans-serif;
+			font-family:'Montserrat','Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 			text-transform:uppercase;
+			-webkit-font-smoothing:antialiased;
 		}
 
 		a:hover {
@@ -473,12 +474,19 @@ select[multiple] {
 	border: 1px solid #eee;
 }
 
+a.search-button {
+	color: #000 !important;
+	padding: 0;
+	line-height: 32px;
+	width: 24%;
+	margin-top: 0;
+}
+
 .btn, .btn input {
-	padding:0 5px;
-	line-height:39px;
-	height:39px;
+	padding:10px 5px;
 	margin:2px;
-	min-width:70px;
+	min-width:80px;
+	line-height:1.5;
 	text-transform:uppercase;
 	font-family:'Gotham Book','Helvetica',sans-serif;
 }
@@ -493,8 +501,12 @@ select[multiple] {
 	opacity:1;
 }
 
-.btn-danger, .btn-danger a, .btn-danger a:hover, .btn-danger:hover, .btn:hover {
+.btn-danger, .btn-danger a, .btn-danger a:hover, .btn-danger:hover, {
 	color:#fff !important;
+}
+
+.btn-danger {
+	margin-top:5px;
 }
 
 .export {
@@ -546,33 +558,6 @@ input[type="submit"] {
 	text-transform:uppercase;
 	font-weight:200;
 	font-family:'Gotham Book','Helvetica',sans-serif;
-}
-
-.image-block{
-	width:220px;
-	text-align:left;
-	display:inline-block;
-	padding:10px;
-	margin:10px;
-	line-height:1.3em;
-	border:1px solid #eee;
-
-	.label {
-		color:#aaa;
-		padding-right:7px;
-	}
-
-	img {
-		margin-bottom:7px;
-	}
-}
-.image-block.large{
-	max-width:100%;
-	width:auto;
-
-	img {
-		max-width:100%;
-	}
 }
 
 .spinner {
@@ -967,7 +952,15 @@ body {
          asset-url('BEBAS___-webfont.svg#bebasregular') format('svg');
     font-weight: normal;
     font-style: normal;
+}
 
+@font-face {
+  font-family: 'Montserrat';
+  src: asset-url('Montserrat-Regular.eot');
+  src: asset-url('Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+       font-url('Montserrat-Regular.woff') format('woff'),
+       asset-url('Montserrat-Regular.ttf') format('truetype'),
+       asset-url('Montserrat-Regular.svg#Montserrat-Regular') format('svg');
 }
 
 /* Override Bootstrap 3 font locations */

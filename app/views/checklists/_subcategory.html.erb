@@ -29,7 +29,7 @@
 				<% end %>
 			</div>
 
-			<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Update", :class => "no-link" %></button></div>
+			<div><%= f.submit "Update", :class => "no-link btn btn-success btn-md pull-right" %></div>
 			<div style="clear:both;">
 				<%= link_to "Delete", destroy_subcategory_checklist_path(@subcategory.category.checklist, :subcategory_id => @subcategory), :method => :delete, :data => {:confirm => "Are you sure you want to delete this category?"}, :class=>"btn btn-danger btn-md pull-right delete-link", :remote => true %>
 			</div>
