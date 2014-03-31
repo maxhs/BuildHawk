@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
 			@company = Company.find params[:company_id]
 			@projects = @company.projects
 		end
-		
+
 		@projects += Project.where(:core => true).flatten
 		@projects = @projects.uniq
 
@@ -157,7 +157,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def checklist_item
-		@checklist_item = ChecklistItem.find params[:item_id]
+		@item = ChecklistItem.find params[:item_id]
 	end
 
 	def new_item 

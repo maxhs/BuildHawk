@@ -49,8 +49,8 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 					<li><a class="navbar-brand" href="/" data-remote='true'><%= image_tag('logo.png') %></a></li>
 					<% if user_signed_in? %>
 						<li class="nav-projects" id="nav-projects"><%= link_to "Projects", projects_path, :class=>"current-page", :remote => true %></li>
-						<% if current_user.admin %>
-							<li class="nav-admin" id="nav-admin"><%= link_to "Admin", admin_index_path, :remote => true %></li> 
+						<% if current_user.admin || current_user.company_admin %>
+							<li class="nav-admin" id="nav-admin"><%= link_to "Admin", admin_index_path, remote: true %></li> 
 						<% end %>
 						<% if current_user.uber_admin %>
 							<li class="nav-uber-admin" id="nav-uber-admin"><%= link_to "Uber Admin", uber_admin_index_path, :remote => true %></li> 

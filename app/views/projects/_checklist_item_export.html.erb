@@ -1,7 +1,7 @@
 <div id="export-checklist-modal" class="border-box">
 	<span id="cancel-checklist-modal" class="cancel-x"></span>
-	<h3>Select Recipient(s) for "<%= truncate @checklist_item.body %>"</h3>
-	<%= form_tag export_checklist_project_path(@project, :checklist_item_id => @checklist_item.id), :remote => true, :method => :post do %>
+	<h3>Select Recipient(s) for "<%= truncate item.body %>"</h3>
+	<%= form_tag export_checklist_project_path(@project, :checklist_item_id => item.id), :remote => true, :method => :post do %>
 		<% current_user.company.personnel.each do |person| %>
 			<% if person == current_user.full_name %>
 				<div class="checkboxes"><%= check_box_tag "names[]", person, :checked => true %><span style="padding-left:1em;"><%= person %></span></div>

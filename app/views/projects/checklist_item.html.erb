@@ -8,6 +8,6 @@
 	<%= render :partial => "projects/project_nav" %>
 
 	<div id="pages">
-		<%= render :partial => "checklist_item" %>
+		<%= render :partial => "checklist_item", :locals => {:item => @item} %>
 	</div>
 </div>
