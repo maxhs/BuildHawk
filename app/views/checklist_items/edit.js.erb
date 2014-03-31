@@ -1,5 +1,6 @@
+
 $('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "checklist_items/edit", :locals => {:item => @item, :project => @project } %>');
+	$(this).html('<%= j render :partial => "checklist_items/edit", :locals => {:item => @item} %>');
 	$(this).fadeIn(100);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

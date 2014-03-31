@@ -7,7 +7,7 @@
 			</span>
 			<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	
 			<span class="col-xs-2 phase-label"><%= parse_date(c.completed_date) %></span>
-			<span class="col-xs-1 phase-label pull-right"><%= link_to "Edit", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :class => "btn btn-md btn-success remote", remote: true %></span>
+			<span class="col-xs-2 phase-label pull-right"><%= link_to "Edit", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :class => "btn btn-md btn-success remote", remote: true %></span>
 		<% else %>
 			<span class="col-xs-8"><h2 style="display:inline-block"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"remote", :remote => true %></h2></span>
 			<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	

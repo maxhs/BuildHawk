@@ -1,5 +1,5 @@
 <%= nested_form_for @item, :url => {:controller => :checklist_items, :action => :update, :id => @item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
-	<div class="item-editor" class="border-box;">
+	<div class="item-editor" class="border-box;" style="overflow:auto;">
 		<div class="row">
 			<h4>Phase:</h4><%= @item.category_name %>
 		</div>
@@ -13,5 +13,7 @@
 			<h4>Item:</h4><%= f.text_area :body, :style => "width:100%;margin-bottom:14px;" %>
 		</div>
 		<%= f.submit "Update", :class => "btn btn-success btn-md pull-right" %>
-	</div>
+
 <% end %>
+	<%= link_to 'Delete', checklist_item_path(item), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, method: :delete, :class=>"btn btn-md btn-danger remote pull-right", :style => "clear:both", remote: true %>
+	</div>
