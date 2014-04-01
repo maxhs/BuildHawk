@@ -12,22 +12,23 @@
 						<div class="project"><%= link_to "#{project.name} - (#{number_to_percentage(project.checklist.completed_count.to_f/project.checklist.item_count*100, :precision =>1)})" , project_path(project), :id=>"#{project.id}-link", :remote => true %>
 							<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
 						</div>
-							
-						<script type="text/javascript">
-							$(function(){
-								$('#sidebar-progress-link-<%=project.id%>').progressbar({
-							    	value:<%=project.checklist.progress%>
-							    });
-							})
-						</script>
-
+	
 					<% else %>
 						<div><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></div>
 					<% end %>
 				<% end %>
 			</div>
 		<% else %>
-			<div style="font-style:italic;color:#aaa;padding:10px 0 20px;text-align:center;font-size:1.25em;font-family:'Montserrat','Helvetica',sans-serif;">NO PROJECTS YET</div>
+			<div style="font-style:italic;color:#aaa;padding:10px 0 20px;text-align:center;font-size:1.1em;font-family:'Montserrat','Helvetica',sans-serif;">NO PROJECTS</div>
 		<% end %>
 	</div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		<% @projects.each do |p| %>
+		$('#sidebar-progress-link-<%=p.id%>').progressbar({
+	    	value:<%=p.checklist.progress%>
+	    });
+	    <% end %>
+	})
+</script>

@@ -9,25 +9,3 @@
 	</div>
 	<ul id="<%= c.id %>-items"></ul>
 </li>
-<script>
-	$(document).ready(function(){
-		$('#<%= c.id %>-items').sortable({
-          axis: 'y',
-          dropOnEmpty:true,
-          cursor: 'move',
-          items: 'li',
-          opacity: 0.4,
-          scroll: true,
-          stop: function(){
-            $.ajax({
-                type: 'post',
-                data: $('#<%= c.id %>-items').sortable('serialize') + '&id=<%=c.id-%>',
-                dataType: 'script',
-                complete: function(request){
-                    //$('#categories').effect('highlight');
-                  },
-                url: '/checklists/order_subcategories'})
-            }
-        })
-	});
-</script>

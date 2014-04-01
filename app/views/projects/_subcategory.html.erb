@@ -22,38 +22,3 @@
 		</ul>
 	</div>
 </li>
-
-<script>
-	$(document).ready(function(){
-		$('#items-<%=subcategory.id%>').sortable({
-          axis: 'y',
-          dropOnEmpty:true,
-          cursor: 'move',
-          items: 'li',
-          opacity: 0.4,
-          scroll: true,
-          stop: function(){
-            $.ajax({
-                type: 'post',
-                data: $('#items-<%=subcategory.id%>').sortable('serialize') + '&id=<%= subcategory.id %>',
-                dataType: 'script',
-                url: '/checklists/order_items'
-            })
-          }
-        });  
-
-		$('.subcategory').on('click',function(){
-			var sub = $(this).find('.items-container');	
-	        if (sub.hasClass("collapsed")){
-	        	sub.css('display','none');
-	        	sub.show(200,function(){
-	        		sub.removeClass('collapsed');
-	        	});
-	        } else {
-	        	sub.hide(200,function(){
-	        		sub.addClass('collapsed');
-	        	});
-	        }
-		});
-	});
-</script>
