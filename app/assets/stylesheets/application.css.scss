@@ -279,12 +279,10 @@ body {
 		li{ 
 			a {
 				line-height:2.25em;
-				font-size:1.25em;
-				font-weight:300;
+				font-size:1.1em;
 				padding:3px 40px;
 				text-align:right;
-				font-family:"Helvetica",sans-serif;
-				text-transform:none;
+				font-family:'Gotham Book',"Helvetica",sans-serif;
 			}
 		}
 	}
@@ -504,8 +502,14 @@ a.search-button {
 	color:#fff !important;
 }
 
+.btn.save {
+	margin:0 auto;
+	width:50%;
+}
+
 .btn-danger {
-	margin-top:5%;
+	max-width:120px;
+	margin:2% auto 0;
 }
 
 .export {
