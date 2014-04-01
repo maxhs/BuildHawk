@@ -1,16 +1,16 @@
 
 <div class="category-form container">
 	<div class="row">
-		<span class="col-xs-5 header-description"><h2><%= @subcategory.name %></h2></span>
+		<span class="col-xs-5 header-description"><h2><%= @subcategory.category.name %></h2></span>
 	</div>
 	<%= nested_form_for @subcategory, :url => update_subcategory_checklist_path(@subcategory.category.checklist, :subcategory_id => @subcategory.id), :remote => true, :method => :patch do |f| %>
 		<div class="row">
-			<h4 style="display:inline-block">Category Name:</h4>
+			<h4 style="display:inline-block">Category Name</h4>
 			<%= f.text_field :name %>
 		</div>
 		<div class="row">
 			<div class="col-xs-6">
-				<h4 style="text-align:center;">Milestone Date:</h4>
+				<h4 style="text-align:center;">Milestone Date</h4>
 				<div class="input-append date" data-date-format="dd-mm-yyyy">
 					<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 					<div id="clear-critical-date"> Clear Date</div>
@@ -18,7 +18,7 @@
 			</div>
 			<% if current_user.admin? || current_user.uber_admin? %>
 				<div class="col-xs-6">
-					<h4 style="text-align:center;">Completion Date:</h4>
+					<h4 style="text-align:center;">Completion Date</h4>
 					<div class="input-append date" data-date-format="dd-mm-yyyy">
 						<%= f.text_field :completed_date, :value => parse_date(f.object.completed_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp-completed" %>
 						<div id="clear-completed-date"> Clear Date</div>
