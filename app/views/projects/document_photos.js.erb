@@ -1,4 +1,5 @@
 $('#main a').removeClass('current-page');
+$('#<%=@project.id%>-link').addClass('current-page');
 $('#<%= @nav %>, .nav-documents.admin a').addClass('current-page');
 $('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "documents" %>');
