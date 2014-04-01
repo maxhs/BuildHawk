@@ -93,7 +93,7 @@
 	}
 
 	.left-edit {
-		top: 29px;
+		top: 28px;
 		padding: 5px 20px 5px 30px;
 		font-size: 17px;
 		position: absolute;
@@ -110,6 +110,29 @@
 
 .category:hover {
 	.left-edit {
+		display:block;
+	}
+}
+
+.checklist-item {
+	min-height:40px;
+
+	.left-edit-checklist {
+		top: -5px;
+		padding: 5px 20px 5px 30px;
+		font-size: 14px;
+		position: absolute;
+		right: 100%;
+		background: #fff;
+		border-left: 1px solid #eee;
+		border-radius:20px 0 0 20px;
+		display:none;
+		-webkit-font-smoothing:antialiased;
+		font-family:"Montserrat","Helvetica",sans-serif;
+	}
+}
+.checklist-item:hover {
+	.left-edit-checklist {
 		display:block;
 	}
 }
@@ -211,7 +234,6 @@
 }
 
 .subcategory {
-	padding-left:2%;
 	
 	.title {
 		display:inline-block;
