@@ -10,21 +10,15 @@
 				</header>
 
 				<div class="row">
-					
-					<div class="col-xs-8">
-						<h4 style="display:inline-block;">Phase</h4>
-						<% if current_user.admin %>
-							<%= link_to "Add Phase", new_category_project_path(@project), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
-						<% else %>
-							&nbsp;
-						<% end %>	
-					</div>
+					<div class="col-xs-8"><h4 style="display:inline-block;">Phase</h4></div>
 					<div class="col-xs-2 header-label"><h4>Critical Date</h4></div>	
 					<div class="col-xs-2 header-label"><h4>Completed</h4></div>
-					
 				</div>
-			
+				
 				<ul id="categories">
+					<% if current_user.admin %>
+						<%= link_to "(+) New Phase", new_category_project_path(@project), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
+					<% end %>
 					<%= render :partial => 'projects/phase', collection: @checklist.categories, :as => :c, cache: true %>
 				</ul>
 			</div>
@@ -36,6 +30,11 @@
 </div>
 <script>
 	$(document).ready(function(){
+		$('#remove').on('click',function(){
+			$('#search').val('');
+			$('#checklist-search').submit();
+		});
+
 		$('#categories').sortable({
           axis: 'y',
           dropOnEmpty:true,

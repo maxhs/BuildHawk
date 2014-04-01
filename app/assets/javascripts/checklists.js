@@ -6,10 +6,6 @@ function datetimepickers(){
 	$('#clear-completed-date').on('click',function(){
 		$('#dp-completed').val('');
 	});
-	$('#remove').on('click',function(){
-		$('#search').val('');
-		$('#checklist-search').submit();
-	});
 }
 
 function checklistItem(){
