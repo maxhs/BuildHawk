@@ -10,17 +10,18 @@
 				</header>
 
 				<div class="row">
-					<% if current_user.admin %>
-						<div class="col-xs-6"><%= link_to "Add Phase", new_category_project_path(@project), :id=>"new-phase", :class=>"remote new-phase", remote: true %></div>
-						<div class="col-xs-2 header-label">Critical Date</div>	
-						<div class="col-xs-2 header-label">Completed</div>
-						<div class="col-xs-1 header-label">&nbsp;</div>
-						<div class="col-xs-1 header-label">&nbsp;</div>
-					<% else %>
-						<div class="col-xs-8">&nbsp;</div>
-						<div class="col-xs-2 header-label" style="text-align: center;">Critical Date</div>	
-						<div class="col-xs-2 header-label" style="text-align: center;">Completed</div>
-					<% end %>	
+					
+					<div class="col-xs-8">
+						<h4 style="display:inline-block;">Phase</h4>
+						<% if current_user.admin %>
+							<%= link_to "Add Phase", new_category_project_path(@project), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
+						<% else %>
+							&nbsp;
+						<% end %>	
+					</div>
+					<div class="col-xs-2 header-label"><h4>Critical Date</h4></div>	
+					<div class="col-xs-2 header-label"><h4>Completed</h4></div>
+					
 				</div>
 			
 				<ul id="categories">

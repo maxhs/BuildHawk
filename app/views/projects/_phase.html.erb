@@ -1,18 +1,11 @@
-<li class="category" style="clear:both;" id="phase-<%=c.id%>">
+<li class="category" id="phase-<%=c.id%>">
+	<% if current_user.admin %>
+		<%= link_to "Edit", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :class => "left-edit remote", remote: true %>
+	<% end %>
 	<div class="header row">
-		<% if current_user.admin %>
-			<span class="col-xs-6">
-				<h2 style="display:inline-block;margin:10px auto;"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"remote", :remote => true %></h2>
-				<%= link_to "Add Category", new_subcategory_project_path(@project, :category_id => c.id), :id=>"new-category-#{c.id}", :class=>"remote new-subcategory", remote: true %>
-			</span>
-			<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	
-			<span class="col-xs-2 phase-label"><%= parse_date(c.completed_date) %></span>
-			<span class="col-xs-2 phase-label pull-right"><%= link_to "Edit", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :class => "btn btn-md btn-success remote", remote: true %></span>
-		<% else %>
-			<span class="col-xs-8"><h2 style="display:inline-block"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"remote", :remote => true %></h2></span>
-			<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	
-			<span class="col-xs-2 phase-label"><%= parse_date(c.completed_date) %></span>
-		<% end %>
+		<span class="col-xs-8"><h2 style="margin: 20px auto;display:inline-block"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"phase-name remote", :remote => true %></h2></span>
+		<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	
+		<span class="col-xs-2 phase-label"><%= parse_date(c.completed_date) %></span>
 	</div>
 	<ul id="<%= c.id %>-items"></ul>
 </li>
