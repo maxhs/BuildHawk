@@ -3,10 +3,10 @@
 <li class="subcategory" id="subcategory-<%=subcategory.id%>">
 	<div class="header row">
 		<div class="col-xs-8">
-			<h4 class="title"><%= subcategory.name %></h4>
+			<h4 class="title" id="<%=subcategory.id%>"><%= subcategory.name %></h4>
 			<span style="padding:0 1em;color:#aaa;">(<%=subcategory.completed_count%> of <%= subcategory.checklist_items.count%>)</span>
 
-			<%= link_to "Edit Category", subcategory_checklist_path(:subcategory_id => subcategory.id), :class=>"edit-category remote", :remote => true %>
+			<%= link_to "Edit Category", subcategory_checklist_path(:subcategory_id => subcategory.id), :class=>"edit-category", :remote => true %>
 			<%= link_to "Add Checklist Item", new_checklist_item_path(:subcategory_id => subcategory.id), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
 
 		</div>

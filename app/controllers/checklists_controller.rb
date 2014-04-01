@@ -141,8 +141,10 @@ class ChecklistsController < ApplicationController
 
 	def category
 		@category = Category.find params[:category_id]
-		@project = Project.find params[:project_id] if params[:project_id]
-		@projects = @project.company.projects 
+		if params[:project_id]
+			@project = Project.find params[:project_id]
+			@projects = @project.company.projects 
+		end
 		if request.xhr?
 			respond_to do |format|
 				format.js
