@@ -3,7 +3,7 @@
 		<%= link_to "Edit", category_checklist_path(@project, :category_id => c.id, :project_id => @project.id), :class => "left-edit remote", remote: true %>
 	<% end %>
 	<div class="header row">
-		<span class="col-xs-8"><h2 style="margin: 20px auto;display:inline-block"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"phase-name remote", :remote => true %></h2></span>
+		<span class="col-xs-8"><h2 style="margin: 20px auto;display:inline-block"><%= link_to c.name, load_items_checklist_path(c, :project_id => @project.id), :id => "c-#{c.id}", :class=>"phase-name remote", :remote => true %></h2></span>
 		<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	
 		<span class="col-xs-2 phase-label"><%= parse_date(c.completed_date) %></span>
 	</div>

@@ -31,7 +31,7 @@ class ChecklistsController < ApplicationController
 
 	def load_items
 		@category = Category.find params[:id]
-		@project = @category.checklist.project
+		@project = Project.find params[:project_id] if params[:project_id]
 		@subcategories = @category.subcategories
 		if request.xhr?
 			respond_to do |format|

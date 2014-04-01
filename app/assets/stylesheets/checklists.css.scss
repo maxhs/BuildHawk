@@ -54,7 +54,12 @@
 	ul {
 		list-style:none;
 	}
+
 	#checklist-items {
+
+		.subcategory {
+			list-style:none;
+		}
 
 		.header-label {
 			font-weight: bold; 
@@ -67,8 +72,7 @@
 				a:hover {
 					color:#fff;
 				}
-			}
-			
+			}	
 		}
 		#categories {
 			list-style:none;
@@ -253,7 +257,7 @@
 	}
 }
 
-.new-checklist-item, .new-phase, .new-subcategory, .edit-category {
+.new-checklist-item, .new-phase, .new-subcategory, .edit-subcategory, .edit-category {
 	border:1px solid #eee;
 	border-radius:5px;
 	-webkit-border-radius:5px;

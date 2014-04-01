@@ -1,18 +1,58 @@
 <% if @checklist && @checklist.categories.count > 0 %>
 	<div class="admin-checklist-table border-box">
-		<header>
-			<%= form_for @checklist, :method => :patch do |f| %>
-				<table>
-					<tr><td style="width:100%; padding-bottom:20px;"><%= f.text_field :name, :style=> "width:100%;" %></td>
-					<td style="vertical-align:top"><button class="btn btn-success btn-md pull-right" style="display:inline-block; margin:0;"><%= f.submit "Change Name", :remote => true %></button></td></tr>
-				</table>
-			<% end %>
-		</header>
 
 		<div id="checklist-items">
-			<%= render :partial => 'admin/phase', collection: @checklist.categories, :as => :c, cache: false %>
+			<header>
+				<%= form_for @checklist, :method => :patch do |f| %>
+					<table>
+						<tr><td style="width:100%; padding-bottom:20px;"><%= f.text_field :name, :style=> "width:100%;" %></td>
+						<td style="vertical-align:top"><%= f.submit "Change Name", :class => "btn btn-success btn-md pull-right", :remote => true %></td></tr>
+					</table>
+				<% end %>
+			</header>
+			<ul id="categories">
+				<%= render :partial => 'admin/phase', collection: @checklist.categories, :as => :c, cache: false %>
+			</ul>
 		</div>
 	</div>
 <% else %>
 	<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>	
 <% end %>
+
+<script>
+$(document).ready(function(){
+	$('#categories').sortable({
+          axis: 'y',
+          dropOnEmpty:true,
+          cursor: 'move',
+          items: 'li',
+          opacity: 0.4,
+          scroll: true,
+          stop: function(){
+            $.ajax({
+                type: 'post',
+                data: $('#categories').sortable('serialize') + '&id=<%=@checklist.id-%>',
+                dataType: 'script',
+                url: '/checklists/order_categories'})
+            }
+        })
+
+        <% @checklist.categories.each do |c| %>
+        	$('#<%= c.id %>-items').sortable({
+	          axis: 'y',
+	          dropOnEmpty:true,
+	          cursor: 'move',
+	          items: 'li',
+	          opacity: 0.4,
+	          scroll: true,
+	          stop: function(){
+	            $.ajax({
+	                type: 'post',
+	                data: $('#<%= c.id %>-items').sortable('serialize') + '&id=<%=c.id-%>',
+	                dataType: 'script',
+	                url: '/checklists/order_subcategories'})
+	            }
+	        });
+        <% end %>
+    });
+</script>
