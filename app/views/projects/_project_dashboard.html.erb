@@ -1,8 +1,7 @@
 <div id="project-dashboard" class="container">
 	<h3 style="margin-top:10px;border-top:0;">Upcoming Critical Items</h3>
-		<% if @upcoming_items %>
-			<div id="upcoming-items">
-	
+		<div id="upcoming-items">
+			<% if @upcoming_items && @upcoming_items.count > 0 %>
 				<% @upcoming_items.each_with_index do |item, idx| %>
 					<div class="row">
 						<%= link_to checklist_item_project_path(@project, :item_id => item.id), :class => "recently-completed", :remote => true do %>
@@ -10,12 +9,12 @@
 							<div class="col-xs-2"><%= parse_date item.critical_date %></div>
 						<% end %>
 					</div>
-				<% end %>
-				
-			</div>
-		<% else %>
-			<div style="color:#aaa;font-style:italic;font-weight:200;text-align:center;">(No upcoming items)</div>
-		<% end %>
+				<% end %>	
+			
+			<% else %>
+				<div style="color:#aaa;font-style:italic;font-weight:200;text-align:center;">(No upcoming items)</div>
+			<% end %>
+		</div>
 
 	<h3>Recent Updates</h3>
 		<% if @recently_completed && @recently_completed.count > 0 %>
