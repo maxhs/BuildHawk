@@ -60,13 +60,19 @@
     <fieldType name="rand" class="solr.RandomSortField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="text" class="solr.TextField" omitNorms="false">
-      <analyzer>
+      <analyzer type="index">
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.StandardFilterFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
-        <filter class="solr.PorterStemFilterFactory"/>
+        <filter class="solr.EdgeNGramFilterFactory" minGramSize="2" maxGramSize="15" side="front"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
       </analyzer>
     </fieldType>
+    <!-- *** Max added this *** -->
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="boolean" class="solr.BoolField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
@@ -102,7 +108,7 @@
      multiValued: true if this field may contain multiple values per document
      omitNorms: (expert) set to true to omit the norms associated with
        this field (this disables length normalization and index-time
-       boosting for the field, and saves some memory).  Only full-text
+       boosting for the field, and saves some memory).  Only full-textxt
        fields or fields that need an index-time boost need norms.
      termVectors: [false] set to true to store the term vector for a
        given field.

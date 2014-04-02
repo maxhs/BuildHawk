@@ -151,7 +151,11 @@ Buildhawk::Application.routes.draw do
       get :generate
     end
   end
-  resources :photos
+  resources :photos do
+    collection do 
+      post :search
+    end
+  end
   resources :punchlists
   resources :reports do
     member do

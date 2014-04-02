@@ -9,8 +9,17 @@
 		</ul>
 	</div>
 	<div id="photo-section">
+		
 		<div id="photo-table">
-			<%= render :partial => "projects/folders" %>
+			<div id="photo-search">
+				<%= form_tag search_photos_path(:project_id => @project.id), :id => "document-search", :method => :post, :class=>"input-group", :style=>"width:100%;", remote: true do %>
+					<%= text_field_tag :search, nil, :placeholder=>"Search for documents...", :class=>"form-control" %>
+					<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
+				<% end %>
+			</div>
+			<div id="folders">
+				<%= render :partial => "projects/folders" %>
+			</div>
 		</div>
 		<div id="photo-focus">
 			<% if @photos && @photos.count > 0 %>	

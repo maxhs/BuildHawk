@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
-	attr_accessible :image, :user_id, :user, :project_id, :project, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:punchlist_item_id, :phase, :name, :punchlist_item, :report, :folder, :folder_id
+	attr_accessible :image, :user_id, :project_id, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
+					:punchlist_item_id, :phase, :name, :folder_id
 
 	belongs_to :user
 	belongs_to :project
@@ -23,6 +23,20 @@ class Photo < ActiveRecord::Base
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
+
+	# websolr
+    searchable do
+        text 	:name
+        text    :source
+        text    :folder do
+        	folder.name if folder
+        end        
+        integer :project_id
+        integer :report_id
+        integer :checklist_item_id
+        integer :punchlist_item_id
+        time    :created_at
+    end
 
 	acts_as_api
 

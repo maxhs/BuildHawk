@@ -11,4 +11,8 @@
 			$(this).fadeIn(200);
 		});
 	});
+	$('#remove').on('click',function(){
+		$('#search').val('');
+		$('#document-search').submit();
+	});
 </script>
