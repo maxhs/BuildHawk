@@ -3,7 +3,7 @@
 		<h3>Are you sure you want to delete this project?</h3>
 		<p>This will permanently delete the project along with all associated documents, worklist items, reports and checklist items.</p>
 	</div>
-	<div style="width:100%;margin:3em auto 2em;padding:0 16px;text-align:center;">
-		<%= link_to "Destroy Project", project_path(@project), :method => :delete, :class=>"btn btn-danger btn-lg delete-project-link no-link", :data => {:confirm => "Are you absolutely sure you want to delete this project? This cannot be undone."} %>
+	<div class="button=container">
+		<%= link_to "Destroy Project", project_path(@project), :method => :delete, :class=>"btn btn-danger btn-lg delete-project-link remote", :style=>"margin:1% auto;max-width:220px;", :data => {:confirm => "Are you absolutely sure you want to delete this project? This cannot be undone."} %>
 	</div>
 </div>
