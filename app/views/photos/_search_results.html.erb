@@ -3,7 +3,12 @@
 		<% @photos.sort_by(&:name).each do |p| %>
 			<li class="photo-name" id="p-<%= p.id %>">
 				<%= link_to show_photo_project_path(@project,:photo_id => p.id), :class=>"remote", :remote => true do %>
-					<%= p.name %><span class="photo-timestamp"><%= parse_datetime p.created_at %></span>
+					<% if p.name && p.name.length > 0 %>
+						<%= p.name %>
+					<% else %>
+						<span class="no-name">(no name)</span>
+					<% end %>
+					<span class="photo-timestamp"><%= parse_datetime p.created_at %></span>
 				<% end %>
 			</li>
 		<% end %>

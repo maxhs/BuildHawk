@@ -1,11 +1,12 @@
 <div id="project-documents" class="border-box">
-	<div style="border-bottom:1px solid #eee;padding:14px 0;">		
+	<div style="border-bottom:1px solid #eee;padding:10px 0;">	
+
 		<ul id="filters">
-			<li><%= link_to "Project Docs", document_photos_project_path(@project), :id => "document-photos-nav", :class => "current-page", :remote => true %></li>
-			<li><%= link_to "Checklist", checklist_photos_project_path(@project), :id => "checklist-photos-nav", :remote => true %></li>
-			<li><%= link_to "Worklist", worklist_photos_project_path(@project), :id => "worklist-photos-nav", :remote => true %></li>
-			<li><%= link_to "Reports", report_photos_project_path(@project), :id => "report-photos-nav", :remote => true %></li>
-			<li><%= link_to "All", documents_project_path(@project), :id => "all-photos-nav", :remote => true %></li>
+			<li><h5><%= link_to "Project Docs", document_photos_project_path(@project), :id => "document-photos-nav", :class => "current-page", :remote => true %></h5></li>
+			<li><h5><%= link_to "Checklist", checklist_photos_project_path(@project), :id => "checklist-photos-nav", :remote => true %></h5></li>
+			<li><h5><%= link_to "Worklist", worklist_photos_project_path(@project), :id => "worklist-photos-nav", :remote => true %></h5></li>
+			<li><h5><%= link_to "Reports", report_photos_project_path(@project), :id => "report-photos-nav", :remote => true %></h5></li>
+			<li><h5><%= link_to "All", documents_project_path(@project), :id => "all-photos-nav", :remote => true %></h5></li>
 		</ul>
 	</div>
 	<div id="photo-section">

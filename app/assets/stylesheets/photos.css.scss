@@ -147,7 +147,7 @@ form.edit_photo {
 	position:relative;
 	width:100%;
 	margin:0;
-	padding:10px 0;
+	padding:0;
 	list-style:none;
 	display:table;
 	font-size:14px;
@@ -191,7 +191,14 @@ form.edit_photo {
 		}
 
 		.photo-name {
+			font-size:1.1em;
 			padding:3px 0 1px 15px;
+
+			.no-name {
+				font-style:italic;
+				color:#aaa;
+				font-weight:200;
+			}
 
 			.photo-timestamp {
 				float:right;
