@@ -205,11 +205,21 @@ class ChecklistsController < ApplicationController
 		@checklist = Checklist.find params[:id]
 		@project = @checklist.project
 		if @category.destroy && request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/checklist"}
+			if @project
+				respond_to do |format|
+					format.js { render :template => "projects/checklist"}
+				end
+			else
+				respond_to do |format|
+					format.js { render :template => "admin/editor"}
+				end
 			end
 		else
-			redirect_to checklist_project_path(@project)
+			if @project
+				redirect_to checklist_project_path(@project)
+			else 
+				render "admin/editor"
+			end
 		end
 	end
 
@@ -218,11 +228,21 @@ class ChecklistsController < ApplicationController
 		@checklist = Checklist.find params[:id]
 		@project = @checklist.project
 		if @subcategory.destroy && request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/checklist"}
+			if @project
+				respond_to do |format|
+					format.js { render :template => "projects/checklist"}
+				end
+			else
+				respond_to do |format|
+					format.js { render :template => "admin/editor"}
+				end
 			end
 		else
-			redirect_to checklist_project_path(@project)
+			if @project
+				redirect_to checklist_project_path(@project)
+			else 
+				render "admin/editor"
+			end
 		end
 	end
 	
