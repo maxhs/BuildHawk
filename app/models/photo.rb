@@ -26,7 +26,7 @@ class Photo < ActiveRecord::Base
 
 	# websolr
     searchable do
-        text 	:name
+        text 	:name, boost: 2.0
         text    :source
         text    :folder do
         	folder.name if folder
@@ -37,6 +37,9 @@ class Photo < ActiveRecord::Base
         integer :punchlist_item_id
         time    :created_at
     end
+    
+    handle_asynchronously :solr_index, queue: 'indexing', priority: 50
+  	handle_asynchronously :solr_index!, queue: 'indexing', priority: 50
 
 	acts_as_api
 
