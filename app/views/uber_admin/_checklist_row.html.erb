@@ -1,8 +1,8 @@
-<tr>
+<tr id="checklist-<%=c.id%>">
 	<td><%= c.name %></td>
 	<td><%= c.categories.count %></td>
 	<td><%= c.categories.map(&:subcategories).flatten.count %></td>
 	<td><%= c.item_count %></td>
-	<td><%= link_to "Edit", editor_admin_index_path(:checklist_id => c.id), :remote => true %></td>
-	<td><%= link_to "Delete", delete_checklist_admin_index_path(:checklist_id => c.id, :company_id => current_user.company.id), :data => {:confirm => "Are you sure you want to delete this core checklist? This can not be undone."}, :remote => true, :class=>"delete-checklist-link", :method => :delete %></td>
+	<td><%= link_to "Edit", editor_admin_index_path(:checklist_id => c.id), :class=>"simple-btn", :remote => true %></td>
+	<td><%= link_to "Delete", checklist_path(c, :company_id => current_user.company.id), :data => {:confirm => "Are you sure you want to delete this core checklist? This can not be undone."}, :remote => true, :class=>"delete-checklist-link btn btn-danger btn-md", :style=>"max-width:100px;display:inline;", method: :delete %></td>
 </tr>

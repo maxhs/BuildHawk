@@ -1,9 +1,7 @@
 <div class="checklist-item-form border-box">
 
-	<%= nested_form_for @category, :url => create_checklist_item_checklist_path(@checklist), :remote => true, :method => :post do |f| %>
+	<%= nested_form_for @category, :url => create_category_checklist_path(@checklist), :remote => true, :method => :post do |f| %>
 		<%= f.hidden_field :checklist_id, :value => @checklist.id %>
-		<%= f.hidden_field :order_index, :value => (@item_index) %>
-		<%= f.hidden_field :item_index, :value => (@item_index) %>
 		<table style="margin: 0 auto; width:100%;display:block;">
 			<tbody>
 				<tr>

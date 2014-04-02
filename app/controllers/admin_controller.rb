@@ -159,20 +159,6 @@ class AdminController < ApplicationController
 	    end
 	end
 
-	def delete_checklist
-		@checklist = Checklist.find params[:checklist_id]
-		@checklist.destroy
-		@company = Company.find params[:company_id]
-		@checklists = @company.checklists
-		if request.xhr?
-			respond_to do |format|
-				format.js {render :template => "admin/checklists"}
-			end
-		else
-			render :checklists
-		end
-	end
-
 	def new_project
 		@company = @user.company
 		unless @company.customer_token.nil? && current_user.uber_admin

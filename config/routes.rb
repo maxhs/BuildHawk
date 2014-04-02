@@ -132,15 +132,15 @@ Buildhawk::Application.routes.draw do
     member do
       get :new_checklist_item
       post :create_checklist_item 
-      get :category
       get :subcategory
       get :load_items
-      patch :update_category
       patch :update_subcategory
       delete :destroy_category
       delete :destroy_subcategory
     end
   end
+  resources :categories
+  resources :subcategories
   resources :checklist_items do
     member do
       get :generate

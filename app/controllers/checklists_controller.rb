@@ -143,86 +143,6 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
-	def category
-		@category = Category.find params[:category_id]
-		if params[:project_id]
-			@project = Project.find params[:project_id]
-			@projects = @project.company.projects 
-		end
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :category
-		end
-	end
-
-	def update_category
-		@category = Category.find params[:category_id]
-		if params[:category][:milestone_date].present?
-			datetime = Date.strptime(params[:category][:milestone_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
-			@category.update_attribute :milestone_date, datetime
-		else
-			@category.update_attribute :milestone_date, nil
-		end
-		
-		if params[:category][:completed_date].present?
-			datetime = Date.strptime(params[:category][:completed_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
-			@category.update_attribute :completed_date, datetime
-		else
-			@category.update_attribute :completed_date, nil
-		end
-		
-		if params[:category][:name].present?
-			@category.update_attribute :name, params[:category][:name]
-		end
-
-		@checklist = @category.checklist
-		unless @checklist.project.nil?
-			@project = @checklist.project
-			@projects = @checklist.project.company.projects
-			if request.xhr?
-			 	respond_to do |format|
-			 		format.js { render :template => "projects/checklist" }
-			 	end
-			else
-			 	redirect_to checklist_project_path(@project)
-			end
-		else 
-			if request.xhr?
-				respond_to do |format|
-					format.js { render :template => "admin/editor" }
-				end
-			else
-				render "admin/editor"
-			end
-		end
-	end
-
-	def destroy_category
-		@category = Category.find params[:category_id]
-		@checklist = Checklist.find params[:id]
-		@project = @checklist.project
-		if @category.destroy && request.xhr?
-			if @project
-				respond_to do |format|
-					format.js { render :template => "projects/checklist"}
-				end
-			else
-				respond_to do |format|
-					format.js { render :template => "admin/editor"}
-				end
-			end
-		else
-			if @project
-				redirect_to checklist_project_path(@project)
-			else 
-				render "admin/editor"
-			end
-		end
-	end
-
 	def destroy_subcategory
 		@subcategory = Subcategory.find params[:subcategory_id]
 		@checklist = Checklist.find params[:id]
@@ -281,5 +201,35 @@ class ChecklistsController < ApplicationController
 		respond_to do |format|
 			format.js { render :template => "checklists/reorder"}
 		end
+	end
+
+	def destroy
+		list = Checklist.find params[:id]
+		@checklist_id = params[:id] if list
+		@core = true if list.core
+		list.destroy
+		
+		@checklist = Checklist.new
+		if @core
+			@checklists = Checklist.where(:core => true)
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			else
+				redirect to core_checklists_uber_admin_index_path
+			end
+		else
+			@company = Company.find params[:company_id]
+			@checklists = @company.checklists
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			else
+				render :checklists
+			end
+		end
+		
 	end
 end

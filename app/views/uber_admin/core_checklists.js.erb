@@ -1,7 +1,9 @@
 $('.sidebarUberadmin div a').removeClass('current-page');
 $('#uber-admin-checklists-link').addClass('current-page');
+
 $('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "uber_admin/core_checklists", :locals => {:items => @items} %>');
 	$(this).fadeIn(170);
+	coreChecklist();
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

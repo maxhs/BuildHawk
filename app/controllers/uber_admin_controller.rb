@@ -24,11 +24,12 @@ class UberAdminController < ApplicationController
 
 	def upload_template
 		Checklist.import(params[:checklist][:file])
-		redirect_to uber_admin_index_path
+		redirect_to core_checklists_uber_admin_index_path
 	end
 
 	def import_checklist
 		Checklist.import(params[:file])
+		redirect_to core_checklists_uber_admin_index_path
 	end
 
 	def edit_item

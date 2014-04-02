@@ -1,11 +1,11 @@
 <table class="project-checklist-table border-box" style="padding:20px;">
 	<% if @checklists && @checklists.count > 0 %>
-		<th>Name</th>
-		<th># Phases</th>
-		<th># Categories</th>
-		<th># items</th>
-		<th>Edit</th>
-		<th>Delete</th>
+		<th><h5>Name</h5></th>
+		<th><h5># Phases</h5></th>
+		<th><h5># Categories</h5></th>
+		<th><h5># items</h5></th>
+		<th><h5>Edit</h5></th>
+		<th><h5>Delete</h5></th>
 		<%= render :partial => "admin/checklist_row", collection: @checklists, :as => :c, cache: true %>
 	<% else %>
 		<tr><td>You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></tr>

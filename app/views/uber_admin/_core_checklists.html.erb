@@ -2,9 +2,8 @@
 	<div id="upload-core">
 		<%= form_for @checklist, :url => upload_template_uber_admin_index_path, :multipart => true, method: :post do |f| %>
 			<div>
-				<h3>Core Checklists</h3>
+				<h3>Upload a New Core Checklist</h3>
 				<div style="text-align:center;width:200px;margin:2.5% auto;"><%= f.file_field :file %></div>
-				<div><%= f.submit "Upload", :class => "btn btn-success btn-lg save" %></div>
 			</div>
 		<% end %>
 	</div>
@@ -12,12 +11,12 @@
 	<table class="core-checklist-table" style="padding:20px;">
 		<% if @checklists && @checklists.count > 0 %>
 			<thead>
-				<th>Name</th>
-				<th># Phases</th>
-				<th># Categories</th>
-				<th># Items</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<th><h5>Name</h5></th>
+				<th><h5># Phases</h5></th>
+				<th><h5># Categories</h5></th>
+				<th><h5># Items</h5></th>
+				<th><h5>Edit</h5></th>
+				<th><h5>Delete</h5></th>
 			</thead>
 			<tbody>
 				<%= render :partial => "uber_admin/checklist_row", collection: @checklists, :as => :c, cache: false %>
