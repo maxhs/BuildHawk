@@ -3,12 +3,7 @@
 
 		<div id="checklist-items">
 			<header>
-				<%= form_for @checklist, :method => :patch do |f| %>
-					<table>
-						<tr><td style="width:100%; padding-bottom:20px;"><%= f.text_field :name, :style=> "width:100%;" %></td>
-						<td style="vertical-align:top"><%= f.submit "Change Name", :class => "btn btn-success btn-md pull-right", :remote => true %></td></tr>
-					</table>
-				<% end %>
+				<%= render partial:"admin/edit_checklist" %>
 			</header>
 			<ul id="categories">
 				<%= render :partial => 'admin/phase', collection: @checklist.categories, :as => :c, cache: false %>

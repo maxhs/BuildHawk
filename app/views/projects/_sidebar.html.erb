@@ -26,9 +26,9 @@
 <script type="text/javascript">
 	$(function(){
 		<% @projects.each do |p| %>
-		$('#sidebar-progress-link-<%=p.id%>').progressbar({
-	    	value:<%=p.checklist.progress%>
-	    });
+			$('#sidebar-progress-link-<%=p.id%>').progressbar({
+		    	value:<%=p.checklist.progress%>
+		    });
 	    <% end %>
 	})
 </script>

@@ -45,14 +45,18 @@ class ChecklistsController < ApplicationController
 		@checklist.update_attributes params[:checklist]
 		@company = current_user.company
 		@checklists = @company.checklists
-		redirect_to checklists_admin_index_path
-		# if request.xhr?
-		# 	respond_to do |format|
-		# 		format.js { render :template => "admin/checklists"}
-		# 	end
-		# else
-		# 	render 'admin/checklists'
-		# end
+		
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			if current_user.uber_admin?
+				redirect_to core_checklists_uber_admin_index_path
+			else
+				redirect_to checklists_admin_index_path
+			end
+		end
 	end
 
 	def new_checklist_item

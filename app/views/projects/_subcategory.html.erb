@@ -1,7 +1,7 @@
 <li class="subcategory" id="subcategory-<%=subcategory.id%>">
 	<div class="header row">
 		<div class="col-xs-8">
-			<h4 class="title"><%= subcategory.name %></h4>
+			<h4 class="title" id="<%= subcategory.id %>"><%= subcategory.name %></h4>
 			<span style="padding:0 1em;color:#aaa;">(<%=subcategory.completed_count%> of <%= subcategory.checklist_items.count%>)</span>
 			<% if current_user.admin %>
 				<%= link_to "Edit Category", subcategory_checklist_path(@project, :subcategory_id => subcategory.id, :project_id => @project.id), :class=>"edit-category remote", :remote => true %>

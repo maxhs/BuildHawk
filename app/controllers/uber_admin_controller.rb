@@ -12,11 +12,13 @@ class UberAdminController < ApplicationController
 		end
 	end
 
-	def core_checklist
+	def core_checklists
 		@checklist = Checklist.new
-		core_checklist = Checklist.where(:core => true).last
-		if core_checklist
-			@items = core_checklist.categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+		@checklists = Checklist.where(:core => true)
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
 		end
 	end
 

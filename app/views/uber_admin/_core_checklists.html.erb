@@ -1,0 +1,29 @@
+<div class="border-box">
+	<div id="upload-core">
+		<%= form_for @checklist, :url => upload_template_uber_admin_index_path, :multipart => true, method: :post do |f| %>
+			<div>
+				<h3>Core Checklists</h3>
+				<div style="text-align:center;width:200px;margin:2.5% auto;"><%= f.file_field :file %></div>
+				<div><%= f.submit "Upload", :class => "btn btn-success btn-lg save" %></div>
+			</div>
+		<% end %>
+	</div>
+
+	<table class="core-checklist-table" style="padding:20px;">
+		<% if @checklists && @checklists.count > 0 %>
+			<thead>
+				<th>Name</th>
+				<th># Phases</th>
+				<th># Categories</th>
+				<th># Items</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</thead>
+			<tbody>
+				<%= render :partial => "uber_admin/checklist_row", collection: @checklists, :as => :c, cache: false %>
+			</tbody>
+		<% else %>
+			<tr><td>You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></tr>
+		<% end %>
+	</table>
+</div>

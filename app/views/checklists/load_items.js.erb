@@ -39,6 +39,7 @@ if (itemsHolder.hasClass('revealed')){
 		$('.subcategory .title').on('click',function(e){
 			var subId = e.target.id;
 			var sub = $('#sub-'+subId);	
+			console.log('clicked');
 	        if (sub.hasClass("collapsed")){
 	        	sub.show(200,function(){
 	        		sub.removeClass('collapsed');

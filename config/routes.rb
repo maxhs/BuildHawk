@@ -63,7 +63,7 @@ Buildhawk::Application.routes.draw do
       post :upload_template
       get :companies
       get :users
-      get :core_checklist
+      get :core_checklists
       get :edit_company
       get :edit_user
       post :update_company

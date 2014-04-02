@@ -36,10 +36,12 @@ class Checklist < ActiveRecord::Base
     end
 
   	def item_count
-        if checklist_items.count
+        if checklist_items && checklist_items.count > 0
             checklist_items.count
         else
-  		    categories.map(&:subcategories).flatten.map(&:checklist_items).flatten.count
+  		    self.checklist_items = categories.map(&:subcategories).flatten.map(&:checklist_items).flatten
+            self.save
+            return self.checklist_items.count
         end
   	end
 
