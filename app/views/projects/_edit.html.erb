@@ -67,11 +67,11 @@
 			    </div>
 			<% end %>
 			
-				
-				<%= f.submit "Save", :class => "btn btn-success btn-md pull-right", :style => "margin:50px auto 15px" %>
+			<div class="button-container">
+				<%= f.submit "Save", :class => "btn btn-success btn-md save" %>
 	<% end %>
-				<div class="button-container" style="width:25%;"><%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"btn btn-danger btn-md pull-right remote", :remote => true, :style=>"width:100%;" %>
-				
+				<%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"btn btn-danger btn-md remote", remote: true %>
+			</div>
 			
 		</div>
 </div>
