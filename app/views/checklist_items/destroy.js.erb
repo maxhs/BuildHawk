@@ -1,3 +1,13 @@
-$('#item-<%= @item_id %>').fadeOut(200,function(){
-	$(this).remove();	
-});
+if ($('#item-<%= @item_id %>').length){
+	$('#item-<%= @item_id %>').fadeOut(200,function(){
+		<% if @subcategory %>
+			$('#subcategory-<%= @subcategory.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", :locals => {:subcategory => @subcategory} %>');
+		<% end %>
+		$(this).remove();	
+	});
+} else {
+	$('#main').fadeOut(200,function(){
+		$(this).html('<%= j render partial:"admin/editor" %>');
+		$(this).fadeIn(200);
+	});
+}

@@ -71,9 +71,9 @@ class ChecklistItemsController < ApplicationController
 		end
 	end
 
-	def create_item
-		index = params[:checklist_item][:item_index]
+	def create
 		@item = ChecklistItem.create params[:checklist_item]
+		@item.move_to_top
 		@checklist = @item.checklist
 		@subcategory = @item.subcategory
 		if request.xhr?
@@ -101,17 +101,18 @@ class ChecklistItemsController < ApplicationController
 	end
 
 	def destroy
-		@checklist_item = ChecklistItem.find params[:id]
+		checklist_item = ChecklistItem.find params[:id]
 		@item_id = params[:id]
-		@checklist = @checklist_item.checklist
-		@project = @checklist_item.subcategory.category.checklist.project
-		@checklist_item.destroy
+		@subcategory = checklist_item.subcategory
+		@checklist = @subcategory.category.checklist
+		@project = @checklist.project
+		checklist_item.destroy
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else 
-			redirect_to checklist_project_path(@project)
+			redirect_to checklist_project_path(@project) if @project
 		end
 	end
 end

@@ -252,6 +252,11 @@
 		vertical-align:middle;
 		text-align:center;
 	}
+	.completed-count {
+		padding:0 1em;
+		color:#aaa;
+	}
+	
 	.items-container.collapsed {
 		display:none;
 	}

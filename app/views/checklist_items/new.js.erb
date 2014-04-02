@@ -1,5 +1,1 @@
-$('#checklist-items').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "checklist_items/new", :locals => {:item => @item} %>');
-	$(this).fadeIn(100);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#subcategory-<%= @subcategory.id %> .header').after('<%= j render partial:"checklist_items/new" %>');

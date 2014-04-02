@@ -1,0 +1,7 @@
+$('#new_checklist_item').fadeOut(200,function(){
+	$(this).replaceWith('<%= j render partial:"admin/item", :locals => {:item => @item} %>');
+	<% if @subcategory %>
+		$('#subcategory-<%= @subcategory.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", :locals => {:subcategory => @subcategory} %>');
+	<% end %>
+	$(this).fadeIn(200);
+});

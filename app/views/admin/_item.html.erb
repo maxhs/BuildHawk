@@ -15,7 +15,7 @@
 		<%= link_to 'Edit', edit_checklist_item_path(item), :class => "simple-btn", :remote => true %>
 	</div>
 	<div class="col-xs-2" style="text-align: center;">
-		<%= link_to 'Delete', delete_item_project_path(item, :checklist_item_id => item.id), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, :class => "simple-btn", :method => :delete, :class=>"simple-btn delete-link", :remote => true %>
+		<%= link_to 'Delete', checklist_item_path(item), :method => :delete, :data => {:confirm => "Are you sure you want to delete this checklist item?"}, :class => "simple-btn", :class=>"simple-btn delete-link", remote: true %>
 	</div>
 
 </div>
