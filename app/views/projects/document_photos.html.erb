@@ -21,7 +21,7 @@
 			</div>
 			<div id="photo-section">
 				<div id="photo-table">
-					<%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: true %>
+					<%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: false %>
 				</div>
 				<div id="photo-focus">	
 					<%= render :partial => "projects/large_image" %>

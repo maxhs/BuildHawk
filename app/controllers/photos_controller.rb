@@ -53,6 +53,7 @@ class PhotosController < ApplicationController
 				with :project_id, params[:project_id]
 			end
 			@photos = initial.results.uniq
+			puts "photo search results count: #{@photos.count}"
 			@prompt = "No search results"
 			if request.xhr?
 				respond_to do |format|
