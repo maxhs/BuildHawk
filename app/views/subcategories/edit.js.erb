@@ -2,13 +2,13 @@ $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('.nav-checklists a').addClass('current-page');
 <% if @project %>
 	$('#pages').fadeOut(170,function(){
-		$(this).html('<%= j render :partial => "projects/subcategory" %>');
+		$(this).html('<%= j render :partial => "subcategories/edit" %>');
 		$(this).fadeIn(170);
 		$("html, body").animate({ scrollTop: 0 }, 300);
 	});
 <% else %>
 	$('#checklist-items').fadeOut(170,function(){
-		$(this).html('<%= j render :partial => "checklists/subcategory" %>');
+		$(this).html('<%= j render :partial => "subcategories/edit" %>');
 		$(this).fadeIn(170);
 		$("html, body").animate({ scrollTop: 0 }, 300);
 	});
