@@ -262,6 +262,7 @@ class ProjectsController < ApplicationController
 
 	def delete_item
 		checklist_item = ChecklistItem.find params[:checklist_item_id]
+		@checklist = checklist_item.subcategory.category.checklist
 		@item_id = checklist_item.id
 		if checklist_item.destroy && request.xhr?
 			respond_to do |format|

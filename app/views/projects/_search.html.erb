@@ -3,7 +3,7 @@
 		<% @projects.each do |project| %>
 			<div class="search-project">
 				<table style="border-bottom:1px solid #eee; width:100%;">
-					<tr style="border-width:0;"><td><h4><%= link_to project.name, project_path(project) %></h4></td></tr>
+					<tr style="border-width:0;"><td><h4><%= link_to project.name, project_path(project), remote: true %></h4></td></tr>
 				
 					<tr>
 						<td class="search-label">Map:</td>
