@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
 	def new
-		@checklist = Checklist.find params[:id]
+		@checklist = Checklist.find params[:checklist_id] if params[:checklist_id]
 		@category = @checklist.categories.new
 		if request.xhr?
 			respond_to do |format|

@@ -7,7 +7,7 @@
 				<%= render partial:"checklists/completed_count", :locals => {:subcategory => subcategory} %>
 			</span>
 
-			<%= link_to "Edit Category", subcategory_checklist_path(:subcategory_id => subcategory.id), :class=>"edit-category", :remote => true %>
+			<%= link_to "Edit Category", edit_subcategory_path(subcategory), :class=>"edit-category", :remote => true %>
 			<%= link_to "Add Checklist Item", new_checklist_item_path(:subcategory_id => subcategory.id), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
 
 		</div>

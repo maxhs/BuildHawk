@@ -1,5 +1,0 @@
-$('#pages').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "checklists/new_category", :locals => {:checklist => @checklist} %>');
-	$(this).fadeIn(170);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
