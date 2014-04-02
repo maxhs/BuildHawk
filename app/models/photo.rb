@@ -31,7 +31,7 @@ class Photo < ActiveRecord::Base
         text    :folder do
         	folder.name if folder
         end        
-        #integer :project_id
+        integer :project_id
         #integer :report_id
         #integer :checklist_item_id
         #integer :punchlist_item_id
