@@ -5,8 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore solr stuff
-/solr/development/data
-/solr/data
+/solr/development
 
 # Ignore stripe keys
 #/config/initializers/stripe.rb
