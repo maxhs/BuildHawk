@@ -12,6 +12,11 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	def create 
+		@category = Category.create params[:category]
+		@category.move_to_top
+	end
+
 	def show
 		@category = Category.find params[:id]
 		if params[:project_id]
@@ -23,8 +28,12 @@ class CategoriesController < ApplicationController
 				format.js
 			end
 		else
-			render :category
+			render :show
 		end
+	end
+
+	def edit
+		@category = Category.find params[:id]
 	end
 
 	def update
@@ -48,9 +57,9 @@ class CategoriesController < ApplicationController
 		end
 
 		@checklist = @category.checklist
-		unless @checklist.project.nil?
+		if @checklist.project
 			@project = @checklist.project
-			@projects = @checklist.project.company.projects
+			@projects = @project.company.projects if @project.company
 			if request.xhr?
 			 	respond_to do |format|
 			 		format.js { render :template => "projects/checklist" }
@@ -61,7 +70,7 @@ class CategoriesController < ApplicationController
 		else 
 			if request.xhr?
 				respond_to do |format|
-					format.js { render :template => "admin/editor" }
+					format.js
 				end
 			else
 				render "admin/editor"
@@ -71,7 +80,7 @@ class CategoriesController < ApplicationController
 
 	def destroy
 		@category = Category.find params[:id]
-		@checklist = Checklist.find params[:checklist_id]
+		@checklist = @category.checklist
 		@project = @checklist.project
 		if @category.destroy && request.xhr?
 			if @project

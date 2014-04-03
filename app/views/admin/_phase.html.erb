@@ -1,5 +1,7 @@
 <li class="category" id="phase-<%=c.id%>">
-	<h2 style="display:inline-block"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"remote", remote: true %></h2>
-	<%= link_to "Edit Phase", category_path(c), :class => "edit-category", remote: true %>
+	<div class="editable">
+		<h2 class="title"><%= link_to c.name, load_items_checklist_path(c), :id => "c-#{c.id}", :class=>"remote", remote: true %></h2>
+		<%= link_to "Edit Phase", edit_category_path(c), :class => "edit-category remote", remote: true %>
+	</div>
 	<div id="<%= c.id %>-items"></div>
 </li>

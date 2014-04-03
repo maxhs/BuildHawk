@@ -26,6 +26,21 @@
 		border-left:1px solid #ddd;
 	}
 
+	.editable {
+
+		#cancel-edit-category {
+			cursor:pointer;
+		}
+
+		h2 {
+			display:inline-block;
+			margin:20px auto;
+		}
+	}
+	form.edit_category {
+		display:inline-block;
+	}
+
 	.phase-label {
 		line-height:53px;
 		vertical-align:middle;
@@ -256,7 +271,7 @@
 		padding:0 1em;
 		color:#aaa;
 	}
-	
+
 	.items-container.collapsed {
 		display:none;
 	}

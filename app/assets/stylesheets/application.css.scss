@@ -496,6 +496,22 @@ a.search-button {
 	line-height:1em;
 }
 
+.simple-danger-btn {
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	padding:7px;
+	position:relative;
+	display:inline-block;
+	margin:0 10px;
+	width:auto;
+	text-align:center;
+	clear:both;
+	font-family:"Gotham Book",'Helvetica',sans-serif;
+	font-size:14px;
+	line-height:1em;
+}
+
 .btn, .btn input {
 	padding:10px 5px;
 	margin-top:2px;

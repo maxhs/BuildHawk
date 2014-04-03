@@ -1,0 +1,5 @@
+<%= form_for category, method: :patch, remote: true do |f| %>
+	<h2><%= f.text_field :name, :style=>"padding:0;border:0;display:inline-block;autofocus:true", autofocus: true %></h2>
+<% end %> 
+<span id="cancel-edit-category" class="simple-btn">cancel</span>
+<%= link_to "Delete", category_path(@category), :method => :delete, :data => {:confirm => "Are you sure you want to delete this phase?"}, :class=>"btn btn-danger btn-md remote", :style=>"line-height:1em;margin:0 auto;width:100px;display:inline-block;", :remote => true %>

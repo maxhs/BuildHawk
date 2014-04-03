@@ -1,11 +1,10 @@
-	<% if @project %>
+<% if @project %>
 		<%= render :partial => "projects/sidebar" %>
-		<div class="col-xs-12 col-sm-9" id="main">
 		<%= render :partial => "projects/project_nav" %>
-	<% else %>
+<% else %>
 		<%= render :partial => "admin/sidebar" %>
-	<% end %>
-
+<% end %>
+<div class="col-xs-12 col-sm-9" id="main">
 	<div id="pages">
 		<%= render :partial => "categories/show", :locals => {:category => @category} %>
 	</div>

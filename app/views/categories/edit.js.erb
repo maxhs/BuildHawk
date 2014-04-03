@@ -1,0 +1,10 @@
+$('#phase-<%=@category.id%> .editable').fadeOut(200,function(){
+	$(this).html('<%= j render partial:"categories/edit", locals: {:category => @category} %>');
+	$(this).fadeIn(200);
+	$('#cancel-edit-category').on('click',function(){
+		$(this).parent().fadeOut(200,function(){
+			$(this).html('<h2 class="title"><%= link_to @category.name, load_items_checklist_path(@category), :id => "c-#{@category.id}", :class=>"remote", remote: true %></h2><%= link_to "Edit Phase", edit_category_path(@category), :class => "edit-category remote", remote: true %>');
+			$(this).fadeIn(200);
+		});
+	});
+});
