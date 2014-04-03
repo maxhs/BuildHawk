@@ -1,1 +1,10 @@
-$('#new-phase').after('<%= j render partial:"projects/new_category" %>');
+if ($('.new_category').length){
+	$('.new_category').fadeOut(200,function(){
+		$(this).remove();
+	});
+} else {
+	var newDiv = $('<%= j render partial:"projects/new_category" %>').css('display','none');
+	$('#new-phase').after(newDiv);
+	newDiv.fadeIn(200);
+}
+

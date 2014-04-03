@@ -3,5 +3,8 @@ if ($('.new_category').length){
 		$(this).remove();
 	});
 } else {
-	$('#categories').before('<%= j render partial:"categories/new" %>');
+	var newDiv = $('<%= j render partial:"categories/new" %>').css('display','none');
+	$('#categories').before(newDiv);
+	newDiv.fadeIn(200);
+	
 }
