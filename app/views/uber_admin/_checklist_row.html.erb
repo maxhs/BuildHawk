@@ -1,5 +1,5 @@
 <tr id="checklist-<%=c.id%>">
-	<td><%= c.name %></td>
+	<td><h5><%= c.name %></h5></td>
 	<td><%= c.categories.count %></td>
 	<td><%= c.categories.map(&:subcategories).flatten.count %></td>
 	<td><%= c.item_count %></td>
