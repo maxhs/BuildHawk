@@ -225,7 +225,7 @@ body {
 			background:transparent;
 		}
 		a {
-			font-size:20px;
+			font-size:18px;
 			letter-spacing:1px;
 			font-family:'Montserrat','Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 			text-transform:uppercase;
@@ -518,6 +518,9 @@ a.search-button {
 	line-height:1.5;
 	text-transform:uppercase;
 	font-family:'Gotham Book','Helvetica',sans-serif;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
 }
 
 .btn-success {

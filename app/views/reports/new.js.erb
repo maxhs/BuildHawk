@@ -1,0 +1,4 @@
+$('#pages').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "new", :locals => {:report => @report, :project => @project } %>');
+	$(this).fadeIn(170);
+});

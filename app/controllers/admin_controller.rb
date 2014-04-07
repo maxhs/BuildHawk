@@ -180,32 +180,6 @@ class AdminController < ApplicationController
 		end
 	end
 
-	def create_project
-		if Rails.env.production?
-			@checklist = Checklist.new
-			if params[:project][:checklist].present?
-				list = Checklist.find_by(name: params[:project][:checklist])
-				params[:project].delete(:checklist)
-				Resque.enqueue(CreateProject,params[:project],list.id)
-			else 
-				Resque.enqueue(CreateProject,params[:project],nil)
-				@checklist.save
-			end
-			
-			@response_message = "Creating project. This may take a few minutes..."
-			if request.xhr?
-				respond_to do |format|
-					format.js {render :template => "admin/background_project"}
-				end
-			else
-				flash[:notice] = @response_message
-				redirect_to admin_index_path
-			end
-		elsif Rails.env.development?
-	      	puts "should be creating a new project in development environment"
-	    end
-	end
-
 	def billing
 		@company = @user.company
 		if @company.customer_token

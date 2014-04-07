@@ -1,9 +1,9 @@
 <div class="border-box" style="padding-top:20px;padding-bottom:0px;">
 	<header>	
-		<%= link_to "Add Report", new_report_project_path(@project), :class=>"btn btn-default pull-right search-button", remote: true %>
+		<%= link_to "Add Report", new_report_path(:project_id => @project.id), :class=>"btn btn-default pull-right search-button", remote: true %>
 		
 		<div style="margin-bottom: 20px">
-			<%= form_tag search_reports_project_path(@project), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
+			<%= form_tag search_reports_path(:project_id => @project.id), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
 				<%= text_field_tag :search, nil, :placeholder=>"Search Reports...", :class=>"form-control" %>
 				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
 			<% end %>
@@ -25,7 +25,7 @@
 				<% if @reports && @reports.count > 0 %>
 					<% @reports.each do |report| %>
 						<tr>
-							<td><%= link_to "#{report.report_type} - #{report.created_date}", show_report_project_path(@project, :report_id => report.id), :remote => true %></td>
+							<td><%= link_to "#{report.report_type} - #{report.created_date}", report_path(report), :remote => true %></td>
 							<td><%= report.report_type %></td>
 							<td><% if report.updated_at %><%= parse_time report.updated_at %><% end %></td>
 							<td>

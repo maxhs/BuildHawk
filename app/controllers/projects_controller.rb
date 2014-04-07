@@ -15,19 +15,40 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		@company = current_user.company
-		@project = @company.projects.create params[:project]
-		redirect_to admin_index_path
+		if Rails.env.production?
+			@checklist = Checklist.new
+			if params[:project][:checklist].present?
+				list = Checklist.find_by(name: params[:project][:checklist])
+				params[:project].delete(:checklist)
+				Resque.enqueue(CreateProject,params[:project],list.id)
+			else 
+				Resque.enqueue(CreateProject,params[:project],nil)
+				@checklist.save
+			end
+			
+			@response_message = "Creating project. This may take a few minutes..."
+			if request.xhr?
+				respond_to do |format|
+					format.js {render :template => "admin/background_project"}
+				end
+			else
+				flash[:notice] = @response_message
+				redirect_to admin_index_path
+			end
+		elsif Rails.env.development?
+	      	puts "should be creating a new project in development environment"
+	      	checklist = Checklist.find_by(name: params[:project][:checklist])
+	      	@new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}]#, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+	      	params[:project].delete(:checklist)
+	      	project = current_user.company.projects.create params[:project]
+	      	project.checklist = checklist
+	      	project.save
+			redirect_to projects_path
+	    end
 	end
 
 	def index
-		if params[:company_id]
-			@company = Company.find params[:company_id]
-			@projects = @company.projects
-		end
-
-		@projects += Project.where(:core => true).flatten
-		@projects = @projects.uniq
+		find_projects
 
 		if request.xhr?
 			respond_to do |format|
@@ -39,8 +60,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project = Project.find params[:id]
-		@projects = @project.company.projects
+		find_projects
 		if @project.checklist 
 			@checklist = @project.checklist
 			items = @checklist.checklist_items
@@ -220,33 +240,6 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def new_category
-		@project = Project.find params[:id]
-		@checklist = @project.checklist
-		@new_category = @checklist.categories.new
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :new_category
-		end
-	end
-
-	def create_category
-		@category = Category.create params[:category]
-		@category.move_to_top
-		@project = Project.find params[:id]
-		@checklist = @project.checklist
-		if request.xhr?
-			respond_to do |format|
-				format.js 
-			end
-		else
-			render :checklist
-		end
-	end
-
 	def update_checklist_item
 		@checklist_item = ChecklistItem.find params[:checklist_item_id]
 		@checklist_item.update_attributes params[:checklist_item]
@@ -369,56 +362,6 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def reports
-		@reports = @project.ordered_reports
-	end
-
-	def search_reports
-		if params[:search] && params[:search].length > 0
-			search_term = "%#{params[:search]}%" 
-			@project = Project.find params[:id]
-			initial = Report.search do
-				fulltext search_term
-				with :project_id, params[:id]
-			end
-			@reports = initial.results.uniq
-			@prompt = "No search results"
-		else
-			@reports = @project.ordered_reports
-		end
-
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :reports
-		end
-	end
-
-	def new_report
-		@report = Report.new
-		@report.users.build
-		@report.subs.build
-		@report.report_subs.build
-		@report_title = "Add a New Report"
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else 
-			@reports = @project.reports
-			redirect_to reports_project_path(@project)
-		end
-	end
-
-	def show_report
-		@report_title = ""
-		@report = Report.find params[:report_id]
-		@report.users.build
-		@report.subs.build
-	end
-
 	def documents
 		@photos = @project.photos.sort_by(&:created_date).reverse
 		@folders = @project.folders
@@ -522,15 +465,22 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def delete_report
-		@report = Report.find params[:report_id]
-		if @report.destroy
-			redirect_to reports_project_path(@project)
-		end
-	end
-
 	def delete_photo
 
+	end
+
+	def archive
+		current_user.archived_projects.create :project_id => @project.id
+		project_user = @project.project_users.where(:user_id => current_user).first
+		project_user.update_attribute :archived, true if project_user
+		find_projects
+		if request.xhr?
+			respond_to do |format|
+				format.js { render template:"projects/index" }
+			end
+		else
+			render :index
+		end
 	end
 
 	def destroy_confirmation
@@ -544,6 +494,24 @@ class ProjectsController < ApplicationController
 	end
 
 	private
+
+	def find_projects
+		if params[:company_id]
+			@company = Company.find params[:company_id]
+			@projects = @company.projects
+		else
+			@projects = current_user.project_users.where(:archived => false).map(&:project)
+		end
+
+		archived = current_user.archived_projects
+		new_projects = []
+		Project.where(:core => true).flatten.each do |c|
+			new_projects << c unless archived.include?(c)
+		end
+
+		@projects += new_projects
+		@projects = @projects.uniq
+	end
 
 	def find_project
 		if params[:id].present?

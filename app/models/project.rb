@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
                     :user_ids, :core, :project_group_id, :subs, :sub_ids#, :subs_attributes, :project_subs_attributes, :users_attributes, :projects_users_attributes
   	
   	has_many :project_users, :dependent => :destroy, autosave: true
-  	has_many :users, :through => :project_users , autosave: true
+  	has_many :users, :through => :project_users, autosave: true
 
     has_many :project_subs, :dependent => :destroy, autosave: true
     has_many :subs, :through => :project_subs , autosave: true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327231804) do
+ActiveRecord::Schema.define(version: 20140407215551) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 20140327231804) do
   end
 
   add_index "apn_registrations", ["user_id"], name: "apn_registrations_user_id_ix"
+
+  create_table "archived_projects", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.integer  "order_index"
@@ -185,6 +192,7 @@ ActiveRecord::Schema.define(version: 20140327231804) do
     t.string   "name",                                     null: false
     t.integer  "folder_id"
     t.boolean  "mobile",             default: false
+    t.text     "description"
   end
 
   add_index "photos", ["report_id", "checklist_item_id", "punchlist_item_id", "user_id"], name: "photos_ix"
@@ -209,6 +217,7 @@ ActiveRecord::Schema.define(version: 20140327231804) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "archived",   default: false
   end
 
   add_index "project_users", ["project_id", "user_id"], name: "project_users_ix"

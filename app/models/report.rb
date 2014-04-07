@@ -45,6 +45,10 @@ class Report < ActiveRecord::Base
       end
     end
 
+    def to_param
+        "#{id}-#{(Digest::SHA1.hexdigest id.to_s)[0..4]}"
+    end
+
     def personnel
       report_users + report_subs
     end

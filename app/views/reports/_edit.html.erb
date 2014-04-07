@@ -2,7 +2,8 @@
 	<div style="float:right">
 		<button class="export btn btn-md" style="margin-top:20px;"><%= link_to 'Export', generate_report_path(@report), :class=>"remote", remote: true %></button>
 	</div>
-	<%= nested_form_for @report, :url => {:controller => :reports, :action => :update, :report_id => @report.id}, :multipart => true, :remote => true, :method => :patch do |f| %>
+	<%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
 		<div id="add-report" class="container">
 			<div class="thin-form">
 				<div class="row form-title">
@@ -65,11 +66,6 @@
 					<div class="sub-container col-md-6">
 						<% @subs.each do |sub| %>
 							<div>
-								<!--<% if @report.subs.include?(sub) %>
-									<%= check_box_tag "report[sub_ids][]", sub.id, checked: true %><span style="padding-left:1em;"><%= sub.name %></span>
-								<% else %>
-									<%= check_box_tag "report[sub_ids][]", sub.id %><span style="padding-left:1em;"><%= sub.name %></span>
-								<% end %>-->
 								<% report_sub = @report.report_subs.where(:sub_id => sub.id).first_or_initialize %>
 								<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;display:inline-block;text-align:center;" %>
 								<span style="padding-left:1em;"><%= sub.name %></span>
@@ -105,17 +101,14 @@
 					</div>
 				</div>
 			
-				<div class="row">
-					<button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button>
-				</div>
-
-				<div class="row">
-					<%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :class => "delete-report-link remote", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."} %>
+				<div class="button-container">
+					<%= f.submit "Save", class: "btn btn-success btn-md save" %>
+				
+	<% end %>
+					<%= link_to "Delete Report", delete_report_project_path(@project, :report_id => @report.id), :method => :delete, :class => "btn btn-danger btn-md remote", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."} %>
 				</div>
 			</div>
-			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>	
 		</div>
-	<% end %>
 </div>
 
 <div class="border-box" style="margin-top:20px;">

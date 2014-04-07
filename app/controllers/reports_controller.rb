@@ -1,8 +1,55 @@
 class ReportsController < ApplicationController
 
+	before_filter :find_project
+
+	def index
+		@project = Project.find params[:project_id]
+		@reports = @project.ordered_reports
+	end
+
+	def search
+		if params[:search] && params[:search].length > 0
+			search_term = "%#{params[:search]}%" 
+			@project = Project.find params[:project_id]
+			initial = Report.search do
+				fulltext search_term
+				with :project_id, params[:project_id]
+			end
+			@reports = initial.results.uniq
+			@prompt = "No search results"
+		else
+			@reports = @project.ordered_reports
+		end
+
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :reports
+		end
+	end
+
+	def new
+		@project = Project.find params[:project_id]
+		@report = Report.new
+		@report.users.build
+		@report.subs.build
+		@report.report_subs.build
+		@report_title = "Add a New Report"
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			@reports = @project.reports
+			redirect_to reports_project_path(@project)
+		end
+	end
+
 	def update
-		@project = Project.find params[:id]
-		@report = Report.find params[:report_id]
+		@project = Project.find params[:project_id]
+		@report = Report.find params[:id]
 
 		if params[:report_subs].present?
 			params[:report_subs].each do |rs|
@@ -44,10 +91,10 @@ class ReportsController < ApplicationController
 		@reports = @project.ordered_reports
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/reports"}
+				format.js { render :template => "reports/index"}
 			end
 		else 
-			render :reports
+			render :index
 		end
 	end
 
@@ -75,6 +122,13 @@ class ReportsController < ApplicationController
 		end
 	end
 
+	def show
+		@report_title = ""
+		@report = Report.find params[:id]
+		@report.users.build
+		@report.subs.build
+	end
+
 	def generate
 		@report = Report.find params[:id]
 		ReportMailer.report(@report,current_user).deliver
@@ -85,6 +139,33 @@ class ReportsController < ApplicationController
 		else 
 			flash[:notice] = "Report emailed to #{current_user.email}".html_safe
 			redirect_to show_report_project_path(@project)
+		end
+	end
+
+	def destroy
+		@project = @report.project
+		@report = Report.find params[:id]
+		if @report.destroy
+			redirect_to reports_path(:project_id => @project.id)
+		end
+	end
+
+	private
+
+	def find_project
+		@report = Report.where(:id => params[:id]).first
+		if params[:project_id].present?
+			@project = Project.find params[:project_id]
+			@company = @project.company
+			@projects = @company.projects
+			@users = @company.users
+			@subs = @company.subs
+		elsif @report && @report.project_id
+			@project = @report.project
+			@company = @project.company
+			@projects = @company.projects
+			@users = @company.users
+			@subs = @company.subs
 		end
 	end
 end

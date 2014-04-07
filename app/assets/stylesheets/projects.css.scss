@@ -31,6 +31,24 @@
 	}
 }
 
+#archive-button {
+	margin:1% auto 0;
+	width:100%;
+	max-width:160px;
+	display: inline-block;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border: 1px solid rgba(0,0,0,0);
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+	font-family:"Gotham Book","Helvetica",sans-serif;
+}
+
+#archive-button:hover {
+	border: 1px solid #ccc;
+}
+
+
 #new-project-form, #edit-project-form {
 	width:75%;
 	margin:0 auto;

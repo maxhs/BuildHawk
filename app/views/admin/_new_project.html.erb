@@ -1,4 +1,4 @@
-<%= nested_form_for @project, :url => create_project_admin_index_path(@project), :method => :post, :remote => true do |f| %>
+<%= nested_form_for @project, :url => projects_path, :method => :post, :remote => true do |f| %>
 	<div class="border-box">
 		<div id="new-project-form">
 			<h2 style="text-align:center;">New Project</h2>
@@ -62,7 +62,7 @@
 		    		<% end %>
 		    	</div>
 	        </div>
-			<div class="button-container"><button class="btn btn-success btn-md"><%= f.submit "CREATE", :id=>"new-project-submit" %></button></div>
+			<div class="button-container"><%= f.submit "CREATE", :id=>"new-project-submit", :class => "btn btn-success btn-md" %></div>
 		</div>
 	</div>
 <% end %>

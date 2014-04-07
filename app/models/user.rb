@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
     belongs_to :company
     
   	has_many :project_users, :dependent => :destroy
-  	has_many :projects, :through => :project_users 
+  	has_many :projects, :through => :project_users
+    has_many :archived_projects, :dependent => :destroy
     has_many :report_users, :dependent => :destroy
     has_many :reports, :through => :report_users
     has_many :notifications, :dependent => :destroy
