@@ -3,7 +3,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     def index
         #find_projects
         @user = User.find params[:user_id]
-        @projects = @user.project_users.where(:archived => false, :project_group_id => nil).map(&:project).compact 
+        @projects = @user.project_users.where(:archived => false, :project_group_id => nil, :core => false).map(&:project).compact 
+        @projects = @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
         groups = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
         if groups
             groups.each do |g|
@@ -13,7 +14,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         
         if @projects
         	respond_to do |format|
-            	format.json { render_for_api :projects, :json => @projects, :root => :projects}
+            	format.json { render_for_api :projects, :json => @projects.sort_by{|p| p.name.downcase}, :root => :projects}
           	end
         else
             render :json => {success: false}
