@@ -3,7 +3,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     def index
         #find_projects
         @user = User.find params[:user_id]
-    	@projects = @user.projects.where(:project_group_id => nil).order("name ASC")
+        @projects = @user.project_users.where(:archived => false).map{|u| u.project if u.project.project_group_id == nil}.compact
+    	#@projects = @user.projects.where(:project_group_id => nil).order("name ASC")
         @projects += Project.where(:core => true).flatten
         
         groups = @user.projects.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
