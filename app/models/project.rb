@@ -19,6 +19,7 @@ class Project < ActiveRecord::Base
     has_many :folders, :dependent => :destroy
 
     after_create :default_folders
+    after_commit :check_groups
 
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true
@@ -41,6 +42,16 @@ class Project < ActiveRecord::Base
             )
         end
         self.save
+    end
+
+    def check_groups
+        puts 'checking groups'
+        if project_group_id != nil
+            puts 'inside check_groups'
+            project_users.each do |pu|
+                pu.update_attribute :project_group_id, project_group_id
+            end
+        end
     end
 
     def checklist_items
