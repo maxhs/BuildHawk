@@ -43,7 +43,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def archive
         @user = User.find params[:user_id]
-        @user.archived_projects.create :project_id => @project.id
+        @project = Project.find params[:id]
+        @user.archived_projects.create :project_id => params[:id]
         project_user = @project.project_users.where(:user_id => current_user).first
         project_user.update_attribute :archived, true if project_user
 
