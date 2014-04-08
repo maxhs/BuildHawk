@@ -57,7 +57,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def find_projects
         @user = User.find params[:user_id]
-        @projects = @user.project_users.where(:archived => false).map{|u| u.project if u.project.project_group_id == nil}
+        @projects = @user.project_users.where(:archived => false).map{|u| u.project if u.project.project_group_id == nil}.compact
 
         archived = @user.archived_projects
         new_projects = []
