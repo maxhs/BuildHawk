@@ -67,7 +67,7 @@
 			<div class="col-xs-12" style="overflow: hidden;">
 				<% @recent_photos.each do |p| %>
 					<% if p.image_file_name%>
-						<%= render :partial => "image", :locals => {:p => p} %>
+						<%= render :partial => "photos/image", :locals => {:p => p} %>
 					<% end %>
 				<% end %>
 			</div>
