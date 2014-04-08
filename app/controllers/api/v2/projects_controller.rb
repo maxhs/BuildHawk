@@ -46,9 +46,9 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         @project = Project.find params[:id]
         @user.archived_projects.create :project_id => params[:id]
         project_user = @project.project_users.where(:user_id => current_user).first
-        project_user.update_attribute :archived, true if project_user
 
-        if project_user.save
+        if project_user
+            project_user.update_attribute :archived, true
             render :json => {success: true}
         else
             render :json => {success: false}
