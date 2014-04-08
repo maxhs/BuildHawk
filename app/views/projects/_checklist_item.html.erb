@@ -80,7 +80,7 @@
 			<%= f.submit "Post", :class=>"btn btn-success btn-md pull-right", :style=>"margin-top:14px;" %>
 		<% end %>
 	</div>
-	<%= render :partial => "projects/comments", :locals => {:comments => item.comments} %>
+	<%= render :partial => "comments/comments", :locals => {:comments => item.comments} %>
 </div>
 
 <script type="text/javascript">
