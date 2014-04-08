@@ -8,7 +8,7 @@
 	</header>-->
 
 <% @projects.each do |project| %>
-	<h4><%= link_to project.name, reports_project_path(project), :remote => true %> </h4>
+	<h4><%= link_to project.name, reports_path(:project_id => project.id), :remote => true %> </h4>
 	<table class="table table-bordered table-responsive report">
 		<% if project.reports && project.reports.count > 0 %>
 			<thead>
@@ -22,7 +22,7 @@
 			<tbody>
 				<% project.reports.each do |report| %>
 					<tr>
-						<td><%= link_to parse_date(report.created_at), show_report_project_path(project, :report_id => report.id), :remote => true %></td>
+						<td><%= link_to parse_date(report.created_at), report_path(report), remote: true %></td>
 						<td><%= report.report_type %></td>
 						<td><%= parse_time report.updated_at%></td>
 						<td><% if report.photos && report.photos.count > 0 %><%= image_tag report.photos.first.image.url(:thumb), :class =>"admin-report-pic" %><% else %>0<% end %></td>
