@@ -217,7 +217,9 @@ ActiveRecord::Schema.define(version: 20140407215551) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "archived",   default: false
+    t.boolean  "archived",         default: false
+    t.boolean  "core",             default: false
+    t.integer  "project_group_id"
   end
 
   add_index "project_users", ["project_id", "user_id"], name: "project_users_ix"

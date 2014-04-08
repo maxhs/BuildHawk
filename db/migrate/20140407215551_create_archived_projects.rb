@@ -7,5 +7,7 @@ class CreateArchivedProjects < ActiveRecord::Migration
     end
     add_column :photos, :description, :text
     add_column :project_users, :archived, :boolean, default: false
+    add_column :project_users, :core, :boolean, default: false
+    add_column :project_users, :project_group_id, :integer
   end
 end
