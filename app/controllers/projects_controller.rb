@@ -465,10 +465,6 @@ class ProjectsController < ApplicationController
 		end
 	end
 
-	def delete_photo
-
-	end
-
 	def archive
 		current_user.archived_projects.create :project_id => @project.id
 		project_user = @project.project_users.where(:user_id => current_user).first

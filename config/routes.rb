@@ -104,8 +104,6 @@ Buildhawk::Application.routes.draw do
       get :new_photo
       post :photo
       delete :delete_item
-      delete :delete_report
-      delete :delete_photo
       delete :delete_checklist
       get :destroy_confirmation
 
