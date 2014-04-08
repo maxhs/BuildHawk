@@ -42,16 +42,15 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def archive
-        current_user.archived_projects.create :project_id => @project.id
+        @user = User.find params[:user_id]
+        @user.archived_projects.create :project_id => @project.id
         project_user = @project.project_users.where(:user_id => current_user).first
         project_user.update_attribute :archived, true if project_user
-        find_projects
-        if request.xhr?
-            respond_to do |format|
-                format.js { render template:"projects/index" }
-            end
+
+        if project_user.save
+            render :json => {success: true}
         else
-            render :index
+            render :json => {success: false}
         end
     end
 
