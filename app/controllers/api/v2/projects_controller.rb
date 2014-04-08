@@ -1,20 +1,20 @@
 class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
-    	user = User.find params[:user_id]
-    	projects = user.projects.where(:project_group_id => nil).order("name ASC")
-        projects += Project.where(:core => true).flatten
+        find_projects
+    	#projects = user.projects.where(:project_group_id => nil).order("name ASC")
+        @projects += Project.where(:core => true).flatten
         
-        groups = user.projects.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        groups = @user.projects.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
         if groups
             groups.each do |g|
-                projects << ProjectGroup.find(g).projects.first
+                @projects << ProjectGroup.find(g).projects.first
             end 
         end
         
-        if projects
+        if @projects
         	respond_to do |format|
-            	format.json { render_for_api :projects, :json => projects, :root => :projects}
+            	format.json { render_for_api :projects, :json => @projects, :root => :projects}
           	end
         else
             render :json => {success: false}
@@ -39,4 +39,34 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         end
     end
 
+    def archive
+        current_user.archived_projects.create :project_id => @project.id
+        project_user = @project.project_users.where(:user_id => current_user).first
+        project_user.update_attribute :archived, true if project_user
+        find_projects
+        if request.xhr?
+            respond_to do |format|
+                format.js { render template:"projects/index" }
+            end
+        else
+            render :index
+        end
+    end
+
+    private
+
+    def find_projects
+        @user = User.find params[:user_id]
+        @projects = @user.project_users.where(:archived => false).map{|u| u.project if u.project.project_group_id == nil}
+
+        archived = @user.archived_projects
+        new_projects = []
+        Project.where(:core => true).flatten.each do |c|
+            new_projects << c unless archived.include?(c)
+        end
+
+        @projects += new_projects
+        @projects = @projects.uniq
+        @projects = @projects.sort_by{|p| p.name.downcase}
+    end
 end

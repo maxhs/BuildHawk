@@ -181,6 +181,9 @@ Buildhawk::Application.routes.draw do
         collection do
           get :dash
         end
+        member do
+          post :archive
+        end
       end
       resources :checklists
       resources :checklist_items do
