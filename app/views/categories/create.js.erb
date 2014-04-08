@@ -1,1 +1,5 @@
-$('#categories').prepend('<%= j render partial:"admin/phase", locals:{:c => @category} %>');
+<% if @category.checklist.project %>
+	$('#new-phase').after('<%= j render partial:"projects/phase", locals:{:c => @category} %>');
+<% else %>
+	$('#new-phase').after('<%= j render partial:"admin/phase", locals:{:c => @category} %>');
+<% end %>

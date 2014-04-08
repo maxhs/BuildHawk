@@ -17,7 +17,7 @@
 				
 				<ul id="categories">
 					<% if current_user.admin %>
-						<%= link_to "(+) New Phase", new_category_project_path(@project), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
+						<%= link_to "(+) New Phase", new_category_path(:checklist_id => @checklist.id,:project_id => @project.id), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
 					<% end %>
 					<%= render :partial => 'projects/phase', collection: @checklist.categories, :as => :c, cache: true %>
 				</ul>

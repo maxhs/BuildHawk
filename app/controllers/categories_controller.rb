@@ -15,6 +15,7 @@ class CategoriesController < ApplicationController
 	def create 
 		@category = Category.create params[:category]
 		@category.move_to_top
+		@project = @category.checklist.project
 	end
 
 	def show
