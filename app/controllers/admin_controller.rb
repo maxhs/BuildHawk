@@ -80,9 +80,8 @@ class AdminController < ApplicationController
 	def create_sub
 		@sub = current_user.company.subs.create params[:sub]
 		if @sub.save & request.xhr?
-			@response_message = "Please make sure you've included a contact".html_safe
 			respond_to do |format|
-				format.js { render :template => "incorrect" }
+				format.js
 			end
 		elsif @sub.save
 			flash[:notice] = "Sub created"

@@ -44,6 +44,9 @@
 
 .projects.archived {
 	display:none;
+	.sidebarProjects div {
+		margin:15px auto;
+	}
 }
 
 #archive-button {
