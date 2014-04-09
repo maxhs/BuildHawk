@@ -52,15 +52,6 @@ class Project < ActiveRecord::Base
                 pu.update_attribute :project_group_id, project_group_id
             end
         end
-        if core == true
-            User.all.each do |u|
-                puts "making a project user for #{u.full_name} for core"
-                ProjectUser.where(:project_id => id, :user_id => u.id).first_or_create
-            end
-        else
-            #puts "erasing all project users for proejct #{project.name}"
-            #ProjectUser.where(:project_id => id, :user_id => u.id).destroy_all
-        end
     end
 
     def checklist_items
