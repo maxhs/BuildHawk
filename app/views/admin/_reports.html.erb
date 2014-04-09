@@ -26,7 +26,6 @@
 						<td><%= report.report_type %></td>
 						<td><%= parse_time report.updated_at%></td>
 						<td><% if report.photos && report.photos.count > 0 %><%= image_tag report.photos.first.image.url(:thumb), :class =>"admin-report-pic" %><% else %>0<% end %></td>
-						
 					</tr>
 				<% end %>
 			</tbody>

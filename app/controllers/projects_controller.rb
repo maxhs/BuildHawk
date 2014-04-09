@@ -48,7 +48,16 @@ class ProjectsController < ApplicationController
 	end
 
 	def index
-		find_projects
+		if params[:company_id]
+			@company = Company.find params[:company_id]
+			@projects = @company.projects
+		elsif current_user.admin? || current_user.company_admin?
+			@company = current_user.company
+			@projects = @company.projects
+			@archived_projects = current_user.archived_projects.uniq
+		else
+			find_projects
+		end
 
 		if request.xhr?
 			respond_to do |format|
@@ -456,7 +465,6 @@ class ProjectsController < ApplicationController
 			flash[:notice] = "didn't work"
 		end
 		if request.xhr?
-			puts "should be doing stuff!"
 			respond_to do |format|
 				format.js
 			end
@@ -492,21 +500,8 @@ class ProjectsController < ApplicationController
 	private
 
 	def find_projects
-		if params[:company_id]
-			@company = Company.find params[:company_id]
-			@projects = @company.projects
-		else
-			@projects = current_user.project_users.where(:archived => false).map(&:project)
-		end
-
-		archived = current_user.archived_projects
-		new_projects = []
-		Project.where(:core => true).flatten.each do |c|
-			new_projects << c unless archived.include?(c)
-		end
-
-		@projects += new_projects
-		@projects = @projects.uniq
+		@projects = current_user.project_users.where(:archived => false).map(&:project).compact
+		@archived_projects = current_user.project_users.where(:archived => true).map(&:project).compact
 	end
 
 	def find_project

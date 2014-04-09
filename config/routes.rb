@@ -218,6 +218,7 @@ Buildhawk::Application.routes.draw do
       resources :projects do
         collection do
           get :dash
+          get :archived
         end
         member do
           post :archive

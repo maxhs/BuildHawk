@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .well {
-	min-height: 20px;
+	min-height: 0px;
 	padding: 0px 10px;
 	margin-bottom: 20px;
 	background-color: #fff;
@@ -29,6 +29,21 @@
 		text-align:center;
 		margin:0 auto 20px;
 	}
+}
+
+#archived-projects-button {
+	text-align:center;
+	color:#aaa;
+	cursor:pointer;
+	margin:5% auto;
+}
+
+#archived-projects-button:hover {
+	color:#222;
+}
+
+.projects.archived {
+	display:none;
 }
 
 #archive-button {

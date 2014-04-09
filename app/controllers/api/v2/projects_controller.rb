@@ -40,6 +40,18 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         end
     end
 
+    def archived
+        @user = User.find params[:user_id]
+        @projects = @user.project_users.where(:archived => true).map(&:project).compact
+        if @projects
+            respond_to do |format|
+                format.json { render_for_api :projects, :json => @projects.sort_by{|p| p.name.downcase}, :root => :projects}
+            end
+        else
+            render :json => {success: false}
+        end
+    end
+
     def archive
         @user = User.find params[:user_id]
         @project = Project.find params[:id]
