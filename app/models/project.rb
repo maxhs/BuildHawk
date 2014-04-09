@@ -58,8 +58,8 @@ class Project < ActiveRecord::Base
                 ProjectUser.where(:project_id => id, :user_id => u.id).first_or_create
             end
         else
-            puts "erasing all project users for proejct #{project.name}"
-            ProjectUser.where(:project_id => id, :user_id => u.id).destroy_all
+            #puts "erasing all project users for proejct #{project.name}"
+            #ProjectUser.where(:project_id => id, :user_id => u.id).destroy_all
         end
     end
 
