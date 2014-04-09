@@ -6,6 +6,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         @projects = @user.project_users.where(:archived => false, :project_group_id => nil, :core => false).map(&:project).compact 
         #@projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
         @projects += Project.where(:core => true) 
+        @projects.sort_by{|p| p.name.downcase}
+        
         groups = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
         if groups
             groups.each do |g|
@@ -15,7 +17,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         
         if @projects
         	respond_to do |format|
-            	format.json { render_for_api :projects, :json => @projects.sort_by{|p| p.name.downcase}, :root => :projects}
+            	format.json { render_for_api :projects, :json => @projects, :root => :projects}
           	end
         else
             render :json => {success: false}
