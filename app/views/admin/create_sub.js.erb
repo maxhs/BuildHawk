@@ -5,5 +5,8 @@ if ($('#new-project-form').length){
 	});
 	$('#sub-list').append('<div style="padding-top:5px;"><%= check_box_tag "project[sub_ids][]", @sub.id, checked: true %><span style="padding-left:10px;"><%= @sub.name %></span></div>');
 } else {
-
+	$('#main').fadeOut(200,function(){
+		$('#main').html('<%= j render partial: "admin/users" %>');
+		$(this).fadeIn(200);
+	});	
 }

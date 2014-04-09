@@ -79,6 +79,8 @@ class AdminController < ApplicationController
 
 	def create_sub
 		@sub = current_user.company.subs.create params[:sub]
+		@users = current_user.company.users
+		@subs = current_user.company.subs
 		if @sub.save & request.xhr?
 			respond_to do |format|
 				format.js

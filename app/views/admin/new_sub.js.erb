@@ -1,5 +1,13 @@
-$('#add-sub-section').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "new_sub", :locals => {:sub => @sub } %>');
-	$(this).fadeIn(100);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+if ($('#add-sub-section').length){
+	$('#add-sub-section').fadeOut(100,function(){
+		$(this).html('<%= j render :partial => "new_sub", :locals => {:sub => @sub } %>');
+		$(this).fadeIn(100);
+		$("html, body").animate({ scrollTop: 0 }, 300);
+	});
+} else {
+	$('#main').fadeOut(100,function(){
+		$(this).html('<div class="border-box"><h3>Add New Sub</h3><%= j render :partial => "new_sub", :locals => {:sub => @sub } %></div>');
+		$(this).fadeIn(100);
+		$("html, body").animate({ scrollTop: 0 }, 300);
+	});
+}
