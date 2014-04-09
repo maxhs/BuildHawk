@@ -222,6 +222,7 @@ Buildhawk::Application.routes.draw do
         end
         member do
           post :archive
+          post :unarchive
         end
       end
       resources :checklists

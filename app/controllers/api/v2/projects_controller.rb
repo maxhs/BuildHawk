@@ -7,7 +7,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         #@projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
         @projects += Project.where(:core => true) 
         @projects.sort_by{|p| p.name.downcase}
-        
+
         groups = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
         if groups
             groups.each do |g|
@@ -62,6 +62,20 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
         if project_user
             project_user.update_attribute :archived, true
+            render :json => {success: true}
+        else
+            render :json => {success: false}
+        end
+    end
+
+    def unarchive
+        @user = User.find params[:user_id]
+        @project = Project.find params[:id]
+        @user.archived_projects.where(:project_id => params[:id]).first.destroy
+        project_user = @project.project_users.where(:user_id => @user).first
+
+        if project_user
+            project_user.update_attribute :archived, false
             render :json => {success: true}
         else
             render :json => {success: false}
