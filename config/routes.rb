@@ -82,6 +82,7 @@ Buildhawk::Application.routes.draw do
   resources :projects do
     member do
       post :archive
+      post :unarchive
       get :worklist
       get :new_item
       post :create_item

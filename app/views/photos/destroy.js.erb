@@ -1,6 +1,6 @@
 $('#photo-<%= @photo_id %>').fadeOut(200,function(){
 	if ($(this).hasClass('large')){
-		$(this).replaceWith('<%= j render partial: "projects/large_image", :locals => {:p => @p} %>');
+		$(this).replaceWith('<%= j render partial: "photos/large_image", :locals => {:p => @p} %>');
 	} else {
 		$(this).remove();
 	}

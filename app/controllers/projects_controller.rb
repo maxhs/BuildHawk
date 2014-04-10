@@ -54,7 +54,7 @@ class ProjectsController < ApplicationController
 		elsif current_user.admin? || current_user.company_admin?
 			@company = current_user.company
 			@projects = @company.projects
-			@archived_projects = current_user.archived_projects.uniq
+			@archived_projects = current_user.project_users.where(:archived => true).map(&:project)
 		else
 			find_projects
 		end
@@ -474,9 +474,21 @@ class ProjectsController < ApplicationController
 	end
 
 	def archive
-		current_user.archived_projects.create :project_id => @project.id
-		project_user = @project.project_users.where(:user_id => current_user).first
+		project_user = current_user.project_users.where(:project_id => @project.id).first
 		project_user.update_attribute :archived, true if project_user
+		find_projects
+		if request.xhr?
+			respond_to do |format|
+				format.js { render template:"projects/index" }
+			end
+		else
+			render :index
+		end
+	end
+
+	def unarchive
+		project_user = current_user.project_users.where(:project_id => @project.id).first
+		project_user.update_attribute :archived, false if project_user
 		find_projects
 		if request.xhr?
 			respond_to do |format|

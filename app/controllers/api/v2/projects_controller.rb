@@ -57,7 +57,6 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     def archive
         @user = User.find params[:user_id]
         @project = Project.find params[:id]
-        @user.archived_projects.create :project_id => params[:id]
         project_user = @project.project_users.where(:user_id => @user).first
 
         if project_user
@@ -71,7 +70,6 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     def unarchive
         @user = User.find params[:user_id]
         @project = Project.find params[:id]
-        @user.archived_projects.where(:project_id => params[:id]).first.destroy
         project_user = @project.project_users.where(:user_id => @user).first
 
         if project_user
@@ -88,10 +86,10 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         @user = User.find params[:user_id]
         @projects = @user.project_users.where(:archived => false).map{|u| u.project if u.project.project_group_id == nil}.compact
 
-        archived = @user.archived_projects
+        @archived_projects = @user.project_users.where(:archived => true).map(&:project)
         new_projects = []
         Project.where(:core => true).flatten.each do |c|
-            new_projects << c unless archived.include?(c)
+            new_projects << c unless @archived_projects.include?(c)
         end
 
         @projects += new_projects

@@ -31,8 +31,8 @@
 		<div class="well sidebar-nav projects archived">
 			
 			<div class="sidebarProjects">
-				<% @archived_projects.each do |ap| %>
-					<div><%= link_to ap.project.name, project_path(ap.project), :id=>"#{ap.project.id}-link", :remote => true %></div>
+				<% @archived_projects.each do |p| %>
+					<div><%= link_to p.name, project_path(p), :id=>"#{p.id}-link", :remote => true %></div>
 				<% end %>
 			</div>
 		</div>
@@ -42,9 +42,11 @@
 	$(function(){
 		sidebarSetup();
 		<% @projects.each do |p| %>
-			$('#sidebar-progress-link-<%=p.id%>').progressbar({
-		    	value:<%=p.checklist.progress%>
-		    });
+			<% if p.checklist %>
+				$('#sidebar-progress-link-<%=p.id%>').progressbar({
+			    	value:<%=p.checklist.progress%>
+			    });
+			<% end %>
 	    <% end %>
 	})
 </script>
