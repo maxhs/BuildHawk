@@ -96,7 +96,13 @@ class PunchlistItemsController < ApplicationController
 		
 	def destroy
 		@item.destroy!
-		redirect_to worklist_project_path(@project)
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to worklist_project_path(@project)
+		end
 	end
 
 	def generate
