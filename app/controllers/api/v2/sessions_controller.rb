@@ -1,13 +1,14 @@
 class Api::V2::SessionsController < Api::V2::ApiController
 
     def create
-        if params[:device_token].present?
-            device_token = [:device_token]
+        if params[:user][:device_token].present?
+            device_token = params[:user][:device_token]
+            params[:user].delete(:device_token)
         end
 
-  		@user = User.find_for_database_authentication email: params[:email]
+  		@user = User.find_for_database_authentication email: params[:user][:email]
   		return invalid_login_attempt unless @user
-  		if @user.valid_password? [:password]
+  		if @user.valid_password? params[:user][:password]
   			@user.reset_authentication_token!
   			puts "successfully signed in user"
             if device_token
