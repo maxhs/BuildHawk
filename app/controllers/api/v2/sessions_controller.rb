@@ -25,6 +25,9 @@ class Api::V2::SessionsController < Api::V2::ApiController
   		if @user.valid_password? password
   			@user.reset_authentication_token!
   			puts "successfully signed in user"
+            puts "session: #{session}"
+            puts "session: #{session[:user_id]}"
+            
             if device_token
   			   @user.apn_registrations.where(:token => device_token).first_or_create
   			   puts "updating device token for existing email user"
