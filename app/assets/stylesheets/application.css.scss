@@ -226,11 +226,10 @@ body {
 			background:transparent;
 		}
 		a {
-			font-size:18px;
+			font-size:17px;
 			letter-spacing:1px;
 			font-family:'Montserrat','Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 			text-transform:uppercase;
-			-webkit-font-smoothing:antialiased;
 		}
 
 		a:hover {
@@ -283,6 +282,7 @@ body {
 				padding:3px 40px;
 				text-align:right;
 				font-family:'Gotham Book',"Helvetica",sans-serif;
+				color:#000;
 			}
 		}
 	}
