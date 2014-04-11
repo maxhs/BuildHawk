@@ -61,7 +61,7 @@
 					<%= f.submit "Update", :class => "no-link btn btn-success btn-md", :style=>"width:50%;" %>
 		<% end %>
 					<% if current_user.admin %>
-						<%= link_to 'Delete', delete_item_project_path(@project, :checklist_item_id => item.id), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, :method => :delete, :class=>"btn btn-md btn-danger remote", :style => "clear:both;display:block;width:100px;margin:5px auto;", :remote => true %>
+						<%= link_to 'Delete', checklist_item_path(item), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, :method => :delete, :class=>"btn btn-md btn-danger remote", :style => "clear:both;display:block;width:100px;margin:5px auto;", :remote => true %>
 					<% end %>
 				</div>
 			</div>
