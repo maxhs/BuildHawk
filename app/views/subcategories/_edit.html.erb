@@ -9,6 +9,30 @@
 				<%= f.text_field :name %>
 			</div>
 
+			<% if @project %>
+				<div class="row">
+					<div class="col-xs-6" style="text-align:center">
+						<h4>Milestone Date</h4>
+						<div class="input-append date row" data-date-format="dd-mm-yyyy">
+							<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+							<div id="clear-critical-date"> Clear Date</div>
+						</div>
+					</div>
+				
+					<% if current_user.admin? || current_user.company_admin? || current_user.uber_admin? %>
+					<div class="col-xs-6" style="text-align:center">
+						<h4>Completion Date</h4>
+					
+						<div class="input-append date row" data-date-format="dd-mm-yyyy">
+							<%= f.text_field :completed_date, :value => parse_date(f.object.completed_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp-completed" %>
+							<div id="clear-completed-date"> Clear Date</div>
+						</div>
+					</div>
+				
+				<% end %>
+				</div>
+			<% end %>
+
 			<div class="button-container">
 				<%= f.submit "Update", :class => "no-link btn btn-success btn-md save" %>
 		<% end %>

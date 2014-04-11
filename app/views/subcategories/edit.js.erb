@@ -5,11 +5,26 @@ $('.nav-checklists a').addClass('current-page');
 		$(this).html('<%= j render :partial => "subcategories/edit" %>');
 		$(this).fadeIn(170);
 		$("html, body").animate({ scrollTop: 0 }, 300);
+		$("#dp,#dp-completed").datepicker();
+		$('#clear-critical-date').on('click',function(){
+			$('#dp').val('');
+		});
+		$('#clear-completed-date').on('click',function(){
+			$('#dp-completed').val('');
+		});
+		console.log('should be working');
 	});
 <% else %>
 	$('#checklist-items').fadeOut(170,function(){
 		$(this).html('<%= j render :partial => "subcategories/edit" %>');
 		$(this).fadeIn(170);
 		$("html, body").animate({ scrollTop: 0 }, 300);
+		$("#dp,#dp-completed").datepicker();
+		$('#clear-critical-date').on('click',function(){
+			$('#dp').val('');
+		});
+		$('#clear-completed-date').on('click',function(){
+			$('#dp-completed').val('');
+		});
 	});
 <% end %>
