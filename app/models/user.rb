@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
       company.users.map{|user| {:full_name => user.full_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
     end
 
-    def url500
+    def url600
       if image_file_name
         image.url(:medium)
       end
@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
 
     def url100
         if image_file_name
-            image.url(:small)
+            image.url(:thumb)
         end
     end
 
@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   	acts_as_api
 
   	api_accessible :user do |t|
-        t.add :id
+      t.add :id
 	    t.add :first_name
 	    t.add :last_name
 	    t.add :full_name
