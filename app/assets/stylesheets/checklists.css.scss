@@ -280,7 +280,7 @@
 	}
 }
 
-.new-checklist-item, .new-phase, .new-subcategory, .edit-subcategory, .edit-category {
+.new-checklist-item, .new-phase, .new-category, .new-subcategory, .edit-subcategory, .edit-category {
 	border:1px solid #eee;
 	border-radius:5px;
 	-webkit-border-radius:5px;
@@ -302,6 +302,10 @@
 	font-size:15px;
 }
 
+.new-category {
+	margin:1% 1%;
+	font-size:15px;
+}
 .new-subcategory {
 	top:17px;
 	vertical-align:top;

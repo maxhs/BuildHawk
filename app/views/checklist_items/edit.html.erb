@@ -1,3 +1,13 @@
-<div id="pages">
-	<%= render :partial => "checklist_items/edit", :locals => {:item => @item} %>
-</div>
+<% if @checklist.project %>
+	<%= render :partial => "projects/sidebar" %>
+	<div class="col-xs-12 col-sm-9" id="main">
+		<%= render :partial => "projects/project_nav" %>
+		<div id="pages">
+			<%= render :partial => "checklist_items/edit", :locals => {:item => @item} %>
+		</div>
+	</div>
+<% else %>
+	<div id="pages">
+		<%= render :partial => "checklist_items/edit", :locals => {:item => @item} %>
+	</div>
+<% end %>

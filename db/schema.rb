@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20140327231804) do
     t.string   "item_type"
     t.text     "body"
     t.integer  "order_index"
-    t.integer  "item_index"
     t.integer  "subcategory_id"
     t.integer  "category_id"
     t.integer  "checklist_id"

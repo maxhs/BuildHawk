@@ -29,6 +29,10 @@
 				Add a photo: <%= f.file_field :image %>
 			</td></tr>
 		<% end %>
-		<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></td></tr>
+		<tr><td>
+			<div class="button-container">
+				<%= f.submit "Save", :class => "btn btn-success btn-md save" %>
+			</div>
+		</td></tr>
 	</table>
 <% end %>

@@ -36,7 +36,6 @@ class ProjectsController < ApplicationController
 				redirect_to admin_index_path
 			end
 		elsif Rails.env.development?
-	      	puts "should be creating a new project in development environment"
 	      	checklist = Checklist.find_by(name: params[:project][:checklist])
 	      	@new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}]#, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
 	      	params[:project].delete(:checklist)
@@ -171,54 +170,8 @@ class ProjectsController < ApplicationController
 		end
 	end     
 
-	def delete_checklist
-		@checklist = Checklist.find params[:checklist_id]
-		@checklist.destroy
-		@projects = current_user.company.projects if current_user.company
-		@project = Project.find params[:id]
-		if request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/show"}
-			end
-		else
-			render :show
-		end
-	end
-
 	def checklist_item
 		@item = ChecklistItem.find params[:item_id]
-	end
-
-	def new_item 
-		@checklist_item = ChecklistItem.new
-		@item_index = params[:item_index]
-		@subcategory = Subcategory.find params[:subcategory_id]
-		@category = @subcategory.category
-		@checklist = @category.checklist
-		@category_name = @category.name
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :new_item
-		end
-	end
-
-	def create_item
-		index = params[:checklist_item][:item_index]
-		@item = ChecklistItem.create params[:checklist_item]
-		@item.move_to_top
-		@checklist = @item.checklist
-		@subcategory = @item.subcategory
-		@project = Project.find params[:id]
-		if request.xhr?
-			respond_to do |format|
-				format.js 
-			end
-		else
-			render :checklist
-		end
 	end
 
 	def new_subcategory
@@ -245,32 +198,6 @@ class ProjectsController < ApplicationController
 				format.js 
 			end
 		else
-			render :checklist
-		end
-	end
-
-	def update_checklist_item
-		@checklist_item = ChecklistItem.find params[:checklist_item_id]
-		@checklist_item.update_attributes params[:checklist_item]
-		@checklist = @checklist_item.subcategory.category.checklist
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :checklist
-		end
-	end
-
-	def delete_item
-		checklist_item = ChecklistItem.find params[:checklist_item_id]
-		@checklist = checklist_item.subcategory.category.checklist
-		@item_id = checklist_item.id
-		if checklist_item.destroy && request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		elsif checklist_item.destroy
 			render :checklist
 		end
 	end

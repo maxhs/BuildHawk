@@ -1,6 +1,9 @@
 class ChecklistItemsController < ApplicationController
 	def edit
 		@item = ChecklistItem.find params[:id]	
+		@checklist = @item.subcategory.category.checklist
+		@project = @checklist.project
+		@projects = @project.company.projects
 		@core = params[:core] if params[:core].present?
 	end
 
@@ -76,6 +79,7 @@ class ChecklistItemsController < ApplicationController
 		@item.move_to_top
 		@checklist = @item.checklist
 		@subcategory = @item.subcategory
+		@project = @checklist.project if @checklist.project
 		if request.xhr?
 			respond_to do |format|
 				format.js 

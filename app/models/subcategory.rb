@@ -28,10 +28,10 @@ class Subcategory < ActiveRecord::Base
     end
 
     def order_indices
-        item_index = 0
-        checklist_items.each do |i|
-            i.update_attribute :order_index, item_index
-            item_index+=1
+        if checklist_items.count > 0 && checklist_items.first.order_index.nil?
+            checklist_items.each_with_index do |i,idx|
+                i.update_attribute :order_index, idx
+            end
         end
     end
 
@@ -40,7 +40,6 @@ class Subcategory < ActiveRecord::Base
   	api_accessible :projects do |t|
   		t.add :name
   		t.add :category_id
-  		t.add :index
   		t.add :milestone_date
   		t.add :completed_date
   	end

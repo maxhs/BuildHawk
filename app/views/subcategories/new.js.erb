@@ -1,0 +1,9 @@
+if ($('#phase-<%=@category.id%> .new_subcategory').length){
+	$('#phase-<%=@category.id%> .new_subcategory').fadeOut(200,function(){
+		$(this).remove();
+	});
+} else {
+	var newDiv = $('<%= j render partial:"subcategories/new" %>').css('display','none');
+	$('#phase-<%=@category.id%> #new-category').replaceWith(newDiv);
+	newDiv.fadeIn(200);
+}

@@ -1,0 +1,6 @@
+<% if @subcategory.category.checklist.project %>
+	$('#new_subcategory').after('<%= j render partial:"projects/subcategory", locals:{:subcategory => @subcategory} %>');
+<% else %>
+	$('#new_subcategory').after('<%= j render partial:"admin/subcategory", locals:{:subcategory => @subcategory} %>');
+<% end %>
+$('#category_name').val('');

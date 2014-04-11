@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
-	attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :subcategories_attributes, :order_index
+	attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :subcategories_attributes
   	belongs_to :checklist
   	has_many :subcategories, :dependent => :destroy
   	accepts_nested_attributes_for :subcategories, :allow_destroy => true

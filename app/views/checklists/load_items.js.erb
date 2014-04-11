@@ -9,9 +9,9 @@ if (itemsHolder.hasClass('revealed')){
 	
 	itemsHolder.fadeOut(200,function(){
 		<% if @project %>
-			$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %>');
+			$(this).html('<%= link_to "(+) New Category", new_subcategory_path(:category_id => @category.id,:project_id => @project.id), :id=>"new-category", :class=>"remote new-category", remote: true %><%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %>');
 		<% else %>
-			$(this).html('<%= j render partial:"admin/subcategory", collection:@subcategories, as: :subcategory, cache: false %>');
+			$(this).html('<%= link_to "(+) New Category", new_subcategory_path(:category_id => @category.id), :id=>"new-category", :class=>"remote new-category", remote: true %><%= j render partial:"admin/subcategory", collection:@subcategories, as: :subcategory, cache: false %>');
 		<% end %>
 		$(this).addClass('revealed');
 		$(this).show(300,function(){

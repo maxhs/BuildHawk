@@ -61,7 +61,7 @@ class ChecklistsController < ApplicationController
 
 	def new_checklist_item
 		@checklist_item = ChecklistItem.new
-		@item_index = params[:item_index]
+
 		@subcategory = Subcategory.find params[:subcategory_id]
 		@category = @subcategory.category
 		@checklist = @category.checklist
@@ -76,7 +76,7 @@ class ChecklistsController < ApplicationController
 	end
 
 	def create_checklist_item
-		index = params[:checklist_item][:item_index]
+
 		@item = ChecklistItem.create params[:checklist_item]
 		@subcategory = @item.subcategory
 		@checklist = @item.checklist
@@ -195,8 +195,7 @@ class ChecklistsController < ApplicationController
 		@project = subcategory.category.checklist.project
 		params[:item].each_with_index do |item,i|
 			@item = ChecklistItem.find item
-			#why am I using item index here? I don't know.
-			@item.update_attribute :item_index, i
+			@item.update_attribute :order_index, i
 		end
 		respond_to do |format|
 			format.js { render :template => "checklists/reorder"}

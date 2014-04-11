@@ -1,7 +1,7 @@
 class ChecklistItem < ActiveRecord::Base
 	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :subcategory_id, :subcategory, 
                   :status, :critical_date, :completed_date,:photos, :photos_attributes, :checklist_id, :checklist, 
-                  :order_index, :item_index, :photos_count, :comments_count
+                  :order_index, :photos_count, :comments_count
   	
   	belongs_to :subcategory
     belongs_to :checklist
@@ -9,8 +9,8 @@ class ChecklistItem < ActiveRecord::Base
   	has_many :photos
   	has_many :comments, :dependent => :destroy
 
-    acts_as_list scope: :subcategory, column: :item_index
-    default_scope { order('item_index') }
+    acts_as_list scope: :subcategory, column: :order_index
+    default_scope { order('order_index') }
 
     after_commit :check_completed
 

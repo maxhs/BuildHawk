@@ -12,8 +12,11 @@
 		<div class="row">
 			<h4>Item:</h4><%= f.text_area :body, :style => "width:100%;margin-bottom:14px;" %>
 		</div>
-		<%= f.submit "Update", :class => "btn btn-success btn-md pull-right" %>
+
+		<div class="button-container">
+			<%= f.submit "Update", :class => "btn btn-success btn-md save" %>
 
 <% end %>
-	<%= link_to 'Delete', checklist_item_path(item), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, method: :delete, :class=>"btn btn-md btn-danger remote pull-right", :style => "clear:both", remote: true %>
+			<%= link_to 'Delete', checklist_item_path(item), :data => {:confirm => "Are you sure you want to delete this checklist item?"}, method: :delete, :class=>"btn btn-md btn-danger remote", :style => "clear:both", remote: true %>
+		</div>
 	</div>

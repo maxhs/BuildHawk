@@ -15,6 +15,7 @@
 //= require jquery_nested_form
 //= require jquery.ui.progressbar
 //= require jquery.ui.sortable
+//= require jquery.ui.autocomplete
 //= require bootstrap
 //= require dropzone
 //= require jquery.remotipart

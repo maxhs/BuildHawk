@@ -1,26 +1,6 @@
 // Place all the styles related to the Punchlists controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-
-#punchlist-item-container {
-	width:80%;
-	margin:0 auto;
-	padding:80px 20px 0;
-	display:block;
-
-	input[type="radio"]{
-		display:inline-block;
-		margin-right:10px;
-		margin-left:10px;
-	}
-
-	input[type="text"] {
-		margin-bottom:2px;
-		width:100% !important;
-	}
-}	
-
+// You can use Sass (SCSS) here: http://sass-lang.com/	
 
 #worklist-table {
 	margin-bottom:0;

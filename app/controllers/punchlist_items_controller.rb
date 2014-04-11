@@ -1,7 +1,7 @@
 class PunchlistItemsController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :find_company
-
+	
 	def new
 		@item = PunchlistItem.new
 		@item.photos.build
@@ -11,7 +11,7 @@ class PunchlistItemsController < ApplicationController
 		@projects = @company.projects
 		@users = @project.users
 		@subs = @project.subs
-	
+		@locations = @project.punchlists.last.punchlist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -53,6 +53,7 @@ class PunchlistItemsController < ApplicationController
 	end
 
 	def edit
+		@locations = @punchlist.punchlist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
 		@item.build_assignee if @item.assignee.nil?
 		if request.xhr?
 			respond_to do |format|
@@ -106,7 +107,6 @@ class PunchlistItemsController < ApplicationController
 	end
 
 	def generate
-
 		if @item.assignee
 			@recipient = @item.assignee
 			PunchlistItemMailer.punchlist_item(@item,@recipient).deliver

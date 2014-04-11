@@ -1,9 +1,10 @@
 class Checklist < ActiveRecord::Base
 	require 'roo'
+    require 'deep_cloneable'
     include ActionView::Helpers::NumberHelper
     
     attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
-    				        :categories, :company, :company_id
+    				:categories, :company, :company_id, :core
   	belongs_to :project
   	belongs_to :company
   	
@@ -12,6 +13,41 @@ class Checklist < ActiveRecord::Base
   	accepts_nested_attributes_for :categories, :allow_destroy => true
 
     after_create :assign_items
+    after_commit :uber_fifo
+    after_commit :core_fifo
+
+    def uber_fifo
+        if core && company_id.nil?
+            lists = Checklist.where(:name => name, :core => true, :project_id => nil, :company_id => nil)
+            if lists.count < 5
+                puts "should create more uber checklist templates"
+                if Rails.env.production?
+                    puts "should be creating another uber checklist in production"
+                    Resque.enqueue(DuplicateChecklist,self,nil)
+                elsif Rails.env.development?
+                    @new_list = self.dup :include => {:categories => {:subcategories => :checklist_items}}
+                    puts "should be creating another uber checklist in development: #{@new_list}"
+                    @new_list.save
+                end
+            end
+        end
+    end    
+
+    def core_fifo
+        if core && company_id != nil
+            lists = Checklist.where(:name => name, :core => true, :project_id => nil)
+            if lists.count < 5
+                puts "should create more core checklist templates"
+                if Rails.env.production?
+                    puts "should be creating another checklist in production"
+                    Resque.enqueue(DuplicateChecklist,list,company_id)
+                elsif Rails.env.development?
+                    puts "should be creating another checklist in development"
+                    Checklist.create :checklist => self.dup(:include => [:company, {:categories => {:subcategories => :checklist_items}}])
+                end
+            end
+        end
+    end
 
     def items
         if checklist_items.count > 0
