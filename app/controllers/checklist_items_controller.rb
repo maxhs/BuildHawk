@@ -111,12 +111,10 @@ class ChecklistItemsController < ApplicationController
 		@checklist = @subcategory.category.checklist
 		@project = @checklist.project
 		checklist_item.destroy
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else 
-			redirect_to checklist_project_path(@project) if @project
+		if @project
+			render "projects/checklist"
+		else
+			render "admin/editor"
 		end
 	end
 end

@@ -43,6 +43,29 @@ class PhotosController < ApplicationController
 		end
 	end
 
+	def create
+		@project = Project.find params[:project_id]
+		@company = @project.company
+		@p = Photo.new(image: params[:file])
+		if params[:file].original_filename
+			@p.name = params[:file].original_filename
+			@p.save
+		end
+		@p.update_attributes :folder_id => params[:photo][:folder_id], :user_id => current_user.id, :project_id => @project.id, :company_id => @company.id
+		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
+		@folders = @project.folders
+
+		unless @p.save 
+			flash[:notice] = "didn't work"
+		end
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to document_photos_project_path(@project)
+		end
+	end
 
 	def search
 		@project = Project.find params[:project_id]

@@ -1,7 +1,7 @@
 <div id="export-worklist-modal" class="border-box">
 	<span id="cancel-worklist-modal" class="cancel-x"></span>
 	<h3>Select Recipient(s)</h3>
-	<%= form_tag export_worklist_project_path(@project), :remote => true, :method => :post do %>
+	<%= form_tag export_punchlists_path(:project_id => @project.id), remote: true, :method => :post do %>
 		<% current_user.company.personnel.each do |person| %>
 			<% if person == current_user.full_name %>
 				<div class="checkboxes"><%= check_box_tag "names[]", person, :checked => true %><span style="padding-left:1em;"><%= person %></span></div>
@@ -10,6 +10,8 @@
 			<% end %>
 		<% end %>
 		<%= text_field_tag :email, "", :placeholder => "Enter email addresses (separated by commas" %>
-		<button class="btn btn-success btn-md" style="text-align:center;margin:0 auto;"><%= submit_tag "Send", :date => { :confirm => "This will send a worklist report to you and each of the selected parties. Continue?" }  %></button>
+		<div class="button-container">
+			<%= submit_tag "Send", :date => { :confirm => "This will send a worklist report to you and each of the selected parties. Continue?" }, :class => "btn btn-success btn-md"  %>
+		</div>
 	<% end %>
 </div>

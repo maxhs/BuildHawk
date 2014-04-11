@@ -168,68 +168,15 @@ class ProjectsController < ApplicationController
 		else
 			render :checklist
 		end
-	end     
+	end   
 
 	def checklist_item
 		@item = ChecklistItem.find params[:item_id]
-	end
-
-	def new_subcategory
-		@category = Category.find params[:category_id] 
-		@new_subcategory = @category.subcategories.new
-		@checklist = @project.checklist
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :new_subcategory
-		end
-	end
-
-	def create_subcategory
-		@subcategory = Subcategory.create params[:subcategory]
-		@subcategory.move_to_top
-		@subcategory.checklist_items.build
-		@checklist = Checklist.find params[:checklist_id]
-		@project = Project.find params[:id]
-		if request.xhr?
-			respond_to do |format|
-				format.js 
-			end
-		else
-			render :checklist
-		end
-	end
+	end  
 
 	def worklist
 		@punchlist = @project.punchlists.first
 		@items = @punchlist.punchlist_items if @punchlist
-	end
-
-	def export_worklist
-		item_array = []
-		params[:items].split(',').each do |i|
-			puts "i: #{i}"
-			item_array << PunchlistItem.find(i)
-		end
-		params[:names].each do |r|
-			puts "r: #{r}"
-			recipient = User.where(:full_name => r).first
-			recipient = Sub.where(:name => r).first unless recipient
-			PunchlistMailer.export(recipient.email, item_array, @project).deliver
-		end
-		params[:email].split(',').each do |e|
-			PunchlistMailer.export(e, item_array, @project).deliver
-		end
-
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :worklist
-		end
 	end
 
 	def export_checklist
@@ -251,28 +198,6 @@ class ProjectsController < ApplicationController
 		else
 			render :checklist
 		end
-	end
-
-	def search_items
-		if params[:search] && params[:search].length > 0
-			search_term = "%#{params[:search]}%" 
-			@project = Project.find params[:id]
-			initial = ChecklistItem.search do
-				fulltext search_term
-				with :checklist_id, params[:checklist_id]
-			end
-			@items = initial.results.uniq
-			@prompt = "No search results"
-			if request.xhr?
-				respond_to do |format|
-					format.js
-				end
-			end
-		else 
-			@checklist = @project.checklist
-			render :checklist
-		end
-		
 	end
 
 	def search_worklist
@@ -375,28 +300,6 @@ class ProjectsController < ApplicationController
 			end
 		else
 			render :documents
-		end
-	end
-
-	def photo
-		@p = Photo.new(image: params[:file])
-		if params[:file].original_filename
-			@p.name = params[:file].original_filename
-			@p.save
-		end
-		@p.update_attributes :folder_id => params[:photo][:folder_id], :user_id => current_user.id, :project_id => @project.id, :company_id => @company.id
-		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
-		@folders = @project.folders
-
-		unless @p.save 
-			flash[:notice] = "didn't work"
-		end
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			redirect_to document_photos_project_path(@project)
 		end
 	end
 

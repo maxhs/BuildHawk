@@ -59,6 +59,28 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
+
+	def search_items
+		@project = Project.find params[:project_id]
+		if params[:search] && params[:search].length > 0
+			search_term = "%#{params[:search]}%" 
+			initial = ChecklistItem.search do
+				fulltext search_term
+				with :checklist_id, params[:id]
+			end
+			@items = initial.results.uniq
+			@prompt = "No search results"
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			end
+		else 
+			@checklist = @project.checklist
+			render "projects/checklist"
+		end
+	end
+
 	def new_checklist_item
 		@checklist_item = ChecklistItem.new
 

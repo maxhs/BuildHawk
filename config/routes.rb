@@ -84,22 +84,16 @@ Buildhawk::Application.routes.draw do
       post :archive
       post :unarchive
       get :worklist
-      get :edit_checklist_item
-      post :export_worklist
       post :export_checklist
-      post :search_items
       post :search_worklist
       get :checklist
       get :checklist_item
-      post :report
       get :documents
       get :show_photo
       get :document_photos
       get :checklist_photos
       get :worklist_photos
       get :report_photos
-      get :new_photo
-      post :photo
       get :destroy_confirmation
     end
     collection do
@@ -116,6 +110,7 @@ Buildhawk::Application.routes.draw do
       post :order_items
     end
     member do
+      post :search_items
       get :new_checklist_item
       post :create_checklist_item 
       get :subcategory
@@ -141,8 +136,15 @@ Buildhawk::Application.routes.draw do
     collection do 
       post :search
     end
+    member do
+      post :photo
+    end
   end
-  resources :punchlists
+  resources :punchlists do
+    collection do
+      post :export
+    end
+  end
   resources :reports do
     member do
       get :generate
