@@ -1,18 +1,20 @@
 class Api::V2::SessionsController < Api::V2::ApiController
 
     def create
-        if params[:user].has_key?(:device_token)
+        if params[:user].present?
             device_token = params[:user][:device_token]
             params[:user].delete(:device_token)
+        elsif params[:device_token]
+            device_token = params[:device_token]
         end
 
-        if params[:user].has_key?(:email)
+        if params[:user].present?
             email = params[:user][:email]
         elsif params[:email]
             email = params[:email]
         end
 
-        if params[:user].has_key?(:password)
+        if params[:user].present?
             password = params[:user][:password]
         elsif params[:password]
             password = params[:password]
