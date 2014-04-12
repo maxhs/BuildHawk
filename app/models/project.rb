@@ -61,11 +61,16 @@ class Project < ActiveRecord::Base
         if core
             puts "project is marked as core"
             User.all.each do |u|
-                project_users.where(:core => true, :user_id => u.id).first_or_create if u.id == 2
+                if u.id == 2
+                    pu = project_users.where(:user_id => u.id).first_or_create
+                    pu.update_attribute :core, true
+                end
             end
         else 
             User.all.each do |u|
-                project_users.where(:project_id => id, :core => true, :user_id => u.id).first.destroy if u.id == 2
+                if u.id == 2
+                    project_users.where(:project_id => id, :core => true, :user_id => u.id).first.destroy
+                end
             end
             puts "project is not core: #{self.name}"
         end
