@@ -51,6 +51,11 @@ class Project < ActiveRecord::Base
             project_users.each do |pu|
                 pu.update_attribute :project_group_id, project_group_id
             end
+        else
+            puts "erase groups"
+            project_users.each do |pu|
+                pu.update_attribute :project_group_id, nil
+            end
         end
     end
 
