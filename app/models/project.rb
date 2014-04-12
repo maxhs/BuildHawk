@@ -57,23 +57,6 @@ class Project < ActiveRecord::Base
                 pu.update_attribute :project_group_id, nil
             end
         end
-
-        if core
-            puts "project is marked as core"
-            User.all.each do |u|
-                if u.id == 2
-                    pu = project_users.where(:user_id => u.id).first_or_create
-                    pu.update_attribute :core, true
-                end
-            end
-        else 
-            User.all.each do |u|
-                if u.id == 2
-                    project_users.where(:project_id => id, :core => true, :user_id => u.id).first.destroy
-                end
-            end
-            puts "project is not core: #{self.name}"
-        end
     end
 
     def checklist_items
