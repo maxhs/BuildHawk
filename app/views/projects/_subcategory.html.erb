@@ -5,7 +5,7 @@
 			<span style="padding:0 1em;color:#aaa;">(<%=subcategory.completed_count%> of <%= subcategory.checklist_items.count%>)</span>
 			<% if current_user.admin %>
 				<%= link_to "Edit Category", edit_subcategory_path(subcategory, :project_id => @project.id), :class=>"edit-category", :remote => true %>
-				<%= link_to "Add Checklist Item", new_checklist_item_path(:project_id => @project.id, :subcategory_id => subcategory.id), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
+				<%= link_to "Add Item", new_checklist_item_path(:project_id => @project.id, :subcategory_id => subcategory.id), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
 			<% end %>
 		</div>
 		<div class="col-xs-2 category-label">

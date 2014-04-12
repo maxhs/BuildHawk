@@ -40,5 +40,6 @@ gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'acts_as_list'
+gem 'pushmeup'
 
 ruby '2.1.1'

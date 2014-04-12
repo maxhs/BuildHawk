@@ -27,7 +27,7 @@ class Api::V2::SessionsController < Api::V2::ApiController
   			puts "successfully signed in user"
             puts "session: #{session}"
             puts "session: #{session[:user_id]}"
-            
+
             if device_token
   			   @user.apn_registrations.where(:token => device_token).first_or_create
   			   puts "updating device token for existing email user"
@@ -43,13 +43,13 @@ class Api::V2::SessionsController < Api::V2::ApiController
 
   def forgot_password
     if params[:email]
-      user = User.find_by_email params[:email]
-      if user
-        user.reset_password
-        render :json=>{"user"=>user}
-      else 
-        render :json=>{:success=>false}
-      end
+        user = User.find_by_email params[:email]
+        if user
+            user.send_reset_password_instructions
+            render :json=>{"user"=>user}
+        else 
+            render :json=>{:success=>false}
+        end
     end
   end 
 
