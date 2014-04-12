@@ -920,10 +920,27 @@ body {
 
 
 /*
- * Off Canvas
- * --------------------------------------------------
+ * MOBILE
  */
+ 
 @media screen and (max-width: 768px) {
+	body {
+	font-size:36px;
+
+		.project-nav {
+			li {
+				width:100%;
+				border:0;
+			}
+		}
+
+		#wrap {
+			#pagescontainer {
+				padding-top:110px;
+			}
+		}
+	}
+
   	.row-offcanvas {
     	position: relative;
     	-webkit-transition: all 0.25s ease-out;
@@ -954,24 +971,14 @@ body {
  		padding-right:0;
  	}
 
+ 	.session-container {
+ 		width:90%;
+ 	}
+
  	.navbar-nav {
  		margin:0;
  	}
 
-	body {
-		.project-nav {
-			li {
-				width:100%;
-				border:0;
-			}
-		}
-
-		#wrap {
-			#pagescontainer {
-				padding-top:110px;
-			}
-		}
-	}
 
 	.nav {
 		li {

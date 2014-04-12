@@ -4,10 +4,8 @@
 	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
 	  <%= devise_error_messages! %>
 
-	  <div>
-	  <%= f.email_field :email, :placeholder => "Your email address", :autofocus => true, :style=>"margin-top:5%;border-color:#ddd;" %></div>
+	  <div><%= f.email_field :email, :placeholder => "Your email address", :autofocus => true, :style=>"margin-top:5%;border-color:#ddd;" %></div>
 	
-
 	  <div class="button-container"><%= f.submit "Reset password", :class => "btn btn-success btn-lg" %></div>
 	<% end %>
 
