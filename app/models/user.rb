@@ -103,17 +103,6 @@ class User < ActiveRecord::Base
         company.subs
     end
 
-    def forgot_password
-        self = User.send_reset_password_instructions(self)
-        yield resource if block_given?
-
-        #if successfully_sent?(self)
-        #  respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
-        #else
-        #  respond_with(resource)
-        #end
-    end
-
   	acts_as_api
 
   	api_accessible :user do |t|
