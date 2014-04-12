@@ -60,10 +60,14 @@ class Project < ActiveRecord::Base
 
         if core
             puts "project is marked as core"
-            project_users.where(:core => true).first_or_create
+            User.all.each do |u|
+                project_users.where(:core => true, :user_id => u.id).first_or_create if u.id == 2
+            end
         else 
-            project = project_users.where("project_id = ? AND core = ? AND user_id IS NULL",id,false).first
-            puts "project is not core: #{project.name}"
+            User.all.each do |u|
+                project_users.where(:project_id => id, :core => true, :user_id => u.id).first.destroy if u.id == 2
+            end
+            puts "project is not core: #{self.name}"
         end
     end
 
