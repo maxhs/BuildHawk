@@ -48,7 +48,7 @@ class Api::V2::SessionsController < Api::V2::ApiController
             user.send_reset_password_instructions
             render :json=>{"user"=>user}
         else 
-            render :json=>{:success=>false}
+            render :json=>{ failure: true }
         end
     end
   end 
