@@ -11,30 +11,30 @@
 			
 			<%= f.fields_for :address do |a| %>
 				<div class="row">
-					<div class="col-xs-3 project-label"><h4>Street:</h4></div>
+					<div class="col-xs-3 project-label"><h4>Street</h4></div>
 					<div class="col-xs-9"><%= a.text_field :street1 , :placeholder => "Street address" %></div>
 				</div>
 				<div class="row">
-					<div class="col-xs-3 project-label"><h4>City:</h4></div>
+					<div class="col-xs-3 project-label"><h4>City</h4></div>
 					<div class="col-xs-9"><%= a.text_field :city , :placeholder => "City" %></div>
 				</div>
 				<div class="row">
-					<div class="col-xs-3 project-label"><h4>State:</h4></div>
+					<div class="col-xs-3 project-label"><h4>State</h4></div>
 					<div class="col-xs-9"><%= a.text_field :state , :placeholder => "State" %></div>
 				</div>
 				<div class="row" style="margin-bottom:10px;">
-					<div class="col-xs-3 project-label"><h4>Zip:</h4></div>
+					<div class="col-xs-3 project-label"><h4>Zip</h4></div>
 					<div class="col-xs-9"><%= a.text_field :zip , :placeholder => "Zip" %></div>
 				</div>
 			<% end %>
 			
 		    <div class="row personnel">
-		    	<div class="col-xs-3"><h4>Project Group:</h4></div>
+		    	<div class="col-xs-3"><h4>Project Group</h4></div>
 		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id) %></div>
 		    </div>
 
 		    <div class="row personnel">
-		    	<div class="col-xs-3"><h4>Personnel Assigned:</h4></div>
+		    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>
 		    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:5px;">
 		    		<% @users.each do |user| %>
 		    			<% if @project.users.include?(user) %>
@@ -47,7 +47,7 @@
 		    </div>
 
 		    <div class="row personnel">
-		    	<div class="col-xs-3"><h4>Subs Assigned:</h4></div>
+		    	<div class="col-xs-3"><h4>Subs Assigned</h4></div>
 		    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:5px;">
 		    		<% @subs.each do |sub| %>
 		    			<% if @project.subs.include?(sub) %>
@@ -62,8 +62,8 @@
 
 		    <% if current_user.uber_admin %>
 			    <div class="row" style="margin-top:1em;">
-			    	<div class="col-xs-3"><h4>Make Core?</h4></div>
-			    	<div class="col-xs-9" style="padding-top:9px;"><%= f.check_box :core, :style=>"padding:7px; display:inline-block; width:33px;" %> (Check to use as demo)</div>
+			    	<div class="col-xs-3"><h4>Use as Demo</h4></div>
+			    	<div class="col-xs-9" style="padding-top:9px;"><%= f.check_box :core, :style=>"padding:7px; display:inline-block; width:33px;" %><span style="color:#cc0000"> WARNING: This will make the project visible to all users</span></div>
 			    </div>
 			<% end %>
 			
