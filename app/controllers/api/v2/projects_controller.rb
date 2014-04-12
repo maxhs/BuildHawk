@@ -2,7 +2,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
         @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ?, project_group_id IS NULL, core = ?",0,0).map(&:project).compact 
+        projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",0,0).map(&:project).compact 
         projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
         #@projects += Project.where(:core => true) 
         projects.sort_by{|p| p.name.downcase}
