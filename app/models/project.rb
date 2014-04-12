@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
     has_many :folders, :dependent => :destroy
 
     after_create :default_folders
-    after_commit :check_state
+    after_commit :adjust_users
 
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true
@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
         self.save
     end
 
-    def check_state
+    def adjust_users
         puts "should be checking state"
         if project_group_id != nil
             puts 'inside check_groups'
@@ -55,6 +55,18 @@ class Project < ActiveRecord::Base
             puts "erase groups"
             project_users.each do |pu|
                 pu.update_attribute :project_group_id, nil
+            end
+        end
+
+        if core
+            puts "project is marked as core"
+            User.all.each do |u|
+                project_users.where(:user_id => u.id, :core => true).first_or_create if u.id == 2
+            end
+        else 
+            puts "project is not core"
+            User.all.each do |u|
+                project_users.where(:user_id => u.id, :core => true).first.destroy if u.id == 2
             end
         end
     end
