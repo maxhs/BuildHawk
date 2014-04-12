@@ -33,4 +33,8 @@ class Address < ActiveRecord::Base
     api_accessible :company, :extend => :projects do |t|
       
     end
+
+    api_accessible :punchlist, :extend => :projects do |t|
+      
+    end
 end

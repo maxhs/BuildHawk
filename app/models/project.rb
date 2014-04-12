@@ -120,12 +120,15 @@ class Project < ActiveRecord::Base
   		t.add :name
   		t.add :address
   		t.add :company
-  		t.add :punchlists
         t.add :active
         t.add :subs
         t.add :users
         t.add :project_group, :if => :has_group?
   	end
+
+    api_accessible :punchlist, :extend => :projects do |t|
+        t.add :punchlists
+    end
 
     api_accessible :user do |t|
         t.add :name
