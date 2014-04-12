@@ -215,6 +215,7 @@ Buildhawk::Application.routes.draw do
         collection do
           get :dash
           get :archived
+          get :groups
         end
         member do
           post :archive

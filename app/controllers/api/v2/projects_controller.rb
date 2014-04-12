@@ -2,14 +2,14 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
         @user = User.find params[:user_id]
-        @projects = @user.project_users.where(:archived => false, :project_group_id => nil, :core => false).map(&:project).compact 
-        @projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
+        projects = @user.project_users.where("archived = ?, project_group_id IS NULL, core = ?",0,0).map(&:project).compact 
+        projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
         #@projects += Project.where(:core => true) 
-        @projects.sort_by{|p| p.name.downcase}
+        projects.sort_by{|p| p.name.downcase}
 
-        if @projects
+        if projects
         	respond_to do |format|
-            	format.json { render_for_api :projects, :json => @projects, :root => :projects}
+            	format.json { render_for_api :projects, :json => projects, :root => :projects}
           	end
         else
             render :json => {success: false}
