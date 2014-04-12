@@ -17,6 +17,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def groups
+        @user = User.find params[:user_id]
         group_ids = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
         groups = []
         if group_ids.count > 0
