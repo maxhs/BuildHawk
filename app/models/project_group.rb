@@ -5,7 +5,7 @@ class ProjectGroup < ActiveRecord::Base
 	has_many :projects
 
 	def group_projects
-		projects.as_json(:include => [:address, :users, :subs])
+		projects.sort_by{|p| p.name.downcase}.as_json(:include => [:address, :users, :subs])
 	end
 	
 	acts_as_api
