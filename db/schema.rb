@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 20140327231804) do
     t.string   "notification_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "photos", force: true do |t|

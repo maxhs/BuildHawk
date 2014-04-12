@@ -59,11 +59,19 @@ class ChecklistItem < ActiveRecord::Base
         end
     end
 
+    def has_critical_date?
+        critical_date.present?
+    end
+
+    def has_completed_date?
+        critical_date.present?
+    end
+
   	api_accessible :projects do |t|
   		t.add :id
         t.add :body
-  		t.add :critical_date
-  		t.add :completed_date
+  		t.add :critical_date, :if => :has_critical_date?
+  		t.add :completed_date, :if => :has_completed_date?
   		t.add :status
         t.add :item_type
         t.add :photos_count

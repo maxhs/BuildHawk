@@ -150,6 +150,7 @@ class Checklist < ActiveRecord::Base
 	end
 
     api_accessible :checklist do |t|
+        t.add :id
         t.add :categories
         t.add :name
     end

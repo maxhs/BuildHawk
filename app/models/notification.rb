@@ -1,11 +1,11 @@
 class Notification < ActiveRecord::Base
 
-	attr_accessible :user_id, :user, :target_user_id, :target_user, :read, :sent, :checklist_item_id,
-					:checklist_item, :punchlist_item, :punchlist_item_id, :report, :report_id, :message,
-					:notification_type
+	attr_accessible :user_id, :target_user_id, :read, :sent, :checklist_item_id, :punchlist_item_id, :report_id, :message,
+					:notification_type, :project_id
 
 	belongs_to :user
 	belongs_to :target_user, :class_name => "User"
+	belongs_to :project
 	belongs_to :report
 	belongs_to :punchlist_item
 	belongs_to :checklist_item
@@ -15,11 +15,12 @@ class Notification < ActiveRecord::Base
 	def deliver
 		if user.push_permissions
 			self.user.notify_all_devices(
-		        :alert          	=> self.message, 
-		        :report_id 			=> self.report_id, 
-		        :punchlist_item_id 	=> self.punchlist_item_id,
-		        :checklist_item_id 	=> self.checklist_item_id,
-		        :badge          	=> self.user.notifications.where(:read => false).count
+		        :alert          	=> message, 
+		        :report_id 			=> report_id, 
+		        :punchlist_item_id 	=> punchlist_item_id,
+		        :checklist_item_id 	=> checklist_item_id,
+		        :project_id 		=> project_id,
+		        :badge          	=> user.notifications.where(:read => false).count
 		    )
 			self.sent = true
 			self.save
