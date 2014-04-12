@@ -3,7 +3,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     def index
         @user = User.find params[:user_id]
         projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",false,false).map(&:project).compact 
-        #projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
+        projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
         #@projects += Project.where(:core => true) 
         projects.sort_by{|p| p.name.downcase}
 
@@ -17,11 +17,20 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def groups
-        groups = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
-        if groups
-            groups.each do |g|
-                @projects << ProjectGroup.find(g).projects.first
+        group_ids = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        groups = []
+        if group_ids.count > 0
+            group_ids.each do |g|
+                groups << ProjectGroup.find(g)
             end 
+        end
+
+        if groups.count > 0
+            respond_to do |format|
+                format.json { render_for_api :projects, :json => groups, :root => :groups}
+            end
+        else
+            render :json => {success: false}
         end
     end
 
