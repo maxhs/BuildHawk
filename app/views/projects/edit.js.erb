@@ -3,4 +3,15 @@ $('.nav-edit a,#<%=@project.id%>-link').addClass('current-page');
 $('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "edit" %>');
 	$(this).fadeIn(170);
+	$("#project_core").change(function() {
+	    if(this.checked) {
+	    	if ($('#core-warning').length){
+	        	$('#core-warning').fadeIn(200);
+	    	} else {
+	    		$('#project_core').after('<span id="core-warning"> WARNING: This will make the project visible to all users</span>');
+	    	}
+	    } else {
+	    	$('#core-warning').fadeOut(200);
+	    }
+	});
 });

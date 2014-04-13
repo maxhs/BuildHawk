@@ -35,7 +35,7 @@
 
 		    <div class="row personnel">
 		    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>
-		    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:5px;">
+		    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
 		    		<% @users.each do |user| %>
 		    			<% if @project.users.include?(user) %>
 		    				<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id, checked: true %><span style="padding-left:10px;"><%= user.full_name %></span></div>
@@ -48,7 +48,7 @@
 
 		    <div class="row personnel">
 		    	<div class="col-xs-3"><h4>Subs Assigned</h4></div>
-		    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:5px;">
+		    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
 		    		<% @subs.each do |sub| %>
 		    			<% if @project.subs.include?(sub) %>
 		    				<div style="padding-top:5px;"><%= check_box_tag "project[sub_ids][]", sub.id, checked: true %><span style="padding-left:10px;"><%= sub.name %></span></div>
@@ -63,7 +63,7 @@
 		    <% if current_user.uber_admin %>
 			    <div class="row" style="margin-top:1em;">
 			    	<div class="col-xs-3"><h4>Use as Demo</h4></div>
-			    	<div class="col-xs-9" style="padding-top:9px;"><%= f.check_box :core, :style=>"padding:7px; display:inline-block; width:33px;" %><span style="color:#cc0000"> WARNING: This will make the project visible to all users</span></div>
+			    	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %><% if f.object.core %> <span id="core-warning"> WARNING: This will make the project visible to all users</span><% end %></div>
 			    </div>
 			<% end %>
 			
