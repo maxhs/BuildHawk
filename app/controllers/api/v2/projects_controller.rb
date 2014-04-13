@@ -34,6 +34,17 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         end
     end
 
+    def demo
+        projects = Project.where(:core => true)
+        if projects.count > 0
+            respond_to do |format|
+                format.json { render_for_api :projects, :json => projects, :root => :projects}
+            end
+        else
+            render :json => {success: false}
+        end
+    end
+
     def show
     	@project = Project.find params[:id]
     	respond_to do |format|

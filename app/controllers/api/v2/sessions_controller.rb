@@ -25,8 +25,6 @@ class Api::V2::SessionsController < Api::V2::ApiController
   		if @user.valid_password? password
   			@user.reset_authentication_token!
   			puts "successfully signed in user"
-            puts "session: #{session}"
-            puts "session: #{session[:user_id]}"
 
             if device_token
   			   @user.apn_registrations.where(:token => device_token).first_or_create
@@ -41,21 +39,22 @@ class Api::V2::SessionsController < Api::V2::ApiController
         end
     end
 
-  def forgot_password
-    if params[:email]
-        user = User.find_by_email params[:email]
-        if user
-            user.send_reset_password_instructions
-            render :json=>{"user"=>user}
-        else 
-            render :json=>{ failure: true }
+    def forgot_password
+        if params[:email]
+            user = User.find_by_email params[:email]
+            if user
+                user.send_reset_password_instructions
+                render :json=>{"user"=>user}
+            else 
+                render :json=>{ failure: true }
+            end
         end
-    end
-  end 
+    end 
 
   def destroy
-    current_user.update_attribute :authentication_token, nil
-    respond_with current_user
+    user = User.find params[:user_id]
+    user.update_attribute :authentication_token, nil
+    render json: {success: true}
   end
 
   private
