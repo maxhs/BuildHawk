@@ -64,4 +64,8 @@ class Company < ActiveRecord::Base
     api_accessible :dashboard do |t|
     
     end
+
+    api_accessible :punchlist, :extend => :projects do |t|
+        t.add :punchlists
+    end
 end
