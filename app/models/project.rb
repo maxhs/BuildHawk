@@ -128,6 +128,7 @@ class Project < ActiveRecord::Base
         t.add :active
         t.add :subs
         t.add :users
+        t.add :core
         #t.add :project_group, :if => :has_group?
   	end
 
