@@ -80,12 +80,16 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def archive
         @user = User.find params[:user_id]
-        @project = Project.find params[:id]
-        project_user = @project.project_users.where(:user_id => @user).first
+        if @user.admin || @user.company_admin || @user.uber_admin
+            @project = Project.find params[:id]
+            project_user = @project.project_users.where(:user_id => @user).first
 
-        if project_user
-            project_user.update_attribute :archived, true
-            render :json => {success: true}
+            if project_user
+                project_user.update_attribute :archived, true
+                render :json => {success: true}
+            else
+                render :json => {success: false}
+            end
         else
             render :json => {success: false}
         end
