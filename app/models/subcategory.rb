@@ -35,6 +35,14 @@ class Subcategory < ActiveRecord::Base
         end
     end
 
+    def not_applicable_count 
+        checklist_items.where(:status => "Not Applicable").count if checklist_items
+    end
+
+    def progress_percentage
+        number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
+    end
+
   	acts_as_api
 
   	api_accessible :projects do |t|
@@ -49,5 +57,6 @@ class Subcategory < ActiveRecord::Base
         t.add :name
         t.add :completed_date
         t.add :milestone_date
+        t.add :progress_percentage
     end
 end
