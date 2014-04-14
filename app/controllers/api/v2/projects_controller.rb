@@ -63,11 +63,11 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def archived
         user = User.find params[:user_id]
-        if user.admin || user.company_admin
-            @projects = user.company.projects.where(:archived => true)
-        else
+        #if user.admin || user.company_admin
+        #    @projects = user.company.projects.where(:archived => true)
+        #else
             @projects = user.project_users.where(:archived => true).map(&:project).compact
-        end
+        #end
        
         if @projects
             respond_to do |format|
