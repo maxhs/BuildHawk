@@ -91,7 +91,9 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 render :json => {success: false}
             end
         else
-            render :json => {success: false}
+            respond_to do |format|
+                format.json { render_for_api :login, :json => @user, :root => :user}
+            end
         end
     end
 
