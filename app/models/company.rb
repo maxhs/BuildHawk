@@ -66,6 +66,6 @@ class Company < ActiveRecord::Base
     end
 
     api_accessible :punchlist, :extend => :projects do |t|
-        t.add :punchlists
+        
     end
 end
