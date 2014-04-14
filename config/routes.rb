@@ -236,6 +236,7 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :comments
+      resources :subs, :only => [:create]
       resources :reports do
         member do
           get :review_report
