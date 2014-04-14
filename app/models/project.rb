@@ -45,7 +45,6 @@ class Project < ActiveRecord::Base
     end
 
     def adjust_users
-        puts "should be checking state"
         if project_group_id != nil
             puts 'inside check_groups'
             project_users.each do |pu|
@@ -76,7 +75,6 @@ class Project < ActiveRecord::Base
     end
 
     def progress
-        #number_to_percentage(checklist.completed_count*100/checklist.item_count.to_f, :precision => 1) if checklist
         checklist.progress_percentage if checklist
     end
 
