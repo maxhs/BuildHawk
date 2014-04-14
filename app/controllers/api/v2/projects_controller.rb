@@ -2,9 +2,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
         @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",false,false).map(&:project).compact 
-        projects += @user.project_users.where(:archived => false, :core => true).map(&:project).compact 
-        projects = projects.sort_by{|p| p.name.downcase}
+        projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",false,false).map(&:project).compact.sort_by{|p| p.name.downcase}
 
         if projects
         	respond_to do |format|
@@ -64,8 +62,13 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def archived
-        @user = User.find params[:user_id]
-        @projects = @user.project_users.where(:archived => true).map(&:project).compact
+        user = User.find params[:user_id]
+        if user.admin || user.company_admin
+            @projects = user.company.projects.where(:archived => true)
+        else
+            @projects = user.project_users.where(:archived => true).map(&:project).compact
+        end
+       
         if @projects
             respond_to do |format|
                 format.json { render_for_api :projects, :json => @projects.sort_by{|p| p.name.downcase}, :root => :projects}
