@@ -1,6 +1,6 @@
 <%= render :partial => "projects/sidebar" %>
 <div class="col-xs-12 col-sm-9" id="main">
 	<div id="pages">
-		<% render :partial => "show" %>
+		<%= render :partial => "show", :locals => {:project => @project} %>
 	</div>
 </div>

@@ -5,3 +5,15 @@
 		<%= render :partial => "edit" %>
 	</div>
 </div>
+
+<script>
+	$("#project_core").change(function() {
+	    if(this.checked) {
+	    	$('#project_core').after('<span id="core-warning"> WARNING: This will make the project visible to all users</span>');
+	    } else {
+	    	$('#core-warning').fadeOut(200,function(){
+	    		$(this).remove();
+	    	});
+	    }
+	});
+</script>
