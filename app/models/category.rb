@@ -52,6 +52,7 @@ class Category < ActiveRecord::Base
       t.add :name
       t.add :completed_date
       t.add :milestone_date
+      t.add :progress_percentage
     end
 
     api_accessible :dashboard do |t|
