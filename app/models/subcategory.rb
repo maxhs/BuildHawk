@@ -1,4 +1,5 @@
 class Subcategory < ActiveRecord::Base
+    include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :category_id, :order_index, :milestone_date, :completed_date, :checklist_items, :status
   	belongs_to :category
   	has_many :checklist_items, :dependent => :destroy
