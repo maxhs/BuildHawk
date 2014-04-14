@@ -110,6 +110,9 @@ class User < ActiveRecord::Base
 	    t.add :first_name
 	    t.add :last_name
 	    t.add :full_name
+        t.add :admin
+        t.add :company_admin
+        t.add :uber_admin
 	    t.add :email
         t.add :phone_number
         t.add :authentication_token
