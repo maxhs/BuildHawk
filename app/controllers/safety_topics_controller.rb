@@ -18,6 +18,7 @@ class SafetyTopicsController < ApplicationController
 
 	def create
 		@safety_topic = SafetyTopic.create params[:safety_topic]
+		@company = @safety_topic.company
 	end
 
 	def index
