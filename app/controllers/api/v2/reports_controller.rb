@@ -24,6 +24,14 @@ class Api::V2::ReportsController < Api::V2::ApiController
             params[:report].delete(:report_subs)
         end
 
+        if params[:report][:safety_topics].present?
+            params[:report][:safety_topics].each do |topic|
+                puts "topic: #{topic}"
+                report.safety_topics.where(:title => topic["title"]).first_or_create
+            end
+            params[:report].delete(:safety_topics)
+        end
+
     	report.update_attributes params[:report]
     	respond_to do |format|
         	format.json { render_for_api :report, :json => report, :root => :report}
@@ -68,8 +76,19 @@ class Api::V2::ReportsController < Api::V2::ApiController
             subs = params[:report][:report_subs]
             params[:report].delete(:report_subs)
         end
+
+        if params[:report][:safety_topics].present?
+            topics = params[:report][:safety_topics]
+            params[:report].delete(:safety_topics)
+        end
+
         @report = Report.create params[:report]
         @report.update_attribute :mobile, true
+        
+        topics.each do |topic|
+            @report.safety_topics.where(:title => topic["title"]).first_or_create
+        end
+        
         if subs
             subs.each do |s|
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
