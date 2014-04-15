@@ -1,0 +1,7 @@
+<%= nested_form_for @safety_topic, :remote => true, :method => :patch do |f| %>
+	<div class="row topic" id="topic-<%= @safety_topic.id %>">
+		<div class="col-xs-5"><%= f.text_field :title, :placeholder => "Name the new safety topic..." %></div>
+		<div class="col-xs-5"><%= f.text_area :info, :placeholder => "Describe the new safety topic..." %></div>
+		<div class="col-xs-2"><%= f.submit "Save", :class => "btn btn-success btn-md remote", :style=>"line-height:36px;height:36px;padding-top:0;", remote: true %></div>
+	</div>
+<% end %>

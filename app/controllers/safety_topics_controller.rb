@@ -12,7 +12,7 @@ class SafetyTopicsController < ApplicationController
 	end
 
 	def create
-		@st = SafetyTopic.create params[:safety_topic]
+		@safety_topic = SafetyTopic.create params[:safety_topic]
 	end
 
 	def index
@@ -28,10 +28,41 @@ class SafetyTopicsController < ApplicationController
 	end
 
 	def edit
-		@st = SafetyTopic.find params[:id]
+		@uber_admin = true
+		@safety_topics = SafetyTopic.where("company_id IS NULL")
+		@safety_topic = SafetyTopic.find params[:id]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :index, layout: "uber_admin"
+		end
 	end
 
 	def update
+		@safety_topics = SafetyTopic.where("company_id IS NULL")
+		@safety_topic = SafetyTopic.find params[:id]
+		@safety_topic.update_attributes params[:safety_topic]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :index, layout: "uber_admin"
+		end
+	end
 
+	def destroy
+		@safety_topics = SafetyTopic.where("company_id IS NULL")
+		@safety_topic = SafetyTopic.find params[:id]
+		@safety_topic.destroy
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :index, layout: "uber_admin"
+		end
 	end
 end

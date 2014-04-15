@@ -1,0 +1,5 @@
+$('#topic-<%= @safety_topic.id %>').fadeOut(170,function(){
+	var div = $('<%= j render :partial => "edit" %>');
+	$(this).replaceWith(div);
+	$(this).fadeIn(170);
+});

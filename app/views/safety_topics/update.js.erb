@@ -1,0 +1,5 @@
+$('#topic-<%= @safety_topic.id %>').fadeOut(170,function(){
+	var div = $('<%= j render :partial => "topic", locals: {:topic => @safety_topic} %>');
+	$(this).replaceWith(div);
+	$(this).fadeIn(170);
+});

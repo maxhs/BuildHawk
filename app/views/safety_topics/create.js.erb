@@ -1,1 +1,8 @@
-$('#safety-topics table').append('<%= j render partial:"topic" %>');
+var div = $('<%= j render partial:"topic", locals: {:topic => @safety_topic} %>');
+div.css('display','none');
+$('#safety-topics').append(div);
+div.fadeIn(200);
+$('.new_safety_topic').fadeOut(100,function(){
+	$(this).replaceWith('<%= link_to "Create a new Safety Topic", new_safety_topic_path, :id => "new-safety-topic-link", :class => "simple-btn", remote: true %>');
+	$(this).fadeIn(100);
+});	

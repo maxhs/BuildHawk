@@ -2,6 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#safety-topics {
+	
+	.topic {
+		vertical-align:middle;
+		padding:15px 0;
+		min-height:60px;
+
+		h5 {
+			margin:0;
+		}
+		input[type="text"],textarea {
+			width:100%;
+		}
+	}
+
+	.delete-safety-topic {
+
+	}
+
+	.delete-safety-topic:hover {
+		background:#cc0000;
+		color:#fff !important;
+	}
+}
+
 #new-safety-topic-link {
 	background:#fff;
 	width: auto;
