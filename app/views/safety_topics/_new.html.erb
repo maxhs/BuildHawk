@@ -4,9 +4,9 @@
 	<% elsif @user.uber_admin %>
 		<%= f.hidden_field :core, value: true %>
 	<% end %>
-	<div class="row">
-		<div class="col-xs-10"><%= f.text_field :title, :placeholder => "Name the new safety topic...", :style=>"width:100%;" %></div>
-		<div class="col-xs-10"><%= f.text_area :info, :placeholder => "Describe the new safety topic...", :style=>"width:100%;" %></div>
-		<%= f.submit "Add", :class => "btn btn-success btn-md col-xs-2", :style=>"line-height:36px;height:36px;padding-top:0;" %>
+	<div class="row topic">
+		<div class="col-xs-5"><%= f.text_field :title, :placeholder => "Name the new safety topic..." %></div>
+		<div class="col-xs-5"><%= f.text_area :info, :placeholder => "Describe the new safety topic..." %></div>
+		<div class="col-xs-2"><%= f.submit "Add", :class => "btn btn-success btn-md remote", :style=>"line-height:36px;height:36px;padding-top:0;text-align:center", remote: true %></div>
 	</div>
 <% end %>
