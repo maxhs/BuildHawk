@@ -27,7 +27,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:safety_topics].present?
             params[:report][:safety_topics].each do |topic|
                 puts "topic: #{topic}"
-                report.safety_topics.where(:title => topic["title"]).first_or_create
+                report.safety_topics.where(:title => topic["title"], :company_id => @current_user.company.id).first_or_create
             end
             params[:report].delete(:safety_topics)
         end
@@ -86,7 +86,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         @report.update_attribute :mobile, true
         
         topics.each do |topic|
-            @report.safety_topics.where(:title => topic["title"]).first_or_create
+            @report.safety_topics.where(:title => topic["title"], :company_id => @current_user.company.id).first_or_create
         end
         
         if subs
