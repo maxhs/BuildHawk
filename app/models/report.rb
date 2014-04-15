@@ -56,10 +56,10 @@ class Report < ActiveRecord::Base
 
     def possible_topics
         if project.company
-            names = SafetyTopic.where(:company_id => project.company.id).map(&:name).uniq
+            titles = SafetyTopic.where(:company_id => project.company.id).map(&:title).uniq
             company_topics = [] 
-            names.each do |n|
-                company_topics << SafetyTopic.where(:company_id => project.company.id, :name => n).first
+            titles.each do |t|
+                company_topics << SafetyTopic.where(:company_id => project.company.id, :title => t).first
             end
         end
 
