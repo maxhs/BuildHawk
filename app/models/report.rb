@@ -55,8 +55,15 @@ class Report < ActiveRecord::Base
     end
 
     def possible_topics
-        company_topics = SafetyTopic.where(:company_id => project.company.id) if project.company
-        if company_topics
+        if project.company
+            names = SafetyTopic.where(:company_id => project.company.id).map(&:name).uniq
+            company_topics = [] 
+            names.each do |n|
+                company_topics << SafetyTopic.where(:company_id => project.company.id, :name => n).first
+            end
+        end
+
+        if company_topics.count > 0
              return company_topics
         else
             return SafetyTopic.where("company_id IS NULL").uniq 
