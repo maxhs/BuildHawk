@@ -1,0 +1,11 @@
+<%= render :partial => "admin/sidebar" %>
+<div class="col-xs-12 col-sm-9" id="main">
+	<div id="pages">
+		<%= render :partial => "admin/safety_topics", locals: {:company => @company} %>
+	</div>
+</div>
+
+<script>
+	$('.sidebarAdmin div a').removeClass('current-page');
+	$('#admin-safety-topics-link').addClass('current-page');
+</script>

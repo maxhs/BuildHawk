@@ -55,7 +55,12 @@ class Report < ActiveRecord::Base
     end
 
     def possible_topics
-        SafetyTopic.where("company_id IS NULL").uniq
+        company_topics = SafetyTopic.where(:company_id => project.company.id) if project.company
+        if company_topics
+             return company_topics
+        else
+            return SafetyTopic.where("company_id IS NULL").uniq 
+        end
     end 
 
   	acts_as_api

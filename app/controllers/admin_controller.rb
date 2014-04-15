@@ -33,7 +33,6 @@ class AdminController < ApplicationController
 		  	@amount = active_projects * 1000 / 100
 			redirect_to billing_admin_index_path
 		end
-
 	end
 
 	def new_user
@@ -114,6 +113,18 @@ class AdminController < ApplicationController
 		@sub = Sub.find params[:id]
 		@sub.destroy
 		redirect_to users_admin_index_path
+	end
+
+	def safety_topics
+		@company = @user.company
+		@safety_topics = @company.safety_topics
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :safety_topics
+		end
 	end
 
 	def reports

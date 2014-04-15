@@ -2,7 +2,10 @@ class SafetyTopicsController < ApplicationController
 	before_filter :authenticate_user!
 
 	def new
+		
+		@company = Company.find params[:company_id] if params[:company_id]
 		@safety_topic = SafetyTopic.new
+		
 		if request.xhr?
 			respond_to do |format|
 				format.js
