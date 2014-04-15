@@ -1,0 +1,8 @@
+
+<div class="row topic" id="topic-<%= topic.id %>">
+	<div class="col-xs-5"><h5><%= topic.title %></h5></div>
+	<div class="col-xs-5"><%= topic.info %></div>
+	<div class="col-xs-2">
+		<%= link_to "Use", clone_topic_admin_path(topic), :class => "simple-btn remote", :style => "text-align:center;", remote: true, method: :post %>
+	</div>
+</div>

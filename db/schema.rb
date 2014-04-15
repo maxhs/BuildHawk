@@ -319,6 +319,7 @@ ActiveRecord::Schema.define(version: 20140415010247) do
     t.integer  "report_id"
     t.string   "title"
     t.text     "info"
+    t.boolean  "core",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

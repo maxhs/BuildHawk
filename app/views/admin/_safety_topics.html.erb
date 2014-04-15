@@ -1,5 +1,5 @@
 <div id="pages" class="page border-box" style="padding-top:5px;">
-	<div id="safety-topics">
+	<div id="admin-safety-topics">
 
 		<div class="row" style="border-bottom:1px solid #ddd;">
 			<div class="col-xs-5"><h5>Topic</h5></div>
@@ -9,8 +9,17 @@
 
 		<%= render partial:"safety_topics/topic", collection: @safety_topics, as: :topic, cache: true %>
 	</div>
-	
-	<div style="text-align:center;">
-		<%= link_to "Create a new Safety Topic", new_safety_topic_path(:company_id => company.id), :id => "new-safety-topic-link", :class => "simple-btn remote", remote: true %>
+</div>
+
+<div id="pages" class="page border-box" style="padding-top:5px;margin-top:15px;">
+	<h3 style="text-align:center;"> Standard Topics </h3>
+	<div id="uber-safety-topics">
+		<div class="row" style="border-bottom:1px solid #ddd;">
+			<div class="col-xs-5"><h5>Topic</h5></div>
+			<div class="col-xs-5"><h5>Description</h5></div>
+			<div class="col-xs-2"><h5>Edit</h5></div>
+		</div>
+
+		<%= render partial:"admin/topic", collection: @uber_topics, as: :topic, cache: true %>
 	</div>
 </div>

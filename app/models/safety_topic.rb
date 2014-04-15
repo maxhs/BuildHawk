@@ -1,5 +1,5 @@
 class SafetyTopic < ActiveRecord::Base
-	attr_accessible :report_id, :company_id, :title, :info
+	attr_accessible :report_id, :company_id, :title, :info, :core
 	belongs_to :company
 	belongs_to :report
 

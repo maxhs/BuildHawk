@@ -50,6 +50,7 @@ Buildhawk::Application.routes.draw do
       delete :delete_checklist
     end
     member do
+      post :clone_topic
       delete :remove_template
       get :edit_user
       patch :update_billing

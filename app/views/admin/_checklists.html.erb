@@ -13,8 +13,8 @@
 	</table>
 			<div id="admin-no-checklists">You don't have any core checklist templates, but you can create some for your company from the list below.</div>
 		<% end %>
-	
 </div>
+
 <div class="project-checklist-table border-box" style="padding:20px;margin-top:15px">
 	<table>
 		<thead>
@@ -29,3 +29,4 @@
 			<%= render :partial => "admin/core_checklist_row", collection: @uber_checklists, :as => :c, cache: true %>
 		</tbody>
 	</table>
+</div>

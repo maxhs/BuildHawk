@@ -118,12 +118,25 @@ class AdminController < ApplicationController
 	def safety_topics
 		@company = @user.company
 		@safety_topics = @company.safety_topics
+		@uber_topics = SafetyTopic.where("company_id IS NULL and core = ?",true)
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else
 			render :safety_topics
+		end
+	end
+
+	def clone_topic
+		topic = SafetyTopic.find params[:id]
+		@safety_topic = SafetyTopic.create :title => topic.title, :info => topic.info, :company_id => @user.company.id
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to safety_topics_admin_index_path
 		end
 	end
 
