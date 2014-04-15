@@ -1,5 +1,6 @@
 class SafetyTopicsController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :find_user
 
 	def new
 		
@@ -67,6 +68,14 @@ class SafetyTopicsController < ApplicationController
 			end
 		else
 			render :index, layout: "uber_admin"
+		end
+	end
+
+	def find_user
+		if params[:user_id].present?
+			@user = User.where(:id => params[:user_id]).first
+		else
+			@user = current_user
 		end
 	end
 end

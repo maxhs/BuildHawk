@@ -22,4 +22,7 @@
 
 		<%= render partial:"admin/topic", collection: @uber_topics, as: :topic, cache: true %>
 	</div>
+	<div style="text-align:center;">
+		<%= link_to "Create a new Safety Topic", new_safety_topic_path(:company_id => company.id), :id => "new-safety-topic-link", :class => "simple-btn remote", remote: true %>
+	</div>
 </div>

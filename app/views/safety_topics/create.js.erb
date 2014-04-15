@@ -1,6 +1,10 @@
 var div = $('<%= j render partial:"topic", locals: {:topic => @safety_topic} %>');
 div.css('display','none');
-$('#safety-topics').append(div);
+<% if @safety_topic.company_id %>
+	$('#admin-safety-topics').append(div);
+<% else %>
+	$('#safety-topics').append(div);
+<% end %>
 div.fadeIn(200);
 $('.new_safety_topic').fadeOut(100,function(){
 	$(this).replaceWith('<%= link_to "Create a new Safety Topic", new_safety_topic_path, :id => "new-safety-topic-link", :class => "simple-btn", remote: true %>');
