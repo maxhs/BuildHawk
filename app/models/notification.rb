@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
 
 	attr_accessible :user_id, :target_user_id, :read, :sent, :checklist_item_id, :punchlist_item_id, :report_id, :message,
-					:notification_type, :project_id
+					:notification_type, :project_id, :feed
 
 	belongs_to :user
 	belongs_to :target_user, :class_name => "User"

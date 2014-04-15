@@ -1,0 +1,7 @@
+$('.sidebarUberadmin div a').removeClass('current-page');
+$('#uber-admin-safety-topics-link').addClass('current-page');
+$('#main').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "safety_topics/index" %>');
+	$(this).fadeIn(170);
+	$("html, body").animate({ scrollTop: 0 }, 300);
+});

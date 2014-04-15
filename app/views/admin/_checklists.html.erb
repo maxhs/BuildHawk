@@ -1,16 +1,31 @@
-<table class="project-checklist-table border-box" style="padding:20px;">
-	<% if @checklists && @checklists.count > 0 %>
+<div class="project-checklist-table border-box" style="padding:20px;">
+	<table id="core-checklists">
 		<th><h5>Name</h5></th>
 		<th><h5># Phases</h5></th>
 		<th><h5># Categories</h5></th>
 		<th><h5># items</h5></th>
 		<th><h5>Edit</h5></th>
 		<th><h5>Delete</h5></th>
-		<%= render :partial => "admin/checklist_row", collection: @checklists, :as => :c, cache: true %>
-	<% else %>
-		<tr><td>You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></tr>
-	<% end %>
-</table>
-<div style="text-align:center;">
-	<%= link_to "Create New Checklist Template", create_template_admin_index_path(:company_id => current_user.company.id), :id =>"new-checklist-link", :class => "gotham remote", :method => :post, :remote => true %>
+		<% if @checklists && @checklists.count > 0 %>
+			<%= render :partial => "admin/checklist_row", collection: @checklists, :as => :c, cache: true %>
+	</table>
+		<% else %>
+	</table>
+			<div id="admin-no-checklists">You don't have any core checklist templates, but you can create some for your company from the list below.</div>
+		<% end %>
+	
 </div>
+<div class="project-checklist-table border-box" style="padding:20px;margin-top:15px">
+	<table>
+		<thead>
+			<th><h5>Name</h5></th>
+			<th><h5>Description</h5></th>
+			<th><h5># Phases</h5></th>
+			<th><h5># Categories</h5></th>
+			<th><h5># Items</h5></th>
+			<th><h5>Create Template</h5></th>
+		</thead>
+		<tbody>
+			<%= render :partial => "admin/core_checklist_row", collection: @uber_checklists, :as => :c, cache: true %>
+		</tbody>
+	</table>

@@ -1,0 +1,16 @@
+<div id="pages">
+	<div id="safety-topics" class="page border-box" style="">
+		<table class="table table-bordered table-responsive">
+			<thead>
+				<th>Topic</th>
+				<th>Description</th>
+				<th>Edit</th>
+			</thead>
+
+			<tbody>
+				<%= render partial:"safety_topics/topic", collection: @safety_topics, as: :topic, cache: true %>
+			</tbody>
+		</table>
+		<%= link_to "Create new Safety Topic", new_safety_topic_path, :id => "new-safety-topic-link", :class => "simple-btn", remote: true %>
+	</div>
+</div>

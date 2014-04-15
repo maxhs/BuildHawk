@@ -1,0 +1,2 @@
+module SafetyTopicsHelper
+end

@@ -37,9 +37,7 @@ class Project < ActiveRecord::Base
 
     def default_folders
         ["Subcontractors","Floor Plans","Permit Docs","Schedule","Selections"].each do |f|
-            self.folders.create(
-                :name => f
-            )
+            self.folders.create :name => f
         end
         self.save
     end

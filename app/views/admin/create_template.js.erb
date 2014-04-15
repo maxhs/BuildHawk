@@ -1,0 +1,6 @@
+$('#core-checklists').append('<%= j render partial:"admin/checklist_row", locals: {:c => @checklist} %>');
+if ($('#admin-no-checklists').length) {
+	$('#admin-no-checklists').fadeOut(200,function(){
+		$(this).remove();
+	});
+}

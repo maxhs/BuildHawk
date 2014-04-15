@@ -3,7 +3,7 @@ class Checklist < ActiveRecord::Base
     require 'deep_cloneable'
     include ActionView::Helpers::NumberHelper
     
-    attr_accessible :name, :checklist_type, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
+    attr_accessible :name, :description, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
     				:categories, :company, :company_id, :core
   	belongs_to :project
   	belongs_to :company
@@ -14,7 +14,6 @@ class Checklist < ActiveRecord::Base
 
     after_create :assign_items
     after_commit :uber_fifo
-    after_commit :core_fifo
 
     def uber_fifo
         if core && company_id.nil?
@@ -34,6 +33,7 @@ class Checklist < ActiveRecord::Base
     end    
 
     def core_fifo
+        puts "in core fifo. company id: #{company_id}"
         if core && company_id != nil
             lists = Checklist.where(:name => name, :core => true, :project_id => nil)
             if lists.count < 5
@@ -43,7 +43,7 @@ class Checklist < ActiveRecord::Base
                     Resque.enqueue(DuplicateChecklist,list,company_id)
                 elsif Rails.env.development?
                     puts "should be creating another checklist in development"
-                    Checklist.create :checklist => self.dup(:include => [:company, {:categories => {:subcategories => :checklist_items}}])
+                    new_list = Checklist.create :checklist => self.dup(:include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}})
                 end
             end
         end

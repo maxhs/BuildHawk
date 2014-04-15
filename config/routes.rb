@@ -49,6 +49,7 @@ Buildhawk::Application.routes.draw do
       delete :delete_checklist
     end
     member do
+      delete :remove_template
       get :edit_user
       patch :update_billing
       patch :update_user
@@ -122,6 +123,7 @@ Buildhawk::Application.routes.draw do
   end
   resources :categories
   resources :subcategories
+  resources :safety_topics
   resources :checklist_items do
     member do
       get :generate

@@ -12,6 +12,7 @@ class Report < ActiveRecord::Base
     has_many :report_subs, :dependent => :destroy
     has_many :subs, :through => :report_subs
     has_many :photos, :dependent => :destroy
+    has_many :safety_topics, :dependent => :destroy
 
     validates_presence_of :report_type
     validates_presence_of :created_date
@@ -53,27 +54,33 @@ class Report < ActiveRecord::Base
       report_users + report_subs
     end
 
+    def possible_topics
+        SafetyTopic.where("company_id IS NULL").uniq
+    end 
+
   	acts_as_api
 
   	api_accessible :report do |t|
-      t.add :id
-      t.add :author
-      t.add :created_at
-      t.add :updated_at
-      t.add :created_date
+        t.add :id
+        t.add :author
+        t.add :created_at
+        t.add :updated_at
+        t.add :created_date
   		t.add :title
   		t.add :report_type
   		t.add :body
-      t.add :weather
-      t.add :weather_icon
-      t.add :precip
-      t.add :temp
-      t.add :wind
-      t.add :humidity
+        t.add :weather
+        t.add :weather_icon
+        t.add :precip
+        t.add :temp
+        t.add :wind
+        t.add :humidity
   		t.add :report_fields
-      t.add :possible_types
-      t.add :comments
-      t.add :photos
-      t.add :personnel
+        t.add :possible_types
+        t.add :comments
+        t.add :photos
+        t.add :personnel
+        t.add :safety_topics
+        t.add :possible_topics
   	end
 end

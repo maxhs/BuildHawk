@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327231804) do
+ActiveRecord::Schema.define(version: 20140415010247) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140327231804) do
     t.boolean  "core",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   add_index "checklists", ["project_id", "company_id"], name: "checklists_ix"
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(version: 20140327231804) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
+    t.boolean  "feed",              default: false
   end
 
   create_table "photos", force: true do |t|
@@ -311,6 +313,15 @@ ActiveRecord::Schema.define(version: 20140327231804) do
   end
 
   add_index "reports", ["author_id", "project_id"], name: "reports_ix"
+
+  create_table "safety_topics", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "report_id"
+    t.string   "title"
+    t.text     "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"

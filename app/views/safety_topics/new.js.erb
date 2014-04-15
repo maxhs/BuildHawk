@@ -1,0 +1,5 @@
+$('#new-safety-topic-link').fadeOut(170,function(){
+	var div = $('<%= j render :partial => "new" %>');
+	$(this).replaceWith(div);
+	$(this).fadeIn(170);
+});

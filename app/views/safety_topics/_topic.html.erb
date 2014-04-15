@@ -1,0 +1,6 @@
+
+<tr id="topic-<%= topic.id %>">
+	<td><h5><%= topic.title %></h5></td>
+	<td><%= topic.info %></td>
+	<td><%= link_to "Edit", edit_safety_topic_path(topic), :class => "simple-btn", :style => "text-align:center;", remote: true %></td>
+</tr>

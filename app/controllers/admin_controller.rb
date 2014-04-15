@@ -5,7 +5,7 @@ class AdminController < ApplicationController
 	require 'stripe'
 
 	def index
-		@core_checklist = Checklist.where(:core => true).last
+		uber_checklists
 		@checklists = current_user.company.checklists
 	end
 
@@ -134,6 +134,7 @@ class AdminController < ApplicationController
 	end
 
 	def checklists
+		uber_checklists
 		@checklists = current_user.company.checklists.flatten
 	end
 
@@ -144,7 +145,6 @@ class AdminController < ApplicationController
 
 	def create_template
 		if Rails.env.production?
-	    
 			Resque.enqueue(CreateTemplate,params[:company_id])
 			@response_message = "Creating checklist template. This may take a few minutes..."
 			if request.xhr?
@@ -156,8 +156,21 @@ class AdminController < ApplicationController
 				redirect_to checklists_admin_index_path
 			end
 		elsif Rails.env.development?
-	      	puts "should be creating a template in development environment"
+	      	@checklist = Checklist.where("core = ? and name = ? and company_id IS NULL and project_id IS NULL",true,params[:name]).first
+	      	if @checklist
+	      		puts "found a checklist. should be doing core fifo now for company id: #{@user.company.id}"
+	      		@checklist.company_id = @user.company.id
+	      		@checklist.save!
+	      		@checklist.core_fifo  
+	      		
+	      	end
 	    end
+	end
+
+	def remove_template
+		@checklist = Checklist.find params[:id]
+		@checklist_id = params[:id]
+		@checklist.destroy
 	end
 
 	def new_project
@@ -226,6 +239,16 @@ class AdminController < ApplicationController
 		@project_groups = @company.project_groups.where("id IS NOT NULL")
 	end
 
+	protected
+
+	def uber_checklists
+		names = Checklist.where(:core => true).map(&:name).uniq
+		@uber_checklists = [] 
+		names.each do |n|
+			@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first
+		end
+	end
+
 	def find_user
 		if params[:user_id].present?
 			@user = User.where(:id => params[:user_id]).first
@@ -234,5 +257,4 @@ class AdminController < ApplicationController
 		end
 		@company = @user.company
 	end
-
 end

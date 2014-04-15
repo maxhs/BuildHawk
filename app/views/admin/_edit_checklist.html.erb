@@ -1,6 +1,11 @@
 <%= form_for @checklist, :method => :patch, remote: true do |f| %>
 	<table>
-		<tr><td style="width:100%; padding-bottom:20px;"><%= f.text_field :name, :style=> "width:100%;" %></td>
-		<td style="vertical-align:top"><%= f.submit "Change Name", :class => "btn btn-success btn-md pull-right", :remote => true %></td></tr>
+		<tr>
+			<td style="width:100%; padding-bottom:20px;">
+				<div><%= f.text_field :name, :style=> "width:100%;" %></div>
+				<div><%= f.text_area :description, :placeholder => "A brief description of this checklist...", :style=> "width:100%;" %></div>
+			</td>
+			<td style="vertical-align:top"><%= f.submit "save", :class => "btn btn-success btn-md pull-right", :remote => true %></td>
+		</tr>
 	</table>
 <% end %>

@@ -1,0 +1,8 @@
+<% if @uber_admin %>
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role ="navigation">
+		<%= render partial:"uber_admin/sidebar" %>
+	</div>
+	<div class="col-xs-12 col-sm-9" id="main">
+		<%= render :partial => "safety_topics/index" %>
+	</div>
+<% end %>
