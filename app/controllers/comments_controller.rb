@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+	before_filter :authenticate_user!
 	def create
 		@comment = Comment.create params[:comment]
 		if params[:comment][:report_id].present?

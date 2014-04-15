@@ -1,4 +1,5 @@
 class PunchlistsController < ApplicationController
+	before_filter :authenticate_user!
 	def index
 		@project = Project.find params[:project_id]
 		@punchlists = @project.punchlists

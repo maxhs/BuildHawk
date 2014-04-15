@@ -1,5 +1,5 @@
 class FoldersController < ApplicationController
-
+	before_filter :authenticate_user!
 	def create
 		@folder = Folder.create params[:folder]
 		@project = @folder.project 

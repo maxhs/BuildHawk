@@ -1,4 +1,5 @@
 class SafetyTopicsController < ApplicationController
+	before_filter :authenticate_user!
 
 	def new
 		@safety_topic = SafetyTopic.new

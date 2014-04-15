@@ -1,4 +1,5 @@
 class ChecklistItemsController < ApplicationController
+	before_filter :authenticate_user!
 	def edit
 		@item = ChecklistItem.find params[:id]	
 		@checklist = @item.subcategory.category.checklist
