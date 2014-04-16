@@ -1,7 +1,9 @@
-
 <div class="row topic" id="topic-<%= topic.id %>">
 	<div class="col-xs-5"><h5><%= topic.title %></h5></div>
-	<div class="col-xs-5"><%= topic.info %></div>
+	<div class="col-xs-5 topic-description"><%= topic.info[0..130] %><span class="ellipsis">...</span>
+		<div class="read-more">Read more</div>
+		<span class="hiddenText"><%= topic.info[131..topic.info.length] %>
+	</div>
 	<div class="col-xs-2" style="text-align:center;">
 		<%= link_to "Edit", edit_safety_topic_path(topic), :class => "simple-btn remote", :style => "text-align:center;margin:0;", remote: true %>
 		<%= link_to "Delete", safety_topic_path(topic), :class => "simple-btn remote delete-safety-topic", :style => "text-align:center;", remote: true, method: :delete, data: {confirm: "Are you sure you want to delete this Safety Topic?" } %>
