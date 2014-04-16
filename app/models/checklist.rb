@@ -82,7 +82,7 @@ class Checklist < ActiveRecord::Base
   	end
 
     def upcoming_items
-        items.select{|i| i.critical_date}.sort_by(&:critical_date).last(5)
+        items.select{|i| i.critical_date if i.status != "Completed"}.sort_by(&:critical_date).last(5)
     end
 
     def recently_completed
