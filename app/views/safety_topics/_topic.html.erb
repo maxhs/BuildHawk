@@ -2,7 +2,7 @@
 	<div class="col-xs-5"><h5><%= topic.title %></h5></div>
 	<% if topic.info.length > 130 %>
 		<div class="col-xs-5 topic-description"><%= topic.info[0..130] %><span class="ellipsis">...</span>
-			<div class="read-more">Read more</div>
+			<div class="read-more simple-btn">Read more</div>
 			<span class="hiddenText"><%= topic.info[131..topic.info.length] %>
 		</div>
 	<% else %>
