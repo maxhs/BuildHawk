@@ -34,11 +34,9 @@ class Report < ActiveRecord::Base
       time    :created_at
     end
 
-    ######can eventually remove from API
     def possible_types
       ["Daily","Safety","Weekly"]
     end
-    ######
 
     def date_for_sort
       if created_date && created_date.length > 0

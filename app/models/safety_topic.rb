@@ -5,15 +5,10 @@ class SafetyTopic < ActiveRecord::Base
 
 	acts_as_api
 
-    def possible_types
-        ["Daily","Safety","Weekly"]
-    end
-
   	api_accessible :report do |t|
   		t.add :title
   		t.add :info
   		t.add :report_id
   		t.add :company_id
-        t.add :possible_types
   	end
 end
