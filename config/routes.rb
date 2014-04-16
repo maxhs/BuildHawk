@@ -249,6 +249,7 @@ Buildhawk::Application.routes.draw do
         end
         collection do
           post :photo
+          get :options
           delete :remove_personnel
         end
       end

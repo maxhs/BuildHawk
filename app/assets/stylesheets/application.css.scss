@@ -464,7 +464,7 @@ select[multiple] {
 	outline: 0;
 	width: 50%;
 	height: auto;
-	border: 1px solid #eee;
+	border: 1px solid #ddd;
 }
 
 a.search-button {
@@ -472,11 +472,11 @@ a.search-button {
 	padding: 0;
 	line-height: 32px;
 	width: 24%;
-	margin-top: 0;
+	margin: 0;
 }
 
 .simple-btn {
-	border:1px solid #eee;
+	border:1px solid #ddd;
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
@@ -490,6 +490,10 @@ a.search-button {
 	font-family:"Gotham Book",'Helvetica',sans-serif;
 	font-size:14px;
 	line-height:1em;
+}
+
+.simple-btn:hover {
+	border-color:#ccc;
 }
 
 .simple-danger-btn {
@@ -555,7 +559,7 @@ a.search-button {
 	-webkit-border-radius:3px;
 	font-size:1.1em;
 	background:#fff;
-	border:1px solid #eee;
+	border:1px solid #ddd;
 	box-shadow:1px 1px 2px 0 rgba(0,0,0,.5);
 
 	a {
@@ -566,7 +570,7 @@ a.search-button {
 }
 
 .export:hover {
-	background:#eee;
+	background:#ddd;
 
 	a {
 		color:#000 !important;

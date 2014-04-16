@@ -26,7 +26,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
         if params[:report][:safety_topics].present?
             params[:report][:safety_topics].each do |topic|
-                puts "topic: #{topic}"
                 report.safety_topics.where(:title => topic["title"], :company_id => @current_user.company.id).first_or_create
             end
             params[:report].delete(:safety_topics)
@@ -48,6 +47,24 @@ class Api::V2::ReportsController < Api::V2::ApiController
         else
             render :json => {:success => false}
         end
+    end
+
+    def options
+        user = User.find params[:user_id]
+        titles = SafetyTopic.where(:company_id => user.company.id).map(&:title).uniq
+        company_topics = [] 
+        titles.each do |t|
+            company_topics << SafetyTopic.where(:company_id => user.company.id, :title => t).first
+        end
+    
+        if company_topics.count == 0
+            company_topics = SafetyTopic.where("company_id IS NULL").uniq 
+        end
+
+        respond_to do |format|
+            format.json { render_for_api :report, :json => company_topics, :root => :possible_topics}
+        end
+        
     end
 
     def review_report

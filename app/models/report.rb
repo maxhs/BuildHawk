@@ -34,9 +34,11 @@ class Report < ActiveRecord::Base
       time    :created_at
     end
 
+    ######can eventually remove from API
     def possible_types
       ["Daily","Safety","Weekly"]
     end
+    ######
 
     def date_for_sort
       if created_date && created_date.length > 0
@@ -51,24 +53,8 @@ class Report < ActiveRecord::Base
     end
 
     def personnel
-      report_users + report_subs
+        report_users + report_subs
     end
-
-    def possible_topics
-        if project.company
-            titles = SafetyTopic.where(:company_id => project.company.id).map(&:title).uniq
-            company_topics = [] 
-            titles.each do |t|
-                company_topics << SafetyTopic.where(:company_id => project.company.id, :title => t).first
-            end
-        end
-
-        if company_topics.count > 0
-             return company_topics
-        else
-            return SafetyTopic.where("company_id IS NULL").uniq 
-        end
-    end 
 
   	acts_as_api
 
@@ -93,6 +79,5 @@ class Report < ActiveRecord::Base
         t.add :photos
         t.add :personnel
         t.add :safety_topics
-        t.add :possible_topics
   	end
 end
