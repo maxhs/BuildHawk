@@ -85,8 +85,10 @@ class Api::V2::ReportsController < Api::V2::ApiController
         @report = Report.create params[:report]
         @report.update_attribute :mobile, true
         
-        topics.each do |topic|
-            @report.safety_topics.where(:title => topic["title"], :company_id => @current_user.company.id).first_or_create
+        if topics && topics.count > 0
+            topics.each do |topic|
+                @report.safety_topics.where(:title => topic["title"], :company_id => @current_user.company.id).first_or_create
+            end
         end
         
         if subs
