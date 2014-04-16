@@ -74,6 +74,7 @@ Buildhawk::Application.routes.draw do
       delete :destroy_company
       delete :destroy_user
       get :promo_codes
+      get :safety_topics
     end
   end
   resources :promo_codes do

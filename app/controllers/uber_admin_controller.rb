@@ -38,6 +38,17 @@ class UberAdminController < ApplicationController
 		redirect_to core_checklists_uber_admin_index_path
 	end
 
+	def safety_topics
+		@safety_topics = SafetyTopic.where("company_id IS NULL")
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :safety_topics
+		end
+	end
+
 	def edit_item
 		@checklist_item = ChecklistItem.find params[:id]
 	end

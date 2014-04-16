@@ -22,7 +22,6 @@ class SafetyTopicsController < ApplicationController
 	end
 
 	def index
-		@uber_admin = true
 		@safety_topics = SafetyTopic.where("company_id IS NULL")
 		if request.xhr?
 			respond_to do |format|
@@ -34,7 +33,7 @@ class SafetyTopicsController < ApplicationController
 	end
 
 	def edit
-		@uber_admin = true
+
 		@safety_topics = SafetyTopic.where("company_id IS NULL")
 		@safety_topic = SafetyTopic.find params[:id]
 		if request.xhr?

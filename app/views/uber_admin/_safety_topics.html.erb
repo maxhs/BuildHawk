@@ -1,0 +1,21 @@
+<div id="pages" class="page border-box" style="padding-top:5px;">
+	<div id="safety-topics">
+
+		<div class="row" style="border-bottom:1px solid #ddd;">
+			<div class="col-xs-5"><h5>Topic</h5></div>
+			<div class="col-xs-5"><h5>Description</h5></div>
+			<div class="col-xs-2"><h5>Edit</h5></div>
+		</div>
+
+		<%= render partial:"safety_topics/topic", collection: @safety_topics, as: :topic, cache: true %>
+	</div>
+	
+	<div style="text-align:center;">
+		<%= link_to "Create a new Safety Topic", new_safety_topic_path, :id => "new-safety-topic-link", :class => "simple-btn remote", remote: true %>
+	</div>
+</div>
+
+
+<script>
+	readMoreLess();
+</script>
