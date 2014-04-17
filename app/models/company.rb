@@ -61,6 +61,9 @@ class Company < ActiveRecord::Base
     api_accessible :report, :extend => :projects do |t|
       
     end
+    api_accessible :details, :extend => :projects do |t|
+      
+    end
 
     api_accessible :dashboard do |t|
     

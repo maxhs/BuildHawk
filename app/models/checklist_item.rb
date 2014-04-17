@@ -82,6 +82,10 @@ class ChecklistItem < ActiveRecord::Base
 
     end
 
+    api_accessible :details, :extend => :projects do |t|
+
+    end
+
     api_accessible :dashboard, :extend => :projects do |t|
       
     end

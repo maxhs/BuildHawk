@@ -150,4 +150,8 @@ class Photo < ActiveRecord::Base
 	api_accessible :report, :extend => :dashboard do |t|
 
 	end
+
+	api_accessible :details, :extend => :dashboard do |t|
+
+	end
 end

@@ -136,6 +136,10 @@ class Project < ActiveRecord::Base
         t.add :punchlists
     end
 
+    api_accessible :details, :extend => :projects do |t|
+    
+    end
+
     api_accessible :user do |t|
         t.add :name
         t.add :address

@@ -215,7 +215,8 @@ Buildhawk::Application.routes.draw do
           post :forgot_password
         end 
       end
-      resources :companies 
+      resources :companies
+      resources :groups 
       resources :projects do
         collection do
           get :dash

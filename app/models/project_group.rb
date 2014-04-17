@@ -16,4 +16,17 @@ class ProjectGroup < ActiveRecord::Base
   		t.add :projects_count
   		t.add :group_projects
   	end
+
+  	api_accessible :dashboard do |t|
+  		t.add :name
+  		t.add :id
+  		t.add :projects_count
+  	end
+
+  	api_accessible :details do |t|
+  		t.add :name
+  		t.add :id
+  		t.add :projects_count
+  		t.add :projects
+  	end
 end
