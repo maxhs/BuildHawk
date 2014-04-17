@@ -32,6 +32,18 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         end
     end
 
+    def dashboard
+        @user = User.find params[:user_id]
+        projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",false,false).map(&:project).compact
+        if @project.checklist
+            respond_to do |format|
+                format.json { render_for_api :dashboard, :json => projects, root: :projects}
+            end
+        else
+            render :json => {success: false}
+        end
+    end
+
     def demo
         projects = Project.where(:core => true)
         if projects.count > 0
@@ -50,17 +62,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
       	end
     end
 
-    def dashboard
-        @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",false,false).map(&:project).compact
-        if @project.checklist
-            respond_to do |format|
-                format.json { render_for_api :dashboard, :json => projects, root: :projects}
-            end
-        else
-            render :json => {success: false}
-        end
-    end
+  
 
     def dash
     	@project = Project.find params[:id]
