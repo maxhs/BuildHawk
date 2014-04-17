@@ -22,7 +22,7 @@ class Api::V2::GroupsController < Api::V2::ApiController
     def show
     	group = ProjectGroup.find params[:id]
     	respond_to do |format|
-        	format.json { render_for_api :details, :json => group, :root => :project_groups}
+        	format.json { render_for_api :details, :json => group, :root => :group}
       	end
     end
 
