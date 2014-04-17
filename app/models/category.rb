@@ -44,6 +44,9 @@ class Category < ActiveRecord::Base
   		t.add :name
   		t.add :milestone_date
   		t.add :completed_date
+      t.add :item_count
+      t.add :completed_count
+      t.add :progress_count
   	end
 
     api_accessible :checklist do |t|
