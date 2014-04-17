@@ -75,4 +75,8 @@ class Sub < ActiveRecord::Base
     api_accessible :login, :extend => :report do |t|
 
     end
+
+    api_accessible :details do |t|
+
+    end
 end
