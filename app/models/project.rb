@@ -125,7 +125,11 @@ class Project < ActiveRecord::Base
         t.add :subs
         t.add :users
         t.add :core
-        #t.add :project_group, :if => :has_group?
+        t.add :progress
+        t.add :upcoming_items
+        t.add :recently_completed
+        t.add :recent_documents
+        t.add :categories
   	end
 
     api_accessible :punchlist, :extend => :projects do |t|

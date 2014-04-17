@@ -42,8 +42,7 @@ class Category < ActiveRecord::Base
 
   	api_accessible :projects do |t|
   		t.add :name
-  		t.add :index
-  		t.add :milestone
+  		t.add :milestone_date
   		t.add :completed_date
   	end
 
