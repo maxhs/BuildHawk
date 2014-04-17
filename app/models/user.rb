@@ -136,6 +136,10 @@ class User < ActiveRecord::Base
 
     end
 
+    api_accessible :details, :extend => :user do |t|
+
+    end
+
     api_accessible :punchlist, :extend => :user do |t|
       
     end
