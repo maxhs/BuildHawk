@@ -49,6 +49,10 @@ class Category < ActiveRecord::Base
       t.add :progress_count
   	end
 
+    api_accessible :details, :extend => :projects do |t|
+
+    end
+
     api_accessible :checklist do |t|
       t.add :subcategories
       t.add :name
