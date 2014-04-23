@@ -32,7 +32,7 @@ class ReportsController < ApplicationController
 
 	def new
 		@project = Project.find params[:project_id]
-		@report = Report.new
+		@report = @project.reports.new
 		@report.users.build
 		@report.subs.build
 		@report.report_subs.build
@@ -43,7 +43,7 @@ class ReportsController < ApplicationController
 			end
 		else 
 			@reports = @project.reports
-			redirect_to reports_project_path(@project)
+			render :new
 		end
 	end
 
@@ -99,7 +99,7 @@ class ReportsController < ApplicationController
 	end
 
 	def create
-		@project = Project.find params[:id]
+		@project = Project.find params[:report][:project_id]
 		if @project.reports.where(:created_date => params[:report][:created_date], :report_type => params[:report][:report_type]).first
 			if request.xhr?
 				respond_to do |format|
@@ -115,7 +115,7 @@ class ReportsController < ApplicationController
 		@reports = @project.ordered_reports
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/reports"}
+				format.js { render :template => "reports/index"}
 			end
 		else 
 			redirect_to reports_project_path(@project)

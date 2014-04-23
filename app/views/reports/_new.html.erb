@@ -1,5 +1,6 @@
 <div class="border-box">
 	<%= nested_form_for @report, url: reports_path, :html=> {:multipart => true}, :remote => true, :method => :post do |f| %>
+		<%= f.hidden_field :project_id, value: @project.id %>
 		<div id="add-report" class="container">
 			<div class="thin-form">
 				<div class="row form-title">
