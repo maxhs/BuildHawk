@@ -76,6 +76,8 @@ class Report < ActiveRecord::Base
         t.add :comments
         t.add :photos
         t.add :personnel
+        t.add :report_users
+        t.add :report_subs
         t.add :safety_topics
   	end
 end
