@@ -64,7 +64,7 @@ class Report < ActiveRecord::Base
         t.add :created_date
   		t.add :title
   		t.add :report_type
-  		t.add :body
+  		t.add :body, :if => body && body.length > 0
         t.add :weather
         t.add :weather_icon
         t.add :precip
