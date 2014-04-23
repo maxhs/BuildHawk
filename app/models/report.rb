@@ -54,6 +54,10 @@ class Report < ActiveRecord::Base
         report_users + report_subs
     end
 
+    def has_body?
+        body.present? && body.length > 0
+    end
+
   	acts_as_api
 
   	api_accessible :report do |t|
@@ -64,7 +68,7 @@ class Report < ActiveRecord::Base
         t.add :created_date
   		t.add :title
   		t.add :report_type
-  		t.add :body, :if => body && body.length > 0
+  		t.add :body, :if => :has_body?
         t.add :weather
         t.add :weather_icon
         t.add :precip
