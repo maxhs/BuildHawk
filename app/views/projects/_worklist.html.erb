@@ -1,12 +1,12 @@
 <div class="border-box" style="padding:20px;">
 	<header>
-		<%= link_to "Add Item", new_punchlist_item_path(:project_id => @project.id), :class=>"btn btn-default pull-right search-button", remote: true %>
-		<div style="margin-bottom: 20px">
+		<div style="margin-bottom: 15px">
 			<%= form_tag search_worklist_project_path(@project), :id => "worklist-search", :method => :post, :class=>"input-group", :remote => true do %>
 				<%= text_field_tag :search, nil, :placeholder=>"Search Worklist...", :class=>"form-control" %>
 				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
 			<% end %>
 		</div>
+		<%= link_to "Add Item", new_punchlist_item_path(:project_id => @project.id), :class=>"btn btn-default search-button", remote: true %>
 	</header>
 	<div id="project-worklist">	
 		<table class="table table-bordered table-responsive" id="worklist-table">
@@ -62,7 +62,7 @@
 						</tr>
 					<% end %>
 				<% else %>
-					<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;font-weight:100;">No Worklist Items</h4></td></tr>
+					<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;font-style:italic;font-weight:100;">No Worklist Items</h4></td></tr>
 				<% end %>
 			</tbody>
 		</table>

@@ -2,9 +2,10 @@
 		<table class="table table-bordered table-responsive" id="worklist-table">
 			<thead>
 				<tr>
+					<th><button class="export" id="export-worklist-items">Export</button></th>
 					<th>Photo</th>
 					<th>Name</th>
-					<th>Assignment</th>
+					<th>Assignee</th>
 					<th>Completed</th>
 					<th>Created On</th>
 				</tr>
@@ -14,17 +15,23 @@
 				<% if @items && @items.count > 0 %>
 					<% @items.each do |item| %>
 						<tr>
-							<td style="width:100px;">
-								<% if item.photos && item.photos.count > 0 %>
+							<td style="width:76px;">
+								<span class="worklist-item-checkbox"><%= check_box_tag :select, item.id %></span>
+							</td>
+							<% if item.photos && item.photos.count > 0 %>
+								<td style="width:100px;height:100px;">
 									<% photo = item.photos.where("image_file_name IS NOT NULL").first %>
 									<% if photo %><%=image_tag(photo.image.url(:thumb)) %><% end %>
-								<% end %>
-							</td>
+								</td>
+							<% else %>
+								<td style="width:100px;"></td>
+							<% end %>
+							
 							<td>
 								<% if item.body.length > 0 %>
-									<%= link_to item.body, edit_worklist_item_project_path(@project, :item_id => item.id), :remote => true %> 
+									<%= link_to item.body, edit_punchlist_item_path(item), :remote => true %> 
 								<% else %>
-									<%= link_to edit_worklist_item_project_path(@project, :item_id => item.id), :remote => true do %> <div style="width:100%;display:block;">&nbsp;</div><% end %>
+									<%= link_to edit_punchlist_item_path(item), :remote => true do %> <div style="width:100%;display:block;">&nbsp;</div><% end %>
 								<% end %>
 							</td>	
 							<td>
@@ -37,7 +44,7 @@
 								<% end %>
 							</td>
 							<td>
-								<% if item.completed_at %>
+								<% if item.completed %>
 									<%= parse_time item.completed_at %>
 								<% end %>
 							</td>
@@ -45,7 +52,7 @@
 						</tr>
 					<% end %>
 				<% else %>
-					<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-style:italic;font-weight:100;">No Worklist Items</h4></td></tr>
+					<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;font-style:italic;font-weight:100;">No Worklist Items</h4></td></tr>
 				<% end %>
 			</tbody>
 		</table>
