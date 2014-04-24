@@ -1,6 +1,7 @@
 <div class="border-box">
 	<%= nested_form_for @report, url: reports_path, :html=> {:multipart => true}, :remote => true, :method => :post do |f| %>
 		<%= f.hidden_field :project_id, value: @project.id %>
+		<%= f.hidden_field :author_id, value: current_user.id %>
 		<div id="add-report" class="container">
 			<div class="thin-form">
 				<div class="row form-title">
@@ -99,8 +100,8 @@
 					</div>
 				</div>
 				
-				<div class="row">
-					<button class="btn btn-success btn-md pull-right"><%= f.submit "Add" %></button>
+				<div class="button-container">
+					<%= f.submit "Add", :class => "btn btn-success btn-md save" %>
 				</div>
 			</div>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>	

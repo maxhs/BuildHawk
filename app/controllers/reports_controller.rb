@@ -112,6 +112,11 @@ class ReportsController < ApplicationController
 			return
 		end
 		@report = @project.reports.create params[:report]
+		if @report.photos
+			@report.photos.each do |p|
+				p.update_attribute :user_id, current_user.id
+			end
+		end
 		@reports = @project.ordered_reports
 		if request.xhr?
 			respond_to do |format|
