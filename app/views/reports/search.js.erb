@@ -1,0 +1,5 @@
+$('a').removeClass('current-page');
+$('#project-reports').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "search" %>');
+	$(this).fadeIn(170);
+});

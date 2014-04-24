@@ -443,7 +443,7 @@ body {
 }
 
 .input-group {
-	width:75%;
+	width:100%;
 }
 
 input[type="email"], input[type="password"], input[type="text"], textarea {
@@ -472,7 +472,7 @@ a.search-button {
 	padding: 0;
 	line-height: 32px;
 	width: 24%;
-	margin: 0;
+	margin: 0 auto 15px;
 }
 
 .simple-btn {
