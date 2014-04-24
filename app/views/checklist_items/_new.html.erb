@@ -1,11 +1,12 @@
 <%= nested_form_for @checklist_item, remote: true, :method => :post do |f| %>
 	<%= f.hidden_field :subcategory_id, :value => @subcategory.id %>
 	<%= f.hidden_field :checklist_id, :value => @checklist.id %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
 
 	<div class="row">
-		<div class="col-md-10"><%= f.text_area :body, :placeholder => "Describe the new checklist item" %></div>
-		<div class="col-md-1"><%= f.label "Item Type" %><%= f.select :item_type, @checklist_item.types %></div>
-		<button class="btn btn-success btn-md pull-right col-md-1"><%= f.submit "ADD", :class => "no-link", :style=>"margin:0 auto;" %></button>
+		<div class="col-xs-8"><%= f.text_area :body, :placeholder => "Describe the new checklist item" %></div>
+		<div class="col-xs-2" style="text-align:center;"><%= f.label "Item Type" %><%= f.select :item_type, @checklist_item.types %></div>
+		<%= f.submit "ADD", :class => "no-link", :class=>"btn btn-success btn-md col-xs-2", :style=>"margin-top:5px;" %>
 	</div>
 
 <% end %>

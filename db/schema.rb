@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415010247) do
+ActiveRecord::Schema.define(version: 20140424224323) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140415010247) do
     t.datetime "updated_at"
     t.integer  "photos_count"
     t.integer  "comments_count"
+    t.integer  "user_id"
   end
 
   add_index "checklist_items", ["subcategory_id", "checklist_id"], name: "checklist_items_ix"

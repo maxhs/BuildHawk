@@ -13,7 +13,7 @@ class Notification < ActiveRecord::Base
 	after_create :deliver
 
 	def deliver
-		if user.push_permissions
+		if user && user.push_permissions
 			self.user.notify_all_devices(
 		        :alert          	=> message, 
 		        :report_id 			=> report_id, 

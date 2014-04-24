@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
     has_many :reports, :dependent => :destroy
   	has_one :checklist, :dependent => :destroy
     has_many :folders, :dependent => :destroy
+    has_many :notifications, :dependent => :destroy
 
     after_create :default_folders
     after_commit :adjust_users
@@ -137,7 +138,7 @@ class Project < ActiveRecord::Base
     end
 
     api_accessible :details, :extend => :projects do |t|
-    
+        t.add :notifications
     end
 
     api_accessible :user do |t|
