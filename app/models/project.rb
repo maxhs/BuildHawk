@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 	  attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist, :photos,
-                    :user_ids, :core, :project_group_id, :subs, :sub_ids#, :subs_attributes, :project_subs_attributes, :users_attributes, :projects_users_attributes
+                        :user_ids, :core, :project_group_id, :subs, :sub_ids
   	
   	has_many :project_users, :dependent => :destroy, autosave: true
   	has_many :users, :through => :project_users, autosave: true
