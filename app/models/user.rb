@@ -72,13 +72,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone_number => user.phone_number, :id => user.id, :url100 => user.url100}}
-    end
-
-    def url600
-      if image_file_name
-        image.url(:medium)
-      end
+      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone_number => user.phone_number, :id => user.id, :url_thumb => user.url_thumb}}
     end
 
     def url200
@@ -87,7 +81,13 @@ class User < ActiveRecord::Base
         end
     end
 
-    def url100
+    def url_small
+        if image_file_name
+            image.url(:small)
+        end
+    end
+
+    def url_thumb
         if image_file_name
             image.url(:thumb)
         end
@@ -107,20 +107,23 @@ class User < ActiveRecord::Base
 
   	api_accessible :user do |t|
         t.add :id
-	    t.add :first_name
-	    t.add :last_name
-	    t.add :full_name
+	      t.add :first_name
+	      t.add :last_name
+	      t.add :full_name
         t.add :admin
         t.add :company_admin
         t.add :uber_admin
-	    t.add :email
+	      t.add :email
         t.add :phone_number
         t.add :authentication_token
-        #t.add :coworkers
-        #t.add :subcontractors
         t.add :company
-        t.add :url100
+
+        ##slated for deletion
         t.add :url200
+        ##
+        
+        t.add :url_thumb
+        t.add :url_small
   	end
 
     api_accessible :login, :extend => :user do |t|
