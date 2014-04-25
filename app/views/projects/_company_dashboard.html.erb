@@ -30,7 +30,7 @@
 				<% end %>
 			</div>
 		</div>
-		<% if project.checklist.upcoming_items.count > 0 %>
+		<% if project.checklist && project.checklist.upcoming_items.count > 0 %>
 			<div class="row">
 				<div class="dashboard-label col-xs-10">Upcoming:</div>
 				<div class="col-xs-10">
