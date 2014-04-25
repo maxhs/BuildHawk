@@ -57,7 +57,19 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
+	def url_small
+		if image_file_name
+			image.url(:small)
+		end
+	end
+
 	def url100
+		if image_file_name
+			image.url(:thumb)
+		end
+	end
+
+	def url_thumb
 		if image_file_name
 			image.url(:thumb)
 		end
@@ -114,6 +126,8 @@ class Photo < ActiveRecord::Base
 		t.add :original
 		t.add :url200
 		t.add :url100
+		t.add :url_small
+		t.add :url_thumb
 		t.add :image_file_size
 		t.add :image_content_type
 		t.add :source
