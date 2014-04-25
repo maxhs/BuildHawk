@@ -20,7 +20,7 @@
 				<th><h5>Delete</h5></th>
 			</thead>
 			<tbody>
-				<%= render :partial => "uber_admin/checklist_row", collection: @checklists, :as => :c, cache: false %>
+				<% render :partial => "uber_admin/checklist_row", collection: @checklists, :as => :c, cache: false %>
 			</tbody>
 		<% else %>
 			<tr><td>You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></tr>
