@@ -14,7 +14,6 @@ class UberAdminController < ApplicationController
 	end
 
 	def core_checklists
-		@checklist = Checklist.new
 		names = Checklist.where(:core => true).map(&:name).uniq
 		@checklists = [] 
 		names.each do |n|
