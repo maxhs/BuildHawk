@@ -14,7 +14,7 @@ class UberAdminController < ApplicationController
 	end
 
 	def core_checklists
-		names = Checklist.where(:core => true).map(&:name).compact
+		names = Checklist.where("core = ? and company_id IS NULL",true).map(&:name).compact
 		@checklists = [] 
 		names.each do |n|
 			@checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first
