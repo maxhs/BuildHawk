@@ -19,7 +19,7 @@ class UberAdminController < ApplicationController
 		names.each do |n|
 			@checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first
 		end
-		@checklists = @checklists.sort_by(&:name)
+		@checklists = @checklists.sort_by(&:name).compact
 		if request.xhr?
 			respond_to do |format|
 				format.js
