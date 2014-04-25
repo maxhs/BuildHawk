@@ -43,7 +43,7 @@ class Checklist < ActiveRecord::Base
                 #    Resque.enqueue(DuplicateChecklist,list,company_id)
                 #elsif Rails.env.development?
                     puts "should be creating another checklist in development"
-                    new_list = Checklist.create :checklist => self.dup(:include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}})
+                    new_list = Checklist.create self.dup(:include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}})
                 #end
             end
         end
