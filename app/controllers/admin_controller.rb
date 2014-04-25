@@ -269,7 +269,7 @@ class AdminController < ApplicationController
 		names = Checklist.where(:core => true).map(&:name).compact
 		@uber_checklists = [] 
 		names.each do |n|
-			@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first
+			@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first if n && n.length > 0
 		end
 	end
 
