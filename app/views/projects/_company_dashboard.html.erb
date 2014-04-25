@@ -18,7 +18,7 @@
 			<div class="dashboard-label col-xs-2">Progress:</div>
 			<div class="col-xs-10">
 				<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
-				<%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
+				<% if project.checklist %><%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %><% end %>
 				<script type="text/javascript">
 					$(function(){
 						$('#progress-link-<%=project.id%>').progressbar({
