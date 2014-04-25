@@ -24,26 +24,26 @@ class Report < ActiveRecord::Base
 
     #websolr
     searchable do
-      text    :body
-      text    :weather
-      text    :created_date
-      integer :project_id
-      text    :users do
-        users.map(&:full_name)
-      end
-      time    :created_at
+        text    :body
+        text    :weather
+        text    :created_date
+        integer :project_id
+        text    :users do
+            users.map(&:full_name)
+        end
+        time    :created_at
     end
 
     def possible_types
-      ["Daily","Safety","Weekly"]
+        ["Daily","Safety","Weekly"]
     end
 
     def date_for_sort
-      if created_date && created_date.length > 0
-        Date.strptime(created_date,"%m/%d/%Y")
-      else 
-        created_at
-      end
+        if created_date && created_date.length > 0
+            Date.strptime(created_date,"%m/%d/%Y")
+        else 
+            created_at
+        end
     end
 
     def to_param

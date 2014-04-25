@@ -41,6 +41,7 @@ class Category < ActiveRecord::Base
   	acts_as_api
 
   	api_accessible :projects do |t|
+      t.add :id
   		t.add :name
   		t.add :milestone_date
   		t.add :completed_date

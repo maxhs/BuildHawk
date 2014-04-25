@@ -124,8 +124,10 @@ class Photo < ActiveRecord::Base
 		t.add :id
 		t.add :url_large
 		t.add :original
+		##slated for removal
 		t.add :url200
 		t.add :url100
+		###
 		t.add :url_small
 		t.add :url_thumb
 		t.add :image_file_size
