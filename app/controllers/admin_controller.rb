@@ -266,7 +266,7 @@ class AdminController < ApplicationController
 	protected
 
 	def uber_checklists
-		names = Checklist.where(:core => true).map(&:name).uniq
+		names = Checklist.where(:core => true).map(&:name).compact
 		@uber_checklists = [] 
 		names.each do |n|
 			@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first
