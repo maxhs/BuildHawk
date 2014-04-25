@@ -10,6 +10,7 @@ class PunchlistsController < ApplicationController
 	end
 
 	def export
+		@project = Project.find params[:project_id]
 		item_array = []
 		params[:items].split(',').each do |i|
 			puts "i: #{i}"
