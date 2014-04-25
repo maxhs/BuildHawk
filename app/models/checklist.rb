@@ -38,13 +38,13 @@ class Checklist < ActiveRecord::Base
             lists = Checklist.where(:name => name, :core => true, :project_id => nil)
             if lists.count < 5
                 puts "should create more core checklist templates"
-                if Rails.env.production?
-                    puts "should be creating another checklist in production"
-                    Resque.enqueue(DuplicateChecklist,list,company_id)
-                elsif Rails.env.development?
+                #if Rails.env.production?
+                #    puts "should be creating another checklist in production"
+                #    Resque.enqueue(DuplicateChecklist,list,company_id)
+                #elsif Rails.env.development?
                     puts "should be creating another checklist in development"
                     new_list = Checklist.create :checklist => self.dup(:include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}})
-                end
+                #end
             end
         end
     end

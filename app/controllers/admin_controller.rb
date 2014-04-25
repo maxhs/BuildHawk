@@ -185,8 +185,7 @@ class AdminController < ApplicationController
 	      		puts "found a checklist. should be doing core fifo now for company id: #{@user.company.id}"
 	      		@checklist.company_id = @user.company.id
 	      		@checklist.save!
-	      		@checklist.core_fifo  
-	      		
+	      		@checklist.core_fifo
 	      	end
 	    # end
 	end
