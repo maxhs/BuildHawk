@@ -18,17 +18,17 @@ class Checklist < ActiveRecord::Base
     def uber_fifo
         if core && company_id.nil?
             lists = Checklist.where(:name => name, :core => true, :project_id => nil, :company_id => nil)
-            while lists.count < 5
-                puts "should create more uber checklist templates"
-                if Rails.env.production?
-                    puts "should be creating another uber checklist in production"
-                    #Resque.enqueue(DuplicateChecklist,self,nil)
-                elsif Rails.env.development?
-                    @new_list = self.dup :include => {:categories => {:subcategories => :checklist_items}}
-                    puts "should be creating another uber checklist in development: #{@new_list.name}"
-                    @new_list.save
-                end
-            end
+            # while lists.count < 5
+            #     puts "should create more uber checklist templates"
+            #     if Rails.env.production?
+            #         puts "should be creating another uber checklist in production"
+            #         #Resque.enqueue(DuplicateChecklist,self,nil)
+            #     elsif Rails.env.development?
+            #         @new_list = self.dup :include => {:categories => {:subcategories => :checklist_items}}
+            #         puts "should be creating another uber checklist in development: #{@new_list.name}"
+            #         @new_list.save
+            #     end
+            # end
         end
     end    
 
@@ -37,20 +37,20 @@ class Checklist < ActiveRecord::Base
             puts "in core fifo. company id: #{company_id}"
             lists = Checklist.where(:name => name, :core => true, :project_id => nil, :company_id => company_id)
             list_count = lists.count
-            while list_count < 5
-                if Rails.env.production?
-                    puts "should be creating another checklist in production"
-                    #Resque.enqueue(DuplicateChecklist,list,company_id)
+            # while list_count < 5
+            #     if Rails.env.production?
+            #         puts "should be creating another checklist in production"
+            #         #Resque.enqueue(DuplicateChecklist,list,company_id)
 
-                elsif Rails.env.development?
-                    new_list = self.dup(:include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}})
-                    new_list.company_id = company_id
-                    new_list.save
-                    puts "created a new list in development: #{new_list.id} & company: #{new_list.company_id}"
-                end
-                puts "lists count: #{lists.count}"
-                list_count += 1
-            end
+            #     elsif Rails.env.development?
+            #         new_list = self.dup(:include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}})
+            #         new_list.company_id = company_id
+            #         new_list.save
+            #         puts "created a new list in development: #{new_list.id} & company: #{new_list.company_id}"
+            #     end
+            #     puts "lists count: #{lists.count}"
+            #     list_count += 1
+            # end
         end
     end
 
