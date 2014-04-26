@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
 	def create
 		checklist = Checklist.where(:name => params[:project][:checklist]).first
 
-		if Rails.env.production? && item_count > 100
+		if Rails.env.production? && checklist.item_count > 100
 
 			if params[:project][:checklist].present?
 				checklist = Checklist.find_by(name: params[:project][:checklist])
