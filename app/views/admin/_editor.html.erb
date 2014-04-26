@@ -1,4 +1,4 @@
-<% if @checklist && @checklist.categories.count > 0 %>
+<% if @checklist %>
 	<div class="admin-checklist-table border-box">
 
 		<div id="checklist-items">
@@ -11,8 +11,6 @@
 			</ul>
 		</div>
 	</div>
-<% else %>
-	<div style="text-align:center;font-style:italic"><h3 style="color:#aaa; font-weight:200;padding-top:100px;">No checklist items</h3></div>	
 <% end %>
 
 <script>

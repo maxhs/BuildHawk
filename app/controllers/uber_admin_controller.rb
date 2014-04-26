@@ -14,12 +14,13 @@ class UberAdminController < ApplicationController
 	end
 
 	def core_checklists
-		names = Checklist.where("core = ? and company_id IS NULL",true).map(&:name).compact
+		names = Checklist.where("core = ? and company_id IS NULL",true).map(&:name).compact.uniq
+		puts "core names: #{names}"
 		@checklists = [] 
 		names.each do |n|
 			@checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first
 		end
-		@checklists = @checklists.sort_by(&:name).compact
+		@checklists = @checklists.sort_by(&:name).compact.uniq
 		if request.xhr?
 			respond_to do |format|
 				format.js

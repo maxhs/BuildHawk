@@ -13,11 +13,9 @@ class PunchlistsController < ApplicationController
 		@project = Project.find params[:project_id]
 		item_array = []
 		params[:items].split(',').each do |i|
-			puts "i: #{i}"
 			item_array << PunchlistItem.find(i)
 		end
 		params[:names].each do |r|
-			puts "r: #{r}"
 			recipient = User.where(:full_name => r).first
 			recipient = Sub.where(:name => r).first unless recipient
 			PunchlistMailer.export(recipient.email, item_array, @project).deliver

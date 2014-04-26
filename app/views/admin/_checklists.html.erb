@@ -3,11 +3,12 @@
 		<th><h5>Name</h5></th>
 		<th><h5># Phases</h5></th>
 		<th><h5># Categories</h5></th>
-		<th><h5># items</h5></th>
+		<th><h5># Items</h5></th>
+		<th><h5># Templates</h5></th>
 		<th><h5>Edit</h5></th>
 		<th><h5>Delete</h5></th>
 		<% if @checklists && @checklists.count > 0 %>
-			<%= render :partial => "admin/checklist_row", collection: @checklists, :as => :c, cache: true %>
+			<%= render :partial => "admin/checklist_row", collection: @checklists, :as => :c, locals:{:company => @company}, cache: true %>
 	</table>
 		<% else %>
 	</table>

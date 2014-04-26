@@ -159,7 +159,7 @@ class AdminController < ApplicationController
 
 	def checklists
 		uber_checklists
-		@checklists = current_user.company.checklists.flatten
+		@checklists = @user.company.checklists.flatten
 	end
 
 	def editor
@@ -180,11 +180,15 @@ class AdminController < ApplicationController
 		# 		redirect_to checklists_admin_index_path
 		# 	end
 		# elsif Rails.env.development?
-	      	@checklist = Checklist.where("core = ? and name = ? and company_id IS NULL and project_id IS NULL",true,params[:name]).first
-	      	if @checklist
-	      		puts "found a checklist. should be doing core fifo now for company id: #{@user.company.id}"
+	      	checklists = Checklist.where("core = ? and name = ? and company_id IS NULL and project_id IS NULL",true,params[:name])
+	      	if checklists && checklists.count > 0
+	      		
+	      		@checklist = checklists.first
+	      		puts "Found core checklist, #{checklists.count-1} remaining. Checklist id: #{@checklist.id}"
+	      		@checklist.uber_fifo
 	      		@checklist.company_id = @user.company.id
 	      		@checklist.save!
+	      		puts "found a checklist. should be doing core fifo now for company id: #{@user.company.id}"
 	      		@checklist.core_fifo
 	      	end
 	    # end
@@ -265,7 +269,7 @@ class AdminController < ApplicationController
 	protected
 
 	def uber_checklists
-		names = Checklist.where("core = ? and company_id IS NULL",true).map(&:name).compact
+		names = Checklist.where("core = ? and company_id IS NULL",true).map(&:name).compact.uniq
 		@uber_checklists = [] 
 		names.each do |n|
 			@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first if n && n.length > 0
