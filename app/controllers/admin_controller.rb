@@ -168,18 +168,18 @@ class AdminController < ApplicationController
 	end
 
 	def create_template
-		# if Rails.env.production?
-		# 	Resque.enqueue(CreateTemplate,params[:company_id])
-		# 	@response_message = "Creating checklist template. This may take a few minutes..."
-		# 	if request.xhr?
-		# 		respond_to do |format|
-		# 			format.js {render :template => "admin/background_template"}
-		# 		end
-		# 	else
-		# 		flash[:notice] = @response_message
-		# 		redirect_to checklists_admin_index_path
-		# 	end
-		# elsif Rails.env.development?
+		if Rails.env.production?
+			Resque.enqueue(CreateTemplate,params[:company_id])
+			@response_message = "Creating checklist template. This may take a few minutes..."
+			if request.xhr?
+				respond_to do |format|
+					format.js {render :template => "admin/background_template"}
+				end
+			else
+				flash[:notice] = @response_message
+				redirect_to checklists_admin_index_path
+			end
+		elsif Rails.env.development?
 	      	checklists = Checklist.where("core = ? and name = ? and company_id IS NULL and project_id IS NULL",true,params[:name])
 	      	if checklists && checklists.count > 0
 	      		
@@ -191,7 +191,7 @@ class AdminController < ApplicationController
 	      		puts "found a checklist. should be doing core fifo now for company id: #{@user.company.id}"
 	      		@checklist.core_fifo
 	      	end
-	    # end
+	    end
 	end
 
 	def remove_template

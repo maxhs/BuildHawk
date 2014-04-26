@@ -22,7 +22,7 @@ class Checklist < ActiveRecord::Base
                 puts "should create more uber checklist templates"
                 if Rails.env.production?
                     puts "should be creating another uber checklist in production"
-                    Resque.enqueue(DuplicateChecklist,self,nil)
+                    #Resque.enqueue(DuplicateChecklist,self,nil)
                 elsif Rails.env.development?
                     @new_list = self.dup :include => {:categories => {:subcategories => :checklist_items}}
                     puts "should be creating another uber checklist in development: #{@new_list.name}"
@@ -40,7 +40,7 @@ class Checklist < ActiveRecord::Base
             while list_count < 5
                 if Rails.env.production?
                     puts "should be creating another checklist in production"
-                    Resque.enqueue(DuplicateChecklist,list,company_id)
+                    #Resque.enqueue(DuplicateChecklist,list,company_id)
 
                 elsif Rails.env.development?
                     new_list = self.dup(:include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}})
