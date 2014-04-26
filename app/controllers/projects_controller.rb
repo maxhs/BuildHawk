@@ -15,10 +15,12 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		if Rails.env.production?
-			@checklist = Checklist.new
+		checklist = Checklist.where(:name => params[:project][:checklist]).first
+
+		if Rails.env.production? && item_count > 100
+
 			if params[:project][:checklist].present?
-				list = Checklist.find_by(name: params[:project][:checklist])
+				checklist = Checklist.find_by(name: params[:project][:checklist])
 				params[:project].delete(:checklist)
 				Resque.enqueue(CreateProject,params[:project],list.id)
 			else 
@@ -35,8 +37,9 @@ class ProjectsController < ApplicationController
 				flash[:notice] = @response_message
 				redirect_to admin_index_path
 			end
-		elsif Rails.env.development?
-	      	checklist = Checklist.find_by(name: params[:project][:checklist])
+
+		else
+	      	
 	      	@new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}]#, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
 	      	params[:project].delete(:checklist)
 	      	project = current_user.company.projects.create params[:project]
