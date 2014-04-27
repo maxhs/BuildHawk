@@ -39,6 +39,7 @@ Buildhawk::Application.routes.draw do
       post :create_sub
       get :reports
       get :checklists
+      post :create_blank_template
       post :create_template
       get :new_project
       get :project_groups

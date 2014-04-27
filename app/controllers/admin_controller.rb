@@ -167,6 +167,22 @@ class AdminController < ApplicationController
 		@project = @checklist.project
 	end
 
+	def create_blank_template
+		@checklist = Checklist.create :company_id => @user.company.id, :name => params[:name], :core => true
+		category = @checklist.categories.create :name => "Phase"
+		subcategory = category.subcategories.create :name => "Category"
+		subcategory.checklist_items.create :body => "First Item"
+		if request.xhr?
+			respond_to do |format|
+				format.js { render template: "admin/create_template"}
+			end
+		else
+			uber_checklists
+			@checklists = @user.company.checklists.flatten
+			render :checklists
+		end
+	end
+
 	def create_template
 		if Rails.env.production?
 			Resque.enqueue(CreateTemplate,params[:company_id])
@@ -181,8 +197,7 @@ class AdminController < ApplicationController
 			end
 		elsif Rails.env.development?
 	      	checklists = Checklist.where("core = ? and name = ? and company_id IS NULL and project_id IS NULL",true,params[:name])
-	      	if checklists && checklists.count > 0
-	      		
+	      	if checklists && checklists.count > 0	
 	      		@checklist = checklists.first
 	      		puts "Found core checklist, #{checklists.count-1} remaining. Checklist id: #{@checklist.id}"
 	      		@checklist.uber_fifo

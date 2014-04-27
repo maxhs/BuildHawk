@@ -27,6 +27,14 @@
 			<th><h5>Create Template</h5></th>
 		</thead>
 		<tbody>
+			<tr>
+				<td><h5>Blank Template</h5></td>
+				<td>This is a blank checklist template</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td><%= link_to "Use", create_blank_template_admin_index_path(:company_id => current_user.company.id, :name => "Blank Template"), :class=>"simple-btn remote", :method => :post, :remote => true %></td>
+			</tr>
 			<%= render :partial => "admin/core_checklist_row", collection: @uber_checklists, :as => :c, cache: true %>
 		</tbody>
 	</table>
