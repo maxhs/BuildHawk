@@ -4,7 +4,6 @@ if ($('.new_category').length){
 	});
 } else {
 	var newDiv = $('<%= j render partial:"categories/new" %>').css('display','none');
-	$('#categories').before(newDiv);
+	$('#new-phase').after(newDiv);
 	newDiv.fadeIn(200);
-	
 }

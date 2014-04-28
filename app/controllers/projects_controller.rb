@@ -354,6 +354,13 @@ class ProjectsController < ApplicationController
 		@subs = @company.subs
 	end
 
+	def find_project
+		if params[:id].present?
+			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
+		end
+		find_projects
+	end
+
 	def find_projects
 		if @user.company_admin? || @user.admin?
 			@projects = @company.projects
@@ -361,12 +368,6 @@ class ProjectsController < ApplicationController
 		else
 			@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
 			@archived_projects = @user.project_users.where(:archived => true).map(&:project).compact.uniq
-		end
-	end
-
-	def find_project
-		if params[:id].present?
-			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
 		end
 	end
 

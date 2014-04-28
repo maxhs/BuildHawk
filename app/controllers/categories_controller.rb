@@ -19,11 +19,13 @@ class CategoriesController < ApplicationController
 	end
 
 	def show
-		@category = Category.find params[:id]
 		if params[:project_id]
 			@project = Project.find params[:project_id]
 			@projects = @project.company.projects 
 		end
+
+		@category = Category.find params[:id]
+		
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -31,6 +33,10 @@ class CategoriesController < ApplicationController
 		else
 			render :show
 		end
+
+		rescue ActiveRecord::RecordNotFound
+		redirect_to projects_path
+		flash[:notice] = "Sorry, but that phase has been removed"
 	end
 
 	def edit

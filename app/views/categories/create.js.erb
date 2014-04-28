@@ -1,6 +1,10 @@
-<% if @category.checklist.project %>
-	$('#new-phase').after('<%= j render partial:"projects/phase", locals:{:c => @category} %>');
-<% else %>
-	$('#new-phase').after('<%= j render partial:"admin/phase", locals:{:c => @category} %>');
-<% end %>
+$('.new_category').fadeOut(170,function(){
+	$(this).remove();
+	<% if @category.checklist.project %>
+		$('#new-phase').after('<%= j render partial:"projects/phase", locals:{:c => @category} %>');
+	<% else %>
+		$('#new-phase').after('<%= j render partial:"admin/phase", locals:{:c => @category} %>');
+	<% end %>
+});
+
 $('#category_name').val('');
