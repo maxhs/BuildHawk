@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :find_user
 	before_filter :find_project
 
 	def new
@@ -16,7 +17,7 @@ class ProjectsController < ApplicationController
 
 	def create
 		checklist = Checklist.where(:name => params[:project][:checklist]).first
-
+		params[:project].delete(:checklist)
 		if Rails.env.production? && checklist.item_count > 100
 
 			if params[:project][:checklist].present?
@@ -39,12 +40,12 @@ class ProjectsController < ApplicationController
 			end
 
 		else
-	      	
-	      	@new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}]#, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
-	      	params[:project].delete(:checklist)
-	      	project = current_user.company.projects.create params[:project]
-	      	project.checklist = checklist
-	      	project.save
+	      	project = @company.projects.create params[:project]
+	      	@new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+	      	@new_checklist.project_id = project.id
+	      	@new_checklist.company_id = @company.id
+	      	@new_checklist.save
+	      	puts "checklist id #{checklist.id} and new checklist: #{@new_checklist.id}"
 			redirect_to projects_path
 	    end
 	end
@@ -344,16 +345,24 @@ class ProjectsController < ApplicationController
 
 	private
 
+	def find_user
+		if params[:user_id].present?
+			@user = User.where(:id => params[:user_id]).first
+		else
+			@user = current_user
+		end
+		@company = @user.company
+	end
+
 	def find_projects
-		@projects = current_user.project_users.where(:archived => false).map(&:project).compact
-		@archived_projects = current_user.project_users.where(:archived => true).map(&:project).compact
+		@projects = @user.project_users.where(:archived => false).map(&:project).compact
+		@archived_projects = @user.project_users.where(:archived => true).map(&:project).compact
 	end
 
 	def find_project
 		if params[:id].present?
 			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
 		end
-		@company = current_user.company
 		@projects = @company.projects
 		@users = @company.users
 		@subs = @company.subs

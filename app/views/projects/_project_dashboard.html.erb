@@ -26,7 +26,6 @@
 				</div>
 
 				<% @recently_completed.each do |item| %>
-
 					<% class_name = item.class.name %>
 					<% if class_name == "ChecklistItem" %>
 						<div class="row">	
@@ -39,7 +38,6 @@
 							<div class="col-xs-2"><%= link_to 'Report', reports_path(:project_id => @project.id), remote: true %></div>
 							<div class="col-xs-2">(<%= parse_date item.updated_at %>)</div>
 							<div class="col-xs-8"><%= link_to item.body, report_path(item), :class => "recently-completed", :remote => true %></div>
-							
 						</div>
 					<% elsif class_name == "PunchlistItem" %>
 						<div class="row">	
@@ -54,7 +52,6 @@
 							<div class="col-xs-8"><%= link_to item.image_file_name, item.image.url(:large), :class => "shadow-photo", :rel => "shadowbox[Mixed]" %></div>
 						</div>
 					<% end %>
-
 				<% end %>
 			</div>
 		<% else %>
