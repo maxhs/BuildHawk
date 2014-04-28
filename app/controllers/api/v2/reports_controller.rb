@@ -40,7 +40,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
     def show
     	project = Project.find params[:id]
         if project.reports 
-        	reports = project.reports.sort_by(&:date_for_sort).reverse
+        	reports = project.reports.sort_by(&:date_for_sort)#.reverse
         	respond_to do |format|
             	format.json { render_for_api :report, :json => reports, :root => :reports}
           	end
