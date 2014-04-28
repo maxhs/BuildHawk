@@ -32,7 +32,7 @@
 			<% end %>
 			<div class="row" style="padding:10px 0;">
 				<div class="col-xs-3"><h4>Checklist:</h4></div>
-				<div class="col-xs-9" style="position:relative;top:7px;"><%= f.select :checklist, options_for_select(current_user.company.checklists.map(&:name)) %></div>
+				<div class="col-xs-9" style="position:relative;top:7px;"><%= f.select :checklist, options_for_select(@checklists) %></div>
 			</div>
 
 	        <div class="row personnel">

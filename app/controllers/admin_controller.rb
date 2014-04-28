@@ -6,7 +6,7 @@ class AdminController < ApplicationController
 
 	def index
 		uber_checklists
-		@checklists = current_user.company.checklists
+		@checklists = @user.company.checklists.where(:core => true)
 	end
 
 	def show
@@ -159,7 +159,7 @@ class AdminController < ApplicationController
 
 	def checklists
 		uber_checklists
-		@checklists = @user.company.checklists.flatten
+		@checklists = @user.company.checklists.where(:core => true).flatten
 	end
 
 	def editor
@@ -223,6 +223,7 @@ class AdminController < ApplicationController
 			@project.project_users.build
 			@users = current_user.company.users
 			@subs = current_user.company.subs
+			@checklists = @user.company.checklists.where(:core=>true).map(&:name)
 			if request.xhr?
 				respond_to do |format|
 					format.js

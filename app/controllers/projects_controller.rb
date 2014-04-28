@@ -41,9 +41,10 @@ class ProjectsController < ApplicationController
 
 		else
 	      	project = @company.projects.create params[:project]
-	      	@new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+	      	@new_checklist = checklist.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
 	      	@new_checklist.project_id = project.id
-	      	@new_checklist.company_id = @company.id
+	      	@new_checklist.core = false
+	      	@new_checklist.company_id = @user.company.id
 	      	@new_checklist.save
 	      	puts "checklist id #{checklist.id} and new checklist: #{@new_checklist.id}"
 			redirect_to projects_path
@@ -54,10 +55,6 @@ class ProjectsController < ApplicationController
 		if params[:company_id]
 			@company = Company.find params[:company_id]
 			@projects = @company.projects
-		elsif current_user.admin? || current_user.company_admin?
-			@company = current_user.company
-			@projects = @company.projects
-			@archived_projects = current_user.project_users.where(:archived => true).map(&:project)
 		else
 			find_projects
 		end
@@ -82,6 +79,7 @@ class ProjectsController < ApplicationController
 			@upcoming_items = items.select{|i| i.critical_date if i.critical_date && i.critical_date > current_time}.sort_by(&:critical_date).last(5)
 			@recent_photos = @project.photos.last(5).sort_by(&:created_at).reverse
 		end
+
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -352,20 +350,24 @@ class ProjectsController < ApplicationController
 			@user = current_user
 		end
 		@company = @user.company
+		@users = @company.users
+		@subs = @company.subs
 	end
 
 	def find_projects
-		@projects = @user.project_users.where(:archived => false).map(&:project).compact
-		@archived_projects = @user.project_users.where(:archived => true).map(&:project).compact
+		if @user.company_admin? || @user.admin?
+			@projects = @company.projects
+			@archived_projects = current_user.project_users.where(:archived => true).map(&:project)
+		else
+			@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
+			@archived_projects = @user.project_users.where(:archived => true).map(&:project).compact.uniq
+		end
 	end
 
 	def find_project
 		if params[:id].present?
 			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
 		end
-		@projects = @company.projects
-		@users = @company.users
-		@subs = @company.subs
 	end
 
 end

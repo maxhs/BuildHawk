@@ -18,7 +18,7 @@ class UberAdminController < ApplicationController
 		puts "core names: #{names}"
 		@checklists = [] 
 		names.each do |n|
-			@checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first
+			@checklists << Checklist.where("core = ? and name = ? and project_id IS NULL and company_id IS NULL",true,n).first
 		end
 		@checklists = @checklists.sort_by(&:name).compact.uniq
 		if request.xhr?
