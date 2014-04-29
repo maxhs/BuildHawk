@@ -12,7 +12,11 @@
 		<table class="table table-bordered table-responsive" id="worklist-table">
 			<thead>
 				<tr>
-					<th><button class="export" id="export-worklist-items">Export</button></th>
+					<th>
+						<% if @items && @items.count > 0 %>
+							<button class="export" id="export-worklist-items">Export</button>
+						<% end %>
+					</th>
 					<th>Photo</th>
 					<th>Name</th>
 					<th>Assignee</th>
@@ -62,7 +66,7 @@
 						</tr>
 					<% end %>
 				<% else %>
-					<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;font-style:italic;font-weight:100;">No Worklist Items</h4></td></tr>
+					<tr><td colspan="6" class="loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;">No Worklist Items</h4></td></tr>
 				<% end %>
 			</tbody>
 		</table>

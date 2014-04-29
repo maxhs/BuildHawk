@@ -52,6 +52,7 @@ class Subcategory < ActiveRecord::Base
   		t.add :category_id
   		t.add :milestone_date
   		t.add :completed_date
+        t.add :order_index
   	end
 
     api_accessible :checklist do |t|
@@ -60,5 +61,6 @@ class Subcategory < ActiveRecord::Base
         t.add :completed_date
         t.add :milestone_date
         t.add :progress_percentage
+        t.add :order_index
     end
 end

@@ -48,6 +48,7 @@ class Category < ActiveRecord::Base
       t.add :item_count
       t.add :completed_count
       t.add :progress_count
+      t.add :order_index
   	end
 
     api_accessible :details, :extend => :projects do |t|
@@ -60,6 +61,7 @@ class Category < ActiveRecord::Base
       t.add :completed_date
       t.add :milestone_date
       t.add :progress_percentage
+      t.add :order_index
     end
 
     api_accessible :dashboard do |t|
@@ -67,5 +69,6 @@ class Category < ActiveRecord::Base
       t.add :item_count
       t.add :completed_count
       t.add :progress_count
+      t.add :order_index
     end
 end
