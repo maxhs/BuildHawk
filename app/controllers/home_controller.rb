@@ -18,4 +18,8 @@ class HomeController < ApplicationController
 			render :about
 		end
 	end
+
+	def privacy
+		
+	end
 end

@@ -12,6 +12,7 @@ Buildhawk::Application.routes.draw do
     get '/register', :to => "registrations#new"
   end
 
+  get 'privacy', :to => "home#privacy", :as => :privacy
   get 'about', :to => "home#about", :as => :about
   post "/projects/search", :to => "projects#search"
   post "/projects/:id", :to => "projects#update"
@@ -25,6 +26,7 @@ Buildhawk::Application.routes.draw do
   resources :home do 
     collection do
       get :about
+      get :privacy
     end
   end
   resources :admin do
