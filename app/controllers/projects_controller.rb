@@ -177,8 +177,8 @@ class ProjectsController < ApplicationController
 	end  
 
 	def worklist
-		@punchlist = @project.punchlists.first
-		@items = @punchlist.punchlist_items if @punchlist
+		@punchlist = @project.punchlists.first_or_create
+		@items = @punchlist.punchlist_items
 	end
 
 	def export_checklist
