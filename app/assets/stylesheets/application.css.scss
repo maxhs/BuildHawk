@@ -429,7 +429,7 @@ body {
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
-	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+	//filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 	position: fixed;
 	left: -64px;
 	padding: 3px 40px 3px;
@@ -447,6 +447,7 @@ body {
 	-moz-transition: all 0.3s;
 	-webkit-transition: all 0.3s;
 	z-index:3;
+	outline:0;
 }
 
 #projects-tab.open {

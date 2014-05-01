@@ -4,9 +4,12 @@ if (!$('.nav-dashboard').length){
 	var nav = $('<%= j render partial: "projects/project_nav" %>');
 	$('#logo').after(nav);
 	nav.fadeIn(300);
+
 }
 $('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
-	$(this).fadeIn(170);
+	$(this).fadeIn(170,function(){
+		closeMenu();
+	});
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });
