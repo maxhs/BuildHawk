@@ -55,7 +55,7 @@ class Checklist < ActiveRecord::Base
     end
 
     def duplicate
-        self.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+        self.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
     end
 
     def items
