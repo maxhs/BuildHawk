@@ -39,6 +39,20 @@
 			border-color:transparent;
 		}
 	}
+
+	#internal-nav {
+		display:table;
+		height:51px;
+
+		li {
+			display:table-cell;
+			vertical-align:middle;
+
+			a {
+				color:#fff;
+			}
+		}
+	}
 }
 
 .bt-menu.bt-menu-open {

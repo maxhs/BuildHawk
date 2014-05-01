@@ -80,6 +80,14 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 <div id="projects-tab">Projects</div>
 <nav id="bt-menu" class="bt-menu">
+	<% if current_user.admin? || current_user.company_admin? %>
+		<ul id="internal-nav">
+			<li><%= link_to "Admin", admin_path, remote: true %></li>
+			<% if current_user.uber_admin? %>
+				<li><%= link_to "Uber Admin", uber_admin_path, remote: true %></li>
+			<% end %>
+		</ul>
+	<% end %>
 	<ul class="nav navbar-nav pull-right" id="credentials">
 		<% if user_signed_in? %>
 			<li>
