@@ -1,6 +1,6 @@
 $('a').removeClass('current-page');
 $('#nav-admin a').addClass('current-page');
-
+$('#alert').fadeOut(400);
 var nav = $('<%= j render partial: "admin/top_nav" %>');
 $('#navigation').fadeOut(170,function(){
 	$(this).html(nav);

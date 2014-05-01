@@ -7,3 +7,10 @@ function sidebarSetup(){
 		}
 	});
 }
+
+function newProjectSetup(){
+	console.log('new project setup');
+	$('.new_project').submit(function(){
+		$('#alert').text("Creating your project. This may take a few moments.").fadeIn(500);
+	});
+}

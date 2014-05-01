@@ -55,15 +55,14 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 						<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
 						<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
 						<li style="position:absolute;right:0;"><%= link_to 'Beta Login', login_path %></li>
-					<% elsif user_signed_in? && params[:controller] == "projects" %>
-
-						<%= render partial: "layouts/internal_nav" %>
 					<% elsif user_signed_in? && params[:controller] == "admin" %>
 						<%= render partial: "admin/top_nav" %>
 					<% elsif user_signed_in? && params[:controller] == "uber_admin" %>
 						<%= render partial: "uber_admin/top_nav" %>
 					<% elsif user_signed_in? && @project %>
 						<%= render partial: "projects/project_nav" %>
+					<% elsif user_signed_in? %>
+						<%= render partial: "layouts/internal_nav" %>
 					<% end %>
 				</ul>
 			</div>
@@ -77,7 +76,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		<% else %>
 			<%= yield %>
 		<% end %>
-
+		<div id="push"></div>
 	</div>
 
 <% if user_signed_in? %>

@@ -1,5 +1,6 @@
 $('a').removeClass('current-page');
 $('#<%=@project.id%>-link, .nav-dashboard.admin a').addClass('current-page');
+$('#alert').fadeOut(400);
 var nav = $('<%= j render partial: "projects/project_nav" %>');
 $('#navigation').fadeOut(170,function(){
 	$(this).html(nav);

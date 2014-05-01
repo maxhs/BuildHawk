@@ -9,7 +9,6 @@ function datetimepickers(){
 }
 
 function coreChecklist(){
-	console.log('core template');
 	$('.company-template').on('click',function(){
 		$('#alert').text("Creating your template. This may take a few moments.").fadeIn(500);
 	});

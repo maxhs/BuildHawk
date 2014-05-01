@@ -24,7 +24,6 @@ class ProjectsController < ApplicationController
 	    @checklist.update_attributes :company_id => @company.id, :project_id => project.id, :core => false
 		puts "is it getting the new company id? #{@checklist.company.id} and project? #{@checklist.project_id}"
 		redirect_to projects_path
-	
 	end
 
 	def index
@@ -120,7 +119,11 @@ class ProjectsController < ApplicationController
 
 	def destroy
 		@project.update_attribute :company_id, nil
-        @project.background_destroy
+		if Rails.env.production?
+        	@project.background_destroy
+    	else 
+    		@project.destroy
+    	end
 		redirect_to projects_path
 	end
 
