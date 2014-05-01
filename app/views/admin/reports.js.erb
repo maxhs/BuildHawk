@@ -1,4 +1,4 @@
-$('.sidebarAdmin div a').removeClass('current-page');
+$('#navigation a').removeClass('current-page');
 $('#admin-reports-link').addClass('current-page');
 $('#main').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "reports", :locals => {:reports => @reports } %>');

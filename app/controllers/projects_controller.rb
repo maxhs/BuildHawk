@@ -21,8 +21,8 @@ class ProjectsController < ApplicationController
 		@checklist.save
 
 	    project = @company.projects.create params[:project]
-	    @checklist.update_attribute :company_id, @company.id
-		puts "is it getting the new company id? #{@checklist.company.id}"
+	    @checklist.update_attributes :company_id => @company.id, :project_id => project.id, :core => false
+		puts "is it getting the new company id? #{@checklist.company.id} and project? #{@checklist.project_id}"
 		redirect_to projects_path
 	
 	end

@@ -238,7 +238,7 @@ class AdminController < ApplicationController
 			@project.project_users.build
 			@users = current_user.company.users
 			@subs = current_user.company.subs
-			@checklists = @user.company.checklists.where(:core=>true).map(&:name)
+			@checklists = @user.company.checklists.where(:core => true)
 			if request.xhr?
 				respond_to do |format|
 					format.js

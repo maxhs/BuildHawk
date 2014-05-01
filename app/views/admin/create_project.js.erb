@@ -1,4 +1,4 @@
-$('.sidebarAdmin div a, #nav-admin a').removeClass('current-page');
+$('#navigation a, #nav-admin a').removeClass('current-page');
 $('#admin-checklists-link').addClass('current-page');
 $('#sidebar').fadeOut(170,function(){
 	$(this).replaceWith('<%= j render :partial => "projects/sidebar" %>');
