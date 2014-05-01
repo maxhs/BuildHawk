@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     validates_confirmation_of :password
     validates_presence_of :password, :if => :password_required?
 
-    after_create :welcome
+    #after_create :welcome
     after_commit :clean_phone_number
     after_commit :clean_name
     

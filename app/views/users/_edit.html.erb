@@ -29,10 +29,19 @@
 				Add a photo: <%= f.file_field :image %>
 			</td></tr>
 		<% end %>
-		<tr><td>
-			<div class="button-container">
-				<%= f.submit "Save", :class => "btn btn-success btn-md save" %>
-			</div>
-		</td></tr>
+		<tr>
+			<td>
+				<div class="button-container">
+					<%= f.submit "Save", :class => "btn btn-success btn-md save" %>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<li style="list-style:none;margin-top:20px;text-align:center;">
+					<%= link_to "Logout", logout_path, :class =>"simple-btn", :style=>"width:25%;" %>
+				</li>
+			</td>
+		</tr>
 	</table>
 <% end %>

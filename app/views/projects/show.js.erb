@@ -1,5 +1,10 @@
-$('.sidebarProjects > div a').removeClass('current-page');
-$('#<%=@project.id%>-link').addClass('current-page');
+$('a').removeClass('current-page');
+$('#<%=@project.id%>-link, .nav-dashboard.admin a').addClass('current-page');
+if (!$('.nav-dashboard').length){
+	var nav = $('<%= j render partial: "projects/project_nav" %>');
+	$('#logo').after(nav);
+	nav.fadeIn(300);
+}
 $('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
 	$(this).fadeIn(170);

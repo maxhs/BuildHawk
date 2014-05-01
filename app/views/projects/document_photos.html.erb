@@ -1,31 +1,26 @@
-<%= render :partial => "projects/sidebar" %>
+<p class="pull-left visible-xs" style="margin-right: 10px;">
+	<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+</p>
+<div id="pages">
 
-<%= render :partial => "projects/project_nav" %>
-
-	<p class="pull-left visible-xs" style="margin-right: 10px;">
-		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-	</p>
-	<div id="pages">
-
-		<div id="project-documents" class="border-box">
-			<div>
-				<h2 style="display:inline-block">Documents</h2>
-				
-				<ul id="filters">
-					<li><%= link_to "All", documents_project_path(@project), :id => "all-photos-nav", :remote => true %></li>
-					<li><%= link_to "Project Docs", document_photos_project_path(@project), :id => "document-photos-nav",:class => "current-page", :remote => true %></li>
-					<li><%= link_to "Checklist", checklist_photos_project_path(@project), :id => "checklist-photos-nav", :remote => true %></li>
-					<li><%= link_to "Worklist", worklist_photos_project_path(@project), :id => "worklist-photos-nav", :remote => true %></li>
-					<li><%= link_to "Reports", report_photos_project_path(@project), :id => "report-photos-nav", :remote => true %></li>
-				</ul>
+	<div id="project-documents" class="border-box">
+		<div>
+			<h2 style="display:inline-block">Documents</h2>
+			
+			<ul id="filters">
+				<li><%= link_to "All", documents_project_path(@project), :id => "all-photos-nav", :remote => true %></li>
+				<li><%= link_to "Project Docs", document_photos_project_path(@project), :id => "document-photos-nav",:class => "current-page", :remote => true %></li>
+				<li><%= link_to "Checklist", checklist_photos_project_path(@project), :id => "checklist-photos-nav", :remote => true %></li>
+				<li><%= link_to "Worklist", worklist_photos_project_path(@project), :id => "worklist-photos-nav", :remote => true %></li>
+				<li><%= link_to "Reports", report_photos_project_path(@project), :id => "report-photos-nav", :remote => true %></li>
+			</ul>
+		</div>
+		<div id="photo-section">
+			<div id="photo-table">
+				<%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: false %>
 			</div>
-			<div id="photo-section">
-				<div id="photo-table">
-					<%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: false %>
-				</div>
-				<div id="photo-focus">	
-					<%= render :partial => "photos/large_image" %>
-				</div>
+			<div id="photo-focus">	
+				<%= render :partial => "photos/large_image" %>
 			</div>
 		</div>
 	</div>

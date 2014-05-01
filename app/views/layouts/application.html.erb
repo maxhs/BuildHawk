@@ -5,6 +5,7 @@
 	<%= stylesheet_link_tag    "application", media: "all" %>
  	<%= javascript_include_tag "application" %>
 	<link rel="shortcut icon" href="<%=root_url %>/favicon.ico?v=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<%= csrf_meta_tags %>
 	<script type="text/javascript">
 	    Shadowbox.init({
@@ -21,7 +22,7 @@
 		
 		setupWindow();
 	</script>
-
+	
 	<script type="text/javascript">
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-43601553-1']);
@@ -46,49 +47,50 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		<div class="navbar navbar-fixed-top" id="top-nav">
 			<div class="container">
 				<ul class="nav navbar-nav">
-					<li><a class="navbar-brand" href="/"><%= image_tag('logo.png') %></a></li>
+					<li id="logo">
+						<a class="navbar-brand" href="/"><%= image_tag('logo.png') %></a>
+					</li>
+					
 					<% if user_signed_in? %>
-						<li class="nav-projects" id="nav-projects"><%= link_to "Projects", projects_path, :class=>"current-page", :remote => true %></li>
-						<% if current_user.admin || current_user.company_admin %>
-							<li class="nav-admin" id="nav-admin"><%= link_to "Admin", admin_index_path, remote: true %></li> 
-						<% end %>
-						<% if current_user.uber_admin %>
-							<li class="nav-uber-admin" id="nav-uber-admin"><%= link_to "Uber Admin", uber_admin_index_path, :remote => true %></li> 
+						<% if @project %>
+							<%= render partial: "projects/project_nav" %>
 						<% end %>
 					<% end %>
+
 					<% if current_page?(root_url) %>
 						<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
 						<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
 						<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
 					<% end %>
 				</ul>
-				<ul class="nav navbar-nav pull-right" id="credentials">
-					<% if user_signed_in? %>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><%=current_user.full_name%></span> <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><%= link_to "My Settings", edit_user_path(current_user), :id => "settings-link", :remote => true %></li>
-								<li><%= link_to "Logout", logout_path %></li>
-							</ul>
-						</li>
-					<% else %>
-						<li><%= link_to "Beta Login", login_path %>
-					<% end %>
-				</ul>
 			</div>
 		</div>
-	<% if user_signed_in? %>
-		<div id="pagescontainer" class="container">
+		
+		<% if user_signed_in? %>
+			<div id="pagescontainer">
+				<%= yield %>
+			</div>
+				
+		<% else %>
 			<%= yield %>
-		</div>
-	</div>
-			
-	<% else %>
-		<%= yield %>
-	<% end %>
+		<% end %>
 
-	<div id="push"></div>
-</div>
+		<div id="push"></div>
+	</div>
+
+<div id="projects-tab">Projects</div>
+<nav id="bt-menu" class="bt-menu">
+	<ul class="nav navbar-nav pull-right" id="credentials">
+		<% if user_signed_in? %>
+			<li>
+				<%= link_to current_user.full_name, edit_user_path(current_user), :id => "settings-link", :remote => true %>
+			</li>
+		<% else %>
+			<li><%= link_to "Beta Login", login_path, :style=>"padding-top:6px;" %>
+		<% end %>
+	</ul>
+	<% if @projects %><%= render partial: "projects/sidebar" %><% end %>
+</nav>
 
 <footer>
 	<div id="container">
@@ -108,7 +110,9 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 	$(document).ready(function() {
 		$.ajaxSetup({ cache: false });
 		datetimepickers();
+		sideMenu();
 	});
+
 </script>
 </body>
 </html>
