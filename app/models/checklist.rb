@@ -4,7 +4,7 @@ class Checklist < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
     
     attr_accessible :name, :description, :body, :user_id, :project_id, :milestone_date, :completed_date, :categories_attributes, 
-    				:categories, :company, :company_id, :core
+    				:categories, :company_id, :core
   	belongs_to :project
   	belongs_to :company
   	
