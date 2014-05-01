@@ -308,12 +308,17 @@ class AdminController < ApplicationController
 	end
 
 	def find_user
-		if params[:user_id].present?
-			@user = User.where(:id => params[:user_id]).first
+		unless current_user.admin? || current_user.company_admin? || current_user.uber_admin?
+			flash[:alert] = "Sorry, you don't have access to that section.".html_safe
+			redirect_to projects_path
 		else
-			@user = current_user
+			if params[:user_id].present?
+				@user = User.where(:id => params[:user_id]).first
+			else
+				@user = current_user
+			end
+			@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
+			@company = @user.company
 		end
-		@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
-		@company = @user.company
 	end
 end
