@@ -54,6 +54,10 @@ class Checklist < ActiveRecord::Base
         end
     end
 
+    def duplicate
+        self.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+    end
+
     def items
         if checklist_items.count > 0
             checklist_items
