@@ -16,39 +16,15 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		checklist = Checklist.where(:name => params[:project][:checklist]).first
-		params[:project].delete(:checklist)
-		if Rails.env.production? && checklist.item_count > 100
+		list = Checklist.find params[:checklist_id]
+		@checklist = list.duplicate
+		@checklist.save
 
-			if params[:project][:checklist].present?
-				checklist = Checklist.find_by(name: params[:project][:checklist])
-				params[:project].delete(:checklist)
-				Resque.enqueue(CreateProject,params[:project],list.id)
-			else 
-				Resque.enqueue(CreateProject,params[:project],nil)
-				@checklist.save
-			end
-			
-			@response_message = "Creating project. This may take a few minutes..."
-			if request.xhr?
-				respond_to do |format|
-					format.js {render :template => "admin/background_project"}
-				end
-			else
-				flash[:notice] = @response_message
-				redirect_to admin_index_path
-			end
-
-		else
-	      	project = @company.projects.create params[:project]
-	      	@new_checklist = checklist.dup :include => {:categories => {:subcategories => :checklist_items}}, :except => {:categories => {:subcategories => {:checklist_items => :status}}}
-	      	@new_checklist.project_id = project.id
-	      	@new_checklist.core = false
-	      	@new_checklist.company_id = @user.company.id
-	      	@new_checklist.save
-	      	puts "checklist id #{checklist.id} and new checklist: #{@new_checklist.id}"
-			redirect_to projects_path
-	    end
+	    project = @company.projects.create params[:project]
+	    @checklist.update_attribute :company_id, @company.id
+		puts "is it getting the new company id? #{@checklist.company.id}"
+		redirect_to projects_path
+	
 	end
 
 	def index
@@ -96,7 +72,7 @@ class ProjectsController < ApplicationController
 			@users = @project.company.users
 			@subs = @project.company.subs
 		end
-		
+
 		@project.users.build
 		unless @project.address
 			@project.build_address

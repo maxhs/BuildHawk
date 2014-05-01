@@ -186,7 +186,6 @@ class AdminController < ApplicationController
 		list = Checklist.find params[:checklist_id]
 		@checklist = list.duplicate
 		@checklist.save
-
 		@checklist.update_attribute :company_id, @company.id
 		puts "is it getting the new company id? #{@checklist.company.id}"
 		
