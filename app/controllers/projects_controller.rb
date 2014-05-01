@@ -91,13 +91,17 @@ class ProjectsController < ApplicationController
 
 	def edit
 		@project = Project.find params[:id]
-		@project_groups = @project.company.project_groups
+		if @project.company
+			@project_groups = @project.company.project_groups 
+			@users = @project.company.users
+			@subs = @project.company.subs
+		end
+		
 		@project.users.build
 		unless @project.address
 			@project.build_address
 		end
-		@users = @project.company.users
-		@subs = @project.company.subs
+		
 		if request.xhr?
 			respond_to do |format|
 				format.js

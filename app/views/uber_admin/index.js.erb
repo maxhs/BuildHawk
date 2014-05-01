@@ -1,4 +1,12 @@
 $('a').removeClass('current-page');
+
+var nav = $('<%= j render partial: "uber_admin/top_nav" %>');
+$('#navigation').fadeOut(170,function(){
+	$(this).html(nav);
+	$(this).fadeIn(170);
+});
+
+
 $('#pagescontainer').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
 	$(this).fadeIn(170,function(){

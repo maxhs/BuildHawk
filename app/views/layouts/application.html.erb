@@ -97,8 +97,6 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			<li>
 				<%= link_to current_user.full_name, edit_user_path(current_user), :id => "settings-link", :class=>"font-smoothing", :remote => true %>
 			</li>
-		<% else %>
-			<li><%= link_to "Beta Login", login_path, :style=>"padding-top:6px;" %>
 		<% end %>
 	</ul>
 	<% if @projects %><%= render partial: "projects/sidebar" %><% end %>
