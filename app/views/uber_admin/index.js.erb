@@ -9,7 +9,6 @@ $('#navigation').fadeOut(170,function(){
 
 $('#pagescontainer').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
-	$('#projects-tab').text("Menu");
 	$(this).fadeIn(170,function(){
 		closeMenu();
 	});

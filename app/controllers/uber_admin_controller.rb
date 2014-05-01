@@ -150,6 +150,10 @@ class UberAdminController < ApplicationController
 		unless current_user.uber_admin?
 			flash[:alert] = "Sorry, you don't have access to that section.".html_safe
 			redirect_to projects_path
+		else
+			@user = current_user
+			@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
+			@company = @user.company
 		end
 	end
 

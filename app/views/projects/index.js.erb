@@ -3,7 +3,6 @@ $('#nav-projects a').addClass('current-page');
 var nav = $('<%= j render partial: "layouts/internal_nav" %>');
 $('#navigation').fadeOut(170,function(){
 	$(this).html(nav);
-	$('#projects-tab').text("Projects");
 	$(this).fadeIn(170,function(){
 		$('#alert').fadeOut(400);
 	});

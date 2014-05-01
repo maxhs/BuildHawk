@@ -9,7 +9,6 @@ $('#navigation').fadeOut(170,function(){
 
 $('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
-	$('#projects-tab').text("Projects");
 	$(this).fadeIn(170,function(){
 		closeMenu();
 	});

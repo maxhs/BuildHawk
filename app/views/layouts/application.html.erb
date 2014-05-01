@@ -80,11 +80,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 	</div>
 
 <% if user_signed_in? %>
-	<% if params[:controller] == "admin" || params[:controller] == "uber_admin"  %>
-		<div id="projects-tab">Menu</div>
-	<% else %>
-		<div id="projects-tab">Projects</div>
-	<% end %>
+	<div id="projects-tab">Projects</div>
 	<nav id="bt-menu" class="bt-menu">
 	
 		<% if current_user.admin? || current_user.company_admin? %>
