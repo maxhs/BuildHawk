@@ -20,9 +20,8 @@ class ChecklistItem < ActiveRecord::Base
 
     if Rails.env.production?
       # websolr
-      searchable auto_index: false do
+      searchable auto_index: false, auto_remove: false do
         text    :body
-        #text    :item_type
         text    :status
         integer :checklist_id
       end
@@ -34,7 +33,6 @@ class ChecklistItem < ActiveRecord::Base
       
       searchable do
         text    :body
-        #text    :item_type
         text    :status
         integer :checklist_id
       end

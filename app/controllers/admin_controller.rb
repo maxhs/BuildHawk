@@ -185,18 +185,19 @@ class AdminController < ApplicationController
 	def create_template
 		list = Checklist.find params[:checklist_id]
 		@checklist = list.duplicate
-		@checklist.company_id = params[:company_id]
-		if @checklist.save
-			@checklists = @user.company.checklists.where(:core => true).flatten
-			if request.xhr?
-				respond_to do |format|
-					format.js
-				end
-			else
-				uber_checklists
-				render :checklists
+		@checklist.save
+		@checklist.update_attribute :company_id, params[:company_id]
+		
+		@checklists = @user.company.checklists.where(:core => true).flatten
+		if request.xhr?
+			respond_to do |format|
+				format.js
 			end
+		else
+			uber_checklists
+			render :checklists
 		end
+		
 		# if Rails.env.production?
 		# 	Resque.enqueue(CreateTemplate,params[:company_id])
 		# 	@response_message = "Creating checklist template. This may take a few minutes..."
@@ -311,6 +312,7 @@ class AdminController < ApplicationController
 		else
 			@user = current_user
 		end
+		@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
 		@company = @user.company
 	end
 end
