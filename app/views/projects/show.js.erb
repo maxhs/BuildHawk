@@ -1,11 +1,11 @@
 $('a').removeClass('current-page');
 $('#<%=@project.id%>-link, .nav-dashboard.admin a').addClass('current-page');
-if (!$('.nav-dashboard').length){
-	var nav = $('<%= j render partial: "projects/project_nav" %>');
-	$('#logo').after(nav);
-	nav.fadeIn(300);
+var nav = $('<%= j render partial: "projects/project_nav" %>');
+$('.navbar-nav').fadeOut(170,function(){
+	$(this).html(nav);
+	$(this).fadeIn(170);
+});
 
-}
 $('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
 	$(this).fadeIn(170,function(){

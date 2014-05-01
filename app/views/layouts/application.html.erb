@@ -46,11 +46,19 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
     <div id="wrap">
 		<div class="navbar navbar-fixed-top" id="top-nav">
 			<div class="container">
-				<ul class="nav navbar-nav">
-					<li id="logo">
-						<a class="navbar-brand" href="/"><%= image_tag('logo.png') %></a>
-					</li>
-					
+				<a class="logo" href="/"><%= image_tag('logo.png') %></a>
+
+				<ul class="navigation">
+					<% if current_page?(root_url) && current_user %>
+						<% if current_user.admin? || current_user.company_admin? %>
+							<ul id="internal-nav">
+								<li><%= link_to "Admin", admin_index_path, remote: true %></li>
+								<% if current_user.uber_admin? %>
+									<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
+								<% end %>
+							</ul>
+						<% end %>
+					<% end %>
 					<% if user_signed_in? %>
 						<% if @project %>
 							<%= render partial: "projects/project_nav" %>
@@ -78,15 +86,18 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		<div id="push"></div>
 	</div>
 
-<div id="projects-tab">Projects</div>
-<nav id="bt-menu" class="bt-menu">
-	<% if current_user.admin? || current_user.company_admin? %>
+<% if user_signed_in? %>
+	<div id="projects-tab">Projects</div>
+	<nav id="bt-menu" class="bt-menu">
+	
+		<% if current_user.admin? || current_user.company_admin? %>
 		<ul id="internal-nav">
 			<li><%= link_to "Admin", admin_index_path, remote: true %></li>
 			<% if current_user.uber_admin? %>
 				<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
 			<% end %>
 		</ul>
+		<% end %>
 	<% end %>
 	<ul class="nav navbar-nav pull-right" id="credentials">
 		<% if user_signed_in? %>
