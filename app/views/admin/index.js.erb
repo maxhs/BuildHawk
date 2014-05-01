@@ -2,6 +2,8 @@ $('a').removeClass('current-page');
 $('#nav-admin a').addClass('current-page');
 $('#pagescontainer').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(100);
+	$(this).fadeIn(100,function(){
+		closeMenu();
+	});
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

@@ -2,6 +2,8 @@ $('a').removeClass('current-page');
 $('#nav-projects a').addClass('current-page');
 $('#pagescontainer').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(170);
+	$(this).fadeIn(170,function(){
+		$('#bt-menu').append('<% if @projects %><%= j render partial: "projects/sidebar" %><% end %>');
+	});
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

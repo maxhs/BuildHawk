@@ -21,11 +21,16 @@
 	}
 
 	#credentials {
-		top:-2.5%;
-		right:-2.5%;
-		
-		li a span {
-			text-transform:none;	
+		top:0;		
+		li {
+			width:auto;
+			a {
+				text-transform:none;	
+				color:#fff;
+				-webkit-font-smoothing:antialiased;
+				font-size:21px;
+				font-family:'Montserrat','Gotham Book','Helvetica Neue','Helvetica',sans-serif;
+			}
 		}
 		
 		.dropdown-toggle {
@@ -41,14 +46,18 @@
 	}
 
 	#internal-nav {
+		left:-250px;
 		display:table;
 		height:51px;
+		width:auto;
 
 		li {
 			display:table-cell;
 			vertical-align:middle;
+			width:auto;
 
 			a {
+				font-size:1.5em;
 				color:#fff;
 			}
 		}
@@ -65,10 +74,8 @@
 	.sidebarProjects {
 		left:0;
 	}
-	#credentials {
-		right:0.5%;
-		top:2.5%;
-		text-align:right;
+	#internal-nav {
+		left:250px;
 	}
 }
 
@@ -254,9 +261,7 @@
 }
 
 .bt-menu ul:nth-of-type(2) li a {
-	color: transparent;
 	text-align: center;
-	font-size: 0px;
 }
 
 .bt-menu ul li a:before {

@@ -2,5 +2,7 @@ $('a').removeClass('current-page');
 $('#settings-link').addClass('current-page');
 $('#pagescontainer').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "edit" %>');
-	$(this).fadeIn(100);
+	$(this).fadeIn(100,function(){
+		closeMenu();
+	});
 });

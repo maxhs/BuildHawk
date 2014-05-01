@@ -1,6 +1,5 @@
 class UberAdminController < ApplicationController
 	before_filter :authenticate_user!
-	layout 'uber_admin'
 	
 	def index
 		@companies = Company.all

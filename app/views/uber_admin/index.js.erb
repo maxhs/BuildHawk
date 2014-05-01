@@ -1,7 +1,9 @@
 $('a').removeClass('current-page');
 $('#pagescontainer').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(170);
+	$(this).fadeIn(170,function(){
+		closeMenu();
+	});
 	$("html, body").animate({ scrollTop: 0 }, 300);
 	$('#nav-uber-admin a').addClass('current-page');
 	$('#uber-admin-companies-link').addClass('current-page');
