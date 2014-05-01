@@ -45,34 +45,33 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
     <div id="wrap">
 		<div class="navbar navbar-fixed-top" id="top-nav">
-			<div class="container">
+		
 				<a class="logo" href="/"><%= image_tag('logo.png') %></a>
 
 				<ul class="navigation">
-					<% if current_page?(root_url) && current_user %>
-						<% if current_user.admin? || current_user.company_admin? %>
+					<% if current_page?(root_url) %>
+						<% if user_signed_in? && (current_user.admin? || current_user.company_admin?) %>
 							<ul id="internal-nav">
 								<li><%= link_to "Admin", admin_index_path, remote: true %></li>
 								<% if current_user.uber_admin? %>
 									<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
 								<% end %>
 							</ul>
+						<% else %>
+							<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
+							<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
+							<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
+							<li style="position:absolute;right:0;"><%= link_to 'Beta Login', login_path %></li>
 						<% end %>
-					<% end %>
-					<% if user_signed_in? %>
-						<% if @project %>
-							<%= render partial: "projects/project_nav" %>
-						<% end %>
+					<% elsif user_signed_in? && @project %>
+						<%= render partial: "projects/project_nav" %>
+
 					<% end %>
 
-					<% if current_page?(root_url) %>
-						<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
-						<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
-						<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
-					<% end %>
+		
 				</ul>
 			</div>
-		</div>
+		
 		
 		<% if user_signed_in? %>
 			<div id="pagescontainer">
@@ -129,7 +128,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 	$(document).ready(function() {
 		$.ajaxSetup({ cache: false });
 		datetimepickers();
-		sideMenu();
+		<% if user_signed_in? %>sideMenu();<% end %>
 	});
 
 </script>

@@ -193,31 +193,31 @@ body {
 	}
 
 	.navbar-fixed-top {
-		z-index:2;
+		z-index:3;
 		background-color: #fff;
 
+		.logo {
+			padding:0 20px 0 40px;
+			margin-left:0;
+			float:left;
 
-		.container {		
-			.logo {
-				padding:0 20px 0 40px;
-				margin-left:0;
-
-				img {
-					margin:10px auto;
-					height:30px;
-				}
+			img {
+				margin:10px auto;
+				height:30px;
 			}
 		}
+		
 		.navigation {
 			display:inline-block;
 			list-style:none;
-			float:none;
+			float:left;
+			width:auto;
 			
 			li {
 				display:inline-block;
 				position:relative;
-				top:1px;
-				padding:10px 1.5%;
+				top:11px;
+				margin:0 20px;
 			}
 
 			li:hover, li:hover a {
