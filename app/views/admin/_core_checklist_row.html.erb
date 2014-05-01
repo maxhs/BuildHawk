@@ -4,5 +4,5 @@
 	<td><%= c.categories.count %></td>
 	<td><%= c.categories.map(&:subcategories).flatten.count %></td>
 	<td><%= c.item_count %></td>
-	<td><%= link_to "Use", create_template_admin_index_path(:company_id => current_user.company.id, :name => c.name), :class=>"simple-btn remote", :method => :post, :remote => true %></td>
+	<td><%= link_to "Use", create_template_admin_index_path(:company_id => current_user.company.id, :checklist_id => c.id), :class=>"simple-btn remote company-template", :method => :post, :remote => true %></td>
 </tr>

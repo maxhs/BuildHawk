@@ -3,7 +3,6 @@
 	<td><%= c.categories.count %></td>
 	<td><%= c.categories.map(&:subcategories).flatten.count %></td>
 	<td><%= c.item_count %></td>
-	<td><%= Checklist.where(:core => true, :name => c.name, :company_id => company.id).count %></td>
 	<td><%= link_to "Edit", editor_admin_index_path(:checklist_id => c.id), :remote => true %></td>
 	<td><%= link_to "Delete", remove_template_admin_path(c), :data => {:confirm => "Are you sure you want to remove this checklist template? This can not be undone."}, :remote => true, :class=>"delete-checklist-link btn btn-danger btn-md", :style=>"max-width:100px;display:inline;", method: :delete %></td>
 </tr>

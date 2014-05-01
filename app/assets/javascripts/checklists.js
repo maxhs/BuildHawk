@@ -9,11 +9,9 @@ function datetimepickers(){
 }
 
 function coreChecklist(){
-	$('.new_checklist').on('change',function(){
-		$(this).submit();
-		$('#alert').css({'color':'#fff','background':'#cc0000'}).text("Uploading a new core checklist. This may take a few moments.").fadeIn(500).delay(4000).fadeOut(500, function(){
-			$(this).css({'color':'#000','background':'#fff'}).text("");
-		});
+	console.log('core template');
+	$('.company-template').on('click',function(){
+		$('#alert').text("Creating your template. This may take a few moments.").fadeIn(500);
 	});
 }
 
