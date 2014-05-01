@@ -1,7 +1,7 @@
 $('a').removeClass('current-page');
 $('#<%=@project.id%>-link, .nav-dashboard.admin a').addClass('current-page');
 var nav = $('<%= j render partial: "projects/project_nav" %>');
-$('.navbar-nav').fadeOut(170,function(){
+$('#navigation').fadeOut(170,function(){
 	$(this).html(nav);
 	$(this).fadeIn(170);
 });

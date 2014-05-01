@@ -1,0 +1,6 @@
+<ul id="internal-nav">
+	<li><%= link_to "Admin", admin_index_path, remote: true %></li>
+	<% if current_user.uber_admin? %>
+		<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
+	<% end %>
+</ul>	

@@ -207,7 +207,7 @@ body {
 			}
 		}
 		
-		.navigation {
+		#navigation {
 			display:inline-block;
 			list-style:none;
 			float:left;
@@ -216,7 +216,7 @@ body {
 			li {
 				display:inline-block;
 				position:relative;
-				top:11px;
+				top:14px;
 				margin:0 20px;
 			}
 
@@ -225,7 +225,7 @@ body {
 			}
 
 			a {
-				font-size:1.5em;
+				font-size:1.25em;
 				letter-spacing:1px;
 				font-family:'Montserrat','Gotham Book','Helvetica Neue','Helvetica',sans-serif;
 				text-transform:uppercase;
