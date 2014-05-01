@@ -1,6 +1,7 @@
 class UberAdminController < ApplicationController
 	before_filter :authenticate_user!
-	
+	before_filter :find_user
+
 	def index
 		@companies = Company.all
 		if request.xhr?
@@ -146,6 +147,15 @@ class UberAdminController < ApplicationController
 		@companies = Company.all
 		@promo_codes = PromoCode.all
 		@new_code = PromoCode.new
+	end
+
+	protected
+
+	def find_user
+		unless current_user.uber_admin?
+			flash[:alert] = "Sorry, you don't have access to that section.".html_safe
+			redirect_to projects_path
+		end
 	end
 
 end

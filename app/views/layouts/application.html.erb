@@ -59,8 +59,9 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 						<%= render partial: "layouts/internal_nav" %>
 					<% elsif user_signed_in? && params[:controller] == "admin" %>
-
 						<%= render partial: "admin/top_nav" %>
+					<% elsif user_signed_in? && params[:controller] == "uber_admin" %>
+						<%= render partial: "uber_admin/top_nav" %>
 					<% elsif user_signed_in? && @project %>
 						<%= render partial: "projects/project_nav" %>
 					<% end %>
