@@ -30,7 +30,7 @@ html {
 
 body {
 	background-color:#eee !important;
-	height:100%;
+	min-height:100%;
 
 	a, a:focus, .hide-reveal {
 		cursor:pointer;
@@ -56,10 +56,18 @@ body {
 		padding:0;
 	}
 
+	h1, h2, h3 {
+		margin:10px 0;
+	}
+
 	h1, h2, h3, h4, h5 {
 		font-family:"Source Sans Pro","Gotham Book","Helvetica",sans-serif;
 		text-transform:uppercase;
-		margin:10px 0;
+		font-weight:bolder;
+	}
+
+	h4 {
+		text-align:center;
 	}
 
 	.alert, .notice {

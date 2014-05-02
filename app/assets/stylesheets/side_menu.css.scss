@@ -12,9 +12,12 @@
 	-webkit-backface-visibility: hidden;
 	-webkit-transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
 	transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
-	
+	a {
+		font-family:'Source Sans Pro','Helvetica',sans-serif;
+	}
 	.sidebarProjects {
 		left:-250px;
+
 		.project {
 			margin:15px 0;
 		}
@@ -29,8 +32,7 @@
 				text-transform:none;	
 				color:#fff;
 				-webkit-font-smoothing:antialiased;
-				font-size:21px;
-				font-family:'Montserrat','Gotham Book','Helvetica Neue','Helvetica',sans-serif;
+				font-size:26px;
 			}
 		}
 		
@@ -58,7 +60,7 @@
 			width:auto;
 
 			a {
-				font-size:1.5em;
+				font-size:1.6em;
 				color:#fff;
 			}
 		}
@@ -74,7 +76,10 @@
 	
 	.sidebarProjects {
 		left:0;
+		overflow-y:scroll;
+		height:100%;
 	}
+	
 	#internal-nav {
 		left:250px;
 	}
@@ -254,7 +259,7 @@
 	padding: 0;
 	color: #fff;
 	font-weight:500;
-	font-size:17px;
+	font-size:21px;
 	-webkit-font-smoothing:antialiased;
 	letter-spacing: 1px;
 	-webkit-transition: color 0.2s;
