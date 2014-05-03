@@ -13,3 +13,7 @@
 	<li class="nav-reports"><%= link_to "Reports", reports_path(:project_id => @project.id), :remote => true %></li>
 	<li class="nav-punchlists"><%= link_to "Worklist", worklist_project_path(@project), :remote => true %></li>
 <% end %>
+
+<% if current_user && current_user.uber_admin? %>
+	<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
+<% end %>

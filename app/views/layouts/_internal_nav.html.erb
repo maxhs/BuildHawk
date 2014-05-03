@@ -2,5 +2,6 @@
 	<li><%= link_to "Admin", admin_index_path, remote: true %></li>
 	<% if current_user.uber_admin? %>
 		<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
+		<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
 	<% end %>
 </ul>	

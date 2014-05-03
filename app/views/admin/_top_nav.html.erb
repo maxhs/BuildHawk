@@ -6,3 +6,7 @@
 <li><%= link_to "Checklists", checklists_admin_index_path, :id => "admin-checklists-link", :class=>"current-page", :remote => true %></li>
 <li><%= link_to "Personnel", users_admin_index_path, :id => "personnel-link", :remote => true %></li>
 <% if current_user.uber_admin %><li><%= link_to "Billing", billing_admin_index_path, :id => "billing-link", :remote => true %></li><% end %>
+
+<% if current_user && current_user.uber_admin? %>
+	<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
+<% end %>
