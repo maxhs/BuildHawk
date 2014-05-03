@@ -122,8 +122,8 @@
 	}
 
 	.left-edit {
-		top: 28px;
-		padding: 5px 20px 5px 30px;
+		top: 27px;
+		padding: 5px 5px 5px 15px;
 		font-size: 17px;
 		position: absolute;
 		right: 100%;
@@ -131,12 +131,14 @@
 		border-left: 1px solid #eee;
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
-		display:none;
-		-webkit-font-smoothing:antialiased;
-		font-family:"Montserrat","Helvetica",sans-serif;
+		display: none;
+		-webkit-font-smoothing: antialiased;
+		font-family: "Source Sans Pro","Helvetica",sans-serif;
 		border-radius: 18px 0 0 18px;
 		-webkit-border-radius: 18px 0 0 18px;
 		-moz-border-radius: 18px 0 0 18px;
+		z-index: 5;
+		font-weight: bold;
 	}
 }
 
@@ -160,7 +162,7 @@
 		border-radius:20px 0 0 20px;
 		display:none;
 		-webkit-font-smoothing:antialiased;
-		font-family:"Montserrat","Helvetica",sans-serif;
+		font-family:"Souce Sans Pro","Helvetica",sans-serif;
 	}
 }
 .checklist-item:hover {
@@ -177,9 +179,6 @@
 
 .category-form.container {
 	background-color:#fff;
-	border-radius:3px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
 	width:75%;
 	margin:0 auto;
 	overflow:auto;
@@ -302,14 +301,9 @@
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Gotham Book",'Helvetica',sans-serif;
+	font-family:"Source Sans Pro",'Helvetica',sans-serif;
 	font-size:14px;
 	line-height:1em;
-}
-
-.new-phase {
-	margin:2% 0 0 1%;
-	font-size:15px;
 }
 
 .new-category {
@@ -361,9 +355,6 @@
 	display:block;
 	width:100%;
 	background-color:#fff;
-	border-radius:3px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
 	padding: 15px 40px;
 
 	h3 {

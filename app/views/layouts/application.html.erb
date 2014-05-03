@@ -64,6 +64,10 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 					<% elsif user_signed_in? %>
 						<%= render partial: "layouts/internal_nav" %>
 					<% end %>
+
+					<% if current_user && current_user.uber_admin? %>
+						<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
+					<% end %>
 				</ul>
 			</div>
 		

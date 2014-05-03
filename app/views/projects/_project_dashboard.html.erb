@@ -20,9 +20,9 @@
 		<% if @recently_completed && @recently_completed.count > 0 %>
 			<div id="recent-items">
 				<div class="row">
-					<div class="col-xs-2 header-label"><h5>Type</h5></div>
-					<div class="col-xs-2 header-label"><h5>Last Updated</h5></div>
-					<div class="col-xs-2 header-label"><h5>Item</h5></div>
+					<div class="col-xs-2 header-label"><h4>Type</h4></div>
+					<div class="col-xs-2 header-label"><h4>Last Updated</h4></div>
+					<div class="col-xs-2 header-label"><h4>Item</h4></div>
 				</div>
 
 				<% @recently_completed.each do |item| %>
@@ -75,11 +75,11 @@
 		<h3>Checklist Progress</h3>
 		<div id="checklist-section">
 			<div class="row">
-				<div class="col-xs-4 header-label"><h5>Phase</h5></div>
-				<div class="col-xs-2 header-label center"><h5>% Completion</h5></div>
-				<div class="col-xs-2 header-label center"><h5>Completion</h5></div>
-				<div class="col-xs-2 header-label center"><h5>Milestone</h5></div>
-				<div class="col-xs-2 header-label center"><h5>+/-</h5></div>
+				<div class="col-xs-4 header-label"><h4>Phase</h4></div>
+				<div class="col-xs-2 header-label center"><h4>% Completion</h4></div>
+				<div class="col-xs-2 header-label center"><h4>Completion</h4></div>
+				<div class="col-xs-2 header-label center"><h4>Milestone</h4></div>
+				<div class="col-xs-2 header-label center"><h4>+/-</h4></div>
 			</div>
 			
 			<% @checklist.categories.sort_by{|c|c.name.to_i}.each do |cat| %>
