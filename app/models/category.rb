@@ -23,7 +23,11 @@ class Category < ActiveRecord::Base
     end
 
     def progress_percentage
+      if item_count > 0
         number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
+      else
+        "N/A"
+      end
     end
 
     def progress_count

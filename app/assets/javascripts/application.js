@@ -29,7 +29,7 @@ if (history && history.pushState){
     $(function(){
         $('body').on('click', 'a',function(e){
             if ($(e.target).is('.remote, .shadow-photo, .documents-photo, .delete-checklist-link, .delete-link, #clear-critical-date')) {
-                console.log('yup');
+
             } else {
                 history.pushState(null, null, this.href);
             }

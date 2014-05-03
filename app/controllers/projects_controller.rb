@@ -146,6 +146,7 @@ class ProjectsController < ApplicationController
 
 	def checklist
 		@checklist = @project.checklist
+		@phase = @checklist.categories.find params[:phase_id] if params[:phase_id] 
 		if request.xhr?
 			respond_to do |format|
 				format.js
