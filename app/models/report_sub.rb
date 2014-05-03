@@ -1,5 +1,5 @@
 class ReportSub < ActiveRecord::Base
-	attr_accessible :report_id, :sub_id, :count, :hours
+	attr_accessible :report_id, :sub_id, :count
 	belongs_to :report, autosave: true
 	belongs_to :sub, autosave: true
 
@@ -13,6 +13,5 @@ class ReportSub < ActiveRecord::Base
   		t.add :id
   		t.add :sub
   		t.add :count
-  		t.add :hours
   	end
 end

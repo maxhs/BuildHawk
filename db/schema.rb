@@ -285,7 +285,6 @@ ActiveRecord::Schema.define(version: 20140424224323) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "count",      default: 0
-    t.float    "hours"
   end
 
   create_table "report_users", force: true do |t|
@@ -293,6 +292,7 @@ ActiveRecord::Schema.define(version: 20140424224323) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "hours"
   end
 
   create_table "reports", force: true do |t|
