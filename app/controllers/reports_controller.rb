@@ -132,6 +132,10 @@ class ReportsController < ApplicationController
 		@report = Report.find params[:id]
 		@report.users.build
 		@report.subs.build
+		reports = @project.ordered_reports
+		index = reports.index(@report)
+		@next = reports[index-1]
+		@previous = reports[index+1]
 	end
 
 	def generate
