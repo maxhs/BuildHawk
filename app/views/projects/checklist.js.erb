@@ -3,7 +3,10 @@ $('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-
 $('#pages').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/checklist" %>');
 	$(this).fadeIn(170);
-	if ($('#phase-<%= @phase.id %>').length){
-		$('#phase-<%= @phase.id %> .phase-name').click();
-	}
+
+	<% if @phase %>
+		if ($('#phase-<%= @phase.id %>').length){
+			$('#phase-<%= @phase.id %> .phase-name').click();
+		}
+	<% end %>
 });

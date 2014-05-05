@@ -200,18 +200,20 @@ body {
 	}
 
 	.navbar-fixed-top {
+		display:table;
+		width:100%;
 		z-index:3;
 		background-color: #fff;
 		border-bottom:1px solid #eee;
 
 		.logo {
-			padding:0 20px 0 40px;
+			padding:0 10px 0 40px;
 			margin-left:0;
 			float:left;
 
 			img {
 				margin:10px auto;
-				height:30px;
+				height:27px;
 			}
 		}
 		
@@ -233,7 +235,7 @@ body {
 			}
 
 			a {
-				font-size:1.5em;
+				font-size:1.4em;
 				font-weight:bolder;
 				letter-spacing:1px;
 				font-family:'Source Sans Pro','Helvetica',sans-serif;
@@ -438,6 +440,10 @@ body {
 			}
 		}
 	}
+}
+
+.align-left {
+	text-align:left;
 }
 
 #projects-tab {
@@ -912,6 +918,17 @@ body {
 		border:0 !important;
 		margin:0 !important;
 		padding:2px 4px !important;
+	}
+}
+
+@media only screen and (max-width: 768px), only screen and (max-device-width: 768px) {
+	#navigation li {
+		top: 15px;
+		margin:0 10px;
+
+		a {
+			font-size:1.1em;
+		}
 	}
 }
 

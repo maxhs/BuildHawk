@@ -1,14 +1,18 @@
-<div class="border-box">
-	<div class="category-form container">
+<div class="category-form container">
+	<div class="border-box">
 		<div class="row">
 			<span class="header-description"><h2><%= @category.name %></h2></span>
 		</div>
 		<%= nested_form_for @category, :remote => true, :method => :patch do |f| %>
+
 			<div class="row">
-				<h4>Phase Name</h4>
-			</div>
-			<div class="row">
-				<%= f.text_field :name %>
+				<div class="col-xs-1">
+					<h4 class="align-left">Name:</h4>
+				</div>
+
+				<div class="col-xs-11">
+					<%= f.text_field :name %>
+				</div>
 			</div>
 			<% if @project %>
 				<div class="row">
