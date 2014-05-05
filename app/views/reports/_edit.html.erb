@@ -10,12 +10,12 @@
 
 				<% if @previous %>
 					<div class="previous-report">
-						<h5><%= link_to "Previous: #{@previous.created_date}", report_path(@previous), remote:true %></h5>
+						<h5><%= link_to "&#8592;  #{@previous.created_date}".html_safe, report_path(@previous), remote:true %></h5>
 					</div>
 				<% end %>
 				<% if @next %>
 					<div class="next-report">
-						<h5><%= link_to "Next: #{@next.created_date}", report_path(@next), remote:true %></h5>
+						<h5><%= link_to "#{@next.created_date}  &#8594;".html_safe, report_path(@next), remote:true %></h5>
 					</div>
 				<% end %>
 			
@@ -30,8 +30,10 @@
 				</div>
 
 				<div class="row form-title">
-					<div class="col-md-4"><h4 style="display:inline-block;">Report Type</h4></div>
-					<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
+					<div class="col-md-12"><h4 style="display:inline-block;">Report Type</h4></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
 				</div>
 					
 				<div class="row form-title">
