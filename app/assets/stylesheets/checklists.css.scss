@@ -224,6 +224,12 @@
 	margin:0 auto;
 	padding:20px;
 
+	.header-description {
+		h3, h4, h5 {
+			text-align:left;
+		}
+	}
+
 	select, select[multiple] {
 		font-size:1.25em;
 		padding:10px 0;

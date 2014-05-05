@@ -158,6 +158,11 @@ class ProjectsController < ApplicationController
 
 	def checklist_item
 		@item = ChecklistItem.find params[:item_id]
+		subcategory = @item.subcategory
+		@next = subcategory.checklist_items.where(:order_index => @item.order_index+1).first
+		puts "found next" if @next
+		@previous = subcategory.checklist_items.where(:order_index => @item.order_index-1).first
+		puts "found previous" if @previous
 	end  
 
 	def worklist

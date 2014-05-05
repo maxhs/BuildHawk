@@ -2,11 +2,8 @@
 	$('#nav-admin a, #nav-uber-admin a').removeClass('current-page');
 	$('#nav-projects a, li.nav-checklists a').addClass('current-page');
 </script>
-<%= render :partial => "projects/sidebar" %>
 
-<div class="col-xs-12 col-sm-9" id="main">
-	<%= render :partial => "projects/project_nav" %>
-
+<div class="col-xs-12" id="main">
 	<div id="pages">
 		<%= render :partial => "checklist_item", :locals => {:item => @item} %>
 	</div>
