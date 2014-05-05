@@ -14,6 +14,7 @@ if (itemsHolder.hasClass('revealed')){
 			$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "Add a new category", new_subcategory_path(:category_id => @category.id,:project_id => @project.id), :id=>"new-category", :class=>"remote new-category", remote: true %>');
 		<% else %>
 			$(this).html('<%= j render partial:"admin/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "Add a new category", new_subcategory_path(:category_id => @category.id), :id=>"new-category", :class=>"remote new-category", remote: true %>');
+			itemsHolder.children(":first").find(".items-container").removeClass("collapsed");
 		<% end %>
 
 		$(this).addClass('revealed');
