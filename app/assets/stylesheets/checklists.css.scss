@@ -224,6 +224,14 @@
 	margin:0 auto;
 	padding:20px;
 
+	.previous-item {
+		float:left;
+	}
+
+	.next-item {
+		float:right;
+	}
+
 	.header-description {
 		h3, h4, h5 {
 			text-align:left;

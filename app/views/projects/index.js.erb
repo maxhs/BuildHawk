@@ -1,5 +1,4 @@
 $('a').removeClass('current-page');
-$('#nav-projects a').addClass('current-page');
 var nav = $('<%= j render partial: "layouts/internal_nav" %>');
 $('#navigation').fadeOut(170,function(){
 	$(this).html(nav);

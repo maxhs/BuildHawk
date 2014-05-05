@@ -28,7 +28,7 @@
 	<div>
 		<% @report.photos.each do |p| %>
 			<% if p.image_file_name %>
-				<%= link_to show_report_project_url(@report.project, :report_id => @report.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
+				<%= link_to report_url(@report, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
 					<%= image_tag(p.image.url(:small), :style => "width:100px;display:block;") %> 
 					<div style="text-align:center"><%= p.created_date %></div>
 				<% end %>

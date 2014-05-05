@@ -1,7 +1,7 @@
 <div class="border-box">
 
 	<div style="float:right">
-		<button class="export btn btn-md" style="margin-top:20px;"><%= link_to 'Export', generate_report_path(@report), :class=>"remote", remote: true %></button>
+		<button class="export btn btn-md" style="margin-top:20px;"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></button>
 	</div>
 	<%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	

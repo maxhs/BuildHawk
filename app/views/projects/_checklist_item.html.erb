@@ -4,7 +4,17 @@
 	</div>
 
 	<div class="checklist-item-form">
-		<div class="row">
+		<% if @previous %>
+			<div class="previous-item">
+				<h5><%= link_to "&#8592;#{truncate("#{@previous.body}", length:30)}".html_safe, checklist_item_project_path(@project, :item_id => @previous.id), remote:true %></h5>
+			</div>
+		<% end %>
+		<% if @next %>
+			<div class="next-item">
+				<h5><%= link_to "#{truncate("#{@next.body}", length:30)} &#8594;".html_safe, checklist_item_project_path(@project, :item_id => @next.id), remote:true %></h5>
+			</div>
+		<% end %>
+		<div class="row" style="clear:both">
 			<span class="col-xs-5 header-description"><h2><%= item.category_name %></h2></span>
 		</div>
 		<div class="row">
@@ -85,5 +95,19 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		checklistItem();
+		$('#export-checklist-item').on('click',function(){
+			if (!$('#export-checklist-modal').length > 0){
+				$('#item-container').prepend('<%= j render partial:"checklist_item_export", locals: {:item => item} %>');
+			}
+
+			$('body').append('<div class="modal-backdrop in"></div>');
+			$('#export-checklist-modal').animate({"left":"25%",'opacity':'1'},300);
+			$('#cancel-checklist-modal,.modal-backdrop.in').on('click',function(){
+				$('#export-checklist-modal').animate({"left":"100%",'opacity':'0'},300);
+				$('.modal-backdrop.in').fadeOut(300,function(){
+					$(this).remove();
+				});
+			});
+		});
 	});
 </script>
