@@ -14,7 +14,7 @@ $('.nav-checklists a').addClass('current-page');
 		});
 	});
 <% else %>
-	$('#checklist-items').fadeOut(170,function(){
+	$('#main').fadeOut(170,function(){
 		$(this).html('<%= j render :partial => "subcategories/edit" %>');
 		$(this).fadeIn(170);
 		$("html, body").animate({ scrollTop: 0 }, 300);
