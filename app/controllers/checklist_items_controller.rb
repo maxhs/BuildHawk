@@ -105,6 +105,29 @@ class ChecklistItemsController < ApplicationController
 		@item = ChecklistItem.find params[:id]
 	end
 
+	def export_checklist
+		item = ChecklistItem.find params[:checklist_item_id]
+		project = item.checklist.project
+		params[:names].each do |r|
+			puts "r: #{r}"
+			recipient = User.where(:full_name => r).first
+			recipient = Sub.where(:name => r).first unless recipient
+			ChecklistMailer.export(recipient.email, item, project).deliver
+		end
+		params[:email].split(',').each do |e|
+			ChecklistMailer.export(e, item, project).deliver
+		end
+
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render checklist_project_path(project)
+		end
+	end
+
+
 	def destroy
 		checklist_item = ChecklistItem.find params[:id]
 		@item_id = params[:id]

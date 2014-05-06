@@ -94,7 +94,6 @@ Buildhawk::Application.routes.draw do
       post :archive
       post :unarchive
       get :worklist
-      post :export_checklist
       post :search_worklist
       get :checklist
       get :checklist_item
@@ -135,6 +134,7 @@ Buildhawk::Application.routes.draw do
   resources :safety_topics
   resources :checklist_items do
     member do
+      post :export
       get :generate
     end
   end

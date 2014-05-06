@@ -23,7 +23,7 @@
         <div style="width:98%;margin:0 auto;min-height:40px;padding:1% 0;border-top:1px solid #dfdfdf;text-align:center;">
             <div style='max-width:700px;margin:0 auto;width:100%;font-family:Courier,Helvetica,sans-serif;font-size:11px;line-height:1.25em;'>
                 <div>Sent by BuildHawk  |  760 Market Street, 5th Floor  |  San Francisco, CA 94102</div>
-                <div>View our <%= link_to "terms", terms_url(:host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> or <%= link_to "privacy policy", privacy_url(:host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %>.</div>
+                <div>View our <%= link_to "terms", "www.buildhawk.com/terms", :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> or <%= link_to "privacy policy", "www.buildhawk.com/privacy", :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %>.</div>
                 <% if @recipient %>
                     <div><%= link_to "Unsubscribe", email_unsubscribe_user_url(@recipient, :host => "www.buildhawk.com"), :style=>"color:#0880ff;display:inline-block;text-decoration:none;" %> from all BuildHawk emails.</div> 
                 <% end %>

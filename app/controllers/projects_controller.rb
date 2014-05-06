@@ -170,27 +170,6 @@ class ProjectsController < ApplicationController
 		@items = @punchlist.punchlist_items
 	end
 
-	def export_checklist
-		item = ChecklistItem.find params[:checklist_item_id]
-		params[:names].each do |r|
-			puts "r: #{r}"
-			recipient = User.where(:full_name => r).first
-			recipient = Sub.where(:name => r).first unless recipient
-			ChecklistMailer.export(recipient.email, item, @project).deliver
-		end
-		params[:email].split(',').each do |e|
-			ChecklistMailer.export(e, item, @project).deliver
-		end
-
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :checklist
-		end
-	end
-
 	def search_worklist
 		if params[:search] && params[:search].length > 0
 			search_term = "%#{params[:search]}%" 
