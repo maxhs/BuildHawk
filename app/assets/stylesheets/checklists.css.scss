@@ -9,26 +9,6 @@
 	margin:0 auto; 
 	width:100%;
 
-	table {
-		width:100%;
-	}
-
-	tr {
-		border:1px solid #ddd;
-	}
-
-	th {
-		text-align:center;
-		font-size:1.1em;
-	}
-
-	td {
-		text-align:center;
-		padding:20px;
-		font-size:1em;
-		border-right:1px solid #ddd;
-		border-left:1px solid #ddd;
-	}
 
 	#admin-no-checklists {
 		text-align:center;
@@ -43,7 +23,7 @@
 
 		h2 {
 			display:inline-block;
-			margin:20px auto;
+			margin:15px auto;
 		}
 	}
 	form.edit_category {
@@ -62,9 +42,10 @@
 
 	.row {
 		padding:10px 0;
-		border-bottom:1px solid #eee;
+		//border-bottom:1px dotted #ddd;
 		font-size:15px;
-		margin:0;
+		margin:0 0 0 1%;
+		width:99%;
 	}
 
 	.row.checklist-item.completed {
@@ -84,7 +65,7 @@
 
 		.subcategory {
 			list-style:none;
-			padding-left:2%;
+			padding-left:1%;
 
 			.edit-category {
 				bottom:0;
@@ -169,6 +150,16 @@
 		display:none;
 		-webkit-font-smoothing:antialiased;
 		font-family:"Souce Sans Pro","Helvetica",sans-serif;
+	}
+
+	.checklist.body {
+		display:table;
+		height:33px;
+
+		a {
+			vertical-align:middle;
+			display:table-cell;
+		}
 	}
 }
 .checklist-item:hover {
@@ -286,6 +277,21 @@
 	}
 }
 
+.revealed {
+	border-left:1px dotted #ddd;
+}
+
+.subcategory-items {
+	width:98%;
+	margin-left:1%;
+	padding-left:1%;
+	border-left:1px dotted #ddd;
+	
+	.checklist-item {
+		border-bottom:1px dotted #ddd;
+	}	
+}
+
 .subcategory {
 	
 	.title {
@@ -335,7 +341,7 @@
 
 .new-checklist-item {
 	margin-top:15px;
-	margin-left:2.5%;
+	margin-left:3.5%;
 }
 
 .edit-category {
