@@ -105,8 +105,8 @@ class ChecklistItemsController < ApplicationController
 		@item = ChecklistItem.find params[:id]
 	end
 
-	def export_checklist
-		item = ChecklistItem.find params[:checklist_item_id]
+	def export
+		item = ChecklistItem.find params[:id]
 		project = item.checklist.project
 		params[:names].each do |r|
 			puts "r: #{r}"
