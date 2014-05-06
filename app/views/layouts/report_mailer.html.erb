@@ -9,12 +9,27 @@
 <body>
     <div style="background:#eaeaea;">
         <div style="margin:0 auto;border-radius:3px;padding:2.5% 0 7.5% 0">
-            <div style="text-align:center; margin:0 auto 2.5%;"><%= link_to image_tag('logo.png', alt: "BuildHawk", :style=>"width:230px;"), root_url %></div>
+            <% if @logo_url %>
+            <div style="text-align:center; margin:0 auto 2.5%;"><%= link_to image_tag(@logo_url, alt: @company.name, :style=>"width:200px;"), root_url %></div>
+            <% else %>
+            <div style="text-align:center; margin:0 auto 2.5%;"><%= link_to @company.name, root_url, :style=>"font-weight:bold;font-size:2em;text-align:center;" %></div>
+            <% end %>
 
             <div style="width:80%;border:1px solid #ddd; background:#ffffff; border-radius:3px;margin: 0 auto; padding:5% 5% 5% 5%;">
                 <%= yield %>
             </div>
         </div>
+
+        <div style="width:98%;margin:0 auto;min-height:40px;padding:1% 0;border-top:1px solid #dfdfdf;text-align:left;">
+            <div style='max-width:700px;margin:0 auto;width:100%;font-size:12px;line-height:1.25em;'>
+                <div>Sent by BuildHawk  |  760 Market Street, 5th Floor  |  San Francisco, CA 94102</div>
+                <div>View our <%= link_to "terms", "www.buildhawk.com/terms", :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> or <%= link_to "privacy policy", "www.buildhawk.com/privacy", :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %>.</div>
+                <% if @recipient %>
+                    <div><%= link_to "Unsubscribe", email_unsubscribe_user_url(@recipient, :host => "www.buildhawk.com"), :style=>"color:#0880ff;display:inline-block;text-decoration:none;" %> from all BuildHawk emails.</div> 
+                <% end %>
+            </div>
+        </div>
+
     </div>    
 </body>
 </html>
