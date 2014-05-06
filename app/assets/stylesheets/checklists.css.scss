@@ -48,6 +48,7 @@
 	}
 	form.edit_category {
 		display:inline-block;
+		height:73px;
 	}
 
 	.phase-label {
@@ -326,6 +327,12 @@
 .new-checklist-item {
 	margin-top:15px;
 	margin-left:2.5%;
+}
+
+.edit-category {
+	position:relative;
+	left:10px;
+	bottom:5px;
 }
 
 .new-category {
