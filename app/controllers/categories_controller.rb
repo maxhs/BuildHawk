@@ -87,6 +87,7 @@ class CategoriesController < ApplicationController
 
 	def destroy
 		@category = Category.find params[:id]
+		@category_id = @category.id
 		@checklist = @category.checklist
 		@project = @checklist.project
 		if @category.destroy && request.xhr?
@@ -96,7 +97,7 @@ class CategoriesController < ApplicationController
 				end
 			else
 				respond_to do |format|
-					format.js { render :template => "admin/editor"}
+					format.js
 				end
 			end
 		else

@@ -5,10 +5,11 @@
 			<header>
 				<%= render partial:"admin/edit_checklist" %>
 			</header>
-			<%= link_to "(+) New Phase", new_category_path(:checklist_id => @checklist), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
+			
 			<ul id="categories">
 				<%= render :partial => 'admin/phase', collection: @checklist.categories, :as => :c, cache: false %>
 			</ul>
+			<%= link_to "Add a new phase", new_category_path(:checklist_id => @checklist), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
 		</div>
 	</div>
 <% end %>

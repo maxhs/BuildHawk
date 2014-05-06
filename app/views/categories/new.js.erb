@@ -1,9 +1,11 @@
 if ($('.new_category').length){
 	$('.new_category').fadeOut(200,function(){
 		$(this).remove();
+		$('#new-phase').text('Add a new phase');
 	});
 } else {
 	var newDiv = $('<%= j render partial:"categories/new" %>').css('display','none');
-	$('#new-phase').after(newDiv);
+	$('#new-phase').before(newDiv);
 	newDiv.fadeIn(200);
+	$('#new-phase').text('Cancel');
 }

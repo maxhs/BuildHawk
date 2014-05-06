@@ -328,6 +328,11 @@
 	line-height:1em;
 }
 
+.new-phase {
+	font-size:1.1em;
+	margin:10px 0;
+}
+
 .new-checklist-item {
 	margin-top:15px;
 	margin-left:2.5%;
@@ -363,6 +368,14 @@
 
 	button {
 		margin-top:10px;
+	}
+}
+
+.new_category {
+	.row {
+		border:0;
+		padding-left:0;
+		padding-right:0;
 	}
 }
 
