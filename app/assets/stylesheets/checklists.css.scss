@@ -319,13 +319,17 @@
 	text-align:center;
 	clear:both;
 	font-family:"Source Sans Pro",'Helvetica',sans-serif;
-	font-size:14px;
+	font-size:1em;
 	line-height:1em;
 }
 
+.new-checklist-item {
+	margin-top:15px;
+	margin-left:2.5%;
+}
+
 .new-category {
-	margin:1% 1%;
-	font-size:15px;
+	margin:1% 1% 1% 2.5%;
 }
 .new-subcategory {
 	top:17px;

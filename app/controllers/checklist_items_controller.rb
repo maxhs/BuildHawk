@@ -77,7 +77,7 @@ class ChecklistItemsController < ApplicationController
 
 	def create
 		@item = ChecklistItem.create params[:checklist_item]
-		@item.move_to_top
+		@item.move_to_bottom
 		@checklist = @item.checklist
 		@subcategory = @item.subcategory
 		@project = @checklist.project if @checklist.project

@@ -1,9 +1,12 @@
-if ($('#phase-<%=@category.id%> .new_subcategory').length){
-	$('#phase-<%=@category.id%> .new_subcategory').fadeOut(200,function(){
+if ($('#<%=@category.id%>-items .new_subcategory').length){
+	$('#<%=@category.id%>-items .new_subcategory').fadeOut(200,function(){
 		$(this).remove();
+		$('#new-category-<%=@category.id%>').text("Add a new category");
 	});
+
 } else {
 	var newDiv = $('<%= j render partial:"subcategories/new" %>').css('display','none');
-	$('#phase-<%=@category.id%> #new-category').replaceWith(newDiv);
+	$('#new-category-<%=@category.id%>').before(newDiv);
 	newDiv.fadeIn(200);
+	$('#new-category-<%=@category.id%>').text("Cancel");
 }

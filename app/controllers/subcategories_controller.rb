@@ -16,7 +16,7 @@ class SubcategoriesController < ApplicationController
 
 	def create 
 		@subcategory = Subcategory.create params[:subcategory]
-		@subcategory.move_to_top
+		@subcategory.move_to_bottom
 		@checklist = @subcategory.category.checklist
 		@project = @checklist.project if @checklist.project
 	end

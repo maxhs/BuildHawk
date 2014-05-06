@@ -1,9 +1,4 @@
-<% if @project %>
-	<div class="col-xs-12" id="main">
-<% else %>
-	<%= render :partial => "admin/sidebar" %>
-<% end %>
-
+<div class="col-xs-12" id="main">
 	<div id="pages">
 		<%= render :partial => "subcategories/edit", :locals => {:subcategory => @subcategory} %>
 	</div>
