@@ -3,6 +3,8 @@ class ChecklistMailer < ActionMailer::Base
 
     def export(recipient_email, item, project)
       @recipient = User.where(:email => recipient_email).first
+      @company = @recipient.company
+      @logo_url = @company.image.url(:small) if @company.image_file_name
       @recipient = Sub.where(:email => recipient_email).first unless @recipient
       @project = project
       @checklist_item = item

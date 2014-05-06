@@ -42,4 +42,16 @@ class UsersController < ApplicationController
 			flash[:notice] = "Please make sure you've completed the form and that your password(s) are valid".html_safe
 		end
 	end
+
+	def email_unsubscribe
+		@user = User.find params[:id]
+		@user.update_attribute :email_permissions, false
+		flash[:notice] = "Successfully unsubscribed from all Verses emails".html_safe
+
+		unless @user.save
+			flash[:notice] = "Something went wrong. Please try unsubscribing again.".html_safe
+		end
+
+		render projects_path
+	end
 end

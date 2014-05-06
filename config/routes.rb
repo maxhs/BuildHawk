@@ -22,7 +22,11 @@ Buildhawk::Application.routes.draw do
   post "/checklist_items/:id", :to => "checklist_items#update"
   post "/admin/billing", :to => "admin#update_billing"
 
-  resources :users
+  resources :users do
+    member do
+      get :email_unsubscribe
+    end
+  end
   resources :home do 
     collection do
       get :about

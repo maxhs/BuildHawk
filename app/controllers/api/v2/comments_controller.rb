@@ -37,7 +37,7 @@ class Api::V2::CommentsController < Api::V2::ApiController
             report = Report.find params[:comment][:report_id]
             comments = report.comments
         end
-        if comment.save!
+        if comment.save
             respond_to do |format|
                 format.json { render_for_api :projects, :json => comments, :root => :comments}
             end
