@@ -26,11 +26,14 @@ class SubcategoriesController < ApplicationController
 		if params[:project_id]
 			@project = Project.find params[:project_id]
 			@projects = @project.company.projects
-			render "admin/editor"
-		elsif request.xhr?
+		end
+
+		if request.xhr?
 			respond_to do |format|
 				format.js
-			end	
+			end
+		else
+			render "admin/editor"
 		end
 	end
 end
