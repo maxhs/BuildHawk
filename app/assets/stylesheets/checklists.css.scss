@@ -17,6 +17,14 @@
 
 	.editable {
 
+		.disclosure {
+			position:relative;
+			bottom:2px;
+			padding-right:12px;
+			font-size:.5em;
+			vertical-align:middle;
+		}
+
 		#cancel-edit-category {
 			cursor:pointer;
 		}

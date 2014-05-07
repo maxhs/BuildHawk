@@ -2,6 +2,7 @@ var itemsHolder = $('#<%= @category.id %>-items');
 if (itemsHolder.hasClass('revealed')){
 	itemsHolder.hide(300,function(){
 		$('#new-category-<%=@category.id%>').fadeOut(200);
+		$('#phase-<%=@category.id%> .disclosure').text('[-]');
 	});
 	itemsHolder.removeClass('revealed');
 	
@@ -20,6 +21,7 @@ if (itemsHolder.hasClass('revealed')){
 		$(this).addClass('revealed');
 		$(this).show(300,function(){
 			$('#new-category-<%=@category.id%>').fadeIn(200);
+			$('#phase-<%=@category.id%> .disclosure').text('[+]');
 			<% @category.subcategories.each do |subcategory| %>
 		        $('#items-<%=subcategory.id%>').sortable({
 		          axis: 'y',
