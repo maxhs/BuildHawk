@@ -7,7 +7,7 @@
 	<li class="row checklist-item" id="item-<%=item.id%>">
 <% end %>
 
-	<div class="col-md-8 checklist-body" style="margin-left:20px;margin-right:-20px;">
+	<div class="col-md-8 checklist-body">
 		<% if current_user.admin || current_user.company_admin || item.user == current_user %>
 			<%= link_to 'Edit', edit_checklist_item_path(item), :class => "left-edit-checklist", remote: true %>
 		<% end %>

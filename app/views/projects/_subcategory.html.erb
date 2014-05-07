@@ -7,8 +7,6 @@
 				<%= link_to "Edit Category", edit_subcategory_path(subcategory, :project_id => @project.id), :class=>"edit-category", :remote => true %>
 			<% end %>
 			
-			<%= link_to "Add Item", new_checklist_item_path(:project_id => @project.id, :subcategory_id => subcategory.id), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
-			
 		</div>
 		<div class="col-xs-2 category-label">
 			<%= parse_date(subcategory.milestone_date) %>
@@ -22,5 +20,6 @@
 		<ul class="subcategory-items" id="items-<%=subcategory.id%>">
 			<%= render partial:"projects/item", collection:subcategory.checklist_items, as: :item, cache: false %>
 		</ul>
+		<%= link_to "Add Item", new_checklist_item_path(:project_id => @project.id, :subcategory_id => subcategory.id), :id=>"new-item-#{subcategory.id}", :class=>"remote new-checklist-item", :remote => true %>
 	</div>
 </li>
