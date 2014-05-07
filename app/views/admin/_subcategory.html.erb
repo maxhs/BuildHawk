@@ -1,20 +1,12 @@
 
 <li class="subcategory" id="subcategory-<%=subcategory.id%>">
 	<div class="header row">
-		<div class="col-xs-8">
+		<div class="col-xs-12 editable">
 			<h4 class="title" id="<%=subcategory.id%>"><%= subcategory.name %></h4>
 			<span class="completed-count">
 				<%= render partial:"checklists/completed_count", :locals => {:subcategory => subcategory} %>
 			</span>
-
-			<%= link_to "Edit Category", edit_subcategory_path(subcategory), :class=>"edit-category", :remote => true %>
-
-		</div>
-		<div class="col-xs-2 category-label">
-			<%= parse_date(subcategory.milestone_date) %>
-		</div>
-		<div class="col-xs-2 category-label">
-			<%= parse_date(subcategory.completed_date) %>
+			<%= link_to "Edit Category", edit_subcategory_path(subcategory), :class=>"edit-category remote", :remote => true %>
 		</div>
 	</div>
 

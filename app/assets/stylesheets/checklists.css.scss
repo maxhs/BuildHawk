@@ -47,6 +47,8 @@
 
 		#cancel-edit-category {
 			cursor:pointer;
+			text-transform:uppercase;
+			bottom:5px;
 		}
 
 		h2 {
@@ -57,6 +59,17 @@
 	form.edit_category {
 		display:inline-block;
 		height:73px;
+	}
+
+	form.edit_subcategory {
+		display:inline-block;
+		width:300px;
+		height:39px;
+	}
+
+	#cancel-edit-subcategory {
+		cursor:pointer;
+		text-transform:uppercase;
 	}
 
 	.phase-label {

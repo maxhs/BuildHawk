@@ -1,0 +1,7 @@
+<%= form_for subcategory, method: :patch, remote: true, :style=>"width:50%:" do |f| %>
+	<h4 style="display:inline-block">
+		<%= f.text_field :name, :style=>"padding:0;border:0;", autofocus: true %>
+	</h4>
+<% end %> 
+<span id="cancel-edit-subcategory" class="simple-btn">cancel</span>
+<%= link_to "Delete", subcategory_path(subcategory), :method => :delete, :data => {:confirm => "Are you sure you want to delete this category?"}, :class=>"btn btn-danger btn-md remote", :style=>"line-height:11px;position:relative;margin:0 auto;width:80px;height:32px;display:inline-block;", :remote => true %>
