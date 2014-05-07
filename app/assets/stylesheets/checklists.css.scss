@@ -140,6 +140,12 @@
 	}
 }
 
+.project-checklist-table {
+	.new-phase {
+		margin-left:1%;
+	}
+}
+
 .category {
 	clear:both;
 	position:relative;	
@@ -150,7 +156,7 @@
 	}
 
 	.left-edit {
-		top: 27px;
+		top: 21px;
 		padding: 5px 5px 5px 15px;
 		font-size: 17px;
 		position: absolute;
