@@ -56,6 +56,10 @@ class PunchlistItem < ActiveRecord::Base
         end
     end
 
+    def epoch_time
+      created_at.to_i
+    end
+
     acts_as_api
 
     api_accessible :projects do |t|
@@ -67,6 +71,7 @@ class PunchlistItem < ActiveRecord::Base
   		t.add :completed_at
   		t.add :completed
         t.add :photos
+        t.add :epoch_time
         t.add :created_at
         t.add :comments
   	end
