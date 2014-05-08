@@ -82,7 +82,11 @@ class Project < ActiveRecord::Base
     end
 
     def categories
-        checklist.categories if checklist
+        checklist.phases if checklist
+    end
+
+    def phases
+        checklist.phases if checklist
     end
 
     def ordered_reports
@@ -98,7 +102,7 @@ class Project < ActiveRecord::Base
     end
 
     def duplicate_project
-        new_checklist = checklist.dup :include => [:company, {:categories => {:subcategories => :checklist_items}}], :except => {:categories => {:subcategories => {:checklist_items => :status}}}
+        new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :status}}}
         new_project = self.dup :include => [{:reports => [:comments, :report_subs, :subs, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :punchlist_item, :report, :project,:folder]}, {:punchlists => :punchlist_items}, :address, :folders, :users, :project_users, :subs, :project_subs]
         new_project.checklist = new_checklist
         new_project.save
@@ -130,7 +134,10 @@ class Project < ActiveRecord::Base
         t.add :upcoming_items
         t.add :recently_completed
         t.add :recent_documents
+        t.add :phases
+        ### slated for deletion ###
         t.add :categories
+        ###
   	end
 
     api_accessible :punchlist, :extend => :projects do |t|
@@ -151,6 +158,9 @@ class Project < ActiveRecord::Base
         t.add :upcoming_items
         t.add :recently_completed
         t.add :recent_documents
+        t.add :phases
+        ### slated for deletion ###
         t.add :categories
+        ###
     end
 end
