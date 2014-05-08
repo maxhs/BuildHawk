@@ -51,21 +51,22 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
+	### slated for deletion ###
 	def url200
 		if image_file_name
 			image.url(:small)
 		end
 	end
+	def url100
+		if image_file_name
+			image.url(:thumb)
+		end
+	end
+	###
 
 	def url_small
 		if image_file_name
 			image.url(:small)
-		end
-	end
-
-	def url100
-		if image_file_name
-			image.url(:thumb)
 		end
 	end
 
