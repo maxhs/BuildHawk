@@ -1,4 +1,4 @@
-$('#pages').fadeOut(100,function(){
+$('#main').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "punchlist_items/edit" %>');
 	$(this).fadeIn(100);
 	var locations = <%= raw @locations.to_json %>; 

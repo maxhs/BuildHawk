@@ -2,9 +2,9 @@ class ChecklistItemsController < ApplicationController
 	before_filter :authenticate_user!
 	def edit
 		@item = ChecklistItem.find params[:id]	
-		@checklist = @item.subcategory.category.checklist
+		@checklist = @item.category.phase.checklist
 		@project = @checklist.project
-		@projects = @project.company.projects
+		@projects = @project.company.projects if @project
 		@core = params[:core] if params[:core].present?
 	end
 
@@ -28,7 +28,7 @@ class ChecklistItemsController < ApplicationController
 		if status && status == "Completed"
 			@checklist_item.update_attribute :completed_by_user_id, current_user.id
 		end
-		@checklist = @checklist_item.subcategory.category.checklist
+		@checklist = @checklist_item.category.phase.checklist
 		if @checklist.core
 			@items = @checklist.items
 			if request.xhr?
@@ -62,10 +62,10 @@ class ChecklistItemsController < ApplicationController
 	def new
 		@checklist_item = ChecklistItem.new
 		@item_index = params[:item_index]
-		@subcategory = Subcategory.find params[:subcategory_id]
-		@category = @subcategory.category
-		@checklist = @category.checklist
-		@category_name = @category.name
+		@category = Category.find params[:category_id]
+		@phase = @category.phase
+		@checklist = @phase.checklist
+		@phase_name = @phase.name
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -79,7 +79,7 @@ class ChecklistItemsController < ApplicationController
 		@item = ChecklistItem.create params[:checklist_item]
 		@item.move_to_bottom
 		@checklist = @item.checklist
-		@subcategory = @item.subcategory
+		@category = @item.category
 		@project = @checklist.project if @checklist.project
 		if request.xhr?
 			respond_to do |format|
@@ -131,8 +131,8 @@ class ChecklistItemsController < ApplicationController
 	def destroy
 		checklist_item = ChecklistItem.find params[:id]
 		@item_id = params[:id]
-		@subcategory = checklist_item.subcategory
-		@checklist = @subcategory.category.checklist
+		@category = checklist_item.category
+		@checklist = @category.phase.checklist
 		@project = @checklist.project
 		checklist_item.destroy
 		if @project

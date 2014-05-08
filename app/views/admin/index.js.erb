@@ -7,7 +7,7 @@ $('#navigation').fadeOut(170,function(){
 	$(this).fadeIn(170);
 });
 
-$('#pagescontainer').fadeOut(100,function(){
+$('#inner-wrap').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "index" %>');
 	$(this).fadeIn(100,function(){
 		closeMenu();

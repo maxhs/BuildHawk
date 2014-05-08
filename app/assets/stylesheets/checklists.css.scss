@@ -3,31 +3,35 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .project-checklist-table, .admin-checklist-table, .core-checklist-table {
-	padding:20px; 
 	margin-top:40px; 
-	border:1px solid #ddd; 
 	margin:0 auto; 
 	width:100%;
 
-	table {
+	#core-checklists, table {
 		width:100%;
+
+		tr {
+			border:1px solid #ddd;
+		}
+
+		th {
+			text-align:center;
+			font-size:1.1em;
+		}
+
+		td {
+			text-align:center;
+			padding:20px;
+			font-size:1em;
+		}
 	}
 
-	tr {
-		border:1px solid #ddd;
+	#checklist_name {
+		margin-bottom:10px;
 	}
 
-	th {
-		text-align:center;
-		font-size:1.1em;
-	}
-
-	td {
-		text-align:center;
-		padding:20px;
-		font-size:1em;
-		border-right:1px solid #ddd;
-		border-left:1px solid #ddd;
+	input[type="submit"] {
+		margin-top:10px;
 	}
 
 	#admin-no-checklists {
@@ -35,17 +39,16 @@
 		padding:40px 0 20px;
 	}
 
+	.disclosure {
+		position:relative;
+		bottom:2px;
+		padding-right:12px;
+		font-size:.5em;
+		vertical-align:middle;
+	}
+
 	.editable {
-
-		.disclosure {
-			position:relative;
-			bottom:2px;
-			padding-right:12px;
-			font-size:.5em;
-			vertical-align:middle;
-		}
-
-		#cancel-edit-category {
+		#cancel-edit-phase {
 			cursor:pointer;
 			text-transform:uppercase;
 			bottom:5px;
@@ -56,18 +59,21 @@
 			margin:15px auto;
 		}
 	}
-	form.edit_category {
+	form.edit_phase {
 		display:inline-block;
-		height:73px;
+		height:63px;
 	}
 
-	form.edit_subcategory {
+	form.edit_category {
 		display:inline-block;
 		width:300px;
 		height:39px;
+		h3,h4,input[type="text"] {
+			width:100%;
+		}
 	}
 
-	#cancel-edit-subcategory {
+	#cancel-edit-category {
 		cursor:pointer;
 		text-transform:uppercase;
 	}
@@ -104,11 +110,11 @@
 
 	#checklist-items {
 
-		.subcategory {
+		.category {
 			list-style:none;
 			padding-left:1%;
 
-			.edit-category {
+			.edit-phase {
 				bottom:0;
 			}
 		}
@@ -144,9 +150,10 @@
 	.new-phase {
 		margin-left:1%;
 	}
+
 }
 
-.category {
+.phase {
 	clear:both;
 	position:relative;	
 	list-style:none;
@@ -156,7 +163,7 @@
 	}
 
 	.left-edit {
-		top: 21px;
+		top: 18px;
 		padding: 5px 5px 5px 15px;
 		font-size: 17px;
 		position: absolute;
@@ -176,7 +183,7 @@
 	}
 }
 
-.category:hover {
+.phase:hover {
 	.left-edit {
 		display:block;
 	}
@@ -215,17 +222,24 @@
 	}
 }
 
+.checklist-item.search {
+	border-bottom:1px dotted #ddd;
+	h4, h5 {
+		text-align:left;
+	} 
+}
+
 .date-input, #dp, #dp-completed {
 	cursor:pointer;
 	width:auto;
 	margin:0 auto;
 }
 
-.category-form.container {
+.phase-form.container, .category-form.container {
 	background-color:#fff;
-	width:75%;
+	width:100%;
 	max-width:800px;
-	padding:0;
+	padding:0 20px;
 	margin:0 auto;
 	overflow:auto;
 
@@ -263,9 +277,10 @@
 }
 
 .checklist-item-form{
-	width:75%;
 	margin:0 auto;
-	padding:20px;
+	clear:both;
+	overflow-y:auto;
+	overflow-x:hidden;
 
 	.previous-item {
 		float:left;
@@ -328,8 +343,8 @@
 	border-left:1px dotted #ddd;
 }
 
-.subcategory-items {
-	width:98%;
+.category-items {
+	width:99%;
 	margin-left:1%;
 	padding-left:1%;
 	border-left:1px dotted #ddd;
@@ -339,13 +354,14 @@
 	}	
 }
 
-.subcategory {
-	
+.category {
 	.title {
 		display:inline-block;
 		margin:10px auto;
 		cursor:pointer;
+		vertical-align:middle;
 	}
+
 	.title:hover {
 		color:#cc0000;
 	}
@@ -364,7 +380,7 @@
 	}
 }
 
-.new-checklist-item, .new-phase, .new-category, .new-subcategory, .edit-subcategory, .edit-category {
+.new-checklist-item, .new-phase, .new-category, .edit-category, .edit-phase {
 	border:1px solid #eee;
 	border-radius:5px;
 	-webkit-border-radius:5px;
@@ -391,17 +407,15 @@
 	margin-left:3.5%;
 }
 
-.edit-category {
+.edit-phase {
 	position:relative;
 	left:10px;
 	bottom:5px;
 }
 
 .new-category {
-	margin:1% 1% 1% 2.5%;
-}
-.new-subcategory {
 	top:17px;
+	margin:1% 1% 1% 2.5%;
 	vertical-align:top;
 	display:none;
 }
@@ -449,14 +463,17 @@
 }
 
 .item-editor {
-	border:1px solid #ddd;
 	display:block;
-	width:100%;
+	max-width:800px;
 	background-color:#fff;
 	padding: 15px 40px;
+	margin:0 auto;
+	overflow:auto;
 
-	h3 {
+	h2, h3,h4 {
 		display:inline-block;
+		text-align:left;
+		padding-right:10px;
 	}
 
 	input[type="text"] {

@@ -1,12 +1,13 @@
 
 <div class="row topic" id="topic-<%= topic.id %>">
-	<div class="col-xs-6"><h5><%= topic.title %></h5></div>
+	<div class="col-xs-3"><h5><%= topic.title %></h5></div>
 	<% if topic.info.length > 150 %>
-		<div class="col-xs-6 topic-description"><%= topic.info[0..150] %><span class="ellipsis">...</span>
+		<div class="col-xs-9 topic-description"><%= topic.info[0..150] %>
+			<span class="ellipsis">...</span>
 			<div class="read-more simple-btn">Read more</div>
 			<span class="hiddenText"><%= topic.info[151..topic.info.length] %>
 		</div>
 	<% else %>
-		<div class="col-xs-6 topic-description"><%= topic.info %></div>
+		<div class="col-xs-9 topic-description"><%= topic.info %></div>
 	<% end %>
 </div>

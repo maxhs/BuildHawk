@@ -2,6 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.new_project {
+	max-width:800px;
+	margin:0 auto;
+
+	h4 {
+		text-align: left;
+	}
+
+	form, input[type="text"] {
+		width:100%;
+	}
+	input[type="checkbox"] {
+		width:auto;
+		margin-left:0;
+	}
+
+	.row.personnel {
+		padding:10px 0;
+		border-top:1px solid #eee;
+	}
+}
+
+
 .admin-checklist-table {
 	#checklist-items {
 		header {

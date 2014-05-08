@@ -7,7 +7,7 @@ $('#navigation').fadeOut(170,function(){
 	});
 });
 
-$('#pagescontainer').fadeOut(170,function(){
+$('#inner-wrap').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "index" %>');
 	$(this).fadeIn(170,function(){
 		if (!$('#sidebar').length){

@@ -1,146 +1,143 @@
-<div class="border-box">
 
-	<div style="float:right">
-		<button class="export btn btn-md" style="margin-top:20px;"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></button>
-	</div>
-	<%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
-		<div id="edit-report" class="container">
-			<div class="thin-form">
+<%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
+	<div id="edit-report" class="border-box container">
+		<button class="export btn btn-md" style="float:right;"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></button>
+		<div class="thin-form">
+		
+			<div class="row form-title">
+				<div class="col-md-12"><h4>Report Date</h4></div>
+			</div>
 
-				<% if @previous %>
-					<div class="previous-report">
-						<h5><%= link_to "&#8592;  #{@previous.created_date}".html_safe, report_path(@previous), remote:true %></h5>
-					</div>
-				<% end %>
-				<% if @next %>
-					<div class="next-report">
-						<h5><%= link_to "#{@next.created_date}  &#8594;".html_safe, report_path(@next), remote:true %></h5>
-					</div>
-				<% end %>
-			
-				<div class="row form-title">
-					<div class="col-md-12"><h4>Report Date</h4></div>
-				</div>
-
-				<div class="row">
-					<div class="input-append date col-md-12" data-date-format="dd-mm-yyyy">
-						<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
-					</div>
-				</div>
-
-				<div class="row form-title">
-					<div class="col-md-12"><h4 style="display:inline-block;">Report Type</h4></div>
-				</div>
-				<div class="row">
-					<div class="col-md-12" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
-				</div>
-					
-				<div class="row form-title">
-					<div class="col-md-12"><h4>General Remarks</h4></div>
-				</div>
-				<div class="row">
-					<div class="col-md-12"><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></div>
-				</div>
-
-				<% if @report.report_type == "Safety" %>
-					<div class="row form-title">
-						<div class="col-md-12"><h4>Safety Topics Covered</h4></div>
-					</div>
-					
-					<% @report.safety_topics.each do |topic| %>
-						<div class="row">
-							<div class="col-md-12"><h5>&bull;&nbsp;<%= topic.title %></h5></div>
-						</div>
-					<% end %>
-					
-				<% else %>
-					<div class="row form-title">
-						<div class="col-md-12"><h4>Weather Description</h4></div>
-					</div>
-					<div class="row">
-						<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
-					</div>
-					
-					<div class="row weather-titles">
-						<div class="col-md-3"><h4>Temperature</h4></div>
-						<div class="col-md-3"><h4>Wind</h4></div>
-						<div class="col-md-3"><h4>Precipitation</h4></div>
-						<div class="col-md-3"><h4>Humidity</h4></div>
-					</div>
-					<div class="row">
-						<div class="col-md-3"><%= f.text_field :temp, :value => @report.temp, :placeholder => "N/A" %></div>
-						<div class="col-md-3"><%= f.text_field :wind, :value => @report.wind, :placeholder => "N/A" %></div>
-						<div class="col-md-3"><%= f.text_field :precip, :value => @report.precip, :placeholder => "N/A" %></div>
-						<div class="col-md-3"><%= f.text_field :humidity, :value => @report.humidity, :placeholder => "N/A" %></div>
-					</div>
-				<% end %>
-
-				<div class="row form-title">
-					<div class="col-md-6"><h4>Personnel</h4></div>
-					<div class="col-md-6"><h4>Subcontractors (# onsite)</h4></div>
-				</div>
-
-				<div class="row">
-					<div class="user-container col-md-6">
-						<% @users.each do |user| %>
-							<% if @report.users.include?(user) %>
-								<div><%= check_box_tag "report[user_ids][]", user.id, checked: true %><span style="padding-left:1em;"><%= user.full_name %></span></div>
-							<% else %>
-								<div><%= check_box_tag "report[user_ids][]", user.id %><span style="padding-left:1em;"><%= user.full_name %></span></div>
-							<% end %>
-						<% end %>
-					</div>
-					<div class="sub-container col-md-6">
-						<% @subs.each do |sub| %>
-							<div>
-								<% report_sub = @report.report_subs.where(:sub_id => sub.id).first_or_initialize %>
-								<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;display:inline-block;text-align:center;" %>
-								<span style="padding-left:1em;"><%= sub.name %></span>
-							</div>
-						<% end %>
-					</div>
+			<div class="row">
+				<div class="input-append date col-md-12" data-date-format="dd-mm-yyyy">
+					<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 				</div>
 			</div>
 
-			<% if @report.photos && @report.photos.count > 0 %>
-				<div class="row" style="margin-top:20px;">
-					<% @report.photos.each do |p| %>
-						<% if p.image_file_name%>
-							<%= render :partial => "photos/image", :locals => {:p => p} %> 
-						<% end %>
-					<% end %>
+			<div class="row form-title">
+				<div class="col-md-12"><h4 style="display:inline-block;">Report Type</h4></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
+			</div>
+				
+			<div class="row form-title">
+				<div class="col-md-12"><h4>General Remarks</h4></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12"><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></div>
+			</div>
+
+			<% if @report.report_type == "Safety" %>
+				<div class="row form-title">
+					<div class="col-md-12"><h4>Safety Topics Covered</h4></div>
+				</div>
+				
+				<% @report.safety_topics.each do |topic| %>
+					<div class="row">
+						<div class="col-md-12"><h5>&bull;&nbsp;<%= topic.title %></h5></div>
+					</div>
+				<% end %>
+				
+			<% else %>
+				<div class="row form-title">
+					<div class="col-md-12"><h4>Weather Description</h4></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
+				</div>
+				
+				<div class="row weather-titles">
+					<div class="col-md-3"><h4>Temperature</h4></div>
+					<div class="col-md-3"><h4>Wind</h4></div>
+					<div class="col-md-3"><h4>Precipitation</h4></div>
+					<div class="col-md-3"><h4>Humidity</h4></div>
+				</div>
+				<div class="row">
+					<div class="col-md-3"><%= f.text_field :temp, :value => @report.temp, :placeholder => "N/A" %></div>
+					<div class="col-md-3"><%= f.text_field :wind, :value => @report.wind, :placeholder => "N/A" %></div>
+					<div class="col-md-3"><%= f.text_field :precip, :value => @report.precip, :placeholder => "N/A" %></div>
+					<div class="col-md-3"><%= f.text_field :humidity, :value => @report.humidity, :placeholder => "N/A" %></div>
 				</div>
 			<% end %>
 
-			<div class="thin-form">	
-				<div class="row">
-					<div class="col-md-12"><h4>Add a photo</h4></div>
-				</div>
-		
-				<div class="row">
-					<div class="col-md-12">
-						<%= f.fields_for :photos, @report.photos.build do |photo| %>
-							<%= photo.file_field :image %>
-							<%= photo.hidden_field :report_id, :value => @report.id %>
-							<%= photo.hidden_field :project_id, :value => @project.id %>
-							<%= photo.hidden_field :source, :value => "Reports" %>
+			<div class="row form-title">
+				<div class="col-md-6"><h4>Personnel</h4></div>
+				<div class="col-md-6"><h4>Subcontractors (# onsite)</h4></div>
+			</div>
+
+			<div class="row">
+				<div class="user-container col-md-6">
+					<% @users.each do |user| %>
+						<% if @report.users.include?(user) %>
+							<div><%= check_box_tag "report[user_ids][]", user.id, checked: true %><span style="padding-left:1em;"><%= user.full_name %></span></div>
+						<% else %>
+							<div><%= check_box_tag "report[user_ids][]", user.id %><span style="padding-left:1em;"><%= user.full_name %></span></div>
 						<% end %>
-					</div>
+					<% end %>
 				</div>
-			
-				<div class="button-container">
-					<%= f.submit "Save", :class => "btn btn-success btn-md save" %>
-	<% end %>
-					<% if current_user.admin || current_user.company_admin || current_user.uber_admin || @report.author == current_user %>
-						<%= link_to "Delete Report", report_path(@report, :project_id => @project.id), :method => :delete, :class => "btn btn-danger btn-md remote", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."} %>
+				<div class="sub-container col-md-6">
+					<% @subs.each do |sub| %>
+						<div>
+							<% report_sub = @report.report_subs.where(:sub_id => sub.id).first_or_initialize %>
+							<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;display:inline-block;text-align:center;" %>
+							<span style="padding-left:1em;"><%= sub.name %></span>
+						</div>
 					<% end %>
 				</div>
 			</div>
 		</div>
+
+		<% if @report.photos && @report.photos.count > 0 %>
+			<div class="row" style="margin-top:20px;">
+				<% @report.photos.each do |p| %>
+					<% if p.image_file_name%>
+						<%= render :partial => "photos/image", :locals => {:p => p} %> 
+					<% end %>
+				<% end %>
+			</div>
+		<% end %>
+
+		<div class="thin-form">	
+			<div class="row">
+				<div class="col-md-12"><h4>Add a photo</h4></div>
+			</div>
+	
+			<div class="row">
+				<div class="col-md-12">
+					<%= f.fields_for :photos, @report.photos.build do |photo| %>
+						<%= photo.file_field :image %>
+						<%= photo.hidden_field :report_id, :value => @report.id %>
+						<%= photo.hidden_field :project_id, :value => @project.id %>
+						<%= photo.hidden_field :source, :value => "Reports" %>
+					<% end %>
+				</div>
+			</div>
+		
+			<div class="button-container">
+				<%= f.submit "Save", :class => "btn btn-success btn-md save" %>
+<% end %>
+				<% if current_user.admin || current_user.company_admin || current_user.uber_admin || @report.author == current_user %>
+					<%= link_to "Delete Report", report_path(@report, :project_id => @project.id), :method => :delete, :class => "btn btn-danger btn-md remote", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."} %>
+				<% end %>
+			</div>
+		</div>
+
+	<% if @previous %>
+		<div class="previous-report">
+			<h5><%= link_to "&#8592;  #{@previous.created_date}".html_safe, report_path(@previous), remote:true %></h5>
+		</div>
+	<% end %>
+	<% if @next %>
+		<div class="next-report">
+			<h5><%= link_to "#{@next.created_date}  &#8594;".html_safe, report_path(@next), remote:true %></h5>
+		</div>
+	<% end %>
 </div>
 
-<div class="border-box" style="margin-top:20px;">
+
+<div class="border-box comment-container" style="margin-top:20px;">
 	<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h3>
 	<div id="comments-form">
 		<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>

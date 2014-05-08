@@ -1,16 +1,16 @@
 class ChecklistItem < ActiveRecord::Base
-	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :subcategory_id, :subcategory, 
+	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :category_id, 
                   :status, :critical_date, :completed_date,:photos, :photos_attributes, :checklist_id, :checklist, 
                   :order_index, :photos_count, :comments_count, :user_id
   	
   	belongs_to :user
-    belongs_to :subcategory
+    belongs_to :category
     belongs_to :checklist
     belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
   	has_many :comments, :dependent => :destroy
 
-    acts_as_list scope: :subcategory, column: :order_index
+    acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
     after_commit :check_completed
@@ -41,23 +41,23 @@ class ChecklistItem < ActiveRecord::Base
 
   	acts_as_api
 
-    def subcategory_name
-      subcategory.name if subcategory
+    def category_name
+      category.name if category
     end
 
     def types
       ["S&C","Doc","Com"]
     end
 
-    def category_name
-      subcategory.category.name if subcategory && subcategory.category
+    def phase_name
+      category.phase.name if category && category.phase
     end
 
     def check_completed
         if status == "Completed" && completed_date == nil
             self.update_attribute :completed_date, Date.today
-            if subcategory.completed_count != 0 && subcategory.completed_count == subcategory.item_count
-              subcategory.update_attribute :completed_date, Date.today
+            if category.completed_count != 0 && category.completed_count == category.item_count
+              category.update_attribute :completed_date, Date.today
             end
             #TODO create a completed notification
             notification = self.checklist.project.notifications.where(
@@ -76,7 +76,7 @@ class ChecklistItem < ActiveRecord::Base
         if checklist
             checklist.project.id
         else
-            subcategory.category.checklist.project.id
+            category.phase.checklist.project.id
         end
     end
 
@@ -114,7 +114,7 @@ class ChecklistItem < ActiveRecord::Base
     api_accessible :detail, :extend => :projects do |t|
         t.add :photos
         t.add :comments
-        t.add :category_name
+        t.add :phase_name
         t.add :project_id
     end
 

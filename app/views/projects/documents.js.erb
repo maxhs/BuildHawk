@@ -1,6 +1,6 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-documents a,#<%=@project.id%>-link').addClass('current-page');
-$('#pages').fadeOut(170,function(){
+$('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "documents", :locals => {:photos => @photos } %>');
 	$(this).fadeIn(170);
 });

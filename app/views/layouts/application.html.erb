@@ -70,7 +70,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		
 		
 		<% if user_signed_in? %>
-			<div id="pagescontainer">
+			<div id="inner-wrap">
 				<%= yield %>
 			</div>
 				
@@ -82,7 +82,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 <% if user_signed_in? %>
 	<div id="projects-tab">Projects</div>
-	<nav id="bt-menu" class="bt-menu">
+	<nav id="bh-menu" class="bh-menu">
 	
 		<% if current_user.admin? || current_user.company_admin? %>
 		<ul id="internal-nav">

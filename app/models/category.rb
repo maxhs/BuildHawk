@@ -1,78 +1,67 @@
 class Category < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
-	attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :subcategories_attributes
-  	belongs_to :checklist
-  	has_many :subcategories, :dependent => :destroy
-  	accepts_nested_attributes_for :subcategories, :allow_destroy => true
+	attr_accessible :name, :phase_id, :order_index, :milestone_date, :completed_date, :checklist_items, :status
+  	belongs_to :phase
+  	has_many :checklist_items, :dependent => :destroy
 
+    after_save :check_completed
     after_create :order_indices
 
-    acts_as_list scope: :checklist, column: :order_index
+    acts_as_list scope: :phase, column: :order_index
     default_scope { order('order_index') }
 
     def item_count
-        subcategories.joins(:checklist_items).count if subcategories
+        checklist_items.count
     end
 
     def completed_count
-        subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if subcategories
+        checklist_items.where(:status => "Completed").count if checklist_items
     end
 
-    def not_applicable_count 
-        subcategories.joins(:checklist_items).where(:checklist_items => {:status => "Not Applicable"}).count if subcategories
-    end
-
-    def progress_percentage
-      if item_count > 0
-        number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
-      else
-        "N/A"
-      end
-    end
-
-    def progress_count
-        not_applicable_count + completed_count
+    def check_completed
+        if phase.completed_count != 0 && phase.completed_count == phase.item_count
+            phase.update_attribute :completed_date, Date.today
+            status = "Completed"
+        elsif completed_date != nil
+            completed_date = nil
+            status = nil
+        end
     end
 
     def order_indices
-        sub_index = 0
-        subcategories.sort_by{|c|c.name.to_i}.each do |i|
-            i.update_attribute :order_index, sub_index
-            sub_index += 1
+        if checklist_items.count > 0 && checklist_items.first.order_index.nil?
+            checklist_items.each_with_index do |i,idx|
+                i.update_attribute :order_index, idx
+            end
         end
+    end
+
+    def not_applicable_count 
+        checklist_items.where(:status => "Not Applicable").count if checklist_items
+    end
+
+    def progress_percentage
+        number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
     end
 
   	acts_as_api
 
   	api_accessible :projects do |t|
-      t.add :id
+        t.add :id
   		t.add :name
+  		t.add :category_id
+        t.add :phase_id
   		t.add :milestone_date
   		t.add :completed_date
-      t.add :item_count
-      t.add :completed_count
-      t.add :progress_count
-      t.add :order_index
+        t.add :order_index
   	end
 
-    api_accessible :details, :extend => :projects do |t|
-
-    end
-
     api_accessible :checklist do |t|
-      t.add :subcategories
-      t.add :name
-      t.add :completed_date
-      t.add :milestone_date
-      t.add :progress_percentage
-      t.add :order_index
-    end
-
-    api_accessible :dashboard do |t|
-      t.add :name
-      t.add :item_count
-      t.add :completed_count
-      t.add :progress_count
-      t.add :order_index
+        t.add :checklist_items
+        t.add :name
+        t.add :completed_date
+        t.add :milestone_date
+        t.add :progress_percentage
+        t.add :order_index
     end
 end

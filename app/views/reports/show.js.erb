@@ -3,7 +3,7 @@ $('.nav-reports a').addClass('current-page');
 if ($('.datepicker.dropdown-menu').length){
 	$('.datepicker.dropdown-menu').remove();
 }
-$('#pages').fadeOut(170,function(){
+$('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "edit", :locals => {:report => @report } %>');
 	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);

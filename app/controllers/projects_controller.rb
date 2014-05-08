@@ -146,7 +146,7 @@ class ProjectsController < ApplicationController
 
 	def checklist
 		@checklist = @project.checklist
-		@phase = @checklist.categories.find params[:phase_id] if params[:phase_id] 
+		@phase = @checklist.phases.find params[:phase_id] if params[:phase_id] 
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -158,10 +158,10 @@ class ProjectsController < ApplicationController
 
 	def checklist_item
 		@item = ChecklistItem.find params[:item_id]
-		subcategory = @item.subcategory
-		@next = subcategory.checklist_items.where(:order_index => @item.order_index+1).first
+		category = @item.category
+		@next = category.checklist_items.where(:order_index => @item.order_index+1).first
 		puts "found next" if @next
-		@previous = subcategory.checklist_items.where(:order_index => @item.order_index-1).first
+		@previous = category.checklist_items.where(:order_index => @item.order_index-1).first
 		puts "found previous" if @previous
 	end  
 

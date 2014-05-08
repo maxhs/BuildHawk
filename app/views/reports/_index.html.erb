@@ -1,4 +1,4 @@
-<div class="border-box" style="padding-top:20px;padding-bottom:0px;">
+<div class="border-box" style="padding-top:20px;">
 	<header>	
 		<div style="margin-bottom: 15px">
 			<%= form_tag search_reports_path(:project_id => @project.id), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
@@ -7,7 +7,7 @@
 			<% end %>
 		</div>
 		<div style="width:100%;text-align:center;">
-			<%= link_to "Add Report", new_report_path(:project_id => @project.id), :class=>"simple-btn search-button", remote: true %>
+			<%= link_to "Add a new report", new_report_path(:project_id => @project.id), :class=>"simple-btn search-button", remote: true %>
 		<div>
 	</header>
 

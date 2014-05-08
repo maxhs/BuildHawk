@@ -82,15 +82,15 @@
 				<div class="col-xs-2 header-label center"><h4>+/-</h4></div>
 			</div>
 			
-			<% @checklist.categories.sort_by{|c|c.name.to_i}.each do |cat| %>
+			<% @checklist.phases.sort_by{|p|p.name.to_i}.each do |phase| %>
 				<div class="row" style="font-size:1.1em;border-bottom:1px solid #eee;">
-					<div class="col-xs-4"><h4 style="text-align:left"><%= link_to cat.name, checklist_project_path(@project, :phase_id => cat.id), :remote => true %></h4></div>
-					<div class="col-xs-2 center"><span style="text-align:center;display:inline-block;width:100%;"><%= cat.progress_percentage %></span></div>
-					<div class="col-xs-2 center"><% if cat.completed_date %> <%= parse_date cat.completed_date%><% end %></div>
-					<div class="col-xs-2 center"><% if cat.milestone_date %><%= parse_date cat.milestone_date %><% end %></div>
+					<div class="col-xs-4"><h4 style="text-align:left"><%= link_to phase.name, checklist_project_path(@project, :phase_id => phase.id), :remote => true %></h4></div>
+					<div class="col-xs-2 center"><span style="text-align:center;display:inline-block;width:100%;"><%= phase.progress_percentage %></span></div>
+					<div class="col-xs-2 center"><% if phase.completed_date %> <%= parse_date phase.completed_date%><% end %></div>
+					<div class="col-xs-2 center"><% if phase.milestone_date %><%= parse_date phase.milestone_date %><% end %></div>
 					<div class="col-xs-2 center">
-						<% if cat.milestone_date && cat.completed_date %> 
-							<% diff = (cat.milestone_date.to_date-cat.completed_date.to_date).to_i %>
+						<% if phase.milestone_date && phase.completed_date %> 
+							<% diff = (phase.milestone_date.to_date-phase.completed_date.to_date).to_i %>
 							<% if diff < 0 %>
 								<span style="color:red"><%= diff %></span>
 							<% else %>

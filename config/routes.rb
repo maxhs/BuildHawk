@@ -114,8 +114,8 @@ Buildhawk::Application.routes.draw do
   resources :project_groups
   resources :checklists do 
     collection do 
+      post :order_phases
       post :order_categories
-      post :order_subcategories
       post :order_items
     end
     member do
@@ -124,13 +124,13 @@ Buildhawk::Application.routes.draw do
       post :create_checklist_item 
       get :subcategory
       get :load_items
-      patch :update_subcategory
+      patch :update_category
+      delete :destroy_phase
       delete :destroy_category
-      delete :destroy_subcategory
     end
   end
+  resources :phases
   resources :categories
-  resources :subcategories
   resources :safety_topics
   resources :checklist_items do
     member do

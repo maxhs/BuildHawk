@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #edit-project {
+	margin: 0 auto;
+	max-width: 800px;
+
 	.edit-header {
 		text-align:center;
 		margin:0 auto 20px;
@@ -51,11 +54,7 @@
 #archive-button:hover {
 	border: 1px solid #ccc;
 }
-
-
-#new-project-form, #edit-project-form {
-	width:75%;
-	margin:0 auto;
+.edit_project {
 
 	form, input[type="text"] {
 		width:100%;

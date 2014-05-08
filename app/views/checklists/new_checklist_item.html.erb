@@ -5,7 +5,7 @@
 	<% else %>
 		<%= render :partial => "admin/sidebar" %>
 	<% end %>
-	<div id="pages">
-		<% render :partial => "new_checklist_item", :locals => {:checklist_item => @checklist_item, :category_name => @category_name, :subcategory_name => @subcategory.name, :checklist => @checklist} %>
-	</div>
+
+	<% render :partial => "new_checklist_item", :locals => {:checklist_item => @checklist_item, :category_name => @category_name, :subcategory_name => @subcategory.name, :checklist => @checklist} %>
+
 </div>

@@ -4,8 +4,9 @@ $('#new_checklist_item').fadeOut(200,function(){
 	<% else %>
 		$(this).replaceWith('<%= j render partial:"admin/item", :locals => {:item => @item} %>');
 	<% end %>
-	<% if @subcategory %>
-		$('#subcategory-<%= @subcategory.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", :locals => {:subcategory => @subcategory} %>');
+	<% if @category %>
+		$('#category-<%= @category.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", :locals => {:category => @category} %>');
 	<% end %>
+	$('.new-checklist-item').text("Add a new item");
 	$(this).fadeIn(200);
 });

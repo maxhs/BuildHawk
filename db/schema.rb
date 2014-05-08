@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424224323) do
+ActiveRecord::Schema.define(version: 20140507233116) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -43,20 +43,18 @@ ActiveRecord::Schema.define(version: 20140424224323) do
   add_index "apn_registrations", ["user_id"], name: "apn_registrations_user_id_ix"
 
   create_table "categories", force: true do |t|
+    t.integer  "phase_id"
+    t.string   "name"
     t.integer  "order_index"
-    t.integer  "checklist_id"
-    t.integer  "core_checklist_id"
+    t.integer  "checklist_items_count"
     t.datetime "completed_date"
     t.datetime "milestone_date"
-    t.integer  "checklist_items_count"
-    t.integer  "subcategories_count"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
   end
 
-  add_index "categories", ["checklist_id"], name: "categories_checklist_id_ix"
+  add_index "categories", ["phase_id"], name: "subcategories_category_id_ix"
 
   create_table "charges", force: true do |t|
     t.integer  "company_id"
@@ -72,7 +70,6 @@ ActiveRecord::Schema.define(version: 20140424224323) do
     t.string   "item_type"
     t.text     "body"
     t.integer  "order_index"
-    t.integer  "subcategory_id"
     t.integer  "category_id"
     t.integer  "checklist_id"
     t.integer  "completed_by_user_id"
@@ -86,7 +83,7 @@ ActiveRecord::Schema.define(version: 20140424224323) do
     t.integer  "user_id"
   end
 
-  add_index "checklist_items", ["subcategory_id", "checklist_id"], name: "checklist_items_ix"
+  add_index "checklist_items", ["category_id", "checklist_id"], name: "checklist_items_ix"
 
   create_table "checklists", force: true do |t|
     t.integer  "project_id"
@@ -169,6 +166,22 @@ ActiveRecord::Schema.define(version: 20140424224323) do
     t.integer  "project_id"
     t.boolean  "feed",              default: false
   end
+
+  create_table "phases", force: true do |t|
+    t.integer  "order_index"
+    t.integer  "checklist_id"
+    t.integer  "core_checklist_id"
+    t.datetime "completed_date"
+    t.datetime "milestone_date"
+    t.integer  "checklist_items_count"
+    t.integer  "subcategories_count"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status"
+  end
+
+  add_index "phases", ["checklist_id"], name: "categories_checklist_id_ix"
 
   create_table "photos", force: true do |t|
     t.string   "image_file_name"
@@ -325,20 +338,6 @@ ActiveRecord::Schema.define(version: 20140424224323) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "subcategories", force: true do |t|
-    t.integer  "category_id"
-    t.string   "name"
-    t.integer  "order_index"
-    t.integer  "checklist_items_count"
-    t.datetime "completed_date"
-    t.datetime "milestone_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "status"
-  end
-
-  add_index "subcategories", ["category_id"], name: "subcategories_category_id_ix"
 
   create_table "subs", force: true do |t|
     t.string   "name"

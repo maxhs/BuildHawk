@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.comment-container {
+	max-width:800px;
+	margin:0 auto;
+	
+	textarea {
+		width:100%;
+		display:block;
+	}
+}
+
 #comments-table {
 	width:75%;
 	margin:66px auto 0;
@@ -20,16 +30,5 @@
 	tr {
 		line-height: 60px;
 		border-top:1px solid #eee;
-	}
-}
-
-#comments-form {
-	width:75%;
-	margin:0 auto;
-	display:block;
-
-	textarea {
-		width:100%;
-		display:block;
 	}
 }

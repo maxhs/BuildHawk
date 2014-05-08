@@ -1,0 +1,25 @@
+<li class="category" id="category-<%=category.id%>">
+	<div class="header row">
+		<div class="col-xs-8">
+			<h4 class="title" id="<%= category.id %>"><%= category.name %></h4>
+			<span style="padding:0 1em;color:#aaa;">(<%=category.completed_count%> of <%= category.checklist_items.count%>)</span>
+			<% if current_user.admin || current_user.company_admin %>
+				<%= link_to "Edit Category", edit_category_path(category, :project_id => @project.id), :class=>"edit-category", :remote => true %>
+			<% end %>
+			
+		</div>
+		<div class="col-xs-2 category-label">
+			<%= parse_date(category.milestone_date) %>
+		</div>
+		<div class="col-xs-2 category-label">
+			<%= parse_date(category.completed_date) %>
+		</div>
+	</div>
+
+	<div class="items-container collapsed" id="category-<%=category.id%>-container">
+		<ul class="category-items" id="items-<%=category.id%>">
+			<%= render partial:"projects/item", collection:category.checklist_items, as: :item, cache: false %>
+		</ul>
+		<%= link_to "Add Item", new_checklist_item_path(:project_id => @project.id, :category_id => category.id), :id=>"new-item-#{category.id}", :class=>"new-checklist-item", :remote => true %>
+	</div>
+</li>

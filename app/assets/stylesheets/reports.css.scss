@@ -2,9 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#add-report, #edit-report {
+#project-reports {
+	.table {
+		margin-bottom:0;
+	}
+}
 
-	min-width:500px;
+#add-report, #edit-report {
+	max-width:800px;
 	margin:0 auto;
 
 	h4 {
@@ -50,23 +55,15 @@
 	}
 
 	.thin-form {
-		width:80%;
-		margin:20px auto;
-		position:relative;
+		clear:both;
+	}
 
-		.previous-report{
-			position:absolute;
-			top:-30px;
-			left:0;
-			margin-bottom:20px;
-		} 
+	.previous-report{
+		float:left;
+	} 
 
-		.next-report {
-			position:absolute;
-			top:-30px;
-			right:0;
-			margin-bottom:20px;
-		}
+	.next-report {
+		float:right;
 	}
 }
 .delete-report-link {

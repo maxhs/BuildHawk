@@ -6,17 +6,17 @@
 				<%= render partial:"admin/edit_checklist" %>
 			</header>
 			
-			<ul id="categories">
-				<%= render :partial => 'admin/phase', collection: @checklist.categories, :as => :c, cache: false %>
+			<ul id="phases">
+				<%= render :partial => 'admin/phase', collection: @checklist.phases, :as => :p, cache: false %>
 			</ul>
-			<%= link_to "Add a new phase", new_category_path(:checklist_id => @checklist), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
+			<%= link_to "Add a new phase", new_phase_path(:checklist_id => @checklist), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
 		</div>
 	</div>
 <% end %>
 
 <script>
 $(document).ready(function(){
-	$('#categories').sortable({
+	$('#phases').sortable({
           axis: 'y',
           dropOnEmpty:true,
           cursor: 'move',
@@ -26,14 +26,14 @@ $(document).ready(function(){
           stop: function(){
             $.ajax({
                 type: 'post',
-                data: $('#categories').sortable('serialize') + '&id=<%=@checklist.id-%>',
+                data: $('#phases').sortable('serialize') + '&id=<%=@checklist.id-%>',
                 dataType: 'script',
-                url: '/checklists/order_categories'})
+                url: '/checklists/order_phases'})
             }
         })
 
-        <% @checklist.categories.each do |c| %>
-        	$('#<%= c.id %>-items').sortable({
+        <% @checklist.phases.each do |p| %>
+        	$('#<%= p.id %>-items').sortable({
 	          axis: 'y',
 	          dropOnEmpty:true,
 	          cursor: 'move',
@@ -43,12 +43,13 @@ $(document).ready(function(){
 	          stop: function(){
 	            $.ajax({
 	                type: 'post',
-	                data: $('#<%= c.id %>-items').sortable('serialize') + '&id=<%=c.id-%>',
+	                data: $('#<%= p.id %>-items').sortable('serialize') + '&id=<%=p.id-%>',
 	                dataType: 'script',
-	                url: '/checklists/order_subcategories'})
+	                url: '/checklists/order_categories'})
 	            }
 	        });
         <% end %>
-        $('#categories li:first-child .phase-link').click();
+        
+        $('#phases li:first-child .phase-link').click();
     });
 </script>

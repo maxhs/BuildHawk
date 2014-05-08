@@ -1,5 +1,5 @@
 <%= nested_form_for @checklist_item, remote: true, :method => :post do |f| %>
-	<%= f.hidden_field :subcategory_id, :value => @subcategory.id %>
+	<%= f.hidden_field :category_id, :value => @category.id %>
 	<%= f.hidden_field :checklist_id, :value => @checklist.id %>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
 

@@ -1,0 +1,26 @@
+$('.new_phase').fadeOut(170,function(){
+	$(this).remove();
+	<% if @category.checklist.project %>
+		$('#phases').append('<%= j render partial:"projects/phase", locals:{:p => @phase} %>');
+	<% else %>
+		$('#phases').append('<%= j render partial:"admin/phase", locals:{:p => @phase} %>');
+	<% end %>
+	$('#new-phase').text("Add a new phase");
+	$('#phases').sortable({
+        axis: 'y',
+        dropOnEmpty:true,
+        cursor: 'move',
+        items: 'li',
+        opacity: 0.4,
+        scroll: true,
+        stop: function(){
+            $.ajax({
+                type: 'post',
+                data: $('#phases').sortable('serialize') + '&id=<%= @phase.checklist.id %>',
+                dataType: 'script',
+                url: '/checklists/order_phases'})
+            }
+    })
+});
+
+$('#phase_name').val('');

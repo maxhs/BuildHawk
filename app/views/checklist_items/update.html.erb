@@ -1,8 +1,2 @@
-<% if @checklist.project %>
-
-<% else %>
-
-<% end %>
-			<div id="pages">
-				<%= render :partial => "projects/checklist", :locals => {:checklist => @checklist} %>
-			</div>
+<%= render :partial => "projects/checklist", :locals => {:checklist => @checklist} %>
+			

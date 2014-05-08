@@ -1,24 +1,13 @@
+
 <div id="item-container" class="border-box">
-	<div style="float:right;padding-top:20px;">
-		<button class="btn simple-btn" id="export-checklist-item">Export</button>
-	</div>
+	<button class="btn simple-btn" id="export-checklist-item">Export</button>
 
 	<div class="checklist-item-form">
-		<% if @previous %>
-			<div class="previous-item">
-				<h5><%= link_to "&#8592;#{truncate("#{@previous.body}", length:30)}".html_safe, checklist_item_project_path(@project, :item_id => @previous.id), remote:true %></h5>
-			</div>
-		<% end %>
-		<% if @next %>
-			<div class="next-item">
-				<h5><%= link_to "#{truncate("#{@next.body}", length:30)} &#8594;".html_safe, checklist_item_project_path(@project, :item_id => @next.id), remote:true %></h5>
-			</div>
-		<% end %>
 		<div class="row" style="clear:both">
-			<span class="col-xs-5 header-description"><h2><%= item.category_name %></h2></span>
+			<span class="col-xs-5 header-description"><h2><%= item.phase_name %></h2></span>
 		</div>
 		<div class="row">
-			<span class="col-xs-5 header-description"><h4><%= item.subcategory_name %></h4></span>
+			<span class="col-xs-5 header-description"><h4><%= item.category_name %></h4></span>
 		</div>
 		<div class="row">
 			<span class="col-xs-12 item-body">- <%= item.body %></span>
@@ -61,7 +50,7 @@
 						<%= photo.file_field :image, :style=>"margin:0 auto;" %>
 						<%= photo.hidden_field :user_id, :value => current_user.id %>
 						<%= photo.hidden_field :project_id, :value => @project.id %>
-						<% if item.category_name %><%= photo.hidden_field :phase, :value => item.category_name %><% end %>
+						<% if item.phase_name %><%= photo.hidden_field :phase, :value => item.phase_name %><% end %>
 						<% if item.id %><%= photo.hidden_field :checklist_item_id, :value => item.id %><% end %>
 						<%= photo.hidden_field :source, :value => "Checklist" %>
 					<% end %>
@@ -75,11 +64,22 @@
 					<% end %>
 				</div>
 			</div>
+
+		<% if @previous %>
+			<div class="previous-item">
+				<h5><%= link_to "&#8592;#{truncate("#{@previous.body}", length:30)}".html_safe, checklist_item_project_path(@project, :item_id => @previous.id), remote:true %></h5>
+			</div>
+		<% end %>
+		<% if @next %>
+			<div class="next-item">
+				<h5><%= link_to "#{truncate("#{@next.body}", length:30)} &#8594;".html_safe, checklist_item_project_path(@project, :item_id => @next.id), remote:true %></h5>
+			</div>
+		<% end %>
 		
 	</div>
 </div>
 
-<div class="border-box" style="margin-top:20px;overflow:auto;">
+<div class="border-box comment-container" style="margin-top:20px;overflow:auto;">
 	<h3 style="text-align:center; width:80%;margin:20px auto; display:block;">Comments</h3>
 	<div id="comments-form">
 		<%= form_for item.comments.new, :method => :post, :remote => true do |f| %>

@@ -1,26 +1,6 @@
-$('.new_category').fadeOut(170,function(){
-	$(this).remove();
-	<% if @category.checklist.project %>
-		$('#categories').append('<%= j render partial:"projects/phase", locals:{:c => @category} %>');
-	<% else %>
-		$('#categories').append('<%= j render partial:"admin/phase", locals:{:c => @category} %>');
-	<% end %>
-	$('#new-phase').text("Add a new phase");
-	$('#categories').sortable({
-        axis: 'y',
-        dropOnEmpty:true,
-        cursor: 'move',
-        items: 'li',
-        opacity: 0.4,
-        scroll: true,
-        stop: function(){
-            $.ajax({
-                type: 'post',
-                data: $('#categories').sortable('serialize') + '&id=<%= @category.checklist.id %>',
-                dataType: 'script',
-                url: '/checklists/order_categories'})
-            }
-    })
-});
-
-$('#category_name').val('');
+<% if @subcategory.category.checklist.project %>
+	$('#new_subcategory').replaceWith('<%= j render partial:"projects/subcategory", locals:{:subcategory => @subcategory} %>');
+<% else %>
+	$('#new_subcategory').replaceWith('<%= j render partial:"admin/subcategory", locals:{:subcategory => @subcategory} %>');
+<% end %>
+$('#new-category-<%=@subcategory.category.id %>').text('Add a new category');

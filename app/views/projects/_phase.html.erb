@@ -1,11 +1,18 @@
-<li class="category" id="phase-<%=c.id%>">
+<li class="phase" id="phase-<%=p.id%>">
 	<% if current_user.admin %>
-		<%= link_to "Edit", category_path(c, :project_id => @project), :class => "left-edit", remote: true %>
+		<%= link_to "Edit", phase_path(p, :project_id => @project), :class => "left-edit", remote: true %>
 	<% end %>
 	<div class="header row">
-		<span class="col-xs-8"><h2 style="margin: 15px auto;display:inline-block"><%= link_to c.name, load_items_checklist_path(c, :project_id => @project.id), :id => "c-#{c.id}", :class=>"phase-name remote", :remote => true %></h2></span>
-		<span class="col-xs-2 phase-label"><%= parse_date(c.milestone_date) %></span>	
-		<span class="col-xs-2 phase-label"><%= parse_date(c.completed_date) %></span>
+		<span class="col-xs-8">
+			<h2 class="title remote">
+			<%= link_to load_items_checklist_path(p), :id => "p-#{p.id}", :class=>"phase-link remote", remote: true do %>
+				<span class="disclosure">[&#45;]</span>
+				<%=p.name%>
+			<% end %>
+		</h2>
+		</span>
+		<span class="col-xs-2 phase-label"><%= parse_date(p.milestone_date) %></span>	
+		<span class="col-xs-2 phase-label"><%= parse_date(p.completed_date) %></span>
 	</div>
-	<ul id="<%= c.id %>-items"></ul>
+	<ul id="<%= p.id %>-items"></ul>
 </li>

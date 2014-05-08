@@ -30,9 +30,9 @@ class ChecklistsController < ApplicationController
 	end
 
 	def load_items
-		@category = Category.find params[:id]
-		@project = Project.find params[:project_id] if params[:project_id]
-		@subcategories = @category.subcategories
+		@phase = Phase.find params[:id]
+		@project = @phase.checklist.project
+		@categories = @phase.categories
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -84,10 +84,10 @@ class ChecklistsController < ApplicationController
 	def new_checklist_item
 		@checklist_item = ChecklistItem.new
 
-		@subcategory = Subcategory.find params[:subcategory_id]
-		@category = @subcategory.category
-		@checklist = @category.checklist
-		@category_name = @category.name
+		@category = Category.find params[:category_id]
+		@phase = @category.phase
+		@checklist = @phase.checklist
+		@phase = @phase.name
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -100,7 +100,7 @@ class ChecklistsController < ApplicationController
 	def create_checklist_item
 
 		@item = ChecklistItem.create params[:checklist_item]
-		@subcategory = @item.subcategory
+		@category = @item.category
 		@checklist = @item.checklist
 
 		if request.xhr?
@@ -112,38 +112,38 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
-	def subcategory
-		@subcategory = Subcategory.find params[:subcategory_id]
+	def category
+		@category = Category.find params[:category_id]
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else
-			render :subcategory
+			render :category
 		end
 	end
 
-	def update_subcategory
-		@subcategory = Subcategory.find params[:subcategory_id]
-		if params[:subcategory][:milestone_date].present?
-			datetime = Date.strptime(params[:subcategory][:milestone_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
-			@subcategory.update_attribute :milestone_date, datetime
+	def update_category
+		@category = Category.find params[:category_id]
+		if params[:category][:milestone_date].present?
+			datetime = Date.strptime(params[:category][:milestone_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
+			@category.update_attribute :milestone_date, datetime
 		else
-			@subcategory.update_attribute :milestone_date, nil
+			@category.update_attribute :milestone_date, nil
 		end
 
-		if params[:subcategory][:completed_date].present?
-			datetime = Date.strptime(params[:subcategory][:completed_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
-			@subcategory.update_attribute :completed_date, datetime
+		if params[:category][:completed_date].present?
+			datetime = Date.strptime(params[:category][:completed_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
+			@category.update_attribute :completed_date, datetime
 		else
-			@subcategory.update_attribute :completed_date, nil
+			@category.update_attribute :completed_date, nil
 		end
 		
-		if params[:subcategory][:name].present?
-			@subcategory.update_attribute :name, params[:subcategory][:name]
+		if params[:category][:name].present?
+			@category.update_attribute :name, params[:category][:name]
 		end
 
-		@checklist = @subcategory.category.checklist
+		@checklist = @category.phase.checklist
 		unless @checklist.project.nil?
 			@project = @checklist.project
 			@projects = @checklist.project.company.projects
@@ -165,11 +165,11 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
-	def destroy_subcategory
-		@subcategory = Subcategory.find params[:subcategory_id]
+	def destroy_category
+		@category = Category.find params[:category_id]
 		@checklist = Checklist.find params[:id]
 		@project = @checklist.project
-		if @subcategory.destroy && request.xhr?
+		if @category.destroy && request.xhr?
 			if @project
 				respond_to do |format|
 					format.js { render :template => "projects/checklist"}
@@ -188,11 +188,11 @@ class ChecklistsController < ApplicationController
 		end
 	end
 	
-	def order_categories
+	def order_phases
 		@checklist = Checklist.find params[:id]
 		@project = @checklist.project unless @checklist.project.nil?
 		params[:phase].each_with_index do |p,i|
-			@phase = Category.find p
+			@phase = Phase.find p
 			@phase.update_attribute :order_index, i
 		end
 		respond_to do |format|
@@ -200,12 +200,12 @@ class ChecklistsController < ApplicationController
 		end
 	end
 
-	def order_subcategories
-		@category = Category.find params[:id]
-		@project = @category.checklist.project unless @category.checklist.project.nil?
-		params[:subcategory].each_with_index do |p,i|
-			subcategory = Subcategory.find p
-			subcategory.update_attribute :order_index, i
+	def order_categories
+		@phase = Phase.find params[:id]
+		@project = @phase.checklist.project unless @phase.checklist.project.nil?
+		params[:category].each_with_index do |p,i|
+			category = Category.find p
+			category.update_attribute :order_index, i
 		end
 		respond_to do |format|
 			format.js  { render :template => "checklists/reorder"}
@@ -213,8 +213,8 @@ class ChecklistsController < ApplicationController
 	end
 
 	def order_items
-		subcategory = Subcategory.find params[:id]
-		@project = subcategory.category.checklist.project
+		category = Category.find params[:id]
+		@project = category.phase.checklist.project
 		params[:item].each_with_index do |item,i|
 			@item = ChecklistItem.find item
 			@item.update_attribute :order_index, i

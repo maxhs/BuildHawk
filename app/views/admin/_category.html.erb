@@ -1,0 +1,19 @@
+
+<li class="category" id="category-<%=category.id%>">
+	<div class="header row">
+		<div class="col-xs-12 editable">
+			<h4 class="title" id="<%=category.id%>"><%= category.name %></h4>
+			<span class="completed-count">
+				<%= render partial:"checklists/completed_count", :locals => {:category => category} %>
+			</span>
+			<%= link_to "Edit Category", edit_category_path(category), :class=>"edit-category remote", :remote => true %>
+		</div>
+	</div>
+
+	<div class="items-container collapsed" id="category-<%=category.id%>-container">
+		<ul class="category-items" id="items-<%=category.id%>">
+			<%= render partial:"admin/item", collection:category.checklist_items, as: :item, cache: false %>
+		</ul>
+		<%= link_to "Add new item", new_checklist_item_path(:category_id => category.id), :id=>"new-item-#{category.id}", :class=>"remote new-checklist-item", :remote => true %>
+	</div>
+</li>

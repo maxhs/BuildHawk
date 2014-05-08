@@ -1,0 +1,11 @@
+if ($('.new_phase').length){
+	$('.new_phase').fadeOut(200,function(){
+		$(this).remove();
+		$('#new-phase').text('Add a new phase');
+	});
+} else {
+	var newDiv = $('<%= j render partial:"phases/new" %>').css('display','none');
+	$('#new-phase').before(newDiv);
+	newDiv.fadeIn(200);
+	$('#new-phase').text('Cancel');
+}

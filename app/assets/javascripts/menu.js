@@ -21,14 +21,14 @@ function sideMenu() {
 
 	function init() {
 
-		var menu = document.getElementById( 'bt-menu' ),
+		var menu = document.getElementById( 'bh-menu' ),
 			trigger = document.getElementById( 'projects-tab' ),
 			projectsTab = document.getElementById( 'projects-tab' ),
-			triggerPlay = document.querySelector( 'a.bt-menu-trigger-out' ),
+			triggerPlay = document.querySelector( 'a.bh-menu-trigger-out' ),
 			// event type (if mobile use touch events)
 			eventtype = mobilecheck() ? 'touchstart' : 'click',
 			resetMenu = function() {
-				classie.remove( menu, 'bt-menu-open' );
+				classie.remove( menu, 'bh-menu-open' );
 				classie.remove( projectsTab, 'open' );
 			},
 			closeClickFn = function( ev ) {
@@ -44,10 +44,10 @@ function sideMenu() {
 			ev.stopPropagation();
 			ev.preventDefault();
 			
-			if( classie.has( menu, 'bt-menu-open' ) ) {
+			if( classie.has( menu, 'bh-menu-open' ) ) {
 				resetMenu();
 			} else {
-				classie.add( menu, 'bt-menu-open' );
+				classie.add( menu, 'bh-menu-open' );
 				classie.add( projectsTab, 'open' );
 				overlay.addEventListener( eventtype, closeClickFn );
 			}
@@ -58,26 +58,23 @@ function sideMenu() {
 				ev.stopPropagation();
 				ev.preventDefault();
 
-				classie.add( menu, 'bt-menu-open' );
+				classie.add( menu, 'bh-menu-open' );
 				classie.add( projectsTab, 'open' );
 				overlay.addEventListener( eventtype, closeClickFn );
 			});
 		}
 
 	}
-
 	init();
 }
 
 function closeMenu() {
-	console.log('should be closing menu');
-	var menu = document.getElementById( 'bt-menu' ),
+	var menu = document.getElementById( 'bh-menu' ),
 		trigger = document.getElementById( 'projects-tab' ),
 		projectsTab = document.getElementById( 'projects-tab' ),
-		triggerPlay = document.querySelector( 'a.bt-menu-trigger-out' ),
+		triggerPlay = document.querySelector( 'a.bh-menu-trigger-out' ),
 		// event type (if mobile use touch events)
 		eventtype = mobilecheck() ? 'touchstart' : 'click';
-
-		classie.remove( menu, 'bt-menu-open' );
+		classie.remove( menu, 'bh-menu-open' );
 		classie.remove( projectsTab, 'open' );
 }

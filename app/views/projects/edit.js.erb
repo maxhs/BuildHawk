@@ -1,6 +1,6 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-edit a,#<%=@project.id%>-link').addClass('current-page');
-$('#pages').fadeOut(170,function(){
+$('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "edit" %>');
 	$(this).fadeIn(170);
 	$("#project_core").change(function() {

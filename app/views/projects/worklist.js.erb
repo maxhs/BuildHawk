@@ -1,6 +1,6 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-punchlists a,#<%=@project.id%>-link').addClass('current-page');
-$('#pages').fadeOut(170,function(){
+$('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/worklist" %>');
 	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);

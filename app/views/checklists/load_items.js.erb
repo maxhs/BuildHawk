@@ -1,29 +1,27 @@
-var itemsHolder = $('#<%= @category.id %>-items');
+var itemsHolder = $('#<%= @phase.id %>-items');
 if (itemsHolder.hasClass('revealed')){
 	itemsHolder.hide(300,function(){
-		$('#new-category-<%=@category.id%>').fadeOut(200);
-		$('#phase-<%=@category.id%> .disclosure').text('[-]');
+		$('#phase-<%=@phase.id%> .disclosure').text('[-]');
 	});
 	itemsHolder.removeClass('revealed');
 	
 } else {
 	$('html, body').animate({
-        scrollTop: $('#phase-<%=@category.id %>').offset().top-50
+        scrollTop: $('#phase-<%=@phase.id %>').offset().top-50
     }, 1000);
 	itemsHolder.fadeOut(200,function(){
 		<% if @project %>
-			$(this).html('<%= j render partial:"projects/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "Add a new category", new_subcategory_path(:category_id => @category.id,:project_id => @project.id), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
+			$(this).html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category", remote: true %>');
 		<% else %>
-			$(this).html('<%= j render partial:"admin/subcategory", collection:@subcategories, as: :subcategory, cache: false %><%= link_to "Add a new category", new_subcategory_path(:category_id => @category.id), :id=>"new-category-#{@category.id}", :class=>"remote new-category", remote: true %>');
+			$(this).html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category", remote: true %>');
 			itemsHolder.children(":first").find(".items-container").removeClass("collapsed");
 		<% end %>
 
 		$(this).addClass('revealed');
 		$(this).show(300,function(){
-			$('#new-category-<%=@category.id%>').fadeIn(200);
-			$('#phase-<%=@category.id%> .disclosure').text('[+]');
-			<% @category.subcategories.each do |subcategory| %>
-		        $('#items-<%=subcategory.id%>').sortable({
+			$('#phase-<%=@phase.id%> .disclosure').text('[+]');
+			<% @phase.categories.each do |category| %>
+		        $('#items-<%=category.id%>').sortable({
 		          axis: 'y',
 		          dropOnEmpty:true,
 		          cursor: 'move',
@@ -33,7 +31,7 @@ if (itemsHolder.hasClass('revealed')){
 		          stop: function(){
 		            $.ajax({
 		                type: 'post',
-		                data: $('#items-<%=subcategory.id%>').sortable('serialize') + '&id=<%= subcategory.id %>',
+		                data: $('#items-<%=category.id%>').sortable('serialize') + '&id=<%= category.id %>',
 		                dataType: 'script',
 		                url: '/checklists/order_items'
 		            })
@@ -42,16 +40,16 @@ if (itemsHolder.hasClass('revealed')){
 	        <% end %>
 		});
 
-		$('.subcategory .title').on('click',function(e){
-			var subId = e.target.id;
-			var sub = $('#sub-'+subId);	
-	        if (sub.hasClass("collapsed")){
-	        	sub.show(200,function(){
-	        		sub.removeClass('collapsed');
+		$('.category .title').on('click',function(e){
+			var catId = e.target.id;
+			var cat = $('#category-'+catId+'-container');	
+	        if (cat.hasClass("collapsed")){
+	        	cat.show(200,function(){
+	        		cat.removeClass('collapsed');
 	        	});
 	        } else {
-	        	sub.hide(200,function(){
-	        		sub.addClass('collapsed');
+	        	cat.hide(200,function(){
+	        		cat.addClass('collapsed');
 	        	});
 	        }
 		});

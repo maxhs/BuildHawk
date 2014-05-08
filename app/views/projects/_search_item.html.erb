@@ -1,22 +1,25 @@
 
 <% if item.status == "Completed" %>
-	<div class="row checklist-item completed" id="item-<%=item.id%>">
+	<div class="row checklist-item completed search" id="item-<%=item.id%>">
 <% elsif item.status == "Not Applicable" %>
-	<div class="row checklist-item not-applicable" id="item-<%=item.id%>">
+	<div class="row checklist-item not-applicable search" id="item-<%=item.id%>">
 <% else %>
-	<div class="row checklist-item" id="item-<%=item.id%>">
+	<div class="row checklist-item search" id="item-<%=item.id%>">
 <% end %>
 	
 	<div class="col-xs-3" style="text-align: center;">
 		<% if current_user.admin %>
 			<%= link_to 'Edit', edit_checklist_item_path(item), :class=> "left-edit-checklist", :style=>"font-size:15px;top:10px;", :remote => true %>
 		<% end %>
-		<h4 style="margin:0 auto;"><%= item.subcategory.category.name %></h4><br/>
-		<h5><%= item.subcategory.name %></h5>
+
+		<%= link_to checklist_item_project_path(@project, :item_id => item.id), :remote => true do %>
+			<h4 style="margin:0 auto;"><%= item.category.phase.name %></h4><br/>
+			<h5><%= item.category.name %></h5>
 	</div>
 
 	<div class="col-xs-5 checklist-body" style="margin-left:20px;margin-right:-20px;">
-		<%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :remote => true %>
+			<%= item.body %>
+		<% end %>
 	</div>
 
 	<div class="col-xs-2" style="text-align: center;">
