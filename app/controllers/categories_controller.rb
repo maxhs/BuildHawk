@@ -81,4 +81,29 @@ class CategoriesController < ApplicationController
 			end
 		end
 	end
+
+	def destroy
+		@category = Category.find params[:id]
+		@category_id = @category.id
+		@checklist = @category.phase.checklist
+		@project = @checklist.project
+		if @category.destroy && request.xhr?
+			if @project
+				respond_to do |format|
+					format.js { render :template => "projects/checklist"}
+				end
+			else
+				respond_to do |format|
+					format.js
+				end
+			end
+		else
+			if @project
+				redirect_to checklist_project_path(@project)
+			else 
+				render "admin/editor"
+			end
+		end
+	end
+
 end

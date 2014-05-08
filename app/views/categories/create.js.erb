@@ -1,6 +1,6 @@
-<% if @subcategory.category.checklist.project %>
-	$('#new_subcategory').replaceWith('<%= j render partial:"projects/subcategory", locals:{:subcategory => @subcategory} %>');
+<% if @category.phase.checklist.project %>
+	$('#new_category').replaceWith('<%= j render partial:"projects/category", locals:{:category => @category} %>');
 <% else %>
-	$('#new_subcategory').replaceWith('<%= j render partial:"admin/subcategory", locals:{:subcategory => @subcategory} %>');
+	$('#new_category').replaceWith('<%= j render partial:"admin/category", locals:{:category => @category} %>');
 <% end %>
-$('#new-category-<%=@subcategory.category.id %>').text('Add a new category');
+$('#new-category-<%=@category.phase.id %>').text('Add a new category');
