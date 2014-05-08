@@ -29,7 +29,7 @@ class ChecklistItemsController < ApplicationController
 			@checklist_item.update_attribute :completed_by_user_id, current_user.id
 		end
 		@checklist = @checklist_item.category.phase.checklist
-		if @checklist.core
+		if @checklist.core && @checklist.company_id.nil?
 			@items = @checklist.items
 			if request.xhr?
 				respond_to do |format|
