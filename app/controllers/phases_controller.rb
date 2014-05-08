@@ -14,7 +14,7 @@ class PhasesController < ApplicationController
 
 	def create 
 		@phase = Phase.create params[:phase]
-		@phase.move_to_top
+		@phase.move_to_bottom
 		@project = @phase.checklist.project
 	end
 

@@ -1,6 +1,6 @@
 $('.new_phase').fadeOut(170,function(){
 	$(this).remove();
-	<% if @category.checklist.project %>
+	<% if @phase.checklist.project %>
 		$('#phases').append('<%= j render partial:"projects/phase", locals:{:p => @phase} %>');
 	<% else %>
 		$('#phases').append('<%= j render partial:"admin/phase", locals:{:p => @phase} %>');
