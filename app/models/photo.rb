@@ -115,11 +115,11 @@ class Photo < ActiveRecord::Base
 	end
 
 	def has_assignee?
-		unless punchlist_item_id.nil?
+		!punchlist_item_id.nil?
 	end
 
 	def has_folder?
-		unless folder_id.nil?
+		!folder_id.nil?
 	end
 
 	def epoch_time

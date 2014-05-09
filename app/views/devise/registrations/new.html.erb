@@ -11,8 +11,8 @@
 	  	<%= c.text_field :name, :placeholder => "Company name"  %>
 	  <% end %>
 	  <%= f.email_field :email, :placeholder => "Email address" %>
-	  <%= f.password_field :password, :placeholder => "Password" %>
-	  <%= f.password_field :password_confirmation, :placeholder => "Password confirmation" %>
+	  <%= f.password_field :password, :placeholder => "Password", :autocomplete => "off" %>
+	  <%= f.password_field :password_confirmation, :placeholder => "Password confirmation", :autocomplete => "off" %>
 
 	  <div><%= f.submit "Sign up", :class=>"btn btn-success btn-lg save", :style=>"margin:15px auto;" %></button></div>
 	<% end %>
