@@ -15,14 +15,14 @@
 		</div>
 		<div class="row" style="font-size:1.1em;margin-top:2.5%;margin-bottom:2.5%;">
 			<div class="col-xs-2"><h4>Status:</h4></div>
-			<div class="col-xs-10" style="font-family:'Montserrat'">
+			<div class="col-xs-10">
 				<div>
-					<%= f.radio_button :completed, false %>IN PROGRESS
+					<%= f.radio_button :completed, false %><h4 style="display:inline-block">IN PROGRESS</h4>
 				</div>
 				<div>
-					<%= f.radio_button :completed, true %>COMPLETED
+					<%= f.radio_button :completed, true %><h4 style="display:inline-block">COMPLETED</h4>
 					<% if @item.completed_by_user %>
-						<span style="color:#aaa;margin-left:10%;">by <%= @item.completed_by_user.full_name %>, <%= parse_time @item.completed_at %></span>
+						<span style="color:#aaa;margin-left:5%;font-family:'Source Sans Pro', helvetica, sans-serif;"> by <%= @item.completed_by_user.full_name %>, <%= parse_time @item.completed_at %></span>
 					<% end %>
 				</div>
 			</div>

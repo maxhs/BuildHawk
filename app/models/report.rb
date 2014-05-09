@@ -58,11 +58,16 @@ class Report < ActiveRecord::Base
         body.present? && body.length > 0
     end
 
+    def epoch_time
+        created_at.to_i
+    end
+
   	acts_as_api
 
   	api_accessible :report do |t|
         t.add :id
         t.add :author
+        t.add :epoch_time
         t.add :created_at
         t.add :updated_at
         t.add :created_date
@@ -79,9 +84,11 @@ class Report < ActiveRecord::Base
         t.add :possible_types
         t.add :comments
         t.add :photos
-        t.add :personnel
         t.add :report_users
-        t.add :report_subs
         t.add :safety_topics
+        ### slated for deletion in next version ###
+        t.add :personnel
+        t.add :report_subs
+        ###
   	end
 end

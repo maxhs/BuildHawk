@@ -57,7 +57,7 @@ class PunchlistItem < ActiveRecord::Base
     end
 
     def epoch_time
-      created_at.to_i
+        created_at.to_i
     end
 
     acts_as_api

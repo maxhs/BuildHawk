@@ -121,6 +121,10 @@ class Photo < ActiveRecord::Base
 		folder_id.present?
 	end
 
+	def epoch_time
+      	created_at.to_i
+	end
+
 	api_accessible :dashboard do |t|
 		t.add :id
 		t.add :url_large
@@ -129,6 +133,7 @@ class Photo < ActiveRecord::Base
 		t.add :url200
 		t.add :url100
 		###
+		t.add :epoch_time
 		t.add :url_small
 		t.add :url_thumb
 		t.add :image_file_size
