@@ -111,14 +111,15 @@ class Photo < ActiveRecord::Base
 	end
 
 	def folder_name
-		folder.name if folder
+		folder.name
 	end
 
 	def has_assignee?
-		punchlist_item_id.present?
+		unless punchlist_item_id.nil?
 	end
+
 	def has_folder?
-		folder_id.present?
+		unless folder_id.nil?
 	end
 
 	def epoch_time
@@ -127,13 +128,9 @@ class Photo < ActiveRecord::Base
 
 	api_accessible :dashboard do |t|
 		t.add :id
+		t.add :epoch_time
 		t.add :url_large
 		t.add :original
-		##slated for removal
-		t.add :url200
-		t.add :url100
-		###
-		t.add :epoch_time
 		t.add :url_small
 		t.add :url_thumb
 		t.add :image_file_size
@@ -147,6 +144,10 @@ class Photo < ActiveRecord::Base
 		t.add :folder_name, :if => :has_folder?
 		t.add :folder_id, :if => :has_folder?
 		t.add :assignee, :if => :has_assignee?
+		##slated for removal
+		t.add :url200
+		t.add :url100
+		###
 	end
 
 	api_accessible :item, :extend => :dashboard do |t|
