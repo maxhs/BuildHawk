@@ -4,3 +4,16 @@
 	$('#new_category').replaceWith('<%= j render partial:"admin/category", locals:{:category => @category} %>');
 <% end %>
 $('#new-category-<%=@category.phase.id %>').text('Add a new category');
+$('.category .title').on('click',function(e){
+	var catId = e.target.id;
+	var cat = $('#category-'+catId+'-container');	
+    if (cat.hasClass("collapsed")){
+    	cat.show(200,function(){
+    		cat.removeClass('collapsed');
+    	});
+    } else {
+    	cat.hide(200,function(){
+    		cat.addClass('collapsed');
+    	});
+    }
+});
