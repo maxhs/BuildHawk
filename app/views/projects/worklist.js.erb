@@ -5,3 +5,9 @@ $('#main').fadeOut(170,function(){
 	$(this).fadeIn(170);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });
+if (history && history.pushState){
+    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/worklist');
+    $(window).bind("popstate", function(){
+      $.getScript(location.href);
+    });
+}

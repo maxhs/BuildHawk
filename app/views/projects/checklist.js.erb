@@ -6,7 +6,22 @@ $('#main').fadeOut(170,function(){
 
 	<% if @phase %>
 		if ($('#phase-<%= @phase.id %>').length){
-			$('#phase-<%= @phase.id %> .phase-name').click();
+			$('#phase-<%= @phase.id %> .phase-link').click();
 		}
+		if (history && history.pushState){
+		    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/checklist?phase_id=<%=@phase.id%>');
+		    $(window).bind("popstate", function(){
+		      $.getScript(location.href);
+		    });
+		}
+	<% else %>
+		if (history && history.pushState){
+		    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/checklist');
+		    $(window).bind("popstate", function(){
+		      $.getScript(location.href);
+		    });
+		}
+
 	<% end %>
+	
 });

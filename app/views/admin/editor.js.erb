@@ -5,3 +5,9 @@ $('#main').fadeOut(100,function(){
 	$(this).fadeIn(100);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });
+if (history && history.pushState){
+    history.pushState(null, null, '<%=root_url%>admin/editor?checklist_id=<%=@checklist.id%>');
+    $(window).bind("popstate", function(){
+      $.getScript(location.href);
+    });
+}
