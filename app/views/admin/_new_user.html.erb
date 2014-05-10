@@ -1,28 +1,31 @@
-<div class="border-box">
-	<%= form_for @user, :url => create_user_admin_index_path(@user), :method => :post, :remote => true do |f| %>
-		<table id="new-user-form">
-			<tbody>
-				<tr><td><h2>Add User</h2></td></tr>
-				<%= hidden_field_tag :company_id, current_user.company.id %>
-				<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-				<tr><td><%= f.label "First name" %></td></tr>
-				<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
-				<tr><td><%= f.label "Last name" %></td></tr>
-				<tr><td><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></td></tr>
-				<tr><td><%= f.label "Email" %></td></tr>
-				<tr><td><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></td></tr>
-				<tr><td><%= f.label "Phone number" %></td></tr>
-				<tr><td><%= f.text_field :phone_number, :placeholder => "Phone number", :class=>"tt-hint form-control" %></td></tr>
-				<tr><td><%= f.label "Password" %></td></tr>
-				<tr><td><%= f.password_field :password, :placeholder => "Password", :class=>"tt-hint form-control" %></td></tr>
-				<tr><td><%= f.label "Password Confirmation" %></td></tr>
-				<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password", :class=>"tt-hint form-control" %></td></tr>
-				<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Admin</div> <%= f.check_box :admin %></td></tr>
-				<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Company Admin (access to billing)</div> <%= f.check_box :company_admin, :style=>"margin-top:24px; vertical-align:top;" %></td></tr>
-				<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Email Permissions?</div> <%= f.check_box :email_permissions %></td></tr>
-				<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Push Permissions?</div> <%= f.check_box :push_permissions %></td></tr>
-				<tr><td><button class="btn btn-success btn-md pull-right"><%= f.submit "Create" %></button></td></tr>
-			</tbody>
-		</table>
-	<% end %>
-</div>
+
+<%= form_for @user, :url => create_user_admin_index_path(@user), :method => :post, :remote => true do |f| %>
+	<table id="new-user-form" class="border-box">
+		<tbody>
+			<tr><td><h2>Add User</h2></td></tr>
+			<%= hidden_field_tag :company_id, current_user.company.id %>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+			<tr><td><%= f.label "First name" %></td></tr>
+			<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Last name" %></td></tr>
+			<tr><td><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Email" %></td></tr>
+			<tr><td><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Phone number" %></td></tr>
+			<tr><td><%= f.text_field :phone_number, :placeholder => "Phone number", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Password" %></td></tr>
+			<tr><td><%= f.password_field :password, :placeholder => "Password", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.label "Password Confirmation" %></td></tr>
+			<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Admin</div> <%= f.check_box :admin %></td></tr>
+			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Company Admin (access to billing)</div> <%= f.check_box :company_admin, :style=>"margin-top:24px; vertical-align:top;" %></td></tr>
+			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Email Permissions?</div> <%= f.check_box :email_permissions %></td></tr>
+			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Push Permissions?</div> <%= f.check_box :push_permissions %></td></tr>
+			<tr>
+				<td style="text-align:center;clear:both;margin-top:30px;">
+					<%= f.submit "Create", :class=>"btn btn-success btn-md save" %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<% end %>

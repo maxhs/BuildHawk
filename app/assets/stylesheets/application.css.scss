@@ -127,6 +127,7 @@ body {
 		width:100%;
 		text-align:center;
 		margin:5% auto 0%;
+		clear:both;
 	}
 
 	#pages {
@@ -225,7 +226,7 @@ body {
 			li {
 				display:inline-block;
 				position:relative;
-				top:12px;
+				top:13px;
 				margin:0 20px;
 			}
 
@@ -452,11 +453,12 @@ body {
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
+	-webkit-font-smoothing:antialiased;
 	position: fixed;
-	left: -63px;
-	height: 34px;
+	left: -65px;
+	height: 30px;
 	vertical-align: middle;
-	line-height: 34px;
+	line-height: 30px;
 	width: 160px;
 	text-align: center;
 	font-size: 22px;
@@ -464,7 +466,7 @@ body {
 	color: #fff;
 	letter-spacing: 1px;
 	font-family: "Source Sans Pro";
-	background: #bbb;
+	background: #336699;
 	cursor: pointer;
 	border-radius: 10px 10px 0px 0px;
 	-webkit-border-radius: 10px 10px 0px 0px;
@@ -477,7 +479,7 @@ body {
 }
 
 #projects-tab.open {
-	left:187px;
+	left:185px;
 }
 
 /* Overlay style */
