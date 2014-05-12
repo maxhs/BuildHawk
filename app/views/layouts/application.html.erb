@@ -46,9 +46,10 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
     <div id="wrap">
 		<div class="navbar navbar-fixed-top" id="top-nav">
 		
-				<a class="logo" href="/" data-remote="true"><%= image_tag('logo.png') %></a>
+				
 
 				<ul id="navigation">
+					<li style="padding:0;width:280px;"><a class="logo" href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
 					<% if current_page?(root_url) && !user_signed_in? %>
 						
 						<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
