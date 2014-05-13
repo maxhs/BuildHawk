@@ -1,4 +1,5 @@
-<ul id="internal-nav">
+<ul id="navigation">
+	<li style="padding:0;width:280px;"><a class="logo" href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
 	<li><%= link_to "Admin", admin_index_path, remote: true %></li>
 	<% if current_user.uber_admin? %>
 		<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>

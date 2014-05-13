@@ -47,16 +47,18 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		<div class="navbar navbar-fixed-top" id="top-nav">
 	
 			<ul id="navigation">
-				<% if current_page?(root_url) && !user_signed_in? %>
+				<% if !user_signed_in? %>
+
+					<li style="padding:0;width:280px;"><a class="logo" href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
 					<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
 					<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
 					<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
-					<li style="position:absolute;right:0;"><%= link_to 'Beta Login', login_path %></li>
-				<% elsif user_signed_in? && params[:controller] == "admin" %>
+					<li style=""><%= link_to 'Beta Login', login_path %></li>
+				<% elsif params[:controller] == "admin" %>
 					<%= render partial: "admin/top_nav" %>
-				<% elsif user_signed_in? && params[:controller] == "uber_admin" %>
+				<% elsif params[:controller] == "uber_admin" %>
 					<%= render partial: "uber_admin/top_nav" %>
-				<% elsif user_signed_in? && @project %>
+				<% elsif @project %>
 					<%= render partial: "projects/project_nav" %>
 				<% elsif user_signed_in? %>
 					<%= render partial: "layouts/internal_nav" %>
