@@ -207,11 +207,17 @@ body {
 		border-bottom:1px solid #eee;
 
 		.logo {
-			padding:0 0 0 40px;
-			top:0 !important;
+			max-width:240px;
+			a{
+				padding:0 0 0 40px;
+				top:0 !important;
+				width:280px;
+			}
 
 			img {
 				width:200px;
+				position:relative;
+				bottom:2px;
 			}
 		}
 		
@@ -219,11 +225,12 @@ body {
 			display:table;
 			list-style:none;
 			width:100%;
+			max-width:1200px;
 			height:50px;
 
 			li {
 				display:table-cell;
-				padding:0 10px 0 0;
+				padding:0 20px 0 0;
 				vertical-align:middle;
 			}
 
@@ -232,14 +239,14 @@ body {
 			}
 
 			a {
-				font-size:1.35em;
+				font-size:1.4em;
 				vertical-align:middle;
 				font-weight:bolder;
 				letter-spacing:1px;
 				font-family:'Source Sans Pro','Helvetica',sans-serif;
 				text-transform:uppercase;
 				position:relative;
-				top:2px;
+				top:1px;
 			}
 
 			a:hover {
@@ -923,12 +930,18 @@ body {
 }
 
 @media only screen and (max-width: 768px), only screen and (max-device-width: 768px) {
-	#navigation li {
-		top: 15px;
-		margin:0 10px;
-
+	#navigation {
+		li {
+			top: 15px;
+			margin:0 10px;
+		}
+		.logo {
+			a{
+				display:none;
+			}
+		}
 		a {
-			font-size:1.1em;
+			font-size:1.1em !important;
 		}
 	}
 }
