@@ -43,6 +43,12 @@ body {
 		transition: all 0.2s ease-out;
 	}
 
+	.font-smoothing, .menu-link {
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	    text-rendering:geometricPrecision;
+	}
+
 	a:hover, a.current-page, .hide-reveal:hover {
 		color:#cc3333 !important;
 		text-decoration:none;

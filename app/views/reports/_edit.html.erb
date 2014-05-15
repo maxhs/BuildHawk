@@ -123,19 +123,18 @@
 				<% end %>
 			</div>
 		</div>
-
-	<% if @previous %>
-		<div class="previous-report">
-			<h5><%= link_to "&#8592;  #{@previous.created_date}".html_safe, report_path(@previous), remote:true %></h5>
-		</div>
-	<% end %>
-	<% if @next %>
-		<div class="next-report">
-			<h5><%= link_to "#{@next.created_date}  &#8594;".html_safe, report_path(@next), remote:true %></h5>
-		</div>
-	<% end %>
 </div>
 
+<% if @previous %>
+	<div class="previous-report">
+		<h4><%= link_to "&#8592;  #{@previous.created_date}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
+	</div>
+<% end %>
+<% if @next %>
+	<div class="next-report">
+		<h4><%= link_to "#{@next.created_date}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
+	</div>
+<% end %>
 
 <div class="border-box comment-container" style="margin-top:20px;">
 	<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h3>

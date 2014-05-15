@@ -11,6 +11,8 @@
 #add-report, #edit-report {
 	max-width:800px;
 	margin:0 auto;
+	position:relative;
+	z-index:2;
 
 	h4 {
 		text-align:left;	
@@ -57,15 +59,25 @@
 	.thin-form {
 		clear:both;
 	}
+}
 
-	.previous-report{
-		float:left;
-	} 
-
-	.next-report {
-		float:right;
+.previous-report, .next-report{
+	position:fixed;
+	top:45%;
+	z-index:1;
+	a {
+		color:#444;
 	}
 }
+
+.previous-report{
+	left:5%;	
+} 
+
+.next-report {
+	right:5%;
+}
+
 .delete-report-link {
 	line-height: 1em;
 	margin: 7px auto 0;
