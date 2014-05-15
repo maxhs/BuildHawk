@@ -367,8 +367,10 @@ body {
 
 		#container {		
 			width:50%;
+			max-width:800px;
 			margin: 0 auto;
 			font-family:"Source Sans Pro","Helvetica",sans-serif;
+			position:relative;
 
 			ul {
 				display:inline-block;
@@ -383,6 +385,9 @@ body {
 			#copyright {
 				color:#aaa;
 				display:inline-block;
+				position:absolute;
+				right:0;
+				bottom:0;
 			}
 		}
 	}

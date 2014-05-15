@@ -104,13 +104,13 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 	<div id="container">
 		<ul>
 			<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
-			<li><a href="#contact">Contact</a></li>
+			<li><%= mail_to "contact@buildhawk.com", "Contact", encode: "javascript", :id => "contact-link" %></li>
 		</ul>
 		<ul>
 			<li><a href="/terms">Terms of Service</a></li>
 			<li><a href="/privacy">Privacy Policy</a></li>
 		</ul>
-		<div id="copyright">&copy; BuildHawk, 2013</div>
+		<div id="copyright">&copy; 2014 BuildHawk Inc</div>
 	</div>
 </footer>
 

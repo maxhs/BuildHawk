@@ -41,5 +41,6 @@ gem 'nprogress-rails'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'acts_as_list'
 gem 'pushmeup'
+gem 'actionview-encoded_mail_to'
 
 ruby '2.1.1'
