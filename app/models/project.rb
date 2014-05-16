@@ -136,6 +136,7 @@ class Project < ActiveRecord::Base
         t.add :phases
         ### slated for deletion ###
         t.add :categories
+        t.add :subs
         ###
   	end
 
