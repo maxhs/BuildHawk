@@ -93,7 +93,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :body
   		t.add :critical_date, :if => :has_critical_date?
   		t.add :completed_date, :if => :has_completed_date?
-  		t.add :status
+        t.add :status
         t.add :item_type
         t.add :photos_count
         t.add :comments_count
