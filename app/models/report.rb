@@ -51,7 +51,7 @@ class Report < ActiveRecord::Base
     end
 
     def personnel
-        report_users
+        report_users + report_subs
     end
 
     def has_body?
@@ -87,6 +87,7 @@ class Report < ActiveRecord::Base
         t.add :report_users
         t.add :safety_topics
         ### slated for deletion in next version ###
+        t.add :report_subs
         t.add :personnel
         ###
   	end
