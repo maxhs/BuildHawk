@@ -99,10 +99,6 @@ class User < ActiveRecord::Base
         end
     end
 
-    def subcontractors
-        company.subs
-    end
-
   	acts_as_api
 
   	api_accessible :user do |t|
@@ -128,7 +124,6 @@ class User < ActiveRecord::Base
 
     api_accessible :login, :extend => :user do |t|
         t.add :coworkers
-        t.add :subcontractors
     end
 
   	api_accessible :feed do |t|

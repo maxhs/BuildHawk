@@ -16,11 +16,11 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
     end
 
     def photo
-        @checklist_item = ChecklistItem.find params[:id]
-        photo = @checklist_item.photos.create params[:photo]
+        params[:photo][:checklist_item_id] = params[:id] if params[:id]
+        photo = Photo.create params[:photo]
         photo.update_attributes :mobile => true, :phase => @checklist_item.category.phase.name
         respond_to do |format|
-            format.json { render_for_api :detail, :json => @checklist_item, :root => :checklist_item}
+            format.json { render_for_api :detail, :json => photo.checklist_item, :root => :checklist_item}
         end
     end
 

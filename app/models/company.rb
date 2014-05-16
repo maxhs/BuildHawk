@@ -33,7 +33,7 @@ class Company < ActiveRecord::Base
     end
 
     def personnel
-        return users.map(&:full_name) + subs.map(&:name)
+        return users.map(&:full_name)
     end
 
 	acts_as_api
