@@ -105,8 +105,6 @@ class Photo < ActiveRecord::Base
 	def assignee
 		if punchlist_item.assignee
 			punchlist_item.assignee.full_name
-		elsif punchlist_item.sub_assignee
-			punchlist_item.sub_assignee.name
 		end
 	end
 
