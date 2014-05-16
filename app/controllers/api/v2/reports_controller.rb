@@ -131,7 +131,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
     end
 
     def photo
-
         photo = Photo.create params[:photo]
         photo.update_attribute :mobile, true
         respond_to do |format|

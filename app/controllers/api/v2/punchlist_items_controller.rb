@@ -76,6 +76,7 @@ class Api::V2::PunchlistItemsController < Api::V2::ApiController
     end
 
     def photo
+        params[:photo][:punchlist_item_id] = params[:id] if params[:id]
         photo = Photo.create params[:photo]
         photo.update_attribute :mobile, true
         respond_to do |format|
