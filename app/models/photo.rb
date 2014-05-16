@@ -103,9 +103,7 @@ class Photo < ActiveRecord::Base
 	end
 
 	def assignee
-		if punchlist_item.assignee
-			punchlist_item.assignee.full_name
-		end
+		punchlist_item.assignee.full_name if punchlist_item && punchlist_item.assignee
 	end
 
 	def folder_name
