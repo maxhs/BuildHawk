@@ -76,11 +76,10 @@ class Api::V2::PunchlistItemsController < Api::V2::ApiController
     end
 
     def photo
-        @punchlist_item = PunchlistItem.find params[:id]
-        photo = @punchlist_item.photos.create params[:photo]
+        photo = Photo.create params[:photo]
         photo.update_attribute :mobile, true
         respond_to do |format|
-            format.json { render_for_api :punchlist, :json => @punchlist_item, :root => :punchlist_item}
+            format.json { render_for_api :punchlist, :json => photo.punchlist_item, :root => :punchlist_item}
         end
     end
 

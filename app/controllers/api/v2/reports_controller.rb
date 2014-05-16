@@ -131,11 +131,11 @@ class Api::V2::ReportsController < Api::V2::ApiController
     end
 
     def photo
-        report = Report.find params[:photo][:report_id]
-        photo = report.photos.create params[:photo]
+
+        photo = Photo.create params[:photo]
         photo.update_attribute :mobile, true
         respond_to do |format|
-            format.json { render_for_api :report, :json => report, :root => :report}
+            format.json { render_for_api :report, :json => photo.report, :root => :report}
         end
     end
 
