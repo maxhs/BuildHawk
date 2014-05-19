@@ -20,7 +20,7 @@ class Api::V2::PunchlistItemsController < Api::V2::ApiController
         end
         
         if params[:punchlist_item][:status].present?
-            if params[:punchlist_item][:status] == "Completed"
+            if params[:punchlist_item][:status] == "Completed" || params[:punchlist_item][:status] == 1
                 params[:punchlist_item][:completed] = true
                 params[:punchlist_item][:completed_at] = Time.now
             else
