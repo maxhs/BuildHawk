@@ -1,7 +1,8 @@
 class PunchlistItem < ActiveRecord::Base
     include ActionView::Helpers::TextHelper
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :punchlist_id, :punchlist, :photos_attributes, 
-                  :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id
+                  :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
+                  :sub_assignee_id
 
     belongs_to :punchlist
     belongs_to :user
