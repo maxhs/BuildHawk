@@ -45,7 +45,6 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
     <div id="wrap">
 		<div class="navbar navbar-fixed-top" id="top-nav">
-	
 			<ul id="navigation">
 				<% if !user_signed_in? %>
 					<li class="logo"><a href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
@@ -62,7 +61,6 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				<% elsif user_signed_in? %>
 					<%= render partial: "layouts/internal_nav" %>
 				<% end %>
-
 			</ul>
 		</div>
 		

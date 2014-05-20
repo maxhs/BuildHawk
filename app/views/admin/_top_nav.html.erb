@@ -1,4 +1,4 @@
-<li style="padding:0;width:280px;"><a class="logo" href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
+<li class="logo"><a href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
 <li><%= link_to "Add Project", new_project_admin_index_path, :id => "new-project-link", :remote => true %></li>
 <% if current_user.uber_admin %><li><%= link_to "Groups", project_groups_admin_index_path, :id => "groups-link", :remote => true %></li>
 <li><%= link_to "Safety Topics", safety_topics_admin_index_path, :id => "admin-safety-topics-link", remote: true %></li>
