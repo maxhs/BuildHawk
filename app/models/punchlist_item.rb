@@ -61,6 +61,7 @@ class PunchlistItem < ActiveRecord::Base
 
     api_accessible :projects do |t|
   		t.add :id
+        t.add :user
   		t.add :body
   		t.add :assignee
   		t.add :location
