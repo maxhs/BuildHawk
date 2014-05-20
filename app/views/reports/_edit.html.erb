@@ -2,7 +2,7 @@
 <%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
 	<div id="edit-report" class="border-box container">
-		<button class="export btn btn-md" style="float:right;"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></button>
+		<div class="simple-btn export" style="float:right;"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></div>
 		<div class="thin-form">
 		
 			<div class="row form-title">

@@ -3,7 +3,8 @@ class ReportMailer < ActionMailer::Base
 
   	def report(report,recipient)
   		@recipient = recipient
-  	  	@report = report
+  	  @report = report
+      @company = report.project.company
   		mail(
       		:subject => "#{report.project.name} - #{report.created_date}",
       		:to      => recipient.email,
