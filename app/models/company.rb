@@ -13,7 +13,7 @@ class Company < ActiveRecord::Base
     has_many :project_groups, :dependent => :destroy
     has_many :safety_topics, :dependent => :destroy
     has_many :company_subs, :dependent => :destroy
-    has_many :subs, :through => :company_subs
+    #has_many :subs, :through => :company_subs
 
     validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
