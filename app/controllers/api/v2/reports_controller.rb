@@ -6,9 +6,9 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             users.each do |u|
-                user = User.find_by full_name: u[:full_name]
+                user = User.where(:full_name => u[:full_name])
                 if user
-                    ru = report.report_users.where(:user_id => user.id).first_or_create
+                    ru = report.report_users.where(:user_id => user.id, :hours => u[:hours]).first_or_create
                 end
             end
             params[:report].delete(:report_users)
