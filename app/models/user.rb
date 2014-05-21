@@ -113,13 +113,11 @@ class User < ActiveRecord::Base
         t.add :phone_number
         t.add :authentication_token
         t.add :company
-
+        t.add :url_thumb
+        t.add :url_small
         ##slated for deletion
         t.add :url200
         ##
-        
-        t.add :url_thumb
-        t.add :url_small
   	end
 
     api_accessible :login, :extend => :user do |t|

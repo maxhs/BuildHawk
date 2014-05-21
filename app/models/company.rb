@@ -38,6 +38,10 @@ class Company < ActiveRecord::Base
         return users.map(&:full_name) + subs.map(&:name)
     end
 
+    def users_count
+        users.count
+    end
+
 	acts_as_api
 
   	api_accessible :company do |t|
@@ -53,7 +57,7 @@ class Company < ActiveRecord::Base
   		t.add :id
         t.add :name
         t.add :subcontractors
-        t.add :users
+        t.add :users_count
   	end
 
     api_accessible :user, :extend => :login do |t|
