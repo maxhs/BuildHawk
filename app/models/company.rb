@@ -6,14 +6,14 @@ class Company < ActiveRecord::Base
   
     has_many :users, :dependent => :destroy
     has_many :subs, :dependent => :destroy
-	has_many :projects, :dependent => :destroy
+    has_many :projects, :dependent => :destroy
 	has_many :photos, :dependent => :destroy
 	has_many :checklists, :dependent => :destroy
     has_many :charges
     has_many :project_groups, :dependent => :destroy
     has_many :safety_topics, :dependent => :destroy
     has_many :company_subs, :dependent => :destroy
-    #has_many :subs, :through => :company_subs
+    has_many :subcontractors, :through => :company_subs
 
     validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
@@ -46,6 +46,7 @@ class Company < ActiveRecord::Base
   		t.add :projects
         t.add :users
         t.add :subs
+        t.add :subcontractors
   	end
 
   	api_accessible :projects do |t|
