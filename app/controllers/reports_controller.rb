@@ -134,8 +134,8 @@ class ReportsController < ApplicationController
 		@report.subs.build
 		reports = @project.ordered_reports
 		index = reports.index(@report)
-		@next = reports[index-1] if reports[index-1].created_at > @report.created_at
-		@previous = reports[index+1] if reports[index+1].created_at < @report.created_at
+		@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at
+		@previous = reports[index+1] if reports[index+1] && reports[index+1].created_at < @report.created_at
 	end
 
 	def generate
