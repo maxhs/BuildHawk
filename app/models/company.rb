@@ -54,12 +54,6 @@ class Company < ActiveRecord::Base
         t.add :name
   	end
 
-    api_accessible :subcontractors do |t|
-        t.add :id
-        t.add :name
-        t.add :subcontractors
-    end
-
     api_accessible :user, :extend => :projects do |t|
       
     end
