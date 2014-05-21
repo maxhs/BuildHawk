@@ -4,7 +4,7 @@
 
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:role=>"form") do |f| %>
 		  
-		  <%= f.email_field :email, placeholder: "Email address", :autofocus => true %>
+		  <%= f.email_field :email, placeholder: "The email address you use for work", :autofocus => true %>
 		  <%= f.password_field :password, placeholder: "Password", :autocomplete => "off" %>
 
 		  	<%= render "devise/shared/links" %>

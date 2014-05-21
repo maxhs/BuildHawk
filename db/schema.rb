@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20140520010308) do
 
   create_table "company_subs", force: true do |t|
     t.integer  "company_id"
+    t.integer  "subcontractor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

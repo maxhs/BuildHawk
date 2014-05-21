@@ -10,7 +10,7 @@
 	  <%= f.fields_for resource.build_company do |c| %>
 	  	<%= c.text_field :name, :placeholder => "Company name"  %>
 	  <% end %>
-	  <%= f.email_field :email, :placeholder => "Email address" %>
+	  <%= f.email_field :email, :placeholder => "The email address you use for work" %>
 	  <%= f.password_field :password, :placeholder => "Password", :autocomplete => "off" %>
 	  <%= f.password_field :password_confirmation, :placeholder => "Password confirmation", :autocomplete => "off" %>
 
