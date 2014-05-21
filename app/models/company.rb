@@ -52,28 +52,32 @@ class Company < ActiveRecord::Base
   	api_accessible :projects do |t|
   		t.add :id
         t.add :name
+        t.add :subcontractors
   	end
 
     api_accessible :user, :extend => :projects do |t|
-      
+        
     end
-
+    
     api_accessible :login, :extend => :projects do |t|
       
     end
-
+    
     api_accessible :report, :extend => :projects do |t|
       
     end
+    
     api_accessible :details, :extend => :projects do |t|
       
-    end
-
-    api_accessible :dashboard do |t|
-    
     end
 
     api_accessible :punchlist, :extend => :projects do |t|
         
     end
+    
+    api_accessible :dashboard do |t|
+    
+    end
+
+   
 end
