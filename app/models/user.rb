@@ -173,4 +173,8 @@ class User < ActiveRecord::Base
       t.add :email
       t.add :phone_number
     end
+
+    api_accessible :company, :extend => :report do |t|
+
+    end
 end

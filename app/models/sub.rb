@@ -76,6 +76,10 @@ class Sub < ActiveRecord::Base
 
     end
 
+    api_accessible :company, :extend => :report do |t|
+
+    end
+
     api_accessible :details do |t|
 
     end
