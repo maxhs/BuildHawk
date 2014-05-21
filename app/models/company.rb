@@ -49,29 +49,30 @@ class Company < ActiveRecord::Base
         t.add :subcontractors
   	end
 
-  	api_accessible :projects do |t|
+  	api_accessible :login do |t|
   		t.add :id
         t.add :name
         t.add :subcontractors
+        t.add :users
   	end
 
-    api_accessible :user, :extend => :projects do |t|
+    api_accessible :user, :extend => :login do |t|
         
     end
     
-    api_accessible :login, :extend => :projects do |t|
+    api_accessible :projects, :extend => :login do |t|
       
     end
     
-    api_accessible :report, :extend => :projects do |t|
+    api_accessible :report, :extend => :login do |t|
       
     end
     
-    api_accessible :details, :extend => :projects do |t|
+    api_accessible :details, :extend => :login do |t|
       
     end
 
-    api_accessible :punchlist, :extend => :projects do |t|
+    api_accessible :punchlist, :extend => :login do |t|
         
     end
     
