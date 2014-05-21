@@ -236,6 +236,7 @@ Buildhawk::Application.routes.draw do
           post :unarchive
         end
       end
+      resources :companies
       resources :checklists
       resources :checklist_items do
         collection do
