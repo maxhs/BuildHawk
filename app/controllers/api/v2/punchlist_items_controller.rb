@@ -33,7 +33,7 @@ class Api::V2::PunchlistItemsController < Api::V2::ApiController
         end
         ## Use the below instead
 
-        if params[:punchlist_item][:completed] = true
+        if params[:punchlist_item][:completed] == true
             params[:punchlist_item][:completed_at] = Time.now
         else
             params[:punchlist_item][:completed] = false
