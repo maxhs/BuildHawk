@@ -19,6 +19,7 @@ class Api::V2::PunchlistItemsController < Api::V2::ApiController
             params[:punchlist_item][:sub_assignee_id] = nil
         end
         
+        ## slated for deletion
         if params[:punchlist_item][:status].present?
             if params[:punchlist_item][:status] == "Completed" || params[:punchlist_item][:status] == true
                 params[:punchlist_item][:completed] = true
@@ -30,6 +31,17 @@ class Api::V2::PunchlistItemsController < Api::V2::ApiController
             end
             params[:punchlist_item].delete(:status)
         end
+        ## Use the below instead
+
+        if params[:punchlist_item][:completed] = true
+            params[:punchlist_item][:completed_at] = Time.now
+            params[:punchlist_item][:completed_by_user_id] = params[:punchlist_item][:user_id] if params[:punchlist_item][:user_id] && @punchlist_item.completed
+        else
+            params[:punchlist_item][:completed] = false
+            params[:punchlist_item][:completed_at] = nil
+            params[:punchlist_item][:completed_by_user_id] = nil
+        end
+
         unless params[:punchlist_item][:location].present?
             params[:punchlist_item][:location] = nil
         end
