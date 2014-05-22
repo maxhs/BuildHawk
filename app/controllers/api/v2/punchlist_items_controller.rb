@@ -35,7 +35,6 @@ class Api::V2::PunchlistItemsController < Api::V2::ApiController
 
         if params[:punchlist_item][:completed] = true
             params[:punchlist_item][:completed_at] = Time.now
-            params[:punchlist_item][:completed_by_user_id] = params[:punchlist_item][:user_id] if params[:punchlist_item][:user_id] && @punchlist_item.completed
         else
             params[:punchlist_item][:completed] = false
             params[:punchlist_item][:completed_at] = nil
