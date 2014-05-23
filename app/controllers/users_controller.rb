@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => :preregister
 
 	def new
 		@user = User.new
@@ -10,6 +10,18 @@ class UsersController < ApplicationController
 			end
 		else
 			render :new
+		end
+	end
+
+	def preregister
+		@user = User.create! params[:user]
+		company = Company.where(:name => params[:company_name]).first_or_create if params[:company_name]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to root_url
 		end
 	end
 

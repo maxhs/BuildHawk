@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 		if user_signed_in?
 			redirect_to projects_path
 		else
-			@company = Company.new
+			@user = User.new
 			render :splash
 		end
 	end

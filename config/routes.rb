@@ -18,11 +18,15 @@ Buildhawk::Application.routes.draw do
   post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
   get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
+  post "/users/preregister", :to => "users#preregister"
   post "/users/:id", :to => "users#update"
   post "/checklist_items/:id", :to => "checklist_items#update"
   post "/admin/billing", :to => "admin#update_billing"
 
   resources :users do
+    collection do 
+      post :preregister
+    end
     member do
       get :email_unsubscribe
     end
