@@ -2,11 +2,10 @@ class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 
     attr_accessible :first_name, :last_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone_number,
-    				:full_name, :company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin,
-                    :authentication_token, :company_admin
+    				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
+                    :uber_admin, :authentication_token, :company_admin
 
     belongs_to :company
-    
   	has_many :project_users, :dependent => :destroy
   	has_many :projects, :through => :project_users
     has_many :report_users, :dependent => :destroy
@@ -44,6 +43,16 @@ class User < ActiveRecord::Base
         UserMailer.welcome(self).deliver if self.email 
         self.full_name = "#{first_name} #{last_name}"
         self.save
+    end
+
+    def full_name 
+        if first_name.length && last_name.length
+            "#{first_name} #{last_name}"
+        elsif first_name.length
+            "#{first_name}"
+        else
+            email
+        end
     end
 
     def clean_phone_number
