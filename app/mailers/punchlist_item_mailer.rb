@@ -3,7 +3,7 @@ class PunchlistItemMailer < ActionMailer::Base
 
   	def punchlist_item(punchlist_item,recipient)
   		@recipient = recipient
-  	  	@punchlist_item = punchlist_item
+  	  @punchlist_item = punchlist_item
   		mail(
       		:subject => "#{punchlist_item.punchlist.project.name} - #{punchlist_item.body}",
       		:to      => recipient.email,

@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
 	def update
 		@user = current_user
-		@user.update_attributes params[:user] if params[:user] && current_user
+		@user.update_attributes params[:user] if params[:user]
 		if @user.save
 			sign_in(current_user, :bypass => true) if params[:user][:password].present? && params[:user][:password_confirmation].present?
 			flash[:notice] = "Settings updated!"

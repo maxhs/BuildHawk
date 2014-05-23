@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     validates_presence_of :last_name
     validates_presence_of :email
     validates_uniqueness_of :email
-    validates_confirmation_of :password
+    validates_confirmation_of :password, :if => :password_required?
     validates_presence_of :password, :if => :password_required?
 
     #after_create :welcome
