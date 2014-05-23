@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :project_id, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:checklist_item, :punchlist_item_id, :phase, :name, :folder_id, :description, :mobile
+					:punchlist_item_id, :phase, :name, :folder_id, :description, :mobile
 
 	belongs_to :user
 	belongs_to :project
@@ -32,9 +32,6 @@ class Photo < ActiveRecord::Base
         	folder.name if folder
         end        
         integer :project_id
-        #integer :report_id
-        #integer :checklist_item_id
-        #integer :punchlist_item_id
         time    :created_at
     end
 
