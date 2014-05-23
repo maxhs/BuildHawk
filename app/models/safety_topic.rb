@@ -6,6 +6,7 @@ class SafetyTopic < ActiveRecord::Base
 	acts_as_api
 
   	api_accessible :report do |t|
+      t.add :id
   		t.add :title
   		t.add :info
   		t.add :report_id
