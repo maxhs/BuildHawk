@@ -13,6 +13,7 @@ Buildhawk::Application.routes.draw do
   end
 
   get 'privacy', :to => "home#privacy", :as => :privacy
+  get 'terms', :to => "home#terms", :as => :terms
   get 'about', :to => "home#about", :as => :about
   post "/projects/search", :to => "projects#search"
   post "/projects/:id", :to => "projects#update"
@@ -35,6 +36,7 @@ Buildhawk::Application.routes.draw do
     collection do
       get :about
       get :privacy
+      get :terms
     end
   end
   resources :admin do
