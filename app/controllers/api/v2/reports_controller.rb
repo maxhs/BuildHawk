@@ -6,7 +6,12 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             users.each do |u|
-                user = User.where(:full_name => u[:full_name]).first
+                if u[:full_name]
+                    user = User.where(:full_name => u[:full_name]).first
+                elsif u[:first_name] && u[:last_name]
+                    user = User.where(:first_name => u[:first_name],:last_name => u[:last_name]).first
+                end
+                    
                 if user
                     ru = report.report_users.where(:user_id => u[:id], :hours => u[:hours]).first_or_create
                 end
