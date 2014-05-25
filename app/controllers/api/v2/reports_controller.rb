@@ -40,7 +40,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
     def show
     	project = Project.find params[:id]
         if project.reports 
-        	reports = project.reports.sort_by(&:date_for_sort)#.reverse
+        	reports = project.reports.sort_by(&:date_for_sort).reverse
         	respond_to do |format|
             	format.json { render_for_api :report, :json => reports, :root => :reports}
           	end
@@ -94,6 +94,11 @@ class Api::V2::ReportsController < Api::V2::ApiController
             params[:report].delete(:report_subs)
         end
 
+        if params[:report][:report_companies].present?
+            companies = params[:report][:report_companies]
+            params[:report].delete(:report_companies)
+        end
+
         if params[:report][:safety_topics].present?
             topics = params[:report][:safety_topics]
             params[:report].delete(:safety_topics)
@@ -108,6 +113,12 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
         end
         
+        if companies
+            companies.each do |c|
+                subcontractor = @current_user.company.subcontractors.where(:name => c[:name]).first_or_create
+                report_company = @report.report_companies.where(:subcontractor_id => subcontractor.id).first_or_create
+            end
+        end
         if subs
             subs.each do |s|
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
