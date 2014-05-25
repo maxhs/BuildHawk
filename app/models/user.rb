@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone_number => user.phone_number, :id => user.id, :url_thumb => user.url_thumb}}
+      company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone_number => user.phone_number, :id => user.id, :url_thumb => user.url_thumb}}
     end
 
     def url200
@@ -155,6 +155,7 @@ class User < ActiveRecord::Base
 
     api_accessible :punchlist do |t|
       t.add :first_name
+      t.add :last_name
       t.add :full_name
       t.add :email
       t.add :phone_number
@@ -162,6 +163,7 @@ class User < ActiveRecord::Base
 
     api_accessible :checklist do |t|
       t.add :first_name
+      t.add :last_name
       t.add :full_name
       t.add :email
       t.add :phone_number
