@@ -23,6 +23,7 @@ class Photo < ActiveRecord::Base
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
+	process_in_background :image
 
 	# websolr
     searchable do
@@ -122,8 +123,8 @@ class Photo < ActiveRecord::Base
 	api_accessible :dashboard do |t|
 		t.add :id
 		t.add :epoch_time
-		t.add :url_large
 		t.add :original
+		t.add :url_large
 		t.add :url_small
 		t.add :url_thumb
 		t.add :image_file_size

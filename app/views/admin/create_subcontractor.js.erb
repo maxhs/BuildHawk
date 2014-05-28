@@ -1,0 +1,12 @@
+if ($('#new-project-form').length){
+	$('#add-sub-section').fadeOut(200,function(){
+		$(this).html('<%= link_to "Add Subcontractor", new_subcontractor_admin_index_path, :id => "add-sub-button", :style=>"float:left", :class=>"remote", :remote => true %>');
+		$(this).fadeIn(200);
+	});
+	$('#sub-list').append('<div style="padding-top:5px;"><%= check_box_tag "project[subcontractor_ids][]", @company_sub.id, checked: true %><span style="padding-left:10px;"><%= @company_sub.subcontractor.name %></span></div>');
+} else {
+	$('#main').fadeOut(200,function(){
+		$('#main').html('<%= j render partial: "admin/users" %>');
+		$(this).fadeIn(200);
+	});	
+}

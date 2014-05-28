@@ -44,11 +44,11 @@ Buildhawk::Application.routes.draw do
       get :users
       get :safety_topics
       get :edit_user
-      get :edit_sub
+      get :edit_subcontractor
       get :new_user
       post :create_user
-      get :new_sub
-      post :create_sub
+      get :new_subcontractor
+      post :create_subcontractor
       get :reports
       get :checklists
       post :create_blank_template
@@ -67,10 +67,10 @@ Buildhawk::Application.routes.draw do
       get :edit_user
       patch :update_billing
       patch :update_user
-      patch :update_sub
+      patch :update_subcontractor
       patch :update_checklist
       delete :delete_user
-      delete :delete_sub
+      delete :delete_subcontractor
     end
   end
   resources :uber_admin do

@@ -168,13 +168,13 @@ class ReportsController < ApplicationController
 			@company = @project.company
 			@projects = @company.projects
 			@users = @company.users
-			@subs = @company.subs
+			@subs = @company.subcontractors
 		elsif @report && @report.project_id
 			@project = @report.project
 			@company = @project.company
 			@projects = @company.projects
 			@users = @company.users
-			@subs = @company.subs
+			@subs = @company.subcontractors
 		end
 	end
 end

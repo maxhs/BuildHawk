@@ -1,0 +1,15 @@
+
+<%= form_for @subcontractor, :url => create_subcontractor_admin_index_path(@subcontractor), :method => :post, remote: true do |f| %>
+	<div id="new-sub-form" class="border-box">
+		<h2>New Subcontractor</h2>
+		<%= f.hidden_field :company_id, :value => current_user.company.id %>
+		<%= f.hidden_field :authenticity_token, :value => form_authenticity_token %>
+			<%= f.fields_for :subcontractor do |sub_fields| %>
+				<div><%= sub_fields.text_field :name, :placeholder => "Name", :class=>"tt-hint form-control" %></div>
+				<div><%= sub_fields.text_field :contact_name, :placeholder => "Contact Name (optional)", :class=>"tt-hint form-control" %></div>
+				<div><%= sub_fields.email_field :email, :placeholder => "Contact email address (optional)", :class=>"tt-hint form-control" %></div>
+				<div><%= sub_fields.text_field :phone_number, :placeholder => "Contact phone number (optional)", :class=>"tt-hint form-control" %></div>
+			<% end %>
+		<div><%= f.submit "Create", :id=>"new-sub-button", :class => "btn btn-success btn-md pull-right" %></div>
+	</div>
+<% end %>

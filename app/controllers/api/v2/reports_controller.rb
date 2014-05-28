@@ -6,17 +6,35 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             users.each do |u|
-                if u[:full_name]
+                if u[:id]
+                    user = User.where(:id => u[:id]).first
+                elsif u[:full_name]
                     user = User.where(:full_name => u[:full_name]).first
-                elsif u[:first_name] && u[:last_name]
-                    user = User.where(:first_name => u[:first_name],:last_name => u[:last_name]).first
                 end
                     
                 if user
-                    ru = report.report_users.where(:user_id => u[:id], :hours => u[:hours]).first_or_create
+                    ru = report.report_users.where(:user_id => u[:id]).first_or_create
+                    ru.update_attribute :hours, u[:hours]
                 end
             end
             params[:report].delete(:report_users)
+        end
+
+        if params[:report][:report_companies].present?
+            companies = params[:report][:report_companies]
+            companies.each do |c|
+                if c[:id]
+                    company = Company.where(:id => c[:id]).first
+                elsif u[:full_name]
+                    company = Company.where(:name => c[:name]).first
+                end
+                    
+                if company
+                    rc = report.report_companies.where(:company_id => c.id).first_or_create
+                    rc.update_attribute :count, c[:count]
+                end
+            end
+            params[:report].delete(:report_companies)
         end
 
         if params[:report][:report_subs].present?

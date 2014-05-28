@@ -1,0 +1,20 @@
+<%= nested_form_for @company_sub, :url => update_subcontractor_admin_path(@company_sub), :multipart => true, :method => :patch do |f| %>
+	<div id="edit-user-form" class="border-box">
+		<div><h2>Edit Subcontractor</h2></div>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<%= f.fields_for :subcontractor do |sub_fields| %>
+		<div><%= sub_fields.label "Subcontractor name" %></div>
+		<div><%= sub_fields.text_field :name, :value => f.object.subcontractor.name, :placeholder => "Name", :class=>"tt-hint form-control" %></div>
+		<div><%= sub_fields.label "Contact name" %></div>
+		<div><%= sub_fields.text_field :contact_name, :value => f.object.subcontractor.contact_name, :placeholder => "Contact Name", :class=>"tt-hint form-control" %></div>
+		<div><%= sub_fields.label "Contact email" %></div>
+		<div><%= sub_fields.email_field :email, :value => f.object.subcontractor.email, :placeholder => "Contact email address", :class=>"tt-hint form-control" %></div>
+		<div><%= sub_fields.label "Contact phone number" %></div>
+		<div><%= sub_fields.text_field :phone_number, :value => f.object.subcontractor.formatted_phone, :placeholder => "Contact phone number (e.g. (555) 555-5555)", :class=>"tt-hint form-control" %></div>
+		<% end %>
+		<div class="button-container">
+			<%= f.submit "Save", :class=>"btn btn-success btn-md save" %>
+			<%= link_to "Delete", delete_subcontractor_admin_path(@company_sub), :class =>"btn-danger btn", :method => :delete, :data => {:confirm => "Are you sure you want to delete this subcontractor?"} %>
+		</div>
+	</div>
+<% end %>

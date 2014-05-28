@@ -20,7 +20,7 @@ class AdminController < ApplicationController
 		@company = @user.company
 		unless @company.customer_token.nil? && current_user.uber_admin
 			@users = current_user.company.users
-			@subs = current_user.company.subs
+			@subcontractors = current_user.company.subcontractors
 			if request.xhr?
 				respond_to do |format|
 					format.js
@@ -41,7 +41,7 @@ class AdminController < ApplicationController
 	def create_user
 		@user = current_user.company.users.create params[:user]
 		@users = current_user.company.users
-		@subs = current_user.company.subs
+		@subcontractors = current_user.company.subcontractors
 		if @user.save & request.xhr?
 			@response_message = "User created".html_safe
 			respond_to do |format|
@@ -71,34 +71,36 @@ class AdminController < ApplicationController
 		redirect_to users_admin_index_path
 	end
 
-	def new_sub
-		@sub = Sub.new
+	def new_subcontractor
+		@subcontractor = CompanySub.new
+		@subcontractor.build_subcontractor
 	end
 
-	def create_sub
-		@sub = current_user.company.subs.create params[:sub]
+	def create_subcontractor
+		company = Company.where(:name => params[:company_sub][:subcontractor][:name]).first_or_create
+		@company_sub = current_user.company.company_subs.where(:subcontractor_id => company.id).first_or_create
 		@users = current_user.company.users
-		@subs = current_user.company.subs
-		if @sub.save & request.xhr?
+		@subcontractors = current_user.company.subcontractors
+		if @company_sub.save & request.xhr?
 			respond_to do |format|
 				format.js
 			end
-		elsif @sub.save
-			flash[:notice] = "Sub created"
+		elsif @company_sub.save
+			flash[:notice] = "Subcontractor created"
 			redirect_to users_admin_index_path
 		else
-			flash[:notice] = "Unable to create sub. Please make sure the form is complete."
+			flash[:notice] = "Unable to create subcontractor. Please make sure the form is complete."
 			redirect_to users_admin_index_path
 		end
 	end
 
-	def edit_sub
-		@sub = Sub.find params[:id]
+	def edit_subcontractor
+		@company_sub = current_user.company.company_subs.where(:subcontractor_id => params[:id]).first
 	end
 
-	def update_sub
-		@sub = Sub.find params[:id]
-		@sub.update_attributes params[:sub]
+	def update_subcontractor
+		@company_sub = current_user.company.company_subs.where(:id => params[:id]).first
+		@company_sub.update_attributes params[:company_sub][:subcontractor]
 		redirect_to users_admin_index_path
 	end
 
@@ -108,9 +110,9 @@ class AdminController < ApplicationController
 		redirect_to users_admin_index_path
 	end
 
-	def delete_sub
-		@sub = Sub.find params[:id]
-		@sub.destroy
+	def delete_subcontractor
+		@subcontractor = CompanySub.find params[:id]
+		@subcontractor.destroy
 		redirect_to users_admin_index_path
 	end
 
