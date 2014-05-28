@@ -89,6 +89,7 @@ class Report < ActiveRecord::Base
         t.add :comments
         t.add :photos
         t.add :report_users
+        t.add :report_companies
         t.add :safety_topics
         ### slated for deletion in next version ###
         t.add :report_subs
