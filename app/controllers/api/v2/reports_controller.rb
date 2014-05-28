@@ -23,15 +23,16 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_companies].present?
             companies = params[:report][:report_companies]
             companies.each do |c|
+                puts "c: #{c}"
                 if c[:id]
                     company = Company.where(:id => c[:id]).first
-                elsif u[:full_name]
+                elsif c[:name]
                     company = Company.where(:name => c[:name]).first
                 end
                     
                 if company
-                    rc = report.report_companies.where(:company_id => c.id).first_or_create
-                    rc.update_attribute :count, c[:count]
+                    rc = report.report_companies.where(:company_id => company.id).first_or_create
+                    rc.update_attribute :count, c[:count].to_i
                 end
             end
             params[:report].delete(:report_companies)
