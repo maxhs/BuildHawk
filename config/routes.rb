@@ -249,7 +249,7 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :punchlists, :only => [:show]
+      resources :punchlists, :only => [:show, :index]
       resources :punchlist_items do
         collection do
           post :photo
