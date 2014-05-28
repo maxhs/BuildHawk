@@ -1,4 +1,4 @@
-<div id="users-page" class="page border-box" style="padding-top:15px;padding-bottom:0px">
+<div id="users-page" class="page border-box">
 	<!--<header>
 		<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
 			<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
@@ -20,7 +20,7 @@
 				<tr class="user-row">
 					<td style="width:100px;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
 					<td class="user-name"><%= link_to user.full_name, edit_user_uber_admin_index_path(:user_id => user.id), :remote => true %></td>
-					<td><%= user.company.name %></td>
+					<td><%= user.company.name if user && user.company %></td>
 					<td><%= user.email %></td>
 					<td><%= parse_time user.created_at %></td>
 				</tr>
