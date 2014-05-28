@@ -139,8 +139,8 @@ class Api::V2::ReportsController < Api::V2::ApiController
         
         if companies
             companies.each do |c|
-                subcontractor = @current_user.company.subcontractors.where(:name => c[:name]).first_or_create
-                report_company = @report.report_companies.where(:subcontractor_id => subcontractor.id).first_or_create
+                company = @current_user.company.subcontractors.where(:name => c[:name]).first_or_create
+                report_company = @report.report_companies.where(:company_id => company.id).first_or_create
             end
         end
         if subs
