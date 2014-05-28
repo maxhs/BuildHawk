@@ -11,16 +11,19 @@ class Punchlist < ActiveRecord::Base
 	acts_as_api
 
   	api_accessible :user do |t|
+      t.add :id
   		t.add :punchlist_items
       t.add :personnel
   	end
 
   	api_accessible :projects do |t|
+      t.add :id
   		t.add :punchlist_items
       t.add :personnel
   	end
 
     api_accessible :punchlist do |t|
+      t.add :id
       t.add :punchlist_items
       t.add :personnel
     end
