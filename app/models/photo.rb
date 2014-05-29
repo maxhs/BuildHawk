@@ -105,7 +105,7 @@ class Photo < ActiveRecord::Base
 	end
 
 	def folder_name
-		folder.name
+		folder.name if folder
 	end
 
 	def has_assignee?
@@ -135,8 +135,8 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
-		t.add :folder_name, :if => :has_folder?
-		t.add :folder_id, :if => :has_folder?
+		#t.add :folder_name, :if => :has_folder?
+		#t.add :folder_id, :if => :has_folder?
 		#t.add :assignee, :if => :has_assignee?
 		##slated for removal
 		t.add :url200
