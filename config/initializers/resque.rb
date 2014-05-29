@@ -2,11 +2,11 @@ require 'resque'
 require 'resque_scheduler'
 require 'resque_scheduler/server'
 
-uri = URI.parse(ENV["REDISTOGO_URL"])
-REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-Resque.redis = REDIS
-
+uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
+#Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+Resque.redis = Redis.new(:url => ENV['REDISTOGO_URL'])
 Resque.redis.namespace = "resque:buildhawk-rails"
+
 # If you want to be able to dynamically change the schedule,
 # uncomment this line.  A dynamic schedule can be updated via the
 # Resque::Scheduler.set_schedule (and remove_schedule) methods.
