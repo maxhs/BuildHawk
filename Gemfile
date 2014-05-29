@@ -30,7 +30,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'
 gem 'sidekiq'
-gem 'apn_sender', require: ['apn', 'apn/jobs/resque_notification_job']
+gem 'apn_sender', require: ['apn', 'apn/jobs/sidekiq_notification_job']
 gem 'daemons'
 gem 'sunspot_rails', '~> 2.1.0'
 gem 'sunspot_solr'
