@@ -2,10 +2,10 @@ require 'resque'
 require 'resque_scheduler'
 require 'resque_scheduler/server'
 
-#uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
-#Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-uri = URI.parse(ENV["REDISTOGO_URL"])
-REDIS = Redis.new(:url => ENV['REDISTOGO_URL'])
+uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
+Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+#uri = URI.parse(ENV["REDISTOGO_URL"])
+#REDIS = Redis.new(:url => ENV['REDISTOGO_URL'])
 Resque.redis = REDIS
 
 Resque.redis.namespace = "resque:buildhawk-rails"
