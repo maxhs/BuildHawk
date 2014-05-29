@@ -42,6 +42,7 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'acts_as_list'
 gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
+gem 'sidekiq'
 #gem 'newrelic_rpm'
 
 ruby '2.1.1'
