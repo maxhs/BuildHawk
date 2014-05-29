@@ -29,7 +29,8 @@ gem 'resque-scheduler', '2.2.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'
-gem 'apn_sender'#, :require => ['apn/jobs/sidekiq_notification_job']
+#gem 'sidekiq'
+gem 'apn_sender'#, :git => "git@github.com:arthurnn/apn_sender.git", :require => ['apn/jobs/sidekiq_notification_job']
 gem 'daemons'
 gem 'sunspot_rails', '~> 2.1.0'
 gem 'sunspot_solr'
@@ -42,7 +43,6 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'acts_as_list'
 gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
-gem 'sidekiq'
 #gem 'newrelic_rpm'
 
 ruby '2.1.1'
