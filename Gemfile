@@ -29,7 +29,7 @@ gem 'resque-scheduler', '2.2.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'
-gem 'apn_sender'#, require: ['apn/jobs/sidekiq_notification_job']
+gem 'apn_sender', :require => ['apn/jobs/sidekiq_notification_job']
 gem 'daemons'
 gem 'sunspot_rails', '~> 2.1.0'
 gem 'sunspot_solr'

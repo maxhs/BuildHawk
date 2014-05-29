@@ -42,12 +42,11 @@ GEM
       rack (>= 1.1.0)
     acts_as_list (0.4.0)
       activerecord (>= 3.0)
-    apn_sender (2.0.0)
+    apn_sender (2.0.1)
       activesupport (>= 3.1)
       connection_pool
       daemons
     arel (4.0.2)
-    atomic (1.1.15)
     aws-sdk (1.34.1)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -69,7 +68,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    connection_pool (1.2.0)
+    connection_pool (2.0.0)
     daemons (1.1.9)
     deep_cloneable (1.6.0)
       activerecord (>= 3.1.0)
@@ -109,7 +108,7 @@ GEM
     minitest (4.7.5)
     mono_logger (1.1.0)
     multi_fetch_fragments (0.0.17)
-    multi_json (1.8.4)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     nested_form (0.3.2)
     nokogiri (1.6.1)
@@ -230,8 +229,7 @@ GEM
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
     thor (0.18.1)
-    thread_safe (0.2.0)
-      atomic (>= 1.1.7, < 2)
+    thread_safe (0.3.4)
     tilt (1.4.1)
     timers (1.1.0)
     treetop (1.4.15)
@@ -239,7 +237,7 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.1)
       coffee-rails
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
