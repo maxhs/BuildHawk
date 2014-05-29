@@ -104,12 +104,8 @@ class Photo < ActiveRecord::Base
 		punchlist_item.assignee.full_name if punchlist_item && punchlist_item.assignee
 	end
 
-	def folder_name
-		if folder
-			folder.name
-		else
-			""
-		end
+	def folder_name	
+		folder.name if folder
 	end
 
 	def has_assignee?
@@ -117,7 +113,7 @@ class Photo < ActiveRecord::Base
 	end
 
 	def has_folder?
-		!folder_id.nil?
+		folder.present?
 	end
 
 	def epoch_time
@@ -139,7 +135,7 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
-		t.add :folder_name
+		t.add :folder_name, :if => :has_folder?
 		t.add :folder_id
 		#t.add :assignee, :if => :has_assignee?
 		##slated for removal
