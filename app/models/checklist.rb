@@ -14,8 +14,9 @@ class Checklist < ActiveRecord::Base
 
     def duplicate
         puts "duplicating a checklist"
-        self.dup :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :status}}}
-        self.save
+        new_checklist = self.dup :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :status}}}
+        new_checklist.save
+        return new_checklist
     end
 
     def items
