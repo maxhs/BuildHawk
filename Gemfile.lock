@@ -256,7 +256,7 @@ DEPENDENCIES
   actionview-encoded_mail_to
   acts_as_api
   acts_as_list
-  apn_sender (= 2.0.0)
+  apn_sender
   aws-sdk
   cocaine
   daemons
