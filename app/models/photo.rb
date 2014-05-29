@@ -105,7 +105,11 @@ class Photo < ActiveRecord::Base
 	end
 
 	def folder_name
-		folder.name if folder
+		if folder
+			folder.name
+		else
+			""
+		end
 	end
 
 	def has_assignee?
