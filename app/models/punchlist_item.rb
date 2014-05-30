@@ -16,7 +16,7 @@ class PunchlistItem < ActiveRecord::Base
 
     after_commit :notify, :if => :persisted?
 
-    default_scope { order('created_at') }
+    default_scope { order('created_at DESC') }
 
     #websolr
     searchable do
