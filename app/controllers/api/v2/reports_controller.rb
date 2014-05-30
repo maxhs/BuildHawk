@@ -32,7 +32,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
                     
                 if company
                     rc = report.report_companies.where(:company_id => company.id).first_or_create
-                    rc.update_attribute :count, c[:count].to_i
+                    rc.update_attribute :count, c[:count]
                 end
             end
             params[:report].delete(:report_companies)
@@ -141,6 +141,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             companies.each do |c|
                 company = @current_user.company.subcontractors.where(:name => c[:name]).first_or_create
                 report_company = @report.report_companies.where(:company_id => company.id).first_or_create
+                report_company.update_attribute :count, c[:count]
             end
         end
         if subs
@@ -156,6 +157,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 user = User.find_by full_name: u[:full_name]
                 if user
                     ru = @report.report_users.where(:user_id => user.id).first_or_create
+                    ru.update_attribute :hours, u[:hours]
                 end
             end
         end
