@@ -93,7 +93,7 @@
 			<%= f.text_field :name, :placeholder => "Your name", :class => "form-control" %>
 			<%= f.text_field :phone_number, :placeholder => "Phone number", :class => "form-control" %>
 			<%= f.email_field :email, :placeholder => "Email address", :class => "form-control" %>
-			<%= text_field_tag :company_name, nil, :placeholder => "Your company", :class => "form-control" %>
+			<%= f.text_field :company_name, :placeholder => "Your company", :class => "form-control" %>
 			<%= f.submit "Submit", :class=>"btn btn-success btn-md send" %>
 		<% end %>
 	</section>
