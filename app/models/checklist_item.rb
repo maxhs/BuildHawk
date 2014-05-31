@@ -9,7 +9,7 @@ class ChecklistItem < ActiveRecord::Base
     belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
   	has_many :comments, :dependent => :destroy
-
+    has_many :notifications, :dependent => :destroy
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 

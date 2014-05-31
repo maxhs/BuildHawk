@@ -7,6 +7,7 @@ class Report < ActiveRecord::Base
     belongs_to :author, :class_name => "User"
   	belongs_to :project
   	has_many :comments, :dependent => :destroy
+    has_many :notifications, :dependent => :destroy
   	has_many :report_fields, :dependent => :destroy
     has_many :report_users, :dependent => :destroy
     has_many :users, :through => :report_users
