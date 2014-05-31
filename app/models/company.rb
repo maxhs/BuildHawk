@@ -52,7 +52,7 @@ class Company < ActiveRecord::Base
     def clone_company_subs
       companies_array = []
       subs.each do |s|
-        new_company = Company.create :name => s.name, :email => s.email, :phone_number => s.phone_number
+        new_company = Company.where(:name => s.name, :email => s.email, :phone_number => s.phone_number).first_or_create
         companies_array << new_company
       end
       companies_array.each do |c|
