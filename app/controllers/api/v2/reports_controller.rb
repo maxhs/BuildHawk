@@ -18,8 +18,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 end
             end
             params[:report].delete(:report_users)
-        elsif report.report_users.count > 0
-            report.report_users.destroy_all
         end
 
         if params[:report][:report_companies].present?
