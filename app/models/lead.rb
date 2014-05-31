@@ -5,7 +5,7 @@ class Lead < ActiveRecord::Base
 
 	def email_will
 		puts "should be emailing will"
-		LeadMailer.lead(self).deliver
+		LeadMailer.email_will(self).deliver
 	end
   	
 end
