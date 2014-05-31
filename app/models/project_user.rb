@@ -13,6 +13,5 @@ class ProjectUser < ActiveRecord::Base
         	:project_id => project_id,
         	:notification_type => "Project"
         ).first_or_create
-        puts "should have just sent a new project user push notification to #{user.full_name}"
 	end
 end

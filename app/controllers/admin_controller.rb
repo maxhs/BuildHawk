@@ -187,10 +187,8 @@ class AdminController < ApplicationController
 	def create_template
 		list = Checklist.find params[:checklist_id]
 		@checklist = list.duplicate
-		@checklist.save
 		@checklist.update_attribute :company_id, @company.id
-		puts "is it getting the new company id? #{@checklist.company.id}"
-		
+		puts "New checklist's company id: #{@checklist.company.id}"
 		@checklists = @user.company.checklists.where(:core => true).flatten
 		if request.xhr?
 			respond_to do |format|
