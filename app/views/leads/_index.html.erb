@@ -1,0 +1,49 @@
+<div id="users-page" class="page border-box">
+	<!--<header>
+		<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
+			<input type="text" id="filter" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
+			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+		</div>
+	</header>-->
+
+	<table class="table table-bordered table-responsive" id="users">
+		<thead>
+			<th><h4>Name</h4></th>
+			<th><h4>Company Name</h4></th>
+			<th><h4>Phone Number</h4></th>
+			<th><h4>Email</h4></th>
+			<th><h4>Created On</h4></th>
+		</thead>
+
+		<tbody>
+			<% leads.each do |lead| %>
+				<tr class="user-row">
+					<td><%= lead.name if lead.name %></td>
+					<td><%= lead.company_name if lead.company_name %></td>
+					<td><%= lead.phone_number if lead.phone_number %></td>
+					<td><%= lead.email %></td>
+					<td><%= parse_time lead.created_at %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<script>
+	$(document).ready(function(){
+	    $("#filter").keyup(function(){
+	        // Retrieve the input field text and reset the count to zero
+	        var filter = $(this).val(), count = 0;
+	        if ($(this).val().length == 0) {
+	        	$(".user-row").fadeIn(0);
+	        } else {
+		        $(".user-row .user-name").each(function(){
+		            // If the list item does not contain the text phrase fade it out
+		            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+		                $(this).parent().fadeOut(0);
+		            }
+		        });
+		    }
+	    });
+	});
+	</script>
+</div>
