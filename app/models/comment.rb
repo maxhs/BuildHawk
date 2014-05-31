@@ -15,15 +15,17 @@ class Comment < ActiveRecord::Base
 
     def notify
         if report && report.author
+            truncated = truncate(body, length:20)
             report.author.notifications.where(
-                :message => "#{user.full_name} just commented on your report: \"#{report.report_type} - #{report.after_create}\"", 
+                :message => "#{user.full_name} just commented on your #{report.report_type} Report from #{report.after_create}: \"#{truncated}\"", 
                 :report_id => report_id,
                 :notification_type => "Comment"
             ).first_or_create
         elsif punchlist_item
+            truncated_item = truncate(punchlist_item.body, length:20)
             truncated = truncate(body, length:20)
             punchlist_item.user.notifications.where(
-                :message => "#{user.full_name} just commented on your worklist item: \"#{truncated}\"", 
+                :message => "#{user.full_name} just commented on your worklist item (#{truncated_item}): \"#{truncated}\"", 
                 :punchlist_item_id => report_id,
                 :notification_type => "Comment"
             ).first_or_create
