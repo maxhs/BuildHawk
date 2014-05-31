@@ -36,7 +36,7 @@ class Api::V2::SessionsController < Api::V2::ApiController
   			end
   		else
   			render json: { message: 'Incorrect password' }, status: 401
-        end
+      end
     end
 
     def forgot_password

@@ -6,10 +6,10 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             users.each do |u|
-                if u[:id]
-                    user = User.where(:id => u[:id]).first
-                elsif u[:full_name]
+                if u[:full_name]
                     user = User.where(:full_name => u[:full_name]).first
+                elsif u[:id]
+                    user = User.where(:id => u[:id]).first
                 end
                     
                 if user
@@ -23,10 +23,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_companies].present?
             companies = params[:report][:report_companies]
             companies.each do |c|
-                puts "c: #{c}"
-                if c[:id]
-                    company = Company.where(:id => c[:id]).first
-                elsif c[:name]
+                if c[:name]
                     company = Company.where(:name => c[:name]).first
                 end
                     
