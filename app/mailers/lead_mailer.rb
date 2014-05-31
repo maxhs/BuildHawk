@@ -12,7 +12,7 @@ class LeadMailer < ActionMailer::Base
   		end
   		mail(
       		:subject => subject,
-      		:to      => ["max.hainesstiles@gmail.com","max@ristrettolabs.com"],
+      		:to      => ["will@buildhawk.com","max@ristrettolabs.com"],
       		:from 	 => "support@buildhawk.com",
       		:tag     => 'Lead'
     	)
