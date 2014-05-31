@@ -13,18 +13,6 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def preregister
-		@user = User.create! params[:user]
-		company = Company.where(:name => params[:company_name]).first_or_create if params[:company_name]
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			redirect_to root_url
-		end
-	end
-
 	def create
 		@user = current_user.company.users.create params[:user]
 		redirect_to projects_path

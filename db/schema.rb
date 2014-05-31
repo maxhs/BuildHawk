@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531175438) do
+ActiveRecord::Schema.define(version: 20140531191252) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -155,6 +155,15 @@ ActiveRecord::Schema.define(version: 20140531175438) do
   create_table "folders", force: true do |t|
     t.string   "name"
     t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leads", force: true do |t|
+    t.string   "name"
+    t.string   "company_name"
+    t.string   "email"
+    t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

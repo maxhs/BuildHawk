@@ -118,6 +118,7 @@ Buildhawk::Application.routes.draw do
   resources :companies
   resources :comments
   resources :project_groups
+  resources :leads
   resources :checklists do 
     collection do 
       post :order_phases

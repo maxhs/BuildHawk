@@ -89,10 +89,9 @@
 		<p> If you’d like to test out the beta, or if you just want to stay in touch,<br />simply fill out the below form and we’ll let you know when it’s ready for early access.</p>
 		<br/>
 
-		<%= form_for @user, url: preregister_users_path(@user), :method => :post, :remote => true do |f| %>
-			<%= hidden_field_tag :pre_register, true %>
-			<%= f.text_field :first_name, :placeholder => "Your first name", :class => "form-control" %>
-			<%= f.text_field :last_name, :placeholder => "Your last name", :class => "form-control" %>
+		<%= form_for @lead, :method => :post, :remote => true do |f| %>
+			<%= f.text_field :name, :placeholder => "Your name", :class => "form-control" %>
+			<%= f.text_field :phone_number, :placeholder => "Your phone number", :class => "form-control" %>
 			<%= f.email_field :email, :placeholder => "Your email address", :class => "form-control" %>
 			<%= text_field_tag :company_name, nil, :placeholder => "Company name", :class => "form-control" %>
 			<%= f.submit "Submit", :class=>"btn btn-success btn-md send" %>
