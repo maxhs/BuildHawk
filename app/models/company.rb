@@ -49,6 +49,17 @@ class Company < ActiveRecord::Base
         end
     end
 
+    def clone_company_subs
+      companies_array = []
+      subs.each do |s|
+        new_company = Company.create :name => s.name, :email => s.email, :phone_number => s.phone_number
+        companies_array << new_company
+      end
+      companies_array.each do |c|
+        company_subs.create :subcontractor_id => c.id
+      end
+    end
+
 	acts_as_api
 
   	api_accessible :company do |t|
