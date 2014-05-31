@@ -13,7 +13,7 @@
 		</div>
 		<%= f.fields_for :assignee do |a| %>
 			<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
-			<%= a.select :full_name, @users.map(&:full_name)+@subs.map(&:name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+			<%= a.select :full_name, (@users.map(&:full_name)+@subs.map(&:name)).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
 		<% end %>
 		<div>
 			<h4>Add a photo</h4>
