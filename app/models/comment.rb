@@ -26,7 +26,7 @@ class Comment < ActiveRecord::Base
             truncated = truncate(body, length:20)
             punchlist_item.user.notifications.where(
                 :message => "#{user.full_name} just commented on your worklist item (#{truncated_item.strip}) \"#{truncated}\"", 
-                :punchlist_item_id => report_id,
+                :punchlist_item_id => punchlist_item_id,
                 :notification_type => "Comment"
             ).first_or_create
         # elsif checklist_item
