@@ -2,12 +2,22 @@
 
 <p>A new lead just signed up:</p>
 <table>
-	<th>Name</th>
-	<th>Company Name</th>
-	<th>Email</th>
-	<th>Phone Number</th>
-	<td><%= @lead.name if @lead.name %></td>
-	<td><%= @lead.company_name if @lead.company_name %></td>
-	<td><%= @lead.email if @lead.email %></td>
-	<td><%= @lead.phone_number if @lead.phone_number %></td>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Company Name</th>
+			<th>Email</th>
+			<th>Phone Number</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td><%= @lead.name if @lead.name %></td>
+			<td><%= @lead.company_name if @lead.company_name %></td>
+			<td><%= @lead.email if @lead.email %></td>
+			<td><%= @lead.phone_number if @lead.phone_number %></td>
+		</tr>
+	</tbody>
 </table>
+

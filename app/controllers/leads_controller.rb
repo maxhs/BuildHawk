@@ -1,4 +1,5 @@
 class LeadsController < ApplicationController
+	before_filter :authenticate_user!, :except => :create
 	def create
 		lead = Lead.create params[:lead]
 		if request.xhr?
@@ -8,5 +9,9 @@ class LeadsController < ApplicationController
 		else
 			redirect_to root_url
 		end
+	end
+
+	def index
+		@leads = Lead.all
 	end
 end

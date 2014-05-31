@@ -4,7 +4,6 @@ class Lead < ActiveRecord::Base
 	after_create :email_will
 
 	def email_will
-		puts "should be emailing will"
 		LeadMailer.email_will(self).deliver
 	end
   	
