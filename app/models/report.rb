@@ -24,7 +24,8 @@ class Report < ActiveRecord::Base
     accepts_nested_attributes_for :users, :allow_destroy => true
     accepts_nested_attributes_for :subs, :allow_destroy => true
     accepts_nested_attributes_for :report_companies, :allow_destroy => true
-    accepts_nested_attributes_for :report_subs
+    accepts_nested_attributes_for :report_subs, :allow_destroy => true
+    accepts_nested_attributes_for :report_users, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
     #websolr
