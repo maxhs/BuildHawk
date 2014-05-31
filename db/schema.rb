@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520010308) do
+ActiveRecord::Schema.define(version: 20140531175438) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20140520010308) do
     t.datetime "updated_at"
     t.integer  "project_id"
     t.boolean  "feed",              default: false
+    t.integer  "comment_id"
   end
 
   create_table "phases", force: true do |t|

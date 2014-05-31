@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
 
-	attr_accessible :user_id, :target_user_id, :read, :sent, :checklist_item_id, :punchlist_item_id, :report_id, :message,
-					:notification_type, :project_id, :feed
+	attr_accessible :user_id, :target_user_id, :comment_id, :read, :sent, :checklist_item_id, :punchlist_item_id, 
+					:report_id, :message, :notification_type, :project_id, :feed
 
 	belongs_to :user
 	belongs_to :target_user, :class_name => "User"
@@ -9,6 +9,7 @@ class Notification < ActiveRecord::Base
 	belongs_to :report
 	belongs_to :punchlist_item
 	belongs_to :checklist_item
+	belongs_to :comment
 
 	after_create :deliver
 
@@ -19,6 +20,7 @@ class Notification < ActiveRecord::Base
 		        :report_id 			=> report_id, 
 		        :punchlist_item_id 	=> punchlist_item_id,
 		        :checklist_item_id 	=> checklist_item_id,
+		        :comment_id 		=> comment_id,
 		        :project_id 		=> project_id,
 		        :badge          	=> user.notifications.where(:read => false).count
 		    )

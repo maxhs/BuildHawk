@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   	belongs_to :report
   	belongs_to :checklist_item, counter_cache: true
   	belongs_to :punchlist_item, counter_cache: true
+    has_one :notification, dependent: :destroy
   	has_many :photos
 
     validates_presence_of :body
@@ -19,6 +20,7 @@ class Comment < ActiveRecord::Base
             report.author.notifications.where(
                 :message => "#{user.full_name} just commented on your #{report.report_type} Report from #{report.created_date}: \"#{truncated}\"", 
                 :report_id => report_id,
+                :comment_id => id,
                 :notification_type => "Comment"
             ).first_or_create
         elsif punchlist_item
@@ -27,15 +29,9 @@ class Comment < ActiveRecord::Base
             punchlist_item.user.notifications.where(
                 :message => "#{user.full_name} just commented on your worklist item (#{truncated_item.strip}) \"#{truncated}\"", 
                 :punchlist_item_id => punchlist_item_id,
+                :comment_id => id,
                 :notification_type => "Comment"
             ).first_or_create
-        # elsif checklist_item
-        #     truncated = truncate(body, length:20)
-        #     checklist_item.user.notifications.where(
-        #         :message => "#{user.full_name} just commented on your worklist item: \"#{truncated}\"", 
-        #         :punchlist_item_id => report_id,
-        #         :notification_type => "Comment"
-        #     ).first_or_create
         end
     end
 
