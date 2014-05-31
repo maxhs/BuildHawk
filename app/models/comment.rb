@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
-	  attr_accessible :body, :user_id, :report_id, :checklist_item_id, :punchlist_item_id, :mobile
+    include ActionView::Helpers::TextHelper
+	attr_accessible :body, :user_id, :report_id, :checklist_item_id, :punchlist_item_id, :mobile
   	belongs_to :user
   	belongs_to :report
   	belongs_to :checklist_item, counter_cache: true
@@ -9,6 +10,32 @@ class Comment < ActiveRecord::Base
     validates_presence_of :body
     validates :body, :length => { :minimum => 1 }
     default_scope { order('created_at') }
+
+    after_create :notify
+
+    def notify
+        if report && report.author
+            report.author.notifications.where(
+                :message => "#{user.full_name} just commented on your report: \"#{report.report_type} - #{report.after_create}\"", 
+                :report_id => report_id,
+                :notification_type => "Comment"
+            ).first_or_create
+        elsif punchlist_item
+            truncated = truncate(body, length:20)
+            punchlist_item.user.notifications.where(
+                :message => "#{user.full_name} just commented on your worklist item: \"#{truncated}\"", 
+                :punchlist_item_id => report_id,
+                :notification_type => "Comment"
+            ).first_or_create
+        # elsif checklist_item
+        #     truncated = truncate(body, length:20)
+        #     checklist_item.user.notifications.where(
+        #         :message => "#{user.full_name} just commented on your worklist item: \"#{truncated}\"", 
+        #         :punchlist_item_id => report_id,
+        #         :notification_type => "Comment"
+        #     ).first_or_create
+        end
+    end
 
   	acts_as_api
 

@@ -1,6 +1,6 @@
 <%= nested_form_for @company, :url => {:action => :update_company}, :html => {:multipart => true}, :remote => true, :method => :post do |f| %>
 	<div id="edit-company-form">
-	<div><h2>Edit Company: <%= @company.name %></h2></div>		
+		<div><h2>Edit Company: <%= @company.name %></h2></div>		
 		<%= hidden_field_tag :company_id, @company.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<div><%= f.text_field :name, :placeholder => "Company Name", :class=>"tt-hint form-control" %></div>
@@ -14,6 +14,8 @@
 		<div>
 			<%= f.file_field :image %>
 		</div>
-		<div><button class="btn btn-success btn-md pull-right"><%= f.submit "Save" %></button></div>
-		<div><%= link_to "Delete Company", destroy_company_uber_admin_index_path(:company_id => @company.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete this company? This will destroy all associated company data (including users, projects, etc.)."}, :style=>"float:right;clear:both;padding:15px 0;", :remote => true %></div>
+		<div><%= f.submit "Save", :class => "btn btn-success btn-md pull-right" %></div>
+		<div><%= link_to "Delete Company", destroy_company_uber_admin_index_path(:company_id => @company.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete this company? This will destroy all associated company data (including users, projects, etc.)."}, :class => "btn btn-danger btn-md remote", :style => "float:right;clear:both;", :remote => true %></div>
+	</div>
 <% end %>
+	
