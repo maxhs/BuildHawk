@@ -13,5 +13,12 @@ class LeadsController < ApplicationController
 
 	def index
 		@leads = Lead.all
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :index
+		end
 	end
 end
