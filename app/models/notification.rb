@@ -15,7 +15,8 @@ class Notification < ActiveRecord::Base
 
 	def deliver
 		if user && user.push_permissions
-			self.user.notify_all_devices(
+			puts "Should be sending a push to: #{user.full_name}"
+			user.notify_all_devices(
 		        :alert          	=> message, 
 		        :report_id 			=> report_id, 
 		        :punchlist_item_id 	=> punchlist_item_id,
@@ -24,7 +25,7 @@ class Notification < ActiveRecord::Base
 		        :project_id 		=> project_id,
 		        :badge          	=> user.notifications.where(:read => false).count
 		    )
-			self.sent = true
+			sent = true
 			self.save
 		end
 	end 

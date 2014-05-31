@@ -7,7 +7,7 @@ class PunchlistItem < ActiveRecord::Base
     belongs_to :punchlist
     belongs_to :user
     belongs_to :completed_by_user, :class_name => "User"
-	  belongs_to :assignee, :class_name => "User"
+	belongs_to :assignee, :class_name => "User"
     belongs_to :sub_assignee, :class_name => "Sub"
     has_many :comments, :dependent => :destroy
     has_many :photos, :dependent => :destroy
@@ -35,22 +35,22 @@ class PunchlistItem < ActiveRecord::Base
     def notify
         puts "punchlist item changed"
         truncated = truncate(body, length:20)
-        if completed && completed == true && user_id
+        if completed
             # user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
             # if user
             #     message = "#{punchlist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
             # else
                 message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" was just completed"
             #end
-            Notification.where(:message => message,:user_id => self.user_id, :punchlist_item_id => self.id, :notification_type => "Worklist").first_or_create
-        elsif user_id
+            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id, :notification_type => "Worklist").first_or_create
+        else
             message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" has been modified"
-            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id,:notification_type => "Worklist").first_or_create
+            user.notifications.where(:message => message,:punchlist_item_id => id,:notification_type => "Worklist").first_or_create
         end
 
         if assignee
             message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
-            Notification.where(:message => message,:user_id => assignee.id, :punchlist_item_id => id,:notification_type => "Worklist").first_or_create
+            assignee.notifications.where(:message => message,:punchlist_item_id => id,:notification_type => "Worklist").first_or_create
         end
     end
 
