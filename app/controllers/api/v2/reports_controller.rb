@@ -14,13 +14,14 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 end
                     
                 if user
-                    ru = report.report_users.where(:user_id => u[:id]).first_or_create
+                    ru = report.report_users.where(:user_id => user.id).first_or_create
+                    puts "user hours: #{u[:hours]}"
                     ru.update_attribute :hours, u[:hours]
                     user_ids << user.id
                 end
             end
             report.report_users.each do |ru|
-                ru.destroy unless user_ids.include?(ru.user.id)
+                ru.destroy unless user_ids.include?(ru.user_id)
             end
             params[:report].delete(:report_users)
         end
