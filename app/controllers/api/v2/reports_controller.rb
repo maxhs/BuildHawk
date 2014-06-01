@@ -19,7 +19,9 @@ class Api::V2::ReportsController < Api::V2::ApiController
                     report_users << ru
                 end
             end
-            
+            report.report_users.each do |ru|
+                ru.destroy unless report_users.include?(ru)
+            end
             params[:report].delete(:report_users)
         end
 
