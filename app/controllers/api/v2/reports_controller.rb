@@ -5,7 +5,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
     	report = Report.find params[:id]
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
-            report_users = []
+            user_ids = []
             users.each do |u|
                 if u[:full_name]
                     user = User.where(:full_name => u[:full_name]).first
@@ -16,11 +16,11 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 if user
                     ru = report.report_users.where(:user_id => u[:id]).first_or_create
                     ru.update_attribute :hours, u[:hours]
-                    report_users << ru
+                    user_ids << user.id
                 end
             end
             report.report_users.each do |ru|
-                ru.destroy unless report_users.include?(ru)
+                ru.destroy unless user_ids.include?(ru.user.id)
             end
             params[:report].delete(:report_users)
         end
