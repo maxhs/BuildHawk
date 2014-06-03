@@ -1,12 +1,14 @@
 <div class="row topic" id="topic-<%= topic.id %>">
 	<div class="col-xs-3"><h5><%= topic.title %></h5></div>
-	<% if topic.info.length > 130 %>
-		<div class="col-xs-7 topic-description"><%= topic.info[0..130] %><span class="ellipsis">...</span>
-			<div class="read-more simple-btn">Read more</div>
-			<span class="hiddenText"><%= topic.info[131..topic.info.length] %>
-		</div>
-	<% else %>
-		<div class="col-xs-7 topic-description"><%= topic.info %></div>
+	<% if topic.info %>
+		<% if topic.info.length > 130 %>
+			<div class="col-xs-7 topic-description"><%= topic.info[0..130] %><span class="ellipsis">...</span>
+				<div class="read-more simple-btn">Read more</div>
+				<span class="hiddenText"><%= topic.info[131..topic.info.length] %>
+			</div>
+		<% else %>
+			<div class="col-xs-7 topic-description"><%= topic.info %></div>
+		<% end %>
 	<% end %>
 	<div class="col-xs-2" style="text-align:center;">
 		<%= link_to "Edit", edit_safety_topic_path(topic), :class => "simple-btn remote", :style => "text-align:center;margin:0;", remote: true %>
