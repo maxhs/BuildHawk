@@ -82,7 +82,17 @@ class PunchlistItem < ActiveRecord::Base
 
     end
 
-    api_accessible :login, :extend => :projects do |t|
-
+    api_accessible :login do |t|
+        t.add :id
+        #t.add :user
+        t.add :body
+        #t.add :assignee
+        t.add :location
+        t.add :completed_at
+        t.add :completed
+        t.add :photos
+        t.add :epoch_time
+        t.add :created_at
+        t.add :comments
     end
 end
