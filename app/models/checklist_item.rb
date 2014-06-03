@@ -1,7 +1,7 @@
 class ChecklistItem < ActiveRecord::Base
 	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :category_id, 
                   :status, :critical_date, :completed_date,:photos, :photos_attributes, :checklist_id, :checklist, 
-                  :order_index, :photos_count, :comments_count, :user_id
+                  :order_index, :photos_count, :comments_count, :user_id, :reminder_date
   	
   	belongs_to :user
     belongs_to :category
@@ -10,6 +10,7 @@ class ChecklistItem < ActiveRecord::Base
   	has_many :photos
   	has_many :comments, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
+    has_many :reminders, :dependent => :destroy
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
