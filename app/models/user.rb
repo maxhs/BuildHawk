@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
     end
 
     def connect_items
-        PunchlistItem.where(:assignee_id => id).flatten
+        PunchlistItem.where(:assignee_id => self.id).flatten
     end
 
   	acts_as_api
@@ -135,7 +135,7 @@ class User < ActiveRecord::Base
 
     api_accessible :login, :extend => :user do |t|
         t.add :coworkers
-        #t.add :connect_items
+        t.add :connect_items
     end
 
   	api_accessible :feed do |t|
