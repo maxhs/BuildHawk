@@ -81,4 +81,8 @@ class PunchlistItem < ActiveRecord::Base
     api_accessible :punchlist, :extend => :projects do |t|
 
     end
+
+    api_accessible :login, :extend => :projects do |t|
+
+    end
 end
