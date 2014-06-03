@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 
     attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone_number,
-    				        :company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
+    				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
                     :uber_admin, :authentication_token, :company_admin
 
     belongs_to :company
@@ -108,17 +108,21 @@ class User < ActiveRecord::Base
         end
     end
 
+    def connect_items
+        PunchlistItem.where(:assignee_id => id).flatten
+    end
+
   	acts_as_api
 
   	api_accessible :user do |t|
         t.add :id
-	      t.add :first_name
-	      t.add :last_name
-	      t.add :full_name
+        t.add :first_name
+        t.add :last_name
+        t.add :full_name
         t.add :admin
         t.add :company_admin
         t.add :uber_admin
-	      t.add :email
+        t.add :email
         t.add :phone_number
         t.add :authentication_token
         t.add :company
@@ -131,6 +135,7 @@ class User < ActiveRecord::Base
 
     api_accessible :login, :extend => :user do |t|
         t.add :coworkers
+        t.add :connect_items
     end
 
   	api_accessible :feed do |t|
@@ -154,20 +159,20 @@ class User < ActiveRecord::Base
     end
 
     api_accessible :punchlist do |t|
-      t.add :first_name
-      t.add :last_name
-      t.add :full_name
-      t.add :email
-      t.add :phone_number
+        t.add :first_name
+        t.add :last_name
+        t.add :full_name
+        t.add :email
+        t.add :phone_number
     end
 
     api_accessible :checklist do |t|
-      t.add :first_name
-      t.add :last_name
-      t.add :full_name
-      t.add :email
-      t.add :phone_number
-      t.add :id
+        t.add :first_name
+        t.add :last_name
+        t.add :full_name
+        t.add :email
+        t.add :phone_number
+        t.add :id
     end
 
     api_accessible :detail, :extend => :checklist do |t|
@@ -175,12 +180,12 @@ class User < ActiveRecord::Base
     end
 
     api_accessible :report do |t|
-      t.add :id
-      t.add :first_name
-      t.add :last_name
-      t.add :full_name
-      t.add :email
-      t.add :phone_number
+        t.add :id
+        t.add :first_name
+        t.add :last_name
+        t.add :full_name
+        t.add :email
+        t.add :phone_number
     end
 
     api_accessible :company, :extend => :report do |t|

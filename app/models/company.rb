@@ -19,14 +19,14 @@ class Company < ActiveRecord::Base
 	accepts_nested_attributes_for :photos, :allow_destroy => true
   
     has_attached_file :image, 
-                  :styles => { :medium => ["600x600#", :jpg],
+                    :styles => { :medium => ["600x600#", :jpg],
                                :small  => ["200x200#", :jpg],
                                :thumb  => ["100x100#", :jpg]
-                   },
-                  :storage        => :s3,
-                  :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
-                  :url            => "buildhawk.s3.amazonaws.com",
-                  :path           => "company_image_:id_:style.:extension"
+                                },
+                    :storage        => :s3,
+                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
+                    :url            => "buildhawk.s3.amazonaws.com",
+                    :path           => "company_image_:id_:style.:extension"
                   
     validates_attachment :image, :content_type => { :content_type => /\Aimage/ }
 
@@ -50,14 +50,14 @@ class Company < ActiveRecord::Base
     end
 
     def clone_company_subs
-      companies_array = []
-      subs.each do |s|
-        new_company = Company.where(:name => s.name, :email => s.email, :phone_number => s.phone_number).first_or_create
-        companies_array << new_company
-      end
-      companies_array.each do |c|
-        company_subs.create :subcontractor_id => c.id
-      end
+        companies_array = []
+        subs.each do |s|
+            new_company = Company.where(:name => s.name, :email => s.email, :phone_number => s.phone_number).first_or_create
+            companies_array << new_company
+        end
+        companies_array.each do |c|
+            company_subs.create :subcontractor_id => c.id
+        end
     end
 
 	acts_as_api
@@ -75,7 +75,7 @@ class Company < ActiveRecord::Base
   		t.add :id
         t.add :name
         t.add :subcontractors
-        t.add :users_count
+        t.add :users
   	end
 
     api_accessible :user, :extend => :login do |t|
