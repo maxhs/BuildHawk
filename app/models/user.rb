@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
   	end
 
     api_accessible :projects, :extend => :user do |t|
-        t.add :connect_items
+        #t.add :connect_items
     end
 
     api_accessible :details, :extend => :user do |t|
