@@ -8,6 +8,6 @@ class ReportTopic < ActiveRecord::Base
   	api_accessible :report do |t|
   		t.add :id
   		t.add :report_id
-  		t.add :safety_topic_id
+  		t.add :safety_topic
   	end
 end
