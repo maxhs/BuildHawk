@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531191252) do
+ActiveRecord::Schema.define(version: 20140603235830) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -302,6 +302,18 @@ ActiveRecord::Schema.define(version: 20140531191252) do
     t.datetime "updated_at"
   end
 
+  create_table "reminders", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "checklist_item_id"
+    t.integer  "project_id"
+    t.datetime "reminder_datetime"
+    t.boolean  "email"
+    t.boolean  "text"
+    t.boolean  "push"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "report_companies", force: true do |t|
     t.integer  "report_id"
     t.integer  "company_id"
@@ -323,6 +335,13 @@ ActiveRecord::Schema.define(version: 20140531191252) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "count",      default: 0
+  end
+
+  create_table "report_topics", force: true do |t|
+    t.integer  "safety_topic_id"
+    t.integer  "report_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "report_users", force: true do |t|

@@ -57,7 +57,12 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
         if params[:report][:safety_topics].present?
             params[:report][:safety_topics].each do |topic|
-                report.safety_topics.where(:title => topic["title"], :company_id => @current_user.company.id).first_or_create
+                if topic["id"]
+                    topic = @current_user.company.safety_topics.where(:id => topic["id"]).first
+                    report.report_topics.where(:safety_topic_id => topic.id).first_or_create
+                else
+                    report.report_topics.where(:title => topic["title"], :info => topic["info"], :company_id => @current_user.company.id).first_or_create
+                end
             end
             params[:report].delete(:safety_topics)
         end
