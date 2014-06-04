@@ -56,8 +56,10 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
         if params[:report][:safety_topics].present?
             params[:report][:safety_topics].each do |topic|
-                unless topic["id"]
-                    report.report_topics.where(:title => topic["title"],:safety_topic_id => topic["topic_id"], :info => topic["info"], :company_id => @current_user.company.id).first_or_create
+                if topic["topic_id"]
+                    report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                else
+                    report.report_topics.where(:title => topic["title"], :info => topic["info"], :company_id => @current_user.company.id).first_or_create
                 end
             end
             params[:report].delete(:safety_topics)
@@ -141,8 +143,10 @@ class Api::V2::ReportsController < Api::V2::ApiController
         
         if topics && topics.count > 0
             topics.each do |topic|
-                unless topic["id"]
-                    report.report_topics.where(:title => topic["title"],:safety_topic_id => topic["topic_id"], :info => topic["info"], :company_id => @current_user.company.id).first_or_create
+                if topic["topic_id"]
+                    report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                else
+                    report.report_topics.where(:title => topic["title"], :info => topic["info"], :company_id => @current_user.company.id).first_or_create
                 end
             end
         end
