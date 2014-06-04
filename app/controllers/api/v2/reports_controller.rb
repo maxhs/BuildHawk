@@ -91,10 +91,8 @@ class Api::V2::ReportsController < Api::V2::ApiController
             company_topics << SafetyTopic.where(:company_id => user.company.id, :title => t).first
         end
     
-        if company_topics.count == 0
-            company_topics = SafetyTopic.where("company_id IS NULL").uniq 
-        end
-
+        company_topics << SafetyTopic.where("company_id IS NULL and core = ?",true).uniq 
+    
         respond_to do |format|
             format.json { render_for_api :report, :json => company_topics, :root => :possible_topics}
         end
