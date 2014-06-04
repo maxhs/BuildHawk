@@ -16,7 +16,9 @@ class Report < ActiveRecord::Base
     has_many :report_companies, :dependent => :destroy
     has_many :companies, :through => :report_companies
     has_many :photos, :dependent => :destroy
-    has_many :safety_topics, :dependent => :destroy
+    
+    has_many :report_topics, :dependent => :destroy
+    has_many :safety_topics, :through => :report_topics
 
     validates_presence_of :report_type
     validates_presence_of :created_date
