@@ -16,7 +16,7 @@ class Report < ActiveRecord::Base
     has_many :report_companies, :dependent => :destroy
     has_many :companies, :through => :report_companies
     has_many :photos, :dependent => :destroy
-    
+
     has_many :report_topics, :dependent => :destroy
     has_many :safety_topics, :through => :report_topics
 
@@ -94,8 +94,9 @@ class Report < ActiveRecord::Base
         t.add :photos
         t.add :report_users
         t.add :report_companies
-        t.add :safety_topics
+        t.add :report_topics
         ### slated for deletion in next version ###
+        t.add :safety_topics
         t.add :report_subs
         t.add :personnel
         ###
