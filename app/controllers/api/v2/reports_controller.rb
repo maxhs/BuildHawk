@@ -91,7 +91,9 @@ class Api::V2::ReportsController < Api::V2::ApiController
             company_topics << SafetyTopic.where(:company_id => user.company.id, :title => t).first
         end
     
-        company_topics << SafetyTopic.where("company_id IS NULL and core = ?",true).uniq 
+        SafetyTopic.where("company_id IS NULL and core = ?",true).each do |topic|
+            company_topics << topic  
+        end
     
         respond_to do |format|
             format.json { render_for_api :report, :json => company_topics, :root => :possible_topics}
