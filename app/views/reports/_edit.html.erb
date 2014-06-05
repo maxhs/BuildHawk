@@ -78,11 +78,11 @@
 					<% end %>
 				</div>
 				<div class="sub-container col-md-6">
-					<% @subs.each do |sub| %>
+					<% @companies.each do |company| %>
 						<div>
-							<% report_sub = @report.report_subs.where(:sub_id => sub.id).first_or_initialize %>
-							<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;display:inline-block;text-align:center;" %>
-							<span style="padding-left:1em;"><%= sub.name %></span>
+							<% report_company = @report.report_companies.where(:company_id => company.id).first_or_initialize %>
+							<%= text_field_tag "report[report_company_ids][#{company.id}]", report_company.count, style: "max-width:40px;display:inline-block;text-align:center;" %>
+							<span style="padding-left:1em;"><%= company.subcontractor.name if company.subcontractor %></span>
 						</div>
 					<% end %>
 				</div>

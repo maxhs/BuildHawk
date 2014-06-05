@@ -13,13 +13,15 @@ class CompanySub < ActiveRecord::Base
 		subcontractor.users if subcontractor
 	end
 
-	def users_count
-		subcontractor.users.count if subcontractor
-	end
-
 	def has_subcontractor?
 		subcontractor.present?
 	end
+
+## slated for deletion ##
+	def users_count
+		subcontractor.users.count if subcontractor
+	end
+## ##
 
     api_accessible :report do |t|
         t.add :id
