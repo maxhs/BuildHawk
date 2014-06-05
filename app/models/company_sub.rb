@@ -2,6 +2,11 @@ class CompanySub < ActiveRecord::Base
 	attr_accessible :company_id, :subcontractor_id
 	belongs_to :company
 	belongs_to :subcontractor, :class_name => "Company"
+	validate :not_self
+
+	def not_self
+		errors.add(:subcontractor_id, "can't be the same as Company") unless company_id != subcontractor_id
+	end
 
 	acts_as_api
 
