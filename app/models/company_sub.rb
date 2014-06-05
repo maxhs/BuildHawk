@@ -13,7 +13,7 @@ class CompanySub < ActiveRecord::Base
 		subcontractor.users if subcontractor
 	end
 
-	def users
+	def users_count
 		subcontractor.users.count if subcontractor
 	end
 
