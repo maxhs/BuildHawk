@@ -6,11 +6,11 @@ class CompanySub < ActiveRecord::Base
 	acts_as_api
 
 	def name
-		subcontractor.name
+		subcontractor.name if subcontractor
 	end
 
 	def users
-		subcontractor.users
+		subcontractor.users if subcontractor
 	end
 
     api_accessible :report do |t|
