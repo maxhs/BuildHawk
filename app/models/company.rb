@@ -93,7 +93,10 @@ class Company < ActiveRecord::Base
         t.add :id
         t.add :name
         t.add :users
+        t.add :company_subs
+        ## slated for deletion##
         t.add :subcontractors
+        ##
     end
     
     api_accessible :details, :extend => :login do |t|
