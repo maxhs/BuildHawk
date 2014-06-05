@@ -13,9 +13,14 @@ class CompanySub < ActiveRecord::Base
 		subcontractor.users if subcontractor
 	end
 
+	def users
+		subcontractor.users.count if subcontractor
+	end
+
     api_accessible :report do |t|
         t.add :id
         t.add :name
         t.add :users
+        t.add :users_count
     end
 end
