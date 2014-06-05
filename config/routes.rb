@@ -258,6 +258,7 @@ Buildhawk::Application.routes.draw do
       end
       resources :reminders
       resources :comments
+      resources :company_subs, :only => [:create]
       resources :subs, :only => [:create]
       resources :safety_topics, :only => [:destroy]
       resources :reports do

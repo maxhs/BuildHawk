@@ -6,4 +6,5 @@ class Api::V2::CompaniesController < Api::V2::ApiController
         	format.json { render_for_api :report, :json => company, :root => :company}
       	end
 	end
+
 end
