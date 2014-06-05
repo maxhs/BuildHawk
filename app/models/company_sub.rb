@@ -1,5 +1,5 @@
 class CompanySub < ActiveRecord::Base
-	attr_accessible :company_id, :subcontractor_id
+	attr_accessible :company_id, :subcontractor_id, :subcontractor
 	belongs_to :company
 	belongs_to :subcontractor, :class_name => "Company"
 	validate :not_self
