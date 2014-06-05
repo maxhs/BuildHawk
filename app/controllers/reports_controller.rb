@@ -51,19 +51,19 @@ class ReportsController < ApplicationController
 		@project = Project.find params[:project_id]
 		@report = Report.find params[:id]
 
-		if params[:report_subs].present?
-			params[:report_subs].each do |rs|
-				report_sub = @report.report_subs.where(:sub_id => rs.first).first
-				if rs[1].to_i > 0
-					unless report_sub
-						report_sub = @report.report_subs.create :sub_id => rs.first
+		if params[:report_companies].present?
+			params[:report_companies].each do |rc|
+				report_company = @report.report_companies.where(:company_id => rc.first).first
+				if rc[1].to_i > 0
+					unless report_company
+						report_company = @report.report_companies.create :company_id => rc.first
 						#params[:report][:sub_ids] = [] unless params[:report][:sub_ids]
 						#params[:report][:sub_ids] << rs.first
 					end
-					report_sub.update_attribute :count, rs[1]
-				#elsif params[:report][:sub_ids].present?
+					report_company.update_attribute :count, rc[1]
+					#elsif params[:report][:sub_ids].present?
 				else
-					report_sub.destroy if report_sub
+					report_company.destroy if report_company
 					#params[:report][:sub_ids].delete(rs.first)
 				end
 			end
