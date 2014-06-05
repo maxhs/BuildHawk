@@ -17,10 +17,14 @@ class CompanySub < ActiveRecord::Base
 		subcontractor.users.count if subcontractor
 	end
 
+	def has_subcontractor?
+		subcontractor.present?
+	end
+
     api_accessible :report do |t|
         t.add :id
-        t.add :name
-        t.add :users
-        t.add :users_count
+        t.add :name, :if => :has_subcontractor?
+        t.add :users, :if => :has_subcontractor?
+        t.add :users_count, :if => :has_subcontractor?
     end
 end
