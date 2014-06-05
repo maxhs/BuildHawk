@@ -41,7 +41,7 @@ class SafetyTopicsController < ApplicationController
 				format.js
 			end
 		else
-			render :index, layout: "uber_admin"
+			render :index#, layout: "uber_admin"
 		end
 	end
 
@@ -54,7 +54,7 @@ class SafetyTopicsController < ApplicationController
 				format.js
 			end
 		else
-			render :index, layout: "uber_admin"
+			render :index#, layout: "uber_admin"
 		end
 	end
 
@@ -67,7 +67,7 @@ class SafetyTopicsController < ApplicationController
 				format.js
 			end
 		else
-			render :index, layout: "uber_admin"
+			render :index#, layout: "uber_admin"
 		end
 	end
 
