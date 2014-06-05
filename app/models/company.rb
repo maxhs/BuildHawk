@@ -30,6 +30,12 @@ class Company < ActiveRecord::Base
                   
     validates_attachment :image, :content_type => { :content_type => /\Aimage/ }
 
+    before_destroy :clean_company_subs
+
+    def clean_company_subs
+        CompanySub.where(:subcontractor_id => id).destroy_all
+    end
+
     def balance
         charges.where(:paid => false).map(&:amount).flatten.inject(:+)
     end
