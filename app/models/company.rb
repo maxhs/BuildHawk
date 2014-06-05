@@ -89,7 +89,7 @@ class Company < ActiveRecord::Base
         t.add :id
         t.add :name
         t.add :users
-        #t.add :subcontractors
+        t.add :subcontractors
     end
     
     api_accessible :details, :extend => :login do |t|
