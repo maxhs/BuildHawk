@@ -7,6 +7,6 @@ class CompanySub < ActiveRecord::Base
 
     api_accessible :report do |t|
         t.add :id
-        #t.add :subcontractor
+        t.add :subcontractor
     end
 end
