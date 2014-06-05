@@ -1,4 +1,5 @@
 <%= nested_form_for @safety_topic, :remote => true, :method => :patch do |f| %>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 	<div class="row topic" id="topic-<%= @safety_topic.id %>">
 		<div class="col-xs-5"><%= f.text_field :title, :placeholder => "Name the new safety topic..." %></div>
 		<div class="col-xs-5"><%= f.text_area :info, :placeholder => "Describe the new safety topic..." %></div>
