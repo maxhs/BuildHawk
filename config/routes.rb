@@ -256,6 +256,7 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
+      resources :reminders
       resources :comments
       resources :subs, :only => [:create]
       resources :safety_topics, :only => [:destroy]
