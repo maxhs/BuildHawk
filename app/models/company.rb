@@ -13,7 +13,7 @@ class Company < ActiveRecord::Base
     has_many :project_groups, :dependent => :destroy
     has_many :safety_topics, :dependent => :destroy
     has_many :company_subs, :dependent => :destroy
-    has_many :subcontractors, :through => :company_subs, :source => :subcontractor
+    #has_many :subcontractors, :through => :company_subs, :source => :subcontractor
 
     validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
@@ -59,6 +59,10 @@ class Company < ActiveRecord::Base
         companies_array.each do |c|
             company_subs.create :subcontractor_id => c.id
         end
+    end
+
+    def subcontractors
+        company_subs
     end
 
 	acts_as_api
