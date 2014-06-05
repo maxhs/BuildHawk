@@ -5,8 +5,17 @@ class CompanySub < ActiveRecord::Base
 
 	acts_as_api
 
+	def name
+		subcontractor.name
+	end
+
+	def users
+		subcontractor.users
+	end
+
     api_accessible :report do |t|
         t.add :id
-        t.add :subcontractor
+        t.add :name
+        t.add :users
     end
 end
