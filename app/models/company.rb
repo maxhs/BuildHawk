@@ -68,7 +68,7 @@ class Company < ActiveRecord::Base
     end
 
     def subcontractors
-        company_subs
+        company_subs.sort_by!{|s|s.name.downcase}
     end
 
 	acts_as_api
