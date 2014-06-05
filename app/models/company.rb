@@ -15,6 +15,7 @@ class Company < ActiveRecord::Base
     has_many :company_subs, :dependent => :destroy
     #has_many :subcontractors, :through => :company_subs, :source => :subcontractor
 
+    validates_presence_of :name
     validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
   
