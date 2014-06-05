@@ -464,11 +464,12 @@ body {
 }
 
 #projects-tab {
-	//filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+	
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 	-webkit-font-smoothing:antialiased;
 	position: fixed;
 	left: -65px;
@@ -691,7 +692,7 @@ a.search-button {
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	padding:7px;
+	padding:7px 10px 5px;
 	position:relative;
 	display:inline-block;
 	margin:0 10px;
@@ -699,8 +700,9 @@ a.search-button {
 	text-align:center;
 	clear:both;
 	font-family:"Source Sans Pro",'Helvetica',sans-serif;
-	font-size:16px;
-	line-height:1em;
+	font-size:15px;
+	font-weight:100;
+	text-transform:uppercase;
 }
 
 .simple-btn:hover {

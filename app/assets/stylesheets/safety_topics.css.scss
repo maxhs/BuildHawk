@@ -6,7 +6,7 @@
 .topic {
 	vertical-align:middle;
 	padding:15px 0;
-	min-height:60px;
+	min-height:80px;
 
 	.hiddenText {
 		display:none;
@@ -31,6 +31,9 @@
 	}
 	input[type="text"],textarea {
 		width:100%;
+	}
+	textarea {
+		min-height:100px;
 	}
 }
 
