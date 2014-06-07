@@ -75,7 +75,7 @@ class Report < ActiveRecord::Base
             puts "Updating #{created_date} for sub: #{rs.sub.name}"
             company_sub = project.company.company_subs.where(:subcontractor_id => rs.sub.id).first_or_create
             rc = report_companies.where(:company_id => company_sub.subcontractor.id).first_or_create
-            rc.update_attribute! :count, rs.count
+            rc.update_attribute :count, rs.count
         end
     end
 
