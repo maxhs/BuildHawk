@@ -120,10 +120,19 @@
 }
 
 form.edit_photo {
-	width:90%;
+	width:100%;
 	display:inline-block;
+
+	.label {
+		text-align:left;
+	}
 	input {
-		width:77%;
+		display:inline-block;
+		//width:77%;
+	}
+
+	input[type="submit"]{
+		float:right;
 	}
 }
 
