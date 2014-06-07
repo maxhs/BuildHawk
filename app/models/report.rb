@@ -70,6 +70,15 @@ class Report < ActiveRecord::Base
         created_at.to_i
     end
 
+    def clone_report_subs
+        report_subs.each do |rs|
+            puts "Updating #{created_date} for sub: #{rs.sub.name}"
+            company_sub = report.project.company.company_subs.where(:subcontractor_id => rs.sub.id).first_or_create
+            rc = report_companies.where(:company_id => company_sub.subcontractor.id).first_or_create
+            rc.update_attribute! :count, rs.count
+        end
+    end
+
   	acts_as_api
 
   	api_accessible :report do |t|
