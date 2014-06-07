@@ -74,13 +74,15 @@ class Report < ActiveRecord::Base
         report_subs.each do |rs|
             puts "Updating #{created_date} for sub: #{rs.sub.name}"
             company = Company.where(:name => rs.sub.name).first
-            puts "found company: #{company.name}"
-            company_sub = project.company.company_subs.where(:subcontractor_id => company.id).first
-            if company_sub
-                rc = report_companies.where(:company_id => company_sub.subcontractor.id).first_or_create
-                rc.update_attribute :count, rs.count
-            else
-                puts "Couldn't find company sub for #{rs.sub.name}"
+            if company
+                puts "found company: #{company.name}"
+                company_sub = project.company.company_subs.where(:subcontractor_id => company.id).first
+                if company_sub
+                    rc = report_companies.where(:company_id => company_sub.subcontractor.id).first_or_create
+                    rc.update_attribute :count, rs.count
+                else
+                    puts "Couldn't find company sub for #{rs.sub.name}"
+                end
             end
         end
     end
