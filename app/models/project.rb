@@ -43,6 +43,10 @@ class Project < ActiveRecord::Base
         self.save
     end
 
+    def to_param
+        "#{id}-#{(Digest::SHA1.hexdigest id.to_s)[0..4]}"
+    end
+
     def adjust_users
         if project_group_id != nil
             puts 'inside check_groups'

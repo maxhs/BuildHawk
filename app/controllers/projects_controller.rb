@@ -322,7 +322,19 @@ class ProjectsController < ApplicationController
 		if params[:id].present?
 			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
 		end
-		find_projects
+		if @project && !@project.users.include?(@user)
+			if request.xhr?
+				respond_to do |format|
+					format.js {render template: "projects/no_access"}
+				end
+			else
+				flash[:notice] = "You don't have access to that project.".html_safe
+				redirect_to root_url
+			end
+		else
+			find_projects
+		end
+		
 	end
 
 	def find_projects
