@@ -322,7 +322,7 @@ class ProjectsController < ApplicationController
 		if params[:id].present?
 			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
 		end
-		if @project && !@project.users.include?(@user)
+		if @project && !@project.users.include?(@user) && params[:id] != @project.to_param
 			if request.xhr?
 				respond_to do |format|
 					format.js {render template: "projects/no_access"}
