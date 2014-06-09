@@ -22,7 +22,7 @@ class Photo < ActiveRecord::Base
 	                    :url            => "buildhawk.s3.amazonaws.com",
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
-	#validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
+	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
 	process_in_background :image
 
 	# websolr
