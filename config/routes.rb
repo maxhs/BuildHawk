@@ -255,8 +255,8 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :worklists, :only => [:show, :index]
-      resources :worklist_items do
+      resources :worklists, :as => :punchlists, :only => [:show, :index]
+      resources :worklist_items, :as => :punchlist_items do
         collection do
           post :photo
         end
