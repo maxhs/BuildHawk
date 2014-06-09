@@ -257,7 +257,7 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :reminders, :only => [:create, :index]
-      resources :notifications, :only => [:index]
+      resources :notifications, :only => [:index, :destroy]
       resources :comments
       resources :company_subs, :only => [:create]
       resources :subs, :only => [:create]
