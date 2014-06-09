@@ -82,6 +82,8 @@ body {
 		line-height: 40px;
 		vertical-align: middle;
 		width:80%;
+		left:50%;
+		margin-left:-40%;
 		height: 40px;
 		text-align: center;
 		position:fixed;
@@ -90,6 +92,7 @@ body {
 		display:none;
 		color:#000;
 		background:#fff;
+		border:1px solid #eee;
 		border-radius:0;
 		-webkit-border-radius:0;
 		border-bottom-left-radius:4px;
@@ -101,7 +104,6 @@ body {
 		-webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
 		-moz-box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
 		padding:0 !important;
-		margin:0 auto;
 		font-family:"Gotham Book", 'Helvetica Neue','Helvetica',sans-serif;
 	}
 
