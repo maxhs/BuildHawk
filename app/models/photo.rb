@@ -22,7 +22,7 @@ class Photo < ActiveRecord::Base
 	                    :url            => "buildhawk.s3.amazonaws.com",
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
-	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
+	#validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
 	process_in_background :image
 
 	# websolr
@@ -35,9 +35,6 @@ class Photo < ActiveRecord::Base
         integer :project_id
         time    :created_at
     end
-
-    #handle_asynchronously :solr_index, queue: 'indexing', priority: 50
-  	#handle_asynchronously :solr_index!, queue: 'indexing', priority: 50
 
 	acts_as_api
 
