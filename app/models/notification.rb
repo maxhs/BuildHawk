@@ -33,11 +33,7 @@ class Notification < ActiveRecord::Base
 	def created_date
         created_at.to_i
     end
-    
-    def updated_date
-        updated_at.to_i if updated_at
-    end
-
+   
 	acts_as_api
 
 	api_accessible :notifications do |t|
@@ -47,6 +43,5 @@ class Notification < ActiveRecord::Base
 		t.add :checklist_item_id
 		t.add :message
 		t.add :created_date
-		t.add :updated_date
 	end
 end
