@@ -256,7 +256,8 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :reminders
+      resources :reminders, :only => [:create, :index]
+      resources :notifications, :only => [:index]
       resources :comments
       resources :company_subs, :only => [:create]
       resources :subs, :only => [:create]
