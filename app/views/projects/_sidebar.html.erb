@@ -24,9 +24,9 @@
 		<% end %>
 	</ul>
 	<% if @archived_projects && @archived_projects.count > 0 %>
-		<h4 id="archived-projects-button">Archived Projects</h4>
-		<div class="well sidebar-nav projects archived">
-			
+		
+		<div class="sidebarProjects archived">
+			<h4 id="archived-projects-button">Archived Projects</h4>
 			<div class="sidebarProjects">
 				<% @archived_projects.each do |p| %>
 					<div><%= link_to p.name, project_path(p), :id=>"#{p.id}-link", :remote => true %></div>
