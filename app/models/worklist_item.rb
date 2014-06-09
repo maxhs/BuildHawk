@@ -1,10 +1,10 @@
-class PunchlistItem < ActiveRecord::Base
+class WorklistItem < ActiveRecord::Base
     include ActionView::Helpers::TextHelper
-	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :punchlist_id, :punchlist, :photos_attributes, 
+	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :worklist_id, :worklist, :photos_attributes, 
                   :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
                   :sub_assignee_id
 
-    belongs_to :punchlist
+    belongs_to :worklist
     belongs_to :user
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
@@ -21,36 +21,36 @@ class PunchlistItem < ActiveRecord::Base
 
     #websolr
     searchable do
-      text    :body
-      text    :location
-      text    :assignee do
-        assignee.full_name if assignee
-      end
-      integer :project_id do
-        punchlist.project.id if punchlist
-      end
-      time    :created_at
+        text    :body
+        text    :location
+        text    :assignee do
+            assignee.full_name if assignee
+        end
+        integer :project_id do
+            worklist.project.id if worklist
+        end
+        time    :created_at
     end
 
     def notify
-        puts "punchlist item changed"
+        puts "worklist item changed"
         truncated = truncate(body, length:20)
         if completed
             # user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
             # if user
-            #     message = "#{punchlist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
+            #     message = "#{worklist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
             # else
-                message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" was just completed"
+                message = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was just completed"
             #end
-            Notification.where(:message => message,:user_id => user_id, :punchlist_item_id => id, :notification_type => "Worklist").first_or_create
+            Notification.where(:message => message,:user_id => user_id, :worklist_item_id => id, :notification_type => "Worklist").first_or_create
         else
-            message = "#{punchlist.project.name} (Worklist) - \"#{truncated}\" has been modified"
-            user.notifications.where(:message => message,:punchlist_item_id => id,:notification_type => "Worklist").first_or_create
+            message = "#{worklist.project.name} (Worklist) - \"#{truncated}\" has been modified"
+            user.notifications.where(:message => message,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
         end
 
         if assignee
-            message = "\"#{truncated}\" has been assigned to you for #{punchlist.project.name}"
-            assignee.notifications.where(:message => message,:punchlist_item_id => id,:notification_type => "Worklist").first_or_create
+            message = "\"#{truncated}\" has been assigned to you for #{worklist.project.name}"
+            assignee.notifications.where(:message => message,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
         end
     end
 
@@ -78,7 +78,7 @@ class PunchlistItem < ActiveRecord::Base
 
     end
 
-    api_accessible :punchlist, :extend => :projects do |t|
+    api_accessible :worklist, :extend => :projects do |t|
 
     end
 end

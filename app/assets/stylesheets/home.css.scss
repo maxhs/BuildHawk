@@ -101,8 +101,8 @@
 			position:absolute;
 		}
 
-		#punchlist-image {
-			background-image:url('/assets/splash_punchlist_gray.png');
+		#worklist-image {
+			background-image:url('/assets/splash_worklist_gray.png');
 			background-repeat:no-repeat;
 			background-position:center; 
 			background-size:100px;
@@ -112,8 +112,8 @@
 			margin:0 1%;
 			position:absolute;
 		}
-		#punchlist-image-blue {
-			background-image:url('/assets/splash_punchlist_blue.png');
+		#worklist-image-blue {
+			background-image:url('/assets/splash_worklist_blue.png');
 			background-repeat:no-repeat;
 			background-position:center; 
 			background-size:100px;
@@ -427,7 +427,7 @@
 			.splash-container {
 				width:100%;
 				.splash-image {
-					#checklist-image, #checklist-image-blue, #report-image, #report-image-blue, #document-image, #document-image-blue, #punchlist-image, #punchlist-image-blue{
+					#checklist-image, #checklist-image-blue, #report-image, #report-image-blue, #document-image, #document-image-blue, #worklist-image, #worklist-image-blue{
 						display:none !important;
 					}
 				}

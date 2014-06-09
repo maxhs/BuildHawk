@@ -145,7 +145,7 @@ Buildhawk::Application.routes.draw do
       get :generate
     end
   end
-  resources :punchlist_items do
+  resources :worklist_items do
     member do
       get :generate
     end
@@ -158,7 +158,7 @@ Buildhawk::Application.routes.draw do
       post :photo
     end
   end
-  resources :punchlists do
+  resources :worklists do
     collection do
       post :export
     end
@@ -200,8 +200,8 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :punchlists, :only => [:show]
-      resources :punchlist_items do
+      resources :worklists, :only => [:show]
+      resources :worklist_items do
         collection do
           post :photo
         end
@@ -228,6 +228,11 @@ Buildhawk::Application.routes.draw do
           post :forgot_password
         end 
       end
+      resources :users do
+        member do
+          get :connect_items
+        end
+      end
       resources :companies
       resources :groups 
       resources :projects do
@@ -250,8 +255,8 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :punchlists, :only => [:show, :index]
-      resources :punchlist_items do
+      resources :worklists, :only => [:show, :index]
+      resources :worklist_items do
         collection do
           post :photo
         end

@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
 		elsif params[:comment][:checklist_item_id].present?
 			@checklist_item = ChecklistItem.find params[:comment][:checklist_item_id]
 			@comments = @checklist_item.comments
-		elsif params[:comment][:punchlist_item_id].present?
-			@punchlist_item = PunchlistItem.find params[:comment][:punchlist_item_id]
-			@comments = @punchlist_item.comments
+		elsif params[:comment][:worklist_item_id].present?
+			@worklist_item = WorklistItem.find params[:comment][:worklist_item_id]
+			@comments = @worklist_item.comments
 		end
 	end
 
@@ -25,10 +25,10 @@ class CommentsController < ApplicationController
 			@checklist_item = @comment.checklist_item
 			@comment.destroy
 			@comments = @checklist_item.comments
-		elsif @comment.punchlist_item_id != nil
-			@punchlist_item = @comment.punchlist_item
+		elsif @comment.worklist_item_id != nil
+			@worklist_item = @comment.worklist_item
 			@comment.destroy
-			@comments = @punchlist_item.comments
+			@comments = @worklist_item.comments
 		end
 
 		if request.xhr?
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
 				format.js
 			end
 		else
-			if @punchlist_item
+			if @worklist_item
 				render "projects/edit_worklist_item"
 			elsif @checklist_item
 				render "projects/checklist_item"

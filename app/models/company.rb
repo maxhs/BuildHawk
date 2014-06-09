@@ -107,7 +107,7 @@ class Company < ActiveRecord::Base
       
     end
 
-    api_accessible :punchlist, :extend => :login do |t|
+    api_accessible :worklist, :extend => :login do |t|
         
     end
     

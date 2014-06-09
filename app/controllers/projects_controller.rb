@@ -162,22 +162,22 @@ class ProjectsController < ApplicationController
 	end  
 
 	def worklist
-		@punchlist = @project.punchlists.first_or_create
-		@items = @punchlist.punchlist_items
+		@worklist = @project.worklists.first_or_create
+		@items = @worklist.worklist_items
 	end
 
 	def search_worklist
 		if params[:search] && params[:search].length > 0
 			search_term = "%#{params[:search]}%" 
 			@project = Project.find params[:id]
-			initial = PunchlistItem.search do
+			initial = WorklistItem.search do
 				fulltext search_term
 				with :project_id, params[:id]
 			end
 			@items = initial.results.uniq
 			@prompt = "No search results"
 		else
-			@items = @project.punchlists.map(&:punchlist_items).flatten.sort_by{|r| r.created_at}
+			@items = @project.worklists.map(&:worklist_items).flatten.sort_by{|r| r.created_at}
 		end
 
 		if request.xhr?

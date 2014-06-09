@@ -1,8 +1,8 @@
 $('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "punchlist_items/new" %>');
+	$(this).html('<%= j render :partial => "worklist_items/edit" %>');
 	$(this).fadeIn(100);
 	var locations = <%= raw @locations.to_json %>; 
-	$('#punchlist_item_location').autocomplete({
+	$('#worklist_item_location').autocomplete({
       	source: locations
     });
 });

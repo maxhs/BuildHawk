@@ -1,5 +1,5 @@
 $('#top-nav a').removeClass('current-page');
-$('.nav-punchlists a,#<%=@project.id%>-link').addClass('current-page');
+$('.nav-worklists a,#<%=@project.id%>-link').addClass('current-page');
 $('#main').fadeOut(170,function(){
 	$(this).html('<%= j render :partial => "projects/worklist" %>');
 	$(this).fadeIn(170);

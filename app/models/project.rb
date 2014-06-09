@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
     belongs_to :project_group, counter_cache: true
   	belongs_to :company
   	has_one :address
-  	has_many :punchlists, :dependent => :destroy
+  	has_many :worklists, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     has_many :reports, :dependent => :destroy
   	has_one :checklist, :dependent => :destroy
@@ -65,8 +65,8 @@ class Project < ActiveRecord::Base
         checklist.checklist_items
     end
 
-    def add_punchlist
-        punchlists.create
+    def add_worklist
+        worklists.create
     end
 
     def upcoming_items
@@ -107,7 +107,7 @@ class Project < ActiveRecord::Base
 
     def duplicate_project
         new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :status}}}
-        new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :punchlist_item, :report, :project,:folder]}, {:punchlists => :punchlist_items}, :address, :folders, :users, :project_users]
+        new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :worklist_item, :report, :project,:folder]}, {:worklists => :worklist_items}, :address, :folders, :users, :project_users]
         new_project.checklist = new_checklist
         new_project.save
         return new_project
@@ -118,7 +118,7 @@ class Project < ActiveRecord::Base
         feed = []
         feed += checklist_items.order('updated_at DESC').limit(limit)
         feed += Report.where(:project_id => id).order('updated_at DESC').limit(limit)
-        feed += PunchlistItem.where(:punchlist_id => punchlists.first.id).order('updated_at DESC').limit(limit) if punchlists && punchlists.first
+        feed += WorklistItem.where(:worklist_id => worklists.first.id).order('updated_at DESC').limit(limit) if worklists && worklists.first
         feed += Photo.where(:project_id => id).order('updated_at DESC').limit(limit)
         return feed.flatten.sort_by(&:updated_at).reverse.first(limit)
     end
@@ -144,8 +144,8 @@ class Project < ActiveRecord::Base
         ###
   	end
 
-    api_accessible :punchlist, :extend => :projects do |t|
-        t.add :punchlists
+    api_accessible :worklist, :extend => :projects do |t|
+        t.add :worklists
     end
 
     api_accessible :details, :extend => :projects do |t|

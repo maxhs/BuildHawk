@@ -7,7 +7,7 @@
 			<% end %>
 		</div>
 		<div style="width:100%;text-align:center;">
-			<%= link_to "Add a new worklist item", new_punchlist_item_path(:project_id => @project.id), :class=>"simple-btn search-button", remote: true %>
+			<%= link_to "Add a new worklist item", new_worklist_item_path(:project_id => @project.id), :class=>"simple-btn search-button", remote: true %>
 		</div>
 	</header>
 	<div id="project-worklist">	
@@ -45,9 +45,9 @@
 							
 							<td>
 								<% if item.body.length > 0 %>
-									<%= link_to item.body, edit_punchlist_item_path(item), :remote => true %> 
+									<%= link_to item.body, edit_worklist_item_path(item), :remote => true %> 
 								<% else %>
-									<%= link_to edit_punchlist_item_path(item), :remote => true do %> <div style="width:100%;display:block;">&nbsp;</div><% end %>
+									<%= link_to edit_worklist_item_path(item), :remote => true do %> <div style="width:100%;display:block;">&nbsp;</div><% end %>
 								<% end %>
 							</td>	
 							<td>
@@ -81,7 +81,7 @@
 	});
 	$('#export-worklist-items').click(function(){
 		if (!$('#export-worklist-modal').length > 0){
-			$('#project-worklist').before('<%= j render partial:"projects/punchlist_export" %>');
+			$('#project-worklist').before('<%= j render partial:"projects/worklist_export" %>');
 		}
 
 		var values = [];

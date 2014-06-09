@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603235830) do
+ActiveRecord::Schema.define(version: 20140609195718) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20140603235830) do
   create_table "comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "report_id"
-    t.integer  "punchlist_item_id"
+    t.integer  "worklist_item_id"
     t.integer  "checklist_item_id"
     t.text     "body"
     t.datetime "created_at"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20140603235830) do
     t.boolean  "mobile",            default: false
   end
 
-  add_index "comments", ["user_id", "report_id", "checklist_item_id", "punchlist_item_id"], name: "comments_ix"
+  add_index "comments", ["user_id", "report_id", "checklist_item_id", "worklist_item_id"], name: "comments_ix"
 
   create_table "companies", force: true do |t|
     t.string   "name",               default: "", null: false
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(version: 20140603235830) do
     t.boolean  "sent",              default: false
     t.integer  "user_id"
     t.integer  "report_id"
-    t.integer  "punchlist_item_id"
+    t.integer  "worklist_item_id"
     t.integer  "checklist_item_id"
     t.text     "message"
     t.string   "notification_type"
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 20140603235830) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "report_id"
-    t.integer  "punchlist_item_id"
+    t.integer  "worklist_item_id"
     t.integer  "checklist_item_id"
     t.string   "phase"
     t.string   "name",                                     null: false
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 20140603235830) do
     t.text     "description"
   end
 
-  add_index "photos", ["report_id", "checklist_item_id", "punchlist_item_id", "user_id"], name: "photos_ix"
+  add_index "photos", ["report_id", "checklist_item_id", "worklist_item_id", "user_id"], name: "photos_ix"
 
   create_table "project_groups", force: true do |t|
     t.integer  "company_id"
@@ -271,33 +271,6 @@ ActiveRecord::Schema.define(version: 20140603235830) do
     t.decimal  "percentage", precision: 5, scale: 2
     t.integer  "days"
     t.integer  "use_count",                          default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "punchlist_items", force: true do |t|
-    t.text     "body"
-    t.integer  "punchlist_id"
-    t.integer  "user_id"
-    t.string   "location"
-    t.integer  "order_index"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "assignee_id"
-    t.boolean  "completed",            default: false
-    t.datetime "completed_at"
-    t.integer  "completed_by_user_id"
-    t.integer  "photos_count"
-    t.integer  "comments_count"
-    t.integer  "sub_assignee_id"
-    t.boolean  "mobile",               default: false
-  end
-
-  add_index "punchlist_items", ["assignee_id"], name: "punchlist_items_assignee_id_ix"
-
-  create_table "punchlists", force: true do |t|
-    t.boolean  "worklist",   default: false
-    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -391,7 +364,7 @@ ActiveRecord::Schema.define(version: 20140603235830) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "count",              default: 0
-    t.integer  "punchlist_item_id"
+    t.integer  "worklist_item_id"
     t.string   "contact_name"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -433,5 +406,30 @@ ActiveRecord::Schema.define(version: 20140603235830) do
   add_index "users", ["company_id"], name: "users_company_id_ix"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "worklist_items", force: true do |t|
+    t.text     "body"
+    t.integer  "worklist_id"
+    t.integer  "user_id"
+    t.string   "location"
+    t.integer  "order_index"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "assignee_id"
+    t.boolean  "completed",            default: false
+    t.datetime "completed_at"
+    t.integer  "completed_by_user_id"
+    t.integer  "photos_count"
+    t.integer  "comments_count"
+    t.integer  "sub_assignee_id"
+    t.boolean  "mobile",               default: false
+  end
+
+  create_table "worklists", force: true do |t|
+    t.boolean  "worklist",   default: false
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
