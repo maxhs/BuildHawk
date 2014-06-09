@@ -219,6 +219,10 @@ Buildhawk::Application.routes.draw do
     end
   end
 
+  get "api/v2/punchlists", to: "worklists#index"
+  get "api/v2/punchlists/:id", to: "worklists#show"
+  post "api/v2/punchlists/photo", to: "worklists#photo"
+
   #mobile API v2
   namespace :api do
     namespace :v2 do
@@ -255,8 +259,8 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :worklists, :as => :punchlists, :only => [:show, :index]
-      resources :worklist_items, :as => :punchlist_items do
+      resources :worklists, :only => [:show, :index]
+      resources :worklist_items do
         collection do
           post :photo
         end
