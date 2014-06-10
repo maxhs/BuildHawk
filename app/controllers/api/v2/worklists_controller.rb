@@ -23,4 +23,13 @@ class Api::V2::WorklistsController < Api::V2::ApiController
         	format.json { render_for_api :worklist, :json => worklist, :root => :punchlist}
       	end
     end
+
+    def destroy
+        item = WorklistItem.find params[:id]
+        if item.destroy
+            render json: {success: true}
+        else
+            render json: {failure: true}
+        end
+    end
 end
