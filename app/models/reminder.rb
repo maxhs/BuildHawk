@@ -1,5 +1,5 @@
 class Reminder < ActiveRecord::Base
-	attr_accessible :user_id, :checklist_item, :project_id, :reminder_datetime, :email, :text, :push
+	attr_accessible :user_id, :checklist_item, :project_id, :reminder_datetime, :email, :text, :push, :active
 
 	belongs_to :user
 	belongs_to :checklist_item

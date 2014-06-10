@@ -55,6 +55,8 @@ class Photo < ActiveRecord::Base
 	def url100
 		if image_file_name
 			image.url(:thumb)
+		else
+			""
 		end
 	end
 	###
@@ -62,24 +64,32 @@ class Photo < ActiveRecord::Base
 	def url_small
 		if image_file_name
 			image.url(:small)
+		else
+			""
 		end
 	end
 
 	def url_thumb
 		if image_file_name
 			image.url(:thumb)
+		else
+			""
 		end
 	end
 
 	def url_large
 		if image_file_name
 			image.url(:large)
+		else
+			""
 		end
 	end
 
 	def original
 		if image_file_name
 			image.url(:original)
+		else
+			""
 		end
 	end
 
