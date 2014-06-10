@@ -181,6 +181,7 @@ Buildhawk::Application.routes.draw do
 
   get "/api/v1/punchlists", to: "api/v1/worklists#index"
   get "/api/v1/punchlists/:id", to: "api/v1/worklists#show"
+  get "/api/v1/punchlist_items/:id", to: "api/v1/worklist_items#show"
   post "/api/v1/punchlist_items", to: "api/v1/worklist_items#create"
   put "/api/v1/punchlist_items/:id", to: "api/v1/worklist_items#update"
   patch "/api/v1/punchlist_items/:id", to: "api/v1/worklist_items#update"
@@ -228,6 +229,7 @@ Buildhawk::Application.routes.draw do
 
   get "/api/v2/punchlists", to: "api/v2/worklists#index"
   get "/api/v2/punchlists/:id", to: "api/v2/worklists#show"
+  get "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#show"
   post "/api/v2/punchlist_items", to: "api/v2/worklist_items#create"
   put "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#update"
   patch "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#update"

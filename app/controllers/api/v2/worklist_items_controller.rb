@@ -97,6 +97,15 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
     end
 
+    def destroy
+        item = WorklistItem.find params[:id]
+        if item.destroy
+            render json: {success: true}
+        else
+            render json: {failure: true}
+        end
+    end
+
     private
 
     def refactor_punchlist
