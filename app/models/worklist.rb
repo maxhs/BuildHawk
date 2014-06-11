@@ -16,6 +16,7 @@ class Worklist < ActiveRecord::Base
 
     api_accessible :projects do |t|
         t.add :id
+        t.add :project_id
         t.add :worklist_items
         ###slated for deletion###
         t.add :punchlist_items

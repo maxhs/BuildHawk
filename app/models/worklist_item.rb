@@ -54,10 +54,6 @@ class WorklistItem < ActiveRecord::Base
         end
     end
 
-    def company_id
-        worklist.project.company.id
-    end
-
     def created_date
         created_at.to_i
     end
@@ -78,7 +74,6 @@ class WorklistItem < ActiveRecord::Base
   		t.add :location
   		t.add :completed_at
   		t.add :completed
-        t.add :company_id
         t.add :created_date
         t.add :epoch_time
         t.add :photos
