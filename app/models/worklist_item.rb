@@ -84,6 +84,7 @@ class WorklistItem < ActiveRecord::Base
         t.add :photos
         t.add :created_at
         t.add :comments
+        t.add :worklist_id
   	end
 
     api_accessible :dashboard, :extend => :projects do |t|
