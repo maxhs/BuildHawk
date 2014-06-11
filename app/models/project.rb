@@ -144,7 +144,13 @@ class Project < ActiveRecord::Base
         ###
   	end
 
-    api_accessible :worklist, :extend => :projects do |t|
+    api_accessible :worklist do |t|
+        t.add :id
+        t.add :name
+        t.add :address
+        t.add :company
+        t.add :active
+        t.add :users
         t.add :worklists
     end
 
