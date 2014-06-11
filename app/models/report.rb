@@ -62,6 +62,13 @@ class Report < ActiveRecord::Base
         report_users + report_subs
     end
 
+    def personnel_count
+        count = 0
+        report_users.map{|u| count+u.hours if u.hours}
+        report_companies.map{|c| count+c.count if c.count}
+        count
+    end
+
     def has_body?
         body.present? && body.length > 0
     end

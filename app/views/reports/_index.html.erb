@@ -12,41 +12,28 @@
 	</header>
 
 	<div id="project-reports">
-		<table class="table table-bordered table-responsive" id="reports">
-			<thead>
-				<tr>
-					<th><h4>Report Date</h4></th>
-					<th><h4>Type</h4></th>
-					<th><h4>Last Updated</h4></th>
-					<th><h4>Photos</h4></th>
-				</tr>
-			</thead>
-				<tbody>
-					<% if @reports && @reports.count > 0 %>
-						<% @reports.each do |report| %>
-							<tr>
-								<td><%= link_to "#{report.report_type} - #{report.created_date}", report_path(report), :remote => true %></td>
-								<td><%= report.report_type %></td>
-								<td><% if report.updated_at %><%= parse_time report.updated_at %><% end %></td>
-								<td>
-									<%if report.photos && report.photos.count > 0 %>
-										<% if report.photos.count == 1 %>
-											1
-										<% else %>
-											<%= report.photos.count %>
-										<% end %>
-									<% else %>
-										0
-									<% end %>
-								</td>
-							</tr>
-						<% end %>
-					<% else %>
-						<tr><td colspan="4" class="loading"><h4 style="font-weight:100;text-align:center;color:#aaa;font-style:italic;">No reports</h4></td></tr>
-					<% end %>
-					
-				</tbody>
-		</table>
+		<div class="header row">
+			<div class="col-xs-3"><h4>Report Date</h4></div>
+			<div class="col-xs-3"><h4>Type</h4></div>
+			<div class="col-xs-2"><h4>Last Updated</h4></div>
+			<div class="col-xs-2"><h4>Personnel on site</h4></div>
+			<div class="col-xs-2"><h4>Photos</h4></div>
+		</div>
+
+		<% if @reports && @reports.count > 0 %>
+			<% @reports.each do |report| %>
+				<div class="report row">
+					<div class="col-xs-3"><%= link_to "#{report.report_type} - #{report.created_date}", report_path(report), :remote => true %></div>
+					<div class="col-xs-3"><%= report.report_type %></div>
+					<div class="col-xs-2"><% if report.updated_at %><%= parse_time report.updated_at %><% end %></div>
+					<div class="col-xs-2"><%= report.personnel_count %></div>
+					<div class="col-xs-2"><%= report.photos.count %></div>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="col-xs-12 loading"><h4 style="font-weight:100;text-align:center;color:#aaa;font-style:italic;">No reports</h4></div>
+		<% end %>
+		
 	</div>
 </div>
 <script>
