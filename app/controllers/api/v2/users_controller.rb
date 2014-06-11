@@ -6,7 +6,7 @@ class Api::V2::UsersController < Api::V2::ApiController
 	end
 
 	def worklist_connect
-		items = WorklistItem.where(:assignee_id => @user.id).
+		items = WorklistItem.where(:assignee_id => @user.id)
 		respond_to do |format|
         	format.json { render_for_api :worklist, :json => items, :root => :worklist_items}
       	end
