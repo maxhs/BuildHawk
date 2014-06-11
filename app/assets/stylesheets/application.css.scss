@@ -342,7 +342,7 @@ body {
 		}
 
 		a {
-			font-size:1.25em;
+			font-size:1.2em;
 			line-height:1.5em;
 			-webkit-transition: all 0.25s ease-out;
     		-moz-transition: all 0.25s ease-out;
@@ -375,7 +375,6 @@ body {
 			ul {
 				display:inline-block;
 				width:40%;
-				font-weight:200;
 
 				li {
 					list-style:none;
@@ -683,8 +682,6 @@ select[multiple] {
 
 a.search-button {
 	color: #000 !important;
-	padding: 0;
-	line-height: 32px;
 	width: 24%;
 	margin: 0 auto 15px;
 }
@@ -703,7 +700,6 @@ a.search-button {
 	clear:both;
 	font-family:"Source Sans Pro",'Helvetica',sans-serif;
 	font-size:15px;
-	font-weight:100;
 	text-transform:uppercase;
 }
 
