@@ -2,7 +2,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
         @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",false,false).map(&:project).compact.sort_by{|p| p.name.downcase}
+        projects = @user.project_users.where("archived = ? and core = ?",false,false).map(&:project).compact.sort_by{|p| p.name.downcase}
         puts "found #{projects.count} projects"
         if projects
         	respond_to do |format|
@@ -34,7 +34,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def dashboard
         @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ? and project_group_id IS NULL and core = ?",false,false).map(&:project).compact
+        projects = @user.project_users.where("archived = ? and core = ?",false,false).map(&:project).compact
         if @project.checklist
             respond_to do |format|
                 format.json { render_for_api :dashboard, :json => projects, root: :projects}
