@@ -14,7 +14,7 @@ class ProjectGroup < ActiveRecord::Base
       t.add :id
       t.add :name
   		t.add :projects_count
-  		t.add :group_projects
+  		#t.add :group_projects
   	end
 
   	api_accessible :dashboard do |t|

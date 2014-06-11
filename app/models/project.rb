@@ -138,6 +138,7 @@ class Project < ActiveRecord::Base
         t.add :recently_completed
         t.add :recent_documents
         t.add :phases
+        t.add :project_group_id
         ### slated for deletion ###
         t.add :categories
         t.add :subs

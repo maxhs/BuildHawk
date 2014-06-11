@@ -108,9 +108,6 @@ class User < ActiveRecord::Base
         end
     end
 
-    def connect_items
-        WorklistItem.where(:assignee_id => self.id).flatten
-    end
 
   	acts_as_api
 
@@ -142,7 +139,7 @@ class User < ActiveRecord::Base
   	end
 
     api_accessible :projects, :extend => :user do |t|
-        #t.add :connect_items
+        
     end
 
     api_accessible :details, :extend => :user do |t|
