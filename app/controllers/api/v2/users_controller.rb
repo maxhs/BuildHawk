@@ -5,10 +5,10 @@ class Api::V2::UsersController < Api::V2::ApiController
 		
 	end
 
-	def connect_items
-		items = WorklistItem.where(:assignee_id => @user.id)
+	def worklist_connect
+		worklists = WorklistItem.where(:assignee_id => @user.id).map(&:worklist).compact
 		respond_to do |format|
-        	format.json { render_for_api :worklist, :json => items, :root => :worklist_items}
+        	format.json { render_for_api :worklist, :json => worklists, :root => :worklists}
       	end
 	end
 

@@ -14,20 +14,20 @@ class Worklist < ActiveRecord::Base
 
 	acts_as_api
 
-    api_accessible :worklist do |t|
+    api_accessible :projects do |t|
         t.add :id
         t.add :worklist_items
         ###slated for deletion###
         t.add :punchlist_items
-        ###
         t.add :personnel
+        ###
     end
 
-  	api_accessible :user, :extend => :worklist do |t|
+  	api_accessible :user, :extend => :projects do |t|
 
   	end
 
-  	api_accessible :projects, :extend => :worklist do |t|
+  	api_accessible :worklist, :extend => :projects do |t|
     
   	end 
 end

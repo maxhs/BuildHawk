@@ -246,7 +246,7 @@ Buildhawk::Application.routes.draw do
       end
       resources :users do
         member do
-          get :connect_items
+          get :worklist_connect
         end
       end
       resources :companies
