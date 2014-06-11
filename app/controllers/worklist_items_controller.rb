@@ -83,7 +83,6 @@ class WorklistItemsController < ApplicationController
 			params[:worklist_item][:completed_by_user_id] = nil
 			params[:worklist_item][:completed_at] = nil
 		end
-		puts "params worklist item: #{params[:worklist_item]}"
 		@item.update_attributes params[:worklist_item]
 
 		if request.xhr?

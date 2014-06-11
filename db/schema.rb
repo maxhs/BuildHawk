@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609195718) do
+ActiveRecord::Schema.define(version: 20140610151456) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -184,6 +184,13 @@ ActiveRecord::Schema.define(version: 20140609195718) do
     t.integer  "comment_id"
   end
 
+  add_index "notifications", ["checklist_item_id"], name: "checklist_item_id_idx"
+  add_index "notifications", ["comment_id"], name: "comment_id_idx"
+  add_index "notifications", ["project_id"], name: "project_id_idx"
+  add_index "notifications", ["report_id"], name: "report_id_idx"
+  add_index "notifications", ["user_id"], name: "user_id_idx"
+  add_index "notifications", ["worklist_item_id"], name: "worklist_item_id_idx"
+
   create_table "phases", force: true do |t|
     t.integer  "order_index"
     t.integer  "checklist_id"
@@ -285,6 +292,7 @@ ActiveRecord::Schema.define(version: 20140609195718) do
     t.boolean  "push"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",            default: true
   end
 
   create_table "report_companies", force: true do |t|

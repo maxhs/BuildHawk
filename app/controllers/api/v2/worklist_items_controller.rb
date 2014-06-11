@@ -90,8 +90,21 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
     def photo
         params[:photo][:worklist_item_id] = params[:id] if params[:id]
-        photo = Photo.create params[:photo]
-        photo.update_attribute :mobile, true
+
+        ## android ##
+        if params[:file]
+            photo = Photo.new(image: params[:file])
+            if params[:file].original_filename
+                photo.name = params[:file].original_filename
+                photo.save
+            end
+            params[:photo][:mobile] = true
+            photo.update_attributes params[:photo]
+        else
+        ## ios ##
+            photo = Photo.create params[:photo]
+        end
+
         respond_to do |format|
             format.json { render_for_api :worklist, :json => photo.worklist_item, :root => @root}
         end

@@ -23,7 +23,7 @@ class Photo < ActiveRecord::Base
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
-	process_in_background :image, :if => :is_mobile?
+	process_in_background :image
 
 	# websolr
     searchable do
