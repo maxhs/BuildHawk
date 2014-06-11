@@ -150,8 +150,6 @@ class Project < ActiveRecord::Base
         t.add :address
         t.add :company
         t.add :active
-        t.add :users
-        t.add :worklists
     end
 
     api_accessible :details, :extend => :projects do |t|

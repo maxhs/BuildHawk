@@ -58,6 +58,10 @@ class WorklistItem < ActiveRecord::Base
         created_at.to_i
     end
 
+    def project 
+        worklist.project
+    end
+
     ##for deletion
     def epoch_time
         created_date
@@ -66,7 +70,7 @@ class WorklistItem < ActiveRecord::Base
 
     acts_as_api
 
-    api_accessible :projects do |t|
+    api_accessible :worklist do |t|
   		t.add :id
         t.add :user
   		t.add :body
@@ -79,14 +83,14 @@ class WorklistItem < ActiveRecord::Base
         t.add :photos
         t.add :created_at
         t.add :comments
-        t.add :worklist_id
+        t.add :project
   	end
 
-    api_accessible :dashboard, :extend => :projects do |t|
+    api_accessible :dashboard, :extend => :worklist do |t|
 
     end
 
-    api_accessible :worklist, :extend => :projects do |t|
+    api_accessible :projects, :extend => :worklist do |t|
 
     end
 end
