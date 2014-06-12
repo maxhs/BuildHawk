@@ -61,7 +61,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 elsif topic["id"]
                     #topic was already added
                 else
-                    new_topic = @report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
+                    new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
                     report.report_topics.create(:safety_topic_id => new_topic.id)
                 end
             end
@@ -141,8 +141,8 @@ class Api::V2::ReportsController < Api::V2::ApiController
             params[:report].delete(:safety_topics)
         end
 
-        @report = Report.create params[:report]
-        @report.update_attribute :mobile, true
+        report = Report.create params[:report]
+        report.update_attribute :mobile, true
         
         if topics
             topics.each do |topic|
@@ -151,7 +151,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 elsif topic["id"]
                     #topic was already added
                 else
-                    new_topic = @report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
+                    new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
                     report.report_topics.create(:safety_topic_id => new_topic.id)
                 end
             end
@@ -160,14 +160,14 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if companies
             companies.each do |c|
                 company = Company.where(:name => c[:name]).first_or_create
-                report_company = @report.report_companies.where(:company_id => company.id).first_or_create
+                report_company = report.report_companies.where(:company_id => company.id).first_or_create
                 report_company.update_attribute :count, c[:count]
             end
         end
         if subs
             subs.each do |s|
                 sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
-                the_sub = @report.report_subs.where(:sub_id => sub.id).first_or_create
+                the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
                 the_sub.update_attribute :count, s[:count]
             end
         end
@@ -176,14 +176,14 @@ class Api::V2::ReportsController < Api::V2::ApiController
             users.each do |u|
                 user = User.find_by full_name: u[:full_name]
                 if user
-                    ru = @report.report_users.where(:user_id => user.id).first_or_create
+                    ru = report.report_users.where(:user_id => user.id).first_or_create
                     ru.update_attribute :hours, u[:hours]
                 end
             end
         end
 
         respond_to do |format|
-            format.json { render_for_api :report, :json => @report, :root => :report}
+            format.json { render_for_api :report, :json => report, :root => :report}
         end
     end
 
