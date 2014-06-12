@@ -20,7 +20,7 @@ class AdminController < ApplicationController
 		@company = @user.company
 		unless @company.customer_token.nil? && current_user.uber_admin
 			@users = current_user.company.users
-			@subcontractors = current_user.company.subcontractors
+			@subcontractors = current_user.company.company_subs
 			if request.xhr?
 				respond_to do |format|
 					format.js
@@ -41,7 +41,7 @@ class AdminController < ApplicationController
 	def create_user
 		@user = current_user.company.users.create params[:user]
 		@users = current_user.company.users
-		@subcontractors = current_user.company.subcontractors
+		@subcontractors = current_user.company_subs
 		if @user.save & request.xhr?
 			@response_message = "User created".html_safe
 			respond_to do |format|

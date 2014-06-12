@@ -56,11 +56,13 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
         if params[:report][:safety_topics].present?
             params[:report][:safety_topics].each do |topic|
-                if topic["id"]
-                    report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                if topic["topic_id"]
+                    report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
                 else
-                    new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
-                    report.report_topics.create(:safety_topic_id => new_topic.id)
+                    unless topic["id"].present?
+                        new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
+                        report.report_topics.create(:safety_topic_id => new_topic.id)
+                    end
                 end
             end
             params[:report].delete(:safety_topics)
@@ -144,11 +146,13 @@ class Api::V2::ReportsController < Api::V2::ApiController
         
         if topics
             topics.each do |topic|
-                if topic["id"]
-                    report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                if topic["topic_id"]
+                    report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
                 else
-                    new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
-                    report.report_topics.create(:safety_topic_id => new_topic.id)
+                    unless topic["id"].present?
+                        new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
+                        report.report_topics.create(:safety_topic_id => new_topic.id)
+                    end
                 end
             end
         end
