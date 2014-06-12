@@ -110,12 +110,6 @@ class AdminController < ApplicationController
 		redirect_to users_admin_index_path
 	end
 
-	def delete_subcontractor
-		@subcontractor = CompanySub.find params[:id]
-		@subcontractor.destroy
-		redirect_to users_admin_index_path
-	end
-
 	def safety_topics
 		@company = @user.company
 		@safety_topics = @company.safety_topics

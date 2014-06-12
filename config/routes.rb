@@ -44,7 +44,6 @@ Buildhawk::Application.routes.draw do
       get :users
       get :safety_topics
       get :edit_user
-      get :edit_subcontractor
       get :new_user
       post :create_user
       get :new_subcontractor
@@ -70,9 +69,9 @@ Buildhawk::Application.routes.draw do
       patch :update_subcontractor
       patch :update_checklist
       delete :delete_user
-      delete :delete_subcontractor
     end
   end
+  resources :company_subs, only: [:destroy]
   resources :uber_admin do
     collection do
       post :upload_template

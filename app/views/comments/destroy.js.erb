@@ -1,4 +1,3 @@
-console.log("just deleted a comment");
 $('#comments-table').fadeOut(100,function(){
 	$(this).html('<%= j render :partial => "comments/comments", :locals => {:comments => @comments} %>');
 	$(this).fadeIn(100);
