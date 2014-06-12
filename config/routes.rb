@@ -233,7 +233,7 @@ Buildhawk::Application.routes.draw do
   post "/api/v2/punchlist_items", to: "api/v2/worklist_items#create"
   put "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#update"
   patch "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#update"
-  post "/api/v2/punchlists/photo", to: "api/v2/worklists#photo"
+  post "/api/v2/punchlist_items/photo", to: "api/v2/worklist_items#photo"
 
   #mobile API v2
   namespace :api do
