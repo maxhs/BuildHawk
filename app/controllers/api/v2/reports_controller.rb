@@ -1,7 +1,16 @@
 class Api::V2::ReportsController < Api::V2::ApiController
 
     def update
-        @current_user = User.find params[:report][:author_id] 
+        ##API compatibility
+        if params[:report][:author_id]
+            @current_user = params[:report][:author_id]
+            params[:report].delete(:author_id)
+        ##
+        else
+            @current_user = User.find params[:user_id] 
+        end
+        
+        
     	report = Report.find params[:id]
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
