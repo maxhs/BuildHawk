@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610151456) do
+ActiveRecord::Schema.define(version: 20140613133811) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -164,6 +164,13 @@ ActiveRecord::Schema.define(version: 20140610151456) do
     t.string   "company_name"
     t.string   "email"
     t.string   "phone_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

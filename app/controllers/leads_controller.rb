@@ -2,12 +2,23 @@ class LeadsController < ApplicationController
 	before_filter :authenticate_user!, :except => :create
 	def create
 		lead = Lead.create params[:lead]
-		if request.xhr?
-			respond_to do |format|
-				format.js
+		if verify_recaptcha
+			if request.xhr?
+				respond_to do |format|
+					format.js
+				end
+			else
+				redirect_to root_url
 			end
 		else
-			redirect_to root_url
+			puts "did't pass"
+			if request.xhr?
+				respond_to do |format|
+					format.js {render template:"home/recaptcha"}
+				end
+			else
+				redirect_to root_url
+			end
 		end
 	end
 

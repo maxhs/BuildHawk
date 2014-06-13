@@ -247,7 +247,7 @@
 
 	#contact {
 		background:#eee;
-		height:500px;
+		height:600px;
 		text-align:center;
 
 		#coming-soon{
@@ -268,14 +268,18 @@
 			font-size: 1.1em;
 			padding: .5em;
 			height: 2.5em;
-			width: 300px;
-			
+			width: 440px;
 			border-radius: 3px;
+		}
+
+		#recaptcha_area {
+			width:440px;
+			margin:0 auto 15px;
 		}
 
 		button {
 			background-color:#336699;
-			width:8em;
+			width:10em;
 			border-radius:3px;
 			color:#fff;
 			border:0;
