@@ -117,7 +117,8 @@ Buildhawk::Application.routes.draw do
   resources :companies
   resources :comments
   resources :project_groups
-  resources :leads
+  resources :leads, only: [:create, :index]
+  resources :messages
   resources :checklists do 
     collection do 
       post :order_phases
@@ -277,6 +278,7 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :reminders, :only => [:create, :index]
+      resources :messages, only: [:index]
       resources :notifications, :only => [:index, :destroy]
       resources :comments
       resources :company_subs, :only => [:create]

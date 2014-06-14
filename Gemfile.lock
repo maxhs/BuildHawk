@@ -67,6 +67,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     connection_pool (2.0.0)
+    daemon_controller (1.2.0)
     daemons (1.1.9)
     deep_cloneable (1.6.0)
       activerecord (>= 3.1.0)
@@ -119,6 +120,10 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    passenger (4.0.45)
+      daemon_controller (>= 1.2.0)
+      rack
+      rake (>= 0.8.1)
     pg (0.17.1)
     polyglot (0.3.4)
     postmark (1.1.0)
@@ -264,6 +269,7 @@ DEPENDENCIES
   non-stupid-digest-assets
   nprogress-rails
   paperclip
+  passenger
   pg
   postmark-rails
   protected_attributes

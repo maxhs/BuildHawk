@@ -96,6 +96,10 @@ class Company < ActiveRecord::Base
       
     end
     
+    api_accessible :messages, :extend => :login do |t|
+      
+    end
+    
     api_accessible :report do |t|
         t.add :id
         t.add :name

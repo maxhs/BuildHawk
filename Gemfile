@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
-
+gem 'passenger', :group => :production
+gem 'thin', :group => :development
 gem 'sqlite3', '1.3.8', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
@@ -34,7 +35,6 @@ gem 'daemons'
 gem 'sunspot_rails', '~> 2.1.0'
 gem 'sunspot_solr'
 gem 'turbolinks'
-gem 'thin'
 gem 'roo'
 gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'

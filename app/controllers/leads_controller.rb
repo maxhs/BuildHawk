@@ -1,5 +1,6 @@
 class LeadsController < ApplicationController
 	before_filter :authenticate_user!, :except => :create
+	
 	def create
 		lead = Lead.create params[:lead]
 		if verify_recaptcha

@@ -166,6 +166,10 @@ class Project < ActiveRecord::Base
         
     end
 
+    api_accessible :messages, :extend => :user do |t|
+        
+    end
+
     api_accessible :dashboard do |t|
         t.add :progress
         t.add :upcoming_items
