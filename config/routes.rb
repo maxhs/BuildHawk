@@ -278,8 +278,12 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :reminders, :only => [:create, :index]
-      resources :messages, only: [:index]
-      resources :notifications, :only => [:index, :destroy]
+      #resources :messages, only: [:index]
+      resources :notifications, :only => [:index, :destroy] do
+        collection do 
+          get :messages
+        end
+      end
       resources :comments
       resources :company_subs, :only => [:create]
       resources :subs, :only => [:create]

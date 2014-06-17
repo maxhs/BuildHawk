@@ -7,7 +7,8 @@ class CreateMessages < ActiveRecord::Migration
     	t.text :body
       	t.timestamps
     end
-
-    add_column :comments, :message_id, :integer
+    #rename_column :notifications, :message, :body
+    #add_column :notifications, :message_id, :integer
+    #add_column :comments, :message_id, :integer
   end
 end

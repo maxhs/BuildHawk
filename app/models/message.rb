@@ -7,6 +7,19 @@ class Message < ActiveRecord::Base
 	has_many :users
 	has_many :comments
 
+	after_commit :notify, on: :create
+
+	def notify
+		users.each do |u|
+			u.notifications.create(
+				:alert 				=> body,
+				:message_id 		=> id,
+				:project_id 		=> target_project_id,
+				:notification_type 	=> "Message"
+			)
+		end
+	end
+
 	acts_as_api
 
 	api_accessible :report do |t|

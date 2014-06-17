@@ -185,13 +185,14 @@ ActiveRecord::Schema.define(version: 20140613133811) do
     t.integer  "report_id"
     t.integer  "worklist_item_id"
     t.integer  "checklist_item_id"
-    t.text     "message"
+    t.text     "body"
     t.string   "notification_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
     t.boolean  "feed",              default: false
     t.integer  "comment_id"
+    t.integer  "message_id"
   end
 
   add_index "notifications", ["checklist_item_id"], name: "checklist_item_id_idx"

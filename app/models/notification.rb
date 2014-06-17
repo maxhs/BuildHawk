@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
 
 	attr_accessible :user_id, :comment_id, :read, :sent, :checklist_item_id, :worklist_item_id, 
-					:report_id, :message, :notification_type, :project_id, :feed
+					:report_id, :body, :notification_type, :project_id, :feed, :message_id
 
 	belongs_to :user
 	belongs_to :target_user, :class_name => "User"
@@ -10,6 +10,7 @@ class Notification < ActiveRecord::Base
 	belongs_to :worklist_item
 	belongs_to :checklist_item
 	belongs_to :comment
+	belongs_to :message
 
 	after_create :deliver
 
@@ -17,7 +18,7 @@ class Notification < ActiveRecord::Base
 		if user && user.push_permissions
 			puts "Should be sending a push to: #{user.full_name}"
 			user.notify_all_devices(
-		        :alert          	=> message, 
+		        :alert          	=> body, 
 		        :report_id 			=> report_id, 
 		        :worklist_item_id 	=> worklist_item_id,
 		        :checklist_item_id 	=> checklist_item_id,

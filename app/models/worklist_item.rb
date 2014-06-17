@@ -77,13 +77,14 @@ class WorklistItem < ActiveRecord::Base
   		t.add :assignee
   		t.add :location
   		t.add :completed_at
+        t.add :created_at
   		t.add :completed
         t.add :created_date
-        t.add :epoch_time
         t.add :photos
-        t.add :created_at
         t.add :comments
         t.add :project
+        ## for deletion
+        t.add :epoch_time
   	end
 
     api_accessible :dashboard, :extend => :worklist do |t|
