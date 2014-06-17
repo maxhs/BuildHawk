@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
     has_many :reports, :through => :report_users
     has_many :notifications, :dependent => :destroy
     has_many :apn_registrations, :dependent => :destroy
+    has_many :message_users, :dependent => :destroy, autosave: true
+    has_many :messages, :through => :message_users , autosave: true
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable
 
