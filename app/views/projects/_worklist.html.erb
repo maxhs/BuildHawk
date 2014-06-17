@@ -44,7 +44,7 @@
 							<% end %>
 							
 							<td>
-								<% if item.body.length > 0 %>
+								<% if item.body && item.body.length > 0 %>
 									<%= link_to item.body, edit_worklist_item_path(item), :remote => true %> 
 								<% else %>
 									<%= link_to edit_worklist_item_path(item), :remote => true do %> <div style="width:100%;display:block;">&nbsp;</div><% end %>
