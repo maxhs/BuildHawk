@@ -85,6 +85,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			<% if current_user.uber_admin? %>
 				<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
 			<% end %>
+			<li><%= link_to "Messages", messages_path, remote:true %></li>
 		</ul>
 		<% end %>
 	<% end %>

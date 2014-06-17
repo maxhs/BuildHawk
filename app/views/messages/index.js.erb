@@ -1,0 +1,4 @@
+$('#main').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "messages/index" %>');
+	$(this).fadeIn(100);
+});

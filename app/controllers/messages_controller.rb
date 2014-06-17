@@ -1,15 +1,15 @@
 class MessagesController < ApplicationController
-
+	before_filter :authenticate_user!
 	def index
-
+		@messages = current_user.messages 
 	end
 
 	def new
-		message = Message.new
+		@message = Message.new
 	end
 
 	def create
-		message = Message.create params[:message]
+		@message = Message.create params[:message]
 	end
 
 	def destroy

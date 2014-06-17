@@ -1,7 +1,7 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
-    	t.belongs_to :user
+    	t.belongs_to :author, class_name: "User"
     	t.belongs_to :target_project
     	t.belongs_to :company
     	t.text :body

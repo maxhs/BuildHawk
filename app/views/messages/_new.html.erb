@@ -1,0 +1,27 @@
+<%= nested_form_for @message, :url => messages_path, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+	<%= hidden_field_tag :project_id, @project.id %>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
+
+	<div id="message-container" class="border-box">
+		<h3>New Message</h3>
+		<div class="row">
+			<div class="col-xs-2">
+				<h4>Location:</h4>
+			</div>
+			<div class="col-xs-10">
+				<%= f.text_area :body, :placeholder => "Message body..." %>
+			</div>
+		</div>
+		<%= f.fields_for :recipient_ids do |a| %>
+			<h4 style="display:inline-block;width:16.666666664%;">Recipients:</h4>
+			<%= a.select :full_name, (@users.map(&:full_name)+@subs.map(&:name)).unshift("No Recipient"), {:include_blank => false}, :class=>"recipient-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+		<% end %>
+
+		<div class="button-container">
+			<%= f.submit "Add", :class=>"btn btn-success btn-md save" %>
+		</div>
+		
+	</div>
+
+<% end %>
