@@ -213,7 +213,9 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
         elsif params[:photos]
             params[:photos].each do |p|
-                photo = Photo.create params[:photo], image: p
+                photo = Photo.new(image: p)
+                photo.save
+                photo.update_attributes params[:photo]
             end
             report = Report.find params[:photo][:report_id]
             respond_to do |format|
