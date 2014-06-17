@@ -205,10 +205,20 @@ class Api::V2::ReportsController < Api::V2::ApiController
     end
 
     def photo
-        photo = Photo.create params[:photo]
-        photo.update_attribute :mobile, true
-        respond_to do |format|
-            format.json { render_for_api :report, :json => photo.report, :root => :report}
+        if params[:photo]
+            photo = Photo.create params[:photo]
+            photo.update_attribute :mobile, true
+            respond_to do |format|
+                format.json { render_for_api :report, :json => photo.report, :root => :report}
+            end
+        elsif params[:photos]
+            params[:photos].each do |p|
+                photo = Photo.create params[:photo], image: p
+            end
+            report = Report.find params[:photo][:report_id]
+            respond_to do |format|
+                format.json { render_for_api :report, :json => report, :root => :report}
+            end
         end
     end
 
