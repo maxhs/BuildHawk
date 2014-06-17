@@ -1,10 +1,12 @@
 class Comment < ActiveRecord::Base
     include ActionView::Helpers::TextHelper
-	attr_accessible :body, :user_id, :report_id, :checklist_item_id, :worklist_item_id, :mobile
+    
+	attr_accessible :body, :user_id, :report_id, :checklist_item_id, :worklist_item_id, :mobile, :message_id
   	belongs_to :user
   	belongs_to :report
   	belongs_to :checklist_item, counter_cache: true
   	belongs_to :worklist_item, counter_cache: true
+    belongs_to :message
     has_one :notification, dependent: :destroy
   	has_many :photos
 

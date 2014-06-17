@@ -5,6 +5,7 @@ class Message < ActiveRecord::Base
 	belongs_to :company
 	belongs_to :target_project, :class_name => "Project"
 	has_many :users
+	has_many :comments
 
 	acts_as_api
 
@@ -13,5 +14,6 @@ class Message < ActiveRecord::Base
         t.add :body
         t.add :company
         t.add :target_project
+        t.add :comments
     end
 end

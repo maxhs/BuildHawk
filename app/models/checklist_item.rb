@@ -60,13 +60,19 @@ class ChecklistItem < ActiveRecord::Base
             if category.completed_count != 0 && category.completed_count == category.item_count
               category.update_attribute :completed_date, Date.today
             end
+
+            if completed_by_user
+                message, "#{completed_by_user.full_name} just marked the following checklist item complete:\"#{body[0..15]}\""
+            else
+                message, "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}"
+            end
             #TODO create a completed notification
             notification = self.checklist.project.notifications.where(
                 :checklist_item_id => id,
                 :notification_type => :checklist_item,
-                :feed => true
+                :feed => true,
+                :message => message
             ).first_or_create
-            notification.update_attribute :message, "#{completed_by_user.full_name} just marked the following checklist item complete:\"#{body[0..15]}\""
             
         elsif status != "Completed" && completed_date != nil
             self.update_attributes :completed_date => nil, :completed_by_user => nil
