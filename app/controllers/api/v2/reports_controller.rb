@@ -10,7 +10,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
             @current_user = User.find params[:user_id] 
         end
         
-        
     	report = Report.find params[:id]
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
@@ -132,71 +131,76 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
     def create
         @current_user = User.find params[:report][:author_id]
-        if params[:report][:report_users].present?
-            users = params[:report][:report_users]
-            params[:report].delete(:report_users)
-        end
+        project = Project.find params[:report][:project_id]
+        if project.reports.map(&:created_date).include?(params[:report][:created_date])
+            render json: {duplicate: "#{params[:report][:created_date]}"}
+        else
+            if params[:report][:report_users].present?
+                users = params[:report][:report_users]
+                params[:report].delete(:report_users)
+            end
 
-        if params[:report][:report_subs].present?
-            subs = params[:report][:report_subs]
-            params[:report].delete(:report_subs)
-        end
+            if params[:report][:report_subs].present?
+                subs = params[:report][:report_subs]
+                params[:report].delete(:report_subs)
+            end
 
-        if params[:report][:report_companies].present?
-            companies = params[:report][:report_companies]
-            params[:report].delete(:report_companies)
-        end
+            if params[:report][:report_companies].present?
+                companies = params[:report][:report_companies]
+                params[:report].delete(:report_companies)
+            end
 
-        if params[:report][:safety_topics].present?
-            topics = params[:report][:safety_topics]
-            params[:report].delete(:safety_topics)
-        end
+            if params[:report][:safety_topics].present?
+                topics = params[:report][:safety_topics]
+                params[:report].delete(:safety_topics)
+            end
 
-        report = Report.create params[:report]
-        report.update_attribute :mobile, true
-        
-        if topics
-            topics.each do |topic|
-                if topic["topic_id"]
-                    report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
-                else
-                    if topic["id"].present?
-                        report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+            report = Report.create params[:report]
+            report.update_attribute :mobile, true
+            
+            if topics
+                topics.each do |topic|
+                    if topic["topic_id"]
+                        report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
                     else
-                        new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
-                        report.report_topics.create(:safety_topic_id => new_topic.id)
+                        if topic["id"].present?
+                            report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                        else
+                            new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
+                            report.report_topics.create(:safety_topic_id => new_topic.id)
+                        end
                     end
                 end
             end
-        end
-        
-        if companies
-            companies.each do |c|
-                company = Company.where(:name => c[:name]).first_or_create
-                report_company = report.report_companies.where(:company_id => company.id).first_or_create
-                report_company.update_attribute :count, c[:count]
-            end
-        end
-        if subs
-            subs.each do |s|
-                sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
-                the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                the_sub.update_attribute :count, s[:count]
-            end
-        end
-
-        if users
-            users.each do |u|
-                user = User.find_by full_name: u[:full_name]
-                if user
-                    ru = report.report_users.where(:user_id => user.id).first_or_create
-                    ru.update_attribute :hours, u[:hours]
+            
+            if companies
+                companies.each do |c|
+                    company = Company.where(:name => c[:name]).first_or_create
+                    report_company = report.report_companies.where(:company_id => company.id).first_or_create
+                    report_company.update_attribute :count, c[:count]
                 end
             end
-        end
+            if subs
+                subs.each do |s|
+                    sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
+                    the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
+                    the_sub.update_attribute :count, s[:count]
+                end
+            end
 
-        respond_to do |format|
-            format.json { render_for_api :report, :json => report, :root => :report}
+            if users
+                users.each do |u|
+                    user = User.find_by full_name: u[:full_name]
+                    if user
+                        ru = report.report_users.where(:user_id => user.id).first_or_create
+                        ru.update_attribute :hours, u[:hours]
+                    end
+                end
+            end
+
+            respond_to do |format|
+                format.json { render_for_api :report, :json => report, :root => :report}
+            end
         end
     end
 

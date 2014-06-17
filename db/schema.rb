@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610151456) do
+ActiveRecord::Schema.define(version: 20140613133811) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20140610151456) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "mobile",            default: false
+    t.integer  "message_id"
   end
 
   add_index "comments", ["user_id", "report_id", "checklist_item_id", "worklist_item_id"], name: "comments_ix"
@@ -164,6 +165,15 @@ ActiveRecord::Schema.define(version: 20140610151456) do
     t.string   "company_name"
     t.string   "email"
     t.string   "phone_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "target_project_id"
+    t.integer  "company_id"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
