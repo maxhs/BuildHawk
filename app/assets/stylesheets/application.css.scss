@@ -462,7 +462,6 @@ body {
 }
 
 #projects-tab {
-	
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
@@ -473,14 +472,16 @@ body {
 	left: -65px;
 	height: 30px;
 	vertical-align: middle;
-	line-height: 30px;
+	line-height: 33px;
 	width: 160px;
 	text-align: center;
-	font-size: 22px;
+	font-size: 19px;
 	top: 45%;
 	color: #fff;
-	font-family: 'Montserrat',"Source Sans Pro";
+	font-family: 'Gotham Book','Montserrat',"Source Sans Pro";
 	background: #336699;
+	font-weight:bolder;
+	text-transform:uppercase;
 	cursor: pointer;
 	border-radius: 10px 10px 0px 0px;
 	-webkit-border-radius: 10px 10px 0px 0px;
@@ -688,15 +689,15 @@ a.search-button {
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	padding:7px 10px 5px;
+	padding:6px 10px;
 	position:relative;
 	display:inline-block;
 	margin:0 10px;
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Source Sans Pro",'Helvetica',sans-serif;
-	font-size:15px;
+	font-family:"Montserrat",'Helvetica',sans-serif;
+	font-size:14px;
 	text-transform:uppercase;
 }
 

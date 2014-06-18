@@ -4,14 +4,14 @@
 	<li class="nav-checklists admin"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
 	<li class="nav-documents admin"><%= link_to "Documents", document_photos_project_path(@project), :remote => true %></a></li>
 	<li class="nav-reports admin"><%= link_to "Reports", reports_path(:project_id => @project.id), :remote => true %></li>
-	<li class="nav-punchlists admin"><%= link_to "Tasks", worklist_project_path(@project), :remote => true %></li>
+	<li class="nav-worklists admin"><%= link_to "Tasks", worklist_project_path(@project), :remote => true %></li>
 	<li class="nav-edit admin"><%= link_to "Edit", edit_project_path(@project), :remote => true %></li> 
 <% else %>
 	<li class="nav-dashboard"><%= link_to @project.name, project_path(@project), :remote => true %></li>
 	<li class="nav-checklists"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
 	<li class="nav-documents"><%= link_to "Documents", document_photos_project_path(@project), :remote => true %></a></li>
 	<li class="nav-reports"><%= link_to "Reports", reports_path(:project_id => @project.id), :remote => true %></li>
-	<li class="nav-punchlists"><%= link_to "Tasks", worklist_project_path(@project), :remote => true %></li>
+	<li class="nav-worklists"><%= link_to "Tasks", worklist_project_path(@project), :remote => true %></li>
 <% end %>
 
 <!--<% if current_user && current_user.uber_admin? %>

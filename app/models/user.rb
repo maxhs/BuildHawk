@@ -57,6 +57,18 @@ class User < ActiveRecord::Base
         end
     end
 
+    def send_text
+        @account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
+        @auth_token = '217b868c691cd7ec356c7dbddb5b5939'
+        twilio_phone_number = "14157234334"
+        @client = Twilio::REST::Client.new(@account_sid, @auth_token)
+        @client.account.sms.messages.create(
+            :from => "+1#{twilio_phone_number}",
+            :to => phone_number,
+            :body => "BuildHawk text"
+        )
+    end
+
     def clean_phone_number
         if self.phone_number.include?(' ')
             self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
