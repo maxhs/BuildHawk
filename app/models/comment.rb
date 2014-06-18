@@ -20,7 +20,7 @@ class Comment < ActiveRecord::Base
         if report && report.author
             truncated = truncate(body, length:20)
             report.author.notifications.where(
-                :message => "#{user.full_name} just commented on your #{report.report_type} Report from #{report.created_date}: \"#{truncated}\"", 
+                :body => "#{user.full_name} just commented on your #{report.report_type} Report from #{report.created_date}: \"#{truncated}\"", 
                 :report_id => report_id,
                 :comment_id => id,
                 :notification_type => "Comment"
@@ -29,7 +29,7 @@ class Comment < ActiveRecord::Base
             truncated_item = truncate(worklist_item.body, length:20)
             truncated = truncate(body, length:20)
             worklist_item.user.notifications.where(
-                :message => "#{user.full_name} just commented on your worklist item (#{truncated_item.strip}) \"#{truncated}\"", 
+                :body => "#{user.full_name} just commented on your worklist item (#{truncated_item.strip}) \"#{truncated}\"", 
                 :worklist_item_id => worklist_item_id,
                 :comment_id => id,
                 :notification_type => "Comment"

@@ -38,19 +38,19 @@ class WorklistItem < ActiveRecord::Base
         if completed
             # user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
             # if user
-            #     message = "#{worklist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
+            #     body = "#{worklist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
             # else
-                message = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was just completed"
+                body = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was just completed"
             #end
-            Notification.where(:message => message,:user_id => user_id, :worklist_item_id => id, :notification_type => "Worklist").first_or_create
+            Notification.where(:body => body,:user_id => user_id, :worklist_item_id => id, :notification_type => "Worklist").first_or_create
         else
-            message = "#{worklist.project.name} (Worklist) - \"#{truncated}\" has been modified"
-            user.notifications.where(:message => message,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
+            body = "#{worklist.project.name} (Worklist) - \"#{truncated}\" has been modified"
+            user.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
         end
 
         if assignee
-            message = "\"#{truncated}\" has been assigned to you for #{worklist.project.name}"
-            assignee.notifications.where(:message => message,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
+            body = "\"#{truncated}\" has been assigned to you for #{worklist.project.name}"
+            assignee.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
         end
     end
 
