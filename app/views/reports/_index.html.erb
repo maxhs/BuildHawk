@@ -12,15 +12,15 @@
 	</header>
 
 	<div id="project-reports">
-		<div class="header row">
-			<div class="col-xs-3"><h4>Report Date</h4></div>
-			<div class="col-xs-3"><h4>Type</h4></div>
-			<div class="col-xs-2"><h4>Last Updated</h4></div>
-			<div class="col-xs-2"><h4>Personnel on site</h4></div>
-			<div class="col-xs-2"><h4>Photos</h4></div>
-		</div>
-
 		<% if @reports && @reports.count > 0 %>
+			<div class="header row">
+				<div class="col-xs-3"><h5>Report Date</h5></div>
+				<div class="col-xs-3"><h5>Type</h5></div>
+				<div class="col-xs-2"><h5>Last Updated</h5></div>
+				<div class="col-xs-2"><h5>Personnel on site</h5></div>
+				<div class="col-xs-2"><h5>Photos</h5></div>
+			</div>
+		
 			<% @reports.each do |report| %>
 				<div class="report row">
 					<div class="col-xs-3"><%= link_to "#{report.report_type} - #{report.created_date}", report_path(report), :remote => true %></div>
