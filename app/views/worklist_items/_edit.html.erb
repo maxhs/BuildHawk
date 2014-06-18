@@ -3,24 +3,24 @@
 
 	<div id="worklist-item-container" class="border-box container">
 		<div class="row">
-			<div class="col-xs-2"><h4>Item:</h4></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the worklist item" %></div>
+			<div class="col-xs-2"><h5>Item</h5></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the worklist item" %></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-2">
-				<h4>Location:</h4>
+				<h5>Location</h5>
 			</div>
 			<div class="col-xs-10">
 				<%= f.text_field :location, :placeholder => "Add a location (optional)" %>
 			</div>		
 		</div>
 		<div class="row" style="font-size:1.1em;margin-top:2.5%;margin-bottom:2.5%;">
-			<div class="col-xs-2"><h4>Status:</h4></div>
+			<div class="col-xs-2"><h5>Status</h5></div>
 			<div class="col-xs-10">
 				<div>
-					<%= f.radio_button :completed, false %><h4 style="display:inline-block">IN PROGRESS</h4>
+					<%= f.radio_button :completed, false %><h5 style="display:inline-block">IN PROGRESS</h5>
 				</div>
 				<div>
-					<%= f.radio_button :completed, true %><h4 style="display:inline-block">COMPLETED</h4>
+					<%= f.radio_button :completed, true %><h5 style="display:inline-block">COMPLETED</h5>
 					<% if @item.completed_by_user %>
 						<span style="color:#aaa;margin-left:5%;font-family:'Source Sans Pro', helvetica, sans-serif;"> by <%= @item.completed_by_user.full_name %>, <%= parse_time @item.completed_at %></span>
 					<% end %>
@@ -31,7 +31,7 @@
 	<% if !@item.completed_by_user %>
 
 		<%= f.fields_for :assignee do |a| %>
-			<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
+			<h5 style="display:inline-block;width:16.666666664%;">Assignee</h5>
 			<%= a.select :full_name, (@users.map(&:full_name)+@subs.map(&:name)).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
 		<% end %>
 	
@@ -47,7 +47,7 @@
 		</div>
 	<% end %>
 	
-	<h4>Add a photo</h4>
+	<h5>Add a photo</h5>
 	<%= f.fields_for :photos, @item.photos.build do |photo| %>
 		<%= photo.file_field :image %>
 		<%= photo.hidden_field :project_id, :value => @project.id %>
@@ -69,7 +69,7 @@
 </div>
 
 <div class="border-box comment-container" style="margin-top:20px;clear:both">
-	<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h3>
+	<h4 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h4>
 	<div id="comments-form">
 		<%= form_for @item.comments.new, :method => :post, :remote => true do |f| %>
 			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
