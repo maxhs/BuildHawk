@@ -2,7 +2,7 @@
 	<header>
 		<div style="margin-bottom: 15px">
 			<%= form_tag search_worklist_project_path(@project), :id => "worklist-search", :method => :post, :class=>"input-group", :remote => true do %>
-				<%= text_field_tag :search, nil, :placeholder=>"Search Worklist...", :class=>"form-control" %>
+				<%= text_field_tag :search, nil, :placeholder=>"Search tasks...", :class=>"form-control" %>
 				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
 			<% end %>
 		</div>
