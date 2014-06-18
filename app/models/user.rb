@@ -147,6 +147,9 @@ class User < ActiveRecord::Base
         t.add :url_thumb
         t.add :url_small
         t.add :url_medium
+        t.add :text_permissions
+        t.add :email_permissions
+        t.add :push_permissions
   	end
 
     api_accessible :login, :extend => :user do |t|
