@@ -21,7 +21,7 @@ class Address < ActiveRecord::Base
   		t.add :city
   		t.add :zip
   		t.add :country
-  		t.add :phone_number
+  		t.add :phone
       t.add :formatted_address
       t.add :latitude
       t.add :longitude
