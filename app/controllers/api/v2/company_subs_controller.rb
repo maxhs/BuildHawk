@@ -11,4 +11,33 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
       	end
 	end
 
+	def add_user
+		company = Company.find params[:company_id]
+		if params[:user][:email]
+			user = User.where(:email => params[:user][:email]).first
+			if !user
+				alternate = Alternate.where(:email => params[:user][:email]).first
+				user = alternate.user
+			end
+		
+			user = company.users.create params[:user] unless user
+		
+			respond_to do |format|
+	        	format.json { render_for_api :user, :json => user, :root => :user}
+	      	end
+		elsif params[:user][:phone]
+			user = User.where(:phone => params[:user][:phone]).first
+			if !user
+				alternate = Alternate.where(:phone => params[:user][:phone]).first
+				user = alternate.user
+			end
+		
+			user = company.users.create params[:user] unless user
+			
+			respond_to do |format|
+		       	format.json { render_for_api :user, :json => user, :root => :user}
+	      	end
+		end
+	end
+
 end

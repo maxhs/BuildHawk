@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618154612) do
+ActiveRecord::Schema.define(version: 20140618221625) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "company_id"
-    t.string   "state",        default: ""
+    t.string   "state",      default: ""
     t.boolean  "active"
-    t.string   "street1",      default: ""
-    t.string   "street2",      default: ""
-    t.string   "city",         default: ""
-    t.string   "phone_number", default: ""
-    t.string   "zip",          default: ""
+    t.string   "street1",    default: ""
+    t.string   "street2",    default: ""
+    t.string   "city",       default: ""
+    t.string   "phone",      default: ""
+    t.string   "zip",        default: ""
     t.string   "country"
     t.float    "latitude"
     t.float    "longitude"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20140618154612) do
   end
 
   add_index "addresses", ["user_id", "company_id", "project_id"], name: "addresses_ix"
+
+  create_table "alternates", force: true do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "apn_registrations", force: true do |t|
     t.integer  "user_id"
@@ -117,7 +125,7 @@ ActiveRecord::Schema.define(version: 20140618154612) do
   create_table "companies", force: true do |t|
     t.string   "name",               default: "", null: false
     t.string   "email"
-    t.string   "phone_number"
+    t.string   "phone"
     t.boolean  "pre_register"
     t.string   "contact_name"
     t.integer  "projects_count"
@@ -176,7 +184,7 @@ ActiveRecord::Schema.define(version: 20140618154612) do
     t.string   "name"
     t.string   "company_name"
     t.string   "email"
-    t.string   "phone_number"
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -418,7 +426,7 @@ ActiveRecord::Schema.define(version: 20140618154612) do
     t.string   "first_name",             default: ""
     t.string   "last_name",              default: ""
     t.string   "full_name",              default: ""
-    t.string   "phone_number",           default: ""
+    t.string   "phone",                  default: ""
     t.boolean  "admin",                  default: false
     t.boolean  "uber_admin",             default: false
     t.string   "authentication_token"

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 
-    attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone_number,
+    attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
     				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
                     :uber_admin, :authentication_token, :company_admin
 
@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
     has_many :apn_registrations, :dependent => :destroy
     has_many :message_users, :dependent => :destroy, autosave: true
     has_many :messages, :through => :message_users , autosave: true
+
+    has_many :alternates, :dependent => :destroy
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable
 
@@ -38,7 +40,7 @@ class User < ActiveRecord::Base
     validates_presence_of :password, :if => :password_required?
 
     #after_create :welcome
-    after_commit :clean_phone_number
+    after_commit :clean_phone
     after_commit :clean_name
     
     def welcome
@@ -60,18 +62,18 @@ class User < ActiveRecord::Base
     def send_text
         @account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
         @auth_token = '217b868c691cd7ec356c7dbddb5b5939'
-        twilio_phone_number = "14157234334"
+        twilio_phone = "14157234334"
         @client = Twilio::REST::Client.new(@account_sid, @auth_token)
         @client.account.sms.messages.create(
-            :from => "+1#{twilio_phone_number}",
-            :to => phone_number,
+            :from => "+1#{twilio_phone}",
+            :to => phone,
             :body => "BuildHawk text"
         )
     end
 
-    def clean_phone_number
-        if self.phone_number.include?(' ')
-            self.phone_number = self.phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+    def clean_phone
+        if self.phone.include?(' ')
+            self.phone = self.phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             self.save
         end
     end
@@ -84,9 +86,9 @@ class User < ActiveRecord::Base
     end
 
     def formatted_phone
-      if self.phone_number && self.phone_number.length > 0
-        clean_phone_number if self.phone_number.include?(' ')
-        number_to_phone(self.phone_number, area_code:true)
+      if self.phone && self.phone.length > 0
+        clean_phone if self.phone.include?(' ')
+        number_to_phone(self.phone, area_code:true)
       end
     end
 
@@ -95,7 +97,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone_number => user.phone_number, :id => user.id, :url_thumb => user.url_thumb}}
+      company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone => user.phone, :id => user.id, :url_thumb => user.url_thumb}}
     end
 
     def url200
@@ -134,7 +136,7 @@ class User < ActiveRecord::Base
         t.add :company_admin
         t.add :uber_admin
         t.add :email
-        t.add :phone_number
+        t.add :phone
         t.add :authentication_token
         t.add :company
         t.add :url_thumb
@@ -173,7 +175,7 @@ class User < ActiveRecord::Base
         t.add :last_name
         t.add :full_name
         t.add :email
-        t.add :phone_number
+        t.add :phone
     end
 
     api_accessible :checklist do |t|
@@ -181,7 +183,7 @@ class User < ActiveRecord::Base
         t.add :last_name
         t.add :full_name
         t.add :email
-        t.add :phone_number
+        t.add :phone
         t.add :id
     end
 
@@ -195,7 +197,7 @@ class User < ActiveRecord::Base
         t.add :last_name
         t.add :full_name
         t.add :email
-        t.add :phone_number
+        t.add :phone
     end
 
     api_accessible :company, :extend => :report do |t|

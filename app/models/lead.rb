@@ -1,5 +1,5 @@
 class Lead < ActiveRecord::Base
-	attr_accessible :name, :company_name, :full_name, :email, :phone_number
+	attr_accessible :name, :company_name, :full_name, :email, :phone
 
 	after_create :email_will
 

@@ -1,7 +1,7 @@
 class Company < ActiveRecord::Base
     require 'stripe'
 
-	attr_accessible :name, :phone_number, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name,
+	attr_accessible :name, :phone, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name,
                     :customer_token
   
     has_many :users, :dependent => :destroy
@@ -50,9 +50,9 @@ class Company < ActiveRecord::Base
     end
 
     def formatted_phone
-        if phone_number && phone_number.length > 0
-            clean_phone_number if phone_number.include?(' ')
-            number_to_phone(phone_number, area_code:true)
+        if phone && phone.length > 0
+            clean_phone if phone.include?(' ')
+            number_to_phone(phone, area_code:true)
         end
     end
 
@@ -60,7 +60,7 @@ class Company < ActiveRecord::Base
         companies_array = []
         subs.each do |s|
             new_company = Company.where(:name => s.name).first_or_create
-            new_company.update_attributes :email => s.email, :phone_number => s.phone_number if s.email && s.phone_number
+            new_company.update_attributes :email => s.email, :phone => s.phone if s.email && s.phone
             companies_array << new_company
         end
         companies_array.each do |c|
