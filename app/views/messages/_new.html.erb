@@ -1,6 +1,5 @@
 <%= nested_form_for @message, :url => messages_path, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
-	<%= hidden_field_tag :project_id, @project.id %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
 
 	<div id="message-container" class="border-box">
@@ -13,9 +12,13 @@
 				<%= f.text_area :body, :placeholder => "Message body..." %>
 			</div>
 		</div>
-		<%= f.fields_for :recipient_ids do |a| %>
+		<%= f.fields_for :project_id do |a| %>
+			<h4 style="display:inline-block;width:16.666666664%;">Select Project:</h4>
+			<%= a.select :name, @projects.map(&:name).unshift("No Project"), {:include_blank => false}, :class=>"project-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+		<% end %>
+		<%= f.fields_for :user_ids do |a| %>
 			<h4 style="display:inline-block;width:16.666666664%;">Recipients:</h4>
-			<%= a.select :full_name, (@users.map(&:full_name)+@subs.map(&:name)).unshift("No Recipient"), {:include_blank => false}, :class=>"recipient-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+			<%= a.select :full_name, @users.map(&:full_name).unshift("No Recipient"), {:include_blank => false}, :class=>"recipient-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
 		<% end %>
 
 		<div class="button-container">

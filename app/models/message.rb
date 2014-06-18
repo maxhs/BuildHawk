@@ -1,10 +1,11 @@
 class Message < ActiveRecord::Base
-	attr_accessible :user_id, :company_id, :target_project_id, :body, :recipient_ids
+	attr_accessible :author_id, :company_id, :target_project_id, :body, :recipient_ids
 
-	belongs_to :user
+	belongs_to :author
 	belongs_to :company
 	belongs_to :target_project, :class_name => "Project"
-	has_many :recipients, :foreign_key => 'message_id', :class_name => "User"
+	has_many :message_users, :dependent => :destroy, autosave: true
+    has_many :users, :through => :message_users , autosave: true
 	has_many :comments
 
 	after_commit :notify, on: :create

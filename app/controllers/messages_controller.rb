@@ -6,6 +6,8 @@ class MessagesController < ApplicationController
 
 	def new
 		@message = Message.new
+		@users = current_user.company.users
+		@projects = current_user.company.projects
 	end
 
 	def create
