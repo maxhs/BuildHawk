@@ -1,14 +1,14 @@
-<div id="task-<%=task.id%>">
+<div id="task-<%=item.id%>">
 	<div class="col-xs-1">
 		<span class="worklist-item-checkbox"><%= check_box_tag :select, item.id %></span>
 	</div>
 	<% if item.photos && item.photos.count > 0 %>
-		<div class="col-xs-2">
+		<div class="col-xs-1">
 			<% photo = item.photos.where("image_file_name IS NOT NULL").first %>
 			<% if photo %><%=image_tag(photo.image.url(:thumb)) %><% end %>
 		</div>
 	<% else %>
-		<div class="col-xs-2"></div>
+		<div class="col-xs-1"></div>
 	<% end %>
 	
 	<div class="col-xs-3">
