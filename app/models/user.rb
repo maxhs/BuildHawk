@@ -130,7 +130,6 @@ class User < ActiveRecord::Base
         end
     end
 
-
   	acts_as_api
 
   	api_accessible :user do |t|
