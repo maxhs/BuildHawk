@@ -114,7 +114,6 @@ GEM
     nested_form (0.3.2)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    non-stupid-digest-assets (1.0.4)
     nprogress-rails (0.1.2.3)
     orm_adapter (0.5.0)
     paperclip (4.1.1)
@@ -241,9 +240,6 @@ GEM
       jwt (>= 0.1.2)
       multi_json (>= 1.3.0)
     tzinfo (0.3.39)
-    uglifier (2.4.0)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
     uuidtools (2.1.4)
     vegas (0.1.11)
       rack (>= 1.0.0)
@@ -259,7 +255,6 @@ DEPENDENCIES
   acts_as_list
   apn_sender
   aws-sdk
-  cocaine
   daemons
   deep_cloneable (~> 1.6.0)
   delayed_job_active_record
@@ -271,10 +266,7 @@ DEPENDENCIES
   jquery-ui-rails
   multi_fetch_fragments
   nested_form
-  nokogiri
-  non-stupid-digest-assets
   nprogress-rails
-  paperclip
   passenger
   pg
   postmark-rails
@@ -297,4 +289,3 @@ DEPENDENCIES
   thin
   turbolinks
   twilio-ruby
-  uglifier (>= 1.3.0)
