@@ -20,7 +20,10 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 				user = alternate.user if alternate
 			end
 		
-			user = company.subcontractor.users.create params[:user] unless user
+			unless user
+				## new user. we should send them something
+				user = company.subcontractor.users.create params[:user] 
+			end
 		
 			respond_to do |format|
 	        	format.json { render_for_api :user, :json => user, :root => :user}
@@ -32,8 +35,11 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 				user = alternate.user if alternate
 			end
 		
-			user = company.subcontractor.users.create params[:user] unless user
-			
+			unless user
+				## new user. we should send them something
+				user = company.subcontractor.users.create params[:user]
+			end
+
 			respond_to do |format|
 		       	format.json { render_for_api :user, :json => user, :root => :user}
 	      	end

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
     attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
     				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
-                    :uber_admin, :authentication_token, :company_admin
+                    :uber_admin, :authentication_token, :company_admin, :text_permissions
 
     belongs_to :company
   	has_many :project_users, :dependent => :destroy

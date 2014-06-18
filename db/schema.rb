@@ -449,6 +449,7 @@ ActiveRecord::Schema.define(version: 20140618221625) do
     t.datetime "image_updated_at"
     t.boolean  "active",                 default: true
     t.boolean  "company_admin",          default: false
+    t.boolean  "text_permissions",       default: true
   end
 
   add_index "users", ["company_id"], name: "users_company_id_ix"
