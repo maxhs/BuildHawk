@@ -12,7 +12,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 	end
 
 	def add_user
-		company = Company.find params[:company_id]
+		company = CompanySub.find params[:id]
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
 			unless user
@@ -20,7 +20,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 				user = alternate.user if alternate
 			end
 		
-			user = company.users.create params[:user] unless user
+			user = company.subcontractor.users.create params[:user] unless user
 		
 			respond_to do |format|
 	        	format.json { render_for_api :user, :json => user, :root => :user}
@@ -32,7 +32,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 				user = alternate.user if alternate
 			end
 		
-			user = company.users.create params[:user] unless user
+			user = company.subcontractor.users.create params[:user] unless user
 			
 			respond_to do |format|
 		       	format.json { render_for_api :user, :json => user, :root => :user}
