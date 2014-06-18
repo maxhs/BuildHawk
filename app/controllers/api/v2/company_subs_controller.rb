@@ -15,9 +15,9 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 		company = Company.find params[:company_id]
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
-			if !user
+			unless user
 				alternate = Alternate.where(:email => params[:user][:email]).first
-				user = alternate.user
+				user = alternate.user if alternate
 			end
 		
 			user = company.users.create params[:user] unless user
@@ -27,9 +27,9 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 	      	end
 		elsif params[:user][:phone]
 			user = User.where(:phone => params[:user][:phone]).first
-			if !user
+			unless user
 				alternate = Alternate.where(:phone => params[:user][:phone]).first
-				user = alternate.user
+				user = alternate.user if alternate
 			end
 		
 			user = company.users.create params[:user] unless user
