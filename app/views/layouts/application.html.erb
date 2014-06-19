@@ -14,7 +14,7 @@
 	   	if ((userAgent.match(/iPhone/i)) && window.location != "<%=root_url%>" && window.location != "<%=root_url%>mobile") {
 	   	 	setTimeout(function () { window.location = "<%=root_url%>mobile" }, 25);
 	   	 	<% if @item %>
-	  	 		window.location = "buildhawk://?task_id=<%= j @item.id.to_s %>"	
+	  	 		
 	  	 	<% end %>
 	  	}
  	</script>
@@ -26,9 +26,7 @@
 	    		$('#top-nav').css('opacity','.1');
 	    	},
 	    	onClose:function(){
-	    		$('#top-nav').css('opacity','1');},
-	    		/*handleOversize: "drag",
-	    		overlayOpacity: "0.8"*/
+	    		$('#top-nav').css('opacity','1');}
 	    })
 		window.Dropzone;
 		setupWindow();
