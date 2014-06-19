@@ -57,6 +57,7 @@ class Category < ActiveRecord::Base
   	end
 
     api_accessible :checklist do |t|
+        t.add :id
         t.add :checklist_items
         t.add :name
         t.add :completed_date

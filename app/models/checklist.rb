@@ -108,10 +108,11 @@ class Checklist < ActiveRecord::Base
         end
     end
 
-    
+    ## slated for deletion
     def categories
         phases
     end
+    ##
 
 	acts_as_api
 
@@ -127,8 +128,10 @@ class Checklist < ActiveRecord::Base
     api_accessible :checklist do |t|
         t.add :id
         t.add :phases
-        t.add :categories
         t.add :name
+        ## slated for deletion
+        t.add :categories
+        ##
     end
 
 end

@@ -60,6 +60,7 @@ class Phase < ActiveRecord::Base
     end
 
     api_accessible :checklist do |t|
+      t.add :id
       t.add :categories
       t.add :name
       t.add :completed_date
@@ -69,6 +70,7 @@ class Phase < ActiveRecord::Base
     end
 
     api_accessible :dashboard do |t|
+      t.add :id
       t.add :name
       t.add :item_count
       t.add :completed_count
