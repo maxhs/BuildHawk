@@ -286,7 +286,7 @@ DEPENDENCIES
   shadowbox-rails
   sqlite3
   stripe!
-  sunspot_rails (~> 2.1.0)
+  sunspot_rails
   sunspot_solr
   thin
   turbolinks

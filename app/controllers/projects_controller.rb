@@ -216,6 +216,7 @@ class ProjectsController < ApplicationController
 			render :documents
 		end
 	end	
+	
 	def checklist_photos
 		@photos = @project.photos.where(:source => "Checklist")
 		@p = @photos.first
