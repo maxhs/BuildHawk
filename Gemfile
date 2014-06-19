@@ -9,9 +9,7 @@ gem 'rails_12factor', group: :production
 gem "paperclip"
 gem 'aws-sdk'
 gem 'acts_as_api'
-gem 'geocoder'
 gem 'devise'
-gem 'httparty'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem "nested_form"
@@ -41,7 +39,9 @@ gem 'acts_as_list'
 gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
 gem "recaptcha", :require => "recaptcha/rails"
-gem 'uglifier', '>= 1.3.0'
+#gem 'uglifier', '>= 1.3.0'
+gem 'geocoder'
+gem 'httparty'
 #gem 'cocaine'
 #gem 'non-stupid-digest-assets'
 #gem 'newrelic_rpm'
