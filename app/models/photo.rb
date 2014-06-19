@@ -130,7 +130,7 @@ class Photo < ActiveRecord::Base
 
 	api_accessible :dashboard do |t|
 		t.add :id
-		
+		t.add :epoch_time	
 		t.add :original
 		t.add :url_large
 		t.add :url_medium
@@ -147,10 +147,6 @@ class Photo < ActiveRecord::Base
 		t.add :description, :if => :has_description?
 		t.add :folder_name, :if => :has_folder?
 		t.add :folder_id, :if => :has_folder?
-		#t.add :assignee, :if => :has_assignee?
-		##slated for removal
-		t.add :epoch_time
-		###
 	end
 
 	api_accessible :item, :extend => :dashboard do |t|

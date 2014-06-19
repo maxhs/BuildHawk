@@ -28,6 +28,7 @@ gem 'delayed_job_active_record'
 gem 'delayed_paperclip'
 gem 'apn_sender', require: ['apn', 'apn/jobs/resque_notification_job']
 gem 'daemons'
+gem 'nokogiri' #nokogiri is a sunspot dependency
 gem 'sunspot_rails', '~> 2.1.0'
 gem 'sunspot_solr'
 gem 'turbolinks'
@@ -40,7 +41,6 @@ gem 'acts_as_list'
 gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
 gem "recaptcha", :require => "recaptcha/rails"
-#gem 'nokogiri'
 #gem 'uglifier', '>= 1.3.0'
 #gem 'non-stupid-digest-assets'
 #gem 'cocaine'
