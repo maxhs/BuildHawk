@@ -47,25 +47,6 @@ class Photo < ActiveRecord::Base
 		end
 	end
 
-	def is_mobile?
-		mobile	
-	end
-
-	### slated for deletion ###
-	def url200
-		if image_file_name
-			image.url(:small)
-		end
-	end
-	def url100
-		if image_file_name
-			image.url(:thumb)
-		else
-			""
-		end
-	end
-	###
-
 	def url_medium
 		if image_file_name
 			image.url(:medium)
@@ -107,7 +88,11 @@ class Photo < ActiveRecord::Base
 	end
 
 	def user_name
-		user.full_name unless user.nil?
+		unless user.nil?
+			user.full_name
+		else 
+			""
+		end 
 	end
 
 	def created_date
@@ -145,7 +130,7 @@ class Photo < ActiveRecord::Base
 
 	api_accessible :dashboard do |t|
 		t.add :id
-		t.add :epoch_time
+		
 		t.add :original
 		t.add :url_large
 		t.add :url_medium
@@ -164,8 +149,7 @@ class Photo < ActiveRecord::Base
 		t.add :folder_id, :if => :has_folder?
 		#t.add :assignee, :if => :has_assignee?
 		##slated for removal
-		t.add :url200
-		t.add :url100
+		t.add :epoch_time
 		###
 	end
 

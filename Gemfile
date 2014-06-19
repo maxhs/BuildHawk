@@ -6,7 +6,6 @@ gem 'thin', :group => :development
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
-#gem 'nokogiri'
 gem "paperclip"
 gem 'aws-sdk'
 gem 'acts_as_api'
@@ -41,6 +40,7 @@ gem 'acts_as_list'
 gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
 gem "recaptcha", :require => "recaptcha/rails"
+#gem 'nokogiri'
 #gem 'uglifier', '>= 1.3.0'
 #gem 'non-stupid-digest-assets'
 #gem 'cocaine'
