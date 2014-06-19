@@ -7,7 +7,7 @@ gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
 #gem 'nokogiri'
-#gem "paperclip"
+gem "paperclip"
 gem 'aws-sdk'
 gem 'acts_as_api'
 gem 'geocoder'

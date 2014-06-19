@@ -267,6 +267,7 @@ DEPENDENCIES
   multi_fetch_fragments
   nested_form
   nprogress-rails
+  paperclip
   passenger
   pg
   postmark-rails
