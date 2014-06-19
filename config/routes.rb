@@ -23,7 +23,8 @@ Buildhawk::Application.routes.draw do
   post "/users/:id", :to => "users#update"
   post "/checklist_items/:id", :to => "checklist_items#update"
   post "/admin/billing", :to => "admin#update_billing"
-  get "/task/:id", :to => "worklist_items#show"
+  get "/task/:id", :to => "worklist_items#edit"
+  get 'mobile', :to => "home#mobile_redirect", :as => 'mobile_redirect'
 
   resources :users do
     collection do 

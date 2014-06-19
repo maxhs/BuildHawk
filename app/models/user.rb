@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
     include ActionView::Helpers::TextHelper
-    
+
     attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
     				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
                     :uber_admin, :authentication_token, :company_admin, :text_permissions
@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
         twilio_phone = "14157234334"
         @client = Twilio::REST::Client.new(@account_sid, @auth_token)
         truncated_task = truncate(task.body, length:15)
-        puts "should be sending a task text, #{truncated_task}, to #{full_name} at phone: #{phone}"
+        puts "should be sending a task text, \"#{truncated_task}\", to #{full_name} at phone: #{phone}"
         @client.account.sms.messages.create(
             :from => "+1#{twilio_phone}",
             :to => phone,

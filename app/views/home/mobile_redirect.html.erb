@@ -1,0 +1,57 @@
+<div id="mobile-redirect" style="height:100%; important; width:100%; position:absolute;">
+	<section id="logo-container" >
+		<%= image_tag 'logo.png', :id=>'mobile-logo' %>
+	</section>
+
+	<!--<section id="mobile-pitch">
+		<div id="slide-container">
+			<div id="slide-1" class="slide">
+				<h1>Simplify</h1>
+    			<p class="font-smoothing">Spend your time having fun, not just planning it.</p>
+			</div>
+			<div id="slide-2" class="slide">
+				<h1>Less Email</h1>
+    			<p class="font-smoothing">Say goodbye to lengthy event planning email chains.</p>
+
+			</div>
+			<div id="slide-3" class="slide">
+				<h1>Vote</h1>
+    			<p class="font-smoothing">Get a little help from your friends! Vote on the event details before they're finalized.</p>
+
+			</div>
+			<div id="slide-4" class="slide">
+				<h1>Streamline</h1>
+    			<p class="font-smoothing">Save time and simplify your calendar with the touch or tap of a button.</p>
+			</div>
+		</div>
+	</section>-->
+
+	<section id="app-store">
+		<%= link_to "Download the app on iOS",  "https://itunes.apple.com/us/app/buildhawk/id816590963?ls=1&mt=8", :id =>"mobile-get-app-link" %>
+	</section>
+</div>
+<!--<script type="text/javascript">
+	var slide1,slide2,slide3;
+	var slide = function() {
+		$('#slide-1').stop().animate({"left":"-100%"},500);
+		$('#slide-2').stop().animate({'left':'0'},500);
+		setTimeout(slide1,7000);
+	}
+	slide1 = function() {
+		$('#slide-2').stop().animate({"left":"-100%"},500);
+		$('#slide-3').stop().animate({'left':'0'},500);
+		setTimeout(slide2,7000);
+	}
+	slide2 = function() {
+		$('#slide-3').stop().animate({"left":"-100%"},500);
+		$('#slide-4').stop().animate({'left':'0'},500);
+		setTimeout(slide3,7000);
+	}
+	slide3 = function() {
+		$('#slide-2, #slide-3, #slide-4').animate({'left':'-100%'},500);
+		$('#slide-1').animate({'left':'0'},500);
+		setTimeout(slide,7000);
+	}
+	setTimeout(slide,2000);
+
+</script>-->
