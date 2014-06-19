@@ -141,7 +141,7 @@ class User < ActiveRecord::Base
         t.add :company_admin
         t.add :uber_admin
         t.add :email
-        t.add :phone
+        t.add :formatted_phone
         t.add :authentication_token
         t.add :company
         t.add :url_thumb
