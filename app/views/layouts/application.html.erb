@@ -13,7 +13,9 @@
 		var userAgent = window.navigator.userAgent;
 	   	if ((userAgent.match(/iPhone/i)) && window.location != "<%=root_url%>" && window.location != "<%=root_url%>mobile") {
 	   	 	setTimeout(function () { window.location = "<%=root_url%>mobile" }, 25);
-	  	 	window.location = "buildhawk://?task_id=<%= j @item.id.to_s %>"	
+	   	 	<% if @item %>
+	  	 		window.location = "buildhawk://?task_id=<%= j @item.id.to_s %>"	
+	  	 	<% end %>
 	  	}
  	</script>
 
