@@ -108,6 +108,11 @@ class Checklist < ActiveRecord::Base
         end
     end
 
+    
+    def categories
+        phases
+    end
+
 	acts_as_api
 
 	api_accessible :user do |t|
@@ -122,6 +127,7 @@ class Checklist < ActiveRecord::Base
     api_accessible :checklist do |t|
         t.add :id
         t.add :phases
+        t.add :categories
         t.add :name
     end
 
