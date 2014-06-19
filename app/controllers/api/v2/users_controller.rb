@@ -15,7 +15,7 @@ class Api::V2::UsersController < Api::V2::ApiController
 	def update
 		@user.update_attributes params[:user]
 		respond_to do |format|
-        	format.json { render_for_api :user, :json => user, :root => :user}
+        	format.json { render_for_api :user, :json => @user, :root => :user}
       	end
 	end
 
