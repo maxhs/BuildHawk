@@ -61,15 +61,15 @@
 					<% end %>
 				</div>
 				<div class="sub-container col-md-6">
-					<% @subs.each do |sub| %>
+					<% @companies.each do |company_sub| %>
 						<div>
-							<% if @report.subs.include?(sub) %>
-								<%= check_box_tag "report[sub_ids][]", sub.id, checked: true %><span style="padding-left:1em;"><%= sub.name %></span>
+							<% report_company = @report.report_companies.where(:company_id => company_sub.subcontractor.id).first %>
+							<% if report_company %>
+								<%= text_field_tag "report_companies[#{company_sub.subcontractor.id if company_sub.subcontractor}]", report_company.count, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
 							<% else %>
-								<%= check_box_tag "report[sub_ids][]", sub.id %><span style="padding-left:1em;"><%= sub.name %></span>
+								<%= text_field_tag "report_companies[#{company_sub.subcontractor.id if company_sub.subcontractor}]", nil, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
 							<% end %>
-							<% report_sub = @report.report_subs.where(:sub_id => sub.id).first_or_initialize %>
-							<%= text_field_tag "report_subs[#{sub.id}]", report_sub.count, style: "max-width:40px;margin-left:1em;display:inline-block;text-align:center;" %>
+							<span style="padding-left:1em;"><%= company_sub.subcontractor.name if company_sub.subcontractor %></span>
 						</div>
 					<% end %>
 				</div>

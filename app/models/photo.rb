@@ -135,6 +135,9 @@ class Photo < ActiveRecord::Base
 	def has_folder?
 		folder.present?
 	end
+	def has_description?
+		description.present?
+	end
 
 	def epoch_time
       	created_at.to_i
@@ -155,8 +158,8 @@ class Photo < ActiveRecord::Base
 		t.add :created_at
 		t.add :user_name
 		t.add :name
-		t.add :description
 		t.add :created_date
+		t.add :description, :if => :has_description?
 		t.add :folder_name, :if => :has_folder?
 		t.add :folder_id, :if => :has_folder?
 		#t.add :assignee, :if => :has_assignee?
