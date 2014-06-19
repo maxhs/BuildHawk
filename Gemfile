@@ -42,7 +42,7 @@ gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'uglifier', '>= 1.3.0'
-gem 'cocaine'
+#gem 'cocaine'
 #gem 'non-stupid-digest-assets'
 #gem 'newrelic_rpm'
 #gem 'sidekiq'
