@@ -1,5 +1,5 @@
 class WorklistItemsController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, except: [:edit]
 	before_filter :find_company
 	
 	def new
@@ -65,32 +65,42 @@ class WorklistItemsController < ApplicationController
 	end
 
 	def update
-		if params[:worklist_item][:assignee_attributes].present?
-			assignee = User.where(:full_name => params[:worklist_item][:assignee_attributes][:full_name]).first
-			params[:worklist_item].delete(:assignee_attributes)
-			if assignee
-				params[:worklist_item][:assignee_id] = assignee.id 
-			else
-				params[:worklist_item][:assignee_id] = nil 
+		unless user_signed_in?
+			if request.xhr?
+				respond_to do |format|
+					format.js { render :template => "worklist_items/login"}
+				end
+			else 
+				redirect_to login_path
 			end
-		end
-				
-		if params[:worklist_item][:completed] == "true"
-			params[:worklist_item][:completed_by_user_id] = current_user.id
-			params[:worklist_item][:completed_at] = Time.now
 		else
-
-			params[:worklist_item][:completed_by_user_id] = nil
-			params[:worklist_item][:completed_at] = nil
-		end
-		@item.update_attributes params[:worklist_item]
-
-		if request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/worklist"}
+			if params[:worklist_item][:assignee_attributes].present?
+				assignee = User.where(:full_name => params[:worklist_item][:assignee_attributes][:full_name]).first
+				params[:worklist_item].delete(:assignee_attributes)
+				if assignee
+					params[:worklist_item][:assignee_id] = assignee.id 
+				else
+					params[:worklist_item][:assignee_id] = nil 
+				end
 			end
-		else 
-			redirect_to worklist_project_path(@project)
+					
+			if params[:worklist_item][:completed] == "true"
+				params[:worklist_item][:completed_by_user_id] = current_user.id
+				params[:worklist_item][:completed_at] = Time.now
+			else
+
+				params[:worklist_item][:completed_by_user_id] = nil
+				params[:worklist_item][:completed_at] = nil
+			end
+			@item.update_attributes params[:worklist_item]
+
+			if request.xhr?
+				respond_to do |format|
+					format.js { render :template => "projects/worklist"}
+				end
+			else 
+				redirect_to worklist_project_path(@project)
+			end
 		end
 	end
 		
