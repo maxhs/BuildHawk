@@ -14,7 +14,7 @@ class Photo < ActiveRecord::Base
 
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["1024x1024#", :jpg],
-	                                 :medium  => ["640x640#", :jpg],
+	                                 #:medium  => ["640x640#", :jpg],
 	                                 :small  => ["200x200#", :jpg],
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },
@@ -133,7 +133,7 @@ class Photo < ActiveRecord::Base
 		t.add :epoch_time	
 		t.add :original
 		t.add :url_large
-		t.add :url_medium
+		#t.add :url_medium
 		t.add :url_small
 		t.add :url_thumb
 		t.add :image_file_size

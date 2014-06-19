@@ -8,10 +8,6 @@ class Worklist < ActiveRecord::Base
         (worklist_items.map(&:sub_assignee).flatten + worklist_items.map(&:assignee).flatten).uniq.compact
     end
 
-    def punchlist_items
-        worklist_items
-    end
-
 	acts_as_api
 
     api_accessible :worklist do |t|
@@ -19,7 +15,6 @@ class Worklist < ActiveRecord::Base
         t.add :project
         t.add :worklist_items
         ###slated for deletion###
-        t.add :punchlist_items
         t.add :personnel
         ###
     end
