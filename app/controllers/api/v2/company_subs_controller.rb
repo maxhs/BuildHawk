@@ -44,9 +44,9 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 			unless user
 				## new user. we should send them something
 				user = company.subcontractor.users.create params[:user]
-				user.text_task(task) if task
 			end
-
+			
+			user.text_task(task) if task
 			respond_to do |format|
 		       	format.json { render_for_api :user, :json => user, :root => :user}
 	      	end
