@@ -19,26 +19,26 @@ class ChecklistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
 
-    if Rails.env.production?
-      # websolr
-      searchable auto_index: false, auto_remove: false do
-        text    :body
-        text    :status
-        integer :checklist_id
-      end
+    # if Rails.env.production?
+    #   # websolr
+    #   searchable auto_index: false, auto_remove: false do
+    #     text    :body
+    #     text    :status
+    #     integer :checklist_id
+    #   end
 
-      after_commit   :resque_solr_update, :if => :persisted?
-      before_destroy :resque_solr_remove
+    #   after_commit   :resque_solr_update, :if => :persisted?
+    #   before_destroy :resque_solr_remove
 
-    elsif Rails.env.development?
+    # elsif Rails.env.development?
       
-      searchable do
-        text    :body
-        text    :status
-        integer :checklist_id
-      end
+    #   searchable do
+    #     text    :body
+    #     text    :status
+    #     integer :checklist_id
+    #   end
     
-    end
+    # end
 
   	acts_as_api
 
