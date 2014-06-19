@@ -59,15 +59,16 @@ class User < ActiveRecord::Base
         end
     end
 
-    def send_text
+    def text_task(tasK)
         @account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
         @auth_token = '217b868c691cd7ec356c7dbddb5b5939'
         twilio_phone = "14157234334"
         @client = Twilio::REST::Client.new(@account_sid, @auth_token)
+        truncated_task = truncate(task.body, length:15)
         @client.account.sms.messages.create(
             :from => "+1#{twilio_phone}",
             :to => phone,
-            :body => "BuildHawk text"
+            :body => "You've been assigned a task on BuildHawk: #{truncated_task}. Click here to view: https://www.buildhawk.com/task/#{task.id}"
         )
     end
 

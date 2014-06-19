@@ -23,6 +23,7 @@ Buildhawk::Application.routes.draw do
   post "/users/:id", :to => "users#update"
   post "/checklist_items/:id", :to => "checklist_items#update"
   post "/admin/billing", :to => "admin#update_billing"
+  get "/task/:id", :to => "worklist_items#show"
 
   resources :users do
     collection do 

@@ -13,9 +13,12 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 
 	def add_user
 		company = CompanySub.find params[:id]
+		task = WorklistItem.find params[:task_id] if params[:task_id]
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
-			unless user
+			if user
+				#existing user
+			else
 				alternate = Alternate.where(:email => params[:user][:email]).first
 				user = alternate.user if alternate
 			end
@@ -23,6 +26,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 			unless user
 				## new user. we should send them something
 				user = company.subcontractor.users.create params[:user] 
+				user.text_task(task) if task
 			end
 		
 			respond_to do |format|
@@ -30,7 +34,9 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 	      	end
 		elsif params[:user][:phone]
 			user = User.where(:phone => params[:user][:phone]).first
-			unless user
+			if user
+				#existing user
+			else
 				alternate = Alternate.where(:phone => params[:user][:phone]).first
 				user = alternate.user if alternate
 			end
@@ -38,6 +44,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 			unless user
 				## new user. we should send them something
 				user = company.subcontractor.users.create params[:user]
+				user.text_task(task) if task
 			end
 
 			respond_to do |format|
