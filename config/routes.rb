@@ -8,7 +8,6 @@ Buildhawk::Application.routes.draw do
     get "login", :to => "devise/sessions#new"
     get "registrations/new", :to => "devise/sessions#new"
     get "logout", :to => "devise/sessions#destroy", :as => :logout
-    
     get '/register', :to => "registrations#new"
   end
 
