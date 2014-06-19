@@ -1,11 +1,11 @@
 class Sub < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
-	attr_accessible :name, :company_id, :company, :email, :phone_number, :count, :worklist_item_id,
+	attr_accessible :name, :company_id, :company, :email, :phone, :count, :worklist_item_id,
                   :worklist_item, :image, :image_file_name, :contact_name
   	belongs_to :company
     belongs_to :worklist_item
 
-    after_save :clean_phone_number
+    after_save :clean_phone
     before_destroy :clean_up
 
     def clean_up
@@ -16,17 +16,17 @@ class Sub < ActiveRecord::Base
         end
     end
 
-    def clean_phone_number
-        if phone_number && phone_number.include?(' ')
-            self.phone_number = phone_number.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+    def clean_phone
+        if phone && phone.include?(' ')
+            self.phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             self.save
         end
     end
 
     def formatted_phone
-      if self.phone_number && self.phone_number.length > 0
-        clean_phone_number if self.phone_number.include?(' ')
-        number_to_phone(self.phone_number, area_code:true)
+      if phone && self.phone.length > 0
+        clean_phone if self.phone.include?(' ')
+        number_to_phone(self.phone, area_code:true)
       end
     end
 
@@ -48,7 +48,7 @@ class Sub < ActiveRecord::Base
       	t.add :id
       	t.add :name
       	t.add :email
-      	t.add :phone_number
+      	t.add :phone
         t.add :count
   	end
 

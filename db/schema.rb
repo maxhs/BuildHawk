@@ -408,7 +408,7 @@ ActiveRecord::Schema.define(version: 20140618221625) do
     t.string   "name"
     t.integer  "company_id"
     t.string   "email"
-    t.string   "phone_number"
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "count",              default: 0

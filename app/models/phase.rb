@@ -42,10 +42,6 @@ class Phase < ActiveRecord::Base
         end
     end
 
-    def subcategories
-        categories
-    end
-
   	acts_as_api
 
   	api_accessible :projects do |t|
@@ -64,9 +60,6 @@ class Phase < ActiveRecord::Base
     end
 
     api_accessible :checklist do |t|
-      ### slated for deletion ###
-      t.add :subcategories
-      ###
       t.add :categories
       t.add :name
       t.add :completed_date
