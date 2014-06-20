@@ -13,7 +13,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 
 	def add_user
 		user_company = Company.find params[:company_id]
-		subcontractor = Company.find params[:id]
+		subcontractor = user_company.company_subs.where(:id => params[:id]).first_or_create
 		task = WorklistItem.find params[:task_id] if params[:task_id]
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
