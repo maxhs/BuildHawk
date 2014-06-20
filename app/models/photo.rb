@@ -144,7 +144,7 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
-		t.add :description, :if => :has_description?
+		t.add :description#, :if => :has_description?
 		t.add :folder_name, :if => :has_folder?
 		t.add :folder_id, :if => :has_folder?
 	end
