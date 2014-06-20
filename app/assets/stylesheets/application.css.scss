@@ -237,6 +237,7 @@ body {
 				display:table-cell;
 				padding:0 20px 0 0;
 				vertical-align:middle;
+
 			}
 
 			li:hover, li:hover a {
@@ -244,13 +245,15 @@ body {
 			}
 
 			a {
-				font-size:1.2em;
+				font-size:1.1em;
 				vertical-align:middle;
 				font-weight:normal;
 				font-family:'Montserrat','Source Sans Pro','Helvetica',sans-serif;
 				text-transform:uppercase;
 				position:relative;
 				top:1px;
+				text-rendering:geometricPrecision;
+				letter-spacing:1px;
 			}
 
 			a:hover {

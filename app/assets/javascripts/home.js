@@ -4,19 +4,36 @@ NProgress.configure({
   speed: 400
 });
 
-$(document).ready(function() {
-  return $(".splash-image").hover((function() {
-    $(this).find("p").css({
-      color: "#111111",
-      WebkitTransition: "color .25s ease-in-out",
-      MozTransition: "color .25s ease-in-out",
-      MsTransition: "color .25s ease-in-out",
-      OTransition: "color .25s ease-in-out",
-      transition: "color .25s ease-in-out"
-    });
-    return $(this).find("span.first").css("opacity", "0");
-  }), function() {
-    $(this).find("p").css("color", "#666");
-    return $(this).find("span.first").css("opacity", "1");
-  });
-});
+function homeSlideshow(){
+    console.log('home homeSlideshow');
+    var lspace = '0%';
+    var offscreen = "-200%";
+    var transition = 6000;
+    
+    var fade,fade1,fade2,fade3,fade4,fade5,restart;
+
+
+    fade = function() {
+        console.log('fade');
+      $('#slide-1').animate({'left':offscreen},400);
+      $('#slide-2').animate({'left':lspace},400);
+      setTimeout(fade1,transition);
+    }
+
+    fade1 = function() {
+      $('#slide-2').animate({'left':offscreen},400);
+      $('#slide-3').animate({'left':lspace},400);
+      setTimeout(fade2,transition);
+    }
+    fade2 = function() {
+      $('#slide-3').animate({'left':offscreen},400);
+      $('#slide-4').animate({'left':lspace},400);
+      setTimeout(fade3,transition);
+    }
+    fade3 = function() {
+      $('#slide-4').animate({'left':offscreen},400);
+      $('#slide-1').animate({'left':lspace},400);
+      setTimeout(fade,transition);
+    }
+    setTimeout(fade,transition);
+}

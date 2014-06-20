@@ -1,4 +1,9 @@
-<div id="messages-container">
-	<%= link_to "New Message", new_message_path, remote:true %>
-	<%= render partial:"messages/message", collection: @messages, as: :message %>
+<div class="messages-container">
+	<%= link_to "Send New Message", new_message_path, :class => "simple-btn", remote:true %>
+	<% if @messages && @messages.count > 0 %>
+		<div class="row">
+			<h5>Messages</h5>
+		</div>
+		<%= render partial:"messages/message", collection: @messages, as: :message %>
+	<% end %>
 </div>

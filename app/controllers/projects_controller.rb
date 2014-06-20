@@ -218,7 +218,7 @@ class ProjectsController < ApplicationController
 	end	
 	
 	def checklist_photos
-		@photos = @project.photos.where(:source => "Checklist")
+		@photos = @project.photos.where(:source => "Checklist").order('created_at DESC')
 		@p = @photos.first
 		@folders = @photos.map(&:folder).flatten
 		@nav = "checklist-photos-nav"
@@ -231,7 +231,7 @@ class ProjectsController < ApplicationController
 		end
 	end	
 	def worklist_photos
-		@photos = @project.photos.where(:source => "Worklist")
+		@photos = @project.photos.where(:source => "Worklist").order('created_at DESC')
 		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
 		@nav = "worklist-photos-nav"
@@ -244,7 +244,7 @@ class ProjectsController < ApplicationController
 		end
 	end	
 	def report_photos
-		@photos = @project.photos.where(:source => "Reports")
+		@photos = @project.photos.where(:source => "Reports").order('created_at DESC')
 		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
 		@nav = "report-photos-nav"

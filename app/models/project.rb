@@ -65,10 +65,6 @@ class Project < ActiveRecord::Base
         checklist.checklist_items
     end
 
-    def add_worklist
-        worklists.create
-    end
-
     def upcoming_items
         checklist.upcoming_items if checklist
     end
@@ -83,10 +79,6 @@ class Project < ActiveRecord::Base
 
     def recent_documents
         photos.where("image_file_name IS NOT NULL").last(8).reverse
-    end
-
-    def categories
-        checklist.phases if checklist
     end
 
     def phases
@@ -122,6 +114,12 @@ class Project < ActiveRecord::Base
         feed += Photo.where(:project_id => id).order('updated_at DESC').limit(limit)
         return feed.flatten.sort_by(&:updated_at).reverse.first(limit)
     end
+
+    ## deprecated
+    def categories
+        checklist.phases if checklist
+    end
+    ##
 
     acts_as_api
 

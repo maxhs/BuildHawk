@@ -2,25 +2,109 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.navbar.splash {
+	border-bottom:0;
+	background:rgba(255,255,255,.95);
+	border-bottom:1px solid #fff;
+
+	#navigation {	
+		max-width:1140px;
+		margin:0 auto;
+
+		li {
+			padding:0;
+			width:25%;
+		}
+	}
+
+	.logo a {
+		padding:0;	
+	}
+}
+
 #splash {
 	font-weight:200;
-	
+
 	section {
-		overflow:auto;
+		height:700px;
 	}
 	.splash-container {
-		margin:30px auto;
+		margin:0 auto;
 		max-width:1140px;
+		position:relative;
+		height:90%;
+		top:29%;
+
+		.slide {
+			width:100%;
+			top:0;
+			display:table;
+			position:absolute;
+			
+			span{
+				display:table-cell;
+				vertical-align:middle;
+
+				p{
+					background:rgba(0,0,0,.3);
+					color:#fff;
+					padding:6%;
+					font-weight:bolder;
+					-webkit-font-smoothing:antialiased;
+					font-size:1.7em;
+					font-family:'Source Sans Pro','Helvetica',sans-serif;
+				}
+			}
+		}
+
+		#slide-2, #slide-3, #slide-4 {
+			left:200%;
+		}
+	}
+	#call-to-action{
+		text-align:center;
+		position:relative;
+
+		#appstore {
+			position:relative;
+			bottom:0;
+			img {
+				width:215px;
+			}
+		}
+
+		#beta-login {
+			width:215px;
+			margin-left:-170px;
+			background:#fff;
+			padding:10px 30px;
+			color:#000;
+			font-weight:bolder;
+			-webkit-font-smoothing:antialiased;
+			font-size:1.3em;
+			letter-spacing:1px;
+			font-family:'Montserrat','Helvetica',sans-serif;
+			border-radius:3px;
+			-webkit-border-radius:3px;
+			-moz-border-radius:3px;
+			text-transform:uppercase;
+			box-shadow: 
+			  0 0x 0px transparent, /*bottom external highlight*/
+			  0 -1px 1px #666, /*top external shadow*/ 
+			  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
+			  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
+		}
 	}
 
 	#first-splash {
 		background:#fff;
-		font-size:1.1em;
-		padding:2.5% 0 5%;
+		background-image: image-url('blur1.png');
+		background-size:cover;
+		background-repeat:no-repeat;
 
 		#macbook-iphone {
-			max-width: 45%;
-			margin: 7.5% auto 5%;
+			max-width: 100%;
+			margin: 0 auto;
 		}
 
 		.container.marketing {
@@ -28,7 +112,7 @@
 			display:inline-block;
 			width:50%;
 			max-width:900px;
-			padding-top:0.5%;
+			padding:0.5% 0 0 0;
 			font-size:1.1em;
 		}
 
@@ -125,37 +209,12 @@
 		}
 
 		.left {
-		float:left;
+			float:left;
 		}
 
 		.right {
-		float:right;
-		text-align:right;
-		}
-
-		.splash-image {
-		height:110px;
-		width:90%;
-		margin:1.5% 2.5% 0 0;
-		padding-bottom:1%;
-		display:inline-table;
-		border-bottom:1px solid #eee;
-
-		.first {
-			transition:opacity .25s linear;
-			-moz-transition:opacity .25s linear;
-			-webkit-transition:opacity .25s linear;
-			z-index:2;
-		}
-
-			p {
-				width:80%;
-				display:inline-block;
-				margin:0;
-				padding-top:20px;
-				vertical-align:top;
-				color:#666;
-			}
+			float:right;
+			text-align:right;
 		}
 	}
 
