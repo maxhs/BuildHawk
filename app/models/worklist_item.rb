@@ -20,17 +20,17 @@ class WorklistItem < ActiveRecord::Base
     default_scope { order('created_at DESC') }
 
     #websolr
-    searchable do
-        text    :body
-        text    :location
-        text    :assignee do
-            assignee.full_name if assignee
-        end
-        integer :project_id do
-            worklist.project.id if worklist
-        end
-        time    :created_at
-    end
+    # searchable do
+    #     text    :body
+    #     text    :location
+    #     text    :assignee do
+    #         assignee.full_name if assignee
+    #     end
+    #     integer :project_id do
+    #         worklist.project.id if worklist
+    #     end
+    #     time    :created_at
+    # end
 
     def notify
         puts "worklist item changed"
