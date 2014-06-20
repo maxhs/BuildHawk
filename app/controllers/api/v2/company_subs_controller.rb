@@ -12,7 +12,8 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 	end
 
 	def add_user
-		company = CompanySub.find params[:id]
+		user_company = Company.find params[:company_id]
+		subcontractor = Company.find params[:id]
 		task = WorklistItem.find params[:task_id] if params[:task_id]
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
@@ -25,8 +26,8 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 		
 			unless user
 				## new user. we should send them something
-				user = company.subcontractor.users.create params[:user] 
-				user.text_task(task) if task
+				user = subcontractor.users.create params[:user]
+				user_company.company_subs.where(:subcontractor_id => subcontractor.id).first_or_create
 			end
 		
 			respond_to do |format|
@@ -43,9 +44,10 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 		
 			unless user
 				## new user. we should send them something
-				user = company.subcontractor.users.create params[:user]
+				user = subcontractor.users.create params[:user]
+				user_company.company_subs.where(:subcontractor_id => subcontractor.id).first_or_create
 			end
-			
+
 			user.text_task(task) if task
 			respond_to do |format|
 		       	format.json { render_for_api :user, :json => user, :root => :user}

@@ -3,7 +3,6 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
     def update
     	@worklist_item = WorklistItem.find params[:id]
-        
         params[:worklist_item].delete(:id)
 
         if params[:worklist_item][:user_assignee].present? 
@@ -34,7 +33,6 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item].delete(:status)
         end
         ## Use the below instead
-
         if params[:worklist_item][:completed] == true
             params[:worklist_item][:completed_at] = Time.now
         else
