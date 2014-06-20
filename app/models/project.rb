@@ -27,14 +27,14 @@ class Project < ActiveRecord::Base
     accepts_nested_attributes_for :subs, :allow_destroy => true
 
     # websolr
-    # searchable do
-    #     text    :name
-    #     text    :address do
-    #         address.formatted_address if address
-    #     end
-    #     integer :company_id
-    #     time    :created_at
-    # end
+    searchable do
+        text    :name
+        text    :address do
+            address.formatted_address if address
+        end
+        integer :company_id
+        time    :created_at
+    end
 
     def default_folders
         ["Subcontractors","Floor Plans","Permit Docs","Schedule","Selections"].each do |f|

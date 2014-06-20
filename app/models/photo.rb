@@ -27,15 +27,15 @@ class Photo < ActiveRecord::Base
 	process_in_background :image
 
 	# websolr
-    # searchable do
-    #     text 	:name, boost: 2.0
-    #     text    :source
-    #     text    :folder do
-    #     	folder.name if folder
-    #     end        
-    #     integer :project_id
-    #     time    :created_at
-    # end
+    searchable do
+        text 	:name, boost: 2.0
+        text    :source
+        text    :folder do
+        	folder.name if folder
+        end        
+        integer :project_id
+        time    :created_at
+    end
 
 	acts_as_api
 
