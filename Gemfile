@@ -39,7 +39,7 @@ gem 'acts_as_list'
 gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
 gem "recaptcha", :require => "recaptcha/rails"
-#gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '>= 1.3.0'
 gem 'geocoder'
 gem 'httparty'
 #gem 'cocaine'
