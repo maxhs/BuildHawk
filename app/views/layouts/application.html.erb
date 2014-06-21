@@ -58,7 +58,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 					<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
 					<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
 					<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
-					<li style=""><%= link_to 'Login', login_path, :style => "float:right;" %></li>
+					<li style=""><%= link_to 'Beta Login', login_path, :style => "float:right;" %></li>
 				<% elsif params[:controller] == "admin" %>
 					<%= render partial: "admin/top_nav" %>
 				<% elsif params[:controller] == "uber_admin" %>

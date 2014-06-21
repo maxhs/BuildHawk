@@ -3,30 +3,33 @@
 
 		<div class="splash-container">
 			
-				<div class="slide" id="slide-1">
-					<%= image_tag("macbook-iphone.png", :id => "macbook-iphone") %>
-					<span><p>Increase efficiency, reduce the likelihood of errors and ensure quality. Use BuildHawk's pre-populated checklists or customize your own.</p></span>
-				</div>
-				
-				<div class="slide" id="slide-2">
-					<span><p>Project documents are stored in the cloud: accessible anytime, anywhere. Easily access photos, blueprints, schedules, and more.</p></span>
-					<%= image_tag("ipad_docs.png", :id => "macbook-iphone") %>
-				</div> 
-				
-				<div class="slide" id="slide-3">
-					<%= image_tag("macbook-iphone.png", :id => "macbook-iphone") %>
-					<span><p>Easily create and share a project task list. Enable your team to track issues with a single set of notes and photos.</p></span>
-				</div>
-				
-				<div class="slide" id="slide-4">
-					<span><p>Reports are easy with automatic weather, notifications, pictures and more, all through a simple, customizable interface.</p></span>
-					<%= image_tag("macbook-iphone.png", :id => "macbook-iphone") %>
-				</div>
+			<div class="slide" id="slide-1">
+				<%= image_tag("splash_checklists.png", :id => "macbook-iphone") %>
+				<span><p><span class="splash-header">Structured Workflow</span>Increase efficiency, reduce the likelihood of errors and ensure quality. Use BuildHawk's pre-populated checklists or customize your own.</p></span>
+			</div>
+			
+			<div class="slide" id="slide-2">
+				<span><p><span class="splash-header">CLOUD SYNCED</span>Project documents are stored in the cloud: accessible anytime, anywhere. Easily access photos, blueprints, schedules, and more.</p></span>
+				<%= image_tag("splash_docs.png", :id => "macbook-iphone") %>
+			</div> 
+			
+			<div class="slide" id="slide-3">
+				<%= image_tag("splash_tasks.png", :id => "macbook-iphone") %>
+				<span><p><span class="splash-header">EFFICIENT COMMUNICATION</span>Easily share tasks and punchlists. Enable your team to track issues with a single set of notes, photos and communication threads.</p></span>
+			</div>
+			
+			<div class="slide" id="slide-4">
+				<span><p><span class="splash-header">REPORTING MADE EASY</span>On site weather reports, notifications, pictures and more &mdash; all through a powerfully simple interface.</p></span>
+				<%= image_tag("splash_reports.png", :id => "macbook-iphone") %>
+			</div>
 		</div>
 
 		<div id="call-to-action">
 			<div id="appstore">
 				<!--<%= link_to image_tag('retina-appstore.png'), "https://itunes.apple.com/us/app/buildhawk/id816590963?ls=1&mt=8", :target => "_blank" %>-->
+			</div>
+			<div id="beta-login">
+				<%= link_to "Beta Login",login_path %>
 			</div>
 		</div>
 

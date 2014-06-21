@@ -5,16 +5,12 @@ NProgress.configure({
 });
 
 function homeSlideshow(){
-    console.log('home homeSlideshow');
     var lspace = '0%';
     var offscreen = "-200%";
-    var transition = 6000;
-    
-    var fade,fade1,fade2,fade3,fade4,fade5,restart;
-
+    var transition = 7000;    
+    var fade,fade1,fade2,fade3;
 
     fade = function() {
-        console.log('fade');
       $('#slide-1').animate({'left':offscreen},400);
       $('#slide-2').animate({'left':lspace},400);
       setTimeout(fade1,transition);
