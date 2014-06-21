@@ -519,17 +519,52 @@
 }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+.navbar.splash {
+	height:7.5%;
+	border-bottom:0;
+	background:rgba(255,255,255,.95);
+	border-bottom:1px solid #fff;
+
+	#navigation {	
+		max-width:1140px;
+		margin:0 auto;
+
+		li {
+			padding:2% 0 0;
+			width:auto;
+			text-align:center;
+			display:none;
+		}
+	}
+
+	.logo, .logo a {
+		display:block !important;	
+		margin:0 auto;
+		text-align:center;
+		img {
+			width:100%;
+		}
+	}
+}
+
 	#splash {
-		font-weight:normal;
+		position:absolute;
+		height:100%;
+		width:100%;
+		overflow:hidden;
+
+		#first-splash, #about, #pricing {
+			height:100%;
+			top:0;
+			position:relative;
+			width:100%;
+		}
 
 		#first-splash {
+			
 			.splash-container {
 				width:100%;
-				.splash-image {
-					#checklist-image, #checklist-image-blue, #report-image, #report-image-blue, #document-image, #document-image-blue, #worklist-image, #worklist-image-blue{
-						display:none !important;
-					}
-				}
+				top:15%;
 			}
 			
 			padding-top:140px;
