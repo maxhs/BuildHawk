@@ -639,8 +639,11 @@ body {
 .session-container {
 	height:100%;
 	display:table;
-	width:400px;
+	width:500px;
 	margin:10% auto;
+	border:1px solid #ddd;
+	padding:1% 2% 2%;
+	background:#fff;
 
 	.inner-container {
 		vertical-align:middle;
