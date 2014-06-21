@@ -94,7 +94,7 @@ class UberAdminController < ApplicationController
 	end
 
 	def companies
-		@companies = Company.all
+		@companies = Company.all.order('name ASC')
 	end
 
 	def edit_company
@@ -135,7 +135,7 @@ class UberAdminController < ApplicationController
 	end
 
 	def users
-		@users = User.all
+		@users = User.all.order('first_name')
 	end
 
 	def promo_codes
