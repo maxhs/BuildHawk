@@ -32,7 +32,7 @@ class Api::V2::SessionsController < Api::V2::ApiController
   		  		format.json { render_for_api :login, :json => @user, :root => :user}
   			end
   		else
-  			render json: { message: 'Incorrect password' }, status: 401
+  			render text: 'Incorrect password', status: 401
       end
     end
 
@@ -57,6 +57,6 @@ class Api::V2::SessionsController < Api::V2::ApiController
   private
 
   def invalid_login_attempt
-    render json: { message: 'No email' }, status: 401
+    render text: 'No email', status: 401
   end
 end
