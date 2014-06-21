@@ -24,11 +24,8 @@ class Api::V2::SessionsController < Api::V2::ApiController
   		return invalid_login_attempt unless @user
   		if @user.valid_password? password
   			@user.reset_authentication_token!
-  			puts "successfully signed in user"
-
             if device_token
   			   @user.apn_registrations.where(:token => device_token).first_or_create
-  			   puts "updating device token for existing email user"
             end
   			
             respond_to do |format|
@@ -60,6 +57,6 @@ class Api::V2::SessionsController < Api::V2::ApiController
   private
 
   def invalid_login_attempt
-    render json: { message: 'NO EMAIL' }, status: 401
+    render json: { message: 'No email' }, status: 401
   end
 end
