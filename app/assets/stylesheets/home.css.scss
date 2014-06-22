@@ -14,6 +14,7 @@
 		li {
 			padding:0;
 			width:25%;
+			text-align:center;
 		}
 	}
 
@@ -48,7 +49,7 @@
 				cursor:default;
 
 				p{
-					background:rgba(0,0,0,.3);
+					background:rgba(0,0,0,.2);
 					color:#fff;
 					padding:4% 6%;
 					font-weight:bolder;
@@ -60,6 +61,7 @@
 					-moz-border-radius:2px;
 					-webkit-border-radius:2px;
 					box-shadow:0 0 30px rgba(255,255,255,.3);
+					border:1px solid #fff;
 				}
 				.splash-header {
 					text-transform: uppercase;
