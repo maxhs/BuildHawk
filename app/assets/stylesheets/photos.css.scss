@@ -24,6 +24,7 @@
 	line-height:1.3em;
 	overflow:auto;
 	border:1px solid #eee;
+	display:inline-block;
 
 	.label {
 		color:#aaa;
@@ -40,6 +41,7 @@
 .image-block.large{
 	max-width:100%;
 	width:auto;
+	display:block;
 
 	img {
 		max-width:100%;
