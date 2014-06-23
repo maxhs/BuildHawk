@@ -168,13 +168,13 @@ class ReportsController < ApplicationController
 			@company = @project.company
 			@projects = @company.projects
 			@project_users = @project.project_users
-			@subs = @project.project_subs.map{|ps| ps.company_sub}.compact
+			@subs = @project.project_subs.map{|ps| ps.company_sub}.compact.map(&:subcontractor).sort_by!(&:name)
 		elsif @report && @report.project_id
 			@project = @report.project
 			@company = @project.company
 			@projects = @company.projects
 			@project_users = @project.project_users
-			@subs = @project.project_subs.map{|ps| ps.company_sub}.compact
+			@subs = @project.project_subs.map{|ps| ps.company_sub}.compact.map(&:subcontractor).sort_by!(&:name)
 		end
 	end
 end

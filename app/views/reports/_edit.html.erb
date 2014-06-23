@@ -80,13 +80,13 @@
 				<div class="sub-container col-md-6">
 					<% @subs.each do |sub| %>
 						<div>
-							<% report_company = @report.report_companies.where(:company_id => sub.subcontractor.id).first %>
+							<% report_company = @report.report_companies.where(:company_id => sub.id).first %>
 							<% if report_company %>
-								<%= text_field_tag "report_companies[#{sub.subcontractor.id if sub.subcontractor}]", report_company.count, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
+								<%= text_field_tag "report_companies[#{sub.id if sub}]", report_company.count, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
 							<% else %>
-								<%= text_field_tag "report_companies[#{sub.subcontractor.id if sub.subcontractor}]", nil, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
+								<%= text_field_tag "report_companies[#{sub.id if sub}]", nil, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
 							<% end %>
-							<span style="padding-left:1em;"><%= sub.subcontractor.name if sub.subcontractor %></span>
+							<span style="padding-left:1em;"><%= sub.name if sub %></span>
 						</div>
 					<% end %>
 				</div>
