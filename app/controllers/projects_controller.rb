@@ -67,7 +67,7 @@ class ProjectsController < ApplicationController
 		if @project.company
 			@project_groups = @project.company.project_groups 
 			@users = @project.company.users
-			@subs = @project.company.subs
+			@subs = @project.company.company_subs
 		end
 
 		@project.users.build

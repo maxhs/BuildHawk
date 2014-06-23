@@ -5,7 +5,7 @@
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 		<div><%= f.text_field :name, :placeholder => "Company Name", :class=>"tt-hint form-control" %></div>
 		<div><%= f.email_field :email, :placeholder => "Contact Email", :class=>"tt-hint form-control" %></div>
-		<div><%= f.text_field :phone_number, :placeholder => "Contact Phone Number", :class=>"tt-hint form-control" %></div>
+		<div><%= f.text_field :phone, :placeholder => "Contact Phone Number", :class=>"tt-hint form-control" %></div>
 		<% if @company.image_file_name %>
 			<div>
 				<%= image_tag @company.image.url(:small), :class => "company-pic" %>

@@ -69,24 +69,24 @@
 
 			<div class="row">
 				<div class="user-container col-md-6">
-					<% @users.each do |user| %>
-						<% if @report.users.include?(user) %>
-							<div><%= check_box_tag "report[user_ids][]", user.id, checked: true %><span style="padding-left:1em;"><%= user.full_name %></span></div>
+					<% @project_users.each do |project_user| %>
+						<% if @report.users.include?(project_user) %>
+							<div><%= check_box_tag "report[user_ids][]", project_user.user.id, checked: true %><span style="padding-left:1em;"><%= project_user.user.full_name %></span></div>
 						<% else %>
-							<div><%= check_box_tag "report[user_ids][]", user.id %><span style="padding-left:1em;"><%= user.full_name %></span></div>
+							<div><%= check_box_tag "report[user_ids][]", project_user.user.id %><span style="padding-left:1em;"><%= project_user.user.full_name %></span></div>
 						<% end %>
 					<% end %>
 				</div>
 				<div class="sub-container col-md-6">
-					<% @companies.each do |company_sub| %>
+					<% @subs.each do |sub| %>
 						<div>
-							<% report_company = @report.report_companies.where(:company_id => company_sub.subcontractor.id).first %>
+							<% report_company = @report.report_companies.where(:company_id => sub.subcontractor.id).first %>
 							<% if report_company %>
-								<%= text_field_tag "report_companies[#{company_sub.subcontractor.id if company_sub.subcontractor}]", report_company.count, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
+								<%= text_field_tag "report_companies[#{sub.subcontractor.id if sub.subcontractor}]", report_company.count, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
 							<% else %>
-								<%= text_field_tag "report_companies[#{company_sub.subcontractor.id if company_sub.subcontractor}]", nil, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
+								<%= text_field_tag "report_companies[#{sub.subcontractor.id if sub.subcontractor}]", nil, placeholder: "0", style: "max-width:40px;display:inline-block;text-align:center;" %>
 							<% end %>
-							<span style="padding-left:1em;"><%= company_sub.subcontractor.name if company_sub.subcontractor %></span>
+							<span style="padding-left:1em;"><%= sub.subcontractor.name if sub.subcontractor %></span>
 						</div>
 					<% end %>
 				</div>

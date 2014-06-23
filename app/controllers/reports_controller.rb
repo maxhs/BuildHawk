@@ -167,14 +167,14 @@ class ReportsController < ApplicationController
 			@project = Project.find params[:project_id]
 			@company = @project.company
 			@projects = @company.projects
-			@users = @company.users
-			@companies = @company.company_subs
+			@project_users = @project.project_users
+			@subs = @project.project_subs.map{|ps| ps.company_sub}.compact
 		elsif @report && @report.project_id
 			@project = @report.project
 			@company = @project.company
 			@projects = @company.projects
-			@users = @company.users
-			@companies = @company.company_subs
+			@project_users = @project.project_users
+			@subs = @project.project_subs.map{|ps| ps.company_sub}.compact
 		end
 	end
 end

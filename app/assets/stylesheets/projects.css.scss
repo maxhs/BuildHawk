@@ -173,6 +173,10 @@
 
 	#recent-documents, #upcoming-items {
 		padding:0 20px;
+
+		.image-block{
+			display:inline-block;
+		}
 	}
 	#checklist-section {
 		padding:0 40px;

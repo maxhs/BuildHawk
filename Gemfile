@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
 gem 'passenger', :group => :production
-gem 'thin', :group => :development
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
@@ -26,7 +25,6 @@ gem 'delayed_job_active_record'
 gem 'delayed_paperclip'
 gem 'apn_sender', require: ['apn', 'apn/jobs/resque_notification_job']
 gem 'daemons'
-gem 'nokogiri'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'turbolinks'
@@ -36,12 +34,13 @@ gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'acts_as_list'
-gem 'pushmeup'
 gem 'actionview-encoded_mail_to'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'uglifier', '>= 1.3.0'
-gem 'geocoder'
 gem 'httparty'
+#gem 'nokogiri'
+#gem 'pushmeup'
+#gem 'geocoder'
 #gem 'cocaine'
 #gem 'non-stupid-digest-assets'
 #gem 'newrelic_rpm'

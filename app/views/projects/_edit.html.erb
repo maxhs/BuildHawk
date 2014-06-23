@@ -49,11 +49,11 @@
 		    <div class="row personnel">
 		    	<div class="col-xs-3"><h4>Subcontractors Assigned</h4></div>
 		    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-		    		<% @subs.each do |sub| %>
-		    			<% if @project.subs.include?(sub) %>
-		    				<div style="padding-top:5px;"><%= check_box_tag "project[sub_ids][]", sub.id, checked: true %><span style="padding-left:10px;"><%= sub.name %></span></div>
+		    		<% @subs.each do |company_sub| %>
+		    			<% if @project.company_subs.include?(company_sub) %>
+		    				<div style="padding-top:5px;"><%= check_box_tag "project[company_sub_ids][]", company_sub.id, checked: true %><span style="padding-left:10px;"><%= company_sub.name %></span></div>
 	    				<% else %>
-	    					<div style="padding-top:5px;"><%= check_box_tag "project[sub_ids][]", sub.id %><span style="padding-left:10px;"><%= sub.name %></span></div>
+	    					<div style="padding-top:5px;"><%= check_box_tag "project[company_sub_ids][]", company_sub.id %><span style="padding-left:10px;"><%= company_sub.name %></span></div>
 	    				<% end %>
 		    		<% end %>
 		    	</div>

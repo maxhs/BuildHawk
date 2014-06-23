@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
-		puts "should be destroying a comment with id: #{params[:id]}"
 		@comment = Comment.find params[:id]
 		if @comment.report_id != nil
 			@report = @comment.report
