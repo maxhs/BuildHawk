@@ -130,6 +130,7 @@ class Project < ActiveRecord::Base
   		t.add :company
         t.add :active
         t.add :users
+        t.add :company_subs
         t.add :core
         t.add :progress
         t.add :upcoming_items
@@ -139,7 +140,6 @@ class Project < ActiveRecord::Base
         t.add :project_group, :if => :has_group?
         ### slated for deletion ###
         t.add :categories
-        t.add :subs
         ###
   	end
 
