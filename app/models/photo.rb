@@ -14,9 +14,9 @@ class Photo < ActiveRecord::Base
 
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["1024x1024", :jpg],
-	                                 :medium  => ["640x640", :jpg],
-	                                 :small  => ["200x200", :jpg],
-	                                 :thumb  => ["100x100", :jpg]
+	                                 :medium  => ["640x640#", :jpg],
+	                                 :small  => ["200x200#", :jpg],
+	                                 :thumb  => ["100x100#", :jpg]
 	                     },
 	                    :storage        => :s3,
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
