@@ -18,8 +18,7 @@
 
 .image-block{
 	width:220px;
-	text-align:left;
-	display:inline-block;
+	text-align:center;
 	padding:10px;
 	margin:10px;
 	line-height:1.3em;
@@ -116,6 +115,7 @@
 }
 
 .image-details {
+	text-align:left;
 	cursor:default;
 }
 

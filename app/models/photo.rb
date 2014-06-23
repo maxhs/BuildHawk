@@ -13,18 +13,18 @@ class Photo < ActiveRecord::Base
     before_create :ensure_defaults
 
   	has_attached_file 	:image, 
-	                    :styles => { :large => ["1024x1024#", :jpg],
-	                                 :medium  => ["640x640#", :jpg],
-	                                 :small  => ["200x200#", :jpg],
-	                                 :thumb  => ["100x100#", :jpg]
+	                    :styles => { :large => ["1024x1024", :jpg],
+	                                 :medium  => ["640x640", :jpg],
+	                                 :small  => ["200x200", :jpg],
+	                                 :thumb  => ["100x100", :jpg]
 	                     },
 	                    :storage        => :s3,
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
-	                    :url            => "buildhawk.s3.amazonaws.com",
+	                    #:url            => "buildhawk.s3.amazonaws.com",
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
-	process_in_background :image
+	process_in_background :image, :only_process => [:large]
 
 	# websolr
     searchable do
