@@ -39,11 +39,12 @@ class Api::V2::ReportsController < Api::V2::ApiController
             companies.each do |c|
                 if c[:name]
                     company = Company.where(:name => c[:name]).first
-                end
-                if company
-                    rc = report.report_companies.where(:company_id => company.id).first_or_create
-                    rc.update_attribute :count, c[:count]
-                    company_ids << company.id
+                    
+                    if company
+                        rc = report.report_companies.where(:company_id => company.id).first_or_create
+                        rc.update_attribute :count, c[:count]
+                        company_ids << company.id
+                    end
                 end
             end
             report.report_companies.each do |rc|

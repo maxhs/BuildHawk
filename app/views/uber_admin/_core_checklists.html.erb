@@ -8,21 +8,20 @@
 		<% end %>
 	</div>
 
-	<table class="core-checklist-table" style="padding:20px;">
+	<div class="core-checklist-table" style="padding:20px;">
 		<% if @checklists && @checklists.count > 0 %>
-			<thead>
-				<th><h5>Name</h5></th>
-				<th><h5># Phases</h5></th>
-				<th><h5># Categories</h5></th>
-				<th><h5># Items</h5></th>
-				<th><h5>Edit</h5></th>
-				<th><h5>Delete</h5></th>
-			</thead>
-			<tbody>
-				<%= render :partial => "uber_admin/checklist_row", collection: @checklists, :as => :c, cache: false %>
-			</tbody>
+			<div class="row" style='border-bottom:1px solid #eee;'>
+				<div class="col-xs-5"><h5>Name</h5></div>
+				<div class="col-xs-1"><h5>Phases</h5></div>
+				<div class="col-xs-1"><h5>Categories</h5></div>
+				<div class="col-xs-1"><h5>Items</h5></div>
+				<div class="col-xs-2"><h5>Edit</h5></div>
+				<div class="col-xs-2"><h5>Delete</h5></div>
+			</div>
+			<%= render :partial => "uber_admin/checklist_row", collection: @checklists, :as => :c, cache: false %>
+			
 		<% else %>
-			<tr><td>You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></tr>
+			<div class="col-xs-12">You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></div>
 		<% end %>
-	</table>
+	</div>
 </div>
