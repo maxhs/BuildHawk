@@ -20,19 +20,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:sub_assignee_id] = nil
         end
         
-        ## slated for deletion
-        if params[:worklist_item][:status].present?
-            if params[:worklist_item][:status] == "Completed" || params[:worklist_item][:status] == true
-                params[:worklist_item][:completed] = true
-                params[:worklist_item][:completed_at] = Time.now
-            else
-                params[:worklist_item][:completed] = false
-                params[:worklist_item][:completed_at] = nil
-                params[:worklist_item][:completed_by_user_id] = nil
-            end
-            params[:worklist_item].delete(:status)
-        end
-        ## Use the below instead
+        puts "was it completed? #{params[:worklist_item][:completed]}"
         if params[:worklist_item][:completed] == true
             params[:worklist_item][:completed_at] = Time.now
         else
