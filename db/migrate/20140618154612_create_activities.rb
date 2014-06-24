@@ -1,6 +1,6 @@
-class CreateEdits < ActiveRecord::Migration
+class CreateActivities < ActiveRecord::Migration
   def change
-    create_table :edits do |t|
+    create_table :activities do |t|
     	t.belongs_to :report
     	t.belongs_to :user
     	t.belongs_to :checklist_item
