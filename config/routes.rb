@@ -87,6 +87,7 @@ Buildhawk::Application.routes.draw do
       delete :destroy_user
       get :promo_codes
       get :safety_topics
+      get :create_blank_template
     end
   end
   resources :promo_codes do

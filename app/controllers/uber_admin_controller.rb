@@ -23,6 +23,20 @@ class UberAdminController < ApplicationController
 		end
 	end
 
+	def create_blank_template
+		@checklist = Checklist.create :core => true, :name => "Blank template"
+		phase = @checklist.phases.create :name => "First phase"
+		phase.categories.create :name => "First category"
+		@checklist.phases.map{|p| p.categories.build}
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to core_checklists_uber_admin_index_path
+		end
+	end
+
 	def upload_template
 		Checklist.import(params[:checklist][:file])
 		redirect_to core_checklists_uber_admin_index_path

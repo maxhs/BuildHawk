@@ -4,11 +4,12 @@
 			<div>
 				<h3>Upload a New Core Checklist</h3>
 				<div style="text-align:center;width:200px;margin:2.5% auto;"><%= f.file_field :file %></div>
+				<%= f.submit "Upload", :class =>"btn btn-default btn-md", :style => "color:#000;" %>
 			</div>
 		<% end %>
 	</div>
 
-	<div class="core-checklist-table" style="padding:20px;">
+	<div class="core-checklist-table" id="uber-core-checklists" style="padding:20px;">
 		<% if @checklists && @checklists.count > 0 %>
 			<div class="row" style='border-bottom:1px solid #eee;'>
 				<div class="col-xs-5"><h5>Name</h5></div>
@@ -23,5 +24,6 @@
 		<% else %>
 			<div class="col-xs-12">You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></div>
 		<% end %>
+		<%= link_to "Create blank template", create_blank_template_uber_admin_index_path, class: "simple-btn" %>
 	</div>
 </div>
