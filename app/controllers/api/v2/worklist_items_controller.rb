@@ -21,7 +21,8 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
         
         puts "was it completed? #{params[:worklist_item][:completed]}"
-        if params[:worklist_item][:completed] == true
+        if params[:worklist_item][:completed] == "1"
+            params[:worklist_item][:completed] = true
             params[:worklist_item][:completed_at] = Time.now
         else
             params[:worklist_item][:completed] = false
