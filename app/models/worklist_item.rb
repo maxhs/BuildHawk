@@ -12,6 +12,7 @@ class WorklistItem < ActiveRecord::Base
     has_many :comments, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
+    has_many :activities, :dependent => :destroy
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 

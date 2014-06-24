@@ -11,6 +11,7 @@ class ChecklistItem < ActiveRecord::Base
   	has_many :comments, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
     has_many :reminders, :dependent => :destroy
+    has_many :activities, :dependent => :destroy
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 

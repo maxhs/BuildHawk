@@ -20,6 +20,8 @@ class Report < ActiveRecord::Base
     has_many :report_topics, :dependent => :destroy
     has_many :safety_topics, :through => :report_topics
 
+    has_many :activities, :dependent => :destroy
+    
     validates_presence_of :report_type
     validates_presence_of :created_date
 
