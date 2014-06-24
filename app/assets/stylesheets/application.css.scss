@@ -692,9 +692,9 @@ a.search-button {
 
 .simple-btn {
 	border:1px solid #ddd;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
 	padding:6px 10px;
 	position:relative;
 	display:inline-block;
@@ -702,13 +702,33 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Montserrat",'Helvetica',sans-serif;
-	font-size:14px;
+	font-family:"Source Sans Pro",'Helvetica',sans-serif;
+	font-size:15px;
+	font-weight:bold;
 	text-transform:uppercase;
 }
 
 .simple-btn:hover {
 	border-color:#ccc;
+	background:#eee;
+}
+
+.delete-link {
+	border:1px solid transparent;
+	padding:6px 10px;
+	position:relative;
+	display:inline-block;
+	margin:0 10px;
+	width:auto;
+	text-align:center;
+	clear:both;
+	font-family:"Source Sans Pro",'Helvetica',sans-serif;
+	font-size:15px;
+	text-transform:uppercase;
+	font-weight:700;
+}
+
+.delete-link:hover {
 }
 
 .simple-danger-btn {
@@ -810,11 +830,7 @@ input, textarea {
 input[type="submit"] {
 	margin:0 auto;
 	background:transparent;
-	border:0;
-	color:#fff;
 	text-transform:uppercase;
-	font-weight:200;
-	font-family:'Gotham Book','Helvetica',sans-serif;
 }
 
 .spinner {

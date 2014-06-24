@@ -12,22 +12,20 @@ class ChecklistItemsController < ApplicationController
 		@checklist_item = ChecklistItem.find params[:id]
 		if params[:checklist_item][:critical_date].present?
 			datetime = Date.strptime(params[:checklist_item][:critical_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
-			@checklist_item.update_attribute :critical_date, datetime
-			params[:checklist_item].delete(:critical_date)
+			params[:checklist_item][:critical_date] = datetime
 		end
 		if params[:checklist_item][:status].present?
 			status = params[:checklist_item][:status][1]
-			params[:checklist_item].delete(:status)
 			if status == "No Status"
-				@checklist_item.update_attribute :status, nil
+				params[:checklist_item][:status] = nil
 			else 
-				@checklist_item.update_attribute :status, status
+				params[:checklist_item][:status] = status
+				params[:checklist_item][:completed_by_user_id] = current_user.id if status == "Completed"
 			end
 		end
+
 		@checklist_item.update_attributes params[:checklist_item]
-		if status && status == "Completed"
-			@checklist_item.update_attribute :completed_by_user_id, current_user.id
-		end
+		
 		@checklist = @checklist_item.category.phase.checklist
 		if @checklist.core && @checklist.company_id.nil?
 			@items = @checklist.items

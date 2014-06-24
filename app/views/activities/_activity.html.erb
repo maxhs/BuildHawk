@@ -1,0 +1,4 @@
+<div class="activity row" id="activity-<%=activity.id%>">
+	<%= activity.body %><% if activity.user %> by <%= activity.user.full_name %><% end %>.
+	<div class="timestamp"><%= parse_datetime activity.created_at %></div>
+</div>

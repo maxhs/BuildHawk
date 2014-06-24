@@ -240,6 +240,7 @@ Buildhawk::Application.routes.draw do
   #mobile API v2
   namespace :api do
     namespace :v2 do
+      resources :alternates, :only => [:create]
       resources :photos
       resources :sessions, :only => [:create, :forgot_password] do
         collection do 

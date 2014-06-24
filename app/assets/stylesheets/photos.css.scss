@@ -19,23 +19,30 @@
 .image-block{
 	width:220px;
 	text-align:center;
-	padding:10px;
-	margin:10px;
+	padding:10px 10px 40px;
+	margin:10px 10px 10px 15px;
 	line-height:1.3em;
 	overflow:auto;
 	border:1px solid #eee;
 	display:inline-block;
+	position:relative;
 
-	.label {
-		color:#aaa;
-		padding-right:7px;
+	.label-container {
+		text-align:left;
+		.label {
+			color:#aaa;
+			padding-right:7px;
+		}
 	}
 
 	img {
 		margin-bottom:7px;
 	}
-	.btn-danger {
-		margin-top:5px;
+	.delete-link {
+		position:absolute;
+		bottom:0;
+		right:0;
+		margin:0;
 	}
 }
 .image-block.large{

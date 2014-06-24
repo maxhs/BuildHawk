@@ -20,7 +20,6 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:sub_assignee_id] = nil
         end
         
-        puts "was it completed? #{params[:worklist_item][:completed]}"
         if params[:worklist_item][:completed] == "1"
             params[:worklist_item][:completed] = true
             params[:worklist_item][:completed_at] = Time.now

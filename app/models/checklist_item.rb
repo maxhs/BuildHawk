@@ -15,7 +15,7 @@ class ChecklistItem < ActiveRecord::Base
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
-    after_commit :check_completed
+    after_commit :create_activity
 
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
@@ -54,11 +54,11 @@ class ChecklistItem < ActiveRecord::Base
       category.phase.name if category && category.phase
     end
 
-    def check_completed
+    def create_activity
         if status == "Completed" && completed_date == nil
             self.update_attribute :completed_date, Date.today
             if category.completed_count != 0 && category.completed_count == category.item_count
-              category.update_attribute :completed_date, Date.today
+                category.update_attribute :completed_date, Date.today
             end
 
             #TODO create a completed notification
@@ -68,15 +68,24 @@ class ChecklistItem < ActiveRecord::Base
                 message = "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}"
             end
             
-            notification = self.checklist.project.notifications.where(
+            activity = activities.create(
+                :body => "This item was marked complete",
+                :user_id => completed_by_user.id,
+                :project_id => checklist.project.id
+            )
+            puts "just created an activity! #{activity}"
+
+            notification = checklist.project.notifications.where(
                 :checklist_item_id => id,
                 :notification_type => :checklist_item,
                 :feed => true,
-                :message => message
+                :body => message
             ).first_or_create
             
-        elsif status != "Completed" && completed_date != nil
-            self.update_attributes :completed_date => nil, :completed_by_user => nil
+        elsif status != "Completed"
+            self.completed_date = nil
+            self.completed_by_user = nil
+            self.save
         end
     end
 
@@ -105,6 +114,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :item_type
         t.add :photos_count
         t.add :comments_count
+        t.add :activities
   	end
 
     api_accessible :checklist, :extend => :projects do |t|
