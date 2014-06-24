@@ -15,7 +15,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = sub.id
             params[:worklist_item].delete(:sub_assignee)
-        else
+        elsif params[:worklist_item][:assignee_id].nil?
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
         end
