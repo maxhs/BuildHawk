@@ -95,7 +95,7 @@ class WorklistItemsController < ApplicationController
 
 			@item.activities.create(
 				:user_id => current_user.id,
-				:body => ,
+				:body => "#{current_user.full_name} just updated this item",
 				:activity_type => @item.class.name
 			)
 			if request.xhr?
