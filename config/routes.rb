@@ -288,7 +288,7 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :comments
-      resources :company_subs, :only => [:create] do
+      resources :project_subs, :only => [:create] do
         member do
           post :add_user
         end

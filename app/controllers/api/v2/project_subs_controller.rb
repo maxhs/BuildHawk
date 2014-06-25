@@ -1,7 +1,7 @@
-class Api::V2::CompanySubsController < Api::V2::ApiController
+class Api::V2::ProjectSubsController < Api::V2::ApiController
 
 	def create
-		company = Company.find params[:company_id]
+		project = Project.find params[:project_id]
 		name = "#{params[:subcontractor][:name]}"
 		subcontractor = Company.where("name ILIKE ?",name).first_or_create
 		subcontractor.update_attributes params[:subcontractor] 
@@ -12,10 +12,8 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 	end
 
 	def add_user
-		company = Company.find params[:company_id]
-		puts "found company: #{company.name}"
-		company_sub = company.company_subs.where(:id => params[:id]).first_or_create
-		puts "found company_sub: #{company_sub.name}"
+		project = Project.find params[:project_id]
+		project_sub = project.project_subs.where(:id => params[:id]).first_or_create
 		task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
