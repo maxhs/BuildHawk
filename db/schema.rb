@@ -474,9 +474,6 @@ ActiveRecord::Schema.define(version: 20140623223112) do
     t.integer  "comments_count"
     t.integer  "sub_assignee_id"
     t.boolean  "mobile",               default: false
-    t.string   "assigned_name"
-    t.string   "assigned_email"
-    t.string   "assigned_phone"
   end
 
   create_table "worklists", force: true do |t|
