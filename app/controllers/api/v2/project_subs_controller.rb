@@ -14,7 +14,7 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
 	def show
 		project = Project.find params[:id]
     	respond_to do |format|
-        	format.json { render_for_api :report, :json => project.project_subs, :root => :project_subs}
+        	format.json { render_for_api :projects, :json => project, :root => :project}
       	end
 	end
 
