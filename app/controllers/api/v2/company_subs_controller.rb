@@ -41,7 +41,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 			user = User.where(:phone => params[:user][:phone]).first
 			if user
 				#existing user
-				user.text_task(task) if task
+				
 			else
 				alternate = Alternate.where(:phone => params[:user][:phone]).first
 				if alternate
@@ -56,6 +56,7 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 		      	end
 			elsif task
 				connect_user = task.connect_users.create params[:user]
+				connect_user.text_task
 				respond_to do |format|
 			       	format.json { render_for_api :user, :json => connect_user, :root => :user}
 		      	end
