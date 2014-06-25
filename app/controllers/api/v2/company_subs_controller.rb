@@ -32,10 +32,9 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 		      	end
 			elsif task
 				puts "could find user for task assignment: #{params[:user]}"
-				task.update_attribute :assigned_email, params[:user][:email]
-				task.update_attributes :assigned_name => "#{params[:user][:first_name]} #{params[:user][:last_name]}"
+				connect_user = task.connect_users.create params[:user]
 				respond_to do |format|
-			       	format.json { render_for_api :worklist, :json => task, :root => :task}
+			       	format.json { render_for_api :user, :json => connect_user, :root => :user}
 		      	end
 			end
 		elsif params[:user][:phone]
@@ -56,11 +55,9 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 			       	format.json { render_for_api :user, :json => user, :root => :user}
 		      	end
 			elsif task
-				puts "could find user for task assignment: #{params[:user]}"
-				task.update_attribute :assigned_phone, params[:user][:phone]
-				task.update_attributes :assigned_name => "#{params[:user][:first_name]} #{params[:user][:last_name]}"
+				connect_user = task.connect_users.create params[:user]
 				respond_to do |format|
-			       	format.json { render_for_api :worklist, :json => task, :root => :task}
+			       	format.json { render_for_api :user, :json => connect_user, :root => :user}
 		      	end
 			end
 		end
