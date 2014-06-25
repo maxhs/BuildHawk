@@ -83,6 +83,9 @@ class WorklistItem < ActiveRecord::Base
         t.add :photos
         t.add :comments
         t.add :project
+        t.add :assigned_email
+        t.add :assigned_phone
+        t.add :assigned_name
         ## for deletion
         t.add :epoch_time
   	end
