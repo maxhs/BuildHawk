@@ -11,6 +11,13 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
       	end
 	end
 
+	def show
+		project = Project.find params[:id]
+    	respond_to do |format|
+        	format.json { render_for_api :report, :json => project.project_subs, :root => :project_subs}
+      	end
+	end
+
 	def add_user
 		project = Project.find params[:project_id]
 		project_sub = project.project_subs.where(:id => params[:id]).first_or_create
