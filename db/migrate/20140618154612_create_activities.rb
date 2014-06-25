@@ -8,7 +8,7 @@ class CreateActivities < ActiveRecord::Migration
     	t.belongs_to :project
     	t.text :body
     	t.boolean :hidden, default: false
-      	t.timestamps
+      t.timestamps
     end
   end
 end

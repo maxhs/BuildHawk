@@ -2,7 +2,7 @@ class WorklistItem < ActiveRecord::Base
     include ActionView::Helpers::TextHelper
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :worklist_id, :worklist, :photos_attributes, 
                   :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
-                  :sub_assignee_id
+                  :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email
 
     belongs_to :worklist
     belongs_to :user
@@ -34,7 +34,6 @@ class WorklistItem < ActiveRecord::Base
     end
 
     def notify
-        puts "worklist item changed"
         truncated = truncate(body, length:20)
         if completed
             # user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil

@@ -1,4 +1,8 @@
 <div class="activity row" id="activity-<%=activity.id%>">
-	<%= activity.body %><% if activity.user %> by <%= activity.user.full_name %><% end %>.
+	<% if activity.activity_type == "Comment" %>
+		<%= activity.user.full_name %> just left a comment.
+	<% else %>
+		<%= activity.body %><% if activity.user %> by <%= activity.user.full_name %><% end %>.
+	<% end %>
 	<div class="timestamp"><%= parse_datetime activity.created_at %></div>
 </div>

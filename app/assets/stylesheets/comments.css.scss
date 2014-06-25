@@ -13,7 +13,7 @@
 }
 
 .comment-container.border-box {
-	padding-top:0;
+	padding-top:10px;
 }
 
 #comments-table {
@@ -35,4 +35,8 @@
 		line-height: 60px;
 		border-top:1px solid #eee;
 	}
+}
+
+.comment-pipe {
+	padding:0 10px;
 }

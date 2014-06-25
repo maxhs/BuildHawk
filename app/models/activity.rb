@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
 	attr_accessible :user_id, :project_id, :worklist_item_id, :checklist_item_id, :report_id, :comment_id, :body,
-					:hidden
+					:hidden, :activity_type
 
 	belongs_to :user
 	belongs_to :project

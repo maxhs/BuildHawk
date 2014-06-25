@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.updates-container {
+.activity-container {
 	max-width:800px;
 	margin:0 auto;
 	padding:15px 15px 30px;
@@ -23,6 +23,6 @@
 	}
 }
 
-.updates-container.border-box {
-	padding-top:0;
+.activity-container.border-box {
+	padding-top:10px;
 }

@@ -93,8 +93,8 @@
 </div>
 
 <% if item.activities.count > 0 %>
-	<div class="border-box updates-container" style="margin-top:20px;overflow:auto;">
-		<h3 style="text-align:center; width:80%;margin:20px auto; display:block;">Updates</h3>
+	<div class="border-box activity-container" style="margin-top:20px;overflow:auto;">
+		<h3 style="text-align:center; width:80%;margin:20px auto; display:block;">Activity</h3>
 		<%= render :partial => "activities/activity", collection: item.activities, as: :activity, cache: true %>
 	</div>
 <% end %>

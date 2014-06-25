@@ -27,8 +27,9 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 			end
 		
 			unless user
-				## new user. we should send them something
-				user = company_sub.subcontractor.users.create params[:user]
+				puts "could find user for task assignment: #{params[:user]}"
+				task.update_attribute :assigned_email, params[:user][:email]
+				task.update_attributes :assigned_name => "#{params[:user][:first_name]} #{params[:user][:last_name]}"
 			end
 		
 			respond_to do |format|
@@ -38,17 +39,21 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 			user = User.where(:phone => params[:user][:phone]).first
 			if user
 				#existing user
+				user.text_task(task) if task
 			else
 				alternate = Alternate.where(:phone => params[:user][:phone]).first
-				user = alternate.user if alternate
+				if alternate
+					user = alternate.user
+					user.text_task(task) if task
+				end
 			end
 		
 			unless user
-				## new user. we should send them something
-				user = company_sub.subcontractor.users.create params[:user]
+				puts "could find user for task assignment: #{params[:user]}"
+				task.update_attribute :assigned_phone, params[:user][:phone]
+				task.update_attributes :assigned_name => "#{params[:user][:first_name]} #{params[:user][:last_name]}"
 			end
 
-			user.text_task(task) if task
 			respond_to do |format|
 		       	format.json { render_for_api :user, :json => user, :root => :user}
 	      	end

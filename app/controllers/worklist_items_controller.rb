@@ -88,12 +88,16 @@ class WorklistItemsController < ApplicationController
 				params[:worklist_item][:completed_by_user_id] = current_user.id
 				params[:worklist_item][:completed_at] = Time.now
 			else
-
 				params[:worklist_item][:completed_by_user_id] = nil
 				params[:worklist_item][:completed_at] = nil
 			end
 			@item.update_attributes params[:worklist_item]
 
+			@item.activities.create(
+				:user_id => current_user.id,
+				:body => ,
+				:activity_type => @item.class.name
+			)
 			if request.xhr?
 				respond_to do |format|
 					format.js { render :template => "projects/worklist"}

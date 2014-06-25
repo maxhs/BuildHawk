@@ -703,8 +703,8 @@ a.search-button {
 	text-align:center;
 	clear:both;
 	font-family:"Source Sans Pro",'Helvetica',sans-serif;
-	font-size:15px;
-	font-weight:bold;
+	font-size:14px;
+	font-weight:500;
 	text-transform:uppercase;
 }
 
@@ -726,6 +726,10 @@ a.search-button {
 	font-size:15px;
 	text-transform:uppercase;
 	font-weight:700;
+
+	img {
+		width:50%;
+	}
 }
 
 .delete-link:hover {
@@ -1223,11 +1227,33 @@ body {
 
 @font-face {
     font-family: 'Source Sans Pro';
+    src: asset-url('sourcesanspro-bold-webfont.eot');
+    src: asset-url('sourcesanspro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('sourcesanspro-bold-webfont.woff') format('woff'),
+         asset-url('sourcesanspro-bold-webfont.ttf') format('truetype'),
+         asset-url('sourcesanspro-bold-webfont.svg#source_sans_prosemibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
     src: asset-url('sourcesanspro-semibold-webfont.eot');
     src: asset-url('sourcesanspro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
          font-url('sourcesanspro-semibold-webfont.woff') format('woff'),
          asset-url('sourcesanspro-semibold-webfont.ttf') format('truetype'),
          asset-url('sourcesanspro-semibold-webfont.svg#source_sans_prosemibold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: asset-url('sourcesanspro-black-webfont.eot');
+    src: asset-url('sourcesanspro-black-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('sourcesanspro-black-webfont.woff') format('woff'),
+         asset-url('sourcesanspro-black-webfont.ttf') format('truetype'),
+         asset-url('sourcesanspro-black-webfont.svg#source_sans_prosemibold') format('svg');
     font-weight: 700;
     font-style: normal;
 }

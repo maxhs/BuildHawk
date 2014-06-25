@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20140623223112) do
     t.boolean  "hidden",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "activity_type"
+    t.integer  "comment_id"
   end
 
   create_table "addresses", force: true do |t|
@@ -472,6 +474,9 @@ ActiveRecord::Schema.define(version: 20140623223112) do
     t.integer  "comments_count"
     t.integer  "sub_assignee_id"
     t.boolean  "mobile",               default: false
+    t.string   "assigned_name"
+    t.string   "assigned_email"
+    t.string   "assigned_phone"
   end
 
   create_table "worklists", force: true do |t|
