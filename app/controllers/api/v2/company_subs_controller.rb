@@ -16,25 +16,28 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 		puts "found company: #{company.name}"
 		company_sub = company.company_subs.where(:id => params[:id]).first_or_create
 		puts "found company_sub: #{company_sub.name}"
-		task = WorklistItem.find params[:task_id] if params[:task_id]
+		task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
 			if user
-				#existing user
+				#existing user, notify them by email
 			else
 				alternate = Alternate.where(:email => params[:user][:email]).first
 				user = alternate.user if alternate
 			end
 		
-			unless user
+			if user
+				respond_to do |format|
+		        	format.json { render_for_api :user, :json => user, :root => :user}
+		      	end
+			elsif task
 				puts "could find user for task assignment: #{params[:user]}"
 				task.update_attribute :assigned_email, params[:user][:email]
 				task.update_attributes :assigned_name => "#{params[:user][:first_name]} #{params[:user][:last_name]}"
+				respond_to do |format|
+			       	format.json { render_for_api :worklist, :json => task, :root => :task}
+		      	end
 			end
-		
-			respond_to do |format|
-	        	format.json { render_for_api :user, :json => user, :root => :user}
-	      	end
 		elsif params[:user][:phone]
 			user = User.where(:phone => params[:user][:phone]).first
 			if user
@@ -48,15 +51,18 @@ class Api::V2::CompanySubsController < Api::V2::ApiController
 				end
 			end
 		
-			unless user
+			if user
+				respond_to do |format|
+			       	format.json { render_for_api :user, :json => user, :root => :user}
+		      	end
+			elsif task
 				puts "could find user for task assignment: #{params[:user]}"
 				task.update_attribute :assigned_phone, params[:user][:phone]
 				task.update_attributes :assigned_name => "#{params[:user][:first_name]} #{params[:user][:last_name]}"
+				respond_to do |format|
+			       	format.json { render_for_api :worklist, :json => task, :root => :task}
+		      	end
 			end
-
-			respond_to do |format|
-		       	format.json { render_for_api :user, :json => user, :root => :user}
-	      	end
 		end
 	end
 
