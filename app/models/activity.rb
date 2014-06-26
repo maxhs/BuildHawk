@@ -34,6 +34,10 @@ class Activity < ActiveRecord::Base
       
     end
 
+    api_accessible :checklist, :extend => :projects do |t|
+      
+    end
+
     api_accessible :details, :extend => :projects do |t|
       
     end
