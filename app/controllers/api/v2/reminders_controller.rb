@@ -16,4 +16,13 @@ class Api::V2::RemindersController < Api::V2::ApiController
 		reminder = Reminder.update_attributes params[:reminder]
 	end
 
+	def destroy
+		reminder = Reminder.find params[:id]
+		if reminder.destroy
+			render json: {success: true}
+		else
+			render json: {failure: true}
+		end
+	end
+
 end
