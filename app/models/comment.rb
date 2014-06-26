@@ -17,6 +17,18 @@ class Comment < ActiveRecord::Base
 
     after_commit :notify, on: :create
 
+    def project
+      if report
+        report.project
+      elsif checklist_item
+        checklist_item.checklist.project
+      elsif worklist_item
+        worklist_item.worklist.project
+      elsif message
+        message.target_project
+      end
+    end
+
     def notify
         activity = activities.create(
             :user_id => user_id,
@@ -25,6 +37,7 @@ class Comment < ActiveRecord::Base
             :report_id => report_id,
             :worklist_item_id => worklist_item_id,
             :message_id => message_id,
+            :project_id => project.id, 
             :activity_type => self.class.name
         )
         puts "just created a comment activity" if activity.save
