@@ -19,6 +19,8 @@ class Project < ActiveRecord::Base
     has_many :folders, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
 
+    has_many :activities, :dependent => :destroy
+
     after_create :default_folders
     after_commit :adjust_users
 
@@ -138,6 +140,7 @@ class Project < ActiveRecord::Base
         t.add :recent_documents
         t.add :phases
         t.add :project_group, :if => :has_group?
+        t.add :activities
         ### slated for deletion ###
         t.add :categories
         ###
