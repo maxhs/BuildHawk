@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
   	has_one :checklist, :dependent => :destroy
     has_many :folders, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
-
+    has_many :reminders, :dependent => :destroy
     has_many :activities, :dependent => :destroy
 
     after_create :default_folders
@@ -118,7 +118,7 @@ class Project < ActiveRecord::Base
     end
 
     def active_reminders
-        Reminder.where("project_id = ? and reminder_datetime < ?",id,Time.now+1.day)
+        Reminder.where("project_id = ? and active = ?",id,true)
     end
 
     def recent_activities
