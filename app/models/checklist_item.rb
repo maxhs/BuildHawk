@@ -54,7 +54,7 @@ class ChecklistItem < ActiveRecord::Base
       category.phase.name if category && category.phase
     end
 
-    def create_activity
+    def log_activity
         if status == "Completed" && completed_date == nil
             self.update_attribute :completed_date, Date.today
             if category.completed_count != 0 && category.completed_count == category.item_count

@@ -33,6 +33,8 @@ class Report < ActiveRecord::Base
     accepts_nested_attributes_for :report_users, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
+    after_commit :log_activity
+
     #websolr
     searchable do
         text    :body
@@ -43,6 +45,10 @@ class Report < ActiveRecord::Base
             users.map(&:full_name)
         end
         time    :created_at
+    end
+
+    def log_activity
+        puts "Should be creating a new activity for report: #{created_date}"
     end
 
     def possible_types
