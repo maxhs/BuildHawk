@@ -21,10 +21,7 @@ class Reminder < ActiveRecord::Base
 	end
 
 	def unschedule
-		Activity.where(:activity_type => self.class.name, :checklist_item_id => checklist_item_id, :user_id => user_id).each do |a| 
-			puts "Destroying an activity because we're deleting the Reminder"
-			a.destroy 
-		end
+		Activity.where(:activity_type => self.class.name, :checklist_item_id => checklist_item_id, :user_id => user_id).each do |a| a.destroy end
 		Resque.remove_delayed(SetReminder,id)
 	end
 

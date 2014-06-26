@@ -117,6 +117,10 @@ class Project < ActiveRecord::Base
         return feed.flatten.sort_by(&:updated_at).reverse.first(limit)
     end
 
+    def active_reminders
+        Reminder.where("project_id = ? and reminder_datetime < ?",id,Time.now+1.day)
+    end
+
     ## deprecated
     def categories
         checklist.phases if checklist
@@ -141,6 +145,7 @@ class Project < ActiveRecord::Base
         t.add :phases
         t.add :project_group, :if => :has_group?
         t.add :activities
+        t.add :active_reminders
         ### slated for deletion ###
         t.add :categories
         ###
