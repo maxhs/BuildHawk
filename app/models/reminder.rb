@@ -1,4 +1,5 @@
 class Reminder < ActiveRecord::Base
+	include ActionView::Helpers::TextHelper
 	attr_accessible :user_id, :checklist_item_id, :project_id, :reminder_datetime, :email, :text, :push, :active
 
 	belongs_to :user
@@ -9,10 +10,19 @@ class Reminder < ActiveRecord::Base
 	before_destroy :unschedule
 
 	def schedule
+		truncated = truncate(checklist_item.body, length:20)
+		Activity.create(
+			:checklist_item_id => checklist_item_id,
+			:project_id => project_id,
+			:user_id => user_id,
+			:activity_type => self.class.name,
+			:body => "#{user.full_name} just set a reminder for #{truncated}: #{reminder_datetime.strftime("%b %e, %l:%M %p")}."
+		)
 
 	end
 
 	def unschedule
+
 
 	end
 
