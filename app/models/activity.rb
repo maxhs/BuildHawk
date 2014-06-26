@@ -21,4 +21,20 @@ class Activity < ActiveRecord::Base
 		t.add :body
 		t.add :hidden
 	end
+
+	api_accessible :user, :extend => :projects do |t|
+      
+    end
+
+    api_accessible :company, :extend => :projects do |t|
+      
+    end
+
+    api_accessible :worklist, :extend => :projects do |t|
+      
+    end
+
+    api_accessible :details, :extend => :projects do |t|
+      
+    end
 end
