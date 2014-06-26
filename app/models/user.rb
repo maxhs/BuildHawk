@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     has_many :messages, :through => :message_users , autosave: true
 
     has_many :alternates, :dependent => :destroy
+    has_many :activities#, :dependent => :destroy
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable
 
