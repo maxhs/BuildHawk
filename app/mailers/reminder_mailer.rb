@@ -6,7 +6,8 @@ class ReminderMailer < ActionMailer::Base
       	@recipient = @reminder.user
       	@checklist_item = @reminder.checklist_item
       	@project = @checklist_item.checklist.project
-      	@logo_url = @project.company.image.url(:small) if @project && @project.company.image_file_name
+      	@company = @project.company
+      	@logo_url = @company.image.url(:small) if @company.image_file_name
       	mail(
          	:subject => "Reminder: #{@checklist_item.body[0..20]}...",
           	:to      => @recipient.email,
