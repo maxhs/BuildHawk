@@ -17,7 +17,7 @@ class Reminder < ActiveRecord::Base
 			:activity_type => self.class.name,
 			:body => "#{user.full_name} just set a reminder for \"#{checklist_item.body[0..20]}...}\": #{reminder_datetime.strftime("%b %e, %l:%M %p")}."
 		)
-		Resque.enqueue_at(reminder_datetime, Reminder, id)
+		Resque.enqueue_at(reminder_datetime, SetReminder, id)
 	end
 
 	def unschedule
@@ -25,7 +25,7 @@ class Reminder < ActiveRecord::Base
 			puts "Destroying an activity because we're deleting the Reminder"
 			a.destroy 
 		end
-		Resque.remove_delayed(Reminder,id)
+		Resque.remove_delayed(SetReminder,id)
 	end
 
 	def reminder_date
