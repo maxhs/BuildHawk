@@ -22,7 +22,15 @@ class Reminder < ActiveRecord::Base
 	end
 
 	def unschedule
+		Activity.where(:activity_type => self.class.name, :checklist_item_id => checklist_item_id, :user_id => user_id).each do |a| 
+			puts "Destroying an activity because we're deleting the Reminder"
+			a.destroy 
+		end
 
+	end
+
+	def reminder_date
+		reminder_datetime.to_i
 	end
 
 	acts_as_api
@@ -31,7 +39,7 @@ class Reminder < ActiveRecord::Base
 		t.add :id
 		t.add :user
 		t.add :checklist_item_id
-		t.add :reminder_datetime
+		t.add :reminder_date
 		t.add :email
 		t.add :text
 		t.add :push
@@ -57,6 +65,7 @@ class Reminder < ActiveRecord::Base
     api_accessible :details, :extend => :projects do |t|
       
     end
+
     api_accessible :detail, :extend => :projects do |t|
       
     end
