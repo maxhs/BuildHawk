@@ -12,7 +12,7 @@ class Activity < ActiveRecord::Base
 	acts_as_api
 
 	api_accessible :projects do |t|
-		t.add :is
+		t.add :id
 		t.add :user_id
 		t.add :checklist_item_id
 		t.add :report_id
