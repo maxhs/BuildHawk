@@ -4,5 +4,6 @@ class ModifyProjectSubs < ActiveRecord::Migration
   	rename_table :edits, :activities
   	add_column :activities, :activity_type, :string
   	add_column :activities, :comment_id, :integer
+  	add_column :activities, :message_id, :integer
   end
 end

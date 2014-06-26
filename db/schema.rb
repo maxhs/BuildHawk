@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.datetime "updated_at"
     t.string   "activity_type"
     t.integer  "comment_id"
+    t.integer  "message_id"
   end
 
   create_table "addresses", force: true do |t|
