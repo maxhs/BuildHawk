@@ -15,7 +15,7 @@ class ChecklistItem < ActiveRecord::Base
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
-    after_commit :create_activity
+    after_commit :log_activity
 
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
