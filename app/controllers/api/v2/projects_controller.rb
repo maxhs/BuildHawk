@@ -61,8 +61,6 @@ class Api::V2::ProjectsController < Api::V2::ApiController
       	end
     end
 
-  
-
     def dash
     	@project = Project.find params[:id]
         unless @project.checklist.nil?
