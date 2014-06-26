@@ -121,6 +121,10 @@ class Project < ActiveRecord::Base
         Reminder.where("project_id = ? and reminder_datetime < ?",id,Time.now+1.day)
     end
 
+    def recent_activities
+        Activity.where("project_id = ? and created_at < ?",id,Time.now+1.day)
+    end
+
     ## deprecated
     def categories
         checklist.phases if checklist
@@ -144,7 +148,7 @@ class Project < ActiveRecord::Base
         t.add :recent_documents
         t.add :phases
         t.add :project_group, :if => :has_group?
-        t.add :activities
+        t.add :recent_activities
         t.add :active_reminders
         ### slated for deletion ###
         t.add :categories
