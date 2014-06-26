@@ -18,6 +18,7 @@ class Activity < ActiveRecord::Base
 		t.add :report_id
 		t.add :comment_id
 		t.add :worklist_item_id
+		t.add :project_id
 		t.add :body
 		t.add :hidden
 	end
@@ -39,6 +40,9 @@ class Activity < ActiveRecord::Base
     end
 
     api_accessible :details, :extend => :projects do |t|
+      
+    end
+    api_accessible :detail, :extend => :projects do |t|
       
     end
 end
