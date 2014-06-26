@@ -11,10 +11,6 @@ Buildhawk::Application.routes.draw do
     get '/register', :to => "registrations#new"
   end
 
-  get 'privacy', :to => "home#privacy", :as => :privacy
-  get 'terms', :to => "home#terms", :as => :terms
-  get 'about', :to => "home#about", :as => :about
-  post "/projects/search", :to => "projects#search"
   post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
   get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
@@ -33,7 +29,7 @@ Buildhawk::Application.routes.draw do
       get :email_unsubscribe
     end
   end
-  resources :home do 
+  resources :home, only: [:index], path:"" do 
     collection do
       get :about
       get :privacy
@@ -180,6 +176,54 @@ Buildhawk::Application.routes.draw do
       patch :promo_code
     end
   end
+
+  # get "/api/v1/punchlists", to: "api/v1/worklists#index"
+  # get "/api/v1/punchlists/:id", to: "api/v1/worklists#show"
+  # get "/api/v1/punchlist_items/:id", to: "api/v1/worklist_items#show"
+  # post "/api/v1/punchlist_items", to: "api/v1/worklist_items#create"
+  # put "/api/v1/punchlist_items/:id", to: "api/v1/worklist_items#update"
+  # patch "/api/v1/punchlist_items/:id", to: "api/v1/worklist_items#update"
+  # post "/api/v1/punchlists/photo", to: "api/v1/worklists#photo"
+
+  # #mobile API v1
+  # namespace :api do
+  #   namespace :v1 do
+  #     resources :photos
+  #     resources :sessions, :only => [:create, :forgot_password] do
+  #       collection do 
+  #         post :forgot_password
+  #       end 
+  #     end
+  #     resources :companies 
+  #     resources :projects do
+  #       collection do
+  #         get :dash
+  #       end
+  #     end
+  #     resources :checklists
+  #     resources :checklist_items do
+  #       collection do
+  #         post :photo
+  #       end
+  #     end
+  #     resources :worklists, :only => [:show]
+  #     resources :worklist_items do
+  #       collection do
+  #         post :photo
+  #       end
+  #     end
+  #     resources :comments
+  #     resources :reports do
+  #       member do
+  #         get :review_report
+  #       end
+  #       collection do
+  #         post :photo
+  #         delete :remove_personnel
+  #       end
+  #     end
+  #   end
+  # end
 
   get "/api/v2/punchlists", to: "api/v2/worklists#index"
   get "/api/v2/punchlists/:id", to: "api/v2/worklists#show"

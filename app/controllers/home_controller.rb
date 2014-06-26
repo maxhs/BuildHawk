@@ -9,6 +9,14 @@ class HomeController < ApplicationController
 		end
 	end
 
+	def show
+		if user_signed_in?
+			redirect_to projects_path
+		else
+			render :index
+		end
+	end
+
 	def about
 		if request.xhr?
 			respond_to do |format|
@@ -21,5 +29,9 @@ class HomeController < ApplicationController
 
 	def privacy
 		
+	end
+
+	def terms
+
 	end
 end
