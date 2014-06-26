@@ -237,6 +237,10 @@ Buildhawk::Application.routes.draw do
   patch "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#update"
   post "/api/v2/punchlist_items/photo", to: "api/v2/worklist_items#photo"
 
+  #temporary
+  get "/api/v2/users/:id/worklist_connect", to: "api/v2/users#connect"
+  #
+
   #mobile API v2
   namespace :api do
     namespace :v2 do
@@ -249,7 +253,7 @@ Buildhawk::Application.routes.draw do
       end
       resources :users do
         member do
-          get :worklist_connect
+          get :connect
         end
       end
       resources :companies
