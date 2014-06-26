@@ -30,6 +30,7 @@ class Reminder < ActiveRecord::Base
 	api_accessible :projects do |t|
 		t.add :id
 		t.add :user
+		t.add :checklist_item_id
 		t.add :reminder_datetime
 		t.add :email
 		t.add :text
