@@ -15,7 +15,7 @@ class ChecklistItem < ActiveRecord::Base
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
-    #after_commit :log_activity
+    after_commit :log_activity
 
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
@@ -55,7 +55,7 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity
-        if status == "Completed" && completed_date == nil
+        if status == "Completed" && completed_date.nil?
             self.completed_date = Date.today
             self.save
             if category.completed_count != 0 && category.completed_count == category.item_count
@@ -84,10 +84,8 @@ class ChecklistItem < ActiveRecord::Base
                 :body => message
             ).first_or_create
             
-        elsif status != "Completed"
-            self.completed_date = nil
-            self.completed_by_user = nil
-            self.save
+        elsif !completed_date.nil?
+            self.update_attributes :completed_date => nil, :completed_by_user => nil
         end
     end
 
