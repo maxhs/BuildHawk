@@ -58,20 +58,20 @@ class ChecklistItem < ActiveRecord::Base
         if status == "Completed"
             self.update_attribute :completed_date, Date.today if completed_date.nil?
 
-            # if completed_by_user
-            #     activities.create!(
-            #         :body => "#{completed_by_user.full_name} just marked the following checklist item complete:\"#{body[0..15]}\"",
-            #         :user_id => completed_by_user_id,
-            #         :project_id => checklist.project.id,
-            #         :activity_type => self.class.name
-            #     )
-            # else
-            #     activities.create!(
-            #         :body => "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}",
-            #         :project_id => checklist.project.id,
-            #         :activity_type => self.class.name
-            #     )
-            # end
+            if completed_by_user
+                activities.create!(
+                    :body => "#{completed_by_user.full_name} just marked the following checklist item complete:\"#{body[0..15]}\"",
+                    :user_id => completed_by_user_id,
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
+                )
+            else
+                activities.create!(
+                    :body => "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}",
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
+                )
+            end
 
             category.update_attribute :completed_date, Date.today if category.completed_count == category.item_count    
         else
