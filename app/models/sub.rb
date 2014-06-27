@@ -52,35 +52,35 @@ class Sub < ActiveRecord::Base
         t.add :count
   	end
 
-    api_accessible :user, :extend => :report do |t|
+    api_accessible :user, :extend => :reports do |t|
 
     end
 
-    api_accessible :projects, :extend => :report do |t|
+    api_accessible :projects, :extend => :reports do |t|
 
     end
 
-    api_accessible :detail, :extend => :report do |t|
+    api_accessible :detail, :extend => :reports do |t|
 
     end
 
-    api_accessible :worklist, :extend => :report do |t|
+    api_accessible :worklist, :extend => :reports do |t|
 
     end
 
-    api_accessible :checklists, :extend => :report do |t|
+    api_accessible :checklists, :extend => :reports do |t|
 
     end
     
-    api_accessible :login, :extend => :report do |t|
+    api_accessible :login, :extend => :reports do |t|
 
     end
 
-    api_accessible :company, :extend => :report do |t|
+    api_accessible :company, :extend => :reports do |t|
 
     end
 
-    api_accessible :details do |t|
+    api_accessible :details, :extend => :reports do |t|
 
     end
 end
