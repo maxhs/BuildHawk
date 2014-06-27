@@ -157,7 +157,7 @@ class Photo < ActiveRecord::Base
 
 	end
 
-	api_accessible :checklist, :extend => :dashboard do |t|
+	api_accessible :checklists, :extend => :dashboard do |t|
 
 	end
 
@@ -165,11 +165,7 @@ class Photo < ActiveRecord::Base
 
 	end
 
-	api_accessible :detail, :extend => :dashboard do |t|
-
-	end
-
-	api_accessible :report, :extend => :dashboard do |t|
+	api_accessible :reports, :extend => :dashboard do |t|
 
 	end
 
