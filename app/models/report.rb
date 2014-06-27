@@ -49,6 +49,12 @@ class Report < ActiveRecord::Base
 
     def log_activity
         puts "Should be creating a new activity for report: #{created_date}"
+        activities.create(
+            :project_id => project_id,
+            :report_id => id,
+            :activity_type => self.class.name,
+            :body => "#{report_type} Report - #{created_date} was updated." 
+        )
     end
 
     def possible_types

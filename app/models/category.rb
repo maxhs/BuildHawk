@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
   	belongs_to :phase
   	has_many :checklist_items, :dependent => :destroy
 
-    after_save :check_completed
+    after_commit :check_completed
     after_create :order_indices
 
     acts_as_list scope: :phase, column: :order_index
@@ -21,10 +21,12 @@ class Category < ActiveRecord::Base
     def check_completed
         if phase.completed_count != 0 && phase.completed_count == phase.item_count
             phase.update_attribute :completed_date, Date.today
-            status = "Completed"
+            self.status = "Completed" 
+            self.save
         elsif completed_date != nil
-            completed_date = nil
-            status = nil
+            self.completed_date = nil
+            self.status = nil
+            self.save
         end
     end
 
