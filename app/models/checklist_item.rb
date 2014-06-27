@@ -55,29 +55,26 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity
-        if status == "Completed" && completed_date.nil?
-            self.update_attribute :completed_date, Date.today
-            
-            if category.completed_count != 0 && category.completed_count == category.item_count
-                category.update_attribute :completed_date, Date.today
-            end
+        if status == "Completed"
+            self.update_attribute :completed_date, Date.today if completed_date.nil?
 
-            #TODO create a completed notification
             if completed_by_user
-                message = "#{completed_by_user.full_name} just marked the following checklist item complete:\"#{body[0..15]}\""
+                activities.create!(
+                    :body => "#{completed_by_user.full_name} just marked the following checklist item complete:\"#{body[0..15]}\"",
+                    :user_id => completed_by_user_id,
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
+                )
             else
-                message = "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}"
+                activities.create!(
+                    :body => "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}",
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
+                )
             end
-            
-            activities.create(
-                :body => "This item was marked complete",
-                :user_id => completed_by_user.id,
-                :project_id => checklist.project.id,
-                :activity_type => self.class.name
-            )
-            puts "just created an activity! #{activity}"
 
-        elsif !completed_date.nil?
+            category.update_attribute :completed_date, Date.today if category.completed_count == category.item_count    
+        else
             self.update_attributes :completed_date => nil, :completed_by_user => nil
         end
     end
