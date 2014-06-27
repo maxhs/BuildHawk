@@ -75,7 +75,7 @@ class ChecklistItem < ActiveRecord::Base
 
             category.update_attribute :completed_date, Date.today if category.completed_count == category.item_count    
         else
-            self.update_attributes :completed_date => nil, :completed_by_user => nil
+            #self.update_attributes :completed_date => nil, :completed_by_user => nil
         end
     end
 
