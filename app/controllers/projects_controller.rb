@@ -117,11 +117,7 @@ class ProjectsController < ApplicationController
 
 	def destroy
 		@project.update_attribute :company_id, nil
-		#if Rails.env.production?
-        #	@project.background_destroy
-    	#else 
-    		@project.destroy
-    	#end
+    	@project.destroy
 		redirect_to projects_path
 	end
 
