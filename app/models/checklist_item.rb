@@ -107,6 +107,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :comments_count
         t.add :activities
         t.add :reminders
+        t.add :project_id
   	end
 
     api_accessible :checklists, :extend => :projects do |t|
