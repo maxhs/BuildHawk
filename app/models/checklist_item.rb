@@ -56,8 +56,8 @@ class ChecklistItem < ActiveRecord::Base
 
     def log_activity
         if status == "Completed" && completed_date.nil?
-            self.completed_date = Date.today
-            self.save
+            self.update_attribute :completed_date, Date.today
+            
             if category.completed_count != 0 && category.completed_count == category.item_count
                 category.update_attribute :completed_date, Date.today
             end
@@ -69,7 +69,7 @@ class ChecklistItem < ActiveRecord::Base
                 message = "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}"
             end
             
-            activity = activities.create(
+            activities.create(
                 :body => "This item was marked complete",
                 :user_id => completed_by_user.id,
                 :project_id => checklist.project.id,
@@ -77,13 +77,6 @@ class ChecklistItem < ActiveRecord::Base
             )
             puts "just created an activity! #{activity}"
 
-            notification = checklist.project.notifications.where(
-                :checklist_item_id => id,
-                :notification_type => self.class.name,
-                :feed => true,
-                :body => message
-            ).first_or_create
-            
         elsif !completed_date.nil?
             self.update_attributes :completed_date => nil, :completed_by_user => nil
         end
