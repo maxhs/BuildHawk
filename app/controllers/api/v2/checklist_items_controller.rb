@@ -2,7 +2,7 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
 
     def update
     	item = ChecklistItem.find params[:id]
-    	item.update_attributes params[:checklist_item][:status]
+    	item.update_attributes params[:checklist_item]
     	respond_to do |format|
         	format.json { render_for_api :detail, :json => item, :root => :checklist_item}
       	end
