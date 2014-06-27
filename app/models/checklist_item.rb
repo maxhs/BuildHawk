@@ -75,7 +75,7 @@ class ChecklistItem < ActiveRecord::Base
 
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
         elsif !completed_date.nil?
-            self.update_attribute :completed_date, nil
+            self.update_attributes :completed_date => nil, :completed_by_user_id => nil
             #completed_by_user_id = nil
         end
     end
