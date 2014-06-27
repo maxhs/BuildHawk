@@ -100,7 +100,7 @@ class Company < ActiveRecord::Base
       
     end
     
-    api_accessible :report do |t|
+    api_accessible :reports do |t|
         t.add :id
         t.add :name
         t.add :users

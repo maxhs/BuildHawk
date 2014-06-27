@@ -18,15 +18,15 @@ class Comment < ActiveRecord::Base
     after_commit :notify, on: :create
 
     def project
-      if report
-        report.project
-      elsif checklist_item
-        checklist_item.checklist.project
-      elsif worklist_item
-        worklist_item.worklist.project
-      elsif message
-        message.target_project
-      end
+        if report
+            report.project
+        elsif checklist_item
+            checklist_item.checklist.project
+        elsif worklist_item
+            worklist_item.worklist.project
+        elsif message
+            message.target_project
+        end
     end
 
     def notify
@@ -79,11 +79,11 @@ class Comment < ActiveRecord::Base
 
   	end
 
-    api_accessible :checklist, :extend => :projects do |t|
+    api_accessible :checklists, :extend => :projects do |t|
 
     end
 
-    api_accessible :detail, :extend => :projects do |t|
+    api_accessible :details, :extend => :projects do |t|
 
     end
 
@@ -91,7 +91,7 @@ class Comment < ActiveRecord::Base
 
     end
 
-    api_accessible :report, :extend => :projects do |t|
+    api_accessible :reports, :extend => :projects do |t|
 
     end
 end

@@ -5,7 +5,7 @@ class ReportCompany < ActiveRecord::Base
 	
 	acts_as_api
 
-  	api_accessible :report do |t|
+  	api_accessible :reports do |t|
   		t.add :id
   		t.add :company
   		t.add :count

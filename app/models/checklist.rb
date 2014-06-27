@@ -125,7 +125,7 @@ class Checklist < ActiveRecord::Base
         t.add :id
 	end
 
-    api_accessible :checklist do |t|
+    api_accessible :checklists do |t|
         t.add :id
         t.add :phases
         t.add :name

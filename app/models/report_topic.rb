@@ -5,7 +5,7 @@ class ReportTopic < ActiveRecord::Base
 
 	acts_as_api
 
-  	api_accessible :report do |t|
+  	api_accessible :reports do |t|
   		t.add :id
   		t.add :report_id
   		t.add :safety_topic

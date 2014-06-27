@@ -189,7 +189,7 @@ class User < ActiveRecord::Base
         t.add :phone
     end
 
-    api_accessible :checklist do |t|
+    api_accessible :checklists do |t|
         t.add :first_name
         t.add :last_name
         t.add :full_name
@@ -198,11 +198,7 @@ class User < ActiveRecord::Base
         t.add :id
     end
 
-    api_accessible :detail, :extend => :checklist do |t|
-
-    end
-
-    api_accessible :report do |t|
+    api_accessible :reports do |t|
         t.add :id
         t.add :first_name
         t.add :last_name
@@ -211,7 +207,7 @@ class User < ActiveRecord::Base
         t.add :phone
     end
 
-    api_accessible :company, :extend => :report do |t|
+    api_accessible :company, :extend => :reports do |t|
 
     end
 end

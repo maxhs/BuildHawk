@@ -56,4 +56,7 @@ class Activity < ActiveRecord::Base
     api_accessible :dashboard, :extend => :projects do |t|
       
     end
+    api_accessible :reports, :extend => :projects do |t|
+      
+    end
 end

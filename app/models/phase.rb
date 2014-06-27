@@ -59,7 +59,7 @@ class Phase < ActiveRecord::Base
 
     end
 
-    api_accessible :checklist do |t|
+    api_accessible :checklists do |t|
       t.add :id
       t.add :categories
       t.add :name

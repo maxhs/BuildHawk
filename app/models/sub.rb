@@ -44,7 +44,7 @@ class Sub < ActiveRecord::Base
   	
     acts_as_api
 
-  	api_accessible :report do |t|
+  	api_accessible :reports do |t|
       	t.add :id
       	t.add :name
       	t.add :email
@@ -68,7 +68,7 @@ class Sub < ActiveRecord::Base
 
     end
 
-    api_accessible :checklist, :extend => :report do |t|
+    api_accessible :checklists, :extend => :report do |t|
 
     end
     

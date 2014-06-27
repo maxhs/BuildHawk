@@ -81,7 +81,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
     	report.update_attributes params[:report]
     	respond_to do |format|
-        	format.json { render_for_api :report, :json => report, :root => :report}
+        	format.json { render_for_api :reports, :json => report, :root => :report}
       	end
     end
 
@@ -90,7 +90,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if project.reports 
         	reports = project.reports.sort_by(&:date_for_sort).reverse
         	respond_to do |format|
-            	format.json { render_for_api :report, :json => reports, :root => :reports}
+            	format.json { render_for_api :reports, :json => reports, :root => :reports}
           	end
         else
             render :json => {:success => false}
@@ -110,7 +110,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         end
     
         respond_to do |format|
-            format.json { render_for_api :report, :json => company_topics, :root => :possible_topics}
+            format.json { render_for_api :reports, :json => company_topics, :root => :possible_topics}
         end
         
     end
@@ -123,7 +123,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         end
         if report 
             respond_to do |format|
-                format.json { render_for_api :report, :json => report, :root => :report}
+                format.json { render_for_api :reports, :json => report, :root => :report}
             end
         else
             render :json => {:success => false}
@@ -201,7 +201,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
 
             respond_to do |format|
-                format.json { render_for_api :report, :json => report, :root => :report}
+                format.json { render_for_api :reports, :json => report, :root => :report}
             end
         end
     end
@@ -211,7 +211,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             photo = Photo.create params[:photo]
             photo.update_attribute :mobile, true
             respond_to do |format|
-                format.json { render_for_api :report, :json => photo.report, :root => :report}
+                format.json { render_for_api :reports, :json => photo.report, :root => :report}
             end
         elsif params[:photos]
             params[:photos].each do |p|
@@ -221,7 +221,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
             report = Report.find params[:photo][:report_id]
             respond_to do |format|
-                format.json { render_for_api :report, :json => report, :root => :report}
+                format.json { render_for_api :reports, :json => report, :root => :report}
             end
         end
     end

@@ -33,7 +33,7 @@ class CompanySub < ActiveRecord::Base
 		t.add :subcontractor
 	end
 
-    api_accessible :report do |t|
+    api_accessible :reports do |t|
         t.add :id
         t.add :name, :if => :has_subcontractor?
         t.add :users, :if => :has_subcontractor?

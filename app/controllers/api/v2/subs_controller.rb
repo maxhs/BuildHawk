@@ -7,7 +7,7 @@ class Api::V2::SubsController < Api::V2::ApiController
 		ps = ProjectSub.where(:project_id => project.id, :sub_id => sub.id).first_or_create
 		if ps.save
 			respond_to do |format|
-        		format.json { render_for_api :report, :json => sub, :root => :sub}
+        		format.json { render_for_api :reports, :json => sub, :root => :sub}
       		end
 		else
 			render json: { failure: false }

@@ -7,7 +7,7 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
 		subcontractor.update_attributes params[:subcontractor] 
 		company.company_subs.create :subcontractor_id => subcontractor.id
     	respond_to do |format|
-        	format.json { render_for_api :report, :json => company, :root => :company}
+        	format.json { render_for_api :reports, :json => company, :root => :company}
       	end
 	end
 
