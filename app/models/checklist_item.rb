@@ -1,7 +1,7 @@
 class ChecklistItem < ActiveRecord::Base
-	attr_accessible :body, :item_type, :completed_by_user, :completed_by_user_id, :category_id, 
-                  :status, :critical_date, :completed_date,:photos, :photos_attributes, :checklist_id, :checklist, 
-                  :order_index, :photos_count, :comments_count, :user_id, :reminder_date
+	attr_accessible :body, :item_type, :completed_by_user_id, :category_id, :status, :critical_date, 
+                    :completed_date,:photos, :photos_attributes, :checklist_id, :order_index, :photos_count, 
+                    :comments_count, :user_id, :reminder_date
   	
   	belongs_to :user
     belongs_to :category
@@ -32,11 +32,11 @@ class ChecklistItem < ActiveRecord::Base
 
     elsif Rails.env.development?
       
-      searchable do
-        text    :body
-        text    :status
-        integer :checklist_id
-      end
+        searchable do
+            text    :body
+            text    :status
+            integer :checklist_id
+        end
     
     end
 
@@ -74,10 +74,8 @@ class ChecklistItem < ActiveRecord::Base
             end
 
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
-        else
-            completed_date = nil
-            completed_by_user_id = nil
-            self.save
+        elsif !completed_date.nil?
+            self.update_attribute :completed_date, nil
         end
     end
 
