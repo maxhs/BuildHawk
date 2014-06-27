@@ -58,7 +58,7 @@ class Category < ActiveRecord::Base
         t.add :order_index
   	end
 
-    api_accessible :checklist do |t|
+    api_accessible :checklists do |t|
         t.add :id
         t.add :checklist_items
         t.add :name
