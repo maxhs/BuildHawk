@@ -10,6 +10,10 @@ class Activity < ActiveRecord::Base
 	belongs_to :comment
 	belongs_to :message
 
+	def created_date
+		created_at.to_i
+	end
+
 	acts_as_api
 
 	api_accessible :projects do |t|
@@ -22,6 +26,7 @@ class Activity < ActiveRecord::Base
 		t.add :project_id
 		t.add :body
 		t.add :hidden
+		t.add :created_date
 	end
 
 	api_accessible :user, :extend => :projects do |t|
