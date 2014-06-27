@@ -1,5 +1,5 @@
 class ChecklistItem < ActiveRecord::Base
-	attr_accessible :body, :complete, :item_type, :completed_by_user, :completed_by_user_id, :category_id, 
+	attr_accessible :body, :item_type, :completed_by_user, :completed_by_user_id, :category_id, 
                   :status, :critical_date, :completed_date,:photos, :photos_attributes, :checklist_id, :checklist, 
                   :order_index, :photos_count, :comments_count, :user_id, :reminder_date
   	
@@ -15,7 +15,7 @@ class ChecklistItem < ActiveRecord::Base
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
-    after_commit :log_activity
+    #after_commit :log_activity
 
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
@@ -56,7 +56,8 @@ class ChecklistItem < ActiveRecord::Base
 
     def log_activity
         if status == "Completed" && completed_date == nil
-            self.update_attribute :completed_date, Date.today
+            self.completed_date = Date.today
+            self.save
             if category.completed_count != 0 && category.completed_count == category.item_count
                 category.update_attribute :completed_date, Date.today
             end
@@ -71,13 +72,14 @@ class ChecklistItem < ActiveRecord::Base
             activity = activities.create(
                 :body => "This item was marked complete",
                 :user_id => completed_by_user.id,
-                :project_id => checklist.project.id
+                :project_id => checklist.project.id,
+                :activity_type => self.class.name
             )
             puts "just created an activity! #{activity}"
 
             notification = checklist.project.notifications.where(
                 :checklist_item_id => id,
-                :notification_type => :checklist_item,
+                :notification_type => self.class.name,
                 :feed => true,
                 :body => message
             ).first_or_create
