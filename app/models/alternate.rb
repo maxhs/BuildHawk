@@ -10,7 +10,7 @@ class Alternate < ActiveRecord::Base
 		t.add :phone
 	end
 
-	api_accessible :reports, :extend => :userdo |t|
+	api_accessible :reports, :extend => :user do |t|
 
 	end
 
