@@ -134,6 +134,7 @@ class Report < ActiveRecord::Base
         t.add :report_users
         t.add :report_companies
         t.add :report_topics
+        t.add :activities
         ### slated for deletion in next version ###
         t.add :safety_topics
         t.add :report_subs
