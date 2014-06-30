@@ -125,6 +125,10 @@ class Project < ActiveRecord::Base
         Activity.where("project_id = ? and created_at < ?",id,Time.now+1.day)
     end
 
+    def personnel
+        users.map(&:company).uniq
+    end
+
     ## deprecated
     def categories
         checklist.phases if checklist
@@ -160,7 +164,7 @@ class Project < ActiveRecord::Base
         t.add :name
         t.add :company
         t.add :users
-        t.add :project_subs
+        t.add :personnel
     end
 
     api_accessible :details, :extend => :projects do |t|
