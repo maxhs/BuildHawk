@@ -91,10 +91,10 @@ class Api::V2::ReportsController < Api::V2::ApiController
     	project = Project.find params[:id]
         if project.reports 
             puts "found project reports"
-        	reports = project.reports.sort_by(&:date_for_sort).reverse
-            puts "got reports: #{reports.count}"
+        	the_reports = project.reports.sort_by(&:date_for_sort).reverse
+            puts "got reports: #{the_reports.count}"
         	respond_to do |format|
-            	format.json { render_for_api :reports, :json => reports, :root => :reports}
+            	format.json { render_for_api :reports, :json => the_reports, :root => :reports}
           	end
         else
             render :json => {:success => false}
@@ -268,7 +268,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
     private
 
     def refactor
-        if params[:report][:created_date]
+        if params[:report] && params[:report][:created_date]
             params[:report][:date_string] = params[:report][:created_date]
             params[:report].delete(:created_date)
         end

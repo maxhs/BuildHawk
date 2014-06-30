@@ -108,19 +108,19 @@ class ChecklistItem < ActiveRecord::Base
         t.add :project_id
   	end
 
+    api_accessible :details, :extend => :projects do |t|
+        t.add :photos
+        t.add :comments
+        t.add :phase_name
+        t.add :project_id
+    end
+
     api_accessible :checklists, :extend => :projects do |t|
 
     end
 
     api_accessible :dashboard, :extend => :projects do |t|
       
-    end
-
-    api_accessible :details, :extend => :projects do |t|
-        t.add :photos
-        t.add :comments
-        t.add :phase_name
-        t.add :project_id
     end
 
     protected
