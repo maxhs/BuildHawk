@@ -1,6 +1,6 @@
 class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :author_id, :project_id, :report_fields, :weather, :photos_attributes, 
-                  :users_attributes, :report_users_attributes, :users, :user_ids, :created_date, :subs, :sub_ids, :subs_attributes,
+                  :users_attributes, :report_users_attributes, :users, :user_ids, :date_string, :subs, :sub_ids, :subs_attributes,
                   :report_subs_attributes, :weather_icon, :temp, :wind, :precip, :humidity, :precip_accumulation, :mobile,
                   :company_ids, :companies, :report_companies_attributes
   	
@@ -24,7 +24,7 @@ class Report < ActiveRecord::Base
     has_many :connect_users
     
     validates_presence_of :report_type
-    validates_presence_of :created_date
+    validates_presence_of :date_string
 
     accepts_nested_attributes_for :users, :allow_destroy => true
     accepts_nested_attributes_for :subs, :allow_destroy => true
@@ -39,7 +39,7 @@ class Report < ActiveRecord::Base
     searchable do
         text    :body
         text    :weather
-        text    :created_date
+        text    :date_string
         integer :project_id
         text    :users do
             users.map(&:full_name)
@@ -48,12 +48,12 @@ class Report < ActiveRecord::Base
     end
 
     def log_activity
-        puts "Should be creating a new activity for report: #{created_date}"
+        puts "Should be creating a new activity for report: #{date_string}"
         activities.create(
             :project_id => project_id,
             :report_id => id,
             :activity_type => self.class.name,
-            :body => "#{report_type} Report - #{created_date} was updated." 
+            :body => "#{report_type} Report - #{date_string} was updated." 
         )
     end
 
@@ -62,8 +62,8 @@ class Report < ActiveRecord::Base
     end
 
     def date_for_sort
-        if created_date && created_date.length > 0
-            Date.strptime(created_date,"%m/%d/%Y")
+        if date_string && date_string.length > 0
+            Date.strptime(date_string,"%m/%d/%Y")
         else 
             created_at
         end
@@ -94,7 +94,7 @@ class Report < ActiveRecord::Base
 
     def clone_report_subs
         report_subs.each do |rs|
-            puts "Updating #{created_date} for sub: #{rs.sub.name}"
+            puts "Updating #{date_string} for sub: #{rs.sub.name}"
             company = Company.where(:name => rs.sub.name).first
             if company
                 puts "found company: #{company.name}"
@@ -109,14 +109,20 @@ class Report < ActiveRecord::Base
         end
     end
 
+    def updated_date
+        updated_at.to_i
+    end
+
+    def created_date
+        date_string
+    end
+
   	acts_as_api
 
   	api_accessible :reports do |t|
         t.add :id
         t.add :author
-        t.add :epoch_time
-        t.add :created_at
-        t.add :updated_at
+        t.add :date_string
         t.add :created_date
   		t.add :title
   		t.add :report_type
@@ -135,7 +141,8 @@ class Report < ActiveRecord::Base
         t.add :report_companies
         t.add :report_topics
         t.add :activities
-        ### slated for deletion in next version ###
+        ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
+        t.add :epoch_time
         t.add :safety_topics
         t.add :report_subs
         t.add :personnel

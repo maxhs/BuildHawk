@@ -1,4 +1,4 @@
-<h1 style="text-align:center"><%= @report.report_type %> - <%= @report.created_date %></h1>
+<h1 style="text-align:center"><%= @report.report_type %> - <%= @report.date_string %></h1>
 <h2 style="text-align:center"><%= @report.project.name %> </h2>
 
 <div>
@@ -30,7 +30,7 @@
 			<% if p.image_file_name %>
 				<%= link_to report_url(@report, :host => "www.buildhawk.com"), :style=>"float:left;margin:10px;" do %>
 					<%= image_tag(p.image.url(:small), :style => "width:100px;display:block;") %> 
-					<div style="text-align:center"><%= p.created_date %></div>
+					<div style="text-align:center"><%= p.date_string %></div>
 				<% end %>
 			<% end %>
 		<% end %>

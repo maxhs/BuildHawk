@@ -397,7 +397,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.text     "weather"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "created_date"
+    t.string   "date_string"
     t.string   "weather_icon"
     t.string   "temp"
     t.string   "wind"

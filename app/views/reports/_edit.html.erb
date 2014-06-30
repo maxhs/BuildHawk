@@ -11,7 +11,7 @@
 
 			<div class="row">
 				<div class="input-append date col-md-12" data-date-format="dd-mm-yyyy">
-					<%= f.text_field :created_date, :value => @report.created_date, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+					<%= f.text_field :date_string, :value => @report.date_string, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 				</div>
 			</div>
 
@@ -131,12 +131,12 @@
 
 <% if @previous %>
 	<div class="previous-report">
-		<h4><%= link_to "&#8592;  #{@previous.created_date}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
+		<h4><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
 	</div>
 <% end %>
 <% if @next %>
 	<div class="next-report">
-		<h4><%= link_to "#{@next.created_date}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
+		<h4><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
 	</div>
 <% end %>
 

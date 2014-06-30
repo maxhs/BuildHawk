@@ -23,7 +23,7 @@
 		
 			<% @reports.each do |report| %>
 				<div class="report row">
-					<div class="col-xs-3"><%= link_to "#{report.report_type} - #{report.created_date}", report_path(report), :remote => true %></div>
+					<div class="col-xs-3"><%= link_to "#{report.report_type} - #{report.date_string}", report_path(report), :remote => true %></div>
 					<div class="col-xs-3"><%= report.report_type %></div>
 					<div class="col-xs-2"><% if report.updated_at %><%= parse_time report.updated_at %><% end %></div>
 					<div class="col-xs-2"><%= report.personnel_count %></div>

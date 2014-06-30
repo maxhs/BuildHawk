@@ -72,8 +72,8 @@ class ReportsController < ApplicationController
 		#unless params[:report][:sub_ids].present?
 		#	params[:report][:sub_ids] = nil
 		#end
-		unless params[:report][:created_date] == @report.created_date && params[:report][:report_type] == @report.report_type
-			if @project.reports.where(:created_date => params[:report][:created_date], :report_type => params[:report][:report_type]).first
+		unless params[:report][:date_string] == @report.date_string && params[:report][:report_type] == @report.report_type
+			if @project.reports.where(:date_string => params[:report][:date_string], :report_type => params[:report][:report_type]).first
 				if request.xhr?
 					respond_to do |format|
 						format.js { render :template => "reports/existing"}
@@ -100,7 +100,7 @@ class ReportsController < ApplicationController
 
 	def create
 		@project = Project.find params[:report][:project_id]
-		if @project.reports.where(:created_date => params[:report][:created_date], :report_type => params[:report][:report_type]).first
+		if @project.reports.where(:date_string => params[:report][:date_string], :report_type => params[:report][:report_type]).first
 			if request.xhr?
 				respond_to do |format|
 					format.js { render :template => "reports/existing"}

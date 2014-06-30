@@ -119,7 +119,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         project = Project.find params[:id]
         if params[:date_string]
             date_string = params[:date_string].gsub '-','/' 
-            report = project.reports.where(:created_date => date_string).last
+            report = project.reports.where(:date_string => date_string).last
         end
         if report 
             respond_to do |format|
@@ -134,8 +134,8 @@ class Api::V2::ReportsController < Api::V2::ApiController
         @current_user = User.find params[:report][:author_id]
         project = Project.find params[:report][:project_id]
         reports_with_type = project.reports.where(:report_type => params[:report][:report_type])
-        if reports_with_type && reports_with_type.map(&:created_date).include?(params[:report][:created_date])
-            render json: {duplicate: "#{params[:report][:created_date]}"}
+        if reports_with_type && reports_with_type.map(&:date_string).include?(params[:report][:date_string])
+            render json: {duplicate: "#{params[:report][:date_string]}"}
         else
             if params[:report][:report_users].present?
                 users = params[:report][:report_users]
