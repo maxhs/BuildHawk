@@ -125,7 +125,7 @@ class Project < ActiveRecord::Base
         Activity.where("project_id = ? and created_at < ?",id,Time.now+1.day)
     end
 
-    def personnel
+    def companies
         users.map(&:company).uniq
     end
 
@@ -164,7 +164,7 @@ class Project < ActiveRecord::Base
         t.add :name
         t.add :company
         t.add :users
-        t.add :personnel
+        t.add :companies
     end
 
     api_accessible :details, :extend => :projects do |t|
