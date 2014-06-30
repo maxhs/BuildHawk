@@ -158,9 +158,9 @@ class Project < ActiveRecord::Base
     api_accessible :worklist do |t|
         t.add :id
         t.add :name
-        t.add :address
         t.add :company
-        t.add :active
+        t.add :users
+        t.add :company_subs
     end
 
     api_accessible :details, :extend => :projects do |t|

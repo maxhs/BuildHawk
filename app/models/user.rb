@@ -142,23 +142,23 @@ class User < ActiveRecord::Base
         t.add :first_name
         t.add :last_name
         t.add :full_name
-        t.add :admin
-        t.add :company_admin
-        t.add :uber_admin
         t.add :email
         t.add :formatted_phone
-        t.add :authentication_token
         t.add :company
         t.add :url_thumb
         t.add :url_small
-        t.add :url_medium
-        t.add :text_permissions
-        t.add :email_permissions
-        t.add :push_permissions
   	end
 
     api_accessible :login, :extend => :user do |t|
         t.add :coworkers
+        t.add :text_permissions
+        t.add :email_permissions
+        t.add :push_permissions
+        t.add :authentication_token
+        t.add :admin
+        t.add :company_admin
+        t.add :uber_admin
+        t.add :url_medium
     end
 
   	api_accessible :feed do |t|

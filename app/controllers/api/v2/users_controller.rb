@@ -2,7 +2,9 @@ class Api::V2::UsersController < Api::V2::ApiController
 	before_filter :find_user
 
 	def show
-		
+		respond_to do |format|
+        	format.json { render_for_api :login, :json => @user, :root => :user}
+      	end
 	end
 
 	def connect
