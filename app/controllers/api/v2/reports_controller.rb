@@ -90,7 +90,9 @@ class Api::V2::ReportsController < Api::V2::ApiController
     def show
     	project = Project.find params[:id]
         if project.reports 
+            puts "found project reports"
         	reports = project.reports.sort_by(&:date_for_sort).reverse
+            puts "got reports: #{reports.count}"
         	respond_to do |format|
             	format.json { render_for_api :reports, :json => reports, :root => :reports}
           	end
