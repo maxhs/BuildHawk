@@ -95,7 +95,7 @@ class Photo < ActiveRecord::Base
 		end 
 	end
 
-	def created_date
+	def date_string
 		if report
 			report.created_at.to_date
 		elsif worklist_item
@@ -103,6 +103,10 @@ class Photo < ActiveRecord::Base
 		else
 			created_at.to_date	
 		end
+	end
+
+	def created_date
+		date_string
 	end
 
 	def assignee
@@ -144,6 +148,7 @@ class Photo < ActiveRecord::Base
 		t.add :user_name
 		t.add :name
 		t.add :created_date
+		t.add :date_string
 		t.add :description#, :if => :has_description?
 		t.add :folder_name, :if => :has_folder?
 		t.add :folder_id, :if => :has_folder?

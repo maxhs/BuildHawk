@@ -1,5 +1,7 @@
 class Api::V2::ReportsController < Api::V2::ApiController
 
+    before_filter :refactor
+
     def update
         ##API compatibility
         if params[:report][:author_id]
@@ -258,6 +260,15 @@ class Api::V2::ReportsController < Api::V2::ApiController
             render :json=>{:success=>true}
         else
             render :json=>{:success=>false}
+        end
+    end
+
+    private
+
+    def refactor
+        if params[:report][:created_date]
+            params[:report][:date_string] = params[:report][:created_date]
+            params[:report].delete(:created_date)
         end
     end
 end
