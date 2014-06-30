@@ -31,13 +31,11 @@ class ChecklistItem < ActiveRecord::Base
       before_destroy :resque_solr_remove
 
     elsif Rails.env.development?
-      
         searchable do
             text    :body
             text    :status
             integer :checklist_id
         end
-    
     end
 
   	acts_as_api
@@ -111,10 +109,6 @@ class ChecklistItem < ActiveRecord::Base
   	end
 
     api_accessible :checklists, :extend => :projects do |t|
-
-    end
-
-    api_accessible :details, :extend => :projects do |t|
 
     end
 
