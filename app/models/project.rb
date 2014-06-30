@@ -160,7 +160,7 @@ class Project < ActiveRecord::Base
         t.add :name
         t.add :company
         t.add :users
-        t.add :company_subs
+        t.add :project_subs
     end
 
     api_accessible :details, :extend => :projects do |t|
