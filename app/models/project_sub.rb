@@ -10,4 +10,8 @@ class ProjectSub < ActiveRecord::Base
         t.add :id
         t.add :company_sub
     end
+    
+    api_accessible :worklist, :extend => :projects do |t|
+
+    end 
 end
