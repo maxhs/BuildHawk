@@ -125,6 +125,7 @@ class Project < ActiveRecord::Base
         Activity.where("project_id = ? and created_at < ?",id,Time.now+1.day)
     end
 
+    ## the companies for the users associated with this project
     def companies
         users.map(&:company).uniq
     end
@@ -154,7 +155,7 @@ class Project < ActiveRecord::Base
         t.add :project_group, :if => :has_group?
         t.add :recent_activities
         t.add :active_reminders
-        ### slated for deletion ###
+        ### slated for deletion in 1.04 ###
         t.add :categories
         ###
   	end

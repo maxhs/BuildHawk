@@ -315,4 +315,8 @@ Buildhawk::Application.routes.draw do
   constraints resque_constraint do
     mount Resque::Server.new, :at => "/resque"
   end
+
+  unless Rails.application.config.consider_all_requests_local
+    get '*not_found', to: 'errors#not_found'
+  end
 end

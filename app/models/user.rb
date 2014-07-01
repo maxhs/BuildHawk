@@ -147,7 +147,6 @@ class User < ActiveRecord::Base
         t.add :company
         t.add :url_thumb
         t.add :url_small
-        t.add :authentication_token
   	end
 
     api_accessible :login, :extend => :user do |t|
