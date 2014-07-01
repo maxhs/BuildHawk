@@ -34,5 +34,6 @@ module Buildhawk
 
     ActionMailer::Base.default :from => 'support@buildhawk.com'
 
+    config.exceptions_app = self.routes
   end
 end
