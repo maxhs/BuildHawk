@@ -70,7 +70,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     def show
         worklist_item = WorklistItem.find params[:id]
         respond_to do |format|
-            format.json { render_for_api :worklist, :json => worklist_item, :root => @root}
+            format.json { render_for_api :details, :json => worklist_item, :root => @root}
         end
     end
 

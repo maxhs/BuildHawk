@@ -96,4 +96,8 @@ class WorklistItem < ActiveRecord::Base
     api_accessible :projects, :extend => :worklist do |t|
 
     end
+
+    api_accessible :details, :extend => :worklist do |t|
+        t.add :activities
+    end
 end
