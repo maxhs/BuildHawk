@@ -119,6 +119,12 @@ class Photo < ActiveRecord::Base
 	def has_folder?
 		folder.present?
 	end
+	def folder_name
+		folder.name
+	end
+	def folder_id
+		folder_id
+	end
 
 	def epoch_time
       	created_at.to_i
@@ -143,6 +149,10 @@ class Photo < ActiveRecord::Base
 		t.add :date_string
 		t.add :description
 		t.add :folder, :if => :has_folder?
+		## deprecated
+		t.add :folder_name, :if => :has_folder?
+		t.add :folder_id, :if => :has_folder?
+		##
 	end
 
 	api_accessible :item, :extend => :dashboard do |t|
