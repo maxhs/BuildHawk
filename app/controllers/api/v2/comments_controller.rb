@@ -51,7 +51,7 @@ class Api::V2::CommentsController < Api::V2::ApiController
         end
 
         if comment.save
-            if comment.checklist_item
+            if comment.checklist_item || comment.worklist_item
                 respond_to do |format|
                     format.json { render_for_api :projects, :json => comment.activity, :root => :activity}
                 end
