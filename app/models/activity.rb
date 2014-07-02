@@ -21,12 +21,17 @@ class Activity < ActiveRecord::Base
 		created_at.to_i
 	end
 
+	def checklist_id
+		checklist_item.checklist.id
+	end
+
 	acts_as_api
 
 	api_accessible :projects do |t|
 		t.add :id
 		t.add :user_id
 		t.add :checklist_item_id
+		t.add :checklist_id
 		t.add :report_id
 		t.add :comment
 		t.add :worklist_item_id
