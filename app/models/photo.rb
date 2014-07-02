@@ -119,11 +119,9 @@ class Photo < ActiveRecord::Base
 	def has_folder?
 		folder.present?
 	end
+
 	def folder_name
 		folder.name
-	end
-	def folder_id
-		folder_id
 	end
 
 	def epoch_time
