@@ -33,7 +33,7 @@ class Report < ActiveRecord::Base
     accepts_nested_attributes_for :report_users, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
-    after_commit :log_activity
+    #after_commit :log_activity
 
     #websolr
     searchable do
@@ -53,7 +53,7 @@ class Report < ActiveRecord::Base
             :project_id => project_id,
             :report_id => id,
             :activity_type => self.class.name,
-            :body => "#{report_type} Report - #{date_string} was updated." 
+            #:body => "#{report_type} Report - #{date_string} was updated." 
         )
     end
 

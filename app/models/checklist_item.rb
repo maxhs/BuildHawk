@@ -20,15 +20,15 @@ class ChecklistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
     if Rails.env.production?
-      # websolr
-      searchable auto_index: false, auto_remove: false do
-        text    :body
-        text    :status
-        integer :checklist_id
-      end
+        # websolr
+        searchable auto_index: false, auto_remove: false do
+            text    :body
+            text    :status
+            integer :checklist_id
+        end
 
-      after_commit   :resque_solr_update, :if => :persisted?
-      before_destroy :resque_solr_remove
+        after_commit   :resque_solr_update, :if => :persisted?
+        before_destroy :resque_solr_remove
 
     elsif Rails.env.development?
         searchable do
@@ -41,15 +41,15 @@ class ChecklistItem < ActiveRecord::Base
   	acts_as_api
 
     def category_name
-      category.name if category
+        category.name if category
     end
 
     def types
-      ["S&C","Doc","Com"]
+        ["S&C","Doc","Com"]
     end
 
     def phase_name
-      category.phase.name if category && category.phase
+        category.phase.name if category && category.phase
     end
 
     def log_activity
@@ -58,14 +58,14 @@ class ChecklistItem < ActiveRecord::Base
 
             if completed_by_user
                 activities.create!(
-                    :body => "#{completed_by_user.full_name} just marked the following checklist item complete:\"#{body[0..15]}\"",
+                    :body => "#{completed_by_user.full_name} marked this item complete.",
                     :user_id => completed_by_user_id,
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
             else
                 activities.create!(
-                    :body => "The checklist item \"#{body[0..15]}\" was marked complete for #{checklist.project.name}",
+                    :body => "This item was marked complete.",
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )

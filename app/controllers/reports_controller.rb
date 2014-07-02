@@ -88,6 +88,13 @@ class ReportsController < ApplicationController
 		
 		@report.update_attributes params[:report]
 		
+		@report.activities.create(
+            :project_id => @report.project.id,
+            :activity_type => @report.class.name,
+            :user_id => current_user.id,
+            :body => "#{current_user.full_name} updated this report." 
+        )
+
 		@reports = @project.ordered_reports
 		if request.xhr?
 			respond_to do |format|
@@ -112,6 +119,14 @@ class ReportsController < ApplicationController
 			return
 		end
 		@report = @project.reports.create params[:report]
+
+		@report.activities.create(
+            :project_id => @report.project.id,
+            :activity_type => @report.class.name,
+            :user_id => current_user.id,
+            :body => "#{current_user.full_name} created this report." 
+        )
+
 		if @report.photos
 			@report.photos.each do |p|
 				p.update_attribute :user_id, current_user.id

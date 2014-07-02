@@ -5,11 +5,11 @@ class Api::V2::ReportsController < Api::V2::ApiController
     def update
         ##API compatibility
         if params[:report][:author_id]
-            @current_user = params[:report][:author_id]
+            current_user = params[:report][:author_id]
             params[:report].delete(:author_id)
         ##
         else
-            @current_user = User.find params[:user_id] 
+            current_user = User.find params[:user_id] 
         end
         
     	report = Report.find params[:id]
@@ -58,7 +58,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_subs].present?
             subs = params[:report][:report_subs]
             subs.each do |s|
-                sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
+                sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
                 the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
                 the_sub.update_attribute :count, s[:count]
             end
@@ -81,7 +81,16 @@ class Api::V2::ReportsController < Api::V2::ApiController
             params[:report].delete(:safety_topics)
         end
 
+        ## finally. an update.
     	report.update_attributes params[:report]
+
+        report.activities.create(
+            :project_id => report.project.id,
+            :activity_type => report.class.name,
+            :user_id => current_user.id,
+            :body => "#{current_user.full_name} updated this report." 
+        )
+
     	respond_to do |format|
         	format.json { render_for_api :reports, :json => report, :root => :report}
       	end
@@ -132,7 +141,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
     end
 
     def create
-        @current_user = User.find params[:report][:author_id]
+        current_user = User.find params[:report][:author_id]
         project = Project.find params[:report][:project_id]
         reports_with_type = project.reports.where(:report_type => params[:report][:report_type])
         if reports_with_type && reports_with_type.map(&:date_string).include?(params[:report][:date_string])
@@ -185,7 +194,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
             if subs
                 subs.each do |s|
-                    sub = Sub.where(:name => s[:name], :company_id => @current_user.company.id).first_or_create
+                    sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
                     the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
                     the_sub.update_attribute :count, s[:count]
                 end
@@ -200,6 +209,13 @@ class Api::V2::ReportsController < Api::V2::ApiController
                     end
                 end
             end
+
+            report.activities.create(
+                :project_id => report.project.id,
+                :activity_type => report.class.name,
+                :user_id => current_user.id,
+                :body => "#{current_user.full_name} created this report." 
+            )
 
             respond_to do |format|
                 format.json { render_for_api :reports, :json => report, :root => :report}

@@ -113,19 +113,12 @@ class Photo < ActiveRecord::Base
 		worklist_item.assignee.full_name if worklist_item && worklist_item.assignee
 	end
 
-	def folder_name	
-		folder.name if folder
-	end
-
 	def has_assignee?
 		!worklist_item_id.nil?
 	end
 
 	def has_folder?
 		folder.present?
-	end
-	def has_description?
-		description.present?
 	end
 
 	def epoch_time
@@ -149,9 +142,8 @@ class Photo < ActiveRecord::Base
 		t.add :name
 		t.add :created_date
 		t.add :date_string
-		t.add :description#, :if => :has_description?
-		t.add :folder_name, :if => :has_folder?
-		t.add :folder_id, :if => :has_folder?
+		t.add :description
+		t.add :folder, :if => :has_folder?
 	end
 
 	api_accessible :item, :extend => :dashboard do |t|

@@ -15,7 +15,7 @@ class Reminder < ActiveRecord::Base
 			:project_id => project_id,
 			:user_id => user_id,
 			:activity_type => self.class.name,
-			:body => "#{user.full_name} just set a reminder for \"#{checklist_item.body[0..20]}...}\": #{reminder_datetime.strftime("%b %e, %l:%M %p")}."
+			:body => "#{user.full_name} just set a reminder for #{reminder_datetime.strftime("%b %e, %l:%M %p")}."
 		)
 		Resque.enqueue_at(reminder_datetime, SetReminder, id)
 	end
