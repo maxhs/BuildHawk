@@ -29,7 +29,7 @@ class Comment < ActiveRecord::Base
     end
 
     def notify
-        activity.create(
+        activity = Activity.create(
             :user_id => user_id,
             :body => "\"#{body}\"",
             :checklist_item_id => checklist_item_id,
@@ -40,7 +40,7 @@ class Comment < ActiveRecord::Base
             :comment_id => id,
             :activity_type => self.class.name
         )
-        puts "just created a comment activity" if activity.save
+        puts "just created a comment activity" if activity.save && self.save
 
         if report && report.author
             report.author.notifications.where(
