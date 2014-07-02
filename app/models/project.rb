@@ -153,7 +153,7 @@ class Project < ActiveRecord::Base
         t.add :recent_documents
         t.add :phases
         t.add :project_group, :if => :has_group?
-        t.add :recent_activities
+        t.add :activities
         t.add :active_reminders
         ### slated for deletion in 1.04 ###
         t.add :categories
