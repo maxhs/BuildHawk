@@ -73,6 +73,7 @@ class WorklistItem < ActiveRecord::Base
 
     api_accessible :worklist do |t|
   		t.add :id
+        t.add :worklist_id
         t.add :user
   		t.add :body
   		t.add :assignee
