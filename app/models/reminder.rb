@@ -5,6 +5,7 @@ class Reminder < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :checklist_item
 	belongs_to :project
+	belongs_to :worklist_item
 
 	after_commit :schedule, on: :create
 	before_destroy :unschedule
@@ -12,6 +13,7 @@ class Reminder < ActiveRecord::Base
 	def schedule
 		Activity.create(
 			:checklist_item_id => checklist_item_id,
+			:worklist_item_id => worklist_item_id,
 			:project_id => project_id,
 			:user_id => user_id,
 			:activity_type => self.class.name,

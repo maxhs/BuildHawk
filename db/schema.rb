@@ -348,6 +348,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",            default: true
+    t.integer  "worklist_item_id"
   end
 
   create_table "report_companies", force: true do |t|
