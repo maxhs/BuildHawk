@@ -23,7 +23,11 @@ class Reminder < ActiveRecord::Base
 	end
 
 	def unschedule
-		Activity.where(:activity_type => self.class.name, :checklist_item_id => checklist_item_id, :user_id => user_id).each do |a| a.destroy end
+		if checklist_item
+			Activity.where(:activity_type => self.class.name, :checklist_item_id => checklist_item_id, :user_id => user_id).each do |a| a.destroy end
+		elsif worklist_item
+			Activity.where(:activity_type => self.class.name, :worklist_item_id => worklist_item_id, :user_id => user_id).each do |a| a.destroy end
+		end
 		Resque.remove_delayed(SetReminder,id)
 	end
 
