@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 	  attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist, :photos,
-                        :user_ids, :core, :project_group_id#, :company_subs, :company_sub_ids
+                        :user_ids, :core, :project_group_id, :companies, :company_ids
   	
   	has_many :project_users, :dependent => :destroy, autosave: true
   	has_many :users, :through => :project_users, autosave: true
@@ -26,7 +26,7 @@ class Project < ActiveRecord::Base
 
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true
-    accepts_nested_attributes_for :company_subs, :allow_destroy => true
+    accepts_nested_attributes_for :companies, :allow_destroy => true
 
     # websolr
     searchable do
