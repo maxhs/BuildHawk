@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   	has_many :users, :through => :project_users, autosave: true
 
     has_many :project_subs, :dependent => :destroy, autosave: true
-    #has_many :company_subs, :through => :project_subs , autosave: true
+    has_many :companies, :through => :project_subs , autosave: true
   	
     belongs_to :project_group, counter_cache: true
   	belongs_to :company
@@ -127,9 +127,9 @@ class Project < ActiveRecord::Base
     end
 
     ## the companies for the users associated with this project
-    def companies
-        users.map(&:company).uniq + company_subs.map(&:subcontractor).uniq
-    end
+    #def companies
+    #    users.map(&:company).uniq + company_subs.map(&:subcontractor).uniq
+    #end
 
     ## deprecated
     def categories
@@ -146,7 +146,6 @@ class Project < ActiveRecord::Base
   		t.add :company
         t.add :active
         t.add :users
-        t.add :company_subs
         t.add :core
         t.add :progress
         t.add :upcoming_items
