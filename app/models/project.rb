@@ -122,7 +122,8 @@ class Project < ActiveRecord::Base
     end
 
     def recent_activities
-        Activity.where("project_id = ? and created_at < ?",id,Time.now+1.day)
+        ## default order is DESC, so first makes sense
+        activities.first(3)
     end
 
     ## the companies for the users associated with this project
@@ -153,7 +154,7 @@ class Project < ActiveRecord::Base
         t.add :recent_documents
         t.add :phases
         t.add :project_group, :if => :has_group?
-        t.add :activities
+        t.add :recent_activities
         t.add :active_reminders
         ### slated for deletion in 1.04 ###
         t.add :categories

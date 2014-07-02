@@ -28,7 +28,7 @@ class Activity < ActiveRecord::Base
 		t.add :user_id
 		t.add :checklist_item_id
 		t.add :report_id
-		t.add :comment_id
+		t.add :comment
 		t.add :worklist_item_id
 		t.add :project_id
 		t.add :body
