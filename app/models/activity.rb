@@ -11,6 +11,11 @@ class Activity < ActiveRecord::Base
 	belongs_to :message
 
 	default_scope { order('created_at DESC') }
+	after_create :notify
+
+	def notify
+		puts "just created an activty"
+	end
 
 	def created_date
 		created_at.to_i
