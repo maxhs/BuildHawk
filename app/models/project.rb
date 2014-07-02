@@ -168,8 +168,10 @@ class Project < ActiveRecord::Base
         t.add :project_subs
     end
 
-    api_accessible :details, :extend => :projects do |t|
-    
+    api_accessible :details do |t|
+        t.add :id
+        t.add :name
+        t.add :company
     end
 
     api_accessible :notifications, :extend => :projects do |t|
