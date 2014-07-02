@@ -31,12 +31,13 @@ class Comment < ActiveRecord::Base
     def notify
         activity = activities.create(
             :user_id => user_id,
-            :body => body,
+            :body => "\"#{body}\"",
             :checklist_item_id => checklist_item_id,
             :report_id => report_id,
             :worklist_item_id => worklist_item_id,
             :message_id => message_id,
             :project_id => project.id, 
+            :comment_id => id,
             :activity_type => self.class.name
         )
         puts "just created a comment activity" if activity.save
