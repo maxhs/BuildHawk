@@ -53,9 +53,8 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity
-        if status == "Completed"
-            self.update_attribute :completed_date, Time.now if completed_date.nil?
-
+        if status == "Completed" && completed_date.nil?
+            self.update_attribute :completed_date, Time.now
             if completed_by_user
                 activities.create!(
                     :body => "#{completed_by_user.full_name} marked this item complete.",
@@ -74,7 +73,6 @@ class ChecklistItem < ActiveRecord::Base
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
         elsif !completed_date.nil?
             self.update_attributes :completed_date => nil, :completed_by_user_id => nil
-            #completed_by_user_id = nil
         end
     end
 
