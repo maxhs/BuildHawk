@@ -21,7 +21,7 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
 	def add_user
 		project = Project.find params[:project_id]
 		company = project.companies.where(:id => params[:id]).first
-		puts "found company: #{company.name}"
+		puts "found company: #{company.name}" if company
 		task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
 		if params[:user][:email]
 			user = User.where(:email => params[:user][:email]).first
