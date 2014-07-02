@@ -34,6 +34,7 @@ class Activity < ActiveRecord::Base
 		t.add :body
 		t.add :hidden
 		t.add :created_date
+		t.add :activity_type
 	end
 
 	api_accessible :user, :extend => :projects do |t|
