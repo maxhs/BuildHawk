@@ -22,7 +22,7 @@ class Activity < ActiveRecord::Base
 	end
 
 	def checklist_id
-		checklist_item.checklist.id
+		checklist_item.checklist.id if checklist_item
 	end
 
 	acts_as_api
