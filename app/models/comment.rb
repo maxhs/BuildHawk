@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
     belongs_to :message
     has_one :notification, dependent: :destroy
   	has_many :photos
-    has_many :activities, dependent: :destroy
+    has_one :activity, dependent: :destroy
 
     validates_presence_of :body
     validates :body, :length => { :minimum => 1 }
@@ -41,7 +41,8 @@ class Comment < ActiveRecord::Base
             :activity_type => self.class.name
         )
         puts "just created a comment activity" if activity.save
-
+        self.save
+        
         if report && report.author
             report.author.notifications.where(
                 :body => body, 
