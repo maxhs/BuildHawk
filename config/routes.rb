@@ -235,6 +235,7 @@ Buildhawk::Application.routes.draw do
 
   #temporary
   get "/api/v2/users/:id/worklist_connect", to: "api/v2/users#connect"
+  post "/api/v2/company_subs", to: "api/v2/project_subs#create"
   #
 
   #mobile API v2
@@ -288,7 +289,6 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :comments
-      resources :project_users
       resources :project_subs, :only => [:create, :show] do
         member do
           post :add_user

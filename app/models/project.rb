@@ -127,7 +127,7 @@ class Project < ActiveRecord::Base
 
     ## the companies for the users associated with this project
     def companies
-        users.map(&:company).uniq
+        users.map(&:company).uniq + company_subs.map(&:subcontractor).uniq
     end
 
     ## deprecated
