@@ -295,7 +295,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
 
   create_table "project_subs", force: true do |t|
     t.integer  "project_id"
-    t.integer  "company_sub_id"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -12,5 +12,6 @@ class CreateConnectUsers < ActiveRecord::Migration
         end
 
         rename_column :reports, :created_date, :date_string
+        rename_column :project_subs, :company_sub_id, :company_id
     end
 end
