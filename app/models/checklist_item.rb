@@ -94,11 +94,11 @@ class ChecklistItem < ActiveRecord::Base
         critical_date.present?
     end
 
-  	api_accessible :projects do |t|
-  		t.add :id
+    api_accessible :dashboard do |t|
+        t.add :id
         t.add :body
-  		t.add :critical_date, :if => :has_critical_date?
-  		t.add :completed_date, :if => :has_completed_date?
+        t.add :critical_date, :if => :has_critical_date?
+        t.add :completed_date, :if => :has_completed_date?
         t.add :status
         t.add :item_type
         t.add :photos_count
@@ -106,21 +106,20 @@ class ChecklistItem < ActiveRecord::Base
         t.add :activities
         t.add :reminders
         t.add :project_id
+    end
+
+  	api_accessible :projects, :extend => :dashboard do |t|
+  		
   	end
 
-    api_accessible :details, :extend => :projects do |t|
+    api_accessible :checklists, :extend => :dashboard do |t|
+    
+    end
+
+    api_accessible :details, :extend => :dashboard do |t|
         t.add :photos
         t.add :comments
         t.add :phase_name
-        t.add :project_id
-    end
-
-    api_accessible :checklists, :extend => :projects do |t|
-
-    end
-
-    api_accessible :dashboard, :extend => :projects do |t|
-      
     end
 
     protected
