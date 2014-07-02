@@ -169,6 +169,10 @@ class Project < ActiveRecord::Base
     end
 
     api_accessible :details, :extend => :projects do |t|
+    
+    end
+
+    api_accessible :notifications, :extend => :projects do |t|
         t.add :notifications
     end
 

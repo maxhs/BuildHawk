@@ -14,4 +14,8 @@ class ProjectSub < ActiveRecord::Base
     api_accessible :worklist, :extend => :projects do |t|
 
     end 
+
+    api_accessible :details, :extend => :projects do |t|
+
+    end 
 end
