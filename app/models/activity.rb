@@ -10,6 +10,8 @@ class Activity < ActiveRecord::Base
 	belongs_to :comment
 	belongs_to :message
 
+	default_scope { order('created_at DESC') }
+
 	def created_date
 		created_at.to_i
 	end
