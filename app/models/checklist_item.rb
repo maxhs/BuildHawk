@@ -70,11 +70,11 @@ class ChecklistItem < ActiveRecord::Base
 
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
         elsif !completed_date.nil?
-            if status.length
-                item.activities.create(
-                    :body => "#{user.full_name} updated the status for this item to \"#{status}\".",
-                    :project_id => item.checklist.project.id,
-                    :activity_type => item.class.name
+            if self.status.length
+                activities.create(
+                    :body => "#{user.full_name} updated the status for this item to \"#{self.status}\".",
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
                 )
             end
             self.update_attributes :completed_date => nil, :completed_by_user_id => nil
