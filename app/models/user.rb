@@ -182,6 +182,10 @@ class User < ActiveRecord::Base
 
     end
 
+    api_accessible :notifications, :extend => :user do |t|
+
+    end
+
     api_accessible :worklist do |t|
         t.add :first_name
         t.add :last_name
