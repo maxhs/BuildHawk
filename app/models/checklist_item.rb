@@ -124,21 +124,21 @@ class ChecklistItem < ActiveRecord::Base
         end
     end
 
-    def ugh_parse
-        url = Rails.root.join("public","ugh.txt")
-        text = File.open(url).read.split("#<")
-        id = " id: "
-        state = " state: "
-        text.each do |t|
-            actual_id = t[/#{id}(.*?),/m,1]
-            actual_state = t[/#{state}(.*?)>/m,1]
-            if actual_id && actual_state
-                item = ChecklistItem.find actual_id
-                item.update_attribute :state, actual_state
-                puts "id: #{actual_id} and state #{actual_state}"
-            end
-        end
-    end
+    # def ugh_parse
+    #     url = Rails.root.join("public","ugh.txt")
+    #     text = File.open(url).read.split("#<")
+    #     id = " id: "
+    #     state = " state: "
+    #     text.each do |t|
+    #         actual_id = t[/#{id}(.*?),/m,1]
+    #         actual_state = t[/#{state}(.*?)>/m,1]
+    #         if actual_id && actual_state
+    #             item = ChecklistItem.find actual_id
+    #             item.update_attribute :state, actual_state
+    #             puts "id: #{actual_id} and state #{actual_state}"
+    #         end
+    #     end
+    # end
 
     api_accessible :dashboard do |t|
         t.add :id
