@@ -47,8 +47,8 @@ class User < ActiveRecord::Base
     after_commit :clean_name
     
     def welcome
-        UserMailer.welcome(self).deliver if self.email 
-        self.full_name = "#{first_name} #{last_name}"
+        UserMailer.welcome(self).deliver if email 
+        full_name = "#{first_name} #{last_name}"
         self.save
     end
 
@@ -78,8 +78,8 @@ class User < ActiveRecord::Base
     end
 
     def clean_phone
-        if self.phone.include?(' ')
-            self.phone = self.phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+        if phone.include?(' ')
+            phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             self.save
         end
     end
@@ -92,9 +92,9 @@ class User < ActiveRecord::Base
     end
 
     def formatted_phone
-      if self.phone && self.phone.length > 0
-        clean_phone if self.phone.include?(' ')
-        number_to_phone(self.phone, area_code:true)
+      if phone && phone.length > 0
+        clean_phone if phone.include?(' ')
+        number_to_phone(phone, area_code:true)
       end
     end
 

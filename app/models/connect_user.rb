@@ -10,21 +10,22 @@ class ConnectUser < ActiveRecord::Base
 
 	def notify
 		if worklist_item
-			if email
+			if email.length
 				email_task
-			elsif phone
+			elsif phone.length
 				text_task
 			end
 		end
 	end
 
 	def email_task
-		puts "Sending a worklist item email to a connect user"
+		puts "Sending a worklist item email to a connect user with email: #{email}"
 		WorklistItemMailer.worklist_item(worklist_item,self).deliver
 	end
 
 	def text_task
-        #clean_phone
+		puts "Texting a task to a connect user with phone: #{phone}"
+        clean_phone
         task = worklist_item
 
         @account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
@@ -38,6 +39,20 @@ class ConnectUser < ActiveRecord::Base
             :to => phone,
             :body => "You've been assigned a task on BuildHawk: \"#{truncated_task}\". Click here to view: https://www.buildhawk.com/task/#{task.id}"
         )
+    end
+
+    def clean_phone
+        if phone.include?(' ')
+            phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            self.save
+        end
+    end
+
+    def formatted_phone
+      	if phone && phone.length > 0
+        	clean_phone if phone.include?(' ')
+        	number_to_phone(phone, area_code:true)
+      	end
     end
 
 	acts_as_api
