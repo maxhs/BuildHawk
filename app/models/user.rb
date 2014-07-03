@@ -160,6 +160,7 @@ class User < ActiveRecord::Base
         t.add :company_admin
         t.add :uber_admin
         t.add :url_medium
+        t.add :alternates
     end
 
   	api_accessible :feed do |t|
