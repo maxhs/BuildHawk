@@ -150,4 +150,8 @@ class Report < ActiveRecord::Base
         t.add :personnel
         ###
   	end
+
+    api_accessible :notifications, :extend => :reports do |t|
+
+    end
 end

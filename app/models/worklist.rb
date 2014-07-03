@@ -25,5 +25,9 @@ class Worklist < ActiveRecord::Base
 
   	api_accessible :projects, :extend => :worklist do |t|
     
-  	end 
+  	end
+
+    api_accessible :notifications, :extend => :worklist do |t|
+    
+    end 
 end
