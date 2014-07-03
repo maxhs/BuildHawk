@@ -63,7 +63,7 @@ class ChecklistItem < ActiveRecord::Base
             else
                 activities.create(
                     :body => "This item was marked complete.",
-                    :user => user.id,
+                    :user_id => user.id,
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
