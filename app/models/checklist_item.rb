@@ -21,7 +21,7 @@ class ChecklistItem < ActiveRecord::Base
         # websolr
         searchable auto_index: false, auto_remove: false do
             text    :body
-            text    :status
+            text    :stats
             integer :checklist_id
         end
 
@@ -63,6 +63,7 @@ class ChecklistItem < ActiveRecord::Base
             else
                 activities.create(
                     :body => "This item was marked complete.",
+                    :user => user.id,
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
@@ -74,6 +75,7 @@ class ChecklistItem < ActiveRecord::Base
                 activities.create(
                     :body => "#{user.full_name} updated the status for this item to \"#{self.status}\".",
                     :project_id => checklist.project.id,
+                    :user_id => user.id,
                     :activity_type => self.class.name
                 )
             end
