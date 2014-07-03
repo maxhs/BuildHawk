@@ -15,8 +15,6 @@ class ChecklistItem < ActiveRecord::Base
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
-    after_commit :log_activity
-
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
 
     if Rails.env.production?
@@ -52,7 +50,7 @@ class ChecklistItem < ActiveRecord::Base
         category.phase.name if category && category.phase
     end
 
-    def log_activity
+    def log_activity(user)
         if status == "Completed" && completed_date.nil?
             self.update_attribute :completed_date, Time.now
             if completed_by_user
@@ -72,6 +70,13 @@ class ChecklistItem < ActiveRecord::Base
 
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
         elsif !completed_date.nil?
+            if status.length
+                item.activities.create(
+                    :body => "#{user.full_name} updated the status for this item to \"#{status}\".",
+                    :project_id => item.checklist.project.id,
+                    :activity_type => item.class.name
+                )
+            end
             self.update_attributes :completed_date => nil, :completed_by_user_id => nil
         end
     end
