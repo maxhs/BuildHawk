@@ -110,12 +110,12 @@ class Project < ActiveRecord::Base
         feed += Report.where(:project_id => id).order('updated_at DESC').limit(limit)
         feed += WorklistItem.where(:worklist_id => worklists.first.id).order('updated_at DESC').limit(limit) if worklists && worklists.first
         feed += Photo.where(:project_id => id).order('updated_at DESC').limit(limit)
-        return feed.flatten.sort_by(&:updated_at).reverse.first(limit)
+        return feed.flatten.sort_by(&:updated_at).compact.reverse.first(limit)
     end
 
     def recent_activities
         ## default order is DESC, so first makes sense
-        activities.first(3)
+        activities.first(3) if activities.count
     end
 
     ## deprecated
