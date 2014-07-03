@@ -46,6 +46,8 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
 				respond_to do |format|
 			       	format.json { render_for_api :user, :json => connect_user, :root => :user}
 		      	end
+			else
+				render json: {success: "No task"}
 			end
 		elsif params[:user][:phone]
 			user = User.where(:phone => params[:user][:phone]).first
@@ -71,6 +73,8 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
 				respond_to do |format|
 			       	format.json { render_for_api :user, :json => connect_user, :root => :user}
 		      	end
+			else
+				render json: {success: "No task"}
 			end
 		end
 	
