@@ -91,6 +91,10 @@ class Company < ActiveRecord::Base
     api_accessible :user, :extend => :login do |t|
         
     end
+
+    api_accessible :notifications, :extend => :login do |t|
+        
+    end
     
     api_accessible :projects, :extend => :login do |t|
       
