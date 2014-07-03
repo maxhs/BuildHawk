@@ -4,6 +4,17 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
     	item = ChecklistItem.find params[:id]
         
         if params[:checklist_item]
+            ## API compatibility
+            if params[:checklist_item][:status]
+                if params[:checklist_item][:status] == "Completed"
+                    params[:checklist_item][:state] = 1
+                elsif params[:checklist_item][:status] == "In-Progress"
+                    params[:checklist_item][:state] = 0
+                elsif params[:checklist_item][:status] == "Not Applicable"
+                    params[:checklist_item][:state] = -1
+                end
+            end
+            ##
             params[:checklist_item][:state] = nil unless params[:checklist_item][:state].present?
             item.update_attributes params[:checklist_item]
         else
