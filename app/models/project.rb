@@ -132,7 +132,6 @@ class Project < ActiveRecord::Base
   		t.add :address
   		t.add :company
         t.add :active
-        t.add :users
         t.add :core
         t.add :progress
         t.add :upcoming_items
@@ -142,6 +141,7 @@ class Project < ActiveRecord::Base
         t.add :project_group, :if => :has_group?
         t.add :recent_activities
         t.add :reminders
+        t.add :users
         ### slated for deletion in 1.04 ###
         t.add :categories
         ###
@@ -157,6 +157,8 @@ class Project < ActiveRecord::Base
         t.add :id
         t.add :name
         t.add :company
+        t.add :users
+        t.add :companies
     end
 
     api_accessible :notifications, :extend => :projects do |t|
