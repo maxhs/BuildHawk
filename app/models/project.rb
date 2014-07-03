@@ -164,8 +164,6 @@ class Project < ActiveRecord::Base
         t.add :id
         t.add :name
         t.add :company
-        t.add :users
-        t.add :project_subs
     end
 
     api_accessible :details do |t|
@@ -179,6 +177,7 @@ class Project < ActiveRecord::Base
     end
 
     api_accessible :user do |t|
+        t.add :id
         t.add :name
         t.add :address
     end
@@ -192,6 +191,7 @@ class Project < ActiveRecord::Base
     end
 
     api_accessible :dashboard do |t|
+        t.add :id
         t.add :progress
         t.add :upcoming_items
         t.add :recently_completed
