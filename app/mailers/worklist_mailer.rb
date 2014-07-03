@@ -1,4 +1,4 @@
-class PunchlistMailer < ActionMailer::Base
+class WorklistMailer < ActionMailer::Base
   	layout "list_mailer"
 
   	def export(recipient_email, item_array, project)

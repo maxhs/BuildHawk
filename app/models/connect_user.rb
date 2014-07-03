@@ -6,8 +6,27 @@ class ConnectUser < ActiveRecord::Base
 	belongs_to :checklist_item
 	belongs_to :report
 
-	def text_task(task)
-        clean_phone
+	after_create :notify
+
+	def notify
+		if worklist_item
+			if email
+				email_task
+			elsif phone
+				text_task
+			end
+		end
+	end
+
+	def email_task
+		puts "Sending a worklist item email to a connect user"
+		WorklistItemMailer.worklist_item(worklist_item,self).deliver
+	end
+
+	def text_task
+        #clean_phone
+        task = worklist_item
+
         @account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
         @auth_token = '217b868c691cd7ec356c7dbddb5b5939'
         twilio_phone = "14157234334"
