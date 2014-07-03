@@ -207,7 +207,7 @@ class AdminController < ApplicationController
 			@project.build_address
 			@project.project_users.build
 			@users = current_user.company.users
-			@subs = current_user.company.subs
+			@subs = current_user.company.company_subs
 			@checklists = @user.company.checklists.where(:core => true)
 			if request.xhr?
 				respond_to do |format|
