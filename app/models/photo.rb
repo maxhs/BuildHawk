@@ -176,4 +176,8 @@ class Photo < ActiveRecord::Base
 	api_accessible :details, :extend => :dashboard do |t|
 
 	end
+
+	api_accessible :notifications, :extend => :dashboard do |t|
+
+	end
 end
