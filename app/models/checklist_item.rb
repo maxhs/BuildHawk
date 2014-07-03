@@ -132,6 +132,8 @@ class ChecklistItem < ActiveRecord::Base
         text.each do |t|
             actual_id = t[/#{id}(.*?),/m,1]
             actual_state = t[/#{state}(.*?)>/m,1]
+            item = ChecklistItem.find actual_id
+            item.update_attribute :state, actual_state
             puts "id: #{actual_id} and state #{actual_state}"
         end
     end
