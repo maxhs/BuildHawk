@@ -22,7 +22,7 @@ class ConnectUser < ActiveRecord::Base
 		puts "Sending a worklist item email to a connect user with email: #{email}"
 		item_array = []
 		item_array << worklist_item
-		WorklistMailer.worklist_item(email, item_array, worklist_item.worklist.project).deliver
+		WorklistMailer.export(email, item_array, worklist_item.worklist.project).deliver
 	end
 
 	def text_task
