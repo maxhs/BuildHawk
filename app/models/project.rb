@@ -95,10 +95,6 @@ class Project < ActiveRecord::Base
         !project_group_id.nil?
     end
 
-    def background_destroy
-      Resque.enqueue(DestroyProject,id)
-    end
-
     def duplicate_project
         new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :status}}}
         new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :worklist_item, :report, :project,:folder]}, {:worklists => :worklist_items}, :address, :folders, :users, :project_users]
@@ -117,19 +113,10 @@ class Project < ActiveRecord::Base
         return feed.flatten.sort_by(&:updated_at).reverse.first(limit)
     end
 
-    def active_reminders
-        Reminder.where("project_id = ? and active = ?",id,true)
-    end
-
     def recent_activities
         ## default order is DESC, so first makes sense
         activities.first(3)
     end
-
-    ## the companies for the users associated with this project
-    #def companies
-    #    users.map(&:company).uniq + company_subs.map(&:subcontractor).uniq
-    #end
 
     ## deprecated
     def categories
@@ -154,7 +141,7 @@ class Project < ActiveRecord::Base
         t.add :phases
         t.add :project_group, :if => :has_group?
         t.add :recent_activities
-        t.add :active_reminders
+        t.add :reminders
         ### slated for deletion in 1.04 ###
         t.add :categories
         ###
