@@ -44,7 +44,7 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
 				puts "could find user for task assignment: #{params[:user]}"
 				connect_user = task.connect_users.create params[:user]
 				respond_to do |format|
-			       	format.json { render_for_api :user, :json => connect_user, :root => :user}
+			       	format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
 		      	end
 			else
 				render json: {success: "No task"}
@@ -69,9 +69,8 @@ class Api::V2::ProjectSubsController < Api::V2::ApiController
 		      	end
 			elsif task
 				connect_user = task.connect_users.create params[:user]
-				connect_user.text_task
 				respond_to do |format|
-			       	format.json { render_for_api :user, :json => connect_user, :root => :user}
+			       	format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
 		      	end
 			else
 				render json: {success: "No task"}
