@@ -11,9 +11,10 @@ class Api::V2::NotificationsController < Api::V2::ApiController
     def messages
         user = User.find params[:user_id]
         notifications = user.notifications.where(:notification_type => "Message")
-        respond_to do |format|
-            format.json { render_for_api :notifications, :json => notifications, :root => :notifications}
-        end
+        render json: {notifications: notifications}
+        # respond_to do |format|
+        #     format.json { render_for_api :notifications, :json => notifications, :root => :notifications}
+        # end
     end
 
     def destroy
