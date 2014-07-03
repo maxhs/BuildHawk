@@ -2,8 +2,14 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
 
     def update
     	item = ChecklistItem.find params[:id]
-        params[:checklist_item][:state] = nil unless params[:checklist_item][:state].present?
-    	item.update_attributes params[:checklist_item]
+        
+        if params[:checklist_item]
+            params[:checklist_item][:state] = nil unless params[:checklist_item][:state].present?
+            item.update_attributes params[:checklist_item]
+        else
+            item.update_attribute :state, nil
+        end
+
         if params[:user_id]
             user = User.find params[:user_id]
             item.log_activity(user)
