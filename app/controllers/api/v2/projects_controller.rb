@@ -4,10 +4,9 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         @user = User.find params[:user_id]
         projects = @user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map(&:project).compact.sort_by{|p| p.name.downcase}
         if projects
-            render text: "hello"
-        	#respond_to do |format|
-            #	format.json { render_for_api :projects, :json => projects, :root => :projects}
-          	#end
+        	respond_to do |format|
+            	format.json { render_for_api :projects, :json => projects, :root => :projects}
+          	end
         else
             render :json => {success: false}
         end
