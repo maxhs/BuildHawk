@@ -10,7 +10,7 @@
 		<div><%= sub_fields.label "Contact email" %></div>
 		<div><%= sub_fields.email_field :email, :value => f.object.subcontractor.email, :placeholder => "Contact email address", :class=>"tt-hint form-control" %></div>
 		<div><%= sub_fields.label "Contact phone number" %></div>
-		<div><%= sub_fields.text_field :phone_number, :value => f.object.subcontractor.formatted_phone, :placeholder => "Contact phone number (e.g. (555) 555-5555)", :class=>"tt-hint form-control" %></div>
+		<div><%= sub_fields.text_field :phone, :value => f.object.subcontractor.formatted_phone, :placeholder => "Contact phone number (e.g. (555) 555-5555)", :class=>"tt-hint form-control" %></div>
 		<% end %>
 		<div class="button-container">
 			<%= f.submit "Save", :class=>"btn btn-success btn-md save" %>
