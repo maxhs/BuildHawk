@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
     has_many :message_users, :dependent => :destroy, autosave: true
     has_many :messages, :through => :message_users , autosave: true
 
+    has_many :reminders, :dependent => :destroy
     has_many :alternates, :dependent => :destroy
     has_many :activities#, :dependent => :destroy
 
