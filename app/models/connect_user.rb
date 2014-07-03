@@ -20,7 +20,9 @@ class ConnectUser < ActiveRecord::Base
 
 	def email_task
 		puts "Sending a worklist item email to a connect user with email: #{email}"
-		WorklistItemMailer.worklist_item(worklist_item,self).deliver
+		item_array = []
+		item_array << worklist_item
+		WorklistMailer.worklist_item(email, item_array, worklist_item.worklist.project).deliver
 	end
 
 	def text_task
@@ -53,6 +55,18 @@ class ConnectUser < ActiveRecord::Base
         	clean_phone if phone.include?(' ')
         	number_to_phone(phone, area_code:true)
       	end
+    end
+
+    def full_name
+    	if first_name.length && last_name.length
+            "#{first_name} #{last_name}"
+        elsif first_name.length
+            "#{first_name}"
+        elsif email
+            email
+        else
+        	""
+        end
     end
 
 	acts_as_api
