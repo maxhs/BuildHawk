@@ -6,6 +6,7 @@ class WorklistMailer < ActionMailer::Base
   		@recipient = Sub.where(:email => recipient_email).first unless @recipient
       @recipient = ConnectUser.where(:email => recipient_email).first unless @recipient
   		@project = project
+      @company = @project.company
   		@item_array = item_array
   		mail(
       		:subject => "#{project.name} - Worklist Report",
