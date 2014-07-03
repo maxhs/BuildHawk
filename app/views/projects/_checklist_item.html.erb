@@ -20,7 +20,7 @@
 					<%= f.select :state, options_for_select({"In-Progress"=>0,"Completed"=>1,"Not Applicable"=>-1,"No Status"=>nil}, selected: item.state), {:include_blank => false}, :multiple => true %>
 				</div>
 			
-				<% if item.status == "Completed" && item.completed_by_user %>
+				<% if item.state == 1 && item.completed_by_user %>
 					<div class="col-xs-6" style="text-align:center; width:50%;display:inline-block;text-align:center;">
 						<h4>Completed By</h4>
 						<%= item.completed_by_user.full_name %>

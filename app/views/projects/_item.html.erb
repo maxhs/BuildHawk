@@ -1,7 +1,7 @@
 
-<% if item.status == "Completed" %>
+<% if item.state == 1 %>
 	<li class="row checklist-item completed" id="item-<%=item.id%>">
-<% elsif item.status == "Not Applicable" %>
+<% elsif item.state == -1 %>
 	<li class="row checklist-item not-applicable" id="item-<%=item.id%>">
 <% else %>
 	<li class="row checklist-item" id="item-<%=item.id%>">
