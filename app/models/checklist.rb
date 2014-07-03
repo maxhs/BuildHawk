@@ -14,7 +14,7 @@ class Checklist < ActiveRecord::Base
 
     def duplicate
         puts "duplicating a checklist"
-        new_checklist = self.dup :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :status}}}
+        new_checklist = self.dup :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :state}}}
         new_checklist.save
         return new_checklist
     end
@@ -34,11 +34,11 @@ class Checklist < ActiveRecord::Base
         else
   		    items = phases.map(&:categories).flatten.map(&:checklist_items).flatten
         end
-        return items.select{|i| i.status == "Completed"}.count
+        return items.select{|i| i.state == 1}.count
   	end
 
     def not_applicable_count
-        items.select{|i| i.status == "Not Applicable"}.count
+        items.select{|i| i.state == -1}.count
     end
 
   	def item_count
@@ -52,11 +52,11 @@ class Checklist < ActiveRecord::Base
   	end
 
     def upcoming_items
-        items.select{|i| i.critical_date if i.status != "Completed"}.sort_by(&:critical_date).last(5)
+        items.select{|i| i.critical_date if i.state != 1}.sort_by(&:critical_date).last(5)
     end
 
     def recently_completed
-        items.select{|i| i.status if i.status == "Completed" && !i.completed_date.nil?}.sort_by(&:completed_date).reverse.first(5)
+        items.select{|i| i.state if i.state == 1 && !i.completed_date.nil?}.sort_by(&:completed_date).reverse.first(5)
     end
 
     def progress_percentage

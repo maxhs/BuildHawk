@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
-	attr_accessible :name, :phase_id, :order_index, :milestone_date, :completed_date, :checklist_items, :status
+	attr_accessible :name, :phase_id, :order_index, :milestone_date, :completed_date, :checklist_items, :state
   	belongs_to :phase
   	has_many :checklist_items, :dependent => :destroy
 
@@ -15,17 +15,17 @@ class Category < ActiveRecord::Base
     end
 
     def completed_count
-        checklist_items.where(:status => "Completed").count if checklist_items
+        checklist_items.where(:state => 1).count if checklist_items
     end
 
     def check_completed
         if phase.completed_count != 0 && phase.completed_count == phase.item_count
             phase.update_attribute :completed_date, Date.today
-            self.status = "Completed" 
+            self.state = 1 
             self.save
         elsif completed_date != nil
             self.completed_date = nil
-            self.status = nil
+            self.state = nil
             self.save
         end
     end
@@ -39,7 +39,7 @@ class Category < ActiveRecord::Base
     end
 
     def not_applicable_count 
-        checklist_items.where(:status => "Not Applicable").count if checklist_items
+        checklist_items.where(:state => -1).count if checklist_items
     end
 
     def progress_percentage

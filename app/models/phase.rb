@@ -15,11 +15,11 @@ class Phase < ActiveRecord::Base
     end
 
     def completed_count
-        categories.joins(:checklist_items).where(:checklist_items => {:status => "Completed"}).count if categories
+        categories.joins(:checklist_items).where(:checklist_items => {:state => 1}).count if categories
     end
 
     def not_applicable_count 
-        categories.joins(:checklist_items).where(:checklist_items => {:status => "Not Applicable"}).count if categories
+        categories.joins(:checklist_items).where(:checklist_items => {:state => -1}).count if categories
     end
 
     def progress_percentage

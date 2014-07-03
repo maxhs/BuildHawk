@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.integer  "state"
   end
 
   add_index "categories", ["phase_id"], name: "subcategories_category_id_ix"
@@ -89,7 +89,6 @@ ActiveRecord::Schema.define(version: 20140625014144) do
   end
 
   create_table "checklist_items", force: true do |t|
-    t.string   "status"
     t.string   "item_type"
     t.text     "body"
     t.integer  "order_index"
@@ -258,7 +257,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.integer  "state"
   end
 
   add_index "phases", ["checklist_id"], name: "categories_checklist_id_ix"

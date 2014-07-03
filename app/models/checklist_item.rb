@@ -1,5 +1,5 @@
 class ChecklistItem < ActiveRecord::Base
-	attr_accessible :body, :item_type, :completed_by_user_id, :category_id, :status, :critical_date, 
+	attr_accessible :body, :item_type, :completed_by_user_id, :category_id, :critical_date, 
                     :completed_date,:photos, :photos_attributes, :checklist_id, :order_index, :photos_count, 
                     :comments_count, :user_id, :reminder_date, :state
   	
@@ -20,8 +20,8 @@ class ChecklistItem < ActiveRecord::Base
     if Rails.env.production?
         # websolr
         searchable auto_index: false, auto_remove: false do
-            text    :body
-            text    :stats
+            text        :body
+            integer     :state
             integer :checklist_id
         end
 
@@ -31,7 +31,7 @@ class ChecklistItem < ActiveRecord::Base
     elsif Rails.env.development?
         searchable do
             text    :body
-            text    :status
+            integer    :state
             integer :checklist_id
         end
     end
@@ -51,7 +51,7 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity(user)
-        if (status == "Completed" || state == 1) && completed_date.nil?
+        if state == 1 && completed_date.nil?
             self.update_attribute :completed_date, Time.now
             if completed_by_user
                 activities.create(
@@ -71,9 +71,16 @@ class ChecklistItem < ActiveRecord::Base
 
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
         elsif !completed_date.nil?
-            if self.status.length
+            if state
+                if state == 1
+                    verbal_state = "completed"
+                elsif state == 0
+                    verbal_state = "in progress"
+                elsif state == -1
+                    verbal_state = "not applicable"
+                end
                 activities.create(
-                    :body => "#{user.full_name} updated the status for this item to \"#{self.status}\".",
+                    :body => "#{user.full_name} updated the status for this item to \"#{verbal_status}\".",
                     :project_id => checklist.project.id,
                     :user_id => user.id,
                     :activity_type => self.class.name
@@ -91,6 +98,14 @@ class ChecklistItem < ActiveRecord::Base
         end
     end
 
+    def critical_date_unix
+        critical_date.to_i
+    end
+
+    def completed_date_unix
+        completed_date.to_i
+    end
+
     def has_critical_date?
         critical_date.present?
     end
@@ -99,11 +114,23 @@ class ChecklistItem < ActiveRecord::Base
         critical_date.present?
     end
 
+    def status
+        if state == 1
+            "Completed"
+        elsif state == 0
+            "In-Progress"
+        elsif state == -1
+            "Not Applicable"
+        end
+    end
+
     api_accessible :dashboard do |t|
         t.add :id
         t.add :body
         t.add :critical_date, :if => :has_critical_date?
+        t.add :critical_date_unix, :if => :has_critical_date?
         t.add :completed_date, :if => :has_completed_date?
+        t.add :completed_date_unix, :if => :has_completed_date?
         t.add :status
         t.add :state
         t.add :item_type
