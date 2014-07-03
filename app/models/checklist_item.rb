@@ -80,7 +80,7 @@ class ChecklistItem < ActiveRecord::Base
                     verbal_state = "not applicable"
                 end
                 activities.create(
-                    :body => "#{user.full_name} updated the status for this item to \"#{verbal_status}\".",
+                    :body => "#{user.full_name} updated the status for this item to \"#{verbal_state}\".",
                     :project_id => checklist.project.id,
                     :user_id => user.id,
                     :activity_type => self.class.name
