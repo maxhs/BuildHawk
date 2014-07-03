@@ -59,6 +59,10 @@ class Phase < ActiveRecord::Base
 
     end
 
+    api_accessible :notifications, :extend => :projects do |t|
+
+    end
+
     api_accessible :checklists do |t|
       t.add :id
       t.add :categories
