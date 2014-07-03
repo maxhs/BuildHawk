@@ -23,8 +23,4 @@ class Folder < ActiveRecord::Base
 		
 	end
 
-	api_accessible :notifications, :extend => :projects do |t|
-
-	end
-
 end

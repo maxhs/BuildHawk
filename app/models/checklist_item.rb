@@ -56,14 +56,14 @@ class ChecklistItem < ActiveRecord::Base
         if status == "Completed" && completed_date.nil?
             self.update_attribute :completed_date, Time.now
             if completed_by_user
-                activities.create!(
+                activities.create(
                     :body => "#{completed_by_user.full_name} marked this item complete.",
                     :user_id => completed_by_user_id,
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
             else
-                activities.create!(
+                activities.create(
                     :body => "This item was marked complete.",
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
@@ -73,6 +73,13 @@ class ChecklistItem < ActiveRecord::Base
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
         elsif !completed_date.nil?
             self.update_attributes :completed_date => nil, :completed_by_user_id => nil
+            if status.length
+                activities.create(
+                    :body => "#{completed_by_user.full_name} updated the status for this item to \"#{status}\".",
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
+                )
+            end
         end
     end
 
