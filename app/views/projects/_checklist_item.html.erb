@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="col-xs-6" style="text-align:center; display:inline-block;float:left;">
 					<h4>Status</h4>
-					<%= f.select :status, ["In-Progress","Completed","Not Applicable","No Status"], {:include_blank => false}, :multiple => true %>
+					<%= f.select :state, options_for_select({"In-Progress"=>0,"Completed"=>1,"Not Applicable"=>-1,"No Status"=>nil}, selected: item.state), {:include_blank => false}, :multiple => true %>
 				</div>
 			
 				<% if item.status == "Completed" && item.completed_by_user %>

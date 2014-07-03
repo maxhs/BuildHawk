@@ -14,13 +14,13 @@ class ChecklistItemsController < ApplicationController
 			datetime = Date.strptime(params[:checklist_item][:critical_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
 			params[:checklist_item][:critical_date] = datetime
 		end
-		if params[:checklist_item][:status].present?
-			status = params[:checklist_item][:status][1]
-			if status == "No Status"
-				params[:checklist_item][:status] = nil
+		if params[:checklist_item][:state].present?
+			state = params[:checklist_item][:state][1]
+			if state == "No state"
+				params[:checklist_item][:state] = nil
 			else 
-				params[:checklist_item][:status] = status
-				params[:checklist_item][:completed_by_user_id] = current_user.id if status == "Completed"
+				params[:checklist_item][:state] = state
+				params[:checklist_item][:completed_by_user_id] = current_user.id if state == "Completed"
 			end
 		end
 
