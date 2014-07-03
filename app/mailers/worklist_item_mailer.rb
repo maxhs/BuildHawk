@@ -6,7 +6,7 @@ class WorklistItemMailer < ActionMailer::Base
   		@recipient = recipient
   	  @worklist_item = worklist_item
   		mail(
-      		:subject => "#{worklist_item.punchlist.project.name} - #{worklist_item.body}",
+      		:subject => "#{worklist_item.worklist.project.name} - #{worklist_item.body}",
       		:to      => recipient.email,
       		:from 	 => "support@buildhawk.com",
       		:tag     => 'Worklist Item'
