@@ -1,7 +1,7 @@
 class ChecklistItem < ActiveRecord::Base
 	attr_accessible :body, :item_type, :completed_by_user_id, :category_id, :status, :critical_date, 
                     :completed_date,:photos, :photos_attributes, :checklist_id, :order_index, :photos_count, 
-                    :comments_count, :user_id, :reminder_date
+                    :comments_count, :user_id, :reminder_date, :state
   	
   	belongs_to :user
     belongs_to :category
@@ -51,7 +51,7 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity(user)
-        if status == "Completed" && completed_date.nil?
+        if (status == "Completed" || state == 1) && completed_date.nil?
             self.update_attribute :completed_date, Time.now
             if completed_by_user
                 activities.create(
@@ -103,6 +103,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :critical_date, :if => :has_critical_date?
         t.add :completed_date, :if => :has_completed_date?
         t.add :status
+        t.add :state
         t.add :item_type
         t.add :photos_count
         t.add :comments_count

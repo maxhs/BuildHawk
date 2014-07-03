@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.integer  "photos_count"
     t.integer  "comments_count"
     t.integer  "user_id"
+    t.integer  "state"
   end
 
   add_index "checklist_items", ["category_id", "checklist_id"], name: "checklist_items_ix"

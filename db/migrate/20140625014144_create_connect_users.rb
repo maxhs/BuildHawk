@@ -14,5 +14,6 @@ class CreateConnectUsers < ActiveRecord::Migration
         rename_column :reports, :created_date, :date_string
         rename_column :project_subs, :company_sub_id, :company_id
         add_column :reminders, :worklist_item_id, :integer
+        add_column :checklist_items, :state, :integer
     end
 end
