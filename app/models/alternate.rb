@@ -6,6 +6,7 @@ class Alternate < ActiveRecord::Base
 
   	api_accessible :user do |t|
 		t.add :id
+		t.add :user
 		t.add :email
 		t.add :phone
 	end

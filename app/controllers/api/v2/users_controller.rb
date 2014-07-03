@@ -27,7 +27,7 @@ class Api::V2::UsersController < Api::V2::ApiController
 		elsif params[:phone]
 			alternate = @user.alternates.create :email => params[:email]
 		end
-		
+
     	if alternate.save
     		respond_to do |format|
                 format.json { render_for_api :user, :json => alternate, :root => :alternate}
@@ -42,6 +42,8 @@ class Api::V2::UsersController < Api::V2::ApiController
 			alternate = @user.alternates.where(:email => params[:email]).first
 		elsif params[:phone]
 			alternate = @user.alternates.where(:email => params[:email]).first
+		elsif params[:alternate_id]
+			alternate = Alternate.find params[:alternate_id]
 		end
 
 		if alternate && alternate.destroy
