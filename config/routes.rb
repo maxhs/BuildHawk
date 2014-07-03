@@ -282,8 +282,7 @@ Buildhawk::Application.routes.draw do
           post :photo
         end
       end
-      resources :reminders, :only => [:create, :index, :destroy]
-      #resources :messages, only: [:index]
+      resources :reminders, :only => [:create, :index, :destroy, :update]
       resources :notifications, :only => [:index, :destroy] do
         collection do 
           get :messages
