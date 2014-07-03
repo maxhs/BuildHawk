@@ -97,6 +97,10 @@ class WorklistItem < ActiveRecord::Base
 
     end
 
+    api_accessible :notifications, :extend => :worklist do |t|
+
+    end
+
     api_accessible :details, :extend => :worklist do |t|
         t.add :activities
     end

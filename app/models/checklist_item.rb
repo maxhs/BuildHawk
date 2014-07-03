@@ -115,6 +115,10 @@ class ChecklistItem < ActiveRecord::Base
     
     end
 
+    api_accessible :notifications, :extend => :dashboard do |t|
+    
+    end
+
     api_accessible :details, :extend => :dashboard do |t|
         t.add :photos
         t.add :comments
