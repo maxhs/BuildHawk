@@ -6,7 +6,7 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
         if params[:user_id]
             user = User.find params[:user_id]
             if item.status.length
-                activities.create(
+                item.activities.create(
                     :body => "#{user.full_name} updated the status for this item to \"#{status}\".",
                     :project_id => item.checklist.project.id,
                     :activity_type => item.class.name
