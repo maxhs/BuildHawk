@@ -86,7 +86,7 @@
 			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
 			<%= f.hidden_field :user_id, :value => current_user.id %>
 			<%= f.hidden_field :checklist_item_id, :value => item.id %>
-			<%= f.submit "Post", :class=>"btn btn-success btn-md pull-right", :style=>"margin-top:14px;" %>
+			<%= f.submit "Post", :class=>"simple-btn pull-right", :style=>"margin-top:14px;" %>
 		<% end %>
 	</div>
 	<%= render :partial => "comments/comments", :locals => {:comments => item.comments} %>

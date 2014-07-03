@@ -14,6 +14,13 @@ class Api::V2::RemindersController < Api::V2::ApiController
 
 	def update
 		reminder = Reminder.update_attributes params[:reminder]
+		if reminder.save
+			respond_to do |format|
+        		format.json { render_for_api :projects, :json => reminder, :root => :reminder}
+      		end
+		else
+			render json: {failure: false}
+		end
 	end
 
 	def destroy
