@@ -17,8 +17,8 @@ class CreateConnectUsers < ActiveRecord::Migration
         add_column :checklist_items, :state, :integer
         add_column :categories, :state, :integer
         add_column :phases, :state, :integer
-        remove_column :checklist_items, :status, :string
-        remove_column :categories, :status, :string
-        remove_column :phases, :status, :string
+        #remove_column :checklist_items, :status, :string
+        #remove_column :categories, :status, :string
+        #remove_column :phases, :status, :string
     end
 end

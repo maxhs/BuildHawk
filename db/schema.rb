@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625014144) do
+ActiveRecord::Schema.define(version: 20140623223112) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "state"
+    t.string   "status"
   end
 
   add_index "categories", ["phase_id"], name: "subcategories_category_id_ix"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.integer  "photos_count"
     t.integer  "comments_count"
     t.integer  "user_id"
-    t.integer  "state"
+    t.string   "status"
   end
 
   add_index "checklist_items", ["category_id", "checklist_id"], name: "checklist_items_ix"
@@ -156,18 +156,6 @@ ActiveRecord::Schema.define(version: 20140625014144) do
   create_table "company_subs", force: true do |t|
     t.integer  "company_id"
     t.integer  "subcontractor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "connect_users", force: true do |t|
-    t.string   "email"
-    t.string   "phone"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "worklist_item_id"
-    t.integer  "checklist_item_id"
-    t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -257,7 +245,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "state"
+    t.string   "status"
   end
 
   add_index "phases", ["checklist_id"], name: "categories_checklist_id_ix"
@@ -295,7 +283,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
 
   create_table "project_subs", force: true do |t|
     t.integer  "project_id"
-    t.integer  "company_id"
+    t.integer  "company_sub_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -348,7 +336,6 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",            default: true
-    t.integer  "worklist_item_id"
   end
 
   create_table "report_companies", force: true do |t|
@@ -398,7 +385,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.text     "weather"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "date_string"
+    t.string   "created_date"
     t.string   "weather_icon"
     t.string   "temp"
     t.string   "wind"

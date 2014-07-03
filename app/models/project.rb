@@ -96,7 +96,7 @@ class Project < ActiveRecord::Base
     end
 
     def duplicate_project
-        new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :status}}}
+        new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :state}}}
         new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :worklist_item, :report, :project,:folder]}, {:worklists => :worklist_items}, :address, :folders, :users, :project_users]
         new_project.checklist = new_checklist
         new_project.save
