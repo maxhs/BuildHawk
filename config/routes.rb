@@ -241,7 +241,6 @@ Buildhawk::Application.routes.draw do
   #mobile API v2
   namespace :api do
     namespace :v2 do
-      resources :alternates, :only => [:create]
       resources :photos
       resources :sessions, :only => [:create, :forgot_password] do
         collection do 
@@ -251,6 +250,8 @@ Buildhawk::Application.routes.draw do
       resources :users do
         member do
           get :connect
+          post :add_alternate
+          post :delete_alternate
         end
       end
       resources :companies
