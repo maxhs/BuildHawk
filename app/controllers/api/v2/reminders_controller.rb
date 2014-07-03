@@ -13,7 +13,8 @@ class Api::V2::RemindersController < Api::V2::ApiController
 	end
 
 	def update
-		reminder = Reminder.update_attributes params[:reminder]
+		reminder = Reminder.find params[:id]
+		reminder.update_attributes params[:reminder]
 		if reminder.save
 			respond_to do |format|
         		format.json { render_for_api :projects, :json => reminder, :root => :reminder}
