@@ -1,6 +1,6 @@
 <div class="activity row" id="activity-<%=activity.id%>">
 	<% if activity.activity_type == "Comment" %>
-		"<%= activity.body %>" - <%= activity.user.full_name %>
+		<%= activity.body %> - <%= activity.user.full_name %>
 	<% else %>
 		<%= activity.body %>
 	<% end %>
