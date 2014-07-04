@@ -107,10 +107,14 @@ class Project < ActiveRecord::Base
         limit = 5
         feed = []
         feed += checklist_items.order('updated_at DESC').limit(limit)
-        feed += Report.where(:project_id => id).order('updated_at DESC').limit(limit)
+        feed += reports.order('updated_at DESC').limit(limit)
         feed += WorklistItem.where(:worklist_id => worklists.first.id).order('updated_at DESC').limit(limit) if worklists && worklists.first
-        feed += Photo.where(:project_id => id).order('updated_at DESC').limit(limit)
+        feed += recent_photos(limit)
         return feed.flatten.sort_by(&:updated_at).compact.reverse.first(limit)
+    end
+
+    def recent_photos(limit)
+        photos.order('updated_at DESC').limit(limit)
     end
 
     def recent_activities

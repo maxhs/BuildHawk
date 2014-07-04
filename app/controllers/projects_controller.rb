@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
 			@recently_completed = @project.recent_feed
 			current_time = Time.now
 			@upcoming_items = items.select{|i| i.critical_date if i.critical_date && i.critical_date > current_time}.sort_by(&:critical_date).last(5)
-			@recent_photos = @project.photos.order("created_at ASC").last(5)
+			@recent_photos = @project.recent_photos(5)
 		end
 
 		if request.xhr?
