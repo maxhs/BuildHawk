@@ -68,9 +68,10 @@ body {
 	}
 
 	h1, h2, h3, h4, h5 {
-		font-family:'Montserrat',"Source Sans Pro","Gotham Book","Helvetica",sans-serif;
+		font-family:"Source Sans Pro","Gotham Book","Helvetica",sans-serif;
 		text-transform:uppercase;
-		font-weight:normal;
+		font-weight:500;
+		letter-spacing:1px;
 	}
 
 	.alert, .notice {
@@ -208,7 +209,7 @@ body {
 		width:100%;
 		z-index:3;
 		background-color: #fff;
-		border-bottom:1px solid #ddd;
+		border-bottom:1px solid #eaeaea;
 
 		.logo {
 			width:270px;
@@ -245,7 +246,7 @@ body {
 			}
 
 			a {
-				font-size:1.1em;
+				font-size:1em;
 				vertical-align:middle;
 				font-weight:normal;
 				font-family:'Montserrat','Source Sans Pro','Helvetica',sans-serif;
@@ -253,7 +254,7 @@ body {
 				position:relative;
 				top:-1px;
 				text-rendering:geometricPrecision;
-				letter-spacing:1px;
+				letter-spacing:2px;
 			}
 
 			a:hover {
@@ -695,22 +696,24 @@ a.search-button {
 	border-radius:2px;
 	-webkit-border-radius:2px;
 	-moz-border-radius:2px;
-	padding:6px 10px;
+	padding:10px 20px;
 	position:relative;
 	display:inline-block;
 	margin:0 10px;
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Source Sans Pro",'Helvetica',sans-serif;
-	font-size:18px;
-	font-weight:700;
+	font-family:"Montserrat",'Helvetica',sans-serif;
+	font-size:14px;
+	letter-spacing:2px;
+	font-weight:normal;
 	text-transform:uppercase;
 }
 
 .simple-btn:hover {
 	border-color:#ccc;
-	background:#eee;
+	background:#f7f7f7;
+	box-shadow: 0 0 20px 0px rgba(0,0,0,.025);
 }
 
 .delete-link {

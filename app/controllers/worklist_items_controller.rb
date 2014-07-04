@@ -146,7 +146,7 @@ class WorklistItemsController < ApplicationController
 			@company = @project.company
 			@projects = @company.projects
 			@users = @project.users
-			@subs = @project.company_subs
+			@subs = @project.project_subs
 		end
 	end
 end

@@ -147,7 +147,7 @@
 			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
 			<%= f.hidden_field :user_id, :value => current_user.id %>
 			<%= f.hidden_field :report_id, :value => @report.id %>
-			<%= f.submit "Send", :class => "btn btn-success btn-md pull-right", :style => "margin-top:14px;" %>
+			<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
 		<% end %>
 	</div>
 	<%= render :partial => "comments/comments", :locals => {:comments => @report.comments} %>

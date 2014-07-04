@@ -32,7 +32,7 @@
 
 		<%= f.fields_for :assignee do |a| %>
 			<h5 style="display:inline-block;width:16.666666664%;">Assignee</h5>
-			<%= a.select :full_name, (@users.map(&:full_name)+@subs.map(&:name)).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
+			<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
 		<% end %>
 	
 	<% end %>

@@ -5,15 +5,34 @@
 			<div class="label-container"><span class="label">Date:</span><%= p.created_date%></div>
 			<div class="label-container">
 				<% if p.source %>
-					<span class="label">Source:</span>
+					
 					<% if p.source == "Documents" %>
+						<span class="label">Source:</span>
 						<%= link_to "Project Docs", document_photos_project_path(@project), :remote => true %>
 					<% elsif p.source == "Checklist" %>
-						<%= link_to "Checklist", checklist_photos_project_path(@project), :remote => true %>
+						<% if p.checklist_item %>
+							<span class="label">Item:</span>
+							<%= link_to "#{p.checklist_item.body[0..15]}...", checklist_item_path(p.checklist_item), :remote => true %>
+						<% else %> 
+							<span class="label">Source:</span>
+							<%= link_to "Checklist", checklist_photos_project_path(@project), :remote => true %>
+						<% end %>
 					<% elsif p.source == "Worklist" %>
-						<%= link_to "Worklist", worklist_photos_project_path(@project), :remote => true %>
+						<% if p.worklist_item %>
+							<span class="label">Item:</span>
+							<%= link_to "#{p.worklist_item.body[0..15]}...", edit_worklist_item_path(p.worklist_item), :remote => true %>
+						<% else %>
+							<span class="label">Source:</span>
+							<%= link_to "Worklist", worklist_photos_project_path(@project), :remote => true %>
+						<% end %>
 					<% elsif p.source == "Reports" %>
-						<%= link_to "Reports", report_photos_project_path(@project), :remote => true %>
+						<% if p.report %>
+							<span class="label">Report:</span>
+							<%= link_to "#{p.report.report_type} - #{p.report.date_string}", report_path(p.report), :remote => true %>
+						<% else %>
+							<span class="label">Source:</span>
+							<%= link_to "Reports", report_photos_project_path(@project), :remote => true %>
+						<% end %>
 					<% end %>
 				<% end %>
 			</div> 
