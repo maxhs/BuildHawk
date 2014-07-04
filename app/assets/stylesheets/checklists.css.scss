@@ -163,7 +163,9 @@
 	.left-edit {
 		top: 18px;
 		padding: 5px 5px 5px 15px;
-		font-size: 17px;
+		font-size: 14px;
+		letter-spacing:1px;
+		text-transform:uppercase;
 		position: absolute;
 		right: 100%;
 		background: #fff;
@@ -171,13 +173,12 @@
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
 		display: none;
-		-webkit-font-smoothing: antialiased;
-		font-family: "Source Sans Pro","Helvetica",sans-serif;
+		font-family: "Montserrat","Helvetica",sans-serif;
 		border-radius: 18px 0 0 18px;
 		-webkit-border-radius: 18px 0 0 18px;
 		-moz-border-radius: 18px 0 0 18px;
 		z-index: 5;
-		font-weight: bold;
+		font-weight: normal;
 	}
 }
 
@@ -193,15 +194,17 @@
 	.left-edit-checklist {
 		top: -5px;
 		padding: 5px 20px 5px 30px;
-		font-size: 14px;
+		font-size: 13px;
+		letter-spacing:1px;
+		font-weight:normal;
+		text-transform:uppercase;
 		position: absolute;
 		right: 100%;
 		background: #fff;
 		border-left: 1px solid #eee;
 		border-radius:20px 0 0 20px;
 		display:none;
-		-webkit-font-smoothing:antialiased;
-		font-family:"Souce Sans Pro","Helvetica",sans-serif;
+		font-family: "Montserrat","Helvetica",sans-serif;
 	}
 
 	.checklist.body {
@@ -299,7 +302,6 @@
 		padding:10px 0;
 		line-height:1.1em;
 		text-align:center;
-		height:110px;
 	}		
 
 	.item-body {	

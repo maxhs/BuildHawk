@@ -53,6 +53,8 @@
 		display:table;
 		height:51px;
 		width:auto;
+		text-transform:uppercase;
+		font-size:12px;
 
 		li {
 			display:table-cell;
@@ -261,7 +263,8 @@
 	padding: 0;
 	color: #fff;
 	font-weight:normal;
-	font-size:17px;
+	font-size:14px;
+	text-transform:uppercase;
 	-webkit-font-smoothing:antialiased;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;

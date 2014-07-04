@@ -2,13 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#export-checklist-item {
-	background:transparent;
-	float:right;
-	margin:0;
-}
-
 #item-container {
 	max-width:800px;
 	margin:0 auto;
+	position:relative;
+
+	#export-checklist-item {
+		background:transparent;
+		position:absolute;
+		right:20px;
+		margin:0;
+	}
 }
