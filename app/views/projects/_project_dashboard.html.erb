@@ -1,5 +1,5 @@
 <div id="project-dashboard" class="container">
-	<h4 style="margin-top:0;border-top:0;">Upcoming Critical Items</h4>
+	<h3 style="margin-top:0;border-top:0;">Upcoming Critical Items</h3>
 		<div id="upcoming-items">
 			<% if @upcoming_items && @upcoming_items.count > 0 %>
 				<% @upcoming_items.each_with_index do |item, idx| %>
@@ -16,13 +16,13 @@
 			<% end %>
 		</div>
 
-	<h4>Recent Updates</h4>
+	<h3>Recent Updates</h3>
 		<% if @recently_completed && @recently_completed.count > 0 %>
 			<div id="recent-items">
 				<div class="row">
-					<div class="col-xs-2 header-label"><h5>Type</h5></div>
-					<div class="col-xs-2 header-label"><h5>Last Updated</h5></div>
-					<div class="col-xs-2 header-label"><h5>Item</h5></div>
+					<div class="col-xs-2 header-label"><h4>Type</h4></div>
+					<div class="col-xs-2 header-label"><h4>Last Updated</h4></div>
+					<div class="col-xs-2 header-label"><h4>Item</h4></div>
 				</div>
 
 				<% @recently_completed.each do |item| %>
@@ -59,7 +59,7 @@
 		<% end %>
 
 	<% if @recent_photos && @recent_photos.count > 0 %>
-		<h4>Recently Added Documents</h4>
+		<h3>Recently Added Documents</h3>
 		<div id="recent-documents" class="row">
 			<div class="col-xs-12" style="overflow: hidden;">
 				<% @recent_photos.each do |p| %>
@@ -72,19 +72,19 @@
 	<% end %>
 
 	<% if @checklist %>
-		<h4>Checklist Progress</h4>
+		<h3>Checklist Progress</h3>
 		<div id="checklist-section">
 			<div class="row">
-				<div class="col-xs-4 header-label"><h5>Phase</h5></div>
-				<div class="col-xs-2 header-label center"><h5>% Completion</h5></div>
-				<div class="col-xs-2 header-label center"><h5>Completion</h5></div>
-				<div class="col-xs-2 header-label center"><h5>Milestone</h5></div>
-				<div class="col-xs-2 header-label center"><h5>+/-</h5></div>
+				<div class="col-xs-4 header-label"><h4>Phase</h4></div>
+				<div class="col-xs-2 header-label center"><h4>% Completion</h4></div>
+				<div class="col-xs-2 header-label center"><h4>Completion</h4></div>
+				<div class="col-xs-2 header-label center"><h4>Milestone</h4></div>
+				<div class="col-xs-2 header-label center"><h4>+/-</h4></div>
 			</div>
 			
 			<% @checklist.phases.sort_by{|p|p.name.to_i}.each do |phase| %>
 				<div class="row" style="font-size:1.1em;border-bottom:1px solid #eee;">
-					<div class="col-xs-4"><h5 style="text-align:left"><%= link_to phase.name, checklist_project_path(@project, :phase_id => phase.id), :remote => true %></h5></div>
+					<div class="col-xs-4"><h4 style="text-align:left"><%= link_to phase.name, checklist_project_path(@project, :phase_id => phase.id), :remote => true %></h4></div>
 					<div class="col-xs-2 center"><span style="text-align:center;display:inline-block;width:100%;"><%= phase.progress_percentage %></span></div>
 					<div class="col-xs-2 center"><% if phase.completed_date %> <%= parse_date phase.completed_date%><% end %></div>
 					<div class="col-xs-2 center"><% if phase.milestone_date %><%= parse_date phase.milestone_date %><% end %></div>
