@@ -66,6 +66,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         company = project.companies.where(:id => params[:company_id]).first
         puts "found company: #{company.name}" if company
         task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
+        report = Report.find params[:report_id] if !task and params[:report_id]
         if params[:user][:email]
             user = User.where(:email => params[:user][:email]).first
             if user
@@ -84,8 +85,14 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
             elsif task
-                puts "could find user for task assignment: #{params[:user]}"
+                puts "couldn't find user for task assignment: #{params[:user]}"
                 connect_user = task.connect_users.create params[:user]
+                respond_to do |format|
+                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
+                end
+            elsif report
+                puts "couldn't find user for report: #{params[:user]}"
+                connect_user = report.connect_users.create params[:user]
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
@@ -112,6 +119,12 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 end
             elsif task
                 connect_user = task.connect_users.create params[:user]
+                respond_to do |format|
+                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
+                end
+            elsif report
+                puts "couldn't find user for report: #{params[:user]}"
+                connect_user = report.connect_users.create params[:user]
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end

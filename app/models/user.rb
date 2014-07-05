@@ -144,6 +144,7 @@ class User < ActiveRecord::Base
         t.add :last_name
         t.add :full_name
         t.add :email
+        t.add :phone
         t.add :formatted_phone
         t.add :company
         t.add :url_thumb

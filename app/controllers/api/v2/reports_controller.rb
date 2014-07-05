@@ -84,7 +84,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
         end
     end
-    
+
     def update
         ##API compatibility
         if params[:report][:author_id]
@@ -100,10 +100,11 @@ class Api::V2::ReportsController < Api::V2::ApiController
             users = params[:report][:report_users]
             user_ids = []
             users.each do |u|
-                if u[:full_name]
-                    user = User.where(:full_name => u[:full_name]).first
-                elsif u[:id]
+                puts "u: #{u}"
+                if u[:id]
                     user = User.where(:id => u[:id]).first
+                elsif u[:full_name]
+                    user = User.where(:full_name => u[:full_name]).first
                 end
                     
                 if user
@@ -112,6 +113,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
                     user_ids << user.id
                 end
             end
+            # clean out any report users not included in the most recent update
             report.report_users.each do |ru|
                 ru.destroy unless user_ids.include?(ru.user_id)
             end

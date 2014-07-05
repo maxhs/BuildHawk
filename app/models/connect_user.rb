@@ -1,10 +1,11 @@
 class ConnectUser < ActiveRecord::Base
 	include ActionView::Helpers::TextHelper
-	attr_accessible :first_name, :last_name, :phone, :email, :worklist_item_id, :report_id, :checklist_item_id
+	attr_accessible :first_name, :last_name, :phone, :email, :worklist_item_id, :report_id, :checklist_item_id, :company_id
 
 	belongs_to :worklist_item
 	belongs_to :checklist_item
 	belongs_to :report
+    belongs_to :company
 
 	after_create :notify
 
