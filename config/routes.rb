@@ -267,6 +267,7 @@ Buildhawk::Application.routes.draw do
         member do
           post :archive
           post :unarchive
+          post :add_user
         end
       end
       resources :companies
@@ -290,7 +291,7 @@ Buildhawk::Application.routes.draw do
       end
       resources :comments
       resources :activities, only: [:destroy]
-      resources :project_subs, :only => [:create, :show] do
+      resources :project_subs, :only => [:create] do
         member do
           post :add_user
         end

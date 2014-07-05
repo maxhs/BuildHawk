@@ -98,14 +98,6 @@ class ChecklistItem < ActiveRecord::Base
         end
     end
 
-    def critical_date_unix
-        critical_date.to_i
-    end
-
-    def completed_date_unix
-        completed_date.to_i
-    end
-
     def has_critical_date?
         critical_date.present?
     end
@@ -144,9 +136,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :id
         t.add :body
         t.add :critical_date, :if => :has_critical_date?
-        t.add :critical_date_unix, :if => :has_critical_date?
         t.add :completed_date, :if => :has_completed_date?
-        t.add :completed_date_unix, :if => :has_completed_date?
         t.add :status
         t.add :state
         t.add :item_type

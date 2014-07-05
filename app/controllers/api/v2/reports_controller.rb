@@ -2,6 +2,89 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
     before_filter :refactor
 
+    def create
+        current_user = User.find params[:report][:author_id]
+        project = Project.find params[:report][:project_id]
+        reports_with_type = project.reports.where(:report_type => params[:report][:report_type])
+        if reports_with_type && reports_with_type.map(&:date_string).include?(params[:report][:date_string])
+            render json: {duplicate: "#{params[:report][:date_string]}"}
+        else
+            if params[:report][:report_users].present?
+                users = params[:report][:report_users]
+                params[:report].delete(:report_users)
+            end
+
+            if params[:report][:report_subs].present?
+                subs = params[:report][:report_subs]
+                params[:report].delete(:report_subs)
+            end
+
+            if params[:report][:report_companies].present?
+                companies = params[:report][:report_companies]
+                params[:report].delete(:report_companies)
+            end
+
+            if params[:report][:safety_topics].present?
+                topics = params[:report][:safety_topics]
+                params[:report].delete(:safety_topics)
+            end
+
+            report = Report.create params[:report]
+            report.update_attribute :mobile, true
+            
+            if topics
+                topics.each do |topic|
+                    if topic["topic_id"]
+                        report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
+                    else
+                        if topic["id"].present?
+                            report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                        else
+                            new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
+                            report.report_topics.create(:safety_topic_id => new_topic.id)
+                        end
+                    end
+                end
+            end
+            
+            if companies
+                companies.each do |c|
+                    company = Company.where(:name => c[:name]).first_or_create
+                    report_company = report.report_companies.where(:company_id => company.id).first_or_create
+                    report_company.update_attribute :count, c[:count]
+                end
+            end
+            if subs
+                subs.each do |s|
+                    sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
+                    the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
+                    the_sub.update_attribute :count, s[:count]
+                end
+            end
+
+            if users
+                users.each do |u|
+                    user = User.find_by full_name: u[:full_name]
+                    if user
+                        ru = report.report_users.where(:user_id => user.id).first_or_create
+                        ru.update_attribute :hours, u[:hours]
+                    end
+                end
+            end
+
+            report.activities.create(
+                :project_id => report.project.id,
+                :activity_type => report.class.name,
+                :user_id => current_user.id,
+                :body => "#{current_user.full_name} created this report." 
+            )
+
+            respond_to do |format|
+                format.json { render_for_api :reports, :json => report, :root => :report}
+            end
+        end
+    end
+    
     def update
         ##API compatibility
         if params[:report][:author_id]
@@ -137,89 +220,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
         else
             render :json => {:success => false}
-        end
-    end
-
-    def create
-        current_user = User.find params[:report][:author_id]
-        project = Project.find params[:report][:project_id]
-        reports_with_type = project.reports.where(:report_type => params[:report][:report_type])
-        if reports_with_type && reports_with_type.map(&:date_string).include?(params[:report][:date_string])
-            render json: {duplicate: "#{params[:report][:date_string]}"}
-        else
-            if params[:report][:report_users].present?
-                users = params[:report][:report_users]
-                params[:report].delete(:report_users)
-            end
-
-            if params[:report][:report_subs].present?
-                subs = params[:report][:report_subs]
-                params[:report].delete(:report_subs)
-            end
-
-            if params[:report][:report_companies].present?
-                companies = params[:report][:report_companies]
-                params[:report].delete(:report_companies)
-            end
-
-            if params[:report][:safety_topics].present?
-                topics = params[:report][:safety_topics]
-                params[:report].delete(:safety_topics)
-            end
-
-            report = Report.create params[:report]
-            report.update_attribute :mobile, true
-            
-            if topics
-                topics.each do |topic|
-                    if topic["topic_id"]
-                        report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
-                    else
-                        if topic["id"].present?
-                            report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
-                        else
-                            new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
-                            report.report_topics.create(:safety_topic_id => new_topic.id)
-                        end
-                    end
-                end
-            end
-            
-            if companies
-                companies.each do |c|
-                    company = Company.where(:name => c[:name]).first_or_create
-                    report_company = report.report_companies.where(:company_id => company.id).first_or_create
-                    report_company.update_attribute :count, c[:count]
-                end
-            end
-            if subs
-                subs.each do |s|
-                    sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
-                    the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                    the_sub.update_attribute :count, s[:count]
-                end
-            end
-
-            if users
-                users.each do |u|
-                    user = User.find_by full_name: u[:full_name]
-                    if user
-                        ru = report.report_users.where(:user_id => user.id).first_or_create
-                        ru.update_attribute :hours, u[:hours]
-                    end
-                end
-            end
-
-            report.activities.create(
-                :project_id => report.project.id,
-                :activity_type => report.class.name,
-                :user_id => current_user.id,
-                :body => "#{current_user.full_name} created this report." 
-            )
-
-            respond_to do |format|
-                format.json { render_for_api :reports, :json => report, :root => :report}
-            end
         end
     end
 
