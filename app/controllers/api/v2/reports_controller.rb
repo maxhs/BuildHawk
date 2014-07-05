@@ -108,14 +108,17 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 end
                     
                 if user
+                    puts "found user"
                     ru = report.report_users.where(:user_id => user.id).first_or_create
+                    puts "found report user, should update hours: #{u[:hours]}"
                     ru.update_attribute :hours, u[:hours]
                     user_ids << user.id
+                    puts "user ids: #{user_ids}"
                 end
             end
             # clean out any report users not included in the most recent update
             report.report_users.each do |ru|
-                ru.destroy unless user_ids.include?(ru.user_id)
+                #ru.destroy unless user_ids.include?(ru.user_id)
             end
             params[:report].delete(:report_users)
         end
