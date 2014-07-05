@@ -7,8 +7,11 @@ class Reminder < ActiveRecord::Base
 	belongs_to :project
 	belongs_to :worklist_item
 
+	validates_presence_of :reminder_datetime
 	after_commit :schedule, on: :create
 	before_destroy :unschedule
+
+	default_scope { order('reminder_datetime') }
 
 	def schedule
 		Activity.create(
