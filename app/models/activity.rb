@@ -50,19 +50,11 @@ class Activity < ActiveRecord::Base
       
     end
 
-    api_accessible :worklist, :extend => :dashboard do |t|
-      
-    end
-
     api_accessible :checklists, :extend => :dashboard do |t|
       
     end
 
     api_accessible :projects, :extend => :dashboard do |t|
-      
-    end
-    
-    api_accessible :reports, :extend => :projects do |t|
       
     end
 
@@ -83,5 +75,13 @@ class Activity < ActiveRecord::Base
 		t.add :hidden
 		t.add :created_date
 		t.add :activity_type
+    end
+
+    api_accessible :reports, :extend => :details do |t|
+      
+    end
+
+    api_accessible :worklist, :extend => :details do |t|
+      
     end
 end
