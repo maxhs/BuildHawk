@@ -40,7 +40,7 @@ class Reminder < ActiveRecord::Base
 
 	acts_as_api
 
-	api_accessible :projects do |t|
+	api_accessible :reminders do |t|
 		t.add :id
 		t.add :user
 		t.add :checklist_item
@@ -52,27 +52,27 @@ class Reminder < ActiveRecord::Base
 		t.add :active
 	end
 
-	api_accessible :user, :extend => :projects do |t|
+	api_accessible :user, :extend => :reminders do |t|
+     
+    end
+
+    api_accessible :company, :extend => :reminders do |t|
       
     end
 
-    api_accessible :company, :extend => :projects do |t|
+    api_accessible :worklist, :extend => :reminders do |t|
       
     end
 
-    api_accessible :worklist, :extend => :projects do |t|
+    api_accessible :checklists, :extend => :reminders do |t|
       
     end
 
-    api_accessible :checklists, :extend => :projects do |t|
+    api_accessible :details, :extend => :reminders do |t|
       
     end
 
-    api_accessible :details, :extend => :projects do |t|
-      
-    end
-
-    api_accessible :dashboard, :extend => :projects do |t|
+    api_accessible :dashboard, :extend => :reminders do |t|
       
     end
 
