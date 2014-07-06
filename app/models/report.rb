@@ -161,11 +161,11 @@ class Report < ActiveRecord::Base
         t.add :humidity
   		#t.add :report_fields
         t.add :possible_types
-        # t.add :comments
-        # t.add :photos
-        # t.add :report_users
-        # t.add :report_companies
-        # t.add :report_topics
+        t.add :comments
+        t.add :photos
+        t.add :report_users
+        t.add :report_companies
+        t.add :report_topics
         t.add :body, :if => :has_body?
 
         ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
