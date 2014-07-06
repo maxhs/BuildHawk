@@ -29,7 +29,6 @@ class Comment < ActiveRecord::Base
     end
 
     def notify
-    
         Activity.create(
             :user_id => user_id,
             :body => "\"#{body}\"",

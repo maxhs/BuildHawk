@@ -161,7 +161,7 @@ class Report < ActiveRecord::Base
         t.add :humidity
   		#t.add :report_fields
         t.add :possible_types
-        t.add :comments
+        # t.add :comments
         # t.add :photos
         # t.add :report_users
         # t.add :report_companies
