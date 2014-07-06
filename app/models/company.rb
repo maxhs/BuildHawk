@@ -118,6 +118,10 @@ class Company < ActiveRecord::Base
     api_accessible :worklist, :extend => :login do |t|
         
     end
+
+    api_accessible :checklists, :extend => :login do |t|
+        
+    end
     
     api_accessible :dashboard do |t|
     
