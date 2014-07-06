@@ -9,7 +9,6 @@ class ReportField < ActiveRecord::Base
   		t.add :title
   		t.add :type
   		t.add :body
-  		t.add :user
   		t.add :report_id
   	end
 end
