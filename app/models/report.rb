@@ -155,7 +155,7 @@ class Report < ActiveRecord::Base
 
     end
 
-    api_accessible :dashboard, :extend => :reports do |t|
+    api_accessible :dashboard do |t|
         t.add :id
         t.add :author
         t.add :updated_at
@@ -178,5 +178,9 @@ class Report < ActiveRecord::Base
         t.add :report_companies
         t.add :report_topics
         t.add :body, :if => :has_body?
+    end
+
+    api_accessible :projects, :extend => :dashboard do |t|
+
     end
 end
