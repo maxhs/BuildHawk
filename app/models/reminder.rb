@@ -52,7 +52,11 @@ class Reminder < ActiveRecord::Base
 		t.add :active
 	end
 
-	api_accessible :user, :extend => :reminders do |t|
+	api_accessible :projects, :extend => :reminders do |t|
+     
+    end
+
+    api_accessible :user, :extend => :reminders do |t|
      
     end
 
