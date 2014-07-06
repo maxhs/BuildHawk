@@ -83,8 +83,8 @@ class WorklistItem < ActiveRecord::Base
         created_at.to_i
     end
 
-    def project 
-        worklist.project
+    def project_id
+        worklist.project.id
     end
 
     ##for deletion
