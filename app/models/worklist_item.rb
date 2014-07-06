@@ -1,5 +1,5 @@
 class WorklistItem < ActiveRecord::Base
-    include ActionView::Helpers::TextHelper
+
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :worklist_id, :worklist, :photos_attributes, 
                   :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
                   :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email
@@ -17,8 +17,6 @@ class WorklistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
-    after_commit :notify, :if => :persisted?
-
     default_scope { order('created_at DESC') }
 
     #websolr
@@ -34,24 +32,50 @@ class WorklistItem < ActiveRecord::Base
         time    :created_at
     end
 
-    def notify
-        truncated = truncate(body, length:20)
+    def notify(user)
+        if body.length > 20
+            truncated = "#{body[0..20]}..."
+        else
+            truncated = body
+        end
+        
         if completed
             # user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
             # if user
             #     body = "#{worklist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
             # else
-                body = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was just completed"
+                text = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was just completed"
             #end
-            Notification.where(:body => body,:user_id => user_id, :worklist_item_id => id, :notification_type => "Worklist").first_or_create
+            Notification.where(:body => text,:user_id => user_id, :worklist_item_id => id, :notification_type => "Worklist").first_or_create
+            activities.create(
+                :user_id => user.id,
+                :project_id => worklist.project.id,
+                :worklist_item_id => id,
+                :body => "This item was marked complete.",
+                :activity_type => self.class.name
+            )
         else
             body = "#{worklist.project.name} (Worklist) - \"#{truncated}\" has been modified"
             user.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
+            activities.create(
+                :user_id => user.id,
+                :project_id => worklist.project.id,
+                :worklist_item_id => id,
+                :body => "This item was modified.",
+                :activity_type => self.class.name
+            )
         end
 
         if assignee
             body = "\"#{truncated}\" has been assigned to you for #{worklist.project.name}"
             assignee.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
+            activities.create(
+                :user_id => user.id,
+                :project_id => worklist.project.id,
+                :worklist_item_id => id,
+                :body => "This item was assigned to #{assignee.full_name}.",
+                :activity_type => self.class.name
+            )
         end
     end
 

@@ -2,7 +2,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     before_filter :refactor_punchlist
 
     def update
-    	@worklist_item = WorklistItem.find params[:id]
+    	worklist_item = WorklistItem.find params[:id]
         params[:worklist_item].delete(:id)
 
         if params[:worklist_item][:user_assignee].present? 
@@ -11,7 +11,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee].present?
-            sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => @worklist_item.worklist.project.company.id).first_or_create
+            sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => worklist_item.worklist.project.company.id).first_or_create
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = sub.id
             params[:worklist_item].delete(:sub_assignee)
@@ -33,15 +33,19 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:location] = nil
         end
 
-    	@worklist_item.update_attributes params[:worklist_item]
+    	worklist_item.update_attributes params[:worklist_item]
+        if params[:user_id]
+            current_user = User.find params[:user_id]
+            worklist_item.notify(current_user)
+        end
         
     	respond_to do |format|
-        	format.json { render_for_api :worklist, :json => @worklist_item, :root => @root}
+        	format.json { render_for_api :worklist, :json => worklist_item, :root => @root}
       	end
     end
 
     def create
-        @project = Project.find params[:project_id]
+        project = Project.find params[:project_id]
 
         if params[:worklist_item][:user_assignee].present? 
             assignee = User.where(:full_name => params[:worklist_item][:user_assignee]).first
@@ -50,19 +54,26 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             sub = Sub.where(:name => params[:worklist_item][:sub_assignee]).first_or_create
             params[:worklist_item].delete(:sub_assignee)
         end
+        params[:worklist_item][:mobile] = true
         
-        @worklist_item = @project.worklists.last.worklist_items.create params[:worklist_item]
-        @worklist_item.update_attribute :mobile, true
+        worklist_item = project.worklists.last.worklist_items.create params[:worklist_item]
+        worklist_item.activities.create(
+            :worklist_item_id => worklist_item.id,
+            :project_id => project.id,
+            :user_id => worklist_item.user.id,
+            :body => "#{worklist_item.user.full_name} created this item.",
+            :activity_type => worklist_item.class.name
+        )
         
         if assignee
-            @worklist_item.update_attribute :assignee_id, assignee.id
+            worklist_item.update_attribute :assignee_id, assignee.id
         elsif sub
-            @worklist_item.update_attribute :sub_assignee_id, sub.id
+            worklist_item.update_attribute :sub_assignee_id, sub.id
         end
 
-        if @worklist_item.save
+        if worklist_item.save
             respond_to do |format|
-                format.json { render_for_api :worklist, :json => @worklist_item, :root => @root}
+                format.json { render_for_api :worklist, :json => worklist_item, :root => @root}
             end
         end
     end
