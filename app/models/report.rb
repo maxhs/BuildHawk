@@ -119,6 +119,32 @@ class Report < ActiveRecord::Base
 
   	acts_as_api
 
+    api_accessible :dashboard do |t|
+        t.add :id
+        t.add :author
+        t.add :updated_at
+        t.add :created_at
+        t.add :date_string
+        t.add :created_date
+        t.add :title
+        t.add :report_type
+        t.add :weather
+        t.add :weather_icon
+        t.add :precip
+        t.add :temp
+        t.add :wind
+        t.add :humidity
+        t.add :report_fields
+        t.add :possible_types
+        t.add :photos
+        t.add :activities
+        t.add :body, :if => :has_body?
+    end
+
+    api_accessible :projects, :extend => :dashboard do |t|
+
+    end
+
   	api_accessible :reports do |t|
         t.add :id
         t.add :author
@@ -142,7 +168,6 @@ class Report < ActiveRecord::Base
         t.add :report_companies
         t.add :report_topics
         t.add :body, :if => :has_body?
-        t.add :activities
         ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
         t.add :epoch_time
         t.add :safety_topics
@@ -155,28 +180,4 @@ class Report < ActiveRecord::Base
 
     end
 
-    api_accessible :dashboard do |t|
-        t.add :id
-        t.add :author
-        t.add :updated_at
-        t.add :created_at
-        t.add :date_string
-        t.add :created_date
-        t.add :title
-        t.add :report_type
-        t.add :weather
-        t.add :weather_icon
-        t.add :precip
-        t.add :temp
-        t.add :wind
-        t.add :humidity
-        t.add :report_fields
-        t.add :possible_types
-        t.add :photos
-        t.add :body, :if => :has_body?
-    end
-
-    api_accessible :projects, :extend => :dashboard do |t|
-
-    end
 end

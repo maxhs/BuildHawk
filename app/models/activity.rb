@@ -58,10 +58,6 @@ class Activity < ActiveRecord::Base
       
     end
 
-    api_accessible :details, :extend => :dashboard do |t|
-      
-    end
-
     api_accessible :projects, :extend => :dashboard do |t|
       
     end
@@ -72,5 +68,20 @@ class Activity < ActiveRecord::Base
 
     api_accessible :notifications, :extend => :projects do |t|
 
+    end
+
+    api_accessible :details do |t|
+      	t.add :id
+		t.add :user_id
+		t.add :checklist_id
+		t.add :checklist_item_id
+		t.add :report_id
+		t.add :comment
+		t.add :worklist_item_id
+		t.add :project_id
+		t.add :body
+		t.add :hidden
+		t.add :created_date
+		t.add :activity_type
     end
 end
