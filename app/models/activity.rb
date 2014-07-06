@@ -55,10 +55,6 @@ class Activity < ActiveRecord::Base
       
     end
 
-    api_accessible :checklists, :extend => :dashboard do |t|
-      
-    end
-
     api_accessible :projects, :extend => :dashboard do |t|
       
     end
@@ -87,6 +83,10 @@ class Activity < ActiveRecord::Base
     end
 
     api_accessible :worklist, :extend => :details do |t|
+      
+    end
+
+    api_accessible :checklists, :extend => :details do |t|
       
     end
 end
