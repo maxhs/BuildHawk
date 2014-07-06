@@ -38,7 +38,7 @@ class Reminder < ActiveRecord::Base
 		reminder_datetime.to_i
 	end
 
-	acts_as_api
+	#acts_as_api
 
 	api_accessible :reminders do |t|
 		t.add :id

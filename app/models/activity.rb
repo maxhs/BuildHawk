@@ -25,7 +25,7 @@ class Activity < ActiveRecord::Base
 		checklist_item.checklist.id if checklist_item
 	end
 
-	acts_as_api
+	#acts_as_api
 
 	api_accessible :dashboard do |t|
 		t.add :id
