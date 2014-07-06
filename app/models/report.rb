@@ -172,7 +172,7 @@ class Report < ActiveRecord::Base
         t.add :created_date
         t.add :epoch_time
         t.add :safety_topics
-        # t.add :report_subs
+        t.add :report_subs
         # t.add :personnel
         ###
   	end
