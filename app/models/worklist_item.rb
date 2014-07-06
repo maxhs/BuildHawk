@@ -106,7 +106,7 @@ class WorklistItem < ActiveRecord::Base
         t.add :created_at
   		t.add :completed
         t.add :created_date
-        t.add :project
+        t.add :project_id
         ## for deletion
         t.add :epoch_time
   	end
