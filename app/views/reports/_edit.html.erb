@@ -140,7 +140,7 @@
 <% end %>
 
 <div class="border-box comment-container" style="margin-top:20px;">
-	<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h3>
+	<h3 style="text-align:center; margin:20px auto; display:block;">Comments</h3>
 	<div id="comments-form">
 		<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
 			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
@@ -154,8 +154,13 @@
 
 <% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
 	<div class="border-box activity-container" style="margin-top:20px;">
-		<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Activity</h3>
+		<h3 style="text-align:center; margin:20px auto; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h3>
 		<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
+	</div>
+<% elsif @report.activities.count %>
+	<div class="border-box activity-container" style="margin-top:20px;">
+		<h3 style="text-align:center; margin:20px auto; display:block;">Activity</h3>
+		<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
 	</div>
 <% end %>
 
