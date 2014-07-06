@@ -162,7 +162,7 @@ class Report < ActiveRecord::Base
   		#t.add :report_fields
         t.add :possible_types
         # t.add :comments
-        # t.add :photos
+        t.add :photos
         # t.add :report_users
         # t.add :report_companies
         # t.add :report_topics
