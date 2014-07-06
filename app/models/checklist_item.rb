@@ -160,6 +160,18 @@ class ChecklistItem < ActiveRecord::Base
     
     end
 
+    api_accessible :reminders, :extend => :dashboard do |t|
+        t.add :id
+        t.add :body
+        t.add :critical_date, :if => :has_critical_date?
+        t.add :completed_date, :if => :has_completed_date?
+        t.add :status
+        t.add :state
+        t.add :item_type
+        t.add :photos_count
+        t.add :checklist_id
+    end
+
     api_accessible :details, :extend => :dashboard do |t|
         t.add :photos
         t.add :comments

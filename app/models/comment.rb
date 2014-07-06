@@ -91,7 +91,12 @@ class Comment < ActiveRecord::Base
     api_accessible :reports, :extend => :projects do |t|
 
     end
+    
     api_accessible :notifications, :extend => :projects do |t|
+
+    end
+
+    api_accessible :reminders, :extend => :projects do |t|
 
     end
 end

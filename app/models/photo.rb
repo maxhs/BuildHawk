@@ -180,4 +180,8 @@ class Photo < ActiveRecord::Base
 	api_accessible :notifications, :extend => :dashboard do |t|
 
 	end
+
+	api_accessible :reminders, :extend => :dashboard do |t|
+
+	end
 end

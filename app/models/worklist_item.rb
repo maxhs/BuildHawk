@@ -104,4 +104,17 @@ class WorklistItem < ActiveRecord::Base
     api_accessible :details, :extend => :worklist do |t|
         t.add :activities
     end
+
+    api_accessible :reminders do |t|
+        t.add :id
+        t.add :worklist_id
+        t.add :user
+        t.add :body
+        t.add :assignee
+        t.add :location
+        t.add :completed_at
+        t.add :created_at
+        t.add :completed
+        t.add :created_date
+    end
 end
