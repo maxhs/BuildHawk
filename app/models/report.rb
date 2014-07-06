@@ -137,7 +137,6 @@ class Report < ActiveRecord::Base
         t.add :report_fields
         t.add :possible_types
         t.add :photos
-        t.add :activities
         t.add :body, :if => :has_body?
     end
 
@@ -167,6 +166,7 @@ class Report < ActiveRecord::Base
         t.add :report_companies
         t.add :report_topics
         t.add :body, :if => :has_body?
+        t.add :activities
         ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
         t.add :created_date
         t.add :epoch_time
