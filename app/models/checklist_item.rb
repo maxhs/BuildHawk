@@ -152,7 +152,7 @@ class ChecklistItem < ActiveRecord::Base
   	end
 
     api_accessible :checklists, :extend => :dashboard do |t|
-    
+        t.add :reminders
     end
 
     api_accessible :notifications, :extend => :dashboard do |t|
@@ -175,6 +175,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :photos
         t.add :comments
         t.add :phase_name
+        t.add :reminders
     end
 
     protected

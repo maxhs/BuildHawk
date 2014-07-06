@@ -53,7 +53,7 @@ class Reminder < ActiveRecord::Base
 	end
 
 	api_accessible :projects, :extend => :reminders do |t|
-     
+     	
     end
 
     api_accessible :user, :extend => :reminders do |t|
@@ -64,19 +64,25 @@ class Reminder < ActiveRecord::Base
       
     end
 
-    api_accessible :worklist, :extend => :reminders do |t|
-      
-    end
-
-    api_accessible :checklists, :extend => :reminders do |t|
-      
-    end
-
     api_accessible :details, :extend => :reminders do |t|
       
     end
 
     api_accessible :dashboard, :extend => :reminders do |t|
+      
+    end
+
+    api_accessible :worklist do |t|
+  		t.add :id
+		t.add :user
+		t.add :reminder_date
+		t.add :email
+		t.add :text
+		t.add :push
+		t.add :active
+    end
+
+    api_accessible :checklists, :extend => :worklist do |t|
       
     end
 
