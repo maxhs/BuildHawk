@@ -159,7 +159,7 @@ class Report < ActiveRecord::Base
         t.add :temp
         t.add :wind
         t.add :humidity
-  		#t.add :report_fields
+  		t.add :report_fields
         t.add :possible_types
         t.add :comments
         t.add :photos
