@@ -118,7 +118,7 @@ class Report < ActiveRecord::Base
     end
 
     def daily_activities
-        project.activities.map{|a| a if a.created_at.to_date == Date.strptime(date_string,"%m/%d/%Y")}
+        project.activities.map{|a| a if a.created_at.to_date == Date.strptime(date_string,"%m/%d/%Y")}.compact
     end
 
   	acts_as_api
