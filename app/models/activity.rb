@@ -30,8 +30,8 @@ class Activity < ActiveRecord::Base
 	api_accessible :dashboard do |t|
 		t.add :id
 		t.add :user_id
-		t.add :checklist_item_id
 		t.add :checklist_id
+		t.add :checklist_item
 		t.add :report
 		t.add :comment
 		t.add :worklist_item_id
