@@ -173,7 +173,6 @@ class Report < ActiveRecord::Base
         t.add :report_fields
         t.add :possible_types
         t.add :photos
-        t.add :report_topics
         t.add :body, :if => :has_body?
     end
 
