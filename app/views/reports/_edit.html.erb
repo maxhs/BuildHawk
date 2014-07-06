@@ -152,10 +152,10 @@
 	<%= render :partial => "comments/comments", :locals => {:comments => @report.comments} %>
 </div>
 
-<% if @report.activities.count > 0 %>
+<% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
 	<div class="border-box activity-container" style="margin-top:20px;">
 		<h3 style="text-align:center; width:50%;margin:20px auto; display:block;">Activity</h3>
-		<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
+		<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
 	</div>
 <% end %>
 
