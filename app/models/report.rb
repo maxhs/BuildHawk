@@ -117,6 +117,10 @@ class Report < ActiveRecord::Base
         date_string
     end
 
+    def project_activities
+        project.activities.map{|a| a if a.created_at.to_date == Date.strptime(date_string,"%m/%d/%Y")}
+    end
+
   	acts_as_api
 
     api_accessible :dashboard do |t|
@@ -167,6 +171,7 @@ class Report < ActiveRecord::Base
         t.add :report_topics
         t.add :body, :if => :has_body?
         t.add :activities
+        t.add :project_activities
         ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
         t.add :created_date
         t.add :epoch_time
