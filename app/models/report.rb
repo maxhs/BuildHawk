@@ -154,4 +154,29 @@ class Report < ActiveRecord::Base
     api_accessible :notifications, :extend => :reports do |t|
 
     end
+
+    api_accessible :dashboard, :extend => :reports do |t|
+        t.add :id
+        t.add :author
+        t.add :updated_at
+        t.add :created_at
+        t.add :date_string
+        t.add :created_date
+        t.add :title
+        t.add :report_type
+        t.add :weather
+        t.add :weather_icon
+        t.add :precip
+        t.add :temp
+        t.add :wind
+        t.add :humidity
+        t.add :report_fields
+        t.add :possible_types
+        t.add :comments
+        t.add :photos
+        t.add :report_users
+        t.add :report_companies
+        t.add :report_topics
+        t.add :body, :if => :has_body?
+    end
 end

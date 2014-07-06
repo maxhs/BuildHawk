@@ -27,12 +27,12 @@ class Activity < ActiveRecord::Base
 
 	acts_as_api
 
-	api_accessible :projects do |t|
+	api_accessible :dashboard do |t|
 		t.add :id
 		t.add :user_id
 		t.add :checklist_item_id
 		t.add :checklist_id
-		t.add :report_id
+		t.add :report
 		t.add :comment
 		t.add :worklist_item_id
 		t.add :project_id
@@ -42,27 +42,27 @@ class Activity < ActiveRecord::Base
 		t.add :activity_type
 	end
 
-	api_accessible :user, :extend => :projects do |t|
+	api_accessible :user, :extend => :dashboard do |t|
       
     end
 
-    api_accessible :company, :extend => :projects do |t|
+    api_accessible :company, :extend => :dashboard do |t|
       
     end
 
-    api_accessible :worklist, :extend => :projects do |t|
+    api_accessible :worklist, :extend => :dashboard do |t|
       
     end
 
-    api_accessible :checklists, :extend => :projects do |t|
+    api_accessible :checklists, :extend => :dashboard do |t|
       
     end
 
-    api_accessible :details, :extend => :projects do |t|
+    api_accessible :details, :extend => :dashboard do |t|
       
     end
 
-    api_accessible :dashboard, :extend => :projects do |t|
+    api_accessible :projects, :extend => :dashboard do |t|
       
     end
     
