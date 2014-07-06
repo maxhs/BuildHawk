@@ -6,6 +6,7 @@ class ReportUser < ActiveRecord::Base
 	def sub
 		return false
 	end
+	
 	acts_as_api
 
   	api_accessible :reports do |t|
