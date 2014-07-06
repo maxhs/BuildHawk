@@ -107,6 +107,7 @@ class WorklistItem < ActiveRecord::Base
   		t.add :completed
         t.add :created_date
         t.add :project_id
+        t.add :activities
         ## for deletion
         t.add :epoch_time
   	end
@@ -124,7 +125,7 @@ class WorklistItem < ActiveRecord::Base
     end
 
     api_accessible :details, :extend => :worklist do |t|
-        t.add :activities
+        
         t.add :photos
         t.add :comments
     end
