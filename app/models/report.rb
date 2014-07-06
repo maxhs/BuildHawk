@@ -147,7 +147,7 @@ class Report < ActiveRecord::Base
 
   	api_accessible :reports do |t|
         t.add :id
-        #t.add :author
+        t.add :author
         t.add :updated_at
         t.add :created_at
         t.add :date_string
@@ -164,7 +164,7 @@ class Report < ActiveRecord::Base
         # t.add :comments
         t.add :photos
         # t.add :report_users
-        t.add :report_companies
+        #t.add :report_companies
         t.add :report_topics
         t.add :body, :if => :has_body?
 
