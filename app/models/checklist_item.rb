@@ -142,7 +142,6 @@ class ChecklistItem < ActiveRecord::Base
         t.add :item_type
         t.add :photos_count
         t.add :comments_count
-        t.add :activities
         t.add :checklist_id
         t.add :project_id
     end
@@ -153,6 +152,7 @@ class ChecklistItem < ActiveRecord::Base
 
     api_accessible :checklists, :extend => :dashboard do |t|
         t.add :reminders
+        t.add :activities
     end
 
     api_accessible :notifications, :extend => :dashboard do |t|
@@ -176,6 +176,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :comments
         t.add :phase_name
         t.add :reminders
+        t.add :activities
     end
 
     protected
