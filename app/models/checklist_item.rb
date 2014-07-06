@@ -151,8 +151,7 @@ class ChecklistItem < ActiveRecord::Base
   	end
 
     api_accessible :checklists, :extend => :dashboard do |t|
-        t.add :reminders
-        t.add :activities
+       
     end
 
     api_accessible :notifications, :extend => :dashboard do |t|
