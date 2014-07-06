@@ -39,7 +39,7 @@ class Activity < ActiveRecord::Base
 		t.add :report
 		t.add :comment
 		t.add :worklist_id
-		t.add :worklist_item_id
+		t.add :worklist_item
 		t.add :project_id
 		t.add :body
 		t.add :hidden
