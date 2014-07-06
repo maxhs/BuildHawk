@@ -25,6 +25,10 @@ class Activity < ActiveRecord::Base
 		checklist_item.checklist.id if checklist_item
 	end
 
+	def worklist_id
+		worklist_item.worklist.id if worklist_item
+	end
+
 	acts_as_api
 
 	api_accessible :dashboard do |t|
@@ -34,6 +38,7 @@ class Activity < ActiveRecord::Base
 		t.add :checklist_item
 		t.add :report
 		t.add :comment
+		t.add :worklist_id
 		t.add :worklist_item_id
 		t.add :project_id
 		t.add :body
