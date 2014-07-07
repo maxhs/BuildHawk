@@ -69,7 +69,7 @@
 			<div class="row">
 				<div class="user-container col-md-6">
 					<% @project_users.each do |project_user| %>
-						<% if @report.users.include?(project_user) %>
+						<% if @report.users.include?(project_user.user) %>
 							<div><%= check_box_tag "report[user_ids][]", project_user.user.id, checked: true %><span style="padding-left:1em;"><%= project_user.user.full_name %></span></div>
 						<% else %>
 							<div><%= check_box_tag "report[user_ids][]", project_user.user.id %><span style="padding-left:1em;"><%= project_user.user.full_name %></span></div>

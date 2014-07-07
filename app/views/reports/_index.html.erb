@@ -20,16 +20,9 @@
 				<div class="col-xs-2"><h5>Personnel on site</h5></div>
 				<div class="col-xs-2"><h5>Photos</h5></div>
 			</div>
-		
-			<% @reports.each do |report| %>
-				<div class="report row">
-					<div class="col-xs-3"><%= link_to "#{report.report_type} - #{report.date_string}", report_path(report), :remote => true %></div>
-					<div class="col-xs-3"><%= report.report_type %></div>
-					<div class="col-xs-2"><% if report.updated_at %><%= parse_time report.updated_at %><% end %></div>
-					<div class="col-xs-2"><%= report.personnel_count %></div>
-					<div class="col-xs-2"><%= report.photos.count %></div>
-				</div>
-			<% end %>
+	
+			<%= render partial:"reports/index_row", collection: @reports, as: :report, cache: true %>
+				
 		<% else %>
 			<div class="col-xs-12 loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;margin:50px auto;">No reports</h4></div>
 		<% end %>

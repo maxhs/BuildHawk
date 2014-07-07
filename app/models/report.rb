@@ -79,8 +79,8 @@ class Report < ActiveRecord::Base
 
     def personnel_count
         count = 0
-        report_users.map{|u| count+u.hours if u.hours}
-        report_companies.map{|c| count+c.count if c.count}
+        count += report_users.count
+        report_companies.map{|c| count += c.count if c && c.count}
         count
     end
 
