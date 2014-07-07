@@ -53,7 +53,7 @@ class Report < ActiveRecord::Base
             :project_id => project_id,
             :report_id => id,
             :activity_type => self.class.name,
-            #:body => "#{report_type} Report - #{date_string} was updated." 
+            :body => "#{report_type} Report - #{date_string} was updated." 
         )
     end
 
@@ -171,7 +171,7 @@ class Report < ActiveRecord::Base
         t.add :report_topics
         t.add :body, :if => :has_body?
         t.add :activities
-        t.add :daily_activities
+        #t.add :daily_activities
         ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
         t.add :created_date
         t.add :epoch_time
