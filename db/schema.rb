@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705183625) do
+ActiveRecord::Schema.define(version: 20140625014144) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -170,7 +170,6 @@ ActiveRecord::Schema.define(version: 20140705183625) do
     t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "company_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
