@@ -10,7 +10,7 @@ class Photo < ActiveRecord::Base
 	belongs_to :checklist_item, counter_cache: true
 	belongs_to :folder
     
-    before_create :ensure_defaults
+    after_create :log_activity
 
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["1024x1024", :jpg],
@@ -38,12 +38,8 @@ class Photo < ActiveRecord::Base
 
 	acts_as_api
 
-	def ensure_defaults 
-		unless source == "Documents"
-			unless name
-				self.name = ""
-			end
-		end
+	def log_activity
+
 	end
 
 	def url_medium

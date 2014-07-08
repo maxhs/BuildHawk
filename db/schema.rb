@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625014144) do
+ActiveRecord::Schema.define(version: 20140705183625) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -170,6 +170,8 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
+    t.string   "company_name"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -277,7 +279,7 @@ ActiveRecord::Schema.define(version: 20140625014144) do
     t.integer  "worklist_item_id"
     t.integer  "checklist_item_id"
     t.string   "phase"
-    t.string   "name",                                     null: false
+    t.string   "name",               default: "",          null: false
     t.integer  "folder_id"
     t.boolean  "mobile",             default: false
     t.text     "description"
