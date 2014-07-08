@@ -43,7 +43,8 @@ class Photo < ActiveRecord::Base
 			:user_id => user.id,
 			:project_id => project_id,
 			:photo_id => id,
-			:body "#{user.full_name} added a document."
+			:activity_type => self.class.name,
+			:body => "#{user.full_name} added a document."
 		)
 	end
 
