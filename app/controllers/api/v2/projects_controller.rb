@@ -66,8 +66,12 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         if params[:user][:company_name]
             company_name = "#{params[:user][:company_name]}"
             company = Company.where("name ILIKE ?",company_name).first_or_create
-            project.company_subs.create :company_id => company.id
+
+            ## create a new project subcontractor object for the project
+            project.project_subs.create :company_id => company.id
+            ## create a new company subcontractor object for the company that owns the project
             project.company.company_subs.create :subcontractor_id => company.id 
+
             puts "found or created company: #{company.name}" if company
             params[:user].delete(:company_name)
         end
