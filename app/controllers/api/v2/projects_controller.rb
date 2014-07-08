@@ -98,12 +98,14 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             elsif task
                 puts "couldn't find user for task assignment: #{params[:user]}"
                 connect_user = task.connect_users.create params[:user]
+                company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
             elsif report
                 puts "couldn't find user for report: #{params[:user]}"
                 connect_user = report.connect_users.create params[:user]
+                company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
@@ -130,12 +132,14 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 end
             elsif task
                 connect_user = task.connect_users.create params[:user]
+                company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
             elsif report
                 puts "couldn't find user for report: #{params[:user]}"
                 connect_user = report.connect_users.create params[:user]
+                company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
