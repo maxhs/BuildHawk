@@ -80,7 +80,7 @@ Buildhawk::Application.configure do
 
   #for the mailer
   config.action_mailer.default_url_options = { :host => 'www.buildhawk.com' }
-  config.action_mailer.asset_host = "http://www.buildhawk.com"
+  config.action_mailer.asset_host = "https://www.buildhawk.com"
   config.action_mailer.delivery_method = :smtp
 
 end

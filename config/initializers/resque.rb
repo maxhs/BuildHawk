@@ -3,8 +3,7 @@ require 'resque_scheduler'
 require 'resque_scheduler/server'
 
 uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
-#Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-Resque.redis = Redis.new(:url => ENV['REDISTOGO_URL'])
+Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password, :thread_safe => true)
 Resque.redis.namespace = "resque:buildhawk-rails"
 
 # If you want to be able to dynamically change the schedule,
@@ -20,3 +19,13 @@ Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 # The schedule doesn't need to be stored in a YAML, it just needs to
 # be a hash.  YAML is usually the easiest.
 Resque.schedule = YAML.load_file(Rails.root.join('config', 'resque_schedule.yml'))
+
+if defined?(PhusionPassenger)
+  PhusionPassenger.on_event(:starting_worker_process) do |forked|
+    # We're in smart spawning mode.
+    if forked
+      # Re-establish redis connection
+      Resque.redis.client.reconnect
+    end
+  end
+end
