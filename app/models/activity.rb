@@ -46,6 +46,7 @@ class Activity < ActiveRecord::Base
 		t.add :hidden
 		t.add :created_date
 		t.add :activity_type
+		t.add :photo
 	end
 
 	api_accessible :user, :extend => :dashboard do |t|
