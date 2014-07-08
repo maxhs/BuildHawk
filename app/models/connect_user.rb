@@ -77,6 +77,7 @@ class ConnectUser < ActiveRecord::Base
 		t.add :id
 		t.add :first_name
 		t.add :last_name
+        t.add :full_name 
 		t.add :phone
 		t.add :email
 	end
