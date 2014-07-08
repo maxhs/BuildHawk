@@ -60,10 +60,12 @@ class ConnectUser < ActiveRecord::Base
     end
 
     def full_name
-    	if first_name.length && last_name.length
-            "#{first_name} #{last_name}"
-        elsif first_name.length
-            "#{first_name}"
+    	if first_name && first_name.length
+            if last_name && last_name.length
+                "#{first_name} #{last_name}"
+            else
+                "#{first_name}"
+            end
         elsif email
             email
         else
