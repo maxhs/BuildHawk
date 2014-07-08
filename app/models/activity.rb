@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
 	attr_accessible :user_id, :project_id, :worklist_item_id, :checklist_item_id, :report_id, :comment_id, :body,
-					:hidden, :activity_type, :message_id
+					:hidden, :activity_type, :message_id, :photo_id
 
 	belongs_to :user
 	belongs_to :project
@@ -9,6 +9,7 @@ class Activity < ActiveRecord::Base
 	belongs_to :report
 	belongs_to :comment
 	belongs_to :message
+	belongs_to :photo
 
 	default_scope { order('created_at DESC') }
 	after_create :notify

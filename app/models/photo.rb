@@ -9,6 +9,8 @@ class Photo < ActiveRecord::Base
 	belongs_to :worklist_item, counter_cache: true
 	belongs_to :checklist_item, counter_cache: true
 	belongs_to :folder
+
+	has_many :activities
     
     after_create :log_activity
 
