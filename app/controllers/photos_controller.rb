@@ -57,6 +57,9 @@ class PhotosController < ApplicationController
 		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
 		@folders = @project.folders
 
+		## log the activity
+		@p.log_activity(current_user)
+
 		unless @p.save 
 			flash[:notice] = "didn't work"
 		end

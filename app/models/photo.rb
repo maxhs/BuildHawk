@@ -12,8 +12,6 @@ class Photo < ActiveRecord::Base
 
 	has_many :activities
     
-    after_create :log_activity
-
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["1024x1024", :jpg],
 	                                 :medium  => ["640x640", :jpg],
@@ -40,8 +38,13 @@ class Photo < ActiveRecord::Base
 
 	acts_as_api
 
-	def log_activity
-
+	def log_activity(user)
+		activities.create(
+			:user_id => user.id,
+			:project_id => project_id,
+			:photo_id => id,
+			:body "#{user.full_name} added a document."
+		)
 	end
 
 	def url_medium
