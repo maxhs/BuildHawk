@@ -3,8 +3,13 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
     def update
     	item = ChecklistItem.find params[:id]
         
+        if params[:checklist_item][:state] && params[:checklist_item][:state] != item.state
+            should_log_activity = true
+        else
+            should_log_activity = false
+        end
+
         if params[:checklist_item]
-            
             ## API compatibility
             if params[:checklist_item][:status]
                 if params[:checklist_item][:status] == "Completed"
@@ -23,11 +28,13 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
             item.update_attribute :state, nil
         end
 
-        if params[:user_id]
-            user = User.find params[:user_id]
-            item.log_activity(user)
-        else
-            item.log_activity(nil)
+        if should_log_activity
+            if params[:user_id]
+                user = User.find params[:user_id]
+                item.log_activity(user)
+            else
+                item.log_activity(nil)
+            end
         end
 
     	respond_to do |format|
