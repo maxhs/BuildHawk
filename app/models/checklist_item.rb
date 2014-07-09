@@ -50,26 +50,18 @@ class ChecklistItem < ActiveRecord::Base
         category.phase.name if category && category.phase
     end
 
-    def log_activity(user)
+    def log_activity(current_user)
         if state == 1 && completed_date.nil?
             self.update_attribute :completed_date, Time.now
-            if completed_by_user
-                activities.create(
-                    :body => "#{completed_by_user.full_name} marked this item complete.",
-                    :user_id => completed_by_user_id,
-                    :project_id => checklist.project.id,
-                    :activity_type => self.class.name
-                )
-            else
-                activities.create(
-                    :body => "This item was marked complete.",
-                    :user_id => user.id,
-                    :project_id => checklist.project.id,
-                    :activity_type => self.class.name
-                )
-            end
-
-            category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count    
+            category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
+            
+            activities.create(
+                :body => "#{current_user.full_name} marked this item complete.",
+                :user_id => current_user.id,
+                :project_id => checklist.project.id,
+                :activity_type => self.class.name
+            )
+               
         elsif !completed_date.nil?
             if state
                 if state == 1
@@ -80,9 +72,9 @@ class ChecklistItem < ActiveRecord::Base
                     verbal_state = "not applicable"
                 end
                 activities.create(
-                    :body => "#{user.full_name} updated the status for this item to \"#{verbal_state}\".",
+                    :body => "#{current_user.full_name} updated the status for this item to \"#{verbal_state}\".",
                     :project_id => checklist.project.id,
-                    :user_id => user.id,
+                    :user_id => current_user.id,
                     :activity_type => self.class.name
                 )
             end
