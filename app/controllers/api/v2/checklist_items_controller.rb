@@ -22,7 +22,7 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
             end
             ##
             
-            params[:checklist_item][:state] = nil unless params[:checklist_item][:state].present?
+            params[:checklist_item][:state] = nil unless params[:checklist_item][:state]
             item.update_attributes params[:checklist_item]
         else
             item.update_attribute :state, nil
