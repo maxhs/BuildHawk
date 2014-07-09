@@ -32,7 +32,7 @@ class WorklistItem < ActiveRecord::Base
         time    :created_at
     end
 
-    def notify(user)
+    def notify(current_user)
         if body.length > 20
             truncated = "#{body[0..20]}..."
         else
@@ -40,28 +40,24 @@ class WorklistItem < ActiveRecord::Base
         end
         
         if completed
-            # user = User.where(:id => completed_by_user_id).first if completed_by_user_id != nil
-            # if user
-            #     body = "#{worklist.project.name} - \"#{truncated}\" was just completed by #{user.full_name}"
-            # else
-                text = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was just completed"
-            #end
+            
+            text = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was completed by #{current_user.full_name}"
             Notification.where(:body => text,:user_id => user_id, :worklist_item_id => id, :notification_type => "Worklist").first_or_create
             activities.create(
-                :user_id => user.id,
+                :user_id => current_user.id,
                 :project_id => worklist.project.id,
                 :worklist_item_id => id,
-                :body => "This item was marked complete.",
+                :body => "This item was completed by #{current_user.full_name}.",
                 :activity_type => self.class.name
             )
         else
             body = "#{worklist.project.name} (Worklist) - \"#{truncated}\" has been modified"
             user.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
             activities.create(
-                :user_id => user.id,
+                :user_id => current_user.id,
                 :project_id => worklist.project.id,
                 :worklist_item_id => id,
-                :body => "This item was modified.",
+                :body => "This item was modified by #{current_user.full_name}.",
                 :activity_type => self.class.name
             )
         end
@@ -70,7 +66,7 @@ class WorklistItem < ActiveRecord::Base
             body = "\"#{truncated}\" has been assigned to you for #{worklist.project.name}"
             assignee.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
             activities.create(
-                :user_id => user.id,
+                :user_id => current_user.id,
                 :project_id => worklist.project.id,
                 :worklist_item_id => id,
                 :body => "This item was assigned to #{assignee.full_name}.",
