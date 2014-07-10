@@ -100,6 +100,7 @@ class Company < ActiveRecord::Base
     api_accessible :projects, :extend => :login do |t|
         t.add :users
         t.add :subcontractors
+        t.add :personnel
     end
     
     api_accessible :messages, :extend => :login do |t|
@@ -111,6 +112,7 @@ class Company < ActiveRecord::Base
         t.add :name
         t.add :users
         t.add :subcontractors
+        t.add :personnel
     end
     
     api_accessible :details, :extend => :login do |t|
