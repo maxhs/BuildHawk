@@ -55,8 +55,14 @@ class ChecklistItem < ActiveRecord::Base
             self.update_attribute :completed_date, Time.now
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
             
+            if current_user
+                body = "#{current_user.full_name} marked this item complete."
+            else 
+                body = "This item was marked complete."
+            end
+
             activities.create(
-                :body => "#{current_user.full_name} marked this item complete.",
+                :body => body,
                 :user_id => current_user.id,
                 :project_id => checklist.project.id,
                 :activity_type => self.class.name
@@ -71,8 +77,15 @@ class ChecklistItem < ActiveRecord::Base
                 elsif state == -1
                     verbal_state = "not applicable"
                 end
+
+                if current_user
+                    body = "#{current_user.full_name} updated the status for this item to \"#{verbal_state}\"."
+                else 
+                    body = "The status for this item was updated to \"#{verbal_state}\"."
+                end
+
                 activities.create(
-                    :body => "#{current_user.full_name} updated the status for this item to \"#{verbal_state}\".",
+                    :body => ,
                     :project_id => checklist.project.id,
                     :user_id => current_user.id,
                     :activity_type => self.class.name

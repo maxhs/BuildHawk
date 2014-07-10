@@ -2,7 +2,7 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
 
     def update
     	item = ChecklistItem.find params[:id]
-        
+        params[:checklist_item].delete(:completed)
         if params[:checklist_item] && params[:checklist_item][:state].to_i != item.state
             should_log_activity = true
         else
@@ -19,6 +19,7 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
                 elsif params[:checklist_item][:status] == "Not Applicable"
                     params[:checklist_item][:state] = -1
                 end
+                params[:checklist_item].delete(:status)
             end
             ##
             
