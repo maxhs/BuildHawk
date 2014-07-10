@@ -85,7 +85,7 @@ class ChecklistItem < ActiveRecord::Base
                 end
 
                 activities.create(
-                    :body => ,
+                    :body => body,
                     :project_id => checklist.project.id,
                     :user_id => current_user.id,
                     :activity_type => self.class.name
