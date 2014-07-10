@@ -56,17 +56,22 @@ class ChecklistItem < ActiveRecord::Base
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
             
             if current_user
-                body = "#{current_user.full_name} marked this item complete."
+                activities.create(
+                    :body => "#{current_user.full_name} marked this item complete.",
+                    :user_id => current_user.id,
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
+                )
             else 
-                body = "This item was marked complete."
+                activities.create(
+                    :body => "This item was marked complete.",
+                    :user_id => current_user.id,
+                    :project_id => checklist.project.id,
+                    :activity_type => self.class.name
+                )
             end
 
-            activities.create(
-                :body => body,
-                :user_id => current_user.id,
-                :project_id => checklist.project.id,
-                :activity_type => self.class.name
-            )
+            
                
         elsif !completed_date.nil?
             if state
@@ -79,17 +84,20 @@ class ChecklistItem < ActiveRecord::Base
                 end
 
                 if current_user
-                    body = "#{current_user.full_name} updated the status for this item to \"#{verbal_state}\"."
+                    activities.create(
+                        :body => "#{current_user.full_name} updated the status for this item to \"#{verbal_state}\".",
+                        :project_id => checklist.project.id,
+                        :user_id => current_user.id,
+                        :activity_type => self.class.name
+                    )
                 else 
-                    body = "The status for this item was updated to \"#{verbal_state}\"."
+                    activities.create(
+                        :body => "The status for this item was updated to \"#{verbal_state}\".",
+                        :project_id => checklist.project.id,
+                        :user_id => current_user.id,
+                        :activity_type => self.class.name
+                    )
                 end
-
-                activities.create(
-                    :body => body,
-                    :project_id => checklist.project.id,
-                    :user_id => current_user.id,
-                    :activity_type => self.class.name
-                )
             end
             self.update_attributes :completed_date => nil, :completed_by_user_id => nil
         end
