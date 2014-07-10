@@ -98,7 +98,9 @@ class Company < ActiveRecord::Base
     end
     
     api_accessible :projects, :extend => :login do |t|
+        ## slated for deletion on v3 API
         t.add :subcontractors
+        ##
     end
     
     api_accessible :messages, :extend => :login do |t|
