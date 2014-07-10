@@ -312,7 +312,7 @@ class ProjectsController < ApplicationController
 		end
 		@company = @user.company
 		@users = @company.users
-		@subs = @company.subs
+		@subs = @company.company_subs
 	end
 
 	def find_project
