@@ -65,7 +65,6 @@ class ChecklistItem < ActiveRecord::Base
             else 
                 activities.create(
                     :body => "This item was marked complete.",
-                    :user_id => current_user.id,
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
@@ -92,7 +91,6 @@ class ChecklistItem < ActiveRecord::Base
                     activities.create(
                         :body => "The status for this item was updated to \"#{verbal_state}\".",
                         :project_id => checklist.project.id,
-                        :user_id => current_user.id,
                         :activity_type => self.class.name
                     )
                 end
