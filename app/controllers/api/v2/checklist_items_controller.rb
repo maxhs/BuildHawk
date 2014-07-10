@@ -32,9 +32,9 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
         if should_log_activity
             if params[:user_id]
                 user = User.find params[:user_id]
-                item.log_activity(user) if user
+                #item.log_activity(user) if user
             else
-                item.log_activity(nil)
+                #item.log_activity(nil)
             end
         end
 
