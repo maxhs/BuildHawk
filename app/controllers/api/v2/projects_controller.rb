@@ -77,11 +77,12 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         end
        
         task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
-        report = Report.find params[:report_id] if !task and params[:report_id]
+        report = Report.find params[:report_id] if params[:report_id] && params[:report_id] != 0
+        
         if params[:user][:email]
             user = User.where(:email => params[:user][:email]).first
             if user
-                #existing user, notify them by email
+                ## existing user. ensure they're attached to the project
                 project.project_users.where(:user_id => user.id).first_or_create
             else
                 alternate = Alternate.where(:email => params[:user][:email]).first
@@ -119,7 +120,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         elsif params[:user][:phone]
             user = User.where(:phone => params[:user][:phone]).first
             if user
-                #existing user
+                ## existing user. ensure they're attached to the project
                 project.project_users.where(:user_id => user.id).first_or_create
             else
                 alternate = Alternate.where(:phone => params[:user][:phone]).first

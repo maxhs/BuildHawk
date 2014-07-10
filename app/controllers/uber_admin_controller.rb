@@ -3,7 +3,7 @@ class UberAdminController < ApplicationController
 	before_filter :find_user
 
 	def index
-		@companies = Company.all
+		@companies = Company.all.order('name ASC')
 		if request.xhr?
 			respond_to do |format|
 				format.js
