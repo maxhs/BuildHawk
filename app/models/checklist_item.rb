@@ -69,9 +69,7 @@ class ChecklistItem < ActiveRecord::Base
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
-            end
-
-            
+            end            
                
         elsif !completed_date.nil?
             if state

@@ -98,7 +98,7 @@ class Company < ActiveRecord::Base
     end
     
     api_accessible :projects, :extend => :login do |t|
-      
+        t.add :subcontractors
     end
     
     api_accessible :messages, :extend => :login do |t|
