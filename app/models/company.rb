@@ -70,8 +70,7 @@ class Company < ActiveRecord::Base
     end
 
     def subcontractors
-        these_guys = company_subs.sort_by!{|cs|cs.subcontractor.name.downcase}
-        {subcontractors: these_guys.map(&:subcontractor)}.as_json
+        company_subs.sort_by!{|cs|cs.subcontractor.name.downcase}
     end
 
 	acts_as_api
