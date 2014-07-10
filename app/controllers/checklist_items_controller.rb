@@ -31,7 +31,7 @@ class ChecklistItemsController < ApplicationController
 			@items = @checklist.items
 			if request.xhr?
 				respond_to do |format|
-					format.js {render :template => "uber_admin/core_checklist"}
+					format.js {render :template => "admin/editor"}
 				end
 			else 
 				redirect_to core_checklist_uber_admin_index_path
