@@ -2,7 +2,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
         @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map(&:project).compact.sort_by{|p| p.name.downcase}
+        projects = @user.project_users.where("core = ? and project_group_id IS NULL",false).map(&:project).compact.sort_by{|p| p.name.downcase}
         if projects
         	respond_to do |format|
             	format.json { render_for_api :projects, :json => projects, :root => :projects}
@@ -78,7 +78,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
        
         task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
         report = Report.find params[:report_id] if params[:report_id] && params[:report_id] != 0
-        
+
         if params[:user][:email]
             user = User.where(:email => params[:user][:email]).first
             if user
