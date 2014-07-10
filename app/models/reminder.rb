@@ -8,6 +8,7 @@ class Reminder < ActiveRecord::Base
 	belongs_to :worklist_item
 
 	validates_presence_of :reminder_datetime
+	validates_uniqueness_of :checklist_item_id, :scope => :user_id
 	after_commit :schedule, on: :create
 	before_destroy :unschedule
 
