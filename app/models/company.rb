@@ -13,7 +13,7 @@ class Company < ActiveRecord::Base
     has_many :project_groups, :dependent => :destroy
     has_many :safety_topics, :dependent => :destroy
     has_many :company_subs, :dependent => :destroy
-    has_many :subcontractors, :through => :company_subs, :source => :subcontractor
+    #has_many :subcontractors, :through => :company_subs, :source => :subcontractor
     has_many :connect_users, :dependent => :destroy
 
     validates_presence_of :name
@@ -69,9 +69,10 @@ class Company < ActiveRecord::Base
         end
     end
 
-    #def subcontractors
-    #    company_subs.sort_by!{|s|s.name.downcase}
-    #end
+    def subcontractors
+        these_guys = company_subs.sort_by!{|cs|cs.subcontractor.name.downcase}
+        render json: {:subcontractors => these_guys}
+    end
 
 	acts_as_api
 
@@ -99,7 +100,7 @@ class Company < ActiveRecord::Base
     
     api_accessible :projects, :extend => :login do |t|
         ## slated for deletion on v3 API
-        #t.add :subcontractors
+        t.add :subcontractors
         ##
     end
     
