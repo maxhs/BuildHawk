@@ -168,7 +168,6 @@ class Report < ActiveRecord::Base
         t.add :photos
         t.add :report_users
         t.add :report_companies
-        t.add :companies
         t.add :report_topics
         t.add :body, :if => :has_body?
         t.add :activities

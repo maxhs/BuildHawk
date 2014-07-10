@@ -108,8 +108,8 @@ class Company < ActiveRecord::Base
     api_accessible :reports do |t|
         t.add :id
         t.add :name
-        #t.add :users
-        #t.add :subcontractors
+        t.add :users
+        t.add :subcontractors
     end
     
     api_accessible :details, :extend => :login do |t|
