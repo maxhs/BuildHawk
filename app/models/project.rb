@@ -145,7 +145,7 @@ class Project < ActiveRecord::Base
         t.add :phases
         t.add :project_group, :if => :has_group?
         t.add :company
-        #t.add :users
+        t.add :users
         ### slated for deletion in 1.04 ###
         t.add :categories
         ###
