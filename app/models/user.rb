@@ -153,6 +153,9 @@ class User < ActiveRecord::Base
         t.add :company
         t.add :url_thumb
         t.add :url_small
+        t.add :admin
+        t.add :company_admin
+        t.add :uber_admin
   	end
 
     api_accessible :login, :extend => :user do |t|
@@ -161,9 +164,6 @@ class User < ActiveRecord::Base
         t.add :email_permissions
         t.add :push_permissions
         t.add :authentication_token
-        t.add :admin
-        t.add :company_admin
-        t.add :uber_admin
         t.add :url_medium
         t.add :alternates
     end
