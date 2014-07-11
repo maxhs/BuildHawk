@@ -129,6 +129,7 @@ class Checklist < ActiveRecord::Base
         t.add :id
         t.add :phases
         t.add :name
+        t.add :project_id
         ## slated for deletion
         #t.add :categories
         ##
