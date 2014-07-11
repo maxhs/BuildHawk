@@ -119,7 +119,7 @@ class Project < ActiveRecord::Base
 
     def recent_activities
         ## default order is DESC, so first makes sense
-        activities.first(3) if activities.count
+        activities.first(10) if activities.count
     end
 
     ## deprecated
@@ -134,18 +134,18 @@ class Project < ActiveRecord::Base
         t.add :id
   		t.add :name
   		t.add :address
-  		t.add :company
+  		#t.add :company
         t.add :active
         t.add :core
         t.add :progress
         t.add :upcoming_items
         t.add :recently_completed
         t.add :recent_documents
+        t.add :recent_activities
+        t.add :reminders
+        #t.add :users
         t.add :phases
         t.add :project_group, :if => :has_group?
-        t.add :activities
-        t.add :reminders
-        t.add :users
         ### slated for deletion in 1.04 ###
         t.add :categories
         ###
