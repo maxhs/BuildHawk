@@ -130,7 +130,7 @@ class Checklist < ActiveRecord::Base
         t.add :phases
         t.add :name
         ## slated for deletion
-        t.add :categories
+        #t.add :categories
         ##
     end
 
