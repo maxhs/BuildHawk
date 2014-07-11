@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-xs-2"><h4>Name</h4></div>
 				<div class="col-xs-8"><%= f.text_field :name, :placeholder => "Project group name" %></div>
-				<div class="col-xs-2"><button class="btn btn-md btn-success" style="margin:-2px auto 0"><%= f.submit "Create" %></button></div>
+				<div class="col-xs-2"><%= f.submit "Create", :class =>"simple-btn", :style =>"padding:7px 20px;" %></div>
 			</div>
 		<% end %>	
 	</div>

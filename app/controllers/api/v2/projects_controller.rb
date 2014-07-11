@@ -1,8 +1,8 @@
 class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
-        @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map(&:project).compact.sort_by{|p| p.name.downcase}
+        user = User.find params[:user_id]
+        projects = user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map(&:project).compact.sort_by{|p| p.name.downcase}
         if projects
         	respond_to do |format|
             	format.json { render_for_api :projects, :json => projects, :root => :projects}
@@ -13,8 +13,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def groups
-        @user = User.find params[:user_id]
-        group_ids = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        user = User.find params[:user_id]
+        group_ids = user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
         groups = []
         if group_ids.count > 0
             group_ids.each do |g|
@@ -32,8 +32,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def dashboard
-        @user = User.find params[:user_id]
-        projects = @user.project_users.where("archived = ? and core = ?",false,false).map(&:project).compact
+        user = User.find params[:user_id]
+        projects = user.project_users.where("archived = ? and core = ?",false,false).map(&:project).compact
         if @project.checklist
             respond_to do |format|
                 format.json { render_for_api :dashboard, :json => projects, root: :projects}

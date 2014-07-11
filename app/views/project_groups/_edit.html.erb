@@ -11,9 +11,9 @@
 			&nbsp;
 		</div>
 			<div class="col-xs-2">
-			<button class="btn btn-md btn-success" style="margin:0 auto;height:36px;"><%= f.submit "Save" %></button>
+			<%= f.submit "Save", :class =>"simple-btn" %>
 		<% end %>
-			<button class="btn btn-md btn-danger" style="margin:0 auto;height:36px;"><%= link_to "Delete" %></button>
+			<%= link_to "Delete", :class =>"delete-link simple-btn" %>
 		</div>
 		
 	</div>
