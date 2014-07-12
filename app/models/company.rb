@@ -69,10 +69,6 @@ class Company < ActiveRecord::Base
         end
     end
 
-    #def subcontractors
-    #    company_subs.sort_by!{|cs|cs.subcontractor.name.downcase}
-    #end
-
 	acts_as_api
 
   	api_accessible :company do |t|
@@ -98,9 +94,7 @@ class Company < ActiveRecord::Base
     end
     
     api_accessible :projects, :extend => :login do |t|
-        ## slated for deletion on v3 API
-        #t.add :subcontractors
-        ##
+  
     end
     
     api_accessible :messages, :extend => :login do |t|
@@ -119,6 +113,10 @@ class Company < ActiveRecord::Base
     end
 
     api_accessible :worklist, :extend => :login do |t|
+        
+    end
+
+    api_accessible :connect, :extend => :login do |t|
         
     end
 

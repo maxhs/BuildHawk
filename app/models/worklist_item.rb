@@ -107,6 +107,19 @@ class WorklistItem < ActiveRecord::Base
         t.add :epoch_time
   	end
 
+    api_accessible :connect do |t|
+        t.add :id
+        t.add :worklist_id
+        t.add :body
+        t.add :assignee
+        t.add :location
+        t.add :completed_at
+        t.add :created_at
+        t.add :completed
+        t.add :created_date
+        t.add :project
+    end
+
     api_accessible :dashboard, :extend => :worklist do |t|
 
     end

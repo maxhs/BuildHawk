@@ -339,7 +339,7 @@ class ProjectsController < ApplicationController
 			@projects = @company.projects
 			@archived_projects = current_user.project_users.where(:archived => true).map(&:project)
 		else
-			@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
+			@projects = @user.project_users.where(:archived => false).map{|p| p.project if p.project.company_id == @user.company_id}.compact.uniq
 			@archived_projects = @user.project_users.where(:archived => true).map(&:project).compact.uniq
 		end
 	end

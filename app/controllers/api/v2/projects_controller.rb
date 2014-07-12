@@ -93,6 +93,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             end
         
             if user
+                project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
                 respond_to do |format|
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
@@ -132,6 +133,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             end
         
             if user
+                project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
                 respond_to do |format|
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
@@ -166,13 +168,9 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def archived
-        user = User.find params[:user_id]
-        #if user.admin || user.company_admin
-        #    projects = user.company.projects.where(:archived => true)
-        #else
-            projects = user.project_users.where(:archived => true).map(&:project).compact
-        #end
-       
+        user = User.find params[:user_id]    
+        projects = user.project_users.where(:archived => true).map(&:project).compact
+     
         if projects
             respond_to do |format|
                 format.json { render_for_api :projects, :json => projects.sort_by{|p| p.name.downcase}, :root => :projects}
