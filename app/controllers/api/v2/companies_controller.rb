@@ -9,7 +9,7 @@ class Api::V2::CompaniesController < Api::V2::ApiController
 		if params[:search]
 			companies = []
 			params[:search].split(' ').each do |s|
-				search_term = "#{s}" 
+				search_term = "%#{s}%" 
 				initial = Company.search do
 					fulltext search_term, minimun_match: 1
 				end
