@@ -34,6 +34,11 @@ class Company < ActiveRecord::Base
 
     before_destroy :clean_company_subs
 
+    # websolr
+    searchable do
+        text    :name
+    end
+
     def clean_company_subs
         CompanySub.where(:subcontractor_id => id).destroy_all
     end
