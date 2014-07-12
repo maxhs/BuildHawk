@@ -151,10 +151,14 @@ class Project < ActiveRecord::Base
         ###
   	end
 
-    api_accessible :connect do |t|
+    api_accessible :worklist do |t|
         t.add :id
         t.add :name
         t.add :company
+    end
+
+    api_accessible :connect, :extend => :worklist do |t|
+    
     end
 
     api_accessible :details do |t|
