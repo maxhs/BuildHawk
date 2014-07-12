@@ -49,6 +49,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             
             if companies
                 companies.each do |c|
+                    report.project.companies.where(:id => c.id).first_or_create
                     company = Company.where(:name => c[:name]).first_or_create
                     report_company = report.report_companies.where(:company_id => company.id).first_or_create
                     report_company.update_attribute :count, c[:count]
@@ -100,7 +101,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
             users = params[:report][:report_users]
             user_ids = []
             users.each do |u|
-                puts "u: #{u}"
                 if u[:id]
                     user = User.where(:id => u[:id]).first
                 elsif u[:full_name]
@@ -131,6 +131,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 end
 
                 if company
+                    report.project.companies.where(:id => company.id).first_or_create
                     rc = report.report_companies.where(:company_id => company.id).first_or_create
                     rc.update_attribute :count, c[:count]
                     company_ids << company.id

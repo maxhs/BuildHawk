@@ -72,7 +72,6 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             ## create a new company subcontractor object for the company that owns the project
             project.company.company_subs.create :subcontractor_id => company.id 
 
-            puts "found or created company: #{company.name}" if company
             params[:user].delete(:company_name)
         end
        

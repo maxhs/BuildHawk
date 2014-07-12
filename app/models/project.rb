@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   	has_many :users, :through => :project_users, autosave: true
 
     has_many :project_subs, :dependent => :destroy, autosave: true
-    has_many :companies, :through => :project_subs , autosave: true
+    has_many :companies, :through => :project_subs, autosave: true
   	
     belongs_to :project_group, counter_cache: true
   	belongs_to :company
