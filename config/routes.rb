@@ -210,6 +210,9 @@ Buildhawk::Application.routes.draw do
         collection do
           get :search
         end
+        member do
+          post :add
+        end
       end
       resources :groups 
       resources :projects do
