@@ -8,7 +8,7 @@ class Api::V2::CompaniesController < Api::V2::ApiController
 	def search
 		search_term = "%#{params[:search]}%" if params[:search]
 		initial = Company.search do
-			fulltext search_term
+			fulltext search_term, minimun_match: 1
 		end
 		companies = initial.results.uniq
 		render json: {companies: companies}
