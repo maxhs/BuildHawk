@@ -209,8 +209,6 @@ Buildhawk::Application.routes.draw do
       resources :companies do
         collection do
           get :search
-        end
-        member do
           post :add
         end
       end

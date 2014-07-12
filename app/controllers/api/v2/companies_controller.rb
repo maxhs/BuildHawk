@@ -22,7 +22,7 @@ class Api::V2::CompaniesController < Api::V2::ApiController
 	end
 
 	def add
-		company = Company.find params[:id]
+		company = Company.create params[:name]
 		project = Project.find params[:project_id]
 		project.companies << company unless project.companies.flatten.include?(company)
 		render json: {company: company}
