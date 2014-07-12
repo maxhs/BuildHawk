@@ -7,6 +7,7 @@ class Api::V2::CompaniesController < Api::V2::ApiController
 
 	def search
 		if params[:search]
+			companies = []
 			params[:search].split(' ').each do |s|
 				search_term = "#{s}" 
 				initial = Company.search do
