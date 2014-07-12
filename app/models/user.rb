@@ -184,6 +184,10 @@ class User < ActiveRecord::Base
       
     end
 
+    api_accessible :connect, :extend => :user do |t|
+      
+    end
+
     api_accessible :dashboard, :extend => :user do |t|
 
     end

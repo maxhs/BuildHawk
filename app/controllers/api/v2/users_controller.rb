@@ -11,7 +11,7 @@ class Api::V2::UsersController < Api::V2::ApiController
 		if @user
 			items = WorklistItem.where(:assignee_id => @user.id).map{|t| t if t.worklist.project.company.id != @user.company.id}.compact
 			respond_to do |format|
-	        	format.json { render_for_api :connect, :json => items, :root => :worklist_items}
+	        	format.json { render_for_api :worklist, :json => items, :root => :worklist_items}
 	      	end
 		else
       		render json: {success: false}
