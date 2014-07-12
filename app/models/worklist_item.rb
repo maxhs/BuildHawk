@@ -83,6 +83,10 @@ class WorklistItem < ActiveRecord::Base
         worklist.project.id
     end
 
+    def project
+        worklist.project
+    end
+
     ##for deletion
     def epoch_time
         created_date
