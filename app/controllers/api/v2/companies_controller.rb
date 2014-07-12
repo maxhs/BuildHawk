@@ -25,7 +25,7 @@ class Api::V2::CompaniesController < Api::V2::ApiController
 		company = Company.find params[:id]
 		project = Project.find params[:project_id]
 		project.companies << company unless project.companies.flatten.include?(company)
-		render json: {companies: project.companies}
+		render json: {company: company}
 	end
 
 end
