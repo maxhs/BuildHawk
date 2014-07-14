@@ -214,6 +214,9 @@ Buildhawk::Application.routes.draw do
       end
       resources :groups 
       resources :projects do
+        member do
+          get :dash
+        end
         collection do
           get :dash
           get :archived
