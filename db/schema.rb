@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705183625) do
+ActiveRecord::Schema.define(version: 20140714194212) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 20140705183625) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "customer_token"
+    t.boolean  "active"
   end
 
   create_table "company_subs", force: true do |t|
