@@ -9,10 +9,10 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
         end
 
         if params[:checklist_item]
+            
             ## API compatibility
             params[:checklist_item].delete(:completed)
             params[:checklist_item].delete(:id)
-            
             if params[:checklist_item][:status]
                 if params[:checklist_item][:status] == "Completed"
                     params[:checklist_item][:state] = 1

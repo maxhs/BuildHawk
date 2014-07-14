@@ -219,7 +219,6 @@ Buildhawk::Application.routes.draw do
           get :archived
           get :groups
           get :demo
-          get :dashboard
         end
         member do
           post :archive
