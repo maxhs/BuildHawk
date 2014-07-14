@@ -45,4 +45,7 @@ class Address < ActiveRecord::Base
     api_accessible :notifications, :extend => :projects do |t|
       
     end
+    api_accessible :dashboard, :extend => :projects do |t|
+      
+    end
 end
