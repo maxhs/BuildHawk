@@ -122,6 +122,11 @@ class Project < ActiveRecord::Base
         activities.first(10) if activities.count
     end
 
+    def companies
+        puts "sorting companies"
+        companies.sort_by{|c|c.name.downcase}
+    end
+
     ## deprecated
     def categories
         checklist.phases if checklist
@@ -136,18 +141,18 @@ class Project < ActiveRecord::Base
   		t.add :address
         t.add :active
         t.add :core
-        t.add :progress
-        t.add :upcoming_items
-        t.add :recently_completed
-        t.add :recent_documents
-        t.add :recent_activities
-        t.add :reminders
         t.add :phases
         t.add :project_group, :if => :has_group?
         t.add :company
         t.add :users
+        #t.add :progress
+        #t.add :upcoming_items
+        #t.add :recently_completed
+        #t.add :recent_documents
+        #t.add :recent_activities
+        #t.add :reminders
         ### slated for deletion in 1.04 ###
-        t.add :categories
+        #t.add :categories
         ###
   	end
 
@@ -187,13 +192,15 @@ class Project < ActiveRecord::Base
         
     end
 
-    api_accessible :dashboard do |t|
+    api_accessible :dashboard, :extend => :projects do |t|
         t.add :id
         t.add :progress
         t.add :upcoming_items
         t.add :recently_completed
         t.add :recent_documents
         t.add :phases
+        t.add :recent_activities
+        t.add :reminders
         ### slated for deletion ###
         t.add :categories
         ###
