@@ -122,11 +122,6 @@ class Project < ActiveRecord::Base
         activities.first(10) if activities.count
     end
 
-    def companies
-        puts "sorting companies"
-        companies.sort_by{|c|c.name.downcase}
-    end
-
     ## deprecated
     def categories
         checklist.phases if checklist
