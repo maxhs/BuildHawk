@@ -2,7 +2,7 @@ class Company < ActiveRecord::Base
     require 'stripe'
 
 	attr_accessible :name, :phone, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name,
-                    :customer_token
+                    :customer_token, :active
   
     has_many :users, :dependent => :destroy
     has_many :subs, :dependent => :destroy
