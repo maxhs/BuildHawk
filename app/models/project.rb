@@ -136,11 +136,11 @@ class Project < ActiveRecord::Base
   		t.add :address
         t.add :active
         t.add :core
-        t.add :phases
-        t.add :project_group, :if => :has_group?
+        t.add :project_group#, :if => :has_group?
         t.add :company
         t.add :users
         #t.add :progress
+        #t.add :phases
         #t.add :upcoming_items
         #t.add :recently_completed
         #t.add :recent_documents
