@@ -20,6 +20,8 @@ class Company < ActiveRecord::Base
     validates_uniqueness_of :name
 	accepts_nested_attributes_for :photos, :allow_destroy => true
   
+    default_scope { order('name') }
+
     has_attached_file :image, 
                     :styles => { :medium => ["600x600#", :jpg],
                                :small  => ["200x200#", :jpg],
