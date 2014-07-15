@@ -91,10 +91,6 @@ class Project < ActiveRecord::Base
         reports.sort_by{|r| r.date_for_sort}.reverse
     end
 
-    def has_group?
-        !project_group_id.nil?
-    end
-
     def duplicate_project
         new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :state}}}
         new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :worklist_item, :report, :project,:folder]}, {:worklists => :worklist_items}, :address, :folders, :users, :project_users]
@@ -136,7 +132,7 @@ class Project < ActiveRecord::Base
   		t.add :address
         t.add :active
         t.add :core
-        t.add :project_group#, :if => :has_group?
+        t.add :project_group
         t.add :company
         t.add :users
         t.add :progress
