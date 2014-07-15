@@ -390,6 +390,7 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "hours"
+    t.integer  "connect_user_id"
   end
 
   create_table "reports", force: true do |t|
