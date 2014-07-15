@@ -189,7 +189,6 @@ class Project < ActiveRecord::Base
 
     api_accessible :dashboard, :extend => :projects do |t|
         t.add :id
-        t.add :progress
         t.add :upcoming_items
         t.add :recently_completed
         t.add :recent_documents
