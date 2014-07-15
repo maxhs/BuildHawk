@@ -84,7 +84,7 @@ class ConnectUser < ActiveRecord::Base
 		t.add :email
 	end
 
-    api_accessible :reports, :extends => :user do |t|
+    api_accessible :reports, :extend => :user do |t|
         
     end
 end
