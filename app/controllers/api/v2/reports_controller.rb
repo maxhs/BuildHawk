@@ -100,9 +100,15 @@ class Api::V2::ReportsController < Api::V2::ApiController
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             user_ids = []
+            connect_user_ids = []
             users.each do |u|
                 if u[:id]
                     user = User.where(:id => u[:id]).first
+                elsif u[:connect_user_id]
+                    connect_user = ConnectUser.where(:id => u[:connect_user_id]).first
+                    ru = report.report_users.where(:connect_user_id => connect_user.id).first_or_create
+                    ru.update_attribute :hours, u[:hours]
+                    connect_user_ids << connect_user.id
                 elsif u[:full_name]
                     user = User.where(:full_name => u[:full_name]).first
                 end
@@ -115,7 +121,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             end
             # clean out any report users not included in the most recent update
             report.report_users.each do |ru|
-                ru.destroy unless user_ids.include?(ru.user_id)
+                ru.destroy unless user_ids.include?(ru.user_id) || connect_user_ids.include?(ru.connect_user_id)
             end
             params[:report].delete(:report_users)
         end
