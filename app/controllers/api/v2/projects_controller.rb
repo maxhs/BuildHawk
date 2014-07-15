@@ -168,10 +168,12 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     end
 
     def archive
-        @user = User.find params[:user_id]
-        if @user.admin || @user.company_admin || @user.uber_admin
-            @project = Project.find params[:id]
-            project_user = @project.project_users.where(:user_id => @user).first
+        user = User.find params[:user_id]
+        project = Project.find params[:id]
+        if project.core
+            render :json => {success: true}
+        elsif  user.admin || user.company_admin || user.uber_admin
+            project_user = project.project_users.where(:user_id => user).first
 
             if project_user
                 project_user.update_attribute :archived, true
@@ -181,7 +183,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             end
         else
             respond_to do |format|
-                format.json { render_for_api :login, :json => @user, :root => :user}
+                format.json { render_for_api :login, :json => user, :root => :user}
             end
         end
     end
