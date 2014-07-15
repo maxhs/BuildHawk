@@ -10,7 +10,7 @@ class WorklistItemsController < ApplicationController
 		@company = @project.company
 		@projects = @company.projects
 		@users = @project.users
-		@subs = @project.subs
+		@subs = @project.project_subs
 		@locations = @project.worklists.last.worklist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
 		if request.xhr?
 			respond_to do |format|
