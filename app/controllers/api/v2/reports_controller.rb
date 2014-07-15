@@ -49,8 +49,8 @@ class Api::V2::ReportsController < Api::V2::ApiController
             
             if companies
                 companies.each do |c|
-                    report.project.companies << company unless report.project.companies.flatten.include?(company)
                     company = Company.where(:name => c[:name]).first_or_create
+                    report.project.companies << company unless report.project.companies.flatten.include?(company)
                     report_company = report.report_companies.where(:company_id => company.id).first_or_create
                     report_company.update_attribute :count, c[:count]
                 end
