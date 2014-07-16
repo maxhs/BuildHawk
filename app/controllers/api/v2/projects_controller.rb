@@ -54,7 +54,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         if params[:user][:company_name]
             company_name = "#{params[:user][:company_name]}"
             company = Company.where("name ILIKE ?",company_name).first_or_create
-
+            puts "found or created company: #{company.name}"
+            params[:user][:company_id] = company.id
             ## create a new project subcontractor object for the project
             project.project_subs.create :company_id => company.id
             ## create a new company subcontractor object for the company that owns the project
@@ -139,7 +140,6 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 end
             else
                 connect_user = ConnectUser.create params[:user]
-                company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
