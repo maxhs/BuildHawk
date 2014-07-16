@@ -53,7 +53,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         project = Project.find params[:id]
         if params[:user][:company_name]
             company_name = "#{params[:user][:company_name]}"
-            company = Company.where("name ILIKE ?",company_name).first_or_create
+            company = Company.where("name ILIKE ?",company_name).first
+            company = Company.create :name => company_name unless company
             puts "found or created company: #{company.name}"
             params[:user][:company_id] = company.id
             ## create a new project subcontractor object for the project
