@@ -17,11 +17,6 @@ class ConnectUser < ActiveRecord::Base
 			elsif phone.length
 				text_task
 			end 
-            puts "creating a project user for a worklist_item connect user"
-            worklist_item.worklist.project.project_users.where(:connect_user_id => id).first_or_create
-		elsif report
-            puts "creating a project user for a report connect user"
-            report.project.project_users.where(:connect_user_id => id).first_or_create
         end
 	end
 
