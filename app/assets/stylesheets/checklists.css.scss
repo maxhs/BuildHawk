@@ -234,10 +234,11 @@
 	cursor:pointer;
 	width:auto;
 	margin:0 auto;
+	text-align:center;
+	font-size:1.1em;
 }
 
 .phase-form.container, .category-form.container {
-	background-color:#fff;
 	width:100%;
 	max-width:800px;
 	padding:0 20px;
@@ -260,7 +261,7 @@
 		padding-top:5px;
 		width:164px;
 		text-align:center;
-		font-size:12px;
+		font-size:14px;
 		text-transform:uppercase;
 		margin:0 auto;
 		-webkit-transition: all 0.25s ease-out;
@@ -322,7 +323,6 @@
 	}
 
 	#clear-critical-date {
-		font-size:12px;
 		text-transform:uppercase;
 	}
 
@@ -332,11 +332,8 @@
 		-o-transition: all 0.25s ease-out;
 		transition: all 0.25s ease-out;
 		cursor:pointer;
-	}	
-
-	#clear-critical-date:hover {
 		color:#cc0000;
-	}
+	}	
 }
 
 .revealed {
