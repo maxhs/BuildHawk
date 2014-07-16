@@ -2,6 +2,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def index
         user = User.find params[:user_id]
+        user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
+            
         projects = user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by{|p| p.name.downcase}
         if projects
         	respond_to do |format|
