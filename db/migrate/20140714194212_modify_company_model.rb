@@ -3,5 +3,9 @@ class ModifyCompanyModel < ActiveRecord::Migration
   	add_column :companies, :active, :boolean
   	add_column :report_users, :connect_user_id, :integer
   	add_column :project_users, :connect_user_id, :integer
+  	remove_column :connect_users, :worklist_item_id, :integer
+  	remove_column :connect_users, :checklist_item_id, :integer
+  	remove_column :connect_users, :report_id, :integer
+  	add_column :worklist_items, :connect_user_id, :integer
   end
 end

@@ -1,24 +1,9 @@
 class ConnectUser < ActiveRecord::Base
 	include ActionView::Helpers::TextHelper
-	attr_accessible :first_name, :last_name, :phone, :email, :worklist_item_id, :report_id, :checklist_item_id, 
-                    :company_id, :company_name
+	attr_accessible :first_name, :last_name, :phone, :email, :company_id, :company_name
 
-	belongs_to :worklist_item
-	belongs_to :checklist_item
-	belongs_to :report
+	has_many :worklist_items
     belongs_to :company
-
-	after_create :notify
-
-	def notify
-		if worklist_item
-			if email.length
-				email_task
-			elsif phone.length
-				text_task
-			end 
-        end
-	end
 
 	def email_task
 		puts "Sending a worklist item email to a connect user with email: #{email}"

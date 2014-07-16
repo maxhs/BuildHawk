@@ -2,18 +2,19 @@ class WorklistItem < ActiveRecord::Base
 
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :worklist_id, :worklist, :photos_attributes, 
                     :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
-                    :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :connect_user_ids
+                    :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :connect_assignee_id
 
     belongs_to :worklist
     belongs_to :user
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
     belongs_to :sub_assignee, :class_name => "Sub"
+    belongs_to :connect_assignee, :class_name => "ConnectUser"
     has_many :comments, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
     has_many :activities, :dependent => :destroy
-    has_many :connect_users
+    
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 

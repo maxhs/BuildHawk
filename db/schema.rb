@@ -166,9 +166,6 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.string   "phone"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "worklist_item_id"
-    t.integer  "checklist_item_id"
-    t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
@@ -493,6 +490,7 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.integer  "comments_count"
     t.integer  "sub_assignee_id"
     t.boolean  "mobile",               default: false
+    t.integer  "connect_user_id"
   end
 
   create_table "worklists", force: true do |t|
