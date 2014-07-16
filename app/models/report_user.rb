@@ -9,7 +9,7 @@ class ReportUser < ActiveRecord::Base
 	def assign
 		if connect_user
 			puts "creating a project user for new report user"
-			report.project.connect_users.where(:id => connect_user_id).first_or_create
+			report.project.project_users.where(:connect_user_id => connect_user_id).first_or_create
 		end
 	end
 
