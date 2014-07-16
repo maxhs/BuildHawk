@@ -22,7 +22,7 @@ class Report < ActiveRecord::Base
 
     has_many :activities, :dependent => :destroy
     has_many :connect_users
-    
+
     validates_presence_of :report_type
     validates_presence_of :date_string
 
