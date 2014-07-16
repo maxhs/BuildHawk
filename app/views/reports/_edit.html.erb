@@ -74,12 +74,6 @@
 							<div><%= text_field_tag "report[user_ids][]", report_user.hours, :class => "report-personnel-input" %>
 								<span style="padding-left:1em;">
 									<%= project_user.user.full_name %>
-									
-									<% if report_user.hours == 1 %>
-										(1 hour)
-									<% else %>
-										(<%= report_user.hours %> hours)
-									<% end %>
 								</span>
 
 							</div>

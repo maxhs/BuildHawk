@@ -2,7 +2,7 @@ class WorklistItem < ActiveRecord::Base
 
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :worklist_id, :worklist, :photos_attributes, 
                   :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
-                  :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email
+                  :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :connect_user_ids
 
     belongs_to :worklist
     belongs_to :user
