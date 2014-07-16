@@ -4,7 +4,7 @@ class ProjectUser < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :connect_user
 	validates_uniqueness_of :project_id, :scope => :user_id
-	validates_uniqueness_of :project_id, :scope => :connect_user_id
+	#validates_uniqueness_of :project_id, :scope => :connect_user_id
 
 	after_create :notify
 
