@@ -18,4 +18,13 @@ class ProjectUser < ActiveRecord::Base
 	        ).first_or_create
 	    end
 	end
+
+	acts_as_api
+
+  	api_accessible :details do |t|
+  		t.add :id
+  		t.add :user
+  		t.add :connect_user
+  		t.add :project_id
+  	end
 end
