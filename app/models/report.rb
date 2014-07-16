@@ -2,7 +2,7 @@ class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :author_id, :project_id, :report_fields, :weather, :photos_attributes, 
                   :users_attributes, :report_users_attributes, :users, :user_ids, :date_string, :subs, :sub_ids, :subs_attributes,
                   :report_subs_attributes, :weather_icon, :temp, :wind, :precip, :humidity, :precip_accumulation, :mobile,
-                  :company_ids, :companies, :report_companies_attributes
+                  :company_ids, :companies, :report_companies_attributes, :connect_user_ids
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project

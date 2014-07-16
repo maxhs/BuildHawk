@@ -71,7 +71,9 @@
 					<% @project_users.each do |project_user| %>
 						<% if @report.users.include?(project_user.user) %>
 							<div><%= check_box_tag "report[user_ids][]", project_user.user.id, checked: true %><span style="padding-left:1em;"><%= project_user.user.full_name %></span></div>
-						<% else %>
+						<% elsif project_user.connect_user %>
+							<div><%= check_box_tag "report[connect_user_ids][]", project_user.connect_user.id, checked: true %><span style="padding-left:1em;"><%= project_user.connect_user.full_name %></span></div>
+						<% elsif project_user.user %>
 							<div><%= check_box_tag "report[user_ids][]", project_user.user.id %><span style="padding-left:1em;"><%= project_user.user.full_name %></span></div>
 						<% end %>
 					<% end %>
