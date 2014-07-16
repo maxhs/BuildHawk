@@ -284,7 +284,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             else
                 render :json=>{:success=>false}
             end
-        endend
+        end
     end
 
     def destroy
