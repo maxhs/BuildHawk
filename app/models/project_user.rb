@@ -3,8 +3,8 @@ class ProjectUser < ActiveRecord::Base
 	belongs_to :project
 	belongs_to :user
 	belongs_to :connect_user
-	validates_uniqueness_of :project_id, :scope => :user_id
-	#validates_uniqueness_of :project_id, :scope => :connect_user_id
+	validates_uniqueness_of :project_id, :scope => :user_id, if: "connect_user_id.nil?"
+	validates_uniqueness_of :project_id, :scope => :connect_user_id, if: "user_id.nil?"
 
 	after_create :notify
 
