@@ -77,13 +77,13 @@ class Checklist < ActiveRecord::Base
             item_title = spreadsheet.row(2)[3]
 
             @new_core = self.create :core => true
-            item_index = 0
+            order_index = 0
             (3..spreadsheet.last_row).each do |i|
                 row = Hash[[header, spreadsheet.row(i)].transpose]
                 phase = @new_core.phases.where(:name => row[phase_title]).first_or_create
                 category = phase.categories.where(:name => row[category_title]).first_or_create
-                item = category.checklist_items.create :item_type => row[type_title], :body => row[item_title], :item_index => item_index if row[type_title] || row[item_title]
-                item_index += 1
+                item = category.checklist_items.create :item_type => row[type_title], :body => row[item_title], :order_index => order_index if row[type_title] || row[item_title]
+                order_index += 1
     	    end
             @new_core.core = true
     	    @new_core.save
