@@ -136,12 +136,12 @@ class Project < ActiveRecord::Base
         t.add :company
         t.add :users
         t.add :progress
+        t.add :reminders
         #t.add :phases
         #t.add :upcoming_items
         #t.add :recently_completed
         #t.add :recent_documents
         #t.add :recent_activities
-        #t.add :reminders
         ### slated for deletion in 1.04 ###
         #t.add :categories
         ###
@@ -190,7 +190,6 @@ class Project < ActiveRecord::Base
         t.add :recent_documents
         t.add :phases
         t.add :recent_activities
-        t.add :reminders
         ### slated for deletion ###
         t.add :categories
         ###
