@@ -9,6 +9,7 @@ class ProjectUser < ActiveRecord::Base
 	after_create :notify
 
 	def notify
+		puts "just created a project connect user: #{connect_user.first_name}" if connect_user
 		user = User.where(:id => user_id).first
 		if user
 	        user.notifications.where(

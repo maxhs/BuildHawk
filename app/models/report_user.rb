@@ -4,15 +4,6 @@ class ReportUser < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :connect_user
 
-	after_create :assign
-
-	def assign
-		if connect_user
-			puts "creating a project user for new report user"
-			report.project.project_users.where(:connect_user_id => connect_user_id).first_or_create
-		end
-	end
-
 	def sub
 		return false
 	end
