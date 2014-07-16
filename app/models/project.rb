@@ -119,7 +119,7 @@ class Project < ActiveRecord::Base
     end
 
     def connect_users
-        ProjectUser.where("project_id = ? and connect_user_id IS NOT NULL",id).flatten
+        ProjectUser.where("project_id = ? and connect_user_id IS NOT NULL",id).map(&:connect_user).compact
     end
 
     ## deprecated
