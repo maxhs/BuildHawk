@@ -119,7 +119,7 @@ class Project < ActiveRecord::Base
     end
 
     def connect_users
-        ConnectUser.where(:project_id => id).flatten
+        ProjectUser.where("project_id = ? and connect_user_id IS NOT NULL").flatten
     end
 
     ## deprecated
