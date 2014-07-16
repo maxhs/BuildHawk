@@ -22,7 +22,7 @@
 				<div>
 					<%= f.radio_button :completed, true %><h5 style="display:inline-block">COMPLETED</h5>
 					<% if @item.completed_by_user %>
-						<span style="color:#aaa;margin-left:5%;font-family:'Source Sans Pro', helvetica, sans-serif;"> by <%= @item.completed_by_user.full_name %>, <%= parse_time @item.completed_at %></span>
+						<h5 style="color:#aaa;margin-left:5%;display:inline-block;font-size:1em;font-weight:100;"> by <%= @item.completed_by_user.full_name %>, <%= parse_time @item.completed_at %></h5>
 					<% end %>
 				</div>
 			</div>

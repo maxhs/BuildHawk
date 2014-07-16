@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.boolean  "archived",         default: false
     t.boolean  "core",             default: false
     t.integer  "project_group_id"
+    t.integer  "connect_user_id"
   end
 
   add_index "project_users", ["project_id", "user_id"], name: "project_users_ix"
