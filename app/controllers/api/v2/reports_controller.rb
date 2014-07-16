@@ -284,6 +284,15 @@ class Api::V2::ReportsController < Api::V2::ApiController
             else
                 render :json=>{:success=>false}
             end
+        elsif params[:report_user_id].present?
+            ru = report.report_users.where(:id => params[:report_user_id]).first
+            if ru && ru.destroy
+                render :json=>{:success=>true}
+            else
+                render :json=>{:success=>false}
+            end
+        else 
+            render json: {success: false}
         end
     end
 
