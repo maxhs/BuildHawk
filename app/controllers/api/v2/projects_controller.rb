@@ -61,8 +61,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             project.project_subs.create :company_id => company.id
             ## create a new company subcontractor object for the company that owns the project
             project.company.company_subs.create :subcontractor_id => company.id 
-
-            params[:user].delete(:company_name)
+            #params[:user].delete(:company_name)
         end
        
         task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
@@ -102,7 +101,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 end
             else
                 connect_user = ConnectUser.create params[:user]
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
+                puts "just created a connect user: #{connect_user.id}"
+                project.project_users.where(:connect_user_id => connect_user.id).first_or_create!
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
