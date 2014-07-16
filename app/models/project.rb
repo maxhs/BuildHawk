@@ -118,10 +118,6 @@ class Project < ActiveRecord::Base
         activities.first(10) if activities.count
     end
 
-    def connect_users
-        ProjectUser.where("project_id = ? and connect_user_id IS NOT NULL",id).map(&:connect_user).compact
-    end
-
     ## deprecated
     def categories
         checklist.phases if checklist
@@ -166,7 +162,7 @@ class Project < ActiveRecord::Base
         t.add :name
         t.add :company
         t.add :users
-        t.add :connect_users
+        t.add :project_users
         t.add :companies
     end
 
