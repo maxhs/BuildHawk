@@ -62,7 +62,8 @@ class Report < ActiveRecord::Base
     end
 
     def date_for_sort
-        if date_string && date_string.length > 0
+        ## a blunt check to make sure the date_string is formatted properly
+        if date_string && date_string.length > 0 && date_string.include?("/20")
             Date.strptime(date_string,"%m/%d/%Y")
         else 
             created_at
