@@ -277,7 +277,14 @@ class Api::V2::ReportsController < Api::V2::ApiController
             else
                 render :json=>{:success=>false}
             end
-        end
+        elsif params[:connect_user_id].present?
+            ru = report.report_users.where(:connect_user_id => params[:connect_user_id]).first
+            if ru && ru.destroy
+                render :json=>{:success=>true}
+            else
+                render :json=>{:success=>false}
+            end
+        endend
     end
 
     def destroy
