@@ -88,4 +88,7 @@ class ConnectUser < ActiveRecord::Base
     api_accessible :reports, :extend => :user do |t|
         
     end
+    api_accessible :details, :extend => :user do |t|
+        
+    end
 end
