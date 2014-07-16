@@ -101,7 +101,6 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 end
             else
                 connect_user = ConnectUser.create params[:user]
-                company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
