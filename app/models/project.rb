@@ -163,6 +163,7 @@ class Project < ActiveRecord::Base
         t.add :name
         t.add :company
         t.add :users
+        t.add :connect_users
         t.add :companies
     end
 
