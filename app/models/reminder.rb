@@ -51,6 +51,7 @@ class Reminder < ActiveRecord::Base
 		t.add :text
 		t.add :push
 		t.add :active
+		t.add :project_id
 	end
 
 	api_accessible :projects, :extend => :reminders do |t|
