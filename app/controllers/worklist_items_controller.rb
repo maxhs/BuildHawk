@@ -9,6 +9,7 @@ class WorklistItemsController < ApplicationController
 		@project = Project.find params[:project_id]
 		@company = @project.company
 		@projects = @company.projects
+		@connect_users = @project.connect_users
 		@users = @project.users
 		@subs = @project.project_subs
 		@locations = @project.worklists.last.worklist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
@@ -146,6 +147,7 @@ class WorklistItemsController < ApplicationController
 			@company = @project.company
 			@projects = @company.projects
 			@users = @project.users
+			@connect_users = @project.connect_users
 			@subs = @project.project_subs
 		end
 	end

@@ -3,7 +3,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
     def index
         user = User.find params[:user_id]
         user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
-            
+
         projects = user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by{|p| p.name.downcase}
         if projects
         	respond_to do |format|
@@ -90,6 +90,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             elsif task
                 puts "couldn't find user for task assignment: #{params[:user]}"
                 connect_user = task.connect_users.create params[:user]
+                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
                 company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
@@ -97,6 +98,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             elsif report
                 puts "couldn't find user for report: #{params[:user]}"
                 connect_user = report.connect_users.create params[:user]
+                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
                 company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
@@ -104,7 +106,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             else
                 connect_user = ConnectUser.create params[:user]
                 puts "just created a connect user: #{connect_user.id}"
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create!
+                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
@@ -130,6 +132,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 end
             elsif task
                 connect_user = task.connect_users.create params[:user]
+                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
                 company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
@@ -137,6 +140,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             elsif report
                 puts "couldn't find user for report: #{params[:user]}"
                 connect_user = report.connect_users.create params[:user]
+                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
                 company.connect_users << connect_user if company
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
