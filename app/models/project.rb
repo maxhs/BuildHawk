@@ -119,11 +119,6 @@ class Project < ActiveRecord::Base
         activities.first(10) if activities.count
     end
 
-    def connect_users
-        knex = reports.map{|r| r.connect_users if r.connect_users.count > 0}.compact.uniq + worklist_items.map{|t| t.connect_users if t.connect_users.count > 0}.compact.uniq
-        return knex.uniq
-    end
-
     ## deprecated
     def categories
         checklist.phases if checklist

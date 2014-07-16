@@ -9,11 +9,13 @@ class ProjectUser < ActiveRecord::Base
 	after_create :notify
 
 	def notify
-		user = User.find user_id
-        user.notifications.where(
-        	:body => "You were added to a project: #{project.name}", 
-        	:project_id => project_id,
-        	:notification_type => "Project"
-        ).first_or_create
+		user = User.where(:id => user_id).first
+		if user
+	        user.notifications.where(
+	        	:body => "You were added to a project: #{project.name}", 
+	        	:project_id => project_id,
+	        	:notification_type => "Project"
+	        ).first_or_create
+	    end
 	end
 end
