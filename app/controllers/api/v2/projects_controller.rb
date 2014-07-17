@@ -57,17 +57,25 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             user = User.where(:email => params[:user][:email]).first
         elsif params[:user][:phone]
             phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            puts "Trying to find a user with phone: #{phone}"
             user = User.where(:phone => phone).first
         end
 
         if user
             ## existing user. ensure they're attached to the project
             project.project_users.where(:user_id => user.id).first_or_create
+            respond_to do |format|
+                format.json { render_for_api :user, :json => user, :root => :user}
+            end
         else
             alternate = Alternate.where(:email => params[:user][:email]).first
+            alternate = Alternate.where(:phone => phone).first unless alternate
             if alternate
                 user = alternate.user
                 project.project_users.where(:user_id => user.id).first_or_create
+                respond_to do |format|
+                    format.json { render_for_api :user, :json => user, :root => :user}
+                end
             else
                 render json: {success: false}
             end
