@@ -226,6 +226,7 @@ Buildhawk::Application.routes.draw do
         member do
           post :archive
           post :unarchive
+          post :find_user
           post :add_user
         end
       end

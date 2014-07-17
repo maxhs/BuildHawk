@@ -51,6 +51,29 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         end
     end
 
+    def find_user
+        project = Project.find params[:id]
+        if params[:user][:email]
+            user = User.where(:email => params[:user][:email]).first
+        elsif params[:user][:phone]
+            phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            user = User.where(:phone => phone).first
+        end
+
+        if user
+            ## existing user. ensure they're attached to the project
+            project.project_users.where(:user_id => user.id).first_or_create
+        else
+            alternate = Alternate.where(:email => params[:user][:email]).first
+            if alternate
+                user = alternate.user
+                project.project_users.where(:user_id => user.id).first_or_create
+            else
+                render json: {success: false}
+            end
+        end
+    end
+
     def add_user
         project = Project.find params[:id]
         if params[:user][:company_name]
@@ -104,12 +127,13 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 end
             end
         elsif params[:user][:phone]
-            user = User.where(:phone => params[:user][:phone]).first
+            phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            user = User.where(:phone => phone).first
             if user
                 ## existing user. ensure they're attached to the project
                 project.project_users.where(:user_id => user.id).first_or_create
             else
-                alternate = Alternate.where(:phone => params[:user][:phone]).first
+                alternate = Alternate.where(:phone => phone).first
                 if alternate
                     user = alternate.user
                     user.text_task(task) if task
@@ -123,7 +147,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
             else
-                connect_user = ConnectUser.where(:phone => params[:user][:phone]).first_or_create
+                connect_user = ConnectUser.where(:phone => phone).first_or_create
                 connect_user.update_attributes params[:user]
                 project.project_users.where(:connect_user_id => connect_user.id).first_or_create
                 company.connect_users << connect_user if company
