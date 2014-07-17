@@ -108,6 +108,7 @@ class WorklistItem < ActiveRecord::Base
   		t.add :id
         t.add :worklist_id
         t.add :user
+        t.add :photos
   		t.add :body
   		t.add :assignee
   		t.add :location
@@ -123,6 +124,7 @@ class WorklistItem < ActiveRecord::Base
     api_accessible :connect do |t|
         t.add :id
         t.add :worklist_id
+        t.add :photos
         t.add :body
         t.add :assignee
         t.add :location
@@ -147,7 +149,6 @@ class WorklistItem < ActiveRecord::Base
 
     api_accessible :details, :extend => :worklist do |t|
         t.add :activities
-        t.add :photos
         t.add :comments
     end
 
