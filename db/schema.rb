@@ -490,7 +490,7 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.integer  "comments_count"
     t.integer  "sub_assignee_id"
     t.boolean  "mobile",               default: false
-    t.integer  "connect_user_id"
+    t.integer  "connect_assignee_id"
   end
 
   create_table "worklists", force: true do |t|
