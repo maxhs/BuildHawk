@@ -38,9 +38,9 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem 'uglifier', '>= 1.3.0'
 gem 'httparty'
 gem 'newrelic_rpm'
+gem 'geocoder'
 #gem 'nokogiri'
 #gem 'pushmeup'
-#gem 'geocoder'
 #gem 'cocaine'
 #gem 'non-stupid-digest-assets'
 
