@@ -34,7 +34,7 @@
 			<h4 style="display:inline-block;width:16.666666664%;">Assignee</h4>
 			<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
 		<% end %>
-		<%= f.fields_for :connect_users do |a| %>
+		<%= f.fields_for :connect_assignee do |a| %>
 			<h4 style="display:inline-block;width:16.666666664%;">Connect Users</h4>
 			<%= a.select :full_name, @connect_users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
 		<% end %>
