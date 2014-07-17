@@ -87,26 +87,18 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 respond_to do |format|
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
-            elsif task
-                puts "couldn't find user for task assignment: #{params[:user]}"
-                connect_user = task.connect_users.create params[:user]
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
-                company.connect_users << connect_user if company
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
-                end
-            elsif report
-                puts "couldn't find user for report: #{params[:user]}"
-                connect_user = report.connect_users.create params[:user]
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
-                company.connect_users << connect_user if company
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
-                end
             else
-                connect_user = ConnectUser.create params[:user]
-                puts "just created a connect user: #{connect_user.id}"
+                connect_user = ConnectUser.where(:email => params[:user][:email]).first_or_create
+                connect_user.update_attributes params[:user]
                 project.project_users.where(:connect_user_id => connect_user.id).first_or_create
+                company.connect_users << connect_user if company
+
+                if task
+                    task.update_attribute :connect_assignee_id, connect_user.id
+                elsif report
+                    report.report_users.where(:connect_user_id => connect_user.id).first_or_create
+                end
+
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
@@ -130,24 +122,18 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 respond_to do |format|
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
-            elsif task
-                connect_user = task.connect_users.create params[:user]
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
-                company.connect_users << connect_user if company
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
-                end
-            elsif report
-                puts "couldn't find user for report: #{params[:user]}"
-                connect_user = report.connect_users.create params[:user]
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
-                company.connect_users << connect_user if company
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
-                end
             else
-                connect_user = ConnectUser.create params[:user]
+                connect_user = ConnectUser.where(:phone => params[:user][:phone]).first_or_create
+                connect_user.update_attributes params[:user]
                 project.project_users.where(:connect_user_id => connect_user.id).first_or_create
+                company.connect_users << connect_user if company
+
+                if task
+                    task.update_attribute :connect_assignee_id, connect_user.id
+                elsif report
+                    report.report_users.where(:connect_user_id => connect_user.id).first_or_create
+                end
+
                 respond_to do |format|
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
