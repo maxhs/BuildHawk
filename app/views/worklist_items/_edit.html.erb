@@ -36,7 +36,7 @@
 		<% end %>
 		<%= f.fields_for :connect_assignee do |a| %>
 			<h4 style="display:inline-block;width:16.666666664%;">Connect Users</h4>
-			<%= a.select :full_name, @connect_users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
+			<%= a.select :id, options_for_select(@connect_users.map{|cu| [cu.full_name, cu.id]}.unshift("No Assignment"), selected: f.object.connect_assignee_id), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
 		<% end %>
 	
 	<% end %>
