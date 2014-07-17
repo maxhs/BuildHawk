@@ -168,10 +168,6 @@ class User < ActiveRecord::Base
         t.add :alternates
     end
 
-  	api_accessible :feed do |t|
-	
-  	end
-
     api_accessible :projects, :extend => :user do |t|
         
     end
@@ -196,19 +192,6 @@ class User < ActiveRecord::Base
 
     end
 
-    api_accessible :worklist do |t|
-        t.add :id
-        t.add :first_name
-        t.add :last_name
-        t.add :full_name
-        t.add :email
-        t.add :phone
-    end
-
-    api_accessible :checklists, :extend => :worklist do |t|
-        
-    end
-
     api_accessible :checklists, :extend => :worklist do |t|
         
     end
@@ -220,6 +203,7 @@ class User < ActiveRecord::Base
     api_accessible :company, :extend => :worklist do |t|
 
     end
+
     api_accessible :reminders, :extend => :worklist do |t|
 
     end

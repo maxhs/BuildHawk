@@ -186,4 +186,8 @@ class Photo < ActiveRecord::Base
 	api_accessible :reminders, :extend => :dashboard do |t|
 
 	end
+
+	api_accessible :connect, :extend => :dashboard do |t|
+
+	end
 end
