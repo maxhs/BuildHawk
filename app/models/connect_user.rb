@@ -5,17 +5,16 @@ class ConnectUser < ActiveRecord::Base
 	has_many :worklist_items
     belongs_to :company
 
-	def email_task
+	def email_task(task)
 		puts "Sending a worklist item email to a connect user with email: #{email}"
-		item_array = []
-		item_array << worklist_item
-		WorklistMailer.export(email, item_array, worklist_item.worklist.project).deliver
+		task_array = []
+		task_array << task
+		WorklistMailer.export(email, task_array, task.worklist.project).deliver
 	end
 
-	def text_task
+	def text_task(task)
 		puts "Texting a task to a connect user with phone: #{phone}"
         clean_phone
-        task = worklist_item
 
         @account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
         @auth_token = '217b868c691cd7ec356c7dbddb5b5939'

@@ -118,6 +118,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
                 if task
                     task.update_attribute :connect_assignee_id, connect_user.id
+                    connect_user.email_task(task)
                 elsif report
                     report.report_users.where(:connect_user_id => connect_user.id).first_or_create
                 end
@@ -154,6 +155,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
                 if task
                     task.update_attribute :connect_assignee_id, connect_user.id
+                    connect_user.text_task(task)
                 elsif report
                     report.report_users.where(:connect_user_id => connect_user.id).first_or_create
                 end
