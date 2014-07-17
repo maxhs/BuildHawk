@@ -138,6 +138,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                     format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
                 end
             end
+        else 
+            render json: {success: false}
         end
     end
 

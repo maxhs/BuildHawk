@@ -256,35 +256,35 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
     def remove_personnel
         report = Report.find params[:report_id]
-        if params[:sub_id].present?
+        if params[:sub_id]
             rs = report.report_subs.where(:sub_id => params[:sub_id]).first
             if rs && rs.destroy
                 render :json=>{:success=>true}
             else
                 render :json=>{:success=>false}
             end
-        elsif params[:user_id].present?
+        elsif params[:user_id]
             ru = report.report_users.where(:user_id => params[:user_id]).first
             if ru && ru.destroy
                 render :json=>{:success=>true}
             else
                 render :json=>{:success=>false}
             end
-        elsif params[:company_id].present?
+        elsif params[:company_id]
             rc = report.report_companies.where(:company_id => params[:company_id]).first
             if rc && rc.destroy
                 render :json=>{:success=>true}
             else
                 render :json=>{:success=>false}
             end
-        elsif params[:connect_user_id].present?
+        elsif params[:connect_user_id]
             ru = report.report_users.where(:connect_user_id => params[:connect_user_id]).first
             if ru && ru.destroy
                 render :json=>{:success=>true}
             else
                 render :json=>{:success=>false}
             end
-        elsif params[:report_user_id].present?
+        elsif params[:report_user_id]
             ru = report.report_users.where(:id => params[:report_user_id]).first
             if ru && ru.destroy
                 render :json=>{:success=>true}
