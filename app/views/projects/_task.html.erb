@@ -22,7 +22,7 @@
 		<% elsif item.sub_assignee_id %>
 			<%= item.sub_assignee.name %>
 		<% elsif item.connect_assignee_id %>
-			<%= item.connect_assignee.first.full_name %>
+			<%= item.connect_assignee.full_name %>
 		<% else %>
 			<span style="color:#aaa;font-style:italic;">Not yet assigned</span>
 		<% end %>
