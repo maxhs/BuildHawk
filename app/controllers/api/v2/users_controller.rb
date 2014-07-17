@@ -8,8 +8,13 @@ class Api::V2::UsersController < Api::V2::ApiController
 	end
 
 	def connect
+		project = Project.find params[:project_id] if params[:project_id]
 		if @user
-			items = WorklistItem.where(:assignee_id => @user.id).map{|t| t if t.worklist.project.company.id != @user.company.id}.compact
+			if project
+				items = WorklistItem.where(:assignee_id => @user.id).map{|t| t if t.worklist.project.id = project.id}.compact
+			else
+				items = WorklistItem.where(:assignee_id => @user.id).map{|t| t if t.worklist.project.company.id != @user.company.id}.compact
+			end
 			respond_to do |format|
 	        	format.json { render_for_api :connect, :json => items, :root => :worklist_items}
 	      	end
