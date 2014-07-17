@@ -88,6 +88,14 @@ class WorklistItem < ActiveRecord::Base
         worklist.project
     end
 
+    def abbreviated_body
+        if body.length > 15
+           "#{body[0..15]}..."
+        else
+            body
+        end        
+    end
+
     ##for deletion
     def epoch_time
         created_date

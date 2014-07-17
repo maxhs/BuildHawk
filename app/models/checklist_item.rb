@@ -50,6 +50,14 @@ class ChecklistItem < ActiveRecord::Base
         category.phase.name if category && category.phase
     end
 
+    def abbreviated_body
+        if body.length > 15
+           "#{body[0..15]}..."
+        else
+            body
+        end        
+    end
+
     def log_activity(current_user)
         if state == 1 && completed_date.nil?
             self.update_attribute :completed_date, Time.now

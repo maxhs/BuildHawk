@@ -12,7 +12,7 @@
 					<% elsif p.source == "Checklist" %>
 						<% if p.checklist_item %>
 							<span class="label">Item:</span>
-							<%= link_to "#{p.checklist_item.body[0..15]}...", checklist_item_path(p.checklist_item), :remote => true %>
+							<%= link_to p.checklist_item.abbreviated_body, checklist_item_path(p.checklist_item), :remote => true %>
 						<% else %> 
 							<span class="label">Source:</span>
 							<%= link_to "Checklist", checklist_photos_project_path(@project), :remote => true %>
@@ -20,7 +20,7 @@
 					<% elsif p.source == "Worklist" %>
 						<% if p.worklist_item %>
 							<span class="label">Item:</span>
-							<%= link_to "#{p.worklist_item.body[0..15]}...", edit_worklist_item_path(p.worklist_item), :remote => true %>
+							<%= link_to p.worklist_item.abbreviated_body, edit_worklist_item_path(p.worklist_item), :remote => true %>
 						<% else %>
 							<span class="label">Source:</span>
 							<%= link_to "Worklist", worklist_photos_project_path(@project), :remote => true %>
