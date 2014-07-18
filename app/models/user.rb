@@ -142,8 +142,12 @@ class User < ActiveRecord::Base
     end
 
     def notify_all_devices(options)
-        apn_registrations.map{|r| r.token}.each do |token|
-            APN.notify_async token, options
+        push_tokens.each do |push_token|
+            if push_token.device_type == 3
+                notify_android(options)
+            else
+                APN.notify_async push_token.token, options
+            end
         end
     end
 
