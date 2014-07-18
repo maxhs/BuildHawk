@@ -111,6 +111,7 @@ class WorklistItem < ActiveRecord::Base
         t.add :photos
   		t.add :body
   		t.add :assignee
+        t.add :connect_assignee
   		t.add :location
   		t.add :completed_at
         t.add :created_at
@@ -127,6 +128,7 @@ class WorklistItem < ActiveRecord::Base
         t.add :photos
         t.add :body
         t.add :assignee
+        t.add :connect_assignee
         t.add :location
         t.add :completed_at
         t.add :created_at
@@ -158,6 +160,7 @@ class WorklistItem < ActiveRecord::Base
         t.add :user
         t.add :body
         t.add :assignee
+        t.add :connect_assignee
         t.add :location
         t.add :completed_at
         t.add :created_at
