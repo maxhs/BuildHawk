@@ -67,6 +67,7 @@ class Phase < ActiveRecord::Base
       t.add :name
       t.add :completed_date
       t.add :milestone_date
+      t.add :item_count
       t.add :not_applicable_count
       t.add :completed_count
       t.add :progress_percentage
@@ -78,6 +79,7 @@ class Phase < ActiveRecord::Base
       t.add :id
       t.add :name
       t.add :item_count
+      t.add :not_applicable_count
       t.add :completed_count
       t.add :progress_count
       t.add :order_index
