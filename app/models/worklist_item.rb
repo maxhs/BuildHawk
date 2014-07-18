@@ -108,16 +108,16 @@ class WorklistItem < ActiveRecord::Base
   		t.add :id
         t.add :worklist_id
         t.add :user
-        t.add :photos
+        #t.add :photos
   		t.add :body
   		t.add :assignee
-        t.add :connect_assignee
-  		t.add :location
-  		t.add :completed_at
-        t.add :created_at
-  		t.add :completed
-        t.add :created_date
-        t.add :project_id
+        #t.add :connect_assignee
+  		#t.add :location
+  		#t.add :completed_at
+        #t.add :created_at
+  		#t.add :completed
+        #t.add :created_date
+        #t.add :project_id
         ## for deletion
         t.add :epoch_time
   	end
