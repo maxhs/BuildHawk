@@ -25,7 +25,7 @@ class Api::V2::SessionsController < Api::V2::ApiController
   		if @user.valid_password? password
   			#@user.reset_authentication_token!
             if device_token
-  			     @user.apn_registrations.where(:token => device_token).first_or_create
+  			     @user.push_tokens.where(:token => device_token).first_or_create
             end
   			
             respond_to do |format|
