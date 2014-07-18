@@ -62,6 +62,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         end
 
         if user
+            puts "we found a user: #{user.full_name}"
             ## existing user. ensure they're attached to the project
             project.project_users.where(:user_id => user.id).first_or_create
             respond_to do |format|
@@ -72,12 +73,13 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             alternate = Alternate.where(:phone => phone).first unless alternate
             if alternate
                 user = alternate.user
+                puts "did we find an alternate? #{user.full_name}"
                 project.project_users.where(:user_id => user.id).first_or_create
                 respond_to do |format|
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
             else
-                ConnectUser.where
+                
                 render json: {success: false}
             end
         end
