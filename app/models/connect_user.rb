@@ -3,6 +3,7 @@ class ConnectUser < ActiveRecord::Base
 	attr_accessible :first_name, :last_name, :phone, :email, :company_id, :company_name
 
 	has_many :worklist_items
+    has_many :project_users, dependent: :destroy
     belongs_to :company
 
 	def email_task(task)
@@ -13,16 +14,14 @@ class ConnectUser < ActiveRecord::Base
 	end
 
 	def text_task(task)
-		puts "Texting a task to a connect user with phone: #{phone}"
         clean_phone
-
-        @account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
-        @auth_token = '217b868c691cd7ec356c7dbddb5b5939'
+        account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
+        auth_token = '217b868c691cd7ec356c7dbddb5b5939'
         twilio_phone = "14157234334"
-        @client = Twilio::REST::Client.new(@account_sid, @auth_token)
+        client = Twilio::REST::Client.new(account_sid, auth_token)
         truncated_task = truncate(task.body, length:15)
         puts "should be sending a task text, \"#{truncated_task}\", to #{full_name} at phone: #{phone}"
-        @client.account.sms.messages.create(
+        client.account.sms.messages.create(
             :from => "+1#{twilio_phone}",
             :to => phone,
             :body => "You've been assigned a task on BuildHawk: \"#{truncated_task}\". Click here to view: https://www.buildhawk.com/task/#{task.id}"
