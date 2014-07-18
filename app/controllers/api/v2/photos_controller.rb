@@ -6,7 +6,7 @@ class Api::V2::PhotosController < Api::V2::ApiController
 
     def show
     	project = Project.find params[:id]
-    	photos = project.photos.where("image_file_name IS NOT NULL").order('created_at')
+    	photos = project.photos.where("image_file_name IS NOT NULL").order('created_at DESC')
     	respond_to do |format|
         	format.json { render_for_api :projects, :json => photos, :root => :photos}
       	end
