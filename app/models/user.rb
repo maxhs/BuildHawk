@@ -164,6 +164,7 @@ class User < ActiveRecord::Base
             worklist_item_id: options[:worklist_item_id],
             checklist_item_id: options[:checklist_item_id],
             report_id: options[:report_id],
+            project_id: options[:project_id],
             unread_messages: options[:badge]
         }
         puts "android datat: #{data}"
