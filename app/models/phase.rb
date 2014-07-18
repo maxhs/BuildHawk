@@ -22,16 +22,16 @@ class Phase < ActiveRecord::Base
         categories.joins(:checklist_items).where(:checklist_items => {:state => -1}).count if categories
     end
 
+    def progress_count
+        not_applicable_count + completed_count
+    end
+
     def progress_percentage
       if item_count > 0
-        number_to_percentage((completed_count+not_applicable_count)/item_count.to_f*100,:precision=>1)
+        number_to_percentage((progress_count)/item_count.to_f*100,:precision=>1)
       else
         "N/A"
       end
-    end
-
-    def progress_count
-        not_applicable_count + completed_count
     end
 
     def order_indices
