@@ -7,5 +7,7 @@ class ModifyCompanyModel < ActiveRecord::Migration
   	remove_column :connect_users, :checklist_item_id, :integer
   	remove_column :connect_users, :report_id, :integer
   	add_column :worklist_items, :connect_assignee_id, :integer
+  	rename_table :apn_registrations, :push_tokens
+  	add_column :push_tokens, :device_type, :integer
   end
 end

@@ -23,9 +23,9 @@ class Api::V2::SessionsController < Api::V2::ApiController
   		@user = User.find_for_database_authentication email: email if email
   		return invalid_login_attempt unless @user
   		if @user.valid_password? password
-  			@user.reset_authentication_token!
+  			#@user.reset_authentication_token!
             if device_token
-  			   @user.apn_registrations.where(:token => device_token).first_or_create
+  			     @user.apn_registrations.where(:token => device_token).first_or_create
             end
   			
             respond_to do |format|

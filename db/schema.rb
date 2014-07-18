@@ -56,15 +56,6 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.datetime "updated_at"
   end
 
-  create_table "apn_registrations", force: true do |t|
-    t.integer  "user_id"
-    t.text     "token",      limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "apn_registrations", ["user_id"], name: "apn_registrations_user_id_ix"
-
   create_table "categories", force: true do |t|
     t.integer  "phase_id"
     t.string   "name"
@@ -337,6 +328,16 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "push_tokens", force: true do |t|
+    t.integer  "user_id"
+    t.text     "token",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "device_type"
+  end
+
+  add_index "push_tokens", ["user_id"], name: "apn_registrations_user_id_ix"
 
   create_table "reminders", force: true do |t|
     t.integer  "user_id"
