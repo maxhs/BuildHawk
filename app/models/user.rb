@@ -161,6 +161,9 @@ class User < ActiveRecord::Base
         GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
         data = {
             message: options[:alert],
+            worklist_item_id: options[:worklist_item_id],
+            checklist_item_id: options[:checklist_item_id],
+            report_id: options[:report_id],
             unread_messages: options[:badge]
         }
         puts "android datat: #{data}"
