@@ -70,7 +70,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             end
         else
             alternate = Alternate.where(:email => params[:user][:email]).first
-            alternate = Alternate.where(:phone => phone).first unless alternate
+            alternate = Alternate.where(:phone => phone).first if phone && !alternate
             if alternate
                 user = alternate.user
                 puts "did we find an alternate? #{user.full_name}"
