@@ -167,8 +167,8 @@ class User < ActiveRecord::Base
             project_id: options[:project_id],
             unread_messages: options[:badge]
         }
-        puts "android datat: #{data}"
         push_tokens.where(:device_type => 3).each do |t|
+            puts "android data: #{data}"
             GCM.send_notification(t.token,data)
         end
     end
