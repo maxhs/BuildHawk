@@ -142,9 +142,10 @@ class User < ActiveRecord::Base
     end
 
     def notify_all_devices(options)
+        puts "options #{options}"
         push_tokens.each do |push_token|
             if push_token.device_type == 3
-                notify_android(options)
+                notify_android(body: options[:body])
             else
                 APN.notify_async push_token.token, options
             end
