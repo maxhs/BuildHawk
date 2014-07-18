@@ -159,10 +159,10 @@ class User < ActiveRecord::Base
         GCM.host = 'https://android.googleapis.com/gcm/send'
         GCM.format = :json
         GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
-        data = (
+        data = {
             message: options[:alert],
             unread_messages: options[:badge]
-        )
+        }
         puts "android datat: #{data}"
         push_tokens.where(:device_type => 3).each do |t|
             GCM.send_notification(t.token,data)
