@@ -3,9 +3,9 @@ class Api::V2::SessionsController < Api::V2::ApiController
     def create
         if params[:user].present?
             device_token = params[:user][:device_token]
+            device_type = params[:user][:device_type] if params[:user][:device_type]
             params[:user].delete(:device_token)
-        elsif params[:device_token]
-            device_token = params[:device_token]
+            params[:user].delete(:device_type)
         end
 
         if params[:user].present?
@@ -24,8 +24,8 @@ class Api::V2::SessionsController < Api::V2::ApiController
   		return invalid_login_attempt unless @user
   		if @user.valid_password? password
   			#@user.reset_authentication_token!
-            if device_token && params[:user][:device_type]
-  			   @user.push_tokens.where(:token => device_token, :device_type => params[:user][:device_type]).first_or_create
+            if device_token && device_type
+  			   @user.push_tokens.where(:token => device_token, :device_type => device_type).first_or_create
             elsif device_token
                 @user.push_tokens.where(:token => device_token).first_or_create
             end

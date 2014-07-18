@@ -149,6 +149,8 @@ class User < ActiveRecord::Base
 
 
     def notify_android(options)
+        ## proejct id: buildhawk-1
+        ## project number: 149110570482
         GCM.host = 'https://android.googleapis.com/gcm/send'
         GCM.format = :json
         GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
