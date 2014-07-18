@@ -77,6 +77,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                     format.json { render_for_api :user, :json => user, :root => :user}
                 end
             else
+                ConnectUser.where
                 render json: {success: false}
             end
         end
@@ -100,80 +101,62 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
         report = Report.find params[:report_id] if params[:report_id] && params[:report_id] != 0
 
-        if params[:user][:email]
-            user = User.where(:email => params[:user][:email]).first
-            if user
-                ## existing user. ensure they're attached to the project
-                project.project_users.where(:user_id => user.id).first_or_create
-            else
-                alternate = Alternate.where(:email => params[:user][:email]).first
-                if alternate
-                    user = alternate.user
-                    project.project_users.where(:user_id => user.id).first_or_create
-                end
-            end
-        
-            if user
-                project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => user, :root => :user}
-                end
-            else
-                connect_user = ConnectUser.where(:email => params[:user][:email]).first_or_create
-                connect_user.update_attributes params[:user]
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
-                company.connect_users << connect_user if company
+        email = params[:user][:email].strip if params[:user][:email]
+        phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'') if params[:user][:phone]
 
-                if task
-                    task.update_attribute :connect_assignee_id, connect_user.id
-                    connect_user.email_task(task)
-                elsif report
-                    report.report_users.where(:connect_user_id => connect_user.id).first_or_create
-                end
+        user = User.where(:email => email).first
+        user = User.where(:phone => phone).first unless user
 
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
-                end
-            end
-        elsif params[:user][:phone]
-            phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
-            user = User.where(:phone => phone).first
-            if user
-                ## existing user. ensure they're attached to the project
-                project.project_users.where(:user_id => user.id).first_or_create
-            else
-                alternate = Alternate.where(:phone => phone).first
-                if alternate
-                    user = alternate.user
-                    user.text_task(task) if task
-                    project.project_users.where(:user_id => user.id).first_or_create
-                end
-            end
+        if user
+            ## existing user. ensure they're attached to the project
+            
+        else
+            alternate = Alternate.where(:email => email).first if email
+            alternate = Alternate.where(:phone => phone).first if phone && !alternate
+            user = alternate.user if alternate
+        end
         
-            if user
-                project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => user, :root => :user}
+        if user
+            project.project_users.where(:user_id => user.id).first_or_create
+            project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
+
+            if task
+                if email
+                    user.email_task(task)
+                elsif phone
+                    user.text_task(task)
                 end
-            else
+            elsif report
+
+            end
+
+            respond_to do |format|
+                format.json { render_for_api :user, :json => user, :root => :user}
+            end
+        else
+            if email
+                connect_user = ConnectUser.where(:email => email).first_or_create
+            elsif phone
                 connect_user = ConnectUser.where(:phone => phone).first_or_create
-                connect_user.update_attributes params[:user]
-                project.project_users.where(:connect_user_id => connect_user.id).first_or_create
-                company.connect_users << connect_user if company
-
-                if task
-                    task.update_attribute :connect_assignee_id, connect_user.id
-                    connect_user.text_task(task)
-                elsif report
-                    report.report_users.where(:connect_user_id => connect_user.id).first_or_create
-                end
-
-                respond_to do |format|
-                    format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
-                end
             end
-        else 
-            render json: {success: false}
+            connect_user.update_attributes params[:user]
+            project.project_users.where(:connect_user_id => connect_user.id).first_or_create
+            company.connect_users << connect_user if company
+
+            if task
+                task.update_attribute :connect_assignee_id, connect_user.id
+                if email
+                    connect_user.email_task(task)
+                elsif phone
+                    connect_user.text_task(task)
+                end
+            elsif report
+                report.report_users.where(:connect_user_id => connect_user.id).first_or_create
+            end
+
+            respond_to do |format|
+                format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
+            end
         end
     end
 
