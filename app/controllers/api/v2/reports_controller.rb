@@ -193,9 +193,10 @@ class Api::V2::ReportsController < Api::V2::ApiController
     def show
     	project = Project.find params[:id]
         if project.reports 
-        	respond_to do |format|
-            	format.json { render_for_api :reports, :json => project.reports.sort_by(&:date_for_sort).reverse, :root => :reports}
-          	end
+        	#respond_to do |format|
+            #	format.json { render_for_api :reports, :json => project.reports.sort_by(&:date_for_sort).reverse, :root => :reports}
+          	#end
+            render json: {reports: project.reports.sort_by(&:date_for_sort).reverse}
         else
             render :json => {:success => false}
         end
