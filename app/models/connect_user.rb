@@ -75,4 +75,10 @@ class ConnectUser < ActiveRecord::Base
     api_accessible :details, :extend => :user do |t|
         
     end
+    api_accessible :worklist, :extend => :user do |t|
+        
+    end
+    api_accessible :connect, :extend => :user do |t|
+        
+    end
 end
