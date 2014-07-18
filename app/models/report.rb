@@ -69,7 +69,7 @@ class Report < ActiveRecord::Base
             puts "trying to format: #{date_string}"
             Date.strptime(date_string,"%m/%d/%Y")
         else 
-            created_at.to_date
+            created_at
         end
     end
 
