@@ -2,11 +2,14 @@ class Api::V2::SessionsController < Api::V2::ApiController
 
     def create
         if params[:user].present?
-            device_token = params[:user][:device_token]
+            device_token = params[:user][:device_token] if params[:user][:device_token]
             device_type = params[:user][:device_type] if params[:user][:device_type]
             params[:user].delete(:device_token)
             params[:user].delete(:device_type)
         end
+
+        device_token = params[:device_token] if params[:device_token]
+        device_type = params[:device_type] if params[:device_type]
 
         if params[:user].present?
             email = params[:user][:email]
