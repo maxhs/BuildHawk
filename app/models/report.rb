@@ -64,6 +64,7 @@ class Report < ActiveRecord::Base
 
     def date_for_sort
         ## a blunt check to make sure the date_string is formatted properly
+        puts "almost #{date_string}"
         if date_string && date_string.length > 0 && date_string.include?("/20")
             puts "trying to format: #{date_string}"
             Date.strptime(date_string,"%m/%d/%Y")
