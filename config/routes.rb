@@ -247,6 +247,7 @@ Buildhawk::Application.routes.draw do
       resources :notifications, :only => [:index, :destroy] do
         collection do 
           get :messages
+          post :test_android_pushes
         end
       end
       resources :comments
