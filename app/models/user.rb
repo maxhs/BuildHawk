@@ -147,6 +147,16 @@ class User < ActiveRecord::Base
         end
     end
 
+
+    def notify_android(options)
+        GCM.host = 'https://android.googleapis.com/gcm/send'
+        GCM.format = :json
+        GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
+        push_tokens.where(:device_type => 3).each do |t|
+            GCM.send_notification(t.token,options)
+        end
+    end
+
   	acts_as_api
 
   	api_accessible :user do |t|
