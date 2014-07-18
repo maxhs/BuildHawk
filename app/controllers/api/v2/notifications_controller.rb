@@ -24,11 +24,11 @@ class Api::V2::NotificationsController < Api::V2::ApiController
     end
 
     def test_android_pushes
-        if params[:message]
-            params[:body] = params[:message]
-            params.delete(:message)
+        if params[:notification][:message]
+            params[:notification][:body] = params[:notification][:message]
+            params[:notification].delete(:message)
         end
-        notification = Notification.create params
+        notification = Notification.create params[:notification]
         if notification.save
             render json: {notification: notification}
         else
