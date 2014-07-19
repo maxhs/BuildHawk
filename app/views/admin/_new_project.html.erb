@@ -53,9 +53,9 @@
         	<div class="col-xs-3" id="sub-list">
 				<% @subs.each do |company_sub| %>
 	    			<% if @project.companies.include?(company_sub.subcontractor) %>
-	    				<div style="padding-top:5px;"><%= check_box_tag "project[sub_ids][]", company_sub.id, checked: true %><span style="padding-left:10px;"><%= sub.name %></span></div>
+	    				<div style="padding-top:5px;"><%= check_box_tag "project[project_sub_ids][]", company_sub.id, checked: true %><span style="padding-left:10px;"><%= sub.name %></span></div>
     				<% else %>
-    					<div style="padding-top:5px;"><%= check_box_tag "project[sub_ids][]", company_sub.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
+    					<div style="padding-top:5px;"><%= check_box_tag "project[project_sub_ids][]", company_sub.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
     				<% end %>
 	    		<% end %>
 	    	</div>
@@ -64,7 +64,7 @@
         	</div>
         </div>
 		<div class="button-container">
-			<%= f.submit "CREATE PROJECT", :id=>"new-project-submit", :class => "btn btn-success btn-md save" %>
+			<%= f.submit "CREATE PROJECT", :id=>"new-project-submit", :class => "simple-btn" %>
 		</div>
 	</div>
 <% end %>
