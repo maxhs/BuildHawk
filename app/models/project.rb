@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+    require "resque"
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist, :photos,
                         :user_ids, :core, :project_group_id, :companies, :company_ids
@@ -120,6 +121,10 @@ class Project < ActiveRecord::Base
 
     def connect_users
         project_users.where("connect_user_id IS NOT NULL").map(&:connect_user).compact
+    end
+
+    def background_destroy
+        Resque.enqueue(DestroyProject, od)
     end
 
     ## deprecated
