@@ -7,8 +7,7 @@ class Address < ActiveRecord::Base
     reverse_geocoded_by :latitude, :longitude
     geocoded_by :formatted_address
     after_validation :geocode
-    after_validation :reverse_geocode
-
+    
     def formatted_address
       "#{street1}, #{city}, #{state} #{zip}"
     end

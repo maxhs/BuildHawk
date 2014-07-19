@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
 	def create
 		list = Checklist.find params[:checklist_id]
 		@checklist = list.duplicate
-		puts "freshly duplicated checklist: #{@checklist.id}"
+		puts "Freshly duplicated checklist: #{@checklist.id}"
 	    project = @company.projects.create params[:project]
 	    @checklist.update_attributes :company_id => @company.id, :project_id => project.id, :core => false
 		redirect_to projects_path

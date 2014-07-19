@@ -13,7 +13,6 @@ class Checklist < ActiveRecord::Base
   	accepts_nested_attributes_for :phases, :allow_destroy => true
 
     def duplicate
-        puts "duplicating a checklist"
         new_checklist = self.dup :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :state}}}
         new_checklist.save
         return new_checklist

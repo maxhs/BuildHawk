@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
   	
     belongs_to :project_group, counter_cache: true
   	belongs_to :company
-  	has_one :address
+  	has_one :address, :dependent => :destroy
   	has_many :worklists, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     has_many :reports, :dependent => :destroy
