@@ -52,7 +52,7 @@ body {
 	}
 
 	a:hover, a.current-page, .hide-reveal:hover {
-		color:#cc3333 !important;
+		color:#0880ff !important;
 		text-decoration:none;
 	}
 
@@ -699,9 +699,9 @@ a.search-button {
 
 .simple-btn {
 	border:1px solid #ddd;
-	border-radius:2px;
-	-webkit-border-radius:2px;
-	-moz-border-radius:2px;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
 	padding:10px 20px;
 	position:relative;
 	display:inline-block;
@@ -709,7 +709,7 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Montserrat",'Helvetica',sans-serif;
+	font-family:'Gotham Book',"Montserrat",'Helvetica',sans-serif;
 	font-size:14px;
 	letter-spacing:2px;
 	font-weight:normal;

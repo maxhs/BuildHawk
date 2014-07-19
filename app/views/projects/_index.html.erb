@@ -9,12 +9,15 @@
 		</div>
 		
 		<div id="messages" class="col-md-2 border-box">
+			<h4>Messages</h4>
 			<% if current_user.messages.count > 0 %>
-				<h4>Messages</h4>
 				<%= render :partial => "messages/message", collection: current_user.messages, as: :message, cache:true %>
 			<% else %>
 				<div style="color:#aaa;">No messages </div>
 			<% end %>
+			<div style="text-align:center;">
+				<div class="simple-btn" style="margin:0 autol"><%= link_to "New Message", new_message_path, remote:true %></div.
+			</div>
 		</div>
 		<% unless @company.projects && @company.projects.count > 0 %>
 			<div id="dashboard-placeholder" class="font-smoothing">Your company does not have any active projects.</div>
