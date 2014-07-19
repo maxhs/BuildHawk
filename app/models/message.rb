@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
 	attr_accessible :author_id, :company_id, :target_project_id, :body, :user_ids
 
-	belongs_to :author
+	belongs_to :author, :class_name => "User"
 	belongs_to :company
 	belongs_to :target_project, :class_name => "Project"
 	has_many :message_users, :dependent => :destroy, autosave: true

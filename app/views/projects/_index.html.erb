@@ -1,6 +1,21 @@
-<div class="col-xs-12" id="main">
+<div id="main">
 	<div id="company-dashboard">
-		<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
+		<div class="col-md-2">
+			
+		</div>
+
+		<div class="col-md-8">
+			<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
+		</div>
+		
+		<div id="messages" class="col-md-2 border-box">
+			<% if current_user.messages.count > 0 %>
+				<h4>Messages</h4>
+				<%= render :partial => "messages/message", collection: current_user.messages, as: :message, cache:true %>
+			<% else %>
+				<div style="color:#aaa;">No messages </div>
+			<% end %>
+		</div>
 		<% unless @company.projects && @company.projects.count > 0 %>
 			<div id="dashboard-placeholder" class="font-smoothing">Your company does not have any active projects.</div>
 		<% end %>
