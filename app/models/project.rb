@@ -124,7 +124,7 @@ class Project < ActiveRecord::Base
     end
 
     def background_destroy
-        Resque.enqueue(DestroyProject, od)
+        Resque.enqueue(DestroyProject, id)
     end
 
     ## deprecated
