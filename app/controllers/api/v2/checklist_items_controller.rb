@@ -4,6 +4,9 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
     	item = ChecklistItem.find params[:id]
         if params[:checklist_item] && params[:checklist_item][:state].to_i != item.state
             should_log_activity = true
+            if params[:checklist_item][:state] == 1
+                params[:checklist_item][:state] = params[:user_id] if params[:user_id]
+            end
         else
             should_log_activity = false
         end
@@ -25,7 +28,11 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
             end
             ##
             
-            params[:checklist_item][:state] = nil unless params[:checklist_item][:state]
+            unless params[:checklist_item][:state]
+                params[:checklist_item][:state] = nil
+                params[:checklist_item][:completed_date] = nil
+                params[:checklist_item][:completed_by_user_id] = nil
+            end
             item.update_attributes params[:checklist_item]
         else
             item.update_attribute :state, nil
