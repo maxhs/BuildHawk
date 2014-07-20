@@ -60,7 +60,7 @@ class ChecklistItem < ActiveRecord::Base
 
     def log_activity(u)
         puts "should be logging a checklist item activity"
-        puts "user? #{_u.full_name}" if u
+        puts "user? #{u.full_name}" if u
         if state == 1 && completed_date.nil?
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
             
