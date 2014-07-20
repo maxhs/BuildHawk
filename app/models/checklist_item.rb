@@ -62,9 +62,9 @@ class ChecklistItem < ActiveRecord::Base
         puts "should be logging a checklist item activity"
         puts "user? #{u.full_name}" if u
         if state == 1 && completed_date.nil?
-            category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
+            #category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
             
-            if user
+            if u
                 activities.create(
                     :body => "#{u.full_name} marked this item complete.",
                     :user_id => u.id,
