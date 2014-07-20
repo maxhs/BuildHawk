@@ -8,8 +8,8 @@
 			<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
 		</div>
 		
-		<div id="messages" class="col-md-2 border-box">
-			<h4>Messages</h4>
+		<div id="messages" class="col-md-2 border-box" style="padding-top:10px;">
+			<h4 style="text-align:center;width:100%;">Messages</h4>
 			<% if current_user.messages.count > 0 %>
 				<%= render :partial => "messages/message", collection: current_user.messages, as: :message, cache:true %>
 			<% else %>
