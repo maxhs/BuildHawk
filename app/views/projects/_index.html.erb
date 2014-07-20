@@ -15,8 +15,8 @@
 			<% else %>
 				<div style="color:#aaa;">No messages </div>
 			<% end %>
-			<div style="text-align:center;">
-				<div class="simple-btn" style="margin:0 autol"><%= link_to "New Message", new_message_path, remote:true %></div>
+			<div style="text-align:center;padding-top:20px;">
+				<div style="margin:0 auto"><%= link_to "New Message", new_message_path, :class=>"simple-btn", remote:true %></div>
 			</div>
 		</div>
 		<% unless @company.projects && @company.projects.count > 0 %>

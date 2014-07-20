@@ -1,4 +1,4 @@
 
 <div><%= message.body %></div>
-<div>-<%= message.author.full_name %></div>
+<div>-<%= message.author.full_name if message.author %></div>
 <div><%= parse_datetime message.created_at %></div>
