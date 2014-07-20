@@ -58,15 +58,16 @@ class ChecklistItem < ActiveRecord::Base
         end        
     end
 
-    def log_activity(current_user)
+    def log_activity(u)
+        puts "should be logging a checklist item activity"
+        puts "user? #{_u.full_name}" if u
         if state == 1 && completed_date.nil?
-            self.update_attribute :completed_date, Time.now
             category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
             
-            if current_user
+            if user
                 activities.create(
-                    :body => "#{current_user.full_name} marked this item complete.",
-                    :user_id => current_user.id,
+                    :body => "#{u.full_name} marked this item complete.",
+                    :user_id => u.id,
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
@@ -79,6 +80,7 @@ class ChecklistItem < ActiveRecord::Base
             end            
                
         elsif !completed_date.nil?
+            puts "no completed date"
             if state
                 if state == 1
                     verbal_state = "completed"
@@ -86,18 +88,22 @@ class ChecklistItem < ActiveRecord::Base
                     verbal_state = "in progress"
                 elsif state == -1
                     verbal_state = "not applicable"
+                else 
+                    verbal_state = ""
                 end
 
-                if current_user
+                if u
+                    puts "current user activity"
                     activities.create(
-                        :body => "#{current_user.full_name} updated the status for this item to \"#{verbal_state}\".",
+                        :body => "#{u.full_name} updated the status for this item\" to #{verbal_state}\".",
                         :project_id => checklist.project.id,
-                        :user_id => current_user.id,
+                        :user_id => u.id,
                         :activity_type => self.class.name
                     )
                 else 
+                    puts "activity for someone else"
                     activities.create(
-                        :body => "The status for this item was updated to \"#{verbal_state}\".",
+                        :body => "The status for this item was updated\" to #{verbal_state}\".",
                         :project_id => checklist.project.id,
                         :activity_type => self.class.name
                     )
