@@ -17,11 +17,11 @@
 		<% end %>
 	</div>	
 	<div class="col-xs-3">
-		<% if item.assignee_id %>
+		<% if item.assignee_id && item.assignee %>
 			<%= item.assignee.full_name %>
-		<% elsif item.sub_assignee_id %>
+		<% elsif item.sub_assignee_id && item.sub_assignee %>
 			<%= item.sub_assignee.name %>
-		<% elsif item.connect_assignee_id %>
+		<% elsif item.connect_assignee_id && item.connect_assignee %>
 			<%= item.connect_assignee.full_name %>
 		<% else %>
 			<span style="color:#aaa;font-style:italic;">Not yet assigned</span>

@@ -5,19 +5,26 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     	worklist_item = WorklistItem.find params[:id]
         params[:worklist_item].delete(:id)
 
-        if params[:worklist_item][:user_assignee].present? 
+        ## to remove in 1.05
+        if params[:worklist_item][:assign].present? 
             user = User.where(:full_name => params[:worklist_item][:user_assignee]).first
             params[:worklist_item][:assignee_id] = user.id
             params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
+        ##
         elsif params[:worklist_item][:sub_assignee].present?
             sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => worklist_item.worklist.project.company.id).first_or_create
             params[:worklist_item][:assignee_id] = nil
+            params[:worklist_item][:connect_assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = sub.id
             params[:worklist_item].delete(:sub_assignee)
-        elsif params[:worklist_item][:assignee_id].nil?
+        elsif params[:worklist_item][:connect_assignee_id]
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
+        else
+            params[:worklist_item][:assignee_id] = nil
+            params[:worklist_item][:sub_assignee_id] = nil
+            params[:worklist_item][:connect_assignee_id] = nil
         end
         
         if params[:worklist_item][:completed] == "1"
