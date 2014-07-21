@@ -6,6 +6,15 @@ class ConnectUser < ActiveRecord::Base
     has_many :project_users, dependent: :destroy
     belongs_to :company
 
+    before_destroy :cleanup
+
+    def cleanup
+        WorklistItem.where(:connect_assignee_id => id).each do |t|
+            puts "Cleaning a connect user who's about to be deleted (#{full_name}) from a worklist item."
+            t.update_attribute :connect_assignee_id, nil
+        end
+    end
+
 	def email_task(task)
 		puts "Sending a worklist item email to a connect user with email: #{email}"
 		task_array = []
