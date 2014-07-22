@@ -19,11 +19,11 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item].delete(:sub_assignee)
         ###
         elsif params[:worklist_item][:assignee_id]
-            @notify_user = true
+            assignee = User.where(:id => params[:worklist_item][:assignee_id]).first
             params[:worklist_item][:connect_assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
         elsif params[:worklist_item][:connect_assignee_id]
-            @notify_connect = true
+            connect_user = ConnectUser.where(:id => params[:worklist_item][:connect_assignee_id]).first
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
         else
@@ -47,18 +47,13 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
     	task = worklist_item.update_attributes params[:worklist_item]
         
-        if @notify_connect
-            connect_user = ConnectUser.where(:id => params[:worklist_item][:connect_assignee_id]).first
-            if connect_user
-                connect_user.text_task(task) if connect_user.phone && connect_user.phone.length
-                connect_user.email_task(task) if connect_user.email && connect_user.email.length
-            end
-        elsif @notify_user
-            user = User.where(:id => params[:worklist_item][:assignee_id]).first
-            if user
-                user.text_task(task) if user.text_permissions && user.phone && connect_user.phone.length
-                user.email_task(task) if user.email_permissions && user.email && connect_user.email.length
-            end
+        if connect_user        
+            connect_user.text_task(task) if connect_user.phone && connect_user.phone.length
+            connect_user.email_task(task) if connect_user.email && connect_user.email.length
+
+        elsif assignee
+            assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length
+            assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length
         end
         
         if params[:user_id]
