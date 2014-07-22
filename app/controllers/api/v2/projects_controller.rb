@@ -104,14 +104,15 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         report = Report.find params[:report_id] if params[:report_id] && params[:report_id] != 0
 
         email = params[:user][:email].strip if params[:user][:email]
+        puts "do we have an email? #{email}"
         phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'') if params[:user][:phone]
+        puts "do we have a phone? #{phone}"
 
         user = User.where(:email => email).first
         user = User.where(:phone => phone).first unless user
 
         if user
             ## existing user. ensure they're attached to the project
-            
         else
             alternate = Alternate.where(:email => email).first if email
             alternate = Alternate.where(:phone => phone).first if phone && !alternate
@@ -136,11 +137,13 @@ class Api::V2::ProjectsController < Api::V2::ApiController
                 format.json { render_for_api :user, :json => user, :root => :user}
             end
         else
+
             if email
                 connect_user = ConnectUser.where(:email => email).first_or_create
             elsif phone
                 connect_user = ConnectUser.where(:phone => phone).first_or_create
             end
+
             connect_user.update_attributes params[:user]
             project.project_users.where(:connect_user_id => connect_user.id).first_or_create
             company.connect_users << connect_user if company
@@ -148,8 +151,10 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             if task
                 task.update_attribute :connect_assignee_id, connect_user.id
                 if email
+                    puts "it's a task, should be emailing the connet user: %{connect_user.full_name} at email: #{email}"
                     connect_user.email_task(task)
                 elsif phone
+                    puts "it's a task, should be texting the connet user: %{connect_user.full_name} at phone: #{phone}"
                     connect_user.text_task(task)
                 end
             elsif report

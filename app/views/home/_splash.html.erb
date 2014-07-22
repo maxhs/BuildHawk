@@ -99,7 +99,7 @@
 			<%= f.email_field :email, :placeholder => "Email address", :class => "form-control" %>
 			<%= f.text_field :company_name, :placeholder => "Your company", :class => "form-control" %>
 			<%= recaptcha_tags display: {theme: 'clean'}, ajax: true %>
-			<%= f.submit "Submit", :class=>"btn btn-success btn-md send" %>
+			<%= f.submit "Submit", :class=>"simple-btn" %>
 		<% end %>
 	</section>
 </div>
