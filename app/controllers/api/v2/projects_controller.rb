@@ -123,14 +123,8 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             project.project_users.where(:user_id => user.id).first_or_create
             project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
 
-            if task
-                if email
-                    user.email_task(task)
-                elsif phone
-                    user.text_task(task)
-                end
-            elsif report
-
+            if report
+                report.report_users.where(:user_id => user.id).first_or_create
             end
 
             respond_to do |format|
@@ -148,16 +142,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             project.project_users.where(:connect_user_id => connect_user.id).first_or_create
             company.connect_users << connect_user if company
 
-            if task
-                task.update_attribute :connect_assignee_id, connect_user.id
-                if email
-                    puts "it's a task, should be emailing the connet user: %{connect_user.full_name} at email: #{email}"
-                    connect_user.email_task(task)
-                elsif phone
-                    puts "it's a task, should be texting the connet user: %{connect_user.full_name} at phone: #{phone}"
-                    connect_user.text_task(task)
-                end
-            elsif report
+            if report
                 report.report_users.where(:connect_user_id => connect_user.id).first_or_create
             end
 
