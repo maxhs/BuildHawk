@@ -45,7 +45,7 @@ class WorklistItem < ActiveRecord::Base
         elsif connect_assignee
             if connect_assignee.email && connect_assignee.email.length > 0
                 connect_assignee.email_task(self)
-            if connect_assignee.phone && connect_assignee.phone.length > 0
+            elsif connect_assignee.phone && connect_assignee.phone.length > 0
                 connect_assignee.text_task(self)
             end
         end
