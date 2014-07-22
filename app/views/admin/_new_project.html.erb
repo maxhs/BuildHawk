@@ -53,9 +53,9 @@
         	<div class="col-xs-3" id="sub-list">
 				<% @subs.each do |company_sub| %>
 	    			<% if @project.companies.include?(company_sub.subcontractor) %>
-	    				<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.id, checked: true %><span style="padding-left:10px;"><%= sub.name %></span></div>
+	    				<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id, checked: true %><span style="padding-left:10px;"><%= sub.name %></span></div>
     				<% else %>
-    					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
+    					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
     				<% end %>
 	    		<% end %>
 	    	</div>

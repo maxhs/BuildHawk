@@ -7,6 +7,7 @@ class Api::V2::UsersController < Api::V2::ApiController
       	end
 	end
 
+	### deprecated in 1.05
 	def connect
 		project = Project.find params[:project_id] if params[:project_id]
 		if @user
@@ -22,6 +23,7 @@ class Api::V2::UsersController < Api::V2::ApiController
       		render json: {success: false}
       	end
 	end
+	###
 
 	def update
 		@user.update_attributes params[:user]

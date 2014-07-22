@@ -91,7 +91,7 @@ Buildhawk::Application.routes.draw do
       get :cancel_editing
     end
   end
-
+  resources :connect
   resources :projects do
     member do
       post :archive
@@ -185,7 +185,7 @@ Buildhawk::Application.routes.draw do
   patch "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#update"
   post "/api/v2/punchlist_items/photo", to: "api/v2/worklist_items#photo"
 
-  #temporary
+  #temporary - deprecated by 1.05
   get "/api/v2/users/:id/worklist_connect", to: "api/v2/users#connect"
   post "/api/v2/company_subs", to: "api/v2/project_subs#create"
   #
@@ -193,26 +193,29 @@ Buildhawk::Application.routes.draw do
   #mobile API v2
   namespace :api do
     namespace :v2 do
-      resources :photos
-      resources :sessions, :only => [:create, :forgot_password] do
-        collection do 
-          post :forgot_password
-        end 
-      end
-      resources :users do
-        member do
-          get :connect
-          post :add_alternate
-          post :delete_alternate
-        end
-      end
+      resources :activities, only: [:destroy]
+      resources :comments
       resources :companies do
         collection do
           get :search
           post :add
         end
       end
+      resources :companies
+      resources :connect, :only => [:index]
+      resources :checklists
+      resources :checklist_items do
+        collection do
+          post :photo
+        end
+      end
       resources :groups 
+      resources :notifications, :only => [:index, :destroy] do
+        collection do 
+          get :messages
+          post :test_android_pushes
+        end
+      end
       resources :projects do
         member do
           get :dash
@@ -229,36 +232,14 @@ Buildhawk::Application.routes.draw do
           post :find_user
           post :add_user
         end
-      end
-      resources :companies
-      resources :checklists
-      resources :checklist_items do
-        collection do
-          post :photo
-        end
-      end
-      resources :worklists, :only => [:show, :index]
-      resources :worklist_items do
-        collection do
-          post :photo
-        end
-      end
-      resources :reminders, :only => [:create, :index, :destroy, :update]
-      resources :notifications, :only => [:index, :destroy] do
-        collection do 
-          get :messages
-          post :test_android_pushes
-        end
-      end
-      resources :comments
-      resources :activities, only: [:destroy]
+      end  
+      resources :photos
       resources :project_subs, :only => [:create] do
         member do
           post :add_user
         end
       end
-      resources :subs, :only => [:create]
-      resources :safety_topics, :only => [:destroy]
+      resources :reminders, :only => [:create, :index, :destroy, :update]
       resources :reports do
         member do
           get :review_report
@@ -267,6 +248,26 @@ Buildhawk::Application.routes.draw do
           post :photo
           get :options
           delete :remove_personnel
+        end
+      end
+      resources :safety_topics, :only => [:destroy]
+      resources :sessions, :only => [:create, :forgot_password] do
+        collection do 
+          post :forgot_password
+        end 
+      end
+      resources :subs, :only => [:create]
+      resources :users do
+        member do
+          get :connect
+          post :add_alternate
+          post :delete_alternate
+        end
+      end
+      resources :worklists, :only => [:show, :index]
+      resources :worklist_items do
+        collection do
+          post :photo
         end
       end
     end
