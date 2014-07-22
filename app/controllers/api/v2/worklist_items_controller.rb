@@ -48,7 +48,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     	task = worklist_item.update_attributes params[:worklist_item]
         
         if connect_user        
-            connect_user.text_task(task) if connect_user.phone && connect_user.phone.length
+            connect_user.text_task(task)# if connect_user.phone && connect_user.phone.length
             connect_user.email_task(task) if connect_user.email && connect_user.email.length
 
         elsif assignee
