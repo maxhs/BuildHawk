@@ -176,6 +176,10 @@ class User < ActiveRecord::Base
         end
     end
 
+    def has_company?
+        company
+    end
+
   	acts_as_api
 
   	api_accessible :user do |t|
@@ -186,7 +190,7 @@ class User < ActiveRecord::Base
         t.add :email
         t.add :phone
         t.add :formatted_phone
-        t.add :company
+        t.add :company, :if => :has_company?
         t.add :url_thumb
         t.add :url_small
         t.add :admin
