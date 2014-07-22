@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone => user.phone, :id => user.id, :url_thumb => user.url_thumb}}
+      company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone => user.phone, :id => user.id, :url_thumb => user.url_thumb}} if company
     end
 
     def url_medium
@@ -190,7 +190,7 @@ class User < ActiveRecord::Base
         t.add :email
         t.add :phone
         t.add :formatted_phone
-        t.add :company, :if => :has_company?
+        t.add :company
         t.add :url_thumb
         t.add :url_small
         t.add :admin
@@ -199,7 +199,7 @@ class User < ActiveRecord::Base
   	end
 
     api_accessible :login, :extend => :user do |t|
-        t.add :coworkers
+        t.add :coworkers#, :if => :has_company?
         t.add :text_permissions
         t.add :email_permissions
         t.add :push_permissions
