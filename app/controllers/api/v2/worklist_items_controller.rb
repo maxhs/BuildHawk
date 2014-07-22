@@ -46,12 +46,10 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
 
     	task.update_attributes params[:worklist_item]
-        puts "we have a task: #{task.body}"
-        if connect_user        
-            puts "should be texting a connect user"
-            connect_user.text_task(task)# if connect_user.phone && connect_user.phone.length
-            #connect_user.email_task(task) if connect_user.email && connect_user.email.length
 
+        if connect_user        
+            connect_user.text_task(task) if connect_user.phone && connect_user.phone.length
+            connect_user.email_task(task) if connect_user.email && connect_user.email.length
         elsif assignee
             assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length
             assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length
@@ -59,7 +57,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         
         if params[:user_id]
             current_user = User.find params[:user_id]
-            task.notify(current_user)
+            task.log_activity(current_user)
         end
         
     	respond_to do |format|
@@ -70,13 +68,18 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     def create
         project = Project.find params[:project_id]
 
+        ## remove in 1.05
         if params[:worklist_item][:user_assignee].present? 
             assignee = User.where(:full_name => params[:worklist_item][:user_assignee]).first
+            params[:worklist_item][:assignee_id] = assignee.id
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee].present?
             sub = Sub.where(:name => params[:worklist_item][:sub_assignee]).first_or_create
+            params[:worklist_item][:sub_assignee_id] = sub.id
             params[:worklist_item].delete(:sub_assignee)
         end
+        ###
+
         params[:worklist_item][:mobile] = true
         
         worklist_item = project.worklists.last.worklist_items.create params[:worklist_item]
@@ -88,11 +91,13 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             :activity_type => worklist_item.class.name
         )
         
+        ### remove in 1.05
         if assignee
             worklist_item.update_attribute :assignee_id, assignee.id
         elsif sub
             worklist_item.update_attribute :sub_assignee_id, sub.id
         end
+        ###
 
         if worklist_item.save
             respond_to do |format|

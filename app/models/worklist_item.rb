@@ -18,6 +18,8 @@ class WorklistItem < ActiveRecord::Base
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
+    after_create :notify
+
     default_scope { order('created_at DESC') }
 
     #websolr
@@ -33,7 +35,23 @@ class WorklistItem < ActiveRecord::Base
         time    :created_at
     end
 
-    def notify(current_user)
+    def notify
+        if assignee
+            if assignee.email_permissions && assignee.email && assignee.email.length > 0
+                assignee.email_task(self)
+            elsif assignee.text_permissions && assignee.phone && assignee.phone.length > 0
+                assignee.text_task(self)
+            end
+        elsif connect_assignee
+            if connect_assignee.email && connect_assignee.email.length > 0
+                connect_assignee.email_task(self)
+            if connect_assignee.phone && connect_assignee.phone.length > 0
+                connect_assignee.text_task(self)
+            end
+        end
+    end
+
+    def log_activity(current_user)
         if body.length > 20
             truncated = "#{body[0..20]}..."
         else
