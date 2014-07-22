@@ -46,10 +46,11 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
 
     	task = worklist_item.update_attributes params[:worklist_item]
-        
+        puts "we have a task: #{task.body}"
         if connect_user        
+            puts "should be texting a connect user"
             connect_user.text_task(task)# if connect_user.phone && connect_user.phone.length
-            connect_user.email_task(task) if connect_user.email && connect_user.email.length
+            #connect_user.email_task(task) if connect_user.email && connect_user.email.length
 
         elsif assignee
             assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length
