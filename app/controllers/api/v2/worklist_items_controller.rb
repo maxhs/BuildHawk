@@ -2,7 +2,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     before_filter :refactor_punchlist
 
     def update
-    	worklist_item = WorklistItem.find params[:id]
+    	task = WorklistItem.find params[:id]
         params[:worklist_item].delete(:id)
 
         ## to remove in 1.05
@@ -12,7 +12,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee].present?
-            sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => worklist_item.worklist.project.company.id).first_or_create
+            sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.worklist.project.company.id).first_or_create
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:connect_assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = sub.id
@@ -45,7 +45,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:location] = nil
         end
 
-    	task = worklist_item.update_attributes params[:worklist_item]
+    	task.update_attributes params[:worklist_item]
         puts "we have a task: #{task.body}"
         if connect_user        
             puts "should be texting a connect user"
@@ -59,11 +59,11 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         
         if params[:user_id]
             current_user = User.find params[:user_id]
-            worklist_item.notify(current_user)
+            task.notify(current_user)
         end
         
     	respond_to do |format|
-        	format.json { render_for_api :worklist, :json => worklist_item, :root => @root}
+        	format.json { render_for_api :worklist, :json => task, :root => @root}
       	end
     end
 
