@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
     validates_presence_of :password, :if => :password_required?
 
     #after_create :welcome
-    #after_commit :clean_phone, :if => :persisted?
+    after_commit :clean_phone, :if => :persisted?
     after_commit :clean_name, :if => :persisted?
     
     def welcome
@@ -55,9 +55,9 @@ class User < ActiveRecord::Base
     end
 
     def full_name 
-        if first_name.length && last_name.length
+        if first_name.length > 0 && last_name.length > 0
             "#{first_name} #{last_name}"
-        elsif first_name.length
+        elsif first_name && first_name.length > 0
             "#{first_name}"
         else
             email
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
         auth_token = '217b868c691cd7ec356c7dbddb5b5939'
         twilio_phone = "14157234334"
         client = Twilio::REST::Client.new(account_sid, auth_token)
-        if task.body.length > 15
+        if task.body && task.body.length > 15
             truncated_task = "#{task.body[0..15]}..."
         else
             truncated_task = task.body
@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
     end
 
     def clean_phone   
-        if phone && phone.length 
+        if phone && phone.length > 0
             phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             self.save
         end

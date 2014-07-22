@@ -6,12 +6,12 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         params[:worklist_item].delete(:id)
 
         ## to remove in 1.05
-        if params[:worklist_item][:user_assignee].present? 
+        if params[:worklist_item][:user_assignee]
             user = User.where(:full_name => params[:worklist_item][:user_assignee]).first
             params[:worklist_item][:assignee_id] = user.id
             params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
-        elsif params[:worklist_item][:sub_assignee].present?
+        elsif params[:worklist_item][:sub_assignee]
             sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.worklist.project.company.id).first_or_create
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:connect_assignee_id] = nil
