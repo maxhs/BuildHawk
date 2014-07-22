@@ -2,7 +2,7 @@ class Lead < ActiveRecord::Base
 	attr_accessible :name, :company_name, :full_name, :email, :phone
 
 	after_create :email_will
-	after_create :clean_phone
+	#after_create :clean_phone
 
 	def email_will
 		LeadMailer.email_will(self).deliver
