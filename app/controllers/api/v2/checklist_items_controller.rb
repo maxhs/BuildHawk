@@ -5,7 +5,7 @@ class Api::V2::ChecklistItemsController < Api::V2::ApiController
         if params[:checklist_item] && params[:checklist_item][:state].to_i != item.state
             should_log_activity = true
             if params[:checklist_item][:state] == 1
-                params[:checklist_item][:state] = params[:user_id] if params[:user_id]
+                params[:checklist_item][:completed_by_user_id] = params[:user_id] if params[:user_id]
             end
         else
             should_log_activity = false
