@@ -169,6 +169,8 @@ class Project < ActiveRecord::Base
     api_accessible :details do |t|
         t.add :id
         t.add :name
+        t.add :address
+        t.add :progress
         t.add :company
         t.add :users
         t.add :connect_users
