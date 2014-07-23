@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
     end
 
     def email_task(task)
-        puts "Sending a worklist item email to a user with email: #{email}"
+        puts "Sending a task email to a user with email: #{email}"
         task_array = []
         task_array << task
         WorklistMailer.export(email, task_array, task.worklist.project).deliver
