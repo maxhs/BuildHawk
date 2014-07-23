@@ -91,8 +91,12 @@ class User < ActiveRecord::Base
         )
     end
 
-    def connect_items
-        WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project.company.id != company_id}.compact if company
+    def connect_items(project)
+        if project
+            WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project.id == project.id && t.worklist.project.company.id != company_id}.compact
+        else
+            WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project.company.id != company_id}.compact if company
+        end
     end
 
     def clean_phone   

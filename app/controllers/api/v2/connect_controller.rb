@@ -5,7 +5,11 @@ class Api::V2::ConnectController < Api::V2::ApiController
     def index
     	project = Project.find params[:project_id] if params[:project_id]
 		if @user
-			items = @user.connect_items
+			if project
+				items = @user.connect_items(project)
+			else
+				items = @user.connect_items(nil)
+			end
 			respond_to do |format|
 	        	format.json { render_for_api :connect, :json => items, :root => :worklist_items}
 	      	end
