@@ -38,9 +38,9 @@ class ConnectUser < ActiveRecord::Base
     end
 
     def clean_phone
-        if phone && phone.include?(' ')
-            #phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
-            #self.save
+        if phone && phone.length > 0 && phone.include?(' ')
+            phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            self.save
         end
     end
 

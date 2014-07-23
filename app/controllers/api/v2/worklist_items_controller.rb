@@ -3,8 +3,8 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
     def update
     	task = WorklistItem.find params[:id]
-        params[:worklist_item].delete(:id)
-
+        
+        notify = false
         ## to remove in 1.05
         if params[:worklist_item][:user_assignee]
             user = User.where(:full_name => params[:worklist_item][:user_assignee]).first
@@ -20,10 +20,12 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         ###
         elsif params[:worklist_item][:assignee_id]
             assignee = User.where(:id => params[:worklist_item][:assignee_id]).first
+            notify = true unless task.assignee_id == assignee.id
             params[:worklist_item][:connect_assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
         elsif params[:worklist_item][:connect_assignee_id]
             connect_user = ConnectUser.where(:id => params[:worklist_item][:connect_assignee_id]).first
+            notify = true unless task.connect_assignee_id == connect_user.id
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
         else
@@ -47,12 +49,14 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
     	task.update_attributes params[:worklist_item]
 
-        if connect_user        
-            connect_user.text_task(task) if connect_user.phone && connect_user.phone.length
-            connect_user.email_task(task) if connect_user.email && connect_user.email.length
-        elsif assignee
-            assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length
-            assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length
+        if notify
+            if connect_user        
+                connect_user.text_task(task) if connect_user.phone && connect_user.phone.length > 0
+                connect_user.email_task(task) if connect_user.email && connect_user.email.length > 0
+            elsif assignee
+                assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
+                assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length > 0
+            end
         end
         
         if params[:user_id]

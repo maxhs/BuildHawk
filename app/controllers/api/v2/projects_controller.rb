@@ -56,7 +56,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         if params[:user][:email]
             user = User.where(:email => params[:user][:email]).first
         elsif params[:user][:phone]
-            #phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             puts "Trying to find a user with phone: #{phone}"
             user = User.where(:phone => phone).first
         end
@@ -105,7 +105,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
         email = params[:user][:email].strip if params[:user][:email]
         puts "do we have an email? #{email}"
-        #phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'') if params[:user][:phone]
+        phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'') if params[:user][:phone]
         puts "do we have a phone? #{phone}"
 
         user = User.where(:email => email).first
