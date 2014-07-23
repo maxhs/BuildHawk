@@ -53,6 +53,17 @@ class WorklistItemsController < ApplicationController
 		end
 	end
 
+	def show
+		@item = WorklistItem.find params[:id]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else 
+			render :show
+		end
+	end
+
 	def edit
 		@locations = @worklist.worklist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
 		@item.build_assignee if @item.assignee.nil?

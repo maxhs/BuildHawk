@@ -1,10 +1,29 @@
 <div class="task" id="<%=task.id%>">
 	<div class="photo">
 		<% if task.photos.count > 0%>
-			<%= image_tag(task.photos.first.url(:thumb)) %>
+			<%= image_tag(task.photos.first.image.url(:thumb)) %>
 		<% else %>
-			asda
+			<span class="no-photo-placeholder">
+				<span style="display:table-cell;text-align:center;vertical-align:middle">NO PHOTO</span>
+			</span>
 		<% end %>
 	</div>
-	<div class="col-xs-7"><%= task.body %></div>
+	<div class="body">
+		<div class="task-title"%><%= link_to task.body, worklist_item_path(task), remote:true  %></div>
+		<div>
+			<span class="attribution"><%= task.user.full_name if task.user %></span>
+			&#10132;
+			<span class="assignee">
+				<% if task.assignee %>
+					<%= task.assignee.full_name %>
+				<% elsif task.connect_assignee %>
+					<%= task.connect_assignee.full_name %>
+				<% end %> 
+			</span>
+		</div>
+
+		<div class="task-timestamp">
+			<%= parse_datetime task.created_at %>
+		</div>
+	</div>
 </div>

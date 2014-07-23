@@ -9,8 +9,7 @@ class ConnectController < ApplicationController
 				else
 					@items = current_user.connect_items(nil)
 				end
-				@companies = @items.map{|t| t.worklist.project.company}.flatten
-				
+				@companies = @items.map{|t| t.worklist.project.company}.uniq
 	      	end
 		end
 	end
