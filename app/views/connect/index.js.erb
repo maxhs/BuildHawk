@@ -1,0 +1,18 @@
+$('a').removeClass('current-page');
+var nav = $('<%= j render partial: "layouts/internal_nav" %>');
+$('#navigation').fadeOut(170,function(){
+	$(this).html(nav);
+	$(this).fadeIn(170,function(){
+		$('#alert').fadeOut(400);
+	});
+});
+
+$('#inner-wrap').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "connect/index" %>');
+	$(this).fadeIn(170,function(){
+		if (!$('#sidebar').length){
+			$('#bt-menu').append('<% if @projects %><%= j render partial: "projects/sidebar" %><% end %>');
+		}
+	});
+	$("html, body").animate({ scrollTop: 0 }, 300);
+});
