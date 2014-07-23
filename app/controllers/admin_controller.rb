@@ -164,9 +164,9 @@ class AdminController < ApplicationController
 
 	def create_blank_template
 		@checklist = Checklist.create :company_id => @user.company.id, :name => params[:name], :core => true
-		category = @checklist.categories.create :name => "Phase"
-		subcategory = category.subcategories.create :name => "Category"
-		subcategory.checklist_items.create :body => "First Item"
+		phase = @checklist.phases.create :name => "Phase"
+		category = phase.categories.create :name => "Category"
+		category.checklist_items.create :body => "First Item"
 		if request.xhr?
 			respond_to do |format|
 				format.js { render template: "admin/create_template"}

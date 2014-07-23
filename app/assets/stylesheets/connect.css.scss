@@ -12,5 +12,31 @@
 
 	.connect-project {
 		border-bottom:1px solid #000;
+		overflow:auto;
+
+		.project-label {
+			color:#aaa;
+			text-transform:uppercase;
+		}
+
+		.row.address {
+			margin-left:0;
+			margin-right:0;
+		}
+		.address {
+			padding:5px 0px;
+			border:1px solid #ccc;
+		}
+
+		.task {
+			border:1px solid #ccc;
+			overflow:auto;
+		}
+
+		.photo  {
+			width:100px;
+			height:100px;
+			float:left;
+		}
 	}
 }
