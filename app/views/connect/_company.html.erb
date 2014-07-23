@@ -1,0 +1,5 @@
+<h4><%= company.name %></h4>
+<div id="connect-company">
+	<% projects = @items.map{|t| t.worklist.project if t.worklist.project.company.id == company.id} %>
+	<%= render partial:"connect/project", :collection => projects, as: :project, cache: true %>
+</div>

@@ -1,0 +1,10 @@
+<div class="task" id="<%=task.id%>">
+	<div class="photo">
+		<% if task.photos.count > 0%>
+			<%= image_tag(task.photos.first.url(:thumb)) %>
+		<% else %>
+			asda
+		<% end %>
+	</div>
+	<div class="col-xs-7"><%= task.body %></div>
+</div>
