@@ -1,5 +1,5 @@
 class WorklistItemsController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, except: [:find_company]
 	before_filter :find_company
 
 	def new
@@ -150,8 +150,14 @@ class WorklistItemsController < ApplicationController
 	end
 
 	def find_company
-		if params[:id]
+		if user_signed_in? && params[:id]
 			@item = WorklistItem.find params[:id] 
+			
+			unless user_signed_in? && (@item.worklist.project.project_users.include?(current_user))
+				redirect_to projects_path
+				flash[:notice] = "You don't have access to this task".html_safe
+			end
+
 			@worklist = @item.worklist
 			@project = @worklist.project
 			@items = @worklist.worklist_items
@@ -160,11 +166,7 @@ class WorklistItemsController < ApplicationController
 			@users = @project.users
 			@connect_users = @project.connect_users
 			@subs = @project.project_subs
-			
-			unless user_signed_in? && (@item.worklist.project.project_users.include?(current_user))
-				redirect_to projects_path
-				flash[:notice] = "You don't have access to this task".html_safe
-			end
+		
 		end
 	end
 end
