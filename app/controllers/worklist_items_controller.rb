@@ -65,8 +65,7 @@ class WorklistItemsController < ApplicationController
 	end
 
 	def edit
-		puts "is it actually getting to edit?"
-		@locations = @worklist.worklist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten if @worklist
+		@locations = @worklist.worklist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
 		@item.build_assignee if @item.assignee.nil?
 		if request.xhr?
 			respond_to do |format|
