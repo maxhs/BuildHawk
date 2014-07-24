@@ -105,6 +105,17 @@
 			padding-left:0;
 		}
 
+		ul li {
+			list-style:none;
+		}
+
+		.activity-icon {
+			padding-right:10px;
+			img{
+				width:24px;
+			}
+		}
+
 		.project-name {
 			font-size:1.5em;
 			text-transform:uppercase;

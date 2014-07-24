@@ -28,17 +28,18 @@
 		<div class="row">
 			<div class="dashboard-label col-xs-3">Activity:</div>
 			<div class="col-xs-9">
-				<ol>
+				<ul>
 					<% project.last_three_activities.each do |activity| %>
 						<li>
 							<% if activity.worklist_item %>
+								<span class="activity-icon"><%= image_tag 'tasks.png' %></span>
 								<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
 									<%= "#{parse_date activity.created_at} - #{activity.worklist_item.body}" %>
 								<% end %>
 							<% end %>
 						</li>
 					<% end %>
-				</ol>
+				</ul>
 			</div>
 		</div>
 	<% else %>
