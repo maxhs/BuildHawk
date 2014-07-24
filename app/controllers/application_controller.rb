@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
             @mobile_redirect = true
             if params[:controller] == "worklist_items" && params[:id]
                 @item = WorklistItem.where(:id => params[:id]).first
-                render "/", layout: "application" and return if @item
+                render "/" and return if @item
             end
         end 
     end
