@@ -1,6 +1,6 @@
 class WorklistItemsController < ApplicationController
 	before_filter :find_company
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => [:find_company, :edit]
 
 	def new
 		@item = WorklistItem.new

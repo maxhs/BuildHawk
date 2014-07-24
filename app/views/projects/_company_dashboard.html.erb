@@ -1,6 +1,6 @@
 <div class="company-project" class="border-box">
 	
-	<div style="col-xs-12" style="margin:10px 0;">
+	<div class="col-xs-12" style="margin:10px 0;padding-left:0;">
 		<span style="font-size:1.5em;text-transform:uppercase;padding-right:10px;"><%= link_to project.name, project_path(project), remote: true %></span>
 		<% if project.address %>
 			<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
@@ -8,41 +8,41 @@
 	</div>
 
 
+	<div class="row">
+		<div class="dashboard-label col-xs-2">Progress:</div>
+		<div class="col-xs-10">
+			<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
+			<% if project.checklist %>
+				<%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
+				<script type="text/javascript">
+					$(function(){
+						$('#progress-link-<%=project.id%>').progressbar({
+					    	value:<%=project.checklist.progress%>
+					    });
+					})
+				</script>
+			<% end %>
+		</div>
+	</div>
+	<% if project.last_three_activities && project.last_three_activities %>
 		<div class="row">
-			<div class="dashboard-label col-xs-2">Progress:</div>
+			<div class="dashboard-label col-xs-10">Activity:</div>
 			<div class="col-xs-10">
-				<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
-				<% if project.checklist %>
-					<%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
-					<script type="text/javascript">
-						$(function(){
-							$('#progress-link-<%=project.id%>').progressbar({
-						    	value:<%=project.checklist.progress%>
-						    });
-						})
-					</script>
-				<% end %>
+				<ol>
+					<% project.last_three_activities do |activity| %>
+						<li>
+							<%= link_to checklist_item_project_path(project, :item_id => item.id), :remote => true do %>
+								<%= "#{parse_date item.critical_date} - #{item.body}" %>
+							<% end %>
+						</li>
+					<% end %>
+				</ol>
 			</div>
 		</div>
-		<% if project.last_three_activities && project.last_three_activities %>
-			<div class="row">
-				<div class="dashboard-label col-xs-10">Recent Activity</div>
-				<div class="col-xs-10">
-					<ol>
-						<% project.last_three_activities do |item| %>
-							<li>
-								<%= link_to checklist_item_project_path(project, :item_id => item.id), :remote => true do %>
-									<%= "#{parse_date item.critical_date} - #{item.body}" %>
-								<% end %>
-							</li>
-						<% end %>
-					</ol>
-				</div>
-			</div>
-		<% else %>
-			<div class="row">
-				<div class="dashboard-label col-xs-2">Upcoming:</div>
-				<div class="col-xs-10"><h5 style="font-style:italic;color:#aaa;padding-left:7px;font-weight:200;font-size:14px;text-align:center;width:100%;">No upcoming items</h5></div>
-			</div>
-		<% end %>
+	<% else %>
+		<div class="row">
+			<div class="dashboard-label col-xs-2">Activity:</div>
+			<div class="col-xs-10"><h5 style="font-style:italic;color:#aaa;padding-left:7px;font-weight:200;font-size:14px;text-align:center;width:100%;">No upcoming items</h5></div>
+		</div>
+	<% end %>
 </div>
