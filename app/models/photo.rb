@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :project_id, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:worklist_item_id, :phase, :name, :folder_id, :description, :mobile
+					:worklist_item_id, :phase, :name, :folder_id, :description, :mobile, :comment_id
 
 	belongs_to :user
 	belongs_to :project
@@ -9,6 +9,7 @@ class Photo < ActiveRecord::Base
 	belongs_to :worklist_item, counter_cache: true
 	belongs_to :checklist_item, counter_cache: true
 	belongs_to :folder
+	belongs_to :comment
 
 	has_many :activities
     

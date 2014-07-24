@@ -28,11 +28,9 @@ class Api::V2::SessionsController < Api::V2::ApiController
         end
 
   		@user = User.find_for_database_authentication email: email if email
-        puts "find a user? #{@user.first_name}"
   		return invalid_login_attempt unless @user
 
   		if @user.valid_password? password
-            puts "user had a valid password"
             if device_token && device_type
   			    @user.push_tokens.where(:token => device_token, :device_type => device_type).first_or_create
             elsif device_token

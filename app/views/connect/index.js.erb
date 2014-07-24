@@ -13,6 +13,7 @@ $('#inner-wrap').fadeOut(170,function(){
 		if (!$('#sidebar').length){
 			$('#bt-menu').append('<% if @projects %><%= j render partial: "projects/sidebar" %><% end %>');
 		}
+		closeMenu();
 	});
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

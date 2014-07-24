@@ -1,12 +1,12 @@
 <div class="connect-project" id="connect-project-<%=project.id%>">
-	<h4><%= project.name %></h4>
+	<h4><%= link_to project.name, project_path(project), remote:true %></h4>
 	<% tasks = @items.map{|t| t if t.worklist.project && t.worklist.project.id == project.id}.compact %>
 	<% completed = tasks.map{|t| t if t.completed} %>
 	<div class="task-list">
 		<div class="row address">
 			<div class="col-xs-6">
 				<% if project.address %>
-					<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
+					<%= link_to project.address.formatted_address, project_path(project), remote:true %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
 				<% end %>
 			</div>
 			<div class="col-xs-6 count">
