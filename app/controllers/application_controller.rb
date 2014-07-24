@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
     def detect_redirect
         if params[:m]
             puts "mobile redirect is true"
-            $mobile_redirect = true
+            @mobile_redirect = true
+            if params[:controller] == "worklist_items" && params[:id]
+                @item = WorklistItem.find params[:id]
+                render "/"
+                return
+            end
         end 
     end
 
