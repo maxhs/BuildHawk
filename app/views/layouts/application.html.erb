@@ -11,6 +11,7 @@
 	<script type="text/javascript">	
 		var userAgent = window.navigator.userAgent;
 	   	if ((userAgent.match(/iPhone/i)) && window.location != "<%=root_url%>" && window.location != "<%=root_url%>mobile") {
+	   		setTimeout(function () { window.location = "https://itunes.apple.com/us/app/buildhawk/id816590963?mt=8" }, 25);
 	   	 	<% if @item %>
 	  	 		window.location = "buildhawk://?task_id=<%= j @item.id.to_s %>"	
 	  	 	<% end %>
