@@ -11,10 +11,9 @@
 	background-color: rgba(0,0,0,0);
 	-webkit-backface-visibility: hidden;
 	-webkit-transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
+	-moz-transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
 	transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
-	a {
-		font-family:'Montserrat','Source Sans Pro','Helvetica',sans-serif;
-	}
+
 	.sidebarProjects {
 		left:-250px;
 
@@ -49,12 +48,13 @@
 	}
 
 	#internal-nav {
+		top:-100px;
 		left:-500px;
 		display:table;
 		height:51px;
 		width:auto;
 		text-transform:uppercase;
-		font-size:12px;
+		font-size:14px;
 
 		li {
 			display:table-cell;
@@ -85,6 +85,7 @@
 	}
 	
 	#internal-nav {
+		top:0px;
 		left:250px;
 	}
 }
@@ -263,7 +264,7 @@
 	padding: 0;
 	color: #fff;
 	font-weight:normal;
-	font-size:14px;
+	font-size:17px;
 	text-transform:uppercase;
 	-webkit-font-smoothing:antialiased;
 	-webkit-transition: color 0.2s;

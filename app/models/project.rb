@@ -119,6 +119,10 @@ class Project < ActiveRecord::Base
         activities.first(10) if activities.count
     end
 
+    def last_three_activities
+        activities.first(3) if activities.count
+    end
+
     def connect_users
         project_users.where("connect_user_id IS NOT NULL").map(&:connect_user).compact
     end
