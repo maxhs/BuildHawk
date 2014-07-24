@@ -27,7 +27,8 @@
 		</div>
 
 		<div id="connect-container">
-			<%= render partial:"connect/company", collection: @companies, as: :company, cache:true %>
+			<% if @companies && @companies.count > 0 %>
+			<% end %>
 		</div>
 	<% end %>
 </div>

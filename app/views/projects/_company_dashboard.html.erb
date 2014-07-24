@@ -44,7 +44,39 @@
 						<td><h4>Type</h4></td>
 						<td><h4>Date</h4></td>
 					</tr>
-					
+					<% project.most_recent_activities.each do |activity| %>
+						<tr>
+							<% if activity.worklist_item %>
+								<td>
+									<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
+										<%= activity.worklist_item.body %>
+									<% end %>
+								</td>
+								<td class="activity-icon"><%= image_tag 'task.png' %></td>
+							
+							<% elsif activity.report %>
+								<td>
+									<%= link_to report_path(project, :report_id => activity.report.id), :remote => true do %>
+										<%= "#{activity.report.report_type} Report - #{activity.report.date_string}" %>
+									<% end %>
+								</td>
+								<td class="activity-icon"><%= image_tag 'report.png' %></td>
+							<% elsif activity.checklist_item %>
+								<td>
+									<%= link_to checklist_item_project_path(project, :checklist_item_id => activity.checklist_item.id), :remote => true do %>
+										<%= activity.checklist_item.body %>
+									<% end %>
+								</td>
+								<td class="activity-icon"><%= image_tag 'checklist.png' %></td>
+							<% else %>
+
+								<td class="activity-icon"></td>
+							<% end %>
+
+							<td class="timestamp"><%= parse_date activity.created_at %></td>
+						</tr>
+
+					<% end %>
 					<tr style="border-top:0;line-height:27px;vertical-align:middle;">
 						<td colspan="3" class="more"><%= link_to "More Activity...", project_path(project), remote: true%></td>
 					</tr>
