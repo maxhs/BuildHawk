@@ -12,10 +12,10 @@ class WorklistMailer < ActionMailer::Base
       @company = @project.company
   		@item_array = item_array
   		mail(
-      		:subject => "#{project.name} - Worklist Report",
+      		:subject => "#{project.name} - Tasks Assigned to You",
       		:to      => recipient_email,
       		:from 	 => "support@buildhawk.com",
-      		:tag     => 'Worklist Export'
+      		:tag     => 'Task Export'
     	)
   	end
 end

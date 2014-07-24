@@ -97,12 +97,24 @@
 	
 	.company-project {
 		background-color:#fff;
-		padding:5px 20px 20px;
+		padding:5px 20px;
 		margin-bottom:10px;
+		overflow:auto;
+
+		table {
+			width:100%;
+		}
 
 		.project-header {
 			margin:10px 0;
 			padding-left:0;
+		}
+
+		.progress-section {
+			padding:20px 0;
+			margin:20px auto;
+			border-top:1px solid #ddd;
+			border-bottom:1px solid #ddd;
 		}
 
 		ul li {
@@ -148,6 +160,7 @@
 			height:100px;
 			text-align:center;
 			display:inline-block;
+			padding:5px;
 			img {
 
 			}
@@ -157,7 +170,7 @@
 	.ui-progressbar {
 		display:inline-block;
 		border:1px solid #ccc;
-		width:200px;
+		width:70%;
 		height:1em;
 		vertical-align:middle;
 		margin-top:-2px;

@@ -1,7 +1,15 @@
 <div id="main">
 	<div id="company-dashboard">
-		<div class="col-md-2">
-			
+		<div id="messages" class="col-md-2" style="padding-top:10px;">
+			<!--<h4 style="text-align:center;width:100%;">Messages</h4>
+			<% if current_user.messages.count > 0 %>
+				<%= render :partial => "messages/message", collection: current_user.messages, as: :message, cache:true %>
+			<% else %>
+				<div style="color:#aaa;">No messages </div>
+			<% end %>
+			<div style="text-align:center;padding-top:20px;">
+				<div style="margin:0 auto"><%= link_to "New Message", new_message_path, :class=>"simple-btn", remote:true %></div>
+			</div>-->
 		</div>
 
 		<div class="col-md-8">
@@ -12,17 +20,9 @@
 			<% end %>
 		</div>
 		
-		<div id="messages" class="col-md-2 border-box" style="padding-top:10px;">
-			<h4 style="text-align:center;width:100%;">Messages</h4>
-			<% if current_user.messages.count > 0 %>
-				<%= render :partial => "messages/message", collection: current_user.messages, as: :message, cache:true %>
-			<% else %>
-				<div style="color:#aaa;">No messages </div>
-			<% end %>
-			<div style="text-align:center;padding-top:20px;">
-				<div style="margin:0 auto"><%= link_to "New Message", new_message_path, :class=>"simple-btn", remote:true %></div>
-			</div>
-		</div>
+		<div class="col-md-2">
+			
+		</div>		
 	</div>
 
 	<% if user_signed_in? && current_user.connect_items(nil).count > 0 %>
