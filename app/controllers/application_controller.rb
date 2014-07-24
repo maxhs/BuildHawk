@@ -7,10 +7,9 @@ class ApplicationController < ActionController::Base
     before_filter :configure_permitted_parameters, if: :devise_controller?
 
     def detect_redirect
-        puts "Should be detecting mobile redirect: #{params}"
         if params[:m]
             puts "mobile redirect is true"
-            @mobile_redirect = true
+            $mobile_redirect = true
         end 
     end
 

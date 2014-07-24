@@ -100,37 +100,47 @@
 		padding:5px 20px 20px;
 		margin-bottom:10px;
 
-			.project-header {
-				margin:10px 0;
-				padding-left:0;
-			}
+		.project-header {
+			margin:10px 0;
+			padding-left:0;
+		}
 
-			.project-name {
-				font-size:1.5em;
-				text-transform:uppercase;
-				padding-right:20px;
-			}
-		
-			.row {
-				margin:-1px 0 0;
-				line-height:33px;
-				vertical-align:middle;
-				border:1px solid #ddd;
-			}
+		.project-name {
+			font-size:1.5em;
+			text-transform:uppercase;
+			padding-right:20px;
+		}
+	
+		.row {
+			margin:-1px 0 0;
+			line-height:33px;
+			vertical-align:middle;
+			border:1px solid #ddd;
+		}
 
-			.dashboard-label {
-				color:#aaa;
-				font-size:12px;
-				text-transform:uppercase;
-				padding-right:21px;
-				padding-left:7px;
-				width:10%;
-			}
+		.dashboard-label {
+			color:#aaa;
+			font-size:12px;
+			text-transform:uppercase;
+			padding-right:21px;
+			padding-left:7px;
+			width:10%;
+		}
 
-			ol li {
-				line-height:23px;
-				padding-top:7px;
+		ol li {
+			line-height:23px;
+			padding-top:7px;
+		}
+
+		.thumb-image {
+			width:100px;
+			height:100px;
+			text-align:center;
+			display:inline-block;
+			img {
+
 			}
+		}
 	}
 
 	.ui-progressbar {

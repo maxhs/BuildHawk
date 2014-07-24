@@ -51,4 +51,11 @@
 			<div class="col-xs-10"><h5 style="font-style:italic;color:#aaa;padding-left:7px;font-weight:200;font-size:14px;text-align:center;width:100%;">No upcoming items</h5></div>
 		</div>
 	<% end %>
+	<div class="row">
+		<% if project.recent_documents %>
+			<% project.recent_documents.each do |p| %>
+				<div class="thumb-image"><%= image_tag(p.image.url(:thumb)) %></div>
+			<% end %>
+		<% end %>
+	</div>
 </div>
