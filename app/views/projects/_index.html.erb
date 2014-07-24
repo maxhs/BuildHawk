@@ -28,6 +28,9 @@
 
 		<div id="connect-container">
 			<% if @companies && @companies.count > 0 %>
+				<%= render partial:"connect/company", collection: @companies, as: :company, cache:true %>
+			<% else %>
+				<span style="color:#aaa;font-weight:100;">You don't have any Connect items</span>
 			<% end %>
 		</div>
 	<% end %>

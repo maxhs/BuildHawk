@@ -1,5 +1,5 @@
 <h3><%= company.name %></h3>
 <div id="connect-company" class="border-box">
-	<% projects = @items.map{|t| t.worklist.project if t.worklist.project.company.id == company.id}.uniq %>
+	<% projects = @items.map{|t| t.worklist.project if t.worklist.project.company && t.worklist.project.company.id == company.id}.uniq %>
 	<%= render partial:"connect/project", :collection => projects, as: :project, cache: true %>
 </div>
