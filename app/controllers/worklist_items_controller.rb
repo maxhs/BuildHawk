@@ -162,10 +162,9 @@ class WorklistItemsController < ApplicationController
 			@subs = @project.project_subs
 			
 			unless user_signed_in? && (@item.worklist.project.company.id == current_user.id || @item.assignee_id == current_user.id)
-				flash[:notice] = "You don't have access to this task"
 				redirect_to projects_path
+				flash[:notice] = "You don't have access to this task".html_safe
 			end
-
 		end
 	end
 end
