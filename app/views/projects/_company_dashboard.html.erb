@@ -31,11 +31,7 @@
 				<ol>
 					<% project.last_three_activities.each do |activity| %>
 						<li>
-							<% if activity.checklist_item %>
-								<%= link_to checklist_item_project_path(project, :item_id => activity.checklist_item.id), :remote => true do %>
-									<%= "#{parse_date item.critical_date} - #{item.body}" %>
-								<% end %>
-							<% elsif activity.worklist_item %>
+							<% if activity.worklist_item %>
 								<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
 									<%= "#{parse_date activity.created_at} - #{activity.worklist_item.body}" %>
 								<% end %>
