@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BuildHawk</title>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+ 	<%= csrf_meta_tags %>
+	<link rel="shortcut icon" href="<%=root_url %>/favicon.ico?v=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-itunes-app" content="app-id=816590963">
+	<script type="text/javascript">	
+		<% if @mobile_redirect %>
+			var userAgent = window.navigator.userAgent;
+		   	if ((userAgent.match(/iPhone/i)) && window.location != "<%=root_url%>" && window.location != "<%=root_url%>mobile") {
+		   		setTimeout(function () { window.location = "https://itunes.apple.com/us/app/buildhawk/id816590963?mt=8" }, 25);
+		   	 	<% if @item %>
+		  	 		window.location = "buildhawk://?task_id=<%= j @item.id.to_s %>"	
+		  	 	<% end %>
+		  	}
+	  	<% end %>
+ 	</script>
+</head>
+<body>
+
+</body>
+</html>
