@@ -6,10 +6,10 @@ class RegistrationsController < Devise::RegistrationsController
     def connect
         @user = User.new
         @connect_user = ConnectUser.find params[:connect_user_id]
-        @user.first_name = connect_user.first_name
-        @user.last_name = connect_user.last_name
-        @user.email = connect_user.email
-        @user.phone = connect_user.phone
+        @user.first_name = @connect_user.first_name
+        @user.last_name = @connect_user.last_name
+        @user.email = @connect_user.email
+        @user.phone = @connect_user.phone
     end
 
     def alternates
