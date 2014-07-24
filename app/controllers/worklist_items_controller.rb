@@ -1,7 +1,7 @@
 class WorklistItemsController < ApplicationController
+	before_filter :authenticate_user!
 	before_filter :find_company
-	before_filter :authenticate_user!#, except: [:edit]
-	
+
 	def new
 		@item = WorklistItem.new
 		@item.photos.build
@@ -160,6 +160,12 @@ class WorklistItemsController < ApplicationController
 			@users = @project.users
 			@connect_users = @project.connect_users
 			@subs = @project.project_subs
+			
+			unless user_signed_in? && (@item.worklist.project.company.id == current_user.id || @item.user_assignee_id == current_user.id)
+				flash[:notice] = "You don't have access to this task"
+				redirect_to projects_path
+			end
+
 		end
 	end
 end
