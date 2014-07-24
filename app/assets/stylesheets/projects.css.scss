@@ -171,13 +171,15 @@
 		}
 
 		.thumb-image {
-			width:110px;
+			width:123px;
 			height:170px;
 			overflow:hidden;
 			display:inline-block;
 			padding:10px;
+			margin:0 auto;
 			text-align:center;
-
+			line-height:1.5em;
+			box-shadow:-2px -2px 20px 0 rgba(0,0,0,.05);
 			img {
 
 			}
