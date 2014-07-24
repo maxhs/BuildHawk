@@ -26,40 +26,59 @@
 			<div class="">	
 				<table>
 					<tr>
-						<td><h5>Type</h5></td>
 						<td><h5>Recent Activity</h5></td>
+						<td><h5>Type</h5></td>
 						<td><h5>Date</h5></td>
 					</tr>
 					<% project.last_three_activities.each do |activity| %>
 						<tr>
 							<% if activity.worklist_item %>
-								<td class="activity-icon"><%= image_tag 'tasks.png' %></td>
-								<td><%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
-									<%= activity.worklist_item.body %>
-								<% end %></td>
-								
-								<td class="timestamp"><%= parse_date activity.created_at %></td>
+								<td>
+									<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
+										<%= activity.worklist_item.body %>
+									<% end %>
+								</td>
+								<td class="activity-icon"><%= image_tag 'task.png' %></td>
+							
+							<% elsif activity.report %>
+								<td>
+									<%= link_to report_path(project, :report_id => activity.report.id), :remote => true do %>
+										<%= "#{activity.report.report_type} Report - #{activity.report.date_string}" %>
+									<% end %>
+								</td>
+								<td class="activity-icon"><%= image_tag 'report.png' %></td>
+							<% elsif activity.checklist_item %>
+								<td>
+									<%= link_to checklist_item_project_path(project, :checklist_item_id => activity.checklist_item.id), :remote => true do %>
+										<%= activity.checklist_item.body %>
+									<% end %>
+								</td>
+								<td class="activity-icon"><%= image_tag 'checklist.png' %></td>
+							<% else %>
+
+								<td class="activity-icon"></td>
 							<% end %>
+
+							<td class="timestamp"><%= parse_date activity.created_at %></td>
 						</tr>
 					<% end %>
 				</table>
 			</div>
 		</div>
 	<% else %>
-		<div class="">
-			<div class="dashboard-label col-xs-2">Activity:</div>
-			<div class=""><h5 style="font-style:italic;color:#aaa;padding-left:7px;font-weight:200;font-size:14px;text-align:center;width:100%;">No upcoming items</h5></div>
-		</div>
+		<div class="font-smoothing" style="margin:20px auto;font-style:italic;color:#aaa;padding-left:7px;text-transform:uppercase;font-size:17px;text-align:center;width:100%;font-weight:100;">No recent activity</div>
 	<% end %>
 	
 	</div>
 
 	
 	<div class="col-xs-6">
-		<% if project.recent_documents %>
-			<% project.recent_documents.each do |p| %>
-				<div class="thumb-image"><%= image_tag(p.image.url(:thumb)) %></div>
-			<% end %>
+		<% if project.recent_documents && project.recent_documents.count > 0 %>
+			<%= render partial: "photos/thumb_image", collection: project.recent_documents, as: :p, locals:{project: project}, cache: true %>
+		<% else %>
+			<div style='display:block;height:100%;'>
+				<div class="font-smoothing" style="text-align:center;color:#aaa;text-transform:uppercase;vertical-align:middle;">No photos</div>
+			</div>
 		<% end %>
 	</div>
 </div>

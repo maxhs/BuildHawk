@@ -53,6 +53,10 @@ class Company < ActiveRecord::Base
         return users.map(&:full_name) + subs.map(&:name)
     end
 
+    def has_admin?
+        User.where(:company_id => id, :company_admin => true).count > 0
+    end
+
     def users_count
         users.count
     end

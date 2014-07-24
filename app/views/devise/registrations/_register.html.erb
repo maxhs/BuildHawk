@@ -1,3 +1,6 @@
+<% if @connect_user && @connect_user.worklist_items.count > 0 %>
+<div>You have <%= @connect_user.worklist_items.count %> tasks assigned to you. %>
+<% end %>
 <%= form_for(user, :url => find_company_path, remote:true) do |f| %>
 	<%= devise_error_messages! %>
 

@@ -9,9 +9,8 @@
 					<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
 				<% end %>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-xs-6 count">
 				<span class="outstanding-tasks"><%= tasks.count - completed.count %> outstanding</span>
-				
 				<span class="completed-tasks">(<%= completed.count %> completed)</span>
 			</div>
 		</div>

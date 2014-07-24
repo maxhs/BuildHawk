@@ -20,9 +20,13 @@
 			<% end %>
 		</div>
 		
-		<div class="col-md-2">
-			
-		</div>		
+		<% unless current_user.company.has_admin? %>
+			<div class="col-md-2 border-box pro-signup">
+				<div>Want to add projects?</div> 
+				<div>Need access to checklists, reports, tasks and documents? </div>
+				<div class="call-to-action">Sign up for <%= link_to "BuildHawk pro", :style=>"color:#cc0000;", remote:true %>.</div>
+			</div>		
+		<% end %>
 	</div>
 
 	<% if user_signed_in? && current_user.connect_items(nil).count > 0 %>
