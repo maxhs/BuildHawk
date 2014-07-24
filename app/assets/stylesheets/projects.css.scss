@@ -103,18 +103,34 @@
 
 		table {
 			width:100%;
+			tr {
+				border-bottom:1px dashed #eee;
+				td{
+					padding:10px 0;
+				}
+			}
+
+			tr:last-child{
+				border:0;
+			}
+
+			.more {
+				text-align:center;
+				text-transform:uppercase;
+				font-size:.9em;
+				letter-spacing:1px;
+				border:1px solid #eee;
+				padding:5px;
+			}
 		}
 
 		.project-header {
-			margin:10px 0;
+			margin:20px 0;
 			padding-left:0;
 		}
 
 		.progress-section {
 			padding:20px 0;
-			margin:20px auto;
-			border-top:1px solid #ddd;
-			border-bottom:1px solid #ddd;
 		}
 
 		ul li {
@@ -129,16 +145,15 @@
 		}
 
 		.project-name {
-			font-size:1.5em;
+			font-size:1.75em;
 			text-transform:uppercase;
 			padding-right:20px;
 		}
 	
 		.row {
-			margin:-1px 0 0;
-			line-height:33px;
+			margin:0;
+			line-height:40px;
 			vertical-align:middle;
-			border:1px solid #ddd;
 		}
 
 		.dashboard-label {
@@ -156,13 +171,18 @@
 		}
 
 		.thumb-image {
-			width:100px;
-			height:100px;
-			text-align:center;
+			width:110px;
+			height:170px;
+			overflow:hidden;
 			display:inline-block;
-			padding:5px;
+			padding:10px;
+			text-align:center;
+
 			img {
 
+			}
+			.label-container {
+				text-align:left;
 			}
 		}
 	}
@@ -170,10 +190,12 @@
 	.ui-progressbar {
 		display:inline-block;
 		border:1px solid #ccc;
-		width:70%;
+		width:90%;
 		height:1em;
-		vertical-align:middle;
-		margin-top:-2px;
+	}
+
+	.progress-percentage {
+		width:30%;
 	}
 
 	.progress-link {

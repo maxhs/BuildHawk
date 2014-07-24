@@ -119,8 +119,8 @@ class Project < ActiveRecord::Base
         activities.first(10) if activities.count
     end
 
-    def last_three_activities
-        activities.first(3) if activities.count
+    def most_recent_activities
+        activities.first(6) if activities.count
     end
 
     def connect_users

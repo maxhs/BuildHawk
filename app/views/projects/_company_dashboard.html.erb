@@ -1,17 +1,18 @@
 <div class="company-project" class="border-box">
 	
-	<div class="col-xs-6">
-		<div class="project-header">
+	<div class="row">
+		<div class="project-header col-xs-6">
 			<span class="project-name"><%= link_to project.name, project_path(project), remote: true %></span>
 			<% if project.address %>
 				<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
 			<% end %>
 		</div>
 	
-		<div class="progress-section">
-			<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
+		<div class="progress-section col-xs-6" style="border:1px dashed #eee;line-height:30px;padding:20px 10px;text-align:center;">
 			<% if project.checklist %>
-				<%= link_to "#{project.checklist.progress_percentage} complete", project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
+				<%= link_to "#{project.checklist.progress_percentage} complete", project_path(project), remote: true, :style=>"text-transform:uppercase;letter-spacing:1px;font-size:1.1em;" %>
+				<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
+				
 				<script type="text/javascript">
 					$(function(){
 						$('#progress-link-<%=project.id%>').progressbar({
@@ -21,16 +22,29 @@
 				</script>
 			<% end %>
 		</div>
-		<% if project.last_three_activities && project.last_three_activities.count > 0 %>
+	</div>
+
+	<div class="col-xs-6">
+		<% if project.recent_documents && project.recent_documents.count > 0 %>
+			<%= render partial: "photos/thumb_image", collection: project.recent_documents, as: :p, locals:{project: project}, cache: true %>
+		<% else %>
+			<div style='display:block;height:100%;'>
+				<div class="font-smoothing" style="text-align:center;color:#aaa;text-transform:uppercase;vertical-align:middle;">No photos</div>
+			</div>
+		<% end %>
+	</div>
+	
+	<div class="col-xs-6">
+		<% if project.most_recent_activities && project.most_recent_activities.count > 0 %>
 		<div class="activities">
 			<div class="">	
 				<table>
 					<tr>
-						<td><h5>Recent Activity</h5></td>
-						<td><h5>Type</h5></td>
-						<td><h5>Date</h5></td>
+						<td><h4>Recent Activity</h4></td>
+						<td><h4>Type</h4></td>
+						<td><h4>Date</h4></td>
 					</tr>
-					<% project.last_three_activities.each do |activity| %>
+					<% project.most_recent_activities.each do |activity| %>
 						<tr>
 							<% if activity.worklist_item %>
 								<td>
@@ -61,7 +75,11 @@
 
 							<td class="timestamp"><%= parse_date activity.created_at %></td>
 						</tr>
+
 					<% end %>
+					<tr style="border-top:0;line-height:27px;vertical-align:middle;">
+						<td colspan="3" class="more"><%= link_to "More Activity...", project_path(project), remote: true%></td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -69,16 +87,5 @@
 		<div class="font-smoothing" style="margin:20px auto;font-style:italic;color:#aaa;padding-left:7px;text-transform:uppercase;font-size:17px;text-align:center;width:100%;font-weight:100;">No recent activity</div>
 	<% end %>
 	
-	</div>
-
-	
-	<div class="col-xs-6">
-		<% if project.recent_documents && project.recent_documents.count > 0 %>
-			<%= render partial: "photos/thumb_image", collection: project.recent_documents, as: :p, locals:{project: project}, cache: true %>
-		<% else %>
-			<div style='display:block;height:100%;'>
-				<div class="font-smoothing" style="text-align:center;color:#aaa;text-transform:uppercase;vertical-align:middle;">No photos</div>
-			</div>
-		<% end %>
 	</div>
 </div>

@@ -1,40 +1,37 @@
 <% if p.image_file_name %>
 	<div class="thumb-image" id="photo-<%=p.id%>">
-		<div class="label-container"><span class="label"></span><%= p.created_date%></div>
-		<%= image_tag(p.image.url(:thumb)) %>
 			
 			<div class="label-container">
-				<% if p.source %>
-					<% if p.source == "Documents" %>
-						<span class="label">Source:</span>
-						<%= link_to "Project Docs", document_photos_project_path(project), :remote => true %>
-					<% elsif p.source == "Checklist" %>
-						<% if p.checklist_item %>
-							<span class="label">Item:</span>
-							<%= link_to p.checklist_item.abbreviated_body, checklist_item_path(p.checklist_item), :remote => true %>
-						<% else %> 
-							<span class="label">Source:</span>
-							<%= link_to "Checklist", checklist_photos_project_path(project), :remote => true %>
-						<% end %>
-					<% elsif p.source == "Worklist" %>
-						<% if p.worklist_item %>
-							<span class="label">Item:</span>
-							<%= link_to p.worklist_item.abbreviated_body, edit_worklist_item_path(p.worklist_item), :remote => true %>
-						<% else %>
-							<span class="label">Source:</span>
-							<%= link_to "Worklist", worklist_photos_project_path(project), :remote => true %>
-						<% end %>
-					<% elsif p.source == "Reports" %>
-						<% if p.report %>
-							<span class="label">Report:</span>
-							<%= link_to "#{p.report.report_type} - #{p.report.date_string}", report_path(p.report), :remote => true %>
-						<% else %>
-							<span class="label">Source:</span>
-							<%= link_to "Reports", report_photos_project_path(project), :remote => true %>
-						<% end %>
+			<% if p.source %>
+				<% if p.source == "Documents" %>
+					<%= link_to image_tag(p.image.url(:thumb)), document_photos_project_path(project), :remote => true %>
+					<div class="label-container"><span class="label"></span><%= p.created_date%></div>
+					<%= link_to "Project Docs", document_photos_project_path(project), :remote => true %>
+				<% elsif p.source == "Checklist" %>
+					<%= link_to image_tag(p.image.url(:thumb)), checklist_item_path(p.checklist_item), :remote => true %>
+					<% if p.checklist_item %>
+						<%= link_to p.checklist_item.abbreviated_body, checklist_item_path(p.checklist_item), :remote => true %>
+					<% else %> 
+						<%= link_to "Checklist", checklist_photos_project_path(project), :remote => true %>
+					<% end %>
+					<div class="label-container"><span class="label"></span><%= p.created_date%></div>
+				<% elsif p.source == "Worklist" %>
+					<%= link_to image_tag(p.image.url(:thumb)), edit_worklist_item_path(p.worklist_item), :remote => true %>
+					<% if p.worklist_item %>
+						<%= link_to p.worklist_item.abbreviated_body, edit_worklist_item_path(p.worklist_item), :remote => true %>
+					<% else %>
+						<%= link_to "Worklist", worklist_photos_project_path(project), :remote => true %>
+					<% end %>
+					<div class="label-container"><span class="label"></span><%= p.created_date%></div>
+				<% elsif p.source == "Reports" %>
+					<% if p.report %>
+						<%= link_to image_tag(p.image.url(:thumb)), report_path(p.report), :remote => true %>
+						<%= link_to "#{p.created_date} - #{p.report.report_type} Report", report_path(p.report), :remote => true %>
+					<% else %>
+						<%= link_to "Reports", report_photos_project_path(project), :remote => true %>
 					<% end %>
 				<% end %>
-			</div> 
-			
+			<% end %>
+		</div> 
 	</div>
 <% end %>
