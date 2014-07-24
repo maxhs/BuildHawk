@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
     has_many :message_users, :dependent => :destroy, autosave: true
     has_many :messages, :through => :message_users , autosave: true
     has_many :comments, dependent: :destroy
+    has_many :worklist_items, foreign_key: "assignee_id"
 
     has_many :photos
 
@@ -126,6 +127,10 @@ class User < ActiveRecord::Base
 
     def coworkers
       company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone => user.phone, :id => user.id, :url_thumb => user.url_thumb}} if company
+    end
+
+    def any_admin?
+        admin || uber_admin || company_admin
     end
 
     def url_medium

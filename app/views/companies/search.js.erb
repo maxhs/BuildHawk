@@ -1,0 +1,1 @@
+$('#search-results').html('<%= j render partial:"company", locals:{user: @user}, collection: @companies, as: :company, cache:true %>');

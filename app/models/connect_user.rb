@@ -2,7 +2,7 @@ class ConnectUser < ActiveRecord::Base
 	include ActionView::Helpers::TextHelper
 	attr_accessible :first_name, :last_name, :phone, :email, :company_id, :company_name
 
-	has_many :worklist_items
+	has_many :worklist_items, foreign_key: "connect_assignee_id"
     has_many :project_users, dependent: :destroy
     belongs_to :company
 

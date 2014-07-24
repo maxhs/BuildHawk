@@ -1,0 +1,4 @@
+$('#form-body').fadeOut(300,function(){
+	$(this).html("<%=j render partial:'devise/registrations/confirm', locals: {user: @user}%>");
+	$(this).fadeIn(300);
+});

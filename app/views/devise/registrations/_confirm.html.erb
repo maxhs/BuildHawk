@@ -1,0 +1,14 @@
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	<%= devise_error_messages! %>
+	<%= f.hidden_field :company_id, value: resource.company_id %>
+	<%= f.text_field :first_name, :placeholder => "First name", :autofocus => true %>
+	<%= f.text_field :last_name, :placeholder => "Last name" %>
+	<%= f.email_field :email, :placeholder => "The email address you use for work" %>
+	<%= f.text_field :phone, :placeholder => "Your phone number" %>
+	<%= f.password_field :password, :placeholder => "Password", :autocomplete => "off" %>
+	<%= f.password_field :password_confirmation, :placeholder => "Password confirmation", :autocomplete => "off" %>
+
+	<div id="action">
+		<%= f.submit "Sign up", :class=>"simple-btn", :style=>"margin:15px auto;", remote:true %>
+	</div>
+<% end %>

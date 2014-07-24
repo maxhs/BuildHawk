@@ -9,6 +9,9 @@ Buildhawk::Application.routes.draw do
     get "registrations/new", :to => "devise/sessions#new"
     get "logout", :to => "devise/sessions#destroy", :as => :logout
     get '/register', :to => "registrations#new"
+    get '/register_connect', :to => "registrations#connect"
+    post '/find_company', :to => "registrations#find_company"
+    post '/confirm', :to => "registrations#confirm"
   end
 
   post "/projects/:id", :to => "projects#update"
@@ -21,6 +24,12 @@ Buildhawk::Application.routes.draw do
   get "/task/:id", :to => "worklist_items#edit"
   get 'mobile', :to => "home#mobile_redirect", :as => 'mobile_redirect'
 
+  resources :registrations, :only =>[] do
+    collection do
+      get :confirm
+      get :alternates
+    end
+  end
   resources :users do
     collection do 
       post :preregister
@@ -112,7 +121,11 @@ Buildhawk::Application.routes.draw do
       post :search
     end
   end
-  resources :companies
+  resources :companies do
+    collection do 
+      post :search
+    end
+  end
   resources :comments
   resources :project_groups
   resources :leads, only: [:create, :index]

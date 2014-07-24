@@ -5,7 +5,11 @@
 		</div>
 
 		<div class="col-md-8">
-			<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
+			<% if @projects.count > 0 %>
+				<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
+			<% else %>
+				<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects.</div>
+			<% end %>
 		</div>
 		
 		<div id="messages" class="col-md-2 border-box" style="padding-top:10px;">
@@ -19,8 +23,15 @@
 				<div style="margin:0 auto"><%= link_to "New Message", new_message_path, :class=>"simple-btn", remote:true %></div>
 			</div>
 		</div>
-		<% unless @company.projects && @company.projects.count > 0 %>
-			<div id="dashboard-placeholder" class="font-smoothing">Your company does not have any active projects.</div>
-		<% end %>
 	</div>
+
+	<% if user_signed_in? && current_user.connect_items(nil).count > 0 %>
+		<div style="width:100%;clear:both;text-align:center;padding-top:2%;">
+			<h2 style="border-top:1px solid #ddd; padding-top:2%;">BuildHawk Connect</h2>
+		</div>
+
+		<div id="connect-container">
+			<%= render partial:"connect/company", collection: @companies, as: :company, cache:true %>
+		</div>
+	<% end %>
 </div>

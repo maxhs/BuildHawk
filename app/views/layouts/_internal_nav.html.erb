@@ -1,9 +1,15 @@
 <ul id="navigation">
 	<li class="logo"><a href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
-	<li><%= link_to "Admin", admin_index_path, remote: true %></li>
+	
+	<% if current_user.any_admin? %>
+		<li><%= link_to "Admin", admin_index_path, remote: true %></li>
+	<% end %>
 	<% if current_user.uber_admin? %>
 		<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
 		<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
-		<li><%= link_to "BuildHawk Connect", connect_index_path, remote: true %></li>
+	<% end %>
+	<% unless current_user.any_admin? %>
+		<li><%= link_to "View Demo Project", project_path(Project.where(:core => true).first), remote: true %></li>
+		<li><%= link_to "Sign Up For a Free Trial", register_path %>
 	<% end %>
 </ul>	

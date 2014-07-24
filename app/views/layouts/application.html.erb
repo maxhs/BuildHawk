@@ -92,16 +92,16 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 <% if user_signed_in? %>
 	<div id="projects-tab">Projects</div>
 	<nav id="bh-menu" class="bh-menu">
-	
-		<% if current_user.admin? || current_user.company_admin? %>
 		<ul id="internal-nav">
+		<% if current_user.any_admin? %>
 			<li><%= link_to "Admin", admin_index_path, remote: true %></li>
 			<% if current_user.uber_admin? %>
 				<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
 			<% end %>
 			<li><%= link_to "Messages", messages_path, remote:true %></li>
-		</ul>
 		<% end %>
+			<li><%= link_to "BuildHawk Connect", connect_index_path, remote:true %></li>
+		</ul>
 	<% end %>
 	<ul id="credentials">
 		<% if user_signed_in? %>
@@ -134,7 +134,6 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		datetimepickers();
 		<% if user_signed_in? %>sideMenu();<% end %>
 	});
-
 </script>
 </body>
 </html>

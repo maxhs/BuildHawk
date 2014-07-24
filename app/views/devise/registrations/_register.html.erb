@@ -1,0 +1,13 @@
+<%= form_for(user, :url => find_company_path, remote:true) do |f| %>
+	<%= devise_error_messages! %>
+
+	<%= hidden_field_tag :connect %>
+	<%= f.text_field :first_name, :placeholder => "First name", :autofocus => true %>
+	<%= f.text_field :last_name, :placeholder => "Last name" %>
+	<%= f.email_field :email, :placeholder => "The email address you use for work" %>
+	<%= f.text_field :phone, :placeholder => "Your phone number" %>
+
+	<div id="action">
+		<%= f.submit "Next", :class=>"simple-btn", :style=>"margin:15px auto;", remote:true %>
+	</div>
+<% end %>
