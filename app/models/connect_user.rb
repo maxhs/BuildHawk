@@ -33,7 +33,7 @@ class ConnectUser < ActiveRecord::Base
         client.account.sms.messages.create(
             :from => "+1#{twilio_phone}",
             :to => phone,
-            :body => "You've been assigned a task on BuildHawk: \"#{truncated_task}\". Click here to view: https://buildhawk.com/task/#{task.id}?m"
+            :body => "You've been assigned a task on BuildHawk: \"#{truncated_task}\". Click here to view: https://buildhawk.com/task/#{task.id}?m="
         )
     end
 

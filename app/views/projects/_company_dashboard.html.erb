@@ -1,7 +1,7 @@
 <div class="company-project" class="border-box">
 	
-	<div style="col-xs-12">
-		<h4 style="display:inline-block;"><%= link_to project.name, project_path(project), remote: true %></h4>
+	<div style="col-xs-12" style="5px 0;">
+		<span style="font-size:1.5em;text-transform:uppercase;"><%= link_to project.name, project_path(project), remote: true %></span>
 		<% if project.address %>
 			<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
 		<% end %>

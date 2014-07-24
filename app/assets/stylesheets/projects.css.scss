@@ -142,7 +142,10 @@
 
 	h5,h4 {
 		width:100%;
-		a {color:#222;}
+		display:inline;
+		a {
+			color:#222;
+		}
 		a:hover {color:#cc0000;}
 	}
 	#dashboard-placeholder {
