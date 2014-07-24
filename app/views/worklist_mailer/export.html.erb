@@ -1,8 +1,10 @@
 <h1 style="text-align:center;margin:0 auto;"> <%= @project.name %> </h1>
-<h2 style="text-align:center;margin:5px auto;"> Task Report </h2>
+<h2 style="text-align:center;margin:5px auto;"> Tasks </h2>
 
+<% if @connect_user %>
+	<div>Want to view and/or edit these tasks? <%= link_to "Sign up" register_connect_url(:host => "www.buildhawk.com"), :style=> "color:#0800ff" %> for BuildHawk.</div>
+<% end %>
 <% @item_array.each do |item| %>
-
 	<div style="width:100%;clear:both;">
 		<% if item.photos && item.photos.count > 0 && item.photos.first.image_file_name %>
 			<% photo = item.photos.first %>
@@ -15,7 +17,7 @@
 
 		<span style="font-size:16px;"><%= link_to item.body, edit_worklist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"color:#000;text-decoration:none;" %></span>
 
-		<% if item.assignee || item.sub_assignee %>
+		<% if item.assignee || item.sub_assignee || item.connect_assignee %>
 			<div>
 				<h4 style="display:inline-block;margin:10px auto 0;">Assigned:</h4>
 				<span>
@@ -23,6 +25,8 @@
 						<%= item.assignee.full_name %>
 					<% elsif item.sub_assignee %>
 						<%= item.sub_assignee.name %>
+					<% elsif item.connect_assignee %>
+						<%= item.connect_assignee.full_name %>
 					<% end %>
 				</span>
 			</div>
