@@ -1,7 +1,7 @@
 <h1 style="text-align:center;margin:0 auto;"> <%= @project.name %> | Tasks assigned to you </h1>
 
 <% if @connect_user %>
-	<div style="width:100%;max-width:800px;margin:20px auto;padding:20px;border:1px solid #ddd;text-align:center;">Want to view and/or edit these tasks? <%= link_to "Sign up", register_connect_url(:connect_user_id=>@connect_user.id, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> for BuildHawk.</div>
+	<div style="width:100%;max-width:800px;margin:20px auto;padding:20px;border:1px solid #ddd;text-align:center;font-size:1.3em;">Want to view and/or edit these tasks? <%= link_to "Sign up", register_connect_url(:connect_user_id=>@connect_user.id, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> for BuildHawk.</div>
 <% end %>
 <% @item_array.each do |item| %>
 	<div style="width:100%;clear:both;">
@@ -16,27 +16,35 @@
 
 		<span style="font-size:16px;"><%= link_to item.body, edit_worklist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"color:#000;text-decoration:none;" %></span>
 
-		<% if item.assignee || item.sub_assignee || item.connect_assignee %>
-			<div>
-				<h4 style="display:inline-block;margin:10px auto 0;">Assigned:</h4>
-				<span>
-					<% if item.assignee %>
-						<%= item.assignee.full_name %>
-					<% elsif item.sub_assignee %>
-						<%= item.sub_assignee.name %>
-					<% elsif item.connect_assignee %>
-						<%= item.connect_assignee.full_name %>
-					<% end %>
-				</span>
-			</div>
-		<% end %>
-		<div><h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Date:</h4><%= item.created_at.strftime("%b %e, %l:%M %p") %></div>
+		<table>
+			<% if item.assignee || item.sub_assignee || item.connect_assignee %>
+				<tr style="padding-right:2em;">
+					<td>
+						<% if item.assignee %>
+							<%= item.assignee.full_name %>
+						<% elsif item.sub_assignee %>
+							<%= item.sub_assignee.name %>
+						<% elsif item.connect_assignee %>
+							<%= item.connect_assignee.full_name %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+
+			<tr>
+				<td style="padding-right:2em;">Date:</h4><%= item.created_at.strftime("%b %e, %l:%M %p") %></td>
+			</tr>
 		
-		<% if item.completed %>
-			<div><h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Status:</h4><span>Complete</span></div>
-		<% else %>
-			<div><h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Status:</h4><span style="color:#cc0000;">IN PROGRESS</span></div>
-		<% end %>
+			<tr>
+				<td>
+					<% if item.completed %>
+						<h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Status:</h4><span>Complete</span>
+					<% else %>
+						<h4 style="display:inline-block;margin:0 auto;padding-right:2em;">Status:</h4><span style="color:#cc0000;">IN PROGRESS</span>
+					<% end %>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 <% end %>
