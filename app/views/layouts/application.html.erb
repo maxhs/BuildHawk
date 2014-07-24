@@ -30,7 +30,7 @@
 	    		$('#top-nav').css('opacity','1');}
 	    })
 		window.Dropzone;
-		setupWindow();
+		
 	</script>
 	<script type="text/javascript">
 	  var _gaq = _gaq || [];
@@ -129,6 +129,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		setupWindow();
 		$.ajaxSetup({ cache: false });
 		datetimepickers();
 		<% if user_signed_in? %>sideMenu();<% end %>

@@ -39,16 +39,18 @@ if (history && history.pushState){
         });
     });
 }
-
 function setupWindow(){
-    if ($('#notice').text().length > 0) {
-        $('#notice').css({}).delay(500).fadeIn("normal", function() {
-            $(this).delay(3300).fadeOut();
+    var notice = document.getElementById("notice");
+    var alert = document.getElementById("alert");
+    if (notice.textContent.length > 0) {
+        $('#notice').delay(500).fadeIn("normal", function() {
+            $(this).delay(3300).fadeOut(function(){$(this).text("");});
+            
         });
     }
-    if ($("#alert").text().length > 0) {
-        $("#alert").css({}).delay(500).fadeIn("normal", function() {
-            $(this).delay(3300).fadeOut();
+    if (alert.textContent.length > 0) {
+        $("#alert").delay(500).fadeIn("normal", function() {
+            $(this).delay(3300).fadeOut(function(){$(this).text("");});
         });
     }
 }
