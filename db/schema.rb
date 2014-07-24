@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714194212) do
+ActiveRecord::Schema.define(version: 20140724222719) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 20140714194212) do
     t.integer  "folder_id"
     t.boolean  "mobile",             default: false
     t.text     "description"
+    t.integer  "comment_id"
   end
 
   add_index "photos", ["report_id", "checklist_item_id", "worklist_item_id", "user_id"], name: "photos_ix"
