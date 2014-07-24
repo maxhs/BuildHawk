@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
             @mobile_redirect = true
             if params[:controller] == "worklist_items" && params[:id]
                 @item = WorklistItem.find params[:id]
-                render "/"
+                render root_url
                 return
             end
         end 
