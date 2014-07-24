@@ -150,14 +150,11 @@ class WorklistItemsController < ApplicationController
 	end
 
 	def find_company
-		if user_signed_in? && params[:id]
-			@item = WorklistItem.find params[:id] 
-			
-			unless user_signed_in? && (@item.worklist.project.project_users.include?(current_user))
-				redirect_to projects_path
-				flash[:notice] = "You don't have access to this task".html_safe
-			end
-
+		@item = WorklistItem.find params[:id] if params[:id]
+		unless user_signed_in? && (@item.worklist.project.project_users.include?(current_user))
+			redirect_to projects_path
+			flash[:notice] = "You don't have access to this task".html_safe
+		else	
 			@worklist = @item.worklist
 			@project = @worklist.project
 			@items = @worklist.worklist_items

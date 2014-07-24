@@ -1,7 +1,7 @@
 <div class="company-project" class="border-box">
 	
-	<div class="col-xs-12" style="margin:10px 0;padding-left:0;">
-		<span style="font-size:1.5em;text-transform:uppercase;padding-right:10px;"><%= link_to project.name, project_path(project), remote: true %></span>
+	<div class="col-xs-12 project-header">
+		<span class="project-name"><%= link_to project.name, project_path(project), remote: true %></span>
 		<% if project.address %>
 			<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
 		<% end %>
@@ -9,8 +9,8 @@
 
 
 	<div class="row">
-		<div class="dashboard-label col-xs-2">Progress:</div>
-		<div class="col-xs-10">
+		<div class="dashboard-label col-xs-3">Progress:</div>
+		<div class="col-xs-9">
 			<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
 			<% if project.checklist %>
 				<%= link_to project.checklist.progress_percentage, project_path(project), :style=>"position:relative;left:10px;", :remote => true %>
@@ -24,15 +24,21 @@
 			<% end %>
 		</div>
 	</div>
-	<% if project.last_three_activities && project.last_three_activities %>
+	<% if project.last_three_activities && project.last_three_activities.count > 0 %>
 		<div class="row">
-			<div class="dashboard-label col-xs-10">Activity:</div>
-			<div class="col-xs-10">
+			<div class="dashboard-label col-xs-3">Activity:</div>
+			<div class="col-xs-9">
 				<ol>
-					<% project.last_three_activities do |activity| %>
+					<% project.last_three_activities.each do |activity| %>
 						<li>
-							<%= link_to checklist_item_project_path(project, :item_id => item.id), :remote => true do %>
-								<%= "#{parse_date item.critical_date} - #{item.body}" %>
+							<% if activity.checklist_item %>
+								<%= link_to checklist_item_project_path(project, :item_id => activity.checklist_item.id), :remote => true do %>
+									<%= "#{parse_date item.critical_date} - #{item.body}" %>
+								<% end %>
+							<% elsif activity.worklist_item %>
+								<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
+									<%= "#{parse_date activity.created_at} - #{activity.worklist_item.body}" %>
+								<% end %>
 							<% end %>
 						</li>
 					<% end %>
