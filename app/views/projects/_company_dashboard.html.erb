@@ -1,14 +1,14 @@
 <div class="company-project" class="border-box">
 	
 	<div class="row">
-		<div class="project-header col-xs-6">
+		<div class="project-header col-xs-4">
 			<span class="project-name"><%= link_to project.name, project_path(project), remote: true %></span>
 			<% if project.address %>
-				<%= link_to project.address.formatted_address, project_path(project) %> (<%= link_to "Map", "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>)
+				<%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>
 			<% end %>
 		</div>
 	
-		<div class="progress-section col-xs-6" style="border:1px dashed #eee;line-height:30px;padding:20px 10px;text-align:center;">
+		<div class="progress-section col-xs-4">
 			<% if project.checklist %>
 				<%= link_to "#{project.checklist.progress_percentage} complete", project_path(project), remote: true, :style=>"text-transform:uppercase;letter-spacing:1px;font-size:1.1em;" %>
 				<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
@@ -22,70 +22,81 @@
 				</script>
 			<% end %>
 		</div>
+		<div class="col-xs-4">
+			<table class="alert-table">
+				<tr>
+					<td><%= link_to "Checklist",checklist_project_path(project), :remote => true %></td>
+					<td><%= link_to "Reports", reports_path(:project_id => project.id), :remote => true %></td>
+					<td><%= link_to "Documents", document_photos_project_path(project), remote: true %></td>
+					<td><%= link_to "Tasks", worklist_project_path(project), :remote => true %></td>
+				</tr>
+			</table>
+		</div>
 	</div>
+	<div class="hidden">
+		<div class="col-xs-6">
+			<% if project.recent_documents && project.recent_documents.count > 0 %>
+				<%= render partial: "photos/thumb_image", collection: project.recent_documents.first(3), as: :p, locals:{project: project}, cache: true %>
+			<% else %>
+				<div style='display:block;height:100%;'>
+					<div class="font-smoothing" style="text-align:center;color:#aaa;text-transform:uppercase;vertical-align:middle;">No photos</div>
+				</div>
+			<% end %>
+		</div>
+		
+		<div class="col-xs-6">
+			<% if project.most_recent_activities && project.most_recent_activities.count > 0 %>
+			<div class="activities">
+				<div class="">	
+					<table>
+						<tr>
+							<td><h4>Recent Activity</h4></td>
+							<td><h4>Type</h4></td>
+							<td><h4>Date</h4></td>
+						</tr>
+						<% project.most_recent_activities.each do |activity| %>
+							<tr>
+								<% if activity.worklist_item %>
+									<td>
+										<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
+											<%= activity.worklist_item.body %>
+										<% end %>
+									</td>
+									<td class="activity-icon"><%= image_tag 'task.png' %></td>
+								
+								<% elsif activity.report %>
+									<td>
+										<%= link_to report_path(project, :report_id => activity.report.id), :remote => true do %>
+											<%= "#{activity.report.report_type} Report - #{activity.report.date_string}" %>
+										<% end %>
+									</td>
+									<td class="activity-icon"><%= image_tag 'report.png' %></td>
+								<% elsif activity.checklist_item %>
+									<td>
+										<%= link_to checklist_item_project_path(project, :checklist_item_id => activity.checklist_item.id), :remote => true do %>
+											<%= activity.checklist_item.body %>
+										<% end %>
+									</td>
+									<td class="activity-icon"><%= image_tag 'checklist.png' %></td>
+								<% else %>
 
-	<div class="col-xs-6">
-		<% if project.recent_documents && project.recent_documents.count > 0 %>
-			<%= render partial: "photos/thumb_image", collection: project.recent_documents, as: :p, locals:{project: project}, cache: true %>
-		<% else %>
-			<div style='display:block;height:100%;'>
-				<div class="font-smoothing" style="text-align:center;color:#aaa;text-transform:uppercase;vertical-align:middle;">No photos</div>
+									<td class="activity-icon"></td>
+								<% end %>
+
+								<td class="timestamp"><%= parse_date activity.created_at %></td>
+							</tr>
+
+						<% end %>
+						<tr style="border-top:0;line-height:27px;vertical-align:middle;">
+							<td colspan="3" class="more"><%= link_to "More Activity...", project_path(project), remote: true%></td>
+						</tr>
+					</table>
+				</div>
 			</div>
+		<% else %>
+			<div class="font-smoothing" style="margin:20px auto;font-style:italic;color:#aaa;padding-left:7px;text-transform:uppercase;font-size:17px;text-align:center;width:100%;font-weight:100;">No recent activity</div>
 		<% end %>
 	</div>
-	
-	<div class="col-xs-6">
-		<% if project.most_recent_activities && project.most_recent_activities.count > 0 %>
-		<div class="activities">
-			<div class="">	
-				<table>
-					<tr>
-						<td><h4>Recent Activity</h4></td>
-						<td><h4>Type</h4></td>
-						<td><h4>Date</h4></td>
-					</tr>
-					<% project.most_recent_activities.each do |activity| %>
-						<tr>
-							<% if activity.worklist_item %>
-								<td>
-									<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
-										<%= activity.worklist_item.body %>
-									<% end %>
-								</td>
-								<td class="activity-icon"><%= image_tag 'task.png' %></td>
-							
-							<% elsif activity.report %>
-								<td>
-									<%= link_to report_path(project, :report_id => activity.report.id), :remote => true do %>
-										<%= "#{activity.report.report_type} Report - #{activity.report.date_string}" %>
-									<% end %>
-								</td>
-								<td class="activity-icon"><%= image_tag 'report.png' %></td>
-							<% elsif activity.checklist_item %>
-								<td>
-									<%= link_to checklist_item_project_path(project, :checklist_item_id => activity.checklist_item.id), :remote => true do %>
-										<%= activity.checklist_item.body %>
-									<% end %>
-								</td>
-								<td class="activity-icon"><%= image_tag 'checklist.png' %></td>
-							<% else %>
-
-								<td class="activity-icon"></td>
-							<% end %>
-
-							<td class="timestamp"><%= parse_date activity.created_at %></td>
-						</tr>
-
-					<% end %>
-					<tr style="border-top:0;line-height:27px;vertical-align:middle;">
-						<td colspan="3" class="more"><%= link_to "More Activity...", project_path(project), remote: true%></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	<% else %>
-		<div class="font-smoothing" style="margin:20px auto;font-style:italic;color:#aaa;padding-left:7px;text-transform:uppercase;font-size:17px;text-align:center;width:100%;font-weight:100;">No recent activity</div>
-	<% end %>
 	
 	</div>
 </div>

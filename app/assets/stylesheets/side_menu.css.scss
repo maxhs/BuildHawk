@@ -7,7 +7,7 @@
 	height: 0;
 	border-width: 0px;
 	border-style: solid;
-	border-color: rgba(255,255,255,.875);
+	border-color: rgba(255,255,255,.975);
 	background-color: rgba(0,0,0,0);
 	-webkit-backface-visibility: hidden;
 	-webkit-transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
@@ -15,7 +15,7 @@
 	transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
 
 	.sidebarProjects {
-		left:-250px;
+		left:-350px;
 
 		.project {
 			margin:15px 0;
@@ -29,8 +29,6 @@
 			width:auto;
 			a {
 				text-transform:none;	
-				color:#fff;
-				-webkit-font-smoothing:antialiased;
 				font-size:20px;
 			}
 		}
@@ -63,8 +61,6 @@
 
 			a {
 				font-size:1.6em;
-				-webkit-font-smoothing:antialiased;
-				color:#fff;
 				padding:0 20px;
 			}
 		}
@@ -73,7 +69,7 @@
 
 .bh-menu.bh-menu-open {
 	height: 100%;
-	border-width: 51px 0px 0px 250px;
+	border-width: 51px 0px 0px 350px;
 	background-color: rgba(0,0,0,0.6);
 	-webkit-transition: border-width 0.3s, background-color 0.3s;
 	transition: border-width 0.3s, background-color 0.3s;
@@ -86,7 +82,7 @@
 	
 	#internal-nav {
 		top:0px;
-		left:250px;
+		left:350px;
 	}
 }
 
@@ -262,11 +258,9 @@
 
 .bh-menu ul:first-of-type li a {
 	padding: 0;
-	color: #fff;
-	font-weight:normal;
-	font-size:17px;
+	font-weight:100;
+	font-size:24px;
 	text-transform:uppercase;
-	-webkit-font-smoothing:antialiased;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;
 }
@@ -276,7 +270,6 @@
 }
 
 .bh-menu ul li a:before {
-	color: #fff;
 	font-size: 24px;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;
@@ -291,13 +284,25 @@
 
 .sidebarProjects {
 
+	.percentage {
+		right: 0;
+		top: 0;
+		font-size: 1.5em;
+		width: 25%;
+		line-height: 100%;
+		vertical-align: middle;
+		text-align: center;
+		position: absolute;
+		height: 100%;
+		font-weight:100;
+	}
 	.ui-progressbar {
 		display:inline-block;
 		border:1px solid #ddd;
 		border-radius:7px;
 		-moz-border-radius:7px;
 		-webkit-border-radius:7px;
-		width:100%;
+		width:75%;
 		height:14px;
 		vertical-align:middle;
 		margin-top:-2px;

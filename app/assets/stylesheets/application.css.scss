@@ -503,7 +503,7 @@ body {
 }
 
 #projects-tab.open {
-	left:185px;
+	left:285px;
 }
 
 /* Overlay style */
@@ -867,12 +867,6 @@ input[type="submit"] {
 .has-spinner.active .spinner {
   	opacity: 1;
   	max-width: 50px; /* More than it will ever come, notice that this affects on animation duration */
-}
-
-.sidebarProjects {
-	div {
-		margin: 5px auto 0;
-	}
 }
 
 .sidebarAdmin, .sidebarUberadmin {

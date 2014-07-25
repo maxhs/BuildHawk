@@ -1,16 +1,11 @@
 <div id="main">
 	<div id="company-dashboard">
-		<div id="messages" class="col-md-2" style="padding-top:10px;">
-			
-		</div>
 
-		<div class="col-md-8">
-			<% if @projects.count > 0 %>
-				<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
-			<% else %>
-				<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects.</div>
-			<% end %>
-		</div>
+		<% if @projects.count > 0 %>
+			<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
+		<% else %>
+			<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects.</div>
+		<% end %>
 		
 		<% unless current_user.company.has_admin? %>
 			<div class="col-md-2 border-box pro-signup">

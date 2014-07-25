@@ -120,7 +120,7 @@ class Project < ActiveRecord::Base
     end
 
     def most_recent_activities
-        activities.first(6) if activities.count
+        activities.first(3) if activities.count
     end
 
     def connect_users

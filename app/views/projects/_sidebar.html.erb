@@ -9,7 +9,8 @@
 			<% @projects.each do |project| %>
 				<% if project.checklist && project.checklist.item_count > 0 %>
 					<li class="project">
-						<%= link_to "#{project.name} (#{project.checklist.progress_percentage})" , project_path(project), :id=>"#{project.id}-link",:remote => true %>
+						<span><%= link_to project.name, project_path(project), :id=>"#{project.id}-link",remote: true %></span>
+						<span class="percentage"><%= project.checklist.progress_percentage %></span>
 						<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
 					</li>
 				<% else %>

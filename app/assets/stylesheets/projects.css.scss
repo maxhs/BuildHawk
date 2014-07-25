@@ -95,6 +95,13 @@
 
 #company-dashboard {
 	
+	.alert-table {
+		width:100%;
+		td {
+			text-align:center;
+		}
+	}
+
 	.company-project {
 		background-color:#fff;
 		padding:10px 20px;
@@ -125,12 +132,14 @@
 		}
 
 		.project-header {
-			margin:20px 0;
+			margin:20px 0 0;
 			padding-left:0;
 		}
 
 		.progress-section {
-			padding:20px 0;
+			border:1px dashed #eee;
+			line-height:30px;
+			text-align:center;
 		}
 
 		ul li {
