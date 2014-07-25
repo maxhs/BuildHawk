@@ -1,1 +1,1 @@
-<div><%= link_to company.name, confirm_path(company_id: company.id, user_id: user.id), method: :post, remote: true %></div>
+<div><a onclick="companyconfirm(<%=company.id%>)"><%= company.name %></a></div>

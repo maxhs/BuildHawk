@@ -11,6 +11,15 @@ class RegistrationsController < Devise::RegistrationsController
         @user.email = @connect_user.email
         @user.phone = @connect_user.phone
         @user.company = @connect_user.company
+
+        if @connect_user.company && @connect_user.company.name.length > 0
+            #companies search
+            search_term = @connect_user.company.name     
+            initial = Company.search do
+                fulltext search_term
+            end
+            @companies = initial.results.uniq
+        end
     end
 
     def alternates
@@ -24,9 +33,8 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def confirm
-        user = User.find params[:user_id]
-        user.update_attribute :company_id, params[:company_id] 
-        redirect_to projects_path
+        @user = User.create params[:user]
+        sign_in @user
     end
 
     def create
