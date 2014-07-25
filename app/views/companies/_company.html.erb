@@ -1,1 +1,1 @@
-<%= link_to company.name, confirm_path(company_id: company.id, user: {:first_name => user.first_name, :last_name => user.last_name, :email => user.email, :phone => user.phone}), method: :post, remote: true %>
+<div><%= link_to company.name, confirm_path(company_id: company.id, user_id: user.id), method: :post, remote: true %></div>

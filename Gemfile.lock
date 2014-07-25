@@ -90,6 +90,8 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
+    jquery-easing-rails (0.0.1)
+      railties (>= 3.1.0)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -258,6 +260,7 @@ DEPENDENCIES
   devise
   geocoder
   httparty
+  jquery-easing-rails
   jquery-rails
   jquery-ui-rails
   multi_fetch_fragments

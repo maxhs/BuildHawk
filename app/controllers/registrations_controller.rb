@@ -10,6 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
         @user.last_name = @connect_user.last_name
         @user.email = @connect_user.email
         @user.phone = @connect_user.phone
+        @user.company = @connect_user.company
     end
 
     def alternates
@@ -22,30 +23,23 @@ class RegistrationsController < Devise::RegistrationsController
         end
     end
 
-    def find_company
-        @user = User.new params[:user]
-        if request.xhr?
-            respond_to do |format|
-                format.js
-            end
-        else
-            render :connect
-        end
-    end
-
     def confirm
-        @user = User.new params[:user]
-        @user.company_id = params[:company_id] 
-        if request.xhr?
-            respond_to do |format|
-                format.js
-            end
-        else
-            render :connect
-        end
+        user = User.find params[:user_id]
+        user.update_attribute :company_id, params[:company_id] 
+        redirect_to projects_path
     end
 
     def create
+        unless params[:user][:password] && params[:user][:password_confirmation]
+            if request.xhr?
+                respond_to do |format|
+                    format.js {render template:"connect/validate"}
+                end
+            else
+                flash[:notice] = "Sorry, but something went wrong while trying to validate your account."
+                redirect_to root_url
+            end
+        end 
         if params[:user][:company]
             @company = Company.where(name: params[:user][:company][:name]).first_or_create!
             @company.projects.build unless @company.projects.count

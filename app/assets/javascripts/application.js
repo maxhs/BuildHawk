@@ -16,6 +16,7 @@
 //= require jquery.ui.progressbar
 //= require jquery.ui.sortable
 //= require jquery.ui.autocomplete
+//= require jquery.easing
 //= require bootstrap
 //= require dropzone
 //= require jquery.remotipart

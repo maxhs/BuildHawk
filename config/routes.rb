@@ -10,7 +10,6 @@ Buildhawk::Application.routes.draw do
     get "logout", :to => "devise/sessions#destroy", :as => :logout
     get '/register', :to => "registrations#new"
     get '/register_connect', :to => "registrations#connect"
-    post '/find_company', :to => "registrations#find_company"
     post '/confirm', :to => "registrations#confirm"
   end
 
