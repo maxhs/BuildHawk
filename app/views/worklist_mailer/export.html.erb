@@ -1,7 +1,7 @@
 <h1 style="text-align:center;margin:0 auto;"> <%= @project.name %> | Tasks assigned to you </h1>
 
 <% if @connect_user %>
-	<div style="width:100%;max-width:800px;margin:20px auto;padding:20px;border:1px solid #ddd;text-align:center;font-size:1.3em;">Want to view and/or edit these tasks? <%= link_to "Sign up", register_connect_url(:connect_user_id=>@connect_user.id, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> for BuildHawk.</div>
+	<div style="max-width:800px;margin:20px auto;padding:20px;border:1px solid #ddd;text-align:center;font-size:1.3em;">Want to view and/or edit these tasks? <%= link_to "Sign up", register_connect_url(:connect_user_id=>@connect_user.id, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> for BuildHawk.</div>
 <% end %>
 <% @item_array.each do |item| %>
 	<div style="width:100%;clear:both;">
