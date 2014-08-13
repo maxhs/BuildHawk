@@ -285,6 +285,89 @@ Buildhawk::Application.routes.draw do
     end
   end
 
+  #mobile API v3
+  namespace :api do
+    namespace :v3 do
+      resources :activities, only: [:destroy]
+      resources :comments
+      resources :companies do
+        collection do
+          get :search
+          post :add
+        end
+      end
+      resources :companies
+      resources :connect, :only => [:index]
+      resources :checklists
+      resources :checklist_items do
+        collection do
+          post :photo
+        end
+      end
+      resources :groups 
+      resources :notifications, :only => [:index, :destroy] do
+        collection do 
+          get :messages
+          post :test_android_pushes
+        end
+      end
+      resources :projects do
+        member do
+          get :dash
+        end
+        collection do
+          get :dash
+          get :archived
+          get :groups
+          get :demo
+        end
+        member do
+          post :archive
+          post :unarchive
+          post :find_user
+          post :add_user
+        end
+      end  
+      resources :photos
+      resources :project_subs, :only => [:create] do
+        member do
+          post :add_user
+        end
+      end
+      resources :reminders, :only => [:create, :index, :destroy, :update]
+      resources :reports do
+        member do
+          get :review_report
+        end
+        collection do
+          post :photo
+          get :options
+          delete :remove_personnel
+        end
+      end
+      resources :safety_topics, :only => [:destroy]
+      resources :sessions, :only => [:create, :forgot_password] do
+        collection do 
+          post :forgot_password
+        end 
+      end
+      resources :subs, :only => [:create]
+      resources :users do
+        member do
+          get :connect
+          post :add_alternate
+          post :delete_alternate
+        end
+      end
+      resources :worklists, :only => [:show, :index]
+      resources :worklist_items do
+        collection do
+          post :photo
+        end
+      end
+    end
+  end
+
   resque_constraint = lambda do |request|
     request.env['warden'].authenticate? and request.env['warden'].user.uber_admin?
   end
