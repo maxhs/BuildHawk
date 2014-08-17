@@ -270,11 +270,11 @@ class AdminController < ApplicationController
 	protected
 
 	def uber_checklists
-		names = Checklist.where("core = ? and company_id IS NULL",true).map(&:name).compact.uniq
-		@uber_checklists = [] 
-		names.each do |n|
-			@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first if n && n.length > 0
-		end
+		@uber_checklists = Checklist.where("core = ? and company_id IS NULL and project_id IS NULL",true).compact.uniq
+		# @uber_checklists = [] 
+		# names.each do |n|
+		# 	@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first if n && n.length > 0
+		# end
 	end
 
 	def find_user
