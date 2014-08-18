@@ -391,7 +391,8 @@
 		position:relative;
 		left:2.5%;
 		z-index:5;
-		background:#fff;
+		background:#fff !important;
+		color:#000;
 	}
 
 	.checklist-item {
@@ -441,7 +442,7 @@
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Source Sans Pro",'Helvetica',sans-serif;
+	font-family:"Proxima Nova","Source Sans Pro",'Helvetica',sans-serif;
 	font-size:1em;
 	line-height:1em;
 	text-transform:uppercase;
