@@ -6,7 +6,13 @@ class ConnectUser < ActiveRecord::Base
     has_many :project_users, dependent: :destroy
     belongs_to :company
 
+    after_create :notify
     before_destroy :cleanup
+
+
+    def notify
+        puts "just created a CONNECT USER from model: #{id}"
+    end
 
     def cleanup
         WorklistItem.where(:connect_assignee_id => id).each do |t|

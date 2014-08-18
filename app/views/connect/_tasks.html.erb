@@ -1,6 +1,6 @@
 <div class="task" id="<%=task.id%>">
 	<div class="photo">
-		<% if task.photos.count > 0%>
+		<% if task.photos.count > 0 %>
 			<%= image_tag(task.photos.first.image.url(:thumb)) %>
 		<% else %>
 			<span class="no-photo-placeholder">

@@ -128,7 +128,13 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             project.project_users.where(:user_id => user.id).first_or_create
             project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
 
-            if report
+            if task
+                if email && user.email_permissions
+                    user.email_task(task)
+                elsif phone && user.text_permissions
+                    user.text_task(task)
+                end
+            elsif report
                 report.report_users.where(:user_id => user.id).first_or_create
             end
 
@@ -147,7 +153,14 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             project.project_users.where(:connect_user_id => connect_user.id).first_or_create
             company.connect_users << connect_user if company
 
-            if report
+            if task
+                puts "task add user shit"
+                if email
+                    connect_user.email_task(task)
+                elsif phone
+                    connect_user.text_task(task)
+                end
+            elsif report
                 report.report_users.where(:connect_user_id => connect_user.id).first_or_create
             end
 
