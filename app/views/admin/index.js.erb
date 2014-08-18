@@ -1,7 +1,7 @@
 $('a').removeClass('current-page');
-$('#nav-admin a').addClass('current-page');
 $('#alert').fadeOut(400);
 var nav = $('<%= j render partial: "admin/top_nav" %>');
 $('#navigation').html(nav);
 $('#inner-wrap').html('<%= j render :partial => "index" %>');
+$('#nav-admin a, #admin-link, #admin-checklists-link').addClass('current-page');
 $("html, body").animate({ scrollTop: 0 }, 0);

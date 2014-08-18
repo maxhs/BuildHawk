@@ -69,12 +69,13 @@ function sideMenu() {
 }
 
 function closeMenu() {
-	var menu = document.getElementById( 'bh-menu' ),
+	/*var menu = document.getElementById( 'bh-menu' ),
 		trigger = document.getElementById( 'projects-tab' ),
 		projectsTab = document.getElementById( 'projects-tab' ),
 		triggerPlay = document.querySelector( 'a.bh-menu-trigger-out' ),
 		// event type (if mobile use touch events)
 		eventtype = mobilecheck() ? 'touchstart' : 'click';
 		classie.remove( menu, 'bh-menu-open' );
-		classie.remove( projectsTab, 'open' );
+		classie.remove( projectsTab, 'open' );*/
+		$('#dropdown-menu').fadeOut(0);
 }

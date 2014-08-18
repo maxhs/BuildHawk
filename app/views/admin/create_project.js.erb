@@ -1,14 +1,7 @@
 $('#navigation a, #nav-admin a').removeClass('current-page');
 $('#admin-checklists-link').addClass('current-page');
-$('#sidebar').fadeOut(170,function(){
-	$(this).replaceWith('<%= j render :partial => "projects/sidebar" %>');
-	$(this).fadeIn(170);
-});
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
-	$(this).fadeIn(170);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#sidebar').replaceWith('<%= j render :partial => "projects/sidebar" %>');
+$('#main').html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
 
 $('#alert').text("<%= @project.name %> created").delay(3000).fadeOut(500, function(){
 	$(this).text("");

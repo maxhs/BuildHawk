@@ -15,7 +15,7 @@
 #reports-search {
 	width:70%;
 	input[type="text"] {
-		height:42px;
+		height:38px;
 		border-color:#eee;
 	}
 }
@@ -45,7 +45,7 @@
 
 #add-report, #edit-report {
 	z-index:2;
-	padding:60px 20px 20px;
+	padding:0 20px;
 
 	h4 {
 		text-align:left;	
@@ -93,6 +93,10 @@
 
 	.thin-form {
 		clear:both;
+
+		div:first-child {
+			border-top:0;
+		}
 	}
 }
 

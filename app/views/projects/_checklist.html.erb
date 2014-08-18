@@ -11,10 +11,10 @@
 
 				<div class="row">
 					<div class="col-xs-8">
-						<h4 style="display:inline-block;">Phase</h4>					
+						<h5 style="display:inline-block;">Phase</h5>					
 					</div>
-					<div class="col-xs-2 header-label"><h4>Critical Date</h4></div>	
-					<div class="col-xs-2 header-label"><h4>Completed</h4></div>
+					<div class="col-xs-2 header-label"><h5>Critical Date</h5></div>	
+					<div class="col-xs-2 header-label"><h5>Completed</h5></div>
 				</div>
 				
 				<ul id="phases">
@@ -31,7 +31,17 @@
 	<% end %>
 </div>
 
+<div id="checklist-focus">
+
+</div>
+
 <script>
+
+	
+	$(document).on('click',".checklist-item-link",function(){
+		$('.active-item').removeClass('active-item');
+		$(this).parent().parent().addClass('active-item');
+	});
 	$(document).ready(function(){
 		$('#remove').on('click',function(){
 			$('#search').val('');

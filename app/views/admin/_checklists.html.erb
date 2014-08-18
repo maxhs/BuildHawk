@@ -1,10 +1,10 @@
 <div class="project-checklist-table border-box" style="padding:5px 20px 20px;">
-	<h2 style="text-align:center"><%=@company.name%> Checklists</h2>
+	<h4 style="text-align:center"><%= @company.name %> Checklists</h4>
 	<table id="core-checklists">
 		<th><h5>Name</h5></th>
-		<th><h5># Phases</h5></th>
-		<th><h5># Categories</h5></th>
-		<th><h5># Items</h5></th>
+		<th><h5>Phases</h5></th>
+		<th><h5>Categories</h5></th>
+		<th><h5>Items</h5></th>
 		<th><h5>Edit</h5></th>
 		<th><h5>Delete</h5></th>
 		<% if @checklists && @checklists.count > 0 %>
@@ -17,24 +17,24 @@
 </div>
 
 <div class="project-checklist-table standard-templates border-box">
-	<h2 style="text-align:center">BuildHawk Standard Templates</h2>
+	<h4 style="text-align:center">BuildHawk Standard Templates</h4>
 	<table>
 		<thead>
 			<th><h5>Name</h5></th>
 			<th><h5>Description</h5></th>
-			<th><h5># Phases</h5></th>
-			<th><h5># Categories</h5></th>
-			<th><h5># Items</h5></th>
-			<th><h5>Use Template</h5></th>
+			<th><h5>Phases</h5></th>
+			<th><h5>Categories</h5></th>
+			<th><h5>Items</h5></th>
+			<th><h5>&nbsp;</h5></th>
 		</thead>
 		<tbody>
-			<tr>
+			<tr class="core-checklist-row">
 				<td><h5>Blank Template</h5></td>
-				<td>This is a fully customizable, blank checklist template.</td>
+				<td class="checklist-description">This is a fully customizable, blank checklist template.</td>
 				<td>1</td>
 				<td>1</td>
 				<td>1</td>
-				<td><%= link_to "Use", create_blank_template_admin_index_path(:company_id => current_user.company.id, :name => "Blank Template"), :class=>"simple-btn remote", :method => :post, :remote => true %></td>
+				<td><h5><%= link_to "Use", create_blank_template_admin_index_path(:company_id => current_user.company.id, :name => "Blank Template"), :class=>"remote", :method => :post, :remote => true %></h5></td>
 			</tr>
 			<%= render :partial => "admin/core_checklist_row", collection: @uber_checklists, :as => :c, cache: true %>
 		</tbody>

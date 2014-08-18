@@ -15,7 +15,7 @@
 #worklist-search {
 	width:70%;
 	input[type="text"] {
-		height:42px;
+		height:38px;
 		border-color:#eee;
 	}
 }
@@ -28,4 +28,20 @@
 		
 		}
 	}
+}
+
+.tasks.border-box {
+	padding-top:10px;
+	width:49%;
+	float:left;
+
+	.task {
+		border-top:2px solid #eee;
+	}
+}
+
+#task-focus {
+	margin-left:1%;
+	width:50%;
+	float:left;
 }

@@ -1,8 +1,8 @@
-<tr id="checklist-<%=c.id%>">
+<tr id="checklist-<%=c.id%>" class="core-checklist-row">
 	<td><h5><%= c.name %></h5></td>
-	<td><%= c.description %></td>
+	<td class="checklist-description"><%= c.description %></td>
 	<td><%= c.phases.count %></td>
 	<td><%= c.phases.map(&:categories).flatten.count %></td>
 	<td><%= c.item_count %></td>
-	<td><%= link_to "Use", create_template_admin_index_path(:company_id => current_user.company.id, :checklist_id => c.id), :class=>"simple-btn remote company-template", :method => :post, :remote => true %></td>
+	<td><h5><%= link_to "Use", create_template_admin_index_path(:company_id => current_user.company.id, :checklist_id => c.id), :class=>"remote company-template", :method => :post, :remote => true %></h5></td>
 </tr>

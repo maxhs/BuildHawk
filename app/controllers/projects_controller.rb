@@ -307,6 +307,13 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def order_projects
+		puts "request: #{params}"
+		if request.xhr?
+			render json:{success:true}
+		end
+	end
+
 	private
 
 	def find_user

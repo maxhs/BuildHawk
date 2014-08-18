@@ -1,7 +1,4 @@
 $('#navigation a').removeClass('current-page');
 $('#uber-admin-companies-link').addClass('current-page');
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "companies", :locals => {:companies => @companies } %>');
-	$(this).fadeIn(170);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#main').html('<%= j render :partial => "companies", :locals => {:companies => @companies } %>');
+$("html, body").animate({ scrollTop: 0 }, 0);

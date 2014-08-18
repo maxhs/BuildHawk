@@ -1,4 +1,5 @@
 class ConnectController < ApplicationController
+	before_filter :authenticate_user!
 
 	def index
 		# unless user_signed_in?
@@ -19,5 +20,25 @@ class ConnectController < ApplicationController
 				@companies = @items.map{|t| t.worklist.project.company}.uniq
 	      	end
 	    
+	end
+
+	def show
+		@company = Company.find params[:id]
+		@tasks = current_user.connect_items(nil).map{|t| t if t.worklist.project.company.id == @company.id}.compact
+	end
+
+	def task
+		@task = WorklistItem.find params[:id]
+		@project = @task.worklist.project
+		@company = @project.company
+		@tasks = current_user.connect_items(nil).map{|t| t if t.worklist.project.company.id == @company.id}.compact
+		
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :show
+		end
 	end
 end

@@ -3,3 +3,9 @@ var nav = $('<%= j render partial: "projects/project_nav" %>');
 $('#navigation').html(nav);
 $("#main").html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
 $("html, body").animate({ scrollTop: 0 }, 0);
+
+if ($("#dropdown-menu").length){
+	$("#dropdown-menu").replaceWith("<ul id='dropdown-menu'><%= j render partial: 'projects/project_nav'%></ul>");
+} else {
+	$("#dropdown-toggle").after("<ul id='dropdown-menu'><%= j render partial: 'projects/project_nav'%></ul>");
+}

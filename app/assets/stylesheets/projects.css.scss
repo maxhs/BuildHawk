@@ -3,8 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #edit-project {
-	margin: 0 auto;
-	max-width: 800px;
 
 	.edit-header {
 		text-align:center;
@@ -94,7 +92,8 @@
 	}
 
 #company-dashboard {
-	
+	padding:0;
+
 	.alert-table {
 		width:100%;
 		td {
@@ -102,10 +101,15 @@
 		}
 	}
 
+	.company-project:last-child {
+		border-bottom:0;
+	}
+
 	.company-project {
 		background-color:#fff;
 		padding:0px 20px;
 		overflow:auto;
+		border-bottom:1px solid #ccc;
 
 		table {
 			width:100%;

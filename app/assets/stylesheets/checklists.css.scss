@@ -2,10 +2,37 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.project-checklist-table, .admin-checklist-table, .core-checklist-table {
+
+#project-checklist {
+	-webkit-transition: all 0.15s ease;
+	-moz-transition: all 0.15s ease;
+	-ms-transition: all 0.15s ease;
+	-o-transition: all 0.15s ease;
+	transition: all 0.15s ease;
+	width:100%;
+}
+
+#checklist-focus {
+	position:absolute;
+	right:0;
+	margin-left:1%;
+	width:45%;
+	-webkit-transition: all 0.15s ease;
+	-moz-transition: all 0.15s ease;
+	-ms-transition: all 0.15s ease;
+	-o-transition: all 0.15s ease;
+	transition: all 0.15s ease;
+}
+
+.project-checklist-table.border-box, .admin-checklist-table.border-box, .core-checklist-table.border-box {
 	margin-top:40px; 
 	margin:0 auto; 
+	padding-right:0;
 	width:100%;
+
+	#checklist-search {
+		padding-right:20px;
+	}
 
 	#core-checklists, table {
 		width:100%;
@@ -21,8 +48,20 @@
 
 		td {
 			text-align:center;
-			padding:20px;
+			padding:10px 20px;
 			font-size:1em;
+			border:1px solid #eee;
+		}
+
+		.checklist.delete-img {
+			width:15px;
+		}
+
+		.core-checklist-row {
+
+			.checklist-description {
+				text-align:left;
+			}
 		}
 	}
 
@@ -204,7 +243,8 @@
 		border-left: 1px solid #eee;
 		border-radius:20px 0 0 20px;
 		display:none;
-		font-family: "Montserrat","Helvetica",sans-serif;
+		z-index:5;
+		font-family: "Proxima Nova","Source Sans Pro","Helvetica Neue","Helvetica",sans-serif;
 	}
 
 	.checklist.body {
@@ -217,6 +257,7 @@
 		}
 	}
 }
+
 .checklist-item:hover {
 	.left-edit-checklist {
 		display:block;
@@ -238,9 +279,9 @@
 	font-size:1.1em;
 }
 
-.phase-form.container, .category-form.container {
+.phase-form, .category-form {
 	width:100%;
-	max-width:800px;
+	max-width:700px;
 	padding:0 20px;
 	margin:0 auto;
 	overflow:auto;
@@ -346,9 +387,20 @@
 	padding-left:1%;
 	border-left:1px dotted #ddd;
 	
+	.checklist-item.active-item {
+		position:relative;
+		left:2.5%;
+		z-index:5;
+		background:#fff;
+	}
+
 	.checklist-item {
-		border-bottom:1px dotted #ddd;
+		border-bottom:1px solid #ccc;
 	}	
+
+	.checklist-item:first-child {
+		border-top:1px solid #ccc;
+	}
 }
 
 .category {

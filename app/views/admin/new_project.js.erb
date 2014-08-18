@@ -1,6 +1,3 @@
 $('#navigation a').removeClass('current-page');
 $('#new-project-link').addClass('current-page');
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "new_project", :locals => {:project => @project } %>');
-	$(this).fadeIn(100);
-});
+$('#main').html('<%= j render :partial => "new_project", :locals => {:project => @project } %>');

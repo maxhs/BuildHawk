@@ -1,1 +1,6 @@
-$('#main').html('<%= j render :partial => "checklist_item", :locals => {:item => @item } %>');
+$("#project-checklist").css({'width':'54%'});
+$('#checklist-focus').html('<%= j render :partial => "checklist_item", :locals => {:item => @item } %>');
+var offset = $('#item-<%=@item.id %>').offset().top-190;
+console.log('offset '+offset);
+$('#checklist-focus').css('top',offset);
+$("html, body").animate({ scrollTop: offset }, 200);

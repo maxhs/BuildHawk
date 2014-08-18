@@ -6,19 +6,23 @@
 		   		<%= text_field_tag :search, params[:search], :id => "projects-search-form", :placeholder => "Search", :class=>"tt-hint form-control" %>
 			<% end %>
 		</li>
+		<aside id="projects">
 		<% @projects.each do |project| %>
 			<% if project.checklist && project.checklist.item_count > 0 %>
 				<li class="project">
-					<div class="inner-padding">
-						<span class="project-name"><%= link_to project.name, project_path(project), :id=>"#{project.id}-link",remote: true %></span>
-						<span class="percentage"><%= project.checklist.progress_percentage %></span>
-						<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
-					</div>
+					<%= link_to project_path(project),:id=>"#{project.id}-link",remote: true do %>
+						<div class="inner-padding">
+							<span class="project-name"><%= project.name %></span>
+							<span class="percentage"><%= project.checklist.progress_percentage %></span>
+							<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
+						</div>
+					<% end %>
 				</li>
 			<% else %>
 				<li><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></li>
 			<% end %>
 		<% end %>
+	</aside>
 	
 	<% else %>
 		<li style="font-style:italic;color:#aaa;padding:10px 0;text-align:center;font-size:1.1em;font-family:'Gotham Book','Helvetica',sans-serif;margin:5% auto;">No Projects</li>
@@ -32,8 +36,18 @@
 		<% end %>
 	
 	<% end %>
-
 </ul>
+
+<div id="connect-container">
+	<h4>CONNECT</h4>
+	<ul id="connect-sidebar" role="navigation">
+		<% if @companies && @companies.count > 0 %>
+			<%= render partial:"connect/company_li", collection: @companies, as: :company, cache:true %>
+		<% else %>
+			<li style="color:#aaa;font-weight:100;">N/A</li>
+		<% end %>
+	</ul>
+</div>
 	
 <script type="text/javascript">
 	$(function(){
@@ -46,4 +60,19 @@
 			<% end %>
 	    <% end %>
 	})
+	$('#projects').sortable({
+      	axis: 'y',
+      	dropOnEmpty:true,
+      	cursor: 'move',
+      	items: 'li',
+      	opacity: 0.6,
+      	scroll: true,
+      	stop: function(){
+            $.ajax({
+                type: 'post',
+                data: $('#projects').sortable('serialize'),
+                dataType: 'script',
+                url: '/projects/order_projects'})
+            }
+    })
 </script>

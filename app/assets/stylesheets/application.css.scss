@@ -116,8 +116,9 @@ body {
 
 	.border-box {
 		background-color:#fff;
-		border:1px solid #e7e7e7;
+		border:1px solid #ccc;
 		padding:20px;
+		box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
 	}
 
 	.delete-button {
@@ -138,19 +139,6 @@ body {
 		clear:both;
 	}
 
-	#pages {
-		#login-page, #register-page, #forgot-page, #reset-page {
-			margin: 100px auto; 
-			max-width: 350px;
-			padding: 10px;
-		}
-
-		#terms {
-			width:50%;
-			margin:0 auto;
-		}
-	}
-
 	#main-sidebar {
 		z-index:4;
 		min-width:200px;
@@ -160,16 +148,18 @@ body {
 		top:0;
 		left:0;
 		background:#fff;
+		border-right:1px solid #ccc;
 
 		#settings-row{
-			padding:10px 10px 0;
+			padding:9px 10px 0;
 		}
 
 		#projects-search-form {
 			width:100%;
 			margin:9px auto 0;
-			border-top:1px solid #eee;
-			border-bottom:1px solid #eee;
+			border-top:1px solid #ccc;
+			border-bottom:1px solid #ccc;
+			box-shadow: 0 2px 5px -2px rgba(0,0,0,.1);
 			border-right:0;
 			border-left:0;
 		}
@@ -195,7 +185,6 @@ body {
 		#projects-sidebar {
 
 			#search-section {
-				margin-bottom:10px;
 				line-height:10px;
 
 				input {
@@ -212,10 +201,19 @@ body {
 			}
 
 			.project {
-				border-bottom: 1px solid #eee;
-				margin-bottom: 10px;
-				padding: 7px 0;
-				line-height:10px;
+				cursor:default;
+				box-shadow: 0 2px 5px -2px rgba(0,0,0,.1);
+				border-bottom: 1px solid #ccc;
+				padding: 13px 0 7px 0;
+				line-height:13px;
+				-webkit-transition: all 0.17s ease;
+    			-moz-transition: all 0.17s ease;
+    			-o-transition: all 0.17s ease;
+    			transition: all 0.17s ease;
+    			
+    			letter-spacing:1px;
+    			text-transform:uppercase;
+    			font-family: "Myriad Pro","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
 
 				.inner-padding {
 					padding:0 10px;
@@ -223,8 +221,13 @@ body {
 
 				.project-name {
 					float:left;
+					cursor:pointer;
 					width:75%;
 				}
+			}
+
+			.project:hover {
+				background:#eee;
 			}
 
 			.percentage {
@@ -241,14 +244,14 @@ body {
 				-webkit-border-radius:0px;
 				width:100%;
 				height:4px;
-				vertical-align:middle;
+				vertical-align:bottom;
 			}
 
 			.progress-link, .sidebar-progress-link {
 
 				.ui-progressbar-value {
 					margin-top:0;
-					background:#0880ff;
+					background:#336699;
 					border-width:0;
 					border-radius:0px;
 					-moz-border-radius:0px;
@@ -258,12 +261,20 @@ body {
 		}
 
 		#bottom-menu {
-			height:79px;
-			width:100%;
-			position:absolute;
-			bottom:0;
-			outline:1px solid #ddd;
-			display:table;
+			height: 80px;
+			width: 20%;
+			min-width: 200px;
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			border-top: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+			display: table;
+			background:#fff;
+
+			div:first-child {
+				border-right:2px solid #eee;
+			}
 
 			div {
 				display:table-cell;
@@ -272,6 +283,10 @@ body {
 				text-align:center;
 				width:50%;
 				padding:0 10px;
+				-webkit-transition: all 0.17s ease;
+    			-moz-transition: all 0.17s ease;
+    			-o-transition: all 0.17s ease;
+    			transition: all 0.17s ease;
 			}
 		}
 	}
@@ -340,10 +355,10 @@ body {
 		display:table;
 		width:100%;
 		left:20%;
-		z-index:3;
+		z-index:6;
 		background-color: #fff;
-		border-bottom:1px solid #e7e7e7;
-		min-height:44px;
+		border-bottom:1px solid #ccc;
+		height:44px;
 
 		.logo {
 			width:270px;
@@ -366,18 +381,14 @@ body {
 			list-style:none;
 			width:80%;
 			max-width:1300px;
-			height:44px;
+			height:42px;
 
 			li {
 				display:table-cell;
 				width:10%;
 				vertical-align:middle;
 				text-align:center;
-				border-right:1px solid #eee;
-			}
-
-			li:first-child {
-				border-left:1px solid #eee;
+				border-right:1px solid #ccc;
 			}
 
 			li:hover, li:hover a {
@@ -475,7 +486,10 @@ body {
 		padding-top:27px;
 		background-color: #fff;
 		font-size: 11px;
-		border-top:1px solid #e7e7e7;
+		border-top:1px solid #ccc;
+		position:relative;
+		left:20%;
+		width:80%;
 
 		img {
 			padding-top: 25px;
@@ -506,7 +520,7 @@ body {
 		}
 
 		#container {		
-			width:50%;
+			width:70%;
 			max-width:800px;
 			margin: 0 auto;
 			letter-spacing:2px;
@@ -530,7 +544,7 @@ body {
 				position:absolute;
 				right:0;
 				bottom:0;
-				cursore:default;
+				cursor:default;
 			}
 		}
 	}
@@ -641,6 +655,77 @@ body {
 	outline: 0;
 }
 
+#dropdown {
+	display:none;
+}
+
+@media only screen and (max-width: 1080px), only screen and (max-device-width: 1080px) {
+	body {
+		#wrap {
+			overflow:auto !important;
+
+			.navbar {
+				left:200px;
+
+				#navigation {
+					display:none;
+				}
+			}
+
+			#inner-wrap {
+				left:200px;
+				min-width:864px;
+				overflow:scroll;
+			}
+		
+			#dropdown{
+				display:block;
+				position:absolute;
+				left:2%;
+				top:4px;
+				width:100%;
+
+				#dropdown-menu {
+					display:none;
+					position:relative;
+					top:-28px;
+					left:44px;
+					background:white;
+					border:1px solid #ddd;
+					padding:10px;
+					width:50%;
+					max-width:200px;
+
+					li {
+						display:block;
+						border:0;
+						height:30px;
+						a {
+							text-transform:uppercase;
+							font-size:1em;
+							letter-spacing:1px;
+						}
+					}
+				}
+			}	
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//old stuff
 #projects-tab.open {
 	left:285px;
 }
@@ -841,13 +926,15 @@ a.search-button {
 	-moz-border-radius:3px;
 	padding:10px 20px;
 	position:relative;
+	top:1px;
 	display:inline-block;
 	margin:0 10px;
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:'Gotham Book',"Montserrat",'Helvetica',sans-serif;
+	font-family:'Proxima Nova',"Montserrat",'Helvetica',sans-serif;
 	font-size:14px;
+	line-height:14px;
 	letter-spacing:2px;
 	font-weight:normal;
 	text-transform:uppercase;
@@ -884,6 +971,7 @@ a.search-button {
 }
 
 .delete-link:hover {
+
 }
 
 .simple-danger-btn {
@@ -906,12 +994,12 @@ a.search-button {
 	padding:10px 5px;
 	margin-top:2px;
 	min-width:80px;
-	line-height:1.5;
+	line-height:1;
 	text-transform:uppercase;
-	font-family:'Gotham Book','Helvetica',sans-serif;
-	border-radius:3px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
+	font-family:'Proxima Nova','Source Sans Pro','Helvetica',sans-serif;
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
 }
 
 .btn-success {

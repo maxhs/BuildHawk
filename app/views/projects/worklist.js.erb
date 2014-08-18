@@ -1,5 +1,5 @@
 $('#main').html('<%= j render :partial => "projects/worklist" %>');
-$("html, body").animate({ scrollTop: 0 }, 300);
+$("html, body").animate({ scrollTop: 0 }, 0);
 
 if (history && history.pushState){
     history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/worklist');
@@ -7,3 +7,4 @@ if (history && history.pushState){
       $.getScript(location.href);
     });
 }
+closeMenu();

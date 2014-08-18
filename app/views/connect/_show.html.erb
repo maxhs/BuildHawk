@@ -1,0 +1,10 @@
+<div class="tasks border-box">
+	<h4><%= company.name %> Tasks</h4>
+	<%= render partial:"connect/tasks", collection: tasks, as: :task, cache: true %>
+</div>
+
+<div id="task-focus" class"border-box">
+	<% if @task %>
+		<%= render partial:'connect/task', locals: {task:@task} %>
+	<% end %>
+</div>

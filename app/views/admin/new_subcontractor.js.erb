@@ -1,13 +1,7 @@
 if ($('#add-sub-section').length){
-	$('#add-sub-section').fadeOut(100,function(){
-		$(this).html('<%= j render :partial => "new_subcontractor", :locals => {:subcontractor => @subcontractor } %>');
-		$(this).fadeIn(100);
-		$("html, body").animate({ scrollTop: 0 }, 300);
-	});
+	$('#add-sub-section').html('<%= j render :partial => "new_subcontractor", :locals => {:subcontractor => @subcontractor } %>');
+	$("html, body").animate({ scrollTop: 0 }, 0);
 } else {
-	$('#main').fadeOut(100,function(){
-		$(this).html('<div class="border-box"><h3>Add New Subcontractor</h3><%= j render :partial => "new_subcontractor", :locals => {:subcontractor => @subcontractor } %></div>');
-		$(this).fadeIn(100);
-		$("html, body").animate({ scrollTop: 0 }, 300);
-	});
+	$('#main').html('<div class="border-box"><h3>Add New Subcontractor</h3><%= j render :partial => "new_subcontractor", :locals => {:subcontractor => @subcontractor } %></div>');
+	$("html, body").animate({ scrollTop: 0 }, 0);
 }

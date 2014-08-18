@@ -8,7 +8,7 @@ if (itemsHolder.hasClass('revealed')){
 } else {
 	$('html, body').animate({
         scrollTop: $('#phase-<%=@phase.id %>').offset().top-50
-    }, 1000);
+    }, 600);
 	itemsHolder.fadeOut(200,function(){
 		<% if @project %>
 			$(this).html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category", remote: true %>');

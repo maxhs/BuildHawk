@@ -2,3 +2,4 @@ $('#top-nav a').removeClass('current-page');
 $('#<%=@project.id%>-link').addClass('current-page');
 $('#<%= @nav %>, .nav-documents a').addClass('current-page');
 $('#main').html('<%= j render :partial => "documents" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);

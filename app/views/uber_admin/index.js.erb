@@ -1,18 +1,8 @@
 $('a').removeClass('current-page');
-
 var nav = $('<%= j render partial: "uber_admin/top_nav" %>');
-$('#navigation').fadeOut(170,function(){
-	$(this).html(nav);
-	$(this).fadeIn(170);
-});
-
-$('#inner-wrap').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(170,function(){
-		closeMenu();
-	});
-	$("html, body").animate({ scrollTop: 0 }, 300);
-	$('#nav-uber-admin a').addClass('current-page');
-	$('#uber-admin-companies-link').addClass('current-page');
-});
+$('#navigation').html(nav);
+$('#inner-wrap').html('<%= j render :partial => "index" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);
+$('#nav-uber-admin a, #uber-admin-link').addClass('current-page');
+$('#uber-admin-companies-link').addClass('current-page');
 mixpanel.track("Uber admin");
