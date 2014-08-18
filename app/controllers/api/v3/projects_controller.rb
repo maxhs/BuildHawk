@@ -148,13 +148,14 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             elsif phone
                 connect_user = ConnectUser.where(:phone => phone).first_or_create
             end
+            puts "do we now have a connect user from the add user section? #{connect_user}"
 
             connect_user.update_attributes params[:user]
             project.project_users.where(:connect_user_id => connect_user.id).first_or_create
             company.connect_users << connect_user if company
 
             if task
-                puts "task add user shit"
+                puts "we had a task for the connect user section"
                 if email
                     connect_user.email_task(task)
                 elsif phone
