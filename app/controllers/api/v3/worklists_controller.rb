@@ -8,7 +8,7 @@ class Api::V3::WorklistsController < Api::V3::ApiController
             worklist = project.worklists.create
         end
         respond_to do |format|
-            format.json { render_for_api :worklist, :json => worklist, :root => :punchlist}
+            format.json { render_for_api :worklist, :json => worklist, :root => :worklist}
         end
     end
 
@@ -20,7 +20,7 @@ class Api::V3::WorklistsController < Api::V3::ApiController
     		worklist = project.worklists.create
     	end
     	respond_to do |format|
-        	format.json { render_for_api :worklist, :json => worklist, :root => :punchlist}
+        	format.json { render_for_api :worklist, :json => worklist, :root => :worklist}
       	end
     end
 end
