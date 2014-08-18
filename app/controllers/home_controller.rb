@@ -18,13 +18,14 @@ class HomeController < ApplicationController
 	end
 
 	def about
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :about
-		end
+		redirect_to root_url
+		# if request.xhr?
+		# 	respond_to do |format|
+		# 		format.js
+		# 	end
+		# else
+		# 	render :about
+		# end
 	end
 
 	def privacy
