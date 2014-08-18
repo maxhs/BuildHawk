@@ -159,8 +159,15 @@ form.edit_photo {
 }
 
 .edit-folder {
-	cursor:pointer;
-	margin-left:2em;
+	cursor: pointer;
+	position: relative;
+	top: 2px;
+	font-size: .85em;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	float: right;
+	line-height: 8px;
+	margin: 0;
 }
 
 .edit-folder:hover {
@@ -182,9 +189,7 @@ form.edit_photo {
 	padding:0;
 	list-style:none;
 	display:table;
-	font-size:14px;
 	letter-spacing:1px;
-	font-family:"Gotham Book","Helvetica Neue","helvetica",sans-serif;
 
 	li {
 		width:20%;
@@ -193,7 +198,9 @@ form.edit_photo {
 		vertical-align:middle;
 		text-align:center;
 		border-right:1px solid #eee;
+
 		a {
+			font-family:"Proxima Nova","Myriad Pro","Source Sans Pro","Helvetica Neue","helvetica",sans-serif;
 			text-transform:uppercase;
 		}
 	}
@@ -223,8 +230,9 @@ form.edit_photo {
 		}
 
 		.photo-name {
-			font-size:1.1em;
-			padding:3px 0 1px 15px;
+			border:1px solid #eee;
+			padding:5px 5px 3px;
+			margin-top:-1px;
 
 			.no-name {
 				font-style:italic;
@@ -239,7 +247,6 @@ form.edit_photo {
 			}
 		}
 	}
-	
 }
 
 #photo-focus {

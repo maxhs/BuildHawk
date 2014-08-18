@@ -7,6 +7,7 @@ class WorklistItemsController < ApplicationController
 		@item.photos.build
 		@item.build_assignee
 		@project = Project.find params[:project_id]
+		@worklist = @project.worklists.last
 		@company = @project.company
 		@projects = @company.projects
 		@connect_users = @project.connect_users
@@ -151,10 +152,10 @@ class WorklistItemsController < ApplicationController
 
 	def find_company
 		@item = WorklistItem.find params[:id] if params[:id]
-		unless user_signed_in?# && (@item.worklist.project.project_users.include?(current_user) || @item.assignee == current_user)
+		if !user_signed_in?# && (@item.worklist.project.project_users.include?(current_user) || @item.assignee == current_user)
 			redirect_to projects_path
 			flash[:notice] = "You don't have access to this task".html_safe
-		else	
+		elsif @item	
 			@worklist = @item.worklist
 			@project = @worklist.project
 			@items = @worklist.worklist_items
@@ -163,7 +164,6 @@ class WorklistItemsController < ApplicationController
 			@users = @project.users
 			@connect_users = @project.connect_users
 			@subs = @project.project_subs
-		
 		end
 	end
 end

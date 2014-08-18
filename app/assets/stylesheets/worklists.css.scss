@@ -2,6 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/	
 
+.new-task {
+	float:left;
+	margin:0 20px 0 0;
+	border-color:#eee;
+}
+
+.new-task:hover {
+	border-color:#ddd;
+}
+
+#worklist-search {
+	width:70%;
+	input[type="text"] {
+		height:42px;
+		border-color:#eee;
+	}
+}
+
 #worklist-table {
 	margin-bottom:0;
 

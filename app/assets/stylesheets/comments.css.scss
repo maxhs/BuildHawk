@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .comment-container {
-	max-width:800px;
 	margin:0 auto;
 	
 	textarea {
@@ -14,6 +13,7 @@
 
 .comment-container.border-box {
 	padding-top:10px;
+	margin-top:10px;
 }
 
 #comments-table {

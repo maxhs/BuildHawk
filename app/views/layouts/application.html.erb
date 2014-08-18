@@ -53,10 +53,34 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
     <p class="alert" id="alert"><%= alert %></p>
 
     <div id="wrap">
+
+    	<% if user_signed_in? %>
+			<nav id="main-sidebar">
+				<div id="settings-row">
+					<a href="/"><%= image_tag 'logo.png', id: "logo" %></a>
+				</div>
+				
+				<% if @projects %>
+					<%= render partial: "projects/sidebar" %>
+				<% end %>
+				
+				<div id="bottom-menu">
+					<div style="border-right:1px solid #ddd;">
+						<%= link_to image_tag('settings.png', id: "settings"),edit_user_path(current_user), remote:true %>
+					</div>
+					<div style="">
+						<% if current_user.any_admin? %>
+							<h5><%= link_to "Admin", admin_index_path, remote: true %></h5>
+						<% end %>
+					</div>
+				</div>
+			</nav>
+		<% end %>
+
 		<div class="navbar navbar-fixed-top <% if !user_signed_in? && (current_page?(root_url) || current_page?(login_path) )%>splash<% end %>" id="top-nav">
 			<ul id="navigation">
 				<% if !user_signed_in? %>
-					<li class="logo"><a href="/"><%= image_tag('logo.png') %></a></li>
+					
 					<% if current_page?(root_url) %>
 						<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
 						<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
@@ -82,37 +106,11 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			<div id="inner-wrap">
 				<%= yield %>
 			</div>
-				
 		<% else %>
 			<%= yield %>
 		<% end %>
 		<div id="push"></div>
 	</div>
-
-<% if user_signed_in? %>
-	<div id="projects-tab">Projects</div>
-	<nav id="bh-menu" class="bh-menu">
-		<ul id="internal-nav">
-		<% if current_user.any_admin? %>
-			<li><%= link_to "Admin", admin_index_path, remote: true %></li>
-			<% if current_user.uber_admin? %>
-				<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
-			<% end %>
-			<li><%= link_to "Messages", messages_path, remote:true %></li>
-		<% end %>
-			<li><%= link_to "BuildHawk Connect", connect_index_path, remote:true %></li>
-		</ul>
-	<% end %>
-	<ul id="credentials">
-		<% if user_signed_in? %>
-			<li>
-				<%= link_to current_user.full_name, edit_user_path(current_user), :id => "settings-link", :class=>"font-smoothing", :remote => true %>
-			</li>
-		<% end %>
-	</ul>
-	<% if @projects %><%= render partial: "projects/sidebar" %><% end %>
-</nav>
-
 <footer>
 	<div id="container">
 		<ul>
@@ -132,7 +130,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		setupWindow();
 		$.ajaxSetup({ cache: false });
 		datetimepickers();
-		<% if user_signed_in? %>sideMenu();<% end %>
+		
 	});
 </script>
 </body>

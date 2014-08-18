@@ -2,6 +2,18 @@
 <%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
 	<div id="edit-report" class="border-box container">
+
+		<% if @previous %>
+			<div class="previous-report">
+				<h4><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
+			</div>
+		<% end %>
+		<% if @next %>
+			<div class="next-report">
+				<h4><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
+			</div>
+		<% end %>
+
 		<div class="simple-btn export" style="float:right;"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></div>
 		<div class="thin-form">
 			<div class="row form-title" style="border:0;margin-top:0;padding-top:0">
@@ -144,18 +156,7 @@
 		</div>
 </div>
 
-<% if @previous %>
-	<div class="previous-report">
-		<h4><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
-	</div>
-<% end %>
-<% if @next %>
-	<div class="next-report">
-		<h4><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
-	</div>
-<% end %>
-
-<div class="border-box comment-container" style="margin-top:20px;">
+<div class="border-box comment-container">
 	<h3 style="text-align:center; margin:20px auto; display:block;">Comments</h3>
 	<div id="comments-form">
 		<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
@@ -169,12 +170,12 @@
 </div>
 
 <% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
-	<div class="border-box activity-container" style="margin-top:20px;">
+	<div class="border-box activity-container">
 		<h3 style="text-align:center; margin:20px auto; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h3>
 		<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
 	</div>
-<% elsif @report.activities.count %>
-	<div class="border-box activity-container" style="margin-top:20px;">
+<% elsif @report.activities.count > 0 %>
+	<div class="border-box activity-container">
 		<h3 style="text-align:center; margin:20px auto; display:block;">Activity</h3>
 		<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
 	</div>

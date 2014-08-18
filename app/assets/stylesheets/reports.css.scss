@@ -2,6 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.new-report {
+	float:left;
+	margin:0 20px 0 0;
+	border-color:#eee;
+}
+
+.new-report:hover {
+	border-color:#ddd;
+}
+
+#reports-search {
+	width:70%;
+	input[type="text"] {
+		height:42px;
+		border-color:#eee;
+	}
+}
+
 #project-reports {
 	border:1px solid #eee;
 	
@@ -26,10 +44,8 @@
 }
 
 #add-report, #edit-report {
-	max-width:800px;
-	margin:0 auto;
-	position:relative;
 	z-index:2;
+	padding:60px 20px 20px;
 
 	h4 {
 		text-align:left;	
@@ -81,20 +97,22 @@
 }
 
 .previous-report, .next-report{
-	position:fixed;
-	top:45%;
-	z-index:1;
-	a {
-		color:#444;
-	}
+	position:absolute;
+	top:0;
+	z-index:1;	
+	border-bottom:1px solid #ddd;
+	padding-left:20px;	
+	padding-right:20px;	
 }
 
 .previous-report{
-	left:5%;	
+	left:0;
+	border-right:1px solid #ddd;
 } 
 
 .next-report {
-	right:5%;
+	right:0;
+	border-left:1px solid #ddd;
 }
 
 .delete-report-link {

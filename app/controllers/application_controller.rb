@@ -3,8 +3,21 @@ class ApplicationController < ActionController::Base
     # For APIs, you may want to use :null_session instead.
     protect_from_forgery with: :exception
     #after_filter :store_location
+    before_filter :user_projects
     before_filter :detect_redirect
     before_filter :configure_permitted_parameters, if: :devise_controller?
+
+    def user_projects
+        if user_signed_in?
+            if current_user.any_admin?
+                @projects = current_user.company.projects
+                @archived_projects = current_user.project_users.where(:archived => true).map(&:project)
+            else
+                @projects = current_user.project_users.where(:archived => false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq
+                @archived_projects = current_user.project_users.where(:archived => true).map(&:project).compact.uniq
+            end
+        end
+    end
 
     def detect_redirect
         if params[:m]

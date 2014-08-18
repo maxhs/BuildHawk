@@ -1,14 +1,15 @@
 <div class="border-box" style="padding:20px;overflow:auto;">
 	<header>
 		<div style="margin-bottom: 15px">
+			 
+			<%= link_to "+ New Task", new_worklist_item_path(:project_id => @project.id), :class=>"simple-btn new-task", remote: true %>
+
 			<%= form_tag search_worklist_project_path(@project), :id => "worklist-search", :method => :post, :class=>"input-group", :remote => true do %>
 				<%= text_field_tag :search, nil, :placeholder=>"Search tasks...", :class=>"form-control" %>
 				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
 			<% end %>
 		</div>
-		<div style="width:100%;text-align:center;">
-			<%= link_to "Add a new task", new_worklist_item_path(:project_id => @project.id), :class=>"simple-btn search-button", remote: true %>
-		</div>
+		
 	</header>
 	<div id="project-worklist">	
 		<div id="worklist-table">
@@ -35,6 +36,8 @@
 	</div>
 </div>
 <script>
+	$('#top-nav a').removeClass('current-page');
+	$('.nav-worklists a,#<%=@project.id%>-link').addClass('current-page');
 	$('#remove').click(function(){
 		$('#search').val('');
 		$('#worklist-search').submit();

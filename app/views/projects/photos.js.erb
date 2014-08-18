@@ -1,8 +1,5 @@
 $('#filters a').removeClass('current-page');
 $('#<%= @nav %>').addClass('current-page');
-$('#photo-table').fadeOut(200);
-$('#photo-focus').fadeOut(170,function(){
-	$(this).html('<% if @photos && @photos.count > 0 %><%= j render :partial => "photos/image", collection: @photos, as: :p, cache: true %><% else %><div class="no-image-placeholder">No Documents</div><% end %>');
-	$(this).addClass('full-focus');
-	$(this).fadeIn(170);
-});
+$('#photo-table').fadeOut(0);
+$('#photo-focus').html('<% if @photos && @photos.count > 0 %><%= j render :partial => "photos/image", collection: @photos, as: :p, cache: true %><% else %><div class="no-image-placeholder">No Documents</div><% end %>');
+$('#photo-focus').addClass('full-focus');

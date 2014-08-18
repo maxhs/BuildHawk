@@ -1,4 +1,3 @@
-<li class="logo"><a href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
 <li class="nav-dashboard admin"><%= link_to @project.name, project_path(@project), :remote => true %></li>
 <li class="nav-checklists admin"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
 <li class="nav-documents admin"><%= link_to "Documents", document_photos_project_path(@project), :remote => true %></a></li>

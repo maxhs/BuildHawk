@@ -1,10 +1,6 @@
-$('#top-nav a').removeClass('current-page');
-$('.nav-worklists a,#<%=@project.id%>-link').addClass('current-page');
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/worklist" %>');
-	$(this).fadeIn(170);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#main').html('<%= j render :partial => "projects/worklist" %>');
+$("html, body").animate({ scrollTop: 0 }, 300);
+
 if (history && history.pushState){
     history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/worklist');
     $(window).bind("popstate", function(){

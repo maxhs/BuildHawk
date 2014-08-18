@@ -151,6 +151,131 @@ body {
 		}
 	}
 
+	#main-sidebar {
+		z-index:4;
+		min-width:200px;
+		height:100%;
+		width:20%;
+		position:fixed;
+		top:0;
+		left:0;
+		background:#fff;
+
+		#settings-row{
+			padding:10px 10px 0;
+		}
+
+		#projects-search-form {
+			width:100%;
+			margin:9px auto 0;
+			border-top:1px solid #eee;
+			border-bottom:1px solid #eee;
+			border-right:0;
+			border-left:0;
+		}
+
+		ul {
+			li {
+				list-style:none;
+			}
+		}
+
+		#logo {
+			padding-bottom:0;
+			width:177px;
+			text-align:center;
+		}
+
+		#settings {
+			position:relative;
+			top:1px;
+			width:22px;
+		}
+
+		#projects-sidebar {
+
+			#search-section {
+				margin-bottom:10px;
+				line-height:10px;
+
+				input {
+					padding:0 10px;
+					height:44px;
+				}
+
+				input.form-control:focus, input.form-control:active {
+					box-shadow:0 0 0 0;
+					-webkit-box-shadow:0 0 0 0;
+					-moz-box-shadow:0 0 0 0;
+					background:#f7f7f7;
+				}
+			}
+
+			.project {
+				border-bottom: 1px solid #eee;
+				margin-bottom: 10px;
+				padding: 7px 0;
+				line-height:10px;
+
+				.inner-padding {
+					padding:0 10px;
+				}
+
+				.project-name {
+					float:left;
+					width:75%;
+				}
+			}
+
+			.percentage {
+				float:right;
+				width: 25%;
+				vertical-align: middle;
+				text-align: center;
+			}
+			.ui-progressbar {
+				display:inline-block;
+				border:1px solid #fff;
+				border-radius:0px;
+				-moz-border-radius:0px;
+				-webkit-border-radius:0px;
+				width:100%;
+				height:4px;
+				vertical-align:middle;
+			}
+
+			.progress-link, .sidebar-progress-link {
+
+				.ui-progressbar-value {
+					margin-top:0;
+					background:#0880ff;
+					border-width:0;
+					border-radius:0px;
+					-moz-border-radius:0px;
+					-webkit-border-radius:0px;
+				}
+			}
+		}
+
+		#bottom-menu {
+			height:79px;
+			width:100%;
+			position:absolute;
+			bottom:0;
+			outline:1px solid #ddd;
+			display:table;
+
+			div {
+				display:table-cell;
+				vertical-align:middle;
+				height:100%;
+				text-align:center;
+				width:50%;
+				padding:0 10px;
+			}
+		}
+	}
+
 	#wrap {
 		height: auto !important;
 		min-height:100%;
@@ -160,7 +285,12 @@ body {
 		margin:0 auto -80px;
 
 		#inner-wrap {
-			padding: 70px 40px 0;
+			top:44px;
+			padding:10px;
+			width:80%;
+			left:20%;
+			margin-bottom:20px;
+			position:relative;
 		}
 
 		#main {
@@ -209,9 +339,11 @@ body {
 	.navbar-fixed-top {
 		display:table;
 		width:100%;
+		left:20%;
 		z-index:3;
 		background-color: #fff;
 		border-bottom:1px solid #e7e7e7;
+		min-height:44px;
 
 		.logo {
 			width:270px;
@@ -232,15 +364,20 @@ body {
 		#navigation {
 			display:table;
 			list-style:none;
-			width:100%;
+			width:80%;
 			max-width:1300px;
-			height:50px;
+			height:44px;
 
 			li {
 				display:table-cell;
-				padding:0 20px 0 0;
+				width:10%;
 				vertical-align:middle;
+				text-align:center;
+				border-right:1px solid #eee;
+			}
 
+			li:first-child {
+				border-left:1px solid #eee;
 			}
 
 			li:hover, li:hover a {
@@ -248,11 +385,13 @@ body {
 			}
 
 			a {
-				font-size:1.25em;
-				vertical-align:middle;
+				position:relative;
+				top:2px;
 				font-weight:normal;
 				text-transform:uppercase;
 				letter-spacing:2px;
+				font-size:.9em;
+				font-family: "Proxima Nova","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
 			}
 
 			a:hover {
@@ -670,9 +809,9 @@ body {
 }
 
 input[type="email"], input[type="password"], input[type="text"], textarea {
-	border-radius:3px;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
+	border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
 	box-shadow:0 0 0 0 transparent;
 	-moz-box-shadow:0 0 0 0 transparent;
 	-webkit-box-shadow:0 0 0 0 transparent;
@@ -692,8 +831,7 @@ select[multiple] {
 
 a.search-button {
 	color: #000 !important;
-	width: 24%;
-	margin: 0 auto 15px;
+	margin: 0 auto;
 }
 
 .simple-btn {
@@ -954,7 +1092,7 @@ body {
 }
 
 .ui-widget {
-	border-color:#ccc !important;
+	border-color:#ccc;
 	font-siez:1em;
 	list-style:none;
 	font-family:'Helvetica Neue','Helvetica','Arial',sans-serif !important;
@@ -1262,6 +1400,14 @@ body {
          asset-url('sourcesanspro-black-webfont.ttf') format('truetype'),
          asset-url('sourcesanspro-black-webfont.svg#source_sans_prosemibold') format('svg');
     font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: font-url('ProximaNova-Reg.otf') format('otf'),
+         asset-url('ProximaNova-Reg.ttf') format('truetype');
+    font-weight: normal;
     font-style: normal;
 }
 

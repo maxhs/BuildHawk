@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #item-container {
-	max-width:800px;
 	margin:0 auto;
 	position:relative;
 
@@ -11,6 +10,7 @@
 		background:transparent;
 		position:absolute;
 		right:20px;
+		top:60px;
 		margin:0;
 	}
 }

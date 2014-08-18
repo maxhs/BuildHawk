@@ -108,6 +108,8 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
+			$('a').removeClass('current-page');
+			$('#<%=@project.id%>-link, .nav-dashboard.admin a').addClass('current-page');
 			Shadowbox.clearCache();
 		    Shadowbox.setup(".shadow-photo", {});
 		});

@@ -2,15 +2,6 @@ $('a').removeClass('current-page');
 $('#nav-admin a').addClass('current-page');
 $('#alert').fadeOut(400);
 var nav = $('<%= j render partial: "admin/top_nav" %>');
-$('#navigation').fadeOut(170,function(){
-	$(this).html(nav);
-	$(this).fadeIn(170);
-});
-
-$('#inner-wrap').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(100,function(){
-		closeMenu();
-	});
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#navigation').html(nav);
+$('#inner-wrap').html('<%= j render :partial => "index" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);

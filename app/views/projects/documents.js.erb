@@ -1,9 +1,7 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-documents a,#<%=@project.id%>-link').addClass('current-page');
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "documents", :locals => {:photos => @photos } %>');
-	$(this).fadeIn(170);
-});
+$('#main').html('<%= j render :partial => "documents", :locals => {:photos => @photos } %>');
+
 $(document).ready(function(){
 	Shadowbox.clearCache();
     Shadowbox.setup(".shadow-photo", {});

@@ -28,10 +28,12 @@
 				</div>
 			<% end %>
 			
-		    <div class="row personnel">
-		    	<div class="col-xs-3"><h4>Project Group</h4></div>
-		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id) %></div>
-		    </div>
+			<% if @project_groups %>
+			    <div class="row personnel">
+			    	<div class="col-xs-3"><h4>Project Group</h4></div>
+			    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id) %></div>
+			    </div>
+		    <% end %>
 
 		    <div class="row personnel">
 		    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>

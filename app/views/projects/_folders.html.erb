@@ -3,7 +3,7 @@
 		<%= render partial: "folders/folder", collection: @folders, as: :folder, cache: false %>
 	</ul>
 <% end %>
-<div id="add-folder-link">ADD NEW FOLDER</div>
+<div id="add-folder-link">+ FOLDER</div>
 <script type="text/javascript">
 	$('#add-folder-link').on('click',function(){
 		$(this).fadeOut(200,function(){

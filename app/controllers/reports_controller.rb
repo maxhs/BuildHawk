@@ -191,5 +191,6 @@ class ReportsController < ApplicationController
 			@project_users = @project.project_users
 			@subs = @project.companies.sort_by!(&:name)
 		end
+		puts "project user count: #{@project_users.count}"
 	end
 end
