@@ -1,4 +1,4 @@
-class PromoCodesController < ApplicationController
+class PromoCodesController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_code
 

@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < AppController
 	before_filter :authenticate_user!
 
 	def new

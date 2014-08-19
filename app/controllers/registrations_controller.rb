@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+    layout "application", only:[:connect]
     def new
         super
     end

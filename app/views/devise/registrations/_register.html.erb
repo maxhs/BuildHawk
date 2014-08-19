@@ -1,11 +1,15 @@
 <div id="connect-form">
-	<ul id="connect-progress">
-		<li class="active">Confirm Details</li>
-		<li>Choose Password</li>
-		<li>Confirm Company</li>
+	<ul id="connect-progress" class="border-box">
+		<li class="active">Basic Info</li>
+		<li>Password</li>
+		<li>Company</li>
 	</ul>
 	<div id="errors"></div>
 <%= form_for user, url: registration_path(user), method: :post,:html => {:autocomplete => "off"} do |f| %>
+<!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+<input style="display:none" type="text" name="fakeusernameremembered"/>
+<input style="display:none" type="password" name="fakepasswordremembered"/>
+
 <%= devise_error_messages! %>
 	<fieldset id="info">
 		<h3 class="fs-title">Is Your Information Correct?</h3>
@@ -19,29 +23,28 @@
 			<%= f.text_field :phone, :placeholder => "Your phone number", autocomplete:"off" %>
 		<% end %>
 			<!--<div style="width:49%;display:inline-block;text-align:center;"><a onclick>No</a> </div>-->
-			<input type="button" name="no" onclick="editfields();" class="no action-button" value="No" />
+			<input type="button" name="no" onclick="editfields();" class="previous action-button" value="No" />
 			<input type="button" name="yes" class="next action-button" value="Yes" />
 	</fieldset>
 	<fieldset id="password">
 		<h2 class="fs-title">Choose a password</h2>
 		<%= f.password_field :password, :placeholder => "Choose a password", :autocomplete => "off" %>
-		<%= f.password_field :password_confirmation, :placeholder => "Click here to confirm your password", :autocomplete => "off" %>
+		<%= f.password_field :password_confirmation, :placeholder => "Confirm your password", :autocomplete => "off" %>
 		<input type="button" name="previous" class="previous action-button" value="Back" />
 		<input type="button" name="next" class="next submit action-button" value="Next" />
 	</fieldset>
 <% end %>
 
 	<%= form_tag search_companies_path, :id => "companies-search", :method => :post, :class=>"input-group", :style=>"width:100%;", :remote => true do %>
+
 		<fieldset id="company">
-			<h2 class="fs-title">Confirm your company</h2>
 			<%= text_field_tag :search, user.company.name, :placeholder=>"Search for your company...", :style=>"border:1px solid #ddd;width:90%;float:left;",:class=>"form-control" %>
 			<span class="input-group-addon" style="cursor: pointer;width:auto;border:0;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
-			<div style="color:#aaa;width:100%;text-align:center; margin:15px auto 10px;font-size:1.1em;" class="font-smoothing">(Click to confirm your company)</div>
-
 			<div id="search-results">
 				<%= render partial:"companies/company", locals:{user: user}, collection: companies, as: :company, cache:true %>
 			</div>
-			<input type="button" name="previous" class="previous action-button" value="Back" />
+			<input type="button" name="previous" class="previous action-button" value="Back" style="float:left" />
+			<div class="fs-title font-smoothing" style="line-height:61px;color:#aaa;text-align:center;">Click your company to confirm</h2>
 		</fieldset>
 	<% end %>
 </div>
@@ -71,6 +74,7 @@
 		} else if ($(this).parent().is(password)){
 			var userPassword = document.getElementById('user_password');
 			var userPasswordConfirmation = document.getElementById('user_password_confirmation');
+			$('#errors').text("");
 			if (userPassword.value.length === 0){
 				$('#errors').text("Please make sure you've entered a password before continuing.").fadeIn(200);
 			} else if (userPasswordConfirmation.value.length === 0){
@@ -119,6 +123,13 @@
 		animating = true;
 		
 		if ($(this).parent().is(info)){
+			var span = document.getElementById("errors");
+			txt = document.createTextNode('Please add your basic info and then click "Yes".');
+			span.innerText = txt.textContent;
+			animating = false;
+			setTimeout(function(){
+				//document.getElementById("errors").innerHTML = '';
+			}, 4000);
 			return;
 		} else if ($(this).parent().is(password)){
 			current_fs = password;

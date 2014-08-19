@@ -1,4 +1,4 @@
-class PhotosController < ApplicationController
+class PhotosController < AppController
 
 	def index
 		@project = Project.find params[:project_id]

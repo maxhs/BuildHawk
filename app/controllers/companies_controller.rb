@@ -1,4 +1,4 @@
-class CompaniesController < ApplicationController
+class CompaniesController < AppController
 	before_filter :authenticate_user!, :except => [:create, :search]
 
 	def index

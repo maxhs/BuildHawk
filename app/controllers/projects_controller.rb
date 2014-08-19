@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class ProjectsController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_user
 	before_filter :find_project

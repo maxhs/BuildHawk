@@ -1,4 +1,4 @@
-class ChargesController < ApplicationController
+class ChargesController < AppController
 	before_filter :authenticate_user!
 	def index
 		company = current_user.company

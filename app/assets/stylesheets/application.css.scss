@@ -358,6 +358,7 @@ body {
 		z-index:6;
 		background-color: #fff;
 		border-bottom:1px solid #ccc;
+		box-shadow: 0 0px 2px 0 rgba(255,255,255,1);
 		height:44px;
 
 		.logo {
@@ -380,7 +381,6 @@ body {
 			display:table;
 			list-style:none;
 			width:80%;
-			max-width:1300px;
 			height:42px;
 
 			li {
@@ -487,6 +487,7 @@ body {
 		background-color: #fff;
 		font-size: 11px;
 		border-top:1px solid #ccc;
+		box-shadow: 0 0px 2px 0 rgba(255,255,255,1);
 		position:relative;
 		left:20%;
 		width:80%;
@@ -547,6 +548,11 @@ body {
 				cursor:default;
 			}
 		}
+	}
+
+	.full {
+		left:0 !important;
+		width:100% !important;
 	}
 
 	// button to clear searches
