@@ -1,4 +1,4 @@
-class PhasesController < ApplicationController
+class PhasesController < AppController
 	before_filter :authenticate_user!
 	def new
 		@checklist = Checklist.find params[:checklist_id] if params[:checklist_id]

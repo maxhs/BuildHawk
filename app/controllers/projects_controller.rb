@@ -157,14 +157,20 @@ class ProjectsController < AppController
 
 	def checklist_item
 		@item = ChecklistItem.find params[:item_id]
-		category = @item.category
-		@next = category.checklist_items.where(:order_index => @item.order_index+1).first
-		@previous = category.checklist_items.where(:order_index => @item.order_index-1).first
+		@category = @item.category
+		@phase = @category.phase
+		@categories = @phase.categories
+		@checklist = @phase.checklist
+		@project = @checklist.project
+
+		#category = @item.category
+		#@next = category.checklist_items.where(:order_index => @item.order_index+1).first
+		#@previous = category.checklist_items.where(:order_index => @item.order_index-1).first
 	end  
 
 	def worklist
 		@worklist = @project.worklists.first_or_create
-		@items = @worklist.worklist_items
+		@tasks = @worklist.worklist_items
 	end
 
 	def search_worklist
@@ -175,10 +181,10 @@ class ProjectsController < AppController
 				fulltext search_term
 				with :project_id, params[:id]
 			end
-			@items = initial.results.uniq
+			@tasks = initial.results.uniq
 			@prompt = "No search results"
 		else
-			@items = @project.worklists.map(&:worklist_items).flatten.sort_by{|r| r.created_at}
+			@tasks = @project.worklists.map(&:worklist_items).flatten.sort_by{|r| r.created_at}
 		end
 
 		if request.xhr?
@@ -235,7 +241,7 @@ class ProjectsController < AppController
 		@photos = @project.photos.where(:source => "Worklist").order('created_at DESC')
 		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
-		@nav = "worklist-photos-nav"
+		@nav = "tasks-hotos-nav"
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/photos"}

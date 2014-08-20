@@ -1,6 +1,13 @@
-$('#main').html('<%= j render :partial => "worklist_items/edit" %>');
-	
 var locations = <%= raw @locations.to_json %>; 
 $('#worklist_item_location').autocomplete({
   	source: locations
 });
+
+$("#project-tasks").addClass('tasks-panel');
+$('#task-focus').html('<%= j render :partial => "worklist_items/edit", :locals => {:task => @task } %>');
+var offset = $('#task-<%=@task.id %>').offset().top-180;
+if (offset<=0){
+	offset = 0;
+}
+$('#task-focus').css('top',offset);
+$("html, body").animate({ scrollTop: offset }, 120);

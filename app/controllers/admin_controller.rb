@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class AdminController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_user
 	require 'stripe'
@@ -237,14 +237,17 @@ class AdminController < ApplicationController
 		end
 	  	active_projects = @company.projects.where(:active => true).count
 	  	@amount = active_projects * 1000 / 100
+
+	  	@stripe_key = Rails.configuration.stripe[:publishable_key]
 	end
 
 	def edit_billing
-
+		@stripe_key = Rails.configuration.stripe[:publishable_key]
 	end
 
 	def update_billing
 		token = params[:stripeToken]
+		@stripe_key = Rails.configuration.stripe[:publishable_key]
 		if @company.customer_token
 			customer = Stripe::Customer.retrieve(@company.customer_token)
 			customer.card = token

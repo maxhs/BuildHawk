@@ -4,12 +4,16 @@
 
 
 #project-checklist {
-	-webkit-transition: all 0.15s ease;
-	-moz-transition: all 0.15s ease;
-	-ms-transition: all 0.15s ease;
-	-o-transition: all 0.15s ease;
-	transition: all 0.15s ease;
+	-webkit-transition: all 0.15s;
+	-moz-transition: all 0.15s;
+	-ms-transition: all 0.15s;
+	-o-transition: all 0.15s;
+	transition: all 0.15s;
 	width:100%;
+}
+
+.checklist-panel {
+	width:54% !important;
 }
 
 #checklist-focus {
@@ -17,21 +21,48 @@
 	right:0;
 	margin-left:1%;
 	width:45%;
-	-webkit-transition: all 0.15s ease;
-	-moz-transition: all 0.15s ease;
-	-ms-transition: all 0.15s ease;
-	-o-transition: all 0.15s ease;
-	transition: all 0.15s ease;
+	-webkit-transition: all 0.15s;
+	-moz-transition: all 0.15s;
+	-ms-transition: all 0.15s;
+	-o-transition: all 0.15s;
+	transition: all 0.15s;
 }
 
 .project-checklist-table.border-box, .admin-checklist-table.border-box, .core-checklist-table.border-box {
 	margin-top:40px; 
 	margin:0 auto; 
-	padding-right:0;
+	padding:0;
 	width:100%;
 
+	#search-button {
+
+	}
+
 	#checklist-search {
-		padding-right:20px;
+		padding:10px;
+		display:none;
+	}
+
+	#checklist-search-button {
+		position:relative;
+		top:5px;
+		width:24px;
+		cursor:pointer;
+	}
+	#checklist-search-button:hover {
+
+	}
+		
+	#checklist-items header {
+		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #eee));
+		border-bottom:1px solid #ddd;
+		padding:0;
+	}
+
+	.checklist-header.row {
+		padding-left:10px;
+		width:100%;
+		margin-left:0px;
 	}
 
 	#core-checklists, table {
@@ -118,8 +149,7 @@
 	}
 
 	.phase-label {
-		line-height:53px;
-		vertical-align:middle;
+		padding-top:10px;
 		text-align:center;
 		a:hover {
 			color:#fff !important;
@@ -127,7 +157,7 @@
 	}
 
 	.row {
-		padding:10px 0;
+		padding:5px 0;
 		margin:0 0 0 1%;
 		width:99%;
 	}
@@ -183,6 +213,44 @@
 	}
 }
 
+.checklist-item {
+			min-height:40px;
+
+			.left-edit-checklist {
+				top: -5px;
+				margin-right:10px;
+				padding: 5px 10px 5px 20px;
+				font-size: 13px;
+				letter-spacing:1px;
+				font-weight:normal;
+				text-transform:uppercase;
+				position: absolute;
+				right: 100%;
+				background: #fff;
+				border-left: 1px solid #eee;
+				border-radius:20px 0 0 20px;
+				display:none;
+				z-index:5;
+				font-family: "Proxima Nova","Source Sans Pro","Helvetica Neue","Helvetica",sans-serif;
+			}
+
+			.checklist.body {
+				display:table;
+				height:33px;
+
+				a {
+					vertical-align:middle;
+					display:table-cell;
+				}
+			}
+		}
+
+		.checklist-item:hover {
+			.left-edit-checklist {
+				display:block;
+			}
+		}
+
 .project-checklist-table {
 	.new-phase {
 		margin-left:1%;
@@ -200,7 +268,7 @@
 	}
 
 	.left-edit {
-		top: 18px;
+		top: 10px;
 		padding: 5px 5px 5px 15px;
 		font-size: 14px;
 		letter-spacing:1px;
@@ -212,7 +280,7 @@
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
 		display: none;
-		font-family: "Montserrat","Helvetica",sans-serif;
+		font-family: "Proxima Nova","Source Sans Pro","Helvetica",sans-serif;
 		border-radius: 18px 0 0 18px;
 		-webkit-border-radius: 18px 0 0 18px;
 		-moz-border-radius: 18px 0 0 18px;
@@ -223,43 +291,6 @@
 
 .phase:hover {
 	.left-edit {
-		display:block;
-	}
-}
-
-.checklist-item {
-	min-height:40px;
-
-	.left-edit-checklist {
-		top: -5px;
-		padding: 5px 20px 5px 30px;
-		font-size: 13px;
-		letter-spacing:1px;
-		font-weight:normal;
-		text-transform:uppercase;
-		position: absolute;
-		right: 100%;
-		background: #fff;
-		border-left: 1px solid #eee;
-		border-radius:20px 0 0 20px;
-		display:none;
-		z-index:5;
-		font-family: "Proxima Nova","Source Sans Pro","Helvetica Neue","Helvetica",sans-serif;
-	}
-
-	.checklist.body {
-		display:table;
-		height:33px;
-
-		a {
-			vertical-align:middle;
-			display:table-cell;
-		}
-	}
-}
-
-.checklist-item:hover {
-	.left-edit-checklist {
 		display:block;
 	}
 }
@@ -319,6 +350,10 @@
 
 }
 
+.checklist-item-link {
+	font-size:14px;	
+}
+
 .checklist-item-form{
 	margin:0 auto;
 	clear:both;
@@ -340,14 +375,12 @@
 	}
 
 	select, select[multiple] {
-		font-size:1.25em;
-		padding:10px 0;
-		line-height:1.1em;
+		padding:5px 0;
+		line-height:1.5em;
 		text-align:center;
 	}		
 
-	.item-body {	
-		font-size:17px;
+	.item-body {
 		margin:0.5em auto 2em;
 		display:block;
 	}
@@ -396,11 +429,12 @@
 	}
 
 	.checklist-item {
-		border-bottom:1px solid #ccc;
+		border-bottom:1px solid #ddd;
+		padding:10px 0 10px 10px !important;
 	}	
 
 	.checklist-item:first-child {
-		border-top:1px solid #ccc;
+		border-top:1px solid #ddd;
 	}
 }
 
@@ -416,8 +450,7 @@
 		color:#cc0000;
 	}
 	.category-label {
-		line-height:40px;
-		vertical-align:middle;
+		padding-top:5px;
 		text-align:center;
 	}
 	.completed-count {
@@ -435,7 +468,7 @@
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	padding:7px 14px;
+	padding:5px 10px;
 	position:relative;
 	display:inline-block;
 	margin:0;
@@ -443,7 +476,7 @@
 	text-align:center;
 	clear:both;
 	font-family:"Proxima Nova","Source Sans Pro",'Helvetica',sans-serif;
-	font-size:1em;
+	font-size:.9em;
 	line-height:1em;
 	text-transform:uppercase;
 	letter-spacing:1px;

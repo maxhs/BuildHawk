@@ -16,16 +16,36 @@
 	margin:10px auto;
 }
 
+#add-folder-link {
+	cursor:pointer;
+	clear:both;
+	margin-top:1em;
+	text-align:center;
+}
+
 #add-folder-link:hover {
 	color:#cc0000;
 }
 
 .edit_folder {
+	margin-bottom:9px;
+	
 	input[type="text"] {
 		width:70%;
 		font-size:16px;
 		height:39px;
 		display:inline-block;
+	}
+
+	.cancel {
+		position:relative;
+		left:10px;
+		cursor:pointer;
+	}
+
+	.delete-img {
+		position:relative;
+		left:20px;
 	}
 }
 

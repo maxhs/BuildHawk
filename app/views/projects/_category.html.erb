@@ -1,10 +1,10 @@
 <li class="category" id="category-<%=category.id%>">
 	<div class="header row">
 		<div class="col-xs-8">
-			<h4 class="title" id="<%= category.id %>"><%= category.name %></h4>
+			<h5 class="title" id="<%= category.id %>"><%= category.name %></h5>
 			<span style="padding:0 1em;color:#aaa;">(<%=category.completed_count%> of <%= category.checklist_items.count%>)</span>
 			<% if current_user.admin || current_user.company_admin %>
-				<%= link_to "Edit Category", edit_category_path(category, :project_id => @project.id), :class=>"edit-category", :remote => true %>
+				<%= link_to "Edit", edit_category_path(category, :project_id => @project.id), :class=>"edit-category", :remote => true %>
 			<% end %>
 			
 		</div>

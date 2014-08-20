@@ -1,6 +1,7 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-page');
 $('#main').html('<%= j render :partial => "projects/checklist" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);
 
 <% if @phase %>
 	if ($('#phase-<%= @phase.id %>').length){

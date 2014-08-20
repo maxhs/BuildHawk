@@ -3,5 +3,9 @@ $('.nav-reports a').addClass('current-page');
 if ($('.datepicker.dropdown-menu').length){
 	$('.datepicker.dropdown-menu').remove();
 }
-$('#main').html('<%= j render :partial => "edit", :locals => {:report => @report } %>');
-$("html, body").animate({ scrollTop: 0 }, 300);
+
+$("#project-reports").addClass('reports-panel');
+$('#report-focus').html('<%= j render :partial => "reports/edit", :locals => {:report => @report } %>');
+var offset = $('#report-<%=@report.id %>').offset().top-136;
+$('#report-focus').css('top',offset);
+$("html, body").animate({ scrollTop: offset }, 120);

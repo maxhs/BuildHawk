@@ -1,37 +1,37 @@
-<div id="task-<%=item.id%>" class="task row">
+<div id="task-<%=task.id%>" class="task row">
 	<!--<div class="col-xs-1">
-		<span class="worklist-item-checkbox"><%= check_box_tag :select, item.id %></span>
+		<span class="worklist-item-checkbox"><%= check_box_tag :select, task.id %></span>
 	</div>-->
 	<div class="col-xs-2">
-		<% if item.photos && item.photos.count > 0 %>
-			<% photo = item.photos.where("image_file_name IS NOT NULL").first %>
+		<% if task.photos && task.photos.count > 0 %>
+			<% photo = task.photos.where("image_file_name IS NOT NULL").first %>
 			<% if photo %><%=image_tag(photo.image.url(:thumb)) %><% end %>
 		<% end %>
 	</div>
 	
 	<div class="col-xs-3">
-		<% if item.body && item.body.length > 0 %>
-			<%= link_to item.body, edit_worklist_item_path(item), :remote => true %> 
+		<% if task.body && task.body.length > 0 %>
+			<%= link_to task.body, edit_worklist_item_path(task), :remote => true %> 
 		<% else %>
-			<%= link_to edit_worklist_item_path(item), :remote => true do %> <span style="width:100%;">&nbsp;</span><% end %>
+			<%= link_to edit_worklist_item_path(task), :remote => true do %> <span style="width:100%;">&nbsp;</span><% end %>
 		<% end %>
 	</div>	
 	<div class="col-xs-3">
-		<% if item.assignee_id && item.assignee %>
-			<%= item.assignee.full_name %>
-		<% elsif item.sub_assignee_id && item.sub_assignee %>
-			<%= item.sub_assignee.name %>
-		<% elsif item.connect_assignee_id && item.connect_assignee %>
-			<%= item.connect_assignee.full_name %>
+		<% if task.assignee_id && task.assignee %>
+			<%= task.assignee.full_name %>
+		<% elsif task.sub_assignee_id && task.sub_assignee %>
+			<%= task.sub_assignee.name %>
+		<% elsif task.connect_assignee_id && task.connect_assignee %>
+			<%= task.connect_assignee.full_name %>
 		<% else %>
 			<span style="color:#aaa;font-style:italic;">Not yet assigned</span>
 		<% end %>
 	</div>
 	<div class="col-xs-2">
-		<% if item.completed %>
-			<%= parse_time item.completed_at %>
+		<% if task.completed %>
+			<%= parse_time task.completed_at %>
 		<% end %>
 	</div>
-	<div class="col-xs-2"><%= parse_time item.created_at %></div>
+	<div class="col-xs-2"><%= parse_time task.created_at %></div>
 </div>
 					

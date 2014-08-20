@@ -1,4 +1,4 @@
-<%= nested_form_for @item, url: worklist_item_path(@item), :multipart => true, :method => :patch, :remote => true do |f| %>
+<%= nested_form_for @task, url: worklist_item_path(@task), :multipart => true, :method => :patch, :remote => true do |f| %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
 	<div id="worklist-item-container" class="border-box container">
@@ -21,64 +21,72 @@
 				</div>
 				<div>
 					<%= f.radio_button :completed, true %><h5 style="display:inline-block">COMPLETED</h5>
-					<% if @item.completed_by_user %>
-						<h5 style="color:#aaa;margin-left:5%;display:inline-block;font-size:1em;font-weight:100;"> by <%= @item.completed_by_user.full_name %>, <%= parse_time @item.completed_at %></h5>
+					<% if @task.completed_by_user %>
+						<h5 style="color:#aaa;margin-left:5%;display:inline-block;font-size:1em;font-weight:100;"> by <%= @task.completed_by_user.full_name %>, <%= parse_time @task.completed_at %></h5>
 					<% end %>
 				</div>
 			</div>
 		</div>
 
-	<% if !@item.completed_by_user %>
-
-		<%= f.fields_for :assignee do |a| %>
-			<h4 style="display:inline-block;width:16.666666664%;">Assignee</h4>
-			<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
-		<% end %>
-		<%= f.fields_for :connect_assignee do |a| %>
-			<h4 style="display:inline-block;width:16.666666664%;">Connect Users</h4>
-			<%= a.select :id, options_for_select(@connect_users.map{|cu| [cu.full_name, cu.id]}.unshift("No Assignment"), selected: f.object.connect_assignee_id), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
-		<% end %>
-	
-	<% end %>
-		
-	<% if @item.photos && @item.photos.count > 0 %>
-		<div style="padding:30px 0;padding-top:20px;">
-			<% @item.photos.each do |p| %>
-				<% if p.image_file_name%>
-					<%= render :partial => "photos/image", :locals => {:p => p} %>
-				<% end %>
+	<% if !@task.completed_by_user %>
+		<div class="row">
+			<%= f.fields_for :assignee do |a| %>
+				<h4 style="display:inline-block;width:16.666666664%;">Assignee</h4>
+				<%= a.select :full_name, @users.map(&:full_name).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
+			<% end %>
+		</div>
+		<div class="row">
+			<%= f.fields_for :connect_assignee do |a| %>
+				<h4 style="display:inline-block;width:16.666666664%;">Connect Users</h4>
+				<%= a.select :id, options_for_select(@connect_users.map{|cu| [cu.full_name, cu.id]}.unshift("No Assignment"), selected: f.object.connect_assignee_id), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;position:relative;top:-3px;" %>
 			<% end %>
 		</div>
 	<% end %>
-	
-	<h4>Add a photo</h4>
-	<%= f.fields_for :photos, @item.photos.build do |photo| %>
-		<%= photo.file_field :image %>
-		<%= photo.hidden_field :project_id, :value => @project.id %>
-		<%= photo.hidden_field :user_id, :value => current_user.id %>
-		<% if @item.id %><%= photo.hidden_field :worklist_item_id, :value => @item.id %><% end %>
-		<%= photo.hidden_field :source, :value => "Worklist" %>
+		
+	<% if @task.photos && @task.photos.count > 0 %>
+		<div class="row">
+			<div style="padding:30px 0;padding-top:20px;">
+				<% @task.photos.each do |p| %>
+					<% if p.image_file_name%>
+						<%= render :partial => "photos/image", :locals => {:p => p} %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
 	<% end %>
+	
+	<div class="row">
+		<h4>Add a photo</h4>
+		<%= f.fields_for :photos, @task.photos.build do |photo| %>
+			<%= photo.file_field :image %>
+			<%= photo.hidden_field :project_id, :value => @project.id %>
+			<%= photo.hidden_field :user_id, :value => current_user.id %>
+			<% if @task.id %><%= photo.hidden_field :worklist_item_id, :value => @task.id %><% end %>
+			<%= photo.hidden_field :source, :value => "Worklist" %>
+		<% end %>
+	</div>
 
-	<div class="button-container">
+
+	<div class="button-container row">
 		<%= f.submit "Save", :class => "simple-btn" %>
 <% end %>
 
-	<% if current_user.admin || current_user.company_admin || current_user.uber_admin || @item.user == current_user %>
-		<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), worklist_item_path(@item), :method => :delete, :class=> "delete-link", :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true %>
+	<% if current_user.admin || current_user.company_admin || current_user.uber_admin || @task.user == current_user %>
+		<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), worklist_item_path(@task), :method => :delete, :class=> "delete-link", :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true %>
 	<% end %>
 	</div>
-</div>
 
-<div class="border-box comment-container" style="margin-top:20px;clear:both">
-	<h4 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h4>
-	<div id="comments-form">
-		<%= form_for @item.comments.new, :method => :post, :remote => true do |f| %>
-			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
-			<%= f.hidden_field :user_id, :value => current_user.id %>
-			<%= f.hidden_field :worklist_item_id, :value => @item.id %>
-			<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
-		<% end %>
+	<div class="comment-container" style="margin-top:20px;clear:both;padding:20px;">
+		<h4 style="text-align:center; width:50%;margin:20px auto; display:block;">Comments</h4>
+		<div id="comments-form">
+			<%= form_for @task.comments.new, :method => :post, :remote => true do |f| %>
+				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
+				<%= f.hidden_field :user_id, :value => current_user.id %>
+				<%= f.hidden_field :worklist_item_id, :value => @task.id %>
+				<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
+			<% end %>
+		</div>
+		<%= render :partial => "comments/comments", :locals => {:comments => @task.comments} %>
 	</div>
-	<%= render :partial => "comments/comments", :locals => {:comments => @item.comments} %>
+
 </div>

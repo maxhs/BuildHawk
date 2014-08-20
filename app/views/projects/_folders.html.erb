@@ -1,13 +1,13 @@
 <% if @folders && @folders.count %>
 	<ul>
-		<%= render partial: "folders/folder", collection: @folders, as: :folder, cache: false %>
+		<%= render partial: "folders/folder", collection: folders, as: :folder, locals:{project:project},cache: false %>
 	</ul>
 <% end %>
-<div id="add-folder-link">+ FOLDER</div>
+<div id="add-folder-link" class="simple-btn">+ FOLDER</div>
 <script type="text/javascript">
 	$('#add-folder-link').on('click',function(){
 		$(this).fadeOut(200,function(){
-			$(this).replaceWith('<%= form_for Folder.new, :remote => true do |f| %><%= f.text_field :name, :placeholder => "New folder name..." %><%= f.hidden_field :project_id, :value => @project.id %><%= f.submit "Create", :class => "btn btn-md btn-success pull-right", :style => "margin-top:9px;" %><% end %>');
+			$(this).replaceWith('<%= j render partial:"folders/new", locals: {project: project} %>');
 			$(this).fadeIn(200);
 		});
 	});

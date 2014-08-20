@@ -5,27 +5,70 @@
 .new-task {
 	float:left;
 	margin:0 20px 0 0;
-	border-color:#eee;
 }
 
 .new-task:hover {
 	border-color:#ddd;
 }
 
-#worklist-search {
+#task-search {
 	width:70%;
 	input[type="text"] {
 		height:38px;
-		border-color:#eee;
 	}
 }
 
-#worklist-table {
-	margin-bottom:0;
+.tasks-panel {
+	width:54% !important;
+}
 
-	.header.row {
-		h5 {
-		
+#project-tasks {
+	-webkit-transition: all 0.15s;
+	-moz-transition: all 0.15s;
+	-ms-transition: all 0.15s;
+	-o-transition: all 0.15s;
+	transition: all 0.15s;
+	width:100%;
+
+	#task-table {
+		margin-bottom:0;
+
+		.row {
+			border-bottom:1px solid #eee;
+			text-align:center;
+		}
+
+		.row:last-child {
+			border-bottom:0;
+		}
+
+		.header.row {
+			border-bottom:1px solid #ddd;
+			background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #eee));
+			
+			h5 {
+			
+			}
+		}
+	}
+}
+
+#task-focus {
+	position:absolute;
+	right:0;
+	margin-left:1%;
+	width:45%;
+	-webkit-transition: all 0.15s;
+	-moz-transition: all 0.15s;
+	-ms-transition: all 0.15s;
+	-o-transition: all 0.15s;
+	transition: all 0.15s;
+
+	#dismiss-task {
+		float:right;
+
+		img {
+			width:24px;
 		}
 	}
 }
@@ -38,10 +81,4 @@
 	.task {
 		border-top:2px solid #eee;
 	}
-}
-
-#task-focus {
-	margin-left:1%;
-	width:50%;
-	float:left;
 }

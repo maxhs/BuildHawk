@@ -1,0 +1,5 @@
+<%= form_for Folder.new, :remote => true do |f| %>
+	<%= f.text_field :name, :placeholder => "New folder name..." %>
+	<%= f.hidden_field :project_id, :value => project.id %>
+	<%= f.submit "Create", :class => "simple-btn", :style => "margin-top:9px;" %>
+<% end %>

@@ -33,7 +33,7 @@ body {
 	min-height:100%;
 	height:100%;
 	font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
-	font-size:15px;
+	font-size:14px;
 
 	a, a:focus, .hide-reveal {
 		cursor:pointer;
@@ -69,11 +69,16 @@ body {
 		margin:10px 0;
 	}
 
-	h1, h2, h3, h4, h5 {
+	h1, h2, h3, h4, h5, h6 {
 		font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Gotham Book","Helvetica",sans-serif;
 		text-transform:uppercase;
 		font-weight:500;
 		letter-spacing:1px;
+		line-height:1;
+	}
+
+	header {
+		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
 	}
 
 	.alert, .notice {
@@ -117,7 +122,7 @@ body {
 	.border-box {
 		background-color:#fff;
 		border:1px solid #ccc;
-		padding:20px;
+		padding:10px;
 		box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
 	}
 
@@ -138,6 +143,10 @@ body {
 		margin:5% auto;
 		clear:both;
 	}
+	
+	#condensed-sidebar {
+		display:none;
+	}
 
 	#main-sidebar {
 		z-index:4;
@@ -148,18 +157,16 @@ body {
 		top:0;
 		left:0;
 		background:#fff;
+		background-image:url('/assets/crossword.png');
 		border-right:1px solid #ccc;
 
 		#settings-row{
-			padding:9px 10px 0;
+			padding:11px 10px;
 		}
 
 		#projects-search-form {
 			width:100%;
-			margin:9px auto 0;
 			border-top:1px solid #ccc;
-			border-bottom:1px solid #ccc;
-			box-shadow: 0 2px 5px -2px rgba(0,0,0,.1);
 			border-right:0;
 			border-left:0;
 		}
@@ -172,7 +179,7 @@ body {
 
 		#logo {
 			padding-bottom:0;
-			width:177px;
+			width:148px;
 			text-align:center;
 		}
 
@@ -182,27 +189,44 @@ body {
 			width:22px;
 		}
 
+		#project-search-button {
+			width:24px;
+			float:right;
+		}
+
 		#projects-sidebar {
+			clear:both;
+
+			#new-project-button {
+				padding: 18px 20px 28px 10px;
+				width: 100%;
+				height: 20px;
+				display: block;
+				text-align:center;
+				border-top:1px solid #ddd;
+			}
 
 			#search-section {
+				display:none;
 				line-height:10px;
 
 				input {
 					padding:0 10px;
 					height:44px;
+					border-bottom:0;
 				}
 
 				input.form-control:focus, input.form-control:active {
 					box-shadow:0 0 0 0;
 					-webkit-box-shadow:0 0 0 0;
 					-moz-box-shadow:0 0 0 0;
-					background:#f7f7f7;
+					background:#f9f9f9;
 				}
 			}
 
 			.project {
 				cursor:default;
-				box-shadow: 0 2px 5px -2px rgba(0,0,0,.1);
+				background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
 				border-bottom: 1px solid #ccc;
 				padding: 13px 0 7px 0;
 				line-height:13px;
@@ -210,7 +234,7 @@ body {
     			-moz-transition: all 0.17s ease;
     			-o-transition: all 0.17s ease;
     			transition: all 0.17s ease;
-    			
+    			font-size:.9em;
     			letter-spacing:1px;
     			text-transform:uppercase;
     			font-family: "Myriad Pro","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
@@ -226,9 +250,6 @@ body {
 				}
 			}
 
-			.project:hover {
-				background:#eee;
-			}
 
 			.percentage {
 				float:right;
@@ -268,9 +289,9 @@ body {
 			left: 0;
 			bottom: 0;
 			border-top: 1px solid #ccc;
-			border-right: 1px solid #ccc;
 			display: table;
 			background:#fff;
+			background-image:url('/assets/crossword.png');
 
 			div:first-child {
 				border-right:2px solid #eee;
@@ -297,6 +318,7 @@ body {
 		height: 100%;
 		width:100%;
 		background:#eee;
+		background-image:url('/assets/fabric_1.png');
 		margin:0 auto -80px;
 
 		#inner-wrap {
@@ -356,10 +378,14 @@ body {
 		width:100%;
 		left:20%;
 		z-index:6;
-		background-color: #fff;
 		border-bottom:1px solid #ccc;
 		box-shadow: 0 0px 2px 0 rgba(255,255,255,1);
 		height:44px;
+
+		.nav-icon {
+			margin-right:6px;
+			width:16px;
+		}
 
 		.logo {
 			width:270px;
@@ -381,28 +407,22 @@ body {
 			display:table;
 			list-style:none;
 			width:80%;
-			height:42px;
+			height:43px;
 
 			li {
 				display:table-cell;
 				width:10%;
 				vertical-align:middle;
 				text-align:center;
-				border-right:1px solid #ccc;
-			}
-
-			li:hover, li:hover a {
-				background:transparent;
+				background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
 			}
 
 			a {
-				position:relative;
-				top:2px;
 				font-weight:normal;
 				text-transform:uppercase;
 				letter-spacing:2px;
-				font-size:.9em;
-				font-family: "Proxima Nova","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
+				font-size:13px;
+				font-family: "Montserrat","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
 			}
 
 			a:hover {
@@ -484,10 +504,10 @@ body {
 	footer {
 		height:80px;
 		padding-top:27px;
-		background-color: #fff;
 		font-size: 11px;
 		border-top:1px solid #ccc;
-		box-shadow: 0 0px 2px 0 rgba(255,255,255,1);
+		background:#fff;
+		background-image:url('/assets/crossword.png');
 		position:relative;
 		left:20%;
 		width:80%;
@@ -665,13 +685,84 @@ body {
 	display:none;
 }
 
-@media only screen and (max-width: 1080px), only screen and (max-device-width: 1080px) {
+@media only screen and (max-width: 1020px), only screen and (max-device-width: 1020px) {
+	body {
+		#wrap {
+			
+			.navbar {
+				left:40px;
+				#navigation {
+					width:100%;
+				}
+			}
+
+			#main-sidebar {
+				display:none;
+			}
+
+			#condensed-sidebar {
+				z-index:10;
+				display:block;
+				background:#fff;
+				position:fixed;
+				height:100%;
+				width:40px;
+				top:0;
+				left:0;
+				border-right:1px solid #ddd;
+
+				#toggle {
+					cursor:pointer;
+					width:34px;
+					margin-left:3px;
+				}
+
+				ul#main-dropdown-menu {
+					display:none;
+					position:absolute;
+					left:40px;
+					top:0;
+					background:#fff;
+					width:200px;
+					padding:0 10px;
+
+					li {
+						list-style:none;
+						display:block;
+						padding:20px 0;
+						border-bottom:1px solid #ddd;
+
+						a {
+							text-transform:uppercase;
+						}
+					}
+
+					li:last-child {
+						border-bottom:0;
+					}
+				}
+			}
+
+			#inner-wrap {
+				left:40px;
+				min-width:864px;
+				overflow:scroll;
+			}
+		}
+		footer {
+			left:40px;
+			width:100%;
+		}
+	}
+}
+
+@media only screen and (max-width: 640px), only screen and (max-device-width: 640px) {
 	body {
 		#wrap {
 			overflow:auto !important;
 
 			.navbar {
-				left:200px;
+				left:40px;
 
 				#navigation {
 					display:none;
@@ -679,7 +770,7 @@ body {
 			}
 
 			#inner-wrap {
-				left:200px;
+				left:40px;
 				min-width:864px;
 				overflow:scroll;
 			}
@@ -718,159 +809,6 @@ body {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//old stuff
-#projects-tab.open {
-	left:285px;
-}
-
-/* Overlay style */
-.overlay {
-	position: fixed;
-	width: 25%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	background: rgba(153,204,51,0.9);
-}
-
-/* Overlay closing cross */
-.overlay .overlay-close {
-	width: 80px;
-	height: 80px;
-	position: absolute;
-	right: 20px;
-	top: 20px;
-	overflow: hidden;
-	border: none;
-	background: image-url('blackX.png') no-repeat center center;
-	text-indent: 200%;
-	color: transparent;
-	outline: none;
-	z-index: 100;
-}
-
-/* Menu style */
-.overlay nav {
-	text-align: center;
-	position: relative;
-	top: 15.5%;
-	height: 60%;
-	-webkit-transform: translateY(-25%);
-	transform: translateY(-25%);
-
-	#sidebar {
-		margin: 0 auto;
-		width:95%;
-	}
-}
-
-.overlay ul {
-	list-style: none;
-	padding: 0;
-	margin: 0 auto;
-	display: inline-block;
-	height: 100%;
-	position: relative;
-}
-
-.overlay ul li {
-	display: block;
-	height: 20%;
-	height: calc(100% / 5);
-	min-height: 54px;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-}
-
-.overlay ul li a {
-	font-size: 54px;
-	font-weight: 300;
-	display: block;
-	color: #000;
-	-webkit-transition: color 0.2s;
-	transition: color 0.2s;
-}
-
-.overlay ul li a:hover,
-.overlay ul li a:focus {
-	color: #f0f0f0;
-}
-
-/* Effects */
-
-#wrap {
-	overflow-x: hidden;
-	-webkit-transition: -webkit-transform 0.5s;
-	transition: transform 0.5s;	
-}
-
-#wrap.overlay-open {
-	-webkit-transform: translateX(25%);
-	transform: translateX(25%);
-}
-
-#wrap::after {
-	content: '';
-	opacity: 0;
-	visibility: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,0.6);
-	-webkit-transition: opacity 0.5s, visibility 0s 0.5s;
-	transition: opacity 0.5s, visibility 0s 0.5s;
-}
-
-#wrap.overlay-open::after {
-	visibility: visible;
-	opacity: 1;
-	-webkit-transition: opacity 0.5s;
-	transition: opacity 0.5s;
-}
-
-.overlay-contentpush {
-	background: #fff;
-	visibility: hidden;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	-webkit-transform: translateX(-100%);
-	transform: translateX(-100%);
-	-webkit-transition: -webkit-transform 0.5s, visibility 0s 0.5s;
-	transition: transform 0.5s, visibility 0s 0.5s;
-}
-
-.overlay-contentpush.open {
-	visibility: visible;
-	-webkit-transform: translateX(0%);
-	transform: translateX(0%);
-	-webkit-transition: -webkit-transform 0.5s;
-	transition: transform 0.5s;
-}
-
-@media screen and (max-height: 30.5em) {
-	.overlay nav {
-		height: 70%;
-		font-size: 34px;
-	}
-	.overlay ul li {
-		min-height: 34px;
-	}
-}
 
 .session-container {
 	height:100%;
@@ -926,13 +864,14 @@ a.search-button {
 }
 
 .simple-btn {
-	border:1px solid #ddd;
-	border-radius:3px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
+	cursor:pointer;
+	border:1px solid #ccc;
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
 	padding:10px 20px;
 	position:relative;
-	top:1px;
 	display:inline-block;
 	margin:0 10px;
 	width:auto;
@@ -953,7 +892,7 @@ a.search-button {
 .simple-btn:hover {
 	border-color:#ccc;
 	background:#f7f7f7;
-	box-shadow: 0 0 20px 0px rgba(0,0,0,.025);
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.75);
 }
 
 .delete-link {
@@ -974,6 +913,10 @@ a.search-button {
 	img {
 		width:50%;
 	}
+}
+
+.delete-img {
+	width:15px;
 }
 
 .delete-link:hover {
@@ -1042,9 +985,8 @@ a.search-button {
 	-webkit-border-radius:2px;
 	position:absolute;
 	top:0;
-	left:100%;
+	right:0;
 	background:#fff;
-	border:1px solid #e7e7e7;
 
 	a {
 		color:#222;

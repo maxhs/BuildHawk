@@ -1,4 +1,4 @@
-class SubsController < ApplicationController
+class SubsController < AppController
 	before_filter :authenticate_user!
 	
 	def update

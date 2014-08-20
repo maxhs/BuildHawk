@@ -1,4 +1,4 @@
-class ProjectGroupsController < ApplicationController
+class ProjectGroupsController < AppController
 	before_filter :authenticate_user!
 	def create
 		@company = current_user.company

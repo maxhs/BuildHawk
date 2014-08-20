@@ -11,7 +11,7 @@
 		<% if current_user.admin || current_user.company_admin || item.user == current_user %>
 			<%= link_to 'Edit', edit_checklist_item_path(item), :class => "left-edit-checklist", remote: true %>
 		<% end %>
-		<%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class=>"checklist-item-link", :remote => true %>
+		<%= link_to item.body, checklist_item_project_path(@project, :item_id => item.id), :class=>"checklist-item-link remote", :remote => true %>
 	</div>
 
 	<div class="col-md-2" style="text-align: center;">

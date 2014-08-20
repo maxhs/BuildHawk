@@ -1,7 +1,4 @@
-$('#top-nav a').removeClass('current-page');
-$('.nav-documents a,#<%=@project.id%>-link').addClass('current-page');
 $('#main').html('<%= j render :partial => "documents", :locals => {:photos => @photos } %>');
-
 $(document).ready(function(){
 	Shadowbox.clearCache();
     Shadowbox.setup(".shadow-photo", {});

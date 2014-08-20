@@ -68,5 +68,7 @@ function setupWindow(){
 }
 
 function closeMenu() {
-    $('#dropdown-menu').fadeOut(0);
+    $('#dropdown-menu').fadeOut(100);
+    $('#main-dropdown-menu').fadeOut(100);
+
 }

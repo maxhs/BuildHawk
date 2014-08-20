@@ -16,6 +16,7 @@ class FoldersController < ApplicationController
 
 	def edit
 		@folder = Folder.find params[:id]
+		#@folders = @folder.project.folders
 	end
 
 	def update

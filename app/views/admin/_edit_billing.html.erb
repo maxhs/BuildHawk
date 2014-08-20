@@ -1,16 +1,3 @@
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#payment-form').submit(function(event) {
-		    var form = $(this);
-		    form.find('button').prop('disabled', true);
-		    Stripe.setPublishableKey('pk_test_23emORqBWZz8YhjkR2vsXjSm');
-		    var token = Stripe.card.createToken(form, stripeResponseHandler);
-		    event.preventDefault();
-		    return false;
-		});
-	});
-</script>
 <div id="billing" class="border-box" style="padding-top:20px">
 	<div id="edit-billing-container" class="border-box">
 		<h2 style="text-align:center;">Update Billing Information</h2>
@@ -38,7 +25,20 @@
 		    	<input type="text" size="4" data-stripe="exp-year"/>
 		  	</div>
 
-		  	<div style="text-align:center;"><button class="btn btn-success btn-md"><%=submit_tag "Save"%></button></div>
+		  	<div style="text-align:center;"><%=submit_tag "Save", :class=>"simple-btn" %></div>
 		<% end %>	
 	</div>
 </div>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#payment-form').submit(function(event) {
+		    var form = $(this);
+		    form.find('button').prop('disabled', true);
+		    Stripe.setPublishableKey(<%=@stripe_key%>);
+		    var token = Stripe.card.createToken(form, stripeResponseHandler);
+		    event.preventDefault();
+		    return false;
+		});
+	});
+</script>

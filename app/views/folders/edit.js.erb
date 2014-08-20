@@ -1,5 +1,5 @@
-$('#fid-<%=@folder.id%> > .edit-folder').fadeOut(200);
-$('#fid-<%=@folder.id%> > .folder-name').fadeOut(200,function(){
-	$(this).replaceWith('<%= form_for(@folder, url: folder_path(@folder), :method => :patch, :remote => true) do |form|%><%= form.text_field :name, :value => @folder.name %><%= link_to "Delete", folder_path(@folder), :method => :delete, remote: true, :class=>"remove-folder-link no-link btn pull-right btn-md btn-danger", :data => {:confirm => "Are you sure you want to delete this folder? This will also delete all of the folder\'s contents."}%><% end %>');
+$('#fid-<%=@folder.id%>').fadeOut(200);
+$('#fid-<%=@folder.id%>').fadeOut(200,function(){
+	$(this).replaceWith('<%= j render partial:"folders/edit", locals: {folder:@folder, project:@folder.project}%>');
 	$(this).fadeIn(200);
 });

@@ -48,7 +48,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 		<div class="navbar navbar-fixed-top full <% if !user_signed_in? && (current_page?(root_url) || current_page?(login_path) )%>splash<% end %>" id="top-nav">
 			<ul id="navigation" class="full">
-				<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
+				<li class="logo"><a href="/"><%= image_tag('logo.png') %></a></li>
 				<% if current_page?(root_url) %>
 					<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
 					<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>

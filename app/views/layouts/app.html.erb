@@ -59,9 +59,19 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
     <div id="wrap">
 
     	<% if user_signed_in? %>
+    		<nav id="condensed-sidebar">
+    			<%= image_tag "menu.png", id:"toggle" %>
+    			<ul id="main-dropdown-menu">
+    				<% @projects.each do |p| %>
+    					<li><%= link_to p.name, project_path(p), remote:true %></li>
+    				<% end %>
+    			</ul>
+
+    		</nav>
 			<nav id="main-sidebar">
 				<div id="settings-row">
 					<a href="/"><%= image_tag 'logo.png', id: "logo" %></a>
+					<%= image_tag 'search.png', id:'project-search-button' %>
 				</div>
 				
 				<% if @projects %>
@@ -168,6 +178,22 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 </footer>
 
 <script type="text/javascript">
+	$('#project-search-button').click(function(){
+		if ($('#search-section').css('display') == 'none') {
+			$('#search-section').show(100,function(){
+				$(this).find('input').focus();
+			});
+		} else {
+			$('#search-section').hide(100);
+		}
+	});
+	$('#toggle').click(function(){
+		if ($('#main-dropdown-menu').css('display') == "none"){
+			$('#main-dropdown-menu').show(200);
+		} else {
+			$('#main-dropdown-menu').hide(200);
+		}
+	});
 	$(document).ready(function() {
 		setupWindow();
 		$.ajaxSetup({ cache: false });

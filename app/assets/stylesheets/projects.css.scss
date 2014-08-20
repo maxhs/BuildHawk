@@ -257,9 +257,11 @@
 		}
 	}
 
-	h3 {
+	h4 {
 		padding:10px;
-		background:#eee;
+		border-top:1px solid #eee;
+		border-bottom:1px solid #ddd;
+		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
 		margin:30px auto;
 	}
 
