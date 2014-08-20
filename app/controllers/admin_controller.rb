@@ -202,7 +202,7 @@ class AdminController < ApplicationController
 
 	def new_project
 		@company = @user.company
-		unless @company.cards.where(:active=>true).first# && current_user.uber_admin
+		if @company.cards.where(:active=>true).nil?# && !current_user.uber_admin
 			@project = Project.new
 			@project.build_address
 			@project.project_users.build
