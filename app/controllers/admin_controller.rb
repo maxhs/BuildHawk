@@ -224,8 +224,11 @@ class AdminController < ApplicationController
 
 	def billing
 		@company = @user.company
-		if @company.customer_token
-			customer = Stripe::Customer.retrieve(@company.customer_token)
+		@stripe_key = Rails.configuration.stripe[:publishable_key]
+		active_card = @company.cards.where(:active => true).first 
+		if active_card && active_card.customer_token
+			
+			customer = Stripe::Customer.retrieve(active_card.customer_token)
 			invoices = Stripe::Invoice.all(
 				:customer => customer.id,
 			)
@@ -240,7 +243,7 @@ class AdminController < ApplicationController
 	end
 
 	def edit_billing
-
+		@stripe_key = Rails.configuration.stripe[:publishable_key]
 	end
 
 	def update_billing

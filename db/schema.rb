@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140820164948) do
     t.string   "expiration"
     t.integer  "company_id"
     t.text     "customer_token"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
