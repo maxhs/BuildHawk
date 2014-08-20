@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(version: 20140820164948) do
   end
 
   create_table "cards", force: true do |t|
-    t.string   "public_digits"
-    t.string   "expiration"
+    t.string   "last4"
+    t.string   "exp_month"
+    t.string   "exp_year"
     t.integer  "company_id"
     t.text     "customer_token"
     t.boolean  "active",         default: false

@@ -18,7 +18,7 @@ class AdminController < ApplicationController
 
 	def users
 		@company = @user.company
-		unless @company.customer_token.nil? && current_user.uber_admin
+		if @company.cards.where(:active => true).nil? && !current_user.uber_admin
 			@users = current_user.company.users
 			@subcontractors = current_user.company.company_subs
 			if request.xhr?
@@ -137,7 +137,7 @@ class AdminController < ApplicationController
 
 	def reports
 		@company = @user.company
-		unless @company.customer_token.nil? && current_user.uber_admin
+		if @company.cards.where(:active => true).nil? && !current_user.uber_admin
 			@projects = current_user.company.projects
 			if request.xhr?
 				respond_to do |format|
@@ -225,6 +225,7 @@ class AdminController < ApplicationController
 	def billing
 		@company = @user.company
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
+		puts "stripe key: #{@stripe_key}"
 		@active_card = @company.cards.where(:active => true).first 
 		if @active_card && @active_card.customer_token
 
@@ -261,8 +262,9 @@ class AdminController < ApplicationController
 			  :email => @user.email
 			)
 		end
-		puts "stripe customer id: #{customer.id}"
-		@company.update_attribute :customer_token, customer.id
+		puts "stripe customer: #{customer}"
+		card_data = customer.cards.data.first
+		@active_card = @user.company.cards.create :customer_token => customer.id, :exp_month => card_data.exp_month,:exp_year => card_data.exp_year, :last4 => card_data.last4
 
 		redirect_to billing_admin_index_path
 	end
