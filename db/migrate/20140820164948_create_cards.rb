@@ -5,7 +5,7 @@ class CreateCards < ActiveRecord::Migration
     	t.string :expiration
     	t.belongs_to :company
     	t.text :customer_token
-    	t.boolean :active
+    	t.boolean :active, default: false
       	t.timestamps
     end
     remove_column :companies, :customer_token, :string

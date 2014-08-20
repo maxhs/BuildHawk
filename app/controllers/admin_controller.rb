@@ -202,7 +202,7 @@ class AdminController < ApplicationController
 
 	def new_project
 		@company = @user.company
-		unless @company.customer_token.nil? && current_user.uber_admin
+		unless @company.cards.where(:active=>true).first# && current_user.uber_admin
 			@project = Project.new
 			@project.build_address
 			@project.project_users.build
@@ -248,8 +248,10 @@ class AdminController < ApplicationController
 
 	def update_billing
 		token = params[:stripeToken]
-		if @company.customer_token
-			customer = Stripe::Customer.retrieve(@company.customer_token)
+		puts "token? #{token}"
+		@active_card = @company.cards.where(:active => true).first
+		if @active_card
+			customer = Stripe::Customer.retrieve(@active_card.customer_token)
 			customer.card = token
 			customer.save
 		else
@@ -281,7 +283,7 @@ class AdminController < ApplicationController
 	end
 
 	def find_user
-		unless current_user.admin? || current_user.company_admin? || current_user.uber_admin?
+		unless current_user.any_admin?
 			flash[:alert] = "Sorry, you don't have access to that section.".html_safe
 			redirect_to projects_path
 		else
