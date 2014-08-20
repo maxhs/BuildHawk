@@ -4,7 +4,7 @@
 		$('#payment-form').submit(function(event) {
 		    var form = $(this);
 		    form.find('button').prop('disabled', true);
-		    Stripe.setPublishableKey('pk_test_23emORqBWZz8YhjkR2vsXjSm');
+		    Stripe.setPublishableKey(<%=@stripe_token%>);
 		    var token = Stripe.card.createToken(form, stripeResponseHandler);
 		    event.preventDefault();
 		    return false;
