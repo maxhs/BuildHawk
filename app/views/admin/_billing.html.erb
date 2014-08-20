@@ -14,7 +14,7 @@
 
 <div id="billing" class="border-box">
 	<h1>BILLING MANAGEMENT</h1>
-	<% if @company.customer_token %>
+	<% if @active_card %>
 		<div id="billing-container" class="border-box">
 			<div class="row">
 				<div class="col-xs-3"><h4>Period Ending</h4></div>
@@ -45,6 +45,9 @@
 		<div style="font-style:italic;color:#aaa;text-align:center;margin-top:20px;" class="font-smoothing">Your card on file will be automatically billed at the end of each month</div>
 	<% else %>
 		<div id="new-billing-container" class="border-box" style="padding-top:20px">
+			<div class="billing-prompt">
+				Please set up your company's billing information in order to proceed.
+			</div>
 			<%= form_tag update_billing_admin_path(@company), method: :patch, :id=>"payment-form", remote:true do %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 			  	<span class="payment-errors"></span>
@@ -68,7 +71,7 @@
 			    	<input type="text" size="4" data-stripe="exp-year"/>
 			  	</div>
 
-			  	<div style="text-align:center;"><button class="btn btn-success btn-md"><%=submit_tag "Add"%></button></div>
+			  	<div style="text-align:center;"><%=submit_tag "Add", :class=>"simple-btn" %></div>
 			<% end %>
 		</div>
 	<% end %>

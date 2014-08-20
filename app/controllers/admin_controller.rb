@@ -225,10 +225,10 @@ class AdminController < ApplicationController
 	def billing
 		@company = @user.company
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
-		active_card = @company.cards.where(:active => true).first 
-		if active_card && active_card.customer_token
-			
-			customer = Stripe::Customer.retrieve(active_card.customer_token)
+		@active_card = @company.cards.where(:active => true).first 
+		if @active_card && @active_card.customer_token
+
+			customer = Stripe::Customer.retrieve(@active_card.customer_token)
 			invoices = Stripe::Invoice.all(
 				:customer => customer.id,
 			)
