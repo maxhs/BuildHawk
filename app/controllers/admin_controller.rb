@@ -225,7 +225,6 @@ class AdminController < ApplicationController
 	def billing
 		@company = @user.company
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
-		puts "stripe key: #{@stripe_key}"
 		@active_card = @company.cards.where(:active => true).first 
 		if @active_card && @active_card.customer_token
 
@@ -244,12 +243,12 @@ class AdminController < ApplicationController
 	end
 
 	def edit_billing
+		@active_card = @company.cards.where(:active => true).first
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
 	end
 
 	def update_billing
 		token = params[:stripeToken]
-		puts "token? #{token}"
 		@active_card = @company.cards.where(:active => true).first
 		if @active_card
 			customer = Stripe::Customer.retrieve(@active_card.customer_token)
@@ -258,13 +257,13 @@ class AdminController < ApplicationController
 		else
 			customer = Stripe::Customer.create(
 			  :card => token,
-			  :plan => "normalhawk",
+			  :plan => "monthly_standard",
 			  :email => @user.email
 			)
 		end
-		puts "stripe customer: #{customer}"
 		card_data = customer.cards.data.first
-		@active_card = @user.company.cards.create :customer_token => customer.id, :exp_month => card_data.exp_month,:exp_year => card_data.exp_year, :last4 => card_data.last4
+		@user.company.cards.map{|c| c.update_attribute :active, false}
+		@active_card = @user.company.cards.create :customer_token => customer.id, :exp_month => card_data.exp_month,:exp_year => card_data.exp_year, :last4 => card_data.last4, :active => true
 
 		redirect_to billing_admin_index_path
 	end

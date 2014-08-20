@@ -11,34 +11,34 @@
 		});
 	});
 </script>
-<div id="billing" class="border-box" style="padding-top:20px">
+<div id="billing">
 	<div id="edit-billing-container" class="border-box">
 		<h2 style="text-align:center;">Update Billing Information</h2>
-		<%= form_tag update_billing_admin_path(@company), method: :patch, :id=>"payment-form", remote:true do %>
+		<%= form_for @active_card, url: update_billing_admin_path(@active_card), method: :patch, :id=>"payment-form", remote:true do |f| %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 		  	<span class="payment-errors"></span>
 
 		  	<div class="form-row">
 		    	<label>
 		      		<span>Card Number</span>
-		     		<input type="text" size="20" data-stripe="number" class="card-info"/>
+		     		<input type="text" size="20" data-stripe="number" class="card-info" value="*** <%= @active_card.last4 %>"/>
 		    	</label>
 		    	<label>
 		      		<span>CVC</span>
-		      		<input type="text" size="4" data-stripe="cvc"/>
+		      		<input type="text" size="4" data-stripe="cvc" value="***"/>
 		    	</label>
 		 	 </div>
 
 		  	<div class="form-row">
 		    	<label>
 		      		<span>Expiration (MM/YYYY)</span>
-		      		<input type="text" size="2" data-stripe="exp-month"/>
+		      		<input type="text" size="2" data-stripe="exp-month" value="<%=@active_card.exp_month%>"/>
 		    	</label>
 		    	<span> / </span>
-		    	<input type="text" size="4" data-stripe="exp-year"/>
+		    	<input type="text" size="4" data-stripe="exp-year" value="<%=@active_card.exp_year%>"/>
 		  	</div>
 
-		  	<div style="text-align:center;"><button class="btn btn-success btn-md"><%=submit_tag "Save"%></button></div>
+		  	<div style="text-align:center;"><%=submit_tag "Save", :class=>"simple-btn" %></div>
 		<% end %>	
 	</div>
 </div>

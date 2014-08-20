@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20140820164948) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "active"
+    t.string   "customer_id"
   end
 
   create_table "company_subs", force: true do |t|
