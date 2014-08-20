@@ -9,3 +9,34 @@
 		}
 	}
 }
+
+.billing-prompt {
+	margin:10px auto;
+	background:#eee;
+	border:1px solid #ddd;
+	text-align:center;
+}
+
+#new-billing-container, #edit-billing-container {
+	position:relative;
+	width:50%;
+	margin:0 auto;
+	
+	input{
+		display:inline-block;
+	}
+
+	input.card-info {
+		widht:70%;
+	}
+
+	#dismiss-card-container {
+		position:absolute;
+		right:5px;
+		top:5px;
+		
+		img {
+			width:18px;
+		}
+	}
+}

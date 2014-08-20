@@ -17,6 +17,6 @@ class CreateCards < ActiveRecord::Migration
         	t.boolean :active, default: false
           	t.timestamps
         end
-        rename_column :companies, :customer_token, :customer_id
+        #rename_column :companies, :customer_token, :customer_id
     end
 end

@@ -24,6 +24,7 @@ class BillingController < ApplicationController
 
 	def edit
 		@card = Card.find params[:id]
+		puts "do we have a card? #{@card}"
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
 	end
 

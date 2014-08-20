@@ -13,15 +13,18 @@
 </script>
 <div id="billing">
 	<div id="edit-billing-container" class="border-box">
+		<div id="dismiss-card-container">
+			<%= link_to image_tag("blackX.png", class:"remote"), billing_index_path, remote: true %>
+		</div>
 		<h2 style="text-align:center;">Update Billing Information</h2>
-		<%= form_for @card, url: card_path(@card), method: :patch, :id=>"payment-form", remote:true do |f| %>
+		<%= form_for card, url: billing_path(card), method: :patch, :id=>"payment-form", remote:true do |f| %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 		  	<span class="payment-errors"></span>
 
 		  	<div class="form-row">
 		    	<label>
 		      		<span>Card Number</span>
-		     		<input type="text" size="20" data-stripe="number" class="card-info" value="*** <%= @card.last4 %>"/>
+		     		<input type="text" size="20" data-stripe="number" class="card-info" value="*** <%= card.last4 %>"/>
 		    	</label>
 		    	<label>
 		      		<span>CVC</span>
@@ -32,10 +35,10 @@
 		  	<div class="form-row">
 		    	<label>
 		      		<span>Expiration (MM/YYYY)</span>
-		      		<input type="text" size="2" data-stripe="exp-month" value="<%=@card.exp_month%>"/>
+		      		<input type="text" size="2" data-stripe="exp-month" value="<%=card.exp_month%>"/>
 		    	</label>
 		    	<span> / </span>
-		    	<input type="text" size="4" data-stripe="exp-year" value="<%=@card.exp_year%>"/>
+		    	<input type="text" size="4" data-stripe="exp-year" value="<%=card.exp_year%>"/>
 		  	</div>
 
 		  	<div style="text-align:center;"><%=submit_tag "Save", :class=>"simple-btn" %></div>

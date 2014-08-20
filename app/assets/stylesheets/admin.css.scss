@@ -24,13 +24,6 @@
 	}
 }
 
-.billing-prompt {
-	margin:10px auto;
-	background:#eee;
-	border:1px solid #ddd;
-	text-align:center;
-}
-
 .payment-errors {
 	color:#cc0000;
 }
@@ -92,15 +85,4 @@
 .admin-user-pic {
 	max-width:200px;
 	padding:0px;
-}
-
-#new-billing-container, #edit-billing-container {
-	width:50%;
-	margin:0 auto;
-	input{
-		display:inline-block;
-	}
-	input.card-info {
-		widht:70%;
-	}
 }
