@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724222719) do
+ActiveRecord::Schema.define(version: 20140820164948) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 20140724222719) do
     t.integer  "user_id"
     t.string   "email"
     t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cards", force: true do |t|
+    t.string   "public_digits"
+    t.string   "expiration"
+    t.integer  "company_id"
+    t.text     "customer_token"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -141,7 +151,6 @@ ActiveRecord::Schema.define(version: 20140724222719) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.string   "customer_token"
     t.boolean  "active"
   end
 
@@ -438,6 +447,14 @@ ActiveRecord::Schema.define(version: 20140724222719) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "task_assignees", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "connect_user_id"
+    t.integer  "worklist_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
