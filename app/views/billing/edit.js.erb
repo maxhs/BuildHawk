@@ -1,7 +1,7 @@
 $('#navigation a').removeClass('current-page');
 $('#billing-link').addClass('current-page');
 $('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "edit_billing" %>');
+	$(this).html('<%= j render :partial => "edit" %>');
 	$(this).fadeIn(100);
 	$("html, body").animate({ scrollTop: 0 }, 300);
 });

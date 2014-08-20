@@ -60,8 +60,6 @@ Buildhawk::Application.routes.draw do
       get :new_project
       get :project_groups
       post :create_project
-      get :billing
-      get :edit_billing
       get :editor
       delete :delete_checklist
     end
@@ -69,13 +67,13 @@ Buildhawk::Application.routes.draw do
       post :clone_topic
       delete :remove_template
       get :edit_user
-      patch :update_billing
       patch :update_user
       patch :update_subcontractor
       patch :update_checklist
       delete :delete_user
     end
   end
+  resources :billing
   resources :company_subs, only: [:destroy]
   resources :uber_admin do
     collection do

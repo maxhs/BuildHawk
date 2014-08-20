@@ -222,52 +222,6 @@ class AdminController < ApplicationController
 		end
 	end
 
-	def billing
-		@company = @user.company
-		@stripe_key = Rails.configuration.stripe[:publishable_key]
-		@active_card = @company.cards.where(:active => true).first 
-		if @active_card && @active_card.customer_token
-
-			customer = Stripe::Customer.retrieve(@active_card.customer_token)
-			invoices = Stripe::Invoice.all(
-				:customer => customer.id,
-			)
-
-			@subtotal = 0
-			@charges = invoices["data"].as_json
-			@charges.map{|c| @subtotal += c["amount_due"]}
-			puts "due: #{@subtotal} and charges: #{@charges}"
-		end
-	  	active_projects = @company.projects.where(:active => true).count
-	  	@amount = active_projects * 1000 / 100
-	end
-
-	def edit_billing
-		@active_card = @company.cards.where(:active => true).first
-		@stripe_key = Rails.configuration.stripe[:publishable_key]
-	end
-
-	def update_billing
-		token = params[:stripeToken]
-		@active_card = @company.cards.where(:active => true).first
-		if @active_card
-			customer = Stripe::Customer.retrieve(@active_card.customer_token)
-			customer.card = token
-			customer.save
-		else
-			customer = Stripe::Customer.create(
-			  :card => token,
-			  :plan => "monthly_standard",
-			  :email => @user.email
-			)
-		end
-		card_data = customer.cards.data.first
-		@user.company.cards.map{|c| c.update_attribute :active, false}
-		@active_card = @user.company.cards.create :customer_token => customer.id, :exp_month => card_data.exp_month,:exp_year => card_data.exp_year, :last4 => card_data.last4, :active => true
-
-		redirect_to billing_admin_index_path
-	end
-
 	def project_groups
 		@company = current_user.company
 		@project_groups = @company.project_groups.where("id IS NOT NULL")

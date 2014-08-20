@@ -1,7 +1,7 @@
 class Company < ActiveRecord::Base
 
 	attr_accessible :name, :phone, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name,
-                    :active
+                    :active, :customer_id
   
     has_many :users, :dependent => :destroy
     has_many :subs, :dependent => :destroy
