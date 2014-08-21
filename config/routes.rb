@@ -73,7 +73,13 @@ Buildhawk::Application.routes.draw do
       delete :delete_user
     end
   end
-  resources :billing
+  resources :billing do 
+    collection do
+      get :new_card
+      get :edit_card
+      post :pay
+    end
+  end 
   resources :company_subs, only: [:destroy]
   resources :uber_admin do
     collection do

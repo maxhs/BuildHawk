@@ -3,60 +3,105 @@ class BillingController < ApplicationController
 	before_filter :find_user
 
 	def index
-		@company = @user.company
-		@cards = @company.cards
+		@cards = @company.cards.where("card_id IS NOT NULL")
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
 		@active_card = @company.cards.where(:active => true).first 
-		if @active_card && @company.customer_id
+		if @company.customer_id
 			customer = Stripe::Customer.retrieve(@company.customer_id)
 			invoices = Stripe::Invoice.all(
 				:customer => customer.id,
 			)
 
 			@subtotal = 0
-			@charges = invoices["data"].as_json
-			@charges.map{|c| @subtotal += c["amount_due"]}
-			puts "due: #{@subtotal} and charges: #{@charges}"
+			@invoices = invoices["data"].as_json
+			@invoices.map{|c| @subtotal += c["amount_due"]}
+		else 
+			@card = @company.cards.new
 		end
 	  	active_projects = @company.projects.where(:active => true).count
 	  	@amount = active_projects * 1000 / 100
 	end
 
-	def edit
-		@card = Card.find params[:id]
-		puts "do we have a card? #{@card}"
+	def new_card
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
+		@card = @company.cards.new
 	end
 
-	def update_billing
+	def create
 		token = params[:stripeToken]
 		if @company.customer_id 
 			customer = Stripe::Customer.retrieve(@company.customer_id)
-			customer.card = token
+			card = customer.cards.create card: token
 			customer.save
-			puts "already had a customer"
 		else
 			customer = Stripe::Customer.create(
 			  	:card => token,
 			  	:plan => "monthly_standard",
+			  	:description => @company.name,
 			  	:email => @user.email
 			)
-			puts "had to create a new customer"
+			@user.company.update_attribute :customer_id, customer.id
+			card = customer.cards.data.first
 		end
-		card_data = customer.cards.data.first
-		puts "card_data: #{card_data}"
-		@user.company.update_attribute :customer_id, customer.id
-		@user.company.cards.map{|c| c.update_attribute :active, false}
-		@card = @user.company.cards.create :card_id => card_data.id, :last4 => card_data.last4, :exp_month => card_data.exp_month, :exp_year => card_data.exp_year, :brand => card_data.brand, :customer_token => customer.id
-		redirect_to billing_admin_index_path
+		
+		@card = @user.company.cards.create :card_id => card.id, :last4 => card.last4, :exp_month => card.exp_month, :exp_year => card.exp_year, :brand => card.brand
+		@card.update_attribute :active, true if @company.cards.count == 1
+		redirect_to billing_index_path
+	end
+
+	def edit_card
+		@card = Card.where(:id => params[:card_id]).first
+		if @card
+			@stripe_key = Rails.configuration.stripe[:publishable_key]
+		else
+			redirect_to billing_index_path
+		end
+	end
+
+	def edit
+		
+	end
+
+	def destroy
+		card = Card.find params[:id]
+		customer = Stripe::Customer.retrieve(@company.customer_id)
+		stripe_card = customer.cards.retrieve(card.card_id)
+		stripe_card.delete if stripe_card 
+		card.destroy
+		redirect_to billing_index_path
 	end
 
 	def update
 		@card = Card.find params[:id]
+		@company.cards.map{|c| c.update_attribute :active, false}
 		@card.update_attributes params[:card]
+		if params[:card][:active] == "1"
+			customer = Stripe::Customer.retrieve(@company.customer_id)
+			customer.default_card = @card.card_id
+			customer.save
+		end
+
+		#rescue Stripe::CardError => e
+		#  flash[:error] = e.message
+		#  redirect_to charges_path
+		#end
+		redirect_to billing_index_path
+	end
+
+	def pay
+		invoice = Stripe::Invoice.retrieve("in_4ct8hzEmBRI9bv")
+		invoice.pay
+	rescue Stripe::InvalidRequestError => e
+		puts "error? #{e.message}"
+	  	flash[:alert] = e.message
+		redirect_to billing_index_path
 	end
 
 	private
+
+	def invoice
+		invoice = Stripe::Invoice.create(customer: @user.company.customer_id)
+	end
 
 	def find_user
 		unless current_user.any_admin?

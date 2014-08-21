@@ -1,0 +1,7 @@
+$('#navigation a').removeClass('current-page');
+$('#billing-link').addClass('current-page');
+$('#main').fadeOut(100,function(){
+	$(this).html('<%= j render :partial => "new_card" %>');
+	$(this).fadeIn(100);
+	$("html, body").animate({ scrollTop: 0 }, 300);
+});

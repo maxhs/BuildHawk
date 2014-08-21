@@ -1,0 +1,55 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#payment-form').submit(function(event) {
+		    var form = $(this);
+		    form.find('button').prop('disabled', true);
+		    Stripe.setPublishableKey('<%=@stripe_key%>');
+		    var token = Stripe.card.createToken(form, stripeResponseHandler);
+		    event.preventDefault();
+		    return false;
+		});
+	});
+</script>
+<div id="billing">
+	<div id="edit-billing-container" class="border-box">
+		<div id="dismiss-card-container">
+			<%= link_to image_tag("blackX.png"), billing_index_path, remote: true %>
+		</div>
+		<h2 style="text-align:center;">Update Billing Information</h2>
+		<%= form_for card, url: billing_path(card), method: :patch, :id=>"payment-form", remote:true do |f| %>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		  	<span class="payment-errors"></span>
+
+		  	<div class="form-row">
+		    	<label>
+		      		<span>Card Number</span>
+		     		<span>*** <%= card.last4 %></span>
+		    	</label>
+		    	<label>
+		      		<span>CVC</span>
+		      		<span>***</span>
+		    	</label>
+		 	 </div>
+
+		  	<div class="form-row">
+		    	<label>
+		      		<span>Expiration (MM/YYYY)</span>
+		      		<span><%=card.exp_month%></span>
+		    	</label>
+		    	<span> / </span>
+		    	<span><%=card.exp_year%></span>
+		  	</div>
+
+		  	<label>Make Primary</label>
+		  	<% if card.active %>
+		  		<%= f.check_box :active, checked: true %>
+		  	<% else %>
+		  		<%= f.check_box :active %>
+		  	<% end %>
+		  	<div style="text-align:center;"><%=submit_tag "Save", :class=>"simple-btn" %></div>
+		<% end %>
+
+		<%= link_to image_tag("trashButton.png", :id=>"trash-button", :style=>"size:24px;"), billing_path(card), method: :delete, data: {confirm: "Are you sure you want to delete this card?"} %>
+	</div>
+</div>

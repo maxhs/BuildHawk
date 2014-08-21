@@ -1,6 +1,0 @@
-$('.sidebarAdmin a').removeClass('current-page');
-$('#billing-link').addClass('current-page');
-$('#pages').fadeOut(200,function(){
-	$(this).html('<%= j render partial:"charges/index" %>');
-	$(this).fadeIn(200);
-});

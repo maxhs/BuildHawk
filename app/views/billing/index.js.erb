@@ -1,4 +1,4 @@
-<% unless @active_card %>
+<% unless @company.cards.count > 0 %>
 	$('#alert').css({'color':'#fff','background':'#cc0000'}).text("Please setup your billing preferences in order to create new projects").fadeIn(500).delay(4000).fadeOut(500, function(){
 		$(this).css({'color':'#000','background':'#fff'}).text("");
 	});
