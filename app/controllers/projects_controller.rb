@@ -67,7 +67,7 @@ class ProjectsController < AppController
 		if @project.company
 			@project_groups = @project.company.project_groups 
 			@users = @project.company.users
-			@subs = @project.company.company_subs.sort_by!{|cs| cs.subcontractor.name}
+			@subs = @project.company.company_subs.flatten.sort_by{|cs| cs.subcontractor.name}
 		end
 
 		@project.users.build

@@ -109,6 +109,9 @@ class ReportsController < AppController
 
 	def create
 		@project = Project.find params[:report][:project_id]
+		@project_users = @project.project_users
+		@subs = @project.companies.flatten.sort_by(&:name)
+
 		if @project.reports.where(:date_string => params[:report][:date_string], :report_type => params[:report][:report_type]).first
 			if request.xhr?
 				respond_to do |format|
