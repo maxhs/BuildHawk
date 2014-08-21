@@ -15,7 +15,6 @@
 	}
 
 	input[type="text"] {
-		margin-bottom:2px;
 		width:100% !important;
 	}
 
@@ -32,6 +31,27 @@
 	
 	h4 {
 		text-align:left;
+	}
+
+	.row {
+		border-bottom:1px solid #ddd;
+		padding:5px 10px;
+	}
+
+	.row:first-child {
+		padding-top:10px;
+	}
+	
+	.row.button-container {
+		border-bottom:0;
+	}
+
+	.comment-container {
+		margin-top: 20px;
+		clear: both;
+		padding: 20px;
+		background: #f7f7f7;
+		border-top: 1px solid #ddd;
 	}
 }
 

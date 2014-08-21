@@ -164,6 +164,11 @@ class WorklistItemsController < AppController
 			@users = @project.users
 			@connect_users = @project.connect_users
 			@subs = @project.project_subs
+		elsif params[:project_id]
+			@project = Project.find params[:project_id]
+			@users = @project.users
+			@connect_users = @project.connect_users
+			@subs = @project.project_subs
 		end
 	end
 end

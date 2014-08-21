@@ -170,6 +170,7 @@ class ProjectsController < AppController
 
 	def worklist
 		@worklist = @project.worklists.first_or_create
+		@connect
 		@tasks = @worklist.worklist_items
 	end
 
@@ -359,7 +360,7 @@ class ProjectsController < AppController
 		else
 			find_projects
 		end
-		
+		@connect_users = @project.connect_users if @project
 	end
 
 	def find_projects

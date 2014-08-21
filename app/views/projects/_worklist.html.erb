@@ -24,8 +24,9 @@
 					<div class="col-xs-2"><h5>Created On</h5></div>
 				</div>		
 				
-				<%= render partial: "projects/task", collection: @tasks, as: :task, cache: true %>
-			
+				<div id="tasks">
+					<%= render partial: "projects/task", collection: @tasks, as: :task, cache: true %>
+				</div>
 			<% else %>
 				<div class="col-xs-12 loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;margin:50px auto;">No tasks</h4></div>
 			<% end %>
@@ -44,7 +45,7 @@
 		if (offset<=0){
 			offset = 0;
 		}
-		$('#task-focus').css('top',offset);
+		$('#task-focus').css({'top':offset,'left':'54%'});
 		$("html, body").animate({ scrollTop: offset }, 120);
 	<% end %>
 	$('#top-nav a').removeClass('current-page');
