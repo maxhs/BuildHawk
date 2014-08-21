@@ -1,7 +1,10 @@
+source 'https://code.stripe.com'
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
-gem 'passenger', :group => :production
+gem 'rails', '4.1.0'
+#gem 'passenger', :group => :production
+gem 'puma', :group => :production
+gem 'puma', :group => :development
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
@@ -10,7 +13,7 @@ gem 'aws-sdk'
 gem 'acts_as_api'
 gem 'devise'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 4.2.1'
 gem "nested_form"
 gem "remotipart"
 gem 'postmark-rails'
@@ -31,16 +34,16 @@ gem 'roo'
 gem 'twilio-ruby'
 gem 'deep_cloneable', '~> 1.6.0'
 gem 'nprogress-rails'
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 gem 'acts_as_list'
 gem 'actionview-encoded_mail_to'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'uglifier', '>= 1.3.0'
 gem 'httparty'
-gem 'newrelic_rpm'
 gem 'geocoder'
 gem 'pushmeup'
 gem 'jquery-easing-rails'
+gem 'newrelic_rpm'
 #gem 'nokogiri'
 #gem 'cocaine'
 #gem 'non-stupid-digest-assets'

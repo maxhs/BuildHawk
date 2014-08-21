@@ -1,17 +1,14 @@
-<div class="border-box" style="padding-top:20px;">
-	<header>	
-		<div style="margin-bottom: 15px">
-			<%= form_tag search_reports_path(:project_id => @project.id), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
-				<%= text_field_tag :search, nil, :placeholder=>"Search Reports...", :class=>"form-control" %>
-				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
-			<% end %>
-		</div>
-		<div style="width:100%;text-align:center;">
-			<%= link_to "Add a new report", new_report_path(:project_id => @project.id), :class=>"simple-btn search-button", remote: true %>
-		<div>
-	</header>
+<div id="project-reports" class="border-box">
+	
+	<div style="margin-bottom: 15px">
+		<%= link_to "+ New Report", new_report_path(:project_id => @project.id), :class=>"simple-btn new-report", remote: true %>
+		<%= form_tag search_reports_path(:project_id => @project.id), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
+			<%= text_field_tag :search, nil, :placeholder=>"Search Reports...", :class=>"form-control" %>
+			<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
+		<% end %>
+	</div>
 
-	<div id="project-reports">
+	<div style="border:1px solid #ddd;">
 		<% if @reports && @reports.count > 0 %>
 			<div class="header row">
 				<div class="col-xs-3"><h5>Report Date</h5></div>
@@ -29,6 +26,13 @@
 		
 	</div>
 </div>
+
+<div id="report-focus">
+	<% if @report %>
+		<%= render partial:"reports/edit", locals:{report:@report} %>
+	<% end %>
+</div>
+
 <script>
 	$('#remove').click(function(){
 		$('#search').val('');

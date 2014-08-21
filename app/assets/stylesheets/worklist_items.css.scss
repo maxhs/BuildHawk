@@ -6,6 +6,7 @@
 	margin:0 auto;
 	max-width:800px;
 	display:block;
+	padding:0;
 
 	input[type="radio"]{
 		display:inline-block;
@@ -14,16 +15,43 @@
 	}
 
 	input[type="text"] {
-		margin-bottom:2px;
 		width:100% !important;
 	}
 
-	h3 {
-		text-align:center;
+	header {
+		padding:3px 0 0px;
+		margin-bottom:20px;
+		border-bottom:1px solid #ddd;
+
+		h3 {
+			text-align:center;
+			
+		}
 	}
 	
 	h4 {
 		text-align:left;
+	}
+
+	.row {
+		border-bottom:1px solid #ddd;
+		padding:5px 10px;
+	}
+
+	.row:first-child {
+		padding-top:10px;
+	}
+	
+	.row.button-container {
+		border-bottom:0;
+	}
+
+	.comment-container {
+		margin-top: 20px;
+		clear: both;
+		padding: 20px;
+		background: #f7f7f7;
+		border-top: 1px solid #ddd;
 	}
 }
 

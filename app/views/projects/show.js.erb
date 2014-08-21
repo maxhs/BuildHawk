@@ -1,16 +1,12 @@
-$('a').removeClass('current-page');
 $('#alert').fadeOut(400);
 var nav = $('<%= j render partial: "projects/project_nav" %>');
-$('#navigation').fadeOut(170,function(){
-	$(this).html(nav);
-	$(this).fadeIn(170);
-	$('#<%=@project.id%>-link, .nav-dashboard.admin a').addClass('current-page');
-});
+$('#navigation').html(nav);
+$("#main").html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
+$("html, body").animate({ scrollTop: 0 }, 0);
 
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
-	$(this).fadeIn(170,function(){
-		closeMenu();
-	});
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+if ($("#dropdown-menu").length){
+	$("#dropdown-menu").replaceWith("<ul id='dropdown-menu'><%= j render partial: 'projects/project_nav'%></ul>");
+} else {
+	$("#dropdown-toggle").after("<ul id='dropdown-menu'><%= j render partial: 'projects/project_nav'%></ul>");
+}
+closeMenu();

@@ -13,6 +13,7 @@ Buildhawk::Application.routes.draw do
     post '/confirm', :to => "registrations#confirm"
   end
 
+  post "projects/order_projects", :to => "projects#order_projects"
   post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
   get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
@@ -103,7 +104,11 @@ Buildhawk::Application.routes.draw do
       get :cancel_editing
     end
   end
-  resources :connect
+  resources :connect do
+    member do 
+      get :task
+    end
+  end
   resources :projects do
     member do
       post :archive
@@ -122,6 +127,7 @@ Buildhawk::Application.routes.draw do
     end
     collection do
       post :search
+      post :order_projects
     end
   end
   resources :companies do

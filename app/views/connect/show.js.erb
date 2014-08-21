@@ -1,0 +1,5 @@
+$('a').removeClass('current-page');
+$('#navigation').html($('<%= j render partial: "connect/top_nav" %>'));
+$('#main').html('<%= j render :partial => "connect/show", locals: {tasks: @tasks, company: @company} %>');
+closeMenu();
+$("html, body").animate({ scrollTop: 0 }, 0);

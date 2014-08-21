@@ -1,28 +1,29 @@
 <div class="company-project" class="border-box">
 	
 	<div class="row">
-		<div class="project-header col-xs-4">
-			<span class="project-name"><%= link_to project.name, project_path(project), remote: true %></span>
-			<% if project.address %>
-				<%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>
-			<% end %>
+		<div class="project-header col-xs-6">
+			<div>
+				<span class="project-name"><%= link_to project.name, project_path(project), remote: true %></span>
+				<% if project.address %>
+					<%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>
+				<% end %>
+			</div>
+			<!--<div>
+				<% if project.checklist %>
+					<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
+					<%= link_to "#{project.checklist.progress_percentage}", project_path(project), remote: true, :style=>"text-transform:uppercase;letter-spacing:1px;" %>
+					<script type="text/javascript">
+						$(function(){
+							$('#progress-link-<%=project.id%>').progressbar({
+						    	value:<%=project.checklist.progress%>
+						    });
+						})
+					</script>
+				<% end %>
+			</div>-->
 		</div>
-	
-		<div class="progress-section col-xs-4">
-			<% if project.checklist %>
-				<%= link_to "#{project.checklist.progress_percentage} complete", project_path(project), remote: true, :style=>"text-transform:uppercase;letter-spacing:1px;font-size:1.1em;" %>
-				<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
-				
-				<script type="text/javascript">
-					$(function(){
-						$('#progress-link-<%=project.id%>').progressbar({
-					    	value:<%=project.checklist.progress%>
-					    });
-					})
-				</script>
-			<% end %>
-		</div>
-		<div class="col-xs-4">
+
+		<div class="col-xs-6">
 			<table class="alert-table">
 				<tr>
 					<td><%= link_to "Checklist",checklist_project_path(project), :remote => true %></td>

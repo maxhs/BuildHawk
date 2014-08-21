@@ -1,7 +1,6 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-worklists a,#<%=@project.id%>-link').addClass('current-page');
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/worklist" %>');
-	$(this).fadeIn(170);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#task-focus').css({'left':'100%','top':'0'});
+$('#project-tasks').removeClass('tasks-panel');
+$('#tasks').html('<%= j render partial: "projects/task", collection: @tasks, as: :task, cache: true %>');
+$("html, body").animate({ scrollTop: 0 }, 200);

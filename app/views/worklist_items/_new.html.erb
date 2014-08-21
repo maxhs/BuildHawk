@@ -1,21 +1,25 @@
-<%= nested_form_for @item, :url => worklist_items_path, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
+<%= nested_form_for @task, :url => worklist_items_path, :html => {:multipart => true}, :remote => true, :class=>"remote", :method => :post do |f| %>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
 	<%= hidden_field_tag :project_id, @project.id %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
 
 	<div id="worklist-item-container" class="border-box">
-		<h3>New task</h3>
+		<header>
+			<h3>New task</h3>
+		</header>
 		<div class="row">
 			<div class="col-xs-2"><h4>Item:</h4></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the task" %></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-2"><h4>Location:</h4></div><div class="col-xs-10"><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
 		</div>
-		<%= f.fields_for :assignee do |a| %>
-			<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
-			<%= a.select :full_name, (@users.map(&:full_name)).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
-		<% end %>
-		<div>
+		<div class="row">
+			<%= f.fields_for :assignee do |a| %>
+				<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
+				<%= a.select :full_name, (@users.map(&:full_name)).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
+			<% end %>
+		</div>
+		<div class="row">
 			<h4>Add a photo</h4>
 			<%= f.fields_for :photos do |photo| %>
 				<%= photo.file_field :image %>
@@ -24,7 +28,7 @@
 				<%= photo.hidden_field :source, :value => "Worklist" %>
 			<% end %>
 		</div>
-		<div class="button-container">
+		<div class="row button-container">
 			<%= f.submit "Add", :class=>"simple-btn save" %>
 		</div>
 		

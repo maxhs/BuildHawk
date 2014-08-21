@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < AppController
 	before_filter :authenticate_user!
 	def create
 		@comment = Comment.create params[:comment]

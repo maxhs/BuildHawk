@@ -1,7 +1,4 @@
 $('#navigation a').removeClass('current-page');
 $('#groups-link').addClass('current-page');
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "admin/project_groups" %>');
-	$(this).fadeIn(100);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#main').html('<%= j render :partial => "admin/project_groups" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);

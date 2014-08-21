@@ -1,13 +1,29 @@
-<li class="logo"><a href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
-<li class="nav-dashboard admin"><%= link_to @project.name, project_path(@project), :remote => true %></li>
-<li class="nav-checklists admin"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
-<li class="nav-documents admin"><%= link_to "Documents", document_photos_project_path(@project), :remote => true %></a></li>
-<li class="nav-reports admin"><%= link_to "Reports", reports_path(:project_id => @project.id), :remote => true %></li>
-<li class="nav-worklists admin"><%= link_to "Tasks", worklist_project_path(@project), :remote => true %></li>
+<li class="nav-dashboard admin">
+	<%= link_to "Dashboard", project_path(@project), :remote => true %>
+</li>
+<li class="nav-checklists admin">
+	<%= link_to checklist_project_path(@project), :remote => true do %>
+		<%= image_tag "checklist.png", :class=>"nav-icon" %> 
+		<div>Checklist</div>
+	<% end %>
+</li>
+<li class="nav-documents admin">
+	<%= link_to document_photos_project_path(@project), :remote => true do %>
+		<%= image_tag "document.png", :class=>"nav-icon" %>
+		<div>Documents</div>
+	<% end %>
+<li class="nav-reports admin">
+	<%= link_to reports_path(:project_id => @project.id), :remote => true do %>
+		<%= image_tag "reports.png", :class=>"nav-icon" %>
+		<div>Reports</div>
+	<% end %>
+</li>
+<li class="nav-tasks admin">
+	<%= link_to worklist_project_path(@project), :remote => true do %>
+		<%= image_tag "task.png", :class=>"nav-icon" %>
+		<div>Tasks</div>
+	<% end %>
+</li>
 <% if current_user.admin %> 
 	<li class="nav-edit admin"><%= link_to "Edit", edit_project_path(@project), :remote => true %></li> 
 <% end %>
-
-<!--<% if current_user && current_user.uber_admin? %>
-	<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
-<% end %>-->

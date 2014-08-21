@@ -1,12 +1,13 @@
-class WorklistItemsController < ApplicationController
+class WorklistItemsController < AppController
 	before_filter :find_company
 	before_filter :authenticate_user!, :except => [:find_company, :edit]
 
 	def new
-		@item = WorklistItem.new
-		@item.photos.build
-		@item.build_assignee
+		@task = WorklistItem.new
+		@task.photos.build
+		@task.build_assignee
 		@project = Project.find params[:project_id]
+		@worklist = @project.worklists.last
 		@company = @project.company
 		@projects = @company.projects
 		@connect_users = @project.connect_users
@@ -35,15 +36,15 @@ class WorklistItemsController < ApplicationController
 			params[:worklist_item].delete(:assignee_attributes)
 		end
 
-		@item = @worklist.worklist_items.create params[:worklist_item]
+		@task = @worklist.worklist_items.create params[:worklist_item]
 		
 		if assignee
-			@item.update_attribute :assignee_id, assignee.id
+			@task.update_attribute :assignee_id, assignee.id
 		elsif sub_assignee
-			@item.update_attribute :sub_assignee_id, sub_assignee.id
+			@task.update_attribute :sub_assignee_id, sub_assignee.id
 		end
 
-		@items = @worklist.worklist_items if @worklist
+		@tasks = @worklist.worklist_items if @worklist
 		if request.xhr?
 			respond_to do |format|
 				format.js { render :template => "projects/worklist"}
@@ -54,7 +55,7 @@ class WorklistItemsController < ApplicationController
 	end
 
 	def show
-		@item = WorklistItem.find params[:id]
+		@task = WorklistItem.find params[:id]
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -66,7 +67,7 @@ class WorklistItemsController < ApplicationController
 
 	def edit
 		@locations = @worklist.worklist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
-		@item.build_assignee if @item.assignee.nil?
+		@task.build_assignee if @task.assignee.nil?
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -103,13 +104,13 @@ class WorklistItemsController < ApplicationController
 				params[:worklist_item][:completed_by_user_id] = nil
 				params[:worklist_item][:completed_at] = nil
 			end
-			@item.update_attributes params[:worklist_item]
+			@task.update_attributes params[:worklist_item]
 
-			@item.activities.create(
+			@task.activities.create(
 				:user_id => current_user.id,
 				:body => "#{current_user.full_name} just updated this item",
-				:project_id => @item.worklist.project.id,
-				:activity_type => @item.class.name
+				:project_id => @task.worklist.project.id,
+				:activity_type => @task.class.name
 			)
 			if request.xhr?
 				respond_to do |format|
@@ -122,7 +123,7 @@ class WorklistItemsController < ApplicationController
 	end
 		
 	def destroy
-		@item.destroy!
+		@task.destroy!
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -133,12 +134,12 @@ class WorklistItemsController < ApplicationController
 	end
 
 	def generate
-		if @item.assignee
-			@recipient = @item.assignee
-			WorklistItemMailer.worklist_item(@item,@recipient).deliver
-		elsif @item.sub_assignee
-			@recipient = @item.sub_assignee
-			WorklistItemMailer.worklist_item(@item,@recipient).deliver
+		if @task.assignee
+			@recipient = @task.assignee
+			WorklistItemMailer.worklist_item(@task,@recipient).deliver
+		elsif @task.sub_assignee
+			@recipient = @task.sub_assignee
+			WorklistItemMailer.worklist_item(@task,@recipient).deliver
 		end
 		if request.xhr?
 			respond_to do |format|
@@ -150,20 +151,24 @@ class WorklistItemsController < ApplicationController
 	end
 
 	def find_company
-		@item = WorklistItem.find params[:id] if params[:id]
-		unless user_signed_in?# && (@item.worklist.project.project_users.include?(current_user) || @item.assignee == current_user)
+		@task = WorklistItem.find params[:id] if params[:id]
+		if !user_signed_in?# && (@task.worklist.project.project_users.include?(current_user) || @task.assignee == current_user)
 			redirect_to projects_path
 			flash[:notice] = "You don't have access to this task".html_safe
-		else	
-			@worklist = @item.worklist
+		elsif @task	
+			@worklist = @task.worklist
 			@project = @worklist.project
-			@items = @worklist.worklist_items
+			@tasks = @worklist.worklist_items
 			@company = @project.company
 			@projects = @company.projects
 			@users = @project.users
 			@connect_users = @project.connect_users
 			@subs = @project.project_subs
-		
+		elsif params[:project_id]
+			@project = Project.find params[:project_id]
+			@users = @project.users
+			@connect_users = @project.connect_users
+			@subs = @project.project_subs
 		end
 	end
 end

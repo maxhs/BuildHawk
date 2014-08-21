@@ -7,12 +7,5 @@ $('#navigation').fadeOut(170,function(){
 	});
 });
 
-$('#inner-wrap').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(170,function(){
-		if (!$('#sidebar').length){
-			$('#bt-menu').append('<% if @projects %><%= j render partial: "projects/sidebar" %><% end %>');
-		}
-	});
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#inner-wrap').html('<%= j render :partial => "index" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < AppController
 	before_filter :authenticate_user!, :except => :preregister
 
 	def new

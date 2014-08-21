@@ -1,4 +1,4 @@
-class CompanySubsController < ApplicationController
+class CompanySubsController < AppController
 
 	def destroy
 		subcontractor = CompanySub.find params[:id]

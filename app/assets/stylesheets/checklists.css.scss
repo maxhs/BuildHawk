@@ -2,10 +2,68 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.project-checklist-table, .admin-checklist-table, .core-checklist-table {
+
+#project-checklist {
+	-webkit-transition: all 0.15s;
+	-moz-transition: all 0.15s;
+	-ms-transition: all 0.15s;
+	-o-transition: all 0.15s;
+	transition: all 0.15s;
+	width:100%;
+}
+
+.checklist-panel {
+	width:54% !important;
+}
+
+#checklist-focus {
+	position:absolute;
+	right:0;
+	margin-left:1%;
+	width:45%;
+	-webkit-transition: all 0.15s;
+	-moz-transition: all 0.15s;
+	-ms-transition: all 0.15s;
+	-o-transition: all 0.15s;
+	transition: all 0.15s;
+}
+
+.project-checklist-table.border-box, .admin-checklist-table.border-box, .core-checklist-table.border-box {
 	margin-top:40px; 
 	margin:0 auto; 
+	padding:0;
 	width:100%;
+
+	#search-button {
+
+	}
+
+	#checklist-search {
+		padding:10px;
+		display:none;
+	}
+
+	#checklist-search-button {
+		position:relative;
+		top:5px;
+		width:24px;
+		cursor:pointer;
+	}
+	#checklist-search-button:hover {
+
+	}
+		
+	#checklist-items header {
+		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #eee));
+		border-bottom:1px solid #ddd;
+		padding:0;
+	}
+
+	.checklist-header.row {
+		padding-left:10px;
+		width:100%;
+		margin-left:0px;
+	}
 
 	#core-checklists, table {
 		width:100%;
@@ -21,8 +79,20 @@
 
 		td {
 			text-align:center;
-			padding:20px;
+			padding:10px 20px;
 			font-size:1em;
+			border:1px solid #eee;
+		}
+
+		.checklist.delete-img {
+			width:15px;
+		}
+
+		.core-checklist-row {
+
+			.checklist-description {
+				text-align:left;
+			}
 		}
 	}
 
@@ -79,8 +149,7 @@
 	}
 
 	.phase-label {
-		line-height:53px;
-		vertical-align:middle;
+		padding-top:10px;
 		text-align:center;
 		a:hover {
 			color:#fff !important;
@@ -88,7 +157,7 @@
 	}
 
 	.row {
-		padding:10px 0;
+		padding:5px 0;
 		margin:0 0 0 1%;
 		width:99%;
 	}
@@ -144,6 +213,44 @@
 	}
 }
 
+.checklist-item {
+			min-height:40px;
+
+			.left-edit-checklist {
+				top: -5px;
+				margin-right:10px;
+				padding: 5px 10px 5px 20px;
+				font-size: 13px;
+				letter-spacing:1px;
+				font-weight:normal;
+				text-transform:uppercase;
+				position: absolute;
+				right: 100%;
+				background: #fff;
+				border-left: 1px solid #eee;
+				border-radius:20px 0 0 20px;
+				display:none;
+				z-index:5;
+				font-family: "Proxima Nova","Source Sans Pro","Helvetica Neue","Helvetica",sans-serif;
+			}
+
+			.checklist.body {
+				display:table;
+				height:33px;
+
+				a {
+					vertical-align:middle;
+					display:table-cell;
+				}
+			}
+		}
+
+		.checklist-item:hover {
+			.left-edit-checklist {
+				display:block;
+			}
+		}
+
 .project-checklist-table {
 	.new-phase {
 		margin-left:1%;
@@ -161,7 +268,7 @@
 	}
 
 	.left-edit {
-		top: 18px;
+		top: 10px;
 		padding: 5px 5px 5px 15px;
 		font-size: 14px;
 		letter-spacing:1px;
@@ -173,7 +280,7 @@
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
 		display: none;
-		font-family: "Montserrat","Helvetica",sans-serif;
+		font-family: "Proxima Nova","Source Sans Pro","Helvetica",sans-serif;
 		border-radius: 18px 0 0 18px;
 		-webkit-border-radius: 18px 0 0 18px;
 		-moz-border-radius: 18px 0 0 18px;
@@ -184,41 +291,6 @@
 
 .phase:hover {
 	.left-edit {
-		display:block;
-	}
-}
-
-.checklist-item {
-	min-height:40px;
-
-	.left-edit-checklist {
-		top: -5px;
-		padding: 5px 20px 5px 30px;
-		font-size: 13px;
-		letter-spacing:1px;
-		font-weight:normal;
-		text-transform:uppercase;
-		position: absolute;
-		right: 100%;
-		background: #fff;
-		border-left: 1px solid #eee;
-		border-radius:20px 0 0 20px;
-		display:none;
-		font-family: "Montserrat","Helvetica",sans-serif;
-	}
-
-	.checklist.body {
-		display:table;
-		height:33px;
-
-		a {
-			vertical-align:middle;
-			display:table-cell;
-		}
-	}
-}
-.checklist-item:hover {
-	.left-edit-checklist {
 		display:block;
 	}
 }
@@ -238,9 +310,9 @@
 	font-size:1.1em;
 }
 
-.phase-form.container, .category-form.container {
+.phase-form, .category-form {
 	width:100%;
-	max-width:800px;
+	max-width:700px;
 	padding:0 20px;
 	margin:0 auto;
 	overflow:auto;
@@ -278,6 +350,10 @@
 
 }
 
+.checklist-item-link {
+	font-size:14px;	
+}
+
 .checklist-item-form{
 	margin:0 auto;
 	clear:both;
@@ -299,14 +375,12 @@
 	}
 
 	select, select[multiple] {
-		font-size:1.25em;
-		padding:10px 0;
-		line-height:1.1em;
+		padding:5px 0;
+		line-height:1.5em;
 		text-align:center;
 	}		
 
-	.item-body {	
-		font-size:17px;
+	.item-body {
 		margin:0.5em auto 2em;
 		display:block;
 	}
@@ -346,9 +420,22 @@
 	padding-left:1%;
 	border-left:1px dotted #ddd;
 	
+	.checklist-item.active-item {
+		position:relative;
+		left:2.5%;
+		z-index:5;
+		background:#fff !important;
+		color:#000;
+	}
+
 	.checklist-item {
-		border-bottom:1px dotted #ddd;
+		border-bottom:1px solid #ddd;
+		padding:10px 0 10px 10px !important;
 	}	
+
+	.checklist-item:first-child {
+		border-top:1px solid #ddd;
+	}
 }
 
 .category {
@@ -363,8 +450,7 @@
 		color:#cc0000;
 	}
 	.category-label {
-		line-height:40px;
-		vertical-align:middle;
+		padding-top:5px;
 		text-align:center;
 	}
 	.completed-count {
@@ -382,15 +468,15 @@
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	padding:7px 14px;
+	padding:5px 10px;
 	position:relative;
 	display:inline-block;
 	margin:0;
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Source Sans Pro",'Helvetica',sans-serif;
-	font-size:1em;
+	font-family:"Proxima Nova","Source Sans Pro",'Helvetica',sans-serif;
+	font-size:.9em;
 	line-height:1em;
 	text-transform:uppercase;
 	letter-spacing:1px;
@@ -477,4 +563,9 @@
 		width:100%;
 		margin:20px 0;
 	}
+}
+
+.project-checklist-table.standard-templates {
+	padding: 5px 20px 20px;
+	margin-top: 10px;
 }

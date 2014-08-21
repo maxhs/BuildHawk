@@ -1,23 +1,25 @@
 <% if folder && folder.name.length > 0 %>
 	<li class="folder" id="fid-<%=folder.id%>">
 		<h4 class="folder-name"><%= folder.name %></h4>
-		<%= link_to "Edit", edit_folder_path(folder), :class=>"edit-folder remote", :remote => true %>
+
+		<div style="float:right">
+			<%= form_for Photo.new, url: photos_path(:project_id => project.id), :multipart => true , :remote => true, :method => :post do |f| %>
+				<div class="dz-message simple-btn">Upload</div>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+				<%= f.hidden_field :folder_id, :value => folder.id %>
+			<% end %>
+			<%= link_to "Edit", edit_folder_path(folder), :class=>"edit-folder simple-btn remote", :remote => true %>
+		</div>
 		<ul>
 			<% folder.photos.sort_by(&:name).each do |p| %>
 				<li class="photo-name" id="p-<%= p.id %>">
-					<%= link_to show_photo_project_path(@project,:photo_id => p.id), :class=>"remote", :remote => true do %>
+					<%= link_to show_photo_project_path(project,:photo_id => p.id), :class=>"remote", :remote => true do %>
 						<%= p.name %><span class="photo-timestamp"><%= parse_datetime p.created_at %></span>
 					<% end %>
 				</li>
 			<% end %>
 		</ul>
 		<div id="fid-<%=folder.id%>-add-document" class="add-photo">
-
-			<%= form_for Photo.new, url: photos_path(:project_id => @project.id), :multipart => true , :remote => true, :method => :post do |f| %>
-				<div class="dz-message">(+) upload</div>
-				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= f.hidden_field :folder_id, :value => folder.id %>
-			<% end %>
 
 			<script type="text/javascript">
 				$(function(){

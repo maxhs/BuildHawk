@@ -1,4 +1,4 @@
-class ChecklistsController < ApplicationController
+class ChecklistsController < AppController
 	before_filter :authenticate_user!
 	def index
 		@checklists = current_user.company.checklists

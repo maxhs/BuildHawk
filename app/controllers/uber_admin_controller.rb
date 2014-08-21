@@ -1,4 +1,4 @@
-class UberAdminController < ApplicationController
+class UberAdminController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_user
 

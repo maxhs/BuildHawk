@@ -1,10 +1,62 @@
+<div class="col-xs-12" id="main">
+	<%= render :partial => "projects/checklist", :locals => {:checklist => @checklist,:item => @item} %>
+</div>
 <script>
+	var itemsHolder = $('#<%= @phase.id %>-items');
+	/*$('html, body').animate({
+        scrollTop: $('#phase-<%=@phase.id %>').offset().top-50
+    }, 0);*/
+	<% if @project %>
+		itemsHolder.html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category", remote: true %>');
+	<% else %>
+		itemsHolder.html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category", remote: true %>');
+		itemsHolder.children(":first").find(".items-container").removeClass("collapsed");
+	<% end %>
+
+	itemsHolder.addClass('revealed');
+	
+	$('#phase-<%=@phase.id%> .disclosure').text('[+]');
+	<% @phase.categories.each do |category| %>
+        $('#items-<%=category.id%>').sortable({
+          axis: 'y',
+          dropOnEmpty:true,
+          cursor: 'move',
+          items: 'li',
+          opacity: 0.4,
+          scroll: true,
+          stop: function(){
+            $.ajax({
+                type: 'post',
+                data: $('#items-<%=category.id%>').sortable('serialize') + '&id=<%= category.id %>',
+                dataType: 'script',
+                url: '/checklists/order_items'
+            })
+          }
+        });  
+    <% end %>
+
+    $('#category-<%=@category.id%>-container').removeClass('collapsed');
+	$("#project-checklist").addClass('checklist-panel');
 	$('#nav-admin a, #nav-uber-admin a').removeClass('current-page');
 	$('#nav-projects a, li.nav-checklists a').addClass('current-page');
+	$('#item-<%=@item.id%>').addClass("active-item");
+	var offset = $('#item-<%=@item.id %>').offset().top-150;
+	if (offset > 50){
+		$('#checklist-focus').css('top',offset);
+		$("html, body").animate({ scrollTop: offset }, 200);
+	}
+
+	$('.category .title').on('click',function(e){
+		var catId = e.target.id;
+		var cat = $('#category-'+catId+'-container');	
+        if (cat.hasClass("collapsed")){
+        	cat.show(200,function(){
+        		cat.removeClass('collapsed');
+        	});
+        } else {
+        	cat.hide(200,function(){
+        		cat.addClass('collapsed');
+        	});
+        }
+	});
 </script>
-
-<div class="col-xs-12" id="main">
-
-	<%= render :partial => "checklist_item", :locals => {:item => @item} %>
-
-</div>

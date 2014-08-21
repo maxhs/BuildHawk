@@ -1,10 +1,12 @@
-class ReportsController < ApplicationController
+class ReportsController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_project
 
 	def index
 		@project = Project.find params[:project_id]
 		@reports = @project.ordered_reports
+	rescue
+		redirect_to root_url
 	end
 
 	def search
@@ -183,13 +185,13 @@ class ReportsController < ApplicationController
 			@company = @project.company
 			@projects = @company.projects
 			@project_users = @project.project_users
-			@subs = @project.companies.sort_by!(&:name)
+			@subs = @project.companies.flatten.sort_by(&:name)
 		elsif @report && @report.project_id
 			@project = @report.project
 			@company = @project.company
 			@projects = @company.projects
 			@project_users = @project.project_users
-			@subs = @project.companies.sort_by!(&:name)
+			@subs = @project.companies.flatten.sort_by(&:name)
 		end
 	end
 end

@@ -3,8 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #edit-project {
-	margin: 0 auto;
-	max-width: 800px;
 
 	.edit-header {
 		text-align:center;
@@ -94,7 +92,8 @@
 	}
 
 #company-dashboard {
-	
+	padding:0;
+
 	.alert-table {
 		width:100%;
 		td {
@@ -102,11 +101,15 @@
 		}
 	}
 
+	.company-project:last-child {
+		border-bottom:0;
+	}
+
 	.company-project {
 		background-color:#fff;
-		padding:10px 20px;
-		margin-bottom:10px;
+		padding:0px 20px;
 		overflow:auto;
+		border-bottom:1px solid #ccc;
 
 		table {
 			width:100%;
@@ -132,7 +135,7 @@
 		}
 
 		.project-header {
-			margin:20px 0 0;
+			margin:10px 0 0;
 			padding-left:0;
 		}
 
@@ -154,7 +157,7 @@
 		}
 
 		.project-name {
-			font-size:1.75em;
+			font-size:1.5em;
 			text-transform:uppercase;
 			padding-right:20px;
 		}
@@ -210,10 +213,16 @@
 	}
 
 	.progress-link {
+		width:80%;
+		height:6px;
+		border-radius:0;
+		margin-right:2.5%;
+		-webkit-border-radius:0;
+		-moz-border-radius:0;
 
 		.ui-progressbar-value {
 			margin-top:0;
-			background:#336699;
+			background:#0880ff;
 			border-width:0;
 		}
 	}
@@ -238,7 +247,6 @@
 }
 
 #project-dashboard {
-	border: 1px solid #ddd;
 	padding: 0;
 	background-color: #fff;
 
@@ -249,9 +257,11 @@
 		}
 	}
 
-	h3 {
+	h4 {
 		padding:10px;
-		background:#eee;
+		border-top:1px solid #eee;
+		border-bottom:1px solid #ddd;
+		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
 		margin:30px auto;
 	}
 

@@ -1,4 +1,4 @@
-class LeadsController < ApplicationController
+class LeadsController < AppController
 	before_filter :authenticate_user!, :except => :create
 	
 	def create

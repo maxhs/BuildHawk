@@ -1,5 +1,5 @@
 <div id="main">
-	<div id="company-dashboard">
+	<div id="company-dashboard" class="border-box">
 
 		<% if @projects.count > 0 %>
 			<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
@@ -16,7 +16,7 @@
 		<% end %>
 	</div>
 
-	<% if user_signed_in? && current_user.connect_items(nil).count > 0 %>
+	<!--<% if user_signed_in? && current_user.connect_items(nil).count > 0 %>
 		<div style="width:100%;clear:both;text-align:center;padding-top:2%;">
 			<h2 style="border-top:1px solid #ddd; padding-top:2%;">BuildHawk Connect</h2>
 		</div>
@@ -28,5 +28,5 @@
 				<span style="color:#aaa;font-weight:100;">You don't have any Connect items</span>
 			<% end %>
 		</div>
-	<% end %>
+	<% end %>-->
 </div>

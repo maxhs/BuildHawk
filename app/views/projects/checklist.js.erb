@@ -1,27 +1,24 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-page');
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/checklist" %>');
-	$(this).fadeIn(170);
+$('#main').html('<%= j render :partial => "projects/checklist" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);
 
-	<% if @phase %>
-		if ($('#phase-<%= @phase.id %>').length){
-			$('#phase-<%= @phase.id %> .phase-link').click();
-		}
-		if (history && history.pushState){
-		    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/checklist?phase_id=<%=@phase.id%>');
-		    $(window).bind("popstate", function(){
-		      $.getScript(location.href);
-		    });
-		}
-	<% else %>
-		if (history && history.pushState){
-		    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/checklist');
-		    $(window).bind("popstate", function(){
-		      $.getScript(location.href);
-		    });
-		}
-
-	<% end %>
-	
-});
+<% if @phase %>
+	if ($('#phase-<%= @phase.id %>').length){
+		$('#phase-<%= @phase.id %> .phase-link').click();
+	}
+	if (history && history.pushState){
+	    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/checklist?phase_id=<%=@phase.id%>');
+	    $(window).bind("popstate", function(){
+	      $.getScript(location.href);
+	    });
+	}
+<% else %>
+	if (history && history.pushState){
+	    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/checklist');
+	    $(window).bind("popstate", function(){
+	      $.getScript(location.href);
+	    });
+	}
+<% end %>
+closeMenu();

@@ -24,18 +24,6 @@
  	</script>
 
 	<script type="text/javascript">
-	    Shadowbox.init({
-	    	skipSetup:true,
-	    	onOpen:function(){
-	    		$('#top-nav').css('opacity','.1');
-	    	},
-	    	onClose:function(){
-	    		$('#top-nav').css('opacity','1');}
-	    })
-		window.Dropzone;
-		
-	</script>
-	<script type="text/javascript">
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-43601553-1']);
 	  _gaq.push(['_setDomainName', 'buildhawk.com']);
@@ -51,6 +39,7 @@
 for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
 mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 </head>
+
 <body>
 	<p class="notice" id="notice"><%= notice %></p>
     <p class="alert" id="alert"><%= alert %></p>
@@ -78,45 +67,20 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				<% elsif user_signed_in? %>
 					<%= render partial: "layouts/internal_nav" %>
 				<% end %>
-			</ul>
+				
+			</ul>	
 		</div>
-		
-		<% if user_signed_in? %>
-			<div id="inner-wrap">
+
+		<% if current_page?(root_url) %>			
+			<%= yield %>
+		<% else %>
+			<div id="inner-wrap" class="full">		
 				<%= yield %>
 			</div>
-				
-		<% else %>
-			<%= yield %>
 		<% end %>
 		<div id="push"></div>
 	</div>
-
-<% if user_signed_in? %>
-	<div id="projects-tab">Projects</div>
-	<nav id="bh-menu" class="bh-menu">
-		<ul id="internal-nav">
-		<% if current_user.any_admin? %>
-			<li><%= link_to "Admin", admin_index_path, remote: true %></li>
-			<% if current_user.uber_admin? %>
-				<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
-			<% end %>
-			<li><%= link_to "Messages", messages_path, remote:true %></li>
-		<% end %>
-			<li><%= link_to "BuildHawk Connect", connect_index_path, remote:true %></li>
-		</ul>
-	<% end %>
-	<ul id="credentials">
-		<% if user_signed_in? %>
-			<li>
-				<%= link_to current_user.full_name, edit_user_path(current_user), :id => "settings-link", :class=>"font-smoothing", :remote => true %>
-			</li>
-		<% end %>
-	</ul>
-	<% if @projects %><%= render partial: "projects/sidebar" %><% end %>
-</nav>
-
-<footer>
+<footer class="full">
 	<div id="container">
 		<ul>
 			<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
@@ -135,7 +99,6 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		setupWindow();
 		$.ajaxSetup({ cache: false });
 		datetimepickers();
-		<% if user_signed_in? %>sideMenu();<% end %>
 	});
 </script>
 </body>

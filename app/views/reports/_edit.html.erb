@@ -2,7 +2,21 @@
 <%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
 	<div id="edit-report" class="border-box container">
-		<div class="simple-btn export" style="float:right;"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></div>
+
+		<!--<% if @previous %>
+			<div class="previous-report">
+				<h4><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
+			</div>
+		<% end %>
+		<% if @next %>
+			<div class="next-report">
+				<h4><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
+			</div>
+		<% end %>-->
+
+		<div id="dismiss-report"><%=image_tag "blackX.png" %></div>
+		<!--<div class="simple-btn export"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></div>-->
+
 		<div class="thin-form">
 			<div class="row form-title" style="border:0;margin-top:0;padding-top:0">
 				<div class="col-md-12"><h4>Report Date</h4></div>
@@ -142,49 +156,47 @@
 				<% end %>
 			</div>
 		</div>
+	<div class="comment-container">
+		<h3 style="text-align:center; margin:20px auto; display:block;">Comments</h3>
+		<div id="comments-form">
+			<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
+				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
+				<%= f.hidden_field :user_id, :value => current_user.id %>
+				<%= f.hidden_field :report_id, :value => @report.id %>
+				<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
+			<% end %>
+		</div>
+		<%= render :partial => "comments/comments", :locals => {:comments => @report.comments} %>
+	</div>
+
+	<% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
+		<div class="activity-container">
+			<h3 style="text-align:center; margin:20px auto; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h3>
+			<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
+		</div>
+	<% elsif @report.activities.count > 0 %>
+		<div class="activity-container">
+			<h3 style="text-align:center; margin:20px auto; display:block;">Activity</h3>
+			<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
+		</div>
+	<% end %>
+
 </div>
-
-<% if @previous %>
-	<div class="previous-report">
-		<h4><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
-	</div>
-<% end %>
-<% if @next %>
-	<div class="next-report">
-		<h4><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
-	</div>
-<% end %>
-
-<div class="border-box comment-container" style="margin-top:20px;">
-	<h3 style="text-align:center; margin:20px auto; display:block;">Comments</h3>
-	<div id="comments-form">
-		<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
-			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
-			<%= f.hidden_field :user_id, :value => current_user.id %>
-			<%= f.hidden_field :report_id, :value => @report.id %>
-			<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
-		<% end %>
-	</div>
-	<%= render :partial => "comments/comments", :locals => {:comments => @report.comments} %>
-</div>
-
-<% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
-	<div class="border-box activity-container" style="margin-top:20px;">
-		<h3 style="text-align:center; margin:20px auto; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h3>
-		<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
-	</div>
-<% elsif @report.activities.count %>
-	<div class="border-box activity-container" style="margin-top:20px;">
-		<h3 style="text-align:center; margin:20px auto; display:block;">Activity</h3>
-		<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
-	</div>
-<% end %>
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#dp").datepicker();
 		$('#dp').datepicker().on('changeDate', function(){
 		    $('#dp').datepicker('hide');
+		});
+	});
+
+	$('#dismiss-report').click(function(){
+		$('.reports-panel').removeClass('reports-panel');
+		$('.active-item').removeClass('active-item');
+		$('#report-focus').hide(100,function(){
+			$(this).html('');
+			$(this).css('display',"block");
 		});
 	});
 </script>

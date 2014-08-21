@@ -155,7 +155,6 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             company.connect_users << connect_user if company
 
             if task
-                puts "we had a task for the connect user section"
                 if email
                     connect_user.email_task(task)
                 elsif phone

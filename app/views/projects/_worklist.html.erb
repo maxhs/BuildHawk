@@ -1,21 +1,19 @@
-<div class="border-box" style="padding:20px;overflow:auto;">
-	<header>
-		<div style="margin-bottom: 15px">
-			<%= form_tag search_worklist_project_path(@project), :id => "worklist-search", :method => :post, :class=>"input-group", :remote => true do %>
-				<%= text_field_tag :search, nil, :placeholder=>"Search tasks...", :class=>"form-control" %>
-				<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
-			<% end %>
-		</div>
-		<div style="width:100%;text-align:center;">
-			<%= link_to "Add a new task", new_worklist_item_path(:project_id => @project.id), :class=>"simple-btn search-button", remote: true %>
-		</div>
-	</header>
-	<div id="project-worklist">	
-		<div id="worklist-table">
-			<% if @items && @items.count > 0 %>
+<div class="border-box <%if @task%>tasks-panel<%end%>" id="project-tasks" style="overflow:auto;">
+
+	<div style="margin-bottom: 15px">
+		<%= link_to "+ New Task", new_worklist_item_path(:project_id => @project.id), :class=>"simple-btn new-task", remote: true %>
+		<%= form_tag search_worklist_project_path(@project), :id => "task-search", :method => :post, :class=>"input-group", :remote => true do %>
+			<%= text_field_tag :search, nil, :placeholder=>"Search tasks...", :class=>"form-control" %>
+			<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
+		<% end %>
+	</div>
+		
+	<div  style="border:1px solid #ddd;">	
+		<div id="task-table">
+			<% if @tasks && @tasks.count > 0 %>
 				<div class="header row">
 					<!--<div class="col-xs-1">
-						<% if @items && @items.count > 0 %>
+						<% if @tasks && @tasks.count > 0 %>
 							<button class="export" id="export-worklist-items">Export</button>
 						<% end %>
 					</div>-->
@@ -26,20 +24,37 @@
 					<div class="col-xs-2"><h5>Created On</h5></div>
 				</div>		
 				
-				<%= render partial: "projects/task", collection: @items, as: :item, cache: true %>
-			
+				<div id="tasks">
+					<%= render partial: "projects/task", collection: @tasks, as: :task, cache: true %>
+				</div>
 			<% else %>
 				<div class="col-xs-12 loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;margin:50px auto;">No tasks</h4></div>
 			<% end %>
 		</div>
 	</div>
 </div>
+<div id="task-focus">
+	<% if @task %>
+		<%= render partial:"worklist_items/edit", locals:{task:@task} %>
+	<% end %>
+</div>
+
 <script>
+	<% if @task %>
+		var offset = $('#task-<%=@task.id %>').offset().top-180;
+		if (offset<=0){
+			offset = 0;
+		}
+		$('#task-focus').css({'top':offset,'left':'54%'});
+		$("html, body").animate({ scrollTop: offset }, 120);
+	<% end %>
+	$('#top-nav a').removeClass('current-page');
+	$('.nav-tasks a,#<%=@project.id%>-link').addClass('current-page');
 	$('#remove').click(function(){
 		$('#search').val('');
-		$('#worklist-search').submit();
+		$('#task-search').submit();
 	});
-	$('#export-worklist-items').click(function(){
+	$('#export-tasks').click(function(){
 		if (!$('#export-worklist-modal').length > 0){
 			$('#project-worklist').before('<%= j render partial:"projects/worklist_export" %>');
 		}

@@ -3,9 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .activity-container {
-	max-width:800px;
 	margin:0 auto;
-	padding:15px 15px 30px;
+	padding:15px 15px 20px;
 
 	.activity.row {
 		position:relative;
@@ -25,4 +24,5 @@
 
 .activity-container.border-box {
 	padding-top:10px;
+	margin-top:10px;
 }

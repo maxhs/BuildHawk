@@ -1,3 +1,4 @@
+
 <li class="logo"><a href="/" data-remote="true"><%= image_tag('logo.png') %></a></li>
 <li><%= link_to "Add Project", new_project_admin_index_path, :id => "new-project-link", :remote => true %></li>
 <% if current_user.uber_admin %><li><%= link_to "Groups", project_groups_admin_index_path, :id => "groups-link", :remote => true %></li>
@@ -6,7 +7,3 @@
 <li><%= link_to "Checklists", checklists_admin_index_path, :id => "admin-checklists-link", :remote => true %></li>
 <li><%= link_to "Personnel", users_admin_index_path, :id => "personnel-link", :remote => true %></li>
 <% if current_user.uber_admin %><li><%= link_to "Billing", billing_index_path, :id => "billing-link", :remote => true %></li><% end %>
-
-<!--<% if current_user && current_user.uber_admin? %>
-	<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
-<% end %>-->

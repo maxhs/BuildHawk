@@ -1,4 +1,5 @@
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "checklist_item", :locals => {:item => @item } %>');
-	$(this).fadeIn(170);
-});
+$("#project-checklist").addClass('checklist-panel');
+$('#checklist-focus').html('<%= j render :partial => "checklist_item", :locals => {:item => @item } %>');
+var offset = $('#item-<%=@item.id %>').offset().top-136;
+$('#checklist-focus').css('top',offset);
+$("html, body").animate({ scrollTop: offset }, 120);

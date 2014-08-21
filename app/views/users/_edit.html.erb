@@ -1,45 +1,47 @@
-<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
-	<table id="edit-user-form" class="border-box">
-	<tr><td><h2>Settings</h2></td></tr>
-		<%= hidden_field_tag :company_id, :value => current_user.company.id %>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-		<tr><td><h4>First name</h4></td></tr>
-		<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
-		<tr><td><h4>Last name</h4></td></tr>
-		<tr><td><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></td></tr>
-		<tr><td><h4>Email</h4></td></tr>
-		<tr><td><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></td></tr>
-		<tr><td><h4>Phone Number</h4></td></tr>
-		<tr><td><%= f.text_field :phone, :value => @user.formatted_phone, :placeholder => "Phone number (e.g. (555) 555-5555)", :class=>"tt-hint form-control" %></td></tr>
-		<tr><td><h4>Password</h4></td></tr>
-		<tr><td><%= f.password_field :password, :placeholder => "Password (if changing)", :class=>"tt-hint form-control" %></td></tr>
-		<tr><td><h4>Password Confirmation</h4></td></tr>
-		<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (if changing)", :class=>"tt-hint form-control" %></td></tr>
-		<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Email Permissions</div> <%= f.check_box :email_permissions %></td></tr>
-		<tr><td><div style="padding:10px 0 30px;display:inline-block; width:25%;">Push Permissions</div> <%= f.check_box :push_permissions %></td></tr>
-		<% if @user.image_file_name %>
-			<tr><td>
-				<%= image_tag @user.image.url(:small), :class => "user-pic" %>
-			</td></tr>
-			<tr><td>
-				Replace your photo: <%= f.file_field :image %>
-			</td></tr>
-		<% else %>
-			<tr><td>
-				Add a photo: <%= f.file_field :image %>
-			</td></tr>
-		<% end %>
-		<tr>
-			<td>
-				<div class="button-container">
-					<%= f.submit "Save", :class => "simple-btn" %>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align:center;">
-				<%= link_to "Logout", logout_path, :class =>"simple-btn", :style=>"width:25%;" %>	
-			</td>
-		</tr>
-	</table>
-<% end %>
+<div id="main">
+	<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
+		<table id="edit-user-form" class="border-box">
+		<tr><td><h2>Settings</h2></td></tr>
+			<%= hidden_field_tag :company_id, :value => current_user.company.id %>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+			<tr><td><h4>First name</h4></td></tr>
+			<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><h4>Last name</h4></td></tr>
+			<tr><td><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><h4>Email</h4></td></tr>
+			<tr><td><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><h4>Phone Number</h4></td></tr>
+			<tr><td><%= f.text_field :phone, :value => @user.formatted_phone, :placeholder => "Phone number (e.g. (555) 555-5555)", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><h4>Password</h4></td></tr>
+			<tr><td><%= f.password_field :password, :placeholder => "Password (if changing)", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><h4>Password Confirmation</h4></td></tr>
+			<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (if changing)", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Email Permissions</div> <%= f.check_box :email_permissions %></td></tr>
+			<tr><td><div style="padding:10px 0 30px;display:inline-block; width:25%;">Push Permissions</div> <%= f.check_box :push_permissions %></td></tr>
+			<% if @user.image_file_name %>
+				<tr><td>
+					<%= image_tag @user.image.url(:small), :class => "user-pic" %>
+				</td></tr>
+				<tr><td>
+					Replace your photo: <%= f.file_field :image %>
+				</td></tr>
+			<% else %>
+				<tr><td>
+					Add a photo: <%= f.file_field :image %>
+				</td></tr>
+			<% end %>
+			<tr>
+				<td>
+					<div class="button-container">
+						<%= f.submit "Save", :class => "simple-btn" %>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center;">
+					<%= link_to "Logout", logout_path, :class =>"simple-btn", :style=>"width:25%;" %>	
+				</td>
+			</tr>
+		</table>
+	<% end %>
+</div>

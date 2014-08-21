@@ -1,4 +1,4 @@
-class ErrorsController < ApplicationController
+class ErrorsController < AppController
 	def error_404
     	@not_found_path = params[:not_found]
   	end

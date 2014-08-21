@@ -6,17 +6,18 @@
 					<%= form_tag search_items_checklist_path(@checklist, :project_id => @project.id), :id => "checklist-search", :method => :post, :class=>"input-group", :style=>"width:100%;", :remote => true do %>
 						<%= text_field_tag :search, nil, :placeholder=>"Search for checklist items...", :class=>"form-control" %>
 						<span class="input-group-addon" style="cursor: pointer;" id="remove"><span class="glyphicon glyphicon-remove"></span></span>
-					<% end %>
-				</header>
-
-				<div class="row">
-					<div class="col-xs-8">
-						<h4 style="display:inline-block;">Phase</h4>					
+					<% end %>				
+					<div class="checklist-header row">
+						<div class="col-xs-1">
+							<%= image_tag "search.png", id:"checklist-search-button" %>
+						</div>
+						<div class="col-xs-7">
+							<h5 style="display:inline-block;">Phase</h5>					
+						</div>
+						<div class="col-xs-2 header-label"><h5>Target</h5></div>	
+						<div class="col-xs-2 header-label"><h5>Completed</h5></div>
 					</div>
-					<div class="col-xs-2 header-label"><h4>Critical Date</h4></div>	
-					<div class="col-xs-2 header-label"><h4>Completed</h4></div>
-				</div>
-				
+				</header>
 				<ul id="phases">
 					<%= render :partial => 'projects/phase', collection: @checklist.phases, :as => :p, cache: true %>
 				</ul>
@@ -31,8 +32,26 @@
 	<% end %>
 </div>
 
+<div id="checklist-focus">
+	<% if @item %>
+		<%= render :partial => "checklist_item", :locals => {:item => @item} %>
+	<% end %>
+</div>
+
 <script>
+
+	$(document).on('click',".checklist-item-link",function(){
+		$('.active-item').removeClass('active-item');
+		$(this).parent().parent().addClass('active-item');
+	});
 	$(document).ready(function(){
+		$('#checklist-search-button').click(function(){
+			if ($('#checklist-search').css('display') == "none"){
+				$('#checklist-search').fadeIn().css('display','table');
+			} else {
+				$('#checklist-search').fadeOut(200);
+			}
+		});
 		$('#remove').on('click',function(){
 			$('#search').val('');
 			$('#checklist-search').submit();

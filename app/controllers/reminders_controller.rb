@@ -1,2 +1,2 @@
-class RemindersController < ApplicationController
+class RemindersController < AppController
 end

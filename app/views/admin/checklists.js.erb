@@ -1,12 +1,8 @@
 $('#navigation a').removeClass('current-page');
 $('#admin-checklists-link').addClass('current-page');
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "checklists", :locals => {:checklists => @checklists } %>');
-	$(this).fadeIn(100,function(){
-		closeMenu();
-	});
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#main').html('<%= j render :partial => "checklists", :locals => {:checklists => @checklists } %>');
+$("html, body").animate({ scrollTop: 0 }, 0);
+
 <% if @response_message %>
 	$('#alert').text("<%= @response_message %>").delay(3000).fadeOut(500, function(){
 		$(this).text("");

@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class AdminController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_user
 	require 'stripe'

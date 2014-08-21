@@ -1,8 +1,5 @@
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "worklist_items/new" %>');
-	$(this).fadeIn(100);
-	var locations = <%= raw @locations.to_json %>; 
-	$('#worklist_item_location').autocomplete({
-      	source: locations
-    });
+$('#main').html('<%= j render :partial => "worklist_items/new" %>');
+var locations = <%= raw @locations.to_json %>; 
+$('#worklist_item_location').autocomplete({
+  	source: locations
 });

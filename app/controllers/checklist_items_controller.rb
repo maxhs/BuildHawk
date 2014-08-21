@@ -1,4 +1,4 @@
-class ChecklistItemsController < ApplicationController
+class ChecklistItemsController < AppController
 	before_filter :authenticate_user!
 	def edit
 		@item = ChecklistItem.find params[:id]	
