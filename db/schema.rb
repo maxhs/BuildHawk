@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20140820164948) do
   end
 
   create_table "cards", force: true do |t|
-<<<<<<< HEAD
     t.string   "last4"
     t.string   "exp_month"
     t.string   "exp_year"
@@ -72,13 +71,6 @@ ActiveRecord::Schema.define(version: 20140820164948) do
     t.string   "country"
     t.string   "name"
     t.boolean  "active",        default: false
-=======
-    t.string   "public_digits"
-    t.string   "expiration"
-    t.integer  "company_id"
-    t.text     "customer_token"
-    t.boolean  "active"
->>>>>>> layout
     t.datetime "created_at"
     t.datetime "updated_at"
   end
