@@ -65,34 +65,9 @@
 	}
 }
 
-.search-project {
-		border: 1px solid #e7e7e7;
-		border-radius: 4px;
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		margin-bottom:15px;
-		padding:5px 20px 20px;
-
-		table {
-			width:100%;
-			tr {
-				line-height:33px;
-				vertical-align:middle;
-				border:1px solid #eee;
-			}
-
-			.search-label {
-				width:100px;
-				color:#aaa;
-				font-size:12px;
-				padding-right:21px;
-				padding-left:7px;
-			}
-		}
-	}
-
-#company-dashboard {
+#company-dashboard, #search-results {
 	padding:0;
+	margin:0;
 
 	.alert-table {
 		width:100%;
@@ -105,7 +80,7 @@
 		border-bottom:0;
 	}
 
-	.company-project {
+	.company-project, .search-project {
 		background-color:#fff;
 		padding:0px 20px;
 		overflow:auto;
@@ -257,7 +232,7 @@
 		}
 	}
 
-	h4 {
+	h4.header {
 		padding:10px;
 		border-top:1px solid #eee;
 		border-bottom:1px solid #ddd;
@@ -318,6 +293,18 @@
 
 .delete-project-link:hover {
 	
+}
+
+#search-results {
+	padding:20px 20px 5px;
+	position:relative;
+
+	#dismiss-search {
+		position:absolute;
+		right:5px;
+		top:5px;
+		width:24px;
+	}
 }
 
 #export-worklist-modal,#export-checklist-modal {

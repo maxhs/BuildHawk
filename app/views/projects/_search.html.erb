@@ -1,27 +1,30 @@
-<div class="border-box" style="padding:20px 20px 5px;">
+<div class="border-box" id="search-results">
+	<%= image_tag 'blackX.png', id:"dismiss-search" %>
 	<% if @projects.count > 0 %>
 		<% @projects.each do |project| %>
-			<div class="search-project">
-				<table style="border-bottom:1px solid #eee; width:100%;">
-					<tr style="border-width:0;"><td><h4><%= link_to project.name, project_path(project), remote: true %></h4></td></tr>
-				
-					<tr>
-						<td class="search-label">Map:</td>
-						<td><%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %></td>
-					</tr>
+			<div class="search-project row">	
+				<div class="project-header col-xs-6">
+					<div>
+						<span class="project-name"><%= link_to project.name, project_path(project), remote: true %></span>
+						<% if project.address %>
+							<%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>
+						<% end %>
+					</div>
+				</div>
 
-				</table>
+				<div class="col-xs-6">
+					<table class="alert-table">
+						<tr>
+							<td><%= link_to "Checklist",checklist_project_path(project), :remote => true %></td>
+							<td><%= link_to "Reports", reports_path(:project_id => project.id), :remote => true %></td>
+							<td><%= link_to "Documents", document_photos_project_path(project), remote: true %></td>
+							<td><%= link_to "Tasks", worklist_project_path(project), :remote => true %></td>
+						</tr>
+					</table>
+				</div>
 			</div>
-
 		<% end %>
 	<% else %>
 		<div style="color:#aaa;text-align:center;font-size:1.25em; font-style:italic;margin-top:50px;font-weight:200;"><%=@prompt%></div>
 	<% end %>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			Shadowbox.clearCache();
-		    Shadowbox.setup(".shadow-photo", {});
-		});
-	</script>
 </div>

@@ -3,9 +3,10 @@
 	<%= f.hidden_field :project_id, value: @project.id %>
 	<%= f.hidden_field :author_id, value: current_user.id %>
 	<div id="add-report" class="border-box container">
+		<div id="dismiss-report"><%=image_tag "blackX.png" %></div>
 		<div class="thin-form">
 			<div class="row form-title">
-				<div class="col-md-12"><h4>Report Date</h4></div>
+				<div class="col-md-12"><h4>Date</h4></div>
 			</div>
 			<div class="row">
 				<div class="input-append date col-md-12" data-date-format="dd-mm-yyyy">
@@ -14,7 +15,7 @@
 			</div>
 
 			<div class="row form-title">
-				<div class="col-md-4"><h4 style="display:inline-block;">Report Type</h4></div>
+				<div class="col-md-4"><h4 style="display:inline-block;">Type</h4></div>
 				<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types) %></div>
 			</div>
 				
@@ -114,5 +115,9 @@
 		$('#dp').datepicker().on('changeDate', function(){
 		    $('#dp').datepicker('hide');
 		});
+	});
+
+	$('#dismiss-report').click(function(){
+		dismissReport();
 	});
 </script>

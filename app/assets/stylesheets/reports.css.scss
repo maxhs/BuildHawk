@@ -30,19 +30,27 @@
 }
 
 .active-report {
-	opacity:1 !important;
-	z-index:6;
+	opacity: 1 !important;
+	z-index: 6;
+	left: 5%;
+	position: relative;
+	background: #fff;
+	border-bottom: 1px solid #ddd !important;
+	border-top: 1px solid #ddd !important;
 }
 
-.new-report {
-	float:left;
-	margin:0 20px 0 0;
-}
+#reports-header{
+	margin-bottom: 15px;
+	padding:0;
+	
+	.new-report {
+		margin:0;
+	}
 
-#reports-search {
-	width:70%;
-	input[type="text"] {
-		height:38px;
+	#reports-search {
+		input[type="text"] {
+			height:38px;
+		}
 	}
 }
 
@@ -81,8 +89,6 @@
 }
 
 #add-report, #edit-report {
-	z-index:2;
-	padding:0 20px;
 
 	h4 {
 		text-align:left;	

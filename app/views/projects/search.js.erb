@@ -1,5 +1,4 @@
 $('a').removeClass('current-page');
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "search" %>');
-	$(this).fadeIn(170);
-});
+var lastContent = $('#main').html();
+$('#main').html('<%= j render :partial => "search" %>');
+setupSearch(lastContent);

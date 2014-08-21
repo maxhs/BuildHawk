@@ -18,3 +18,9 @@ function newProjectSetup(){
 		}
 	});
 }
+
+function setupSearch(content){
+	$('#dismiss-search').click(function(){
+		$('#main').html(content);
+	});
+}
