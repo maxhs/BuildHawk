@@ -2,8 +2,12 @@
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
 	<div id="worklist-item-container" class="border-box container">
+
+		<div id="dismiss-task">
+			<%= image_tag "blackX.png",id:"dismiss-task" %>
+		</div>
 		<div class="row" style="background:#eee;">
-			<h4 style="text-align:center;"><%=@task.body%></h4>
+			<h4 style="text-align:center;margin-bottom:5px;"><%=@task.body%></h4>
 		</div>
 		<div class="row">
 			<div class="col-xs-3"><h5 style="font-family:'Montserrat'">Task</h5></div>
@@ -96,5 +100,10 @@
 		</div>
 		<%= render :partial => "comments/comments", :locals => {:comments => @task.comments} %>
 	</div>
-
 </div>
+
+<script>
+	$('#dismiss-task').click(function(){
+		dismissTask();
+	});
+</script>

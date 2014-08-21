@@ -3,10 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #worklist-item-container {
-	margin:0 auto;
-	max-width:800px;
 	display:block;
 	padding:0;
+	position:relative;
+
+	#dismiss-task {
+		position:absolute;
+		top:5px;
+		right:5px;
+		width:24px;
+	}
 
 	input[type="radio"]{
 		display:inline-block;
@@ -53,6 +59,11 @@
 		background: #f7f7f7;
 		border-top: 1px solid #ddd;
 	}
+}
+
+.active-task {
+	background:#fff;
+	opacity:1 !important;
 }
 
 .task {

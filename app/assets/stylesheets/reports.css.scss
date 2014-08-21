@@ -4,14 +4,14 @@
 
 
 .reports-panel {
-	width:54% !important;
+	width:50% !important;
 }
 
 #report-focus {
-	position:absolute;
-	right:0;
+	position:relative;
+	left:100%;
 	margin-left:1%;
-	width:45%;
+	width:49%;
 	-webkit-transition: all 0.15s;
 	-moz-transition: all 0.15s;
 	-ms-transition: all 0.15s;
@@ -19,12 +19,19 @@
 	transition: all 0.15s;
 
 	#dismiss-report {
-		float:right;
+		right:5px;
+		top:5px;
+		position:absolute;
 
 		img {
 			width:24px;
 		}
 	}
+}
+
+.active-report {
+	opacity:1 !important;
+	z-index:6;
 }
 
 .new-report {

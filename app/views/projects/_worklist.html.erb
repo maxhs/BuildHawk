@@ -1,4 +1,4 @@
-<div class="border-box <%if @task%>tasks-panel<%end%>" id="project-tasks" style="overflow:auto;">
+<div class="border-box <%if @task%>tasks-panel<%end%>" id="project-tasks">
 
 	<div style="margin-bottom: 15px">
 		<%= link_to "+ New Task", new_worklist_item_path(:project_id => @project.id), :class=>"simple-btn new-task", remote: true %>

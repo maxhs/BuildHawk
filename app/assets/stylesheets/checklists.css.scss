@@ -17,19 +17,18 @@
 }
 
 #checklist-focus {
-	position:absolute;
-	right:0;
+	position:relative;
+	left:100%;
 	margin-left:1%;
 	width:45%;
-	-webkit-transition: all 0.15s;
-	-moz-transition: all 0.15s;
-	-ms-transition: all 0.15s;
-	-o-transition: all 0.15s;
-	transition: all 0.15s;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-ms-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
 }
 
 .project-checklist-table.border-box, .admin-checklist-table.border-box, .core-checklist-table.border-box {
-	margin-top:40px; 
 	margin:0 auto; 
 	padding:0;
 	width:100%;
@@ -149,7 +148,6 @@
 	}
 
 	.phase-label {
-		padding-top:10px;
 		text-align:center;
 		a:hover {
 			color:#fff !important;
@@ -259,6 +257,7 @@
 }
 
 .phase {
+	padding:10px 0;
 	clear:both;
 	position:relative;	
 	list-style:none;
@@ -421,11 +420,7 @@
 	border-left:1px dotted #ddd;
 	
 	.checklist-item.active-item {
-		position:relative;
-		left:2.5%;
-		z-index:5;
-		background:#fff !important;
-		color:#000;
+		opacity:1 !important;
 	}
 
 	.checklist-item {

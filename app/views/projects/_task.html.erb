@@ -9,7 +9,7 @@
 		<% end %>
 	</div>
 	
-	<div class="col-xs-3">
+	<div class="col-xs-3 task-body">
 		<% if task.body && task.body.length > 0 %>
 			<%= link_to task.body, edit_worklist_item_path(task), :remote => true %> 
 		<% else %>

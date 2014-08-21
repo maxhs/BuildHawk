@@ -19,7 +19,7 @@
 }
 
 .tasks-panel {
-	width:54% !important;
+	width:50% !important;
 }
 
 #project-tasks {
@@ -31,7 +31,7 @@
 	width:100%;
 
 	#task-table {
-		margin-bottom:0;
+		margin-bottom:23px;
 
 		.row {
 			border-bottom:1px solid #eee;
@@ -54,10 +54,10 @@
 }
 
 #task-focus {
-	position:absolute;
+	position:relative;
 	left:100%;
 	margin-left:1%;
-	width:45%;
+	width:49%;
 	-webkit-transition: all 0.15s;
 	-moz-transition: all 0.15s;
 	-ms-transition: all 0.15s;
@@ -78,7 +78,10 @@
 	width:49%;
 	float:left;
 
-	.task {
+	.task.row {
 		border-top:2px solid #eee;
+		.col-xs-3.task-body, .task-body {
+			text-align:left;
+		}
 	}
 }

@@ -116,12 +116,7 @@
 		});
 
 		$('#dismiss-checklist-item').click(function(){
-			$('.checklist-panel').removeClass('checklist-panel');
-			$('.active-item').removeClass('active-item');
-			$('#checklist-focus').hide(100,function(){
-				$(this).html('');
-				$(this).css('display',"block");
-			});
+			dismissChecklistItem();
 		});
 	});
 </script>

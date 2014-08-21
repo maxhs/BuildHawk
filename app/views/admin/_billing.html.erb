@@ -1,0 +1,77 @@
+<div id="billing" class="border-box">
+	<h3>BILLING MANAGEMENT</h3>
+	<% if @company.customer_token %>
+		<div id="billing-container" class="border-box">
+			<div class="row">
+				<div class="col-xs-3"><h4>Period Ending</h4></div>
+				<div class="col-xs-3"><h4>Amount</h4></div>
+				<div class="col-xs-3"><h4>Description</h4></div>
+				<div class="col-xs-3"><h4>Paid</h4></div>
+			</div>
+			<% if @charges.count > 0 %>
+				<%= render partial:"admin/charge", collection: @charges, as: :charge %>
+				<div class="row summary">
+					<div class="col-xs-3"><h5 style="text-align:right;padding-right:20px;">Subtotal:</h5></div>
+					<div class="col-xs-3"><h5><%= number_to_currency @subtotal/100 %> </h5></div>
+					<div class="col-xs-3"><h5>&nbsp;</h5></div>
+					<div class="col-xs-3"><h5>&nbsp;</h5></div>
+				</div>
+				<div class="row summary">
+					<div class="col-xs-3"><h5 style="text-align:right;padding-right:20px;">Current Balance:</h5></div>
+					<div class="col-xs-3"><h5><%= number_to_currency @charges.last["ending_balance"]%> </h5></div>
+				</div>
+			<% else %>
+				<div class="col-xs-12" style="font-style:italic;font-size:1.5em;text-align:center;font-weight:200;padding-top:30px;margin:0px auto 40px;color:#aaa;border-top:1px solid #eee">No charges</div>
+			<% end %>
+		</div>
+
+		<div style="text-align:center;">
+			<%= link_to 'Edit Billing Information', edit_billing_admin_index_path, remote:true, :class => "simple-btn" %>
+		</div>
+		
+		<div style="font-style:italic;color:#aaa;text-align:center;margin-top:20px;" class="font-smoothing">Your card on file will be automatically billed at the end of each month</div>
+	<% else %>
+		<div id="new-billing-container" class="border-box" style="padding-top:20px">
+			<%= form_tag update_billing_admin_path(@company), method: :patch, :id=>"payment-form", remote:true do %>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+			  	<span class="payment-errors"></span>
+				<div class="form-row">
+			    	<label>
+			      		<span>Card Number</span>
+			     		<input type="text" size="20" data-stripe="number" class="card-info"/>
+			    	</label>
+			    	<label>
+			      		<span>CVC</span>
+			      		<input type="text" size="4" data-stripe="cvc"/>
+			    	</label>
+			 	</div>
+
+			  	<div class="form-row">
+			    	<label>
+			      		<span>Expiration (MM/YYYY)</span>
+			      		<input type="text" size="2" data-stripe="exp-month"/>
+			    	</label>
+			    	<span> / </span>
+			    	<input type="text" size="4" data-stripe="exp-year"/>
+			  	</div>
+
+			  	<div style="text-align:center;"><button class="btn btn-success btn-md"><%=submit_tag "Add"%></button></div>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#navigation a').removeClass('current-page');
+		$('#billing-link').addClass('current-page');
+		$('#payment-form').submit(function(event) {
+		    var form = $(this);
+		    form.find('button').prop('disabled', true);
+		    Stripe.setPublishableKey(<%=@stripe_key%>);
+		    var token = Stripe.card.createToken(form, stripeResponseHandler);
+		    event.preventDefault();
+		    return false;
+		});
+	});
+</script>

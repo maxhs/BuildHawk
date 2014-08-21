@@ -56,7 +56,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 	<p class="notice" id="notice"><%= notice %></p>
     <p class="alert" id="alert"><%= alert %></p>
 
-    <div id="wrap">
+    <div id="wrap" style="margin-bottom:0;">
 
     	<% if user_signed_in? %>
     		<nav id="condensed-sidebar">
@@ -78,7 +78,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 					<%= render partial: "projects/sidebar" %>
 				<% end %>
 				
-				<div id="bottom-menu">
+				<div id="bottom-menu" class="app">
 					<div>
 						<%= link_to image_tag('settings.png', id: "settings"),edit_user_path(current_user), remote:true %>
 					</div>
@@ -161,9 +161,8 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		<% else %>
 			<%= yield %>
 		<% end %>
-		<div id="push"></div>
 	</div>
-<footer>
+<!--<footer class="app">
 	<div id="container">
 		<ul>
 			<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
@@ -175,7 +174,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		</ul>
 		<div id="copyright">&copy; 2014 BuildHawk Inc</div>
 	</div>
-</footer>
+</footer>-->
 
 <script type="text/javascript">
 	$('#project-search-button').click(function(){

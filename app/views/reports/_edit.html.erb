@@ -192,11 +192,6 @@
 	});
 
 	$('#dismiss-report').click(function(){
-		$('.reports-panel').removeClass('reports-panel');
-		$('.active-item').removeClass('active-item');
-		$('#report-focus').hide(100,function(){
-			$(this).html('');
-			$(this).css('display',"block");
-		});
+		dismissReport();
 	});
 </script>

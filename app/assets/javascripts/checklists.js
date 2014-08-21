@@ -25,3 +25,9 @@ function checklistItem(){
     	$('#dp').val('');
     });
 }
+
+function dismissChecklistItem(){
+	$('.checklist-panel').removeClass('checklist-panel');
+	$('.active-item').removeClass('active-item');
+	$('#checklist-focus').css({'left':"100%",'top':'0'});
+}
