@@ -2,9 +2,7 @@ source 'https://code.stripe.com'
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.0'
-#gem 'passenger', :group => :production
-gem 'puma', :group => :production
-gem 'puma', :group => :development
+gem 'passenger', :group => :production
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
