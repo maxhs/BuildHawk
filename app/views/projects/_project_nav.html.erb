@@ -1,5 +1,8 @@
 <li class="nav-dashboard admin">
-	<%= link_to "Dashboard", project_path(@project), :remote => true %>
+	<%= link_to project_path(@project), :remote => true do %>
+		<%= image_tag "dashboard.png", :class=>"nav-icon" %> 
+		<div>Dashboard</div>
+	<% end %>
 </li>
 <li class="nav-checklists admin">
 	<%= link_to checklist_project_path(@project), :remote => true do %>
@@ -25,5 +28,10 @@
 	<% end %>
 </li>
 <% if current_user.admin %> 
-	<li class="nav-edit admin"><%= link_to "Edit", edit_project_path(@project), :remote => true %></li> 
+	<li class="nav-tasks admin">
+		<%= link_to edit_project_path(@project), :remote => true do %>
+			<%= image_tag "wrench.png", :class=>"nav-icon" %>
+			<div>Edit</div>
+		<% end %>
+	</li>
 <% end %>
