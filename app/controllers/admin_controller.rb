@@ -30,7 +30,7 @@ class AdminController < AppController
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
-			redirect_to billing_admin_index_path
+			redirect_to billing_index_path
 		end
 	end
 
@@ -148,7 +148,7 @@ class AdminController < AppController
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
-			redirect_to billing_admin_index_path
+			redirect_to billing_index_path
 		end
 	end
 
@@ -218,7 +218,7 @@ class AdminController < AppController
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
-			redirect_to billing_admin_index_path
+			redirect_to billing_index_path
 		end
 	end
 
@@ -230,11 +230,7 @@ class AdminController < AppController
 	protected
 
 	def uber_checklists
-		@uber_checklists = Checklist.where("core = ? and company_id IS NULL and project_id IS NULL",true).compact.uniq
-		# @uber_checklists = [] 
-		# names.each do |n|
-		# 	@uber_checklists << Checklist.where(:core => true, :name => n, :project_id => nil).first if n && n.length > 0
-		# end
+		@uber_checklists = Checklist.where("core = ? and company_id IS NULL and project_id IS NULL",true).flatten.compact.uniq
 	end
 
 	def find_user

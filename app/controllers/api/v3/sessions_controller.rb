@@ -41,7 +41,7 @@ class Api::V3::SessionsController < Api::V3::ApiController
   		  		format.json { render_for_api :login, :json => @user, :root => :user}
   			end
   		else
-  			render text: 'Incorrect password', status: 401
+  			render plain: 'Incorrect password', status: 401
         end
     end
 
@@ -66,6 +66,6 @@ class Api::V3::SessionsController < Api::V3::ApiController
   private
 
   def invalid_login_attempt
-    render text: 'No email', status: 401
+    render plain: 'No email', status: 401
   end
 end

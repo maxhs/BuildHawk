@@ -2,16 +2,16 @@
 	<div class="col-xs-3"><h5><%= topic.title %></h5></div>
 	<% if topic.info %>
 		<% if topic.info.length > 130 %>
-			<div class="col-xs-7 topic-description"><%= topic.info[0..130] %><span class="ellipsis">...</span>
+			<div class="col-xs-6 topic-description"><%= topic.info[0..130] %><span class="ellipsis">...</span>
 				<div class="read-more simple-btn">Read more</div>
 				<span class="hiddenText"><%= topic.info[131..topic.info.length] %>
 			</div>
 		<% else %>
-			<div class="col-xs-7 topic-description"><%= topic.info %></div>
+			<div class="col-xs-6 topic-description"><%= topic.info %></div>
 		<% end %>
 	<% end %>
-	<div class="col-xs-2" style="text-align:center;">
+	<div class="col-xs-3" style="text-align:center;">
 		<%= link_to "Edit", edit_safety_topic_path(topic), :class => "simple-btn remote", :style => "text-align:center;margin:0;", remote: true %>
-		<%= link_to "Delete", safety_topic_path(topic), :class => "simple-btn remote delete-safety-topic", :style => "text-align:center;", remote: true, method: :delete, data: {confirm: "Are you sure you want to delete this Safety Topic?" } %>
+		<%= link_to image_tag('trashButton.png', :class=>"remote delete-img"), safety_topic_path(topic), :class => "remote delete-safety-topic", :style => "text-align:center;", remote: true, method: :delete, data: {confirm: "Are you sure you want to delete this Safety Topic?" } %>
 	</div>
 </div>

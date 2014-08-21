@@ -6,8 +6,5 @@
 
 $('#navigation a').removeClass('current-page');
 $('#billing-link').addClass('current-page');
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "index" %>');
-	$(this).fadeIn(100);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#main').html('<%= j render :partial => "index" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);
