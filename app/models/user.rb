@@ -160,6 +160,7 @@ class User < ActiveRecord::Base
     def notify_all_devices(options)
         puts "options #{options}"
         push_tokens.each do |push_token|
+            puts "push token: #{push_token}"
             if push_token.device_type == 3
                 notify_android(options, push_token)
             else
@@ -183,7 +184,7 @@ class User < ActiveRecord::Base
             project_id: options[:project_id],
             unread_messages: options[:badge]
         }
-        puts "android data: #{data} for #{full_name}"
+        puts "android data: #{data} for #{full_name} and token: #{push_token}"
         GCM.send_notification(push_token,data)
     end
 
