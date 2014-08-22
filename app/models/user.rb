@@ -160,9 +160,9 @@ class User < ActiveRecord::Base
     def notify_all_devices(options)
         puts "options #{options}"
         push_tokens.each do |push_token|
-            puts "push token: #{push_token}"
+            puts "push token: #{push_token.token}"
             if push_token.device_type == 3
-                notify_android(options, push_token)
+                notify_android(options, push_token.token)
             else
                 APN.notify_async push_token.token, options
             end
@@ -170,7 +170,7 @@ class User < ActiveRecord::Base
     end
 
 
-    def notify_android(options, push_token)
+    def notify_android(options, token)
         ## proejct id: buildhawk-1
         ## project number: 149110570482
         GCM.host = 'https://android.googleapis.com/gcm/send'
@@ -184,8 +184,8 @@ class User < ActiveRecord::Base
             project_id: options[:project_id],
             unread_messages: options[:badge]
         }
-        puts "android data: #{data} for #{full_name} and token: #{push_token}"
-        GCM.send_notification(push_token,data)
+        puts "android data: #{data} for #{full_name} and token: #{token}"
+        GCM.send_notification(token,data)
     end
 
     def has_company?
