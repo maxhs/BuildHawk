@@ -174,7 +174,8 @@ class User < ActiveRecord::Base
             ## project ID: 149110570482
             GCM.host = 'https://android.googleapis.com/gcm/send'
             GCM.format = :json
-            GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
+            #GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
+            GCM.key = "AIzaSyDbRNKm1bztoL_w3SNBZ8JCJh-LC_UQsVc"
             data = {
                 message: options[:alert],
                 worklist_item_id: options[:worklist_item_id],
