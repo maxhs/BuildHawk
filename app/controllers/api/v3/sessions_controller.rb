@@ -57,15 +57,15 @@ class Api::V3::SessionsController < Api::V3::ApiController
         end
     end 
 
-  def destroy
-    user = User.find params[:user_id]
-    user.update_attribute :authentication_token, nil
-    render json: {success: true}
-  end
+    def destroy
+        user = User.find params[:user_id]
+        user.update_attribute :authentication_token, nil
+        render json: {success: true}
+    end
 
-  private
+    private
 
-  def invalid_login_attempt
-    render plain: 'No email', status: 401
-  end
+    def invalid_login_attempt
+        render plain: 'No email', status: 401
+    end
 end

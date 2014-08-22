@@ -84,10 +84,10 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 					</div>
 					<div>
 						<% if current_user.any_admin? %>
-							<h5><%= link_to "Admin", admin_index_path, id:"admin-link", remote: true %></h5>
+							<h6><%= link_to "Admin", admin_index_path, id:"admin-link", remote: true %></h6>
 						<% end %>
 						<% if current_user.uber_admin? %>
-							<h5><%= link_to "Uber Admin", uber_admin_index_path, id:"uber-admin-link", remote: true %></h5>
+							<h6><%= link_to "Uber Admin", uber_admin_index_path, id:"uber-admin-link", remote: true %></h6>
 						<% end %>
 					</div>
 				</div>
