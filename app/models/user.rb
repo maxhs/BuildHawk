@@ -180,8 +180,7 @@ class User < ActiveRecord::Base
             checklist_item_id: options[:checklist_item_id],
             report_id: options[:report_id],
             project_id: options[:project_id],
-            unread_messages: options[:badge],
-            user_id: id
+            unread_messages: options[:badge]
         }
         puts "android data: #{data} for #{full_name} and token: #{token}"
         GCM.send_notification(token,data)
