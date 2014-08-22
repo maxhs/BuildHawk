@@ -169,8 +169,8 @@ class User < ActiveRecord::Base
 
 
     def notify_android(options, token)
-        ## proejct id: buildhawk-1
-        ## project number: 149110570482
+        ## proejct name: buildhawk-1
+        ## project ID: 149110570482
         GCM.host = 'https://android.googleapis.com/gcm/send'
         GCM.format = :json
         GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
@@ -180,7 +180,8 @@ class User < ActiveRecord::Base
             checklist_item_id: options[:checklist_item_id],
             report_id: options[:report_id],
             project_id: options[:project_id],
-            unread_messages: options[:badge]
+            unread_messages: options[:badge],
+            user_id: id
         }
         puts "android data: #{data} for #{full_name} and token: #{token}"
         GCM.send_notification(token,data)
