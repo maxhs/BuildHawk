@@ -169,21 +169,23 @@ class User < ActiveRecord::Base
 
 
     def notify_android(options, token)
-        ## proejct name: buildhawk-1
-        ## project ID: 149110570482
-        GCM.host = 'https://android.googleapis.com/gcm/send'
-        GCM.format = :json
-        GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
-        data = {
-            message: options[:alert],
-            worklist_item_id: options[:worklist_item_id],
-            checklist_item_id: options[:checklist_item_id],
-            report_id: options[:report_id],
-            project_id: options[:project_id],
-            unread_messages: options[:badge]
-        }
-        puts "android data: #{data} for #{full_name} and token: #{token}"
-        GCM.send_notification(token,data)
+        if token && token.length > 0
+            ## proejct name: buildhawk-1
+            ## project ID: 149110570482
+            GCM.host = 'https://android.googleapis.com/gcm/send'
+            GCM.format = :json
+            GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
+            data = {
+                message: options[:alert],
+                worklist_item_id: options[:worklist_item_id],
+                checklist_item_id: options[:checklist_item_id],
+                report_id: options[:report_id],
+                project_id: options[:project_id],
+                unread_messages: options[:badge]
+            }
+            puts "android data: #{data} for #{full_name} and token: #{token}"
+            GCM.send_notification(token,data)
+        end
     end
 
     def has_company?
