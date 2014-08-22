@@ -158,9 +158,7 @@ class User < ActiveRecord::Base
     end
 
     def notify_all_devices(options)
-        puts "options #{options}"
         push_tokens.each do |push_token|
-            puts "push token: #{push_token.token}"
             if push_token.device_type == 3
                 notify_android(options, push_token.token)
             else
