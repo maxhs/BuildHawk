@@ -1,5 +1,4 @@
 function dismissTask() {
-	console.log('dismissing task');
 	$('.tasks-panel').removeClass('tasks-panel');
 	$('.active-task').removeClass('active-task');
 	$('.faded').removeClass('faded');

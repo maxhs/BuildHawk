@@ -23,7 +23,7 @@
 
 			<script type="text/javascript">
 				$(function(){
-					$('#fid-<%=folder.id%>-add-document form').dropzone({
+					$('#fid-<%=folder.id%> form').dropzone({
 						init: function () {
 						    this.on("complete", function (file) {
 						      	if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
