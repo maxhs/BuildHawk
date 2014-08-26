@@ -96,6 +96,16 @@ class WorklistItemsController < AppController
 					params[:worklist_item][:assignee_id] = nil 
 				end
 			end
+
+			if params[:worklist_item][:connect_assignee].present?
+				connect_assignee = ConnectUser.where(:id => params[:worklist_item][:connect_assignee][:id]).first
+				params[:worklist_item].delete(:connect_assignee)
+				if connect_assignee
+					params[:worklist_item][:connect_assignee_id] = connect_assignee.id 
+				else
+					params[:worklist_item][:connect_assignee_id] = nil 
+				end
+			end
 					
 			if params[:worklist_item][:completed] == "true"
 				params[:worklist_item][:completed_by_user_id] = current_user.id
@@ -114,7 +124,7 @@ class WorklistItemsController < AppController
 			)
 			if request.xhr?
 				respond_to do |format|
-					format.js { render :template => "projects/worklist"}
+					format.js
 				end
 			else 
 				redirect_to worklist_project_path(@project)
