@@ -12,6 +12,14 @@ class CommentsController < AppController
 			@worklist_item = WorklistItem.find params[:comment][:worklist_item_id]
 			@comments = @worklist_item.comments
 		end
+
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to project_path(@comment.project)
+		end
 	end
 
 	def destroy
