@@ -173,6 +173,15 @@ class User < ActiveRecord::Base
         if token && token.length > 0
             ## proejct name: buildhawk-1
             ## project ID: 149110570482
+        
+            data = {
+                message: options[:alert],
+                worklist_item_id: options[:worklist_item_id],
+                checklist_item_id: options[:checklist_item_id],
+                report_id: options[:report_id],
+                project_id: options[:project_id],
+                unread_messages: options[:badge]
+            }
             gcm = GCM.new("AIzaSyDbRNKm1bztoL_w3SNBZ8JCJh-LC_UQsVc")
             options = {data: data}
             response = gcm.send([token], options)
