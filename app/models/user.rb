@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
-
+    require 'gcm'
+    
     attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
     				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
                     :uber_admin, :authentication_token, :company_admin, :text_permissions
@@ -172,20 +173,10 @@ class User < ActiveRecord::Base
         if token && token.length > 0
             ## proejct name: buildhawk-1
             ## project ID: 149110570482
-            GCM.host = 'https://android.googleapis.com/gcm/send'
-            GCM.format = :json
-            #GCM.key = "AIzaSyAhYb_V2vurBqGPRKD7ONVd_ylKAhXuWxk"
-            GCM.key = "AIzaSyDbRNKm1bztoL_w3SNBZ8JCJh-LC_UQsVc"
-            data = {
-                message: options[:alert],
-                worklist_item_id: options[:worklist_item_id],
-                checklist_item_id: options[:checklist_item_id],
-                report_id: options[:report_id],
-                project_id: options[:project_id],
-                unread_messages: options[:badge]
-            }
-            puts "android data: #{data} for #{full_name} and token: #{token}"
-            GCM.send_notification(token,data)
+            gcm = GCM.new("AIzaSyDbRNKm1bztoL_w3SNBZ8JCJh-LC_UQsVc")
+            options = {data: data}
+            response = gcm.send([token], options)
+            puts "GCM response: #{response}"
         end
     end
 

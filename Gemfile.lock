@@ -75,6 +75,9 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.1)
+    gcm (0.0.8)
+      httparty
+      json
     geocoder (1.2.4)
     hike (1.2.3)
     httparty (0.13.1)
@@ -127,9 +130,6 @@ GEM
     pr_geohash (1.0.0)
     protected_attributes (1.0.8)
       activemodel (>= 4.0.1, < 5.0)
-    pushmeup (0.3.0)
-      httparty
-      json
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -257,6 +257,7 @@ DEPENDENCIES
   deep_cloneable (~> 1.6.0)
   delayed_job_active_record
   devise
+  gcm
   geocoder
   httparty
   jquery-easing-rails
@@ -271,7 +272,6 @@ DEPENDENCIES
   pg
   postmark-rails
   protected_attributes
-  pushmeup
   rails (= 4.1.0)
   rails-observers
   rails_12factor
