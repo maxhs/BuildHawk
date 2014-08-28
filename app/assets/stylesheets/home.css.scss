@@ -5,7 +5,8 @@
 .navbar.splash {
 	border-bottom:0;
 	background:rgba(255,255,255,1);
-	border-bottom:1px solid #fff;
+	left:0;
+	width:100%;
 
 	#navigation {	
 		max-width:1140px;
@@ -25,6 +26,7 @@
 }
 
 #splash {
+	overflow:hidden;
 	font-weight:200;
 
 	section {
