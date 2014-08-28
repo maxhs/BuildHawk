@@ -81,6 +81,10 @@ body {
 		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
 	}
 
+	.header.row {
+		padding:0;
+	}
+
 	.alert, .notice {
 		font-size: 1.25em;
 		line-height: 40px;
@@ -878,10 +882,10 @@ a.search-button {
 	cursor:pointer;
 	background:#fff;
 	border:1px solid #ccc;
-	box-shadow: inset -1px -1px 0px 0px rgba(0,0,0,.5);
-	border-radius:2px;
-	-webkit-border-radius:2px;
-	-moz-border-radius:2px;
+	box-shadow: inset -1px -1px 0px -1px rgba(0,0,0,.1);
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
 	padding:10px 20px;
 	position:relative;
 	display:inline-block;
@@ -909,7 +913,7 @@ a.search-button {
 .simple-btn:hover {
 	border-color:#aaa;
 	background:#f7f7f7;
-	box-shadow: inset -1px -1px 0px 0px rgba(0,0,0,.55);
+	//box-shadow: inset 0px -1px 0px 0px rgba(0,0,0,.5);
 }
 
 .delete-link {

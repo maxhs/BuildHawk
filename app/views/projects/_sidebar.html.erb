@@ -34,7 +34,7 @@
 
 	<% if @archived_projects && @archived_projects.count > 0 %>
 	
-		<li><h4 id="archived-projects-button">Archived Projects</h4></li>	
+		<li><h5 id="archived-projects-button">Archived Projects</h5></li>	
 		<% @archived_projects.each do |p| %>
 			<li class="project"><%= link_to p.name, project_path(p), :id=>"#{p.id}-link", :remote => true %></li>
 		<% end %>
@@ -43,7 +43,7 @@
 </ul>
 
 <div id="connect-container">
-	<h4>CONNECT</h4>
+	<h5>CONNECT</h5>
 	<ul id="connect-sidebar" role="navigation">
 		<% if @companies && @companies.count > 0 %>
 			<%= render partial:"connect/company_li", collection: @companies, as: :company, cache:true %>

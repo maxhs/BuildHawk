@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/	
 
 .new-task {
-	float:left;
-	margin:0 20px 0 0;
+	width:95%;
+	margin:0;
 }
 
 .new-task:hover {
@@ -12,9 +12,9 @@
 }
 
 #task-search {
-	width:70%;
+	
 	input[type="text"] {
-		height:38px;
+		height:36px;
 	}
 }
 

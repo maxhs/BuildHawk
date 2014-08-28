@@ -1912,7 +1912,7 @@ output {
 }
 
 .form-control {
-  display: block;
+  display: inline-block;
   width: 100%;
   height: 34px;
   padding: 6px 12px;
@@ -3394,12 +3394,25 @@ fieldset[disabled] .btn-warning.active {
   position: relative;
   display: table;
   border-collapse: separate;
+  .form-control.search {
+    width:95%;
+  }
+}
+
+.input-group-addon.cancel-search {
+  background:transparent;
+    width:5%;
+    position:relative;
+    top:1px;
+    padding:10px;
+    border:0 !important;
 }
 
 .input-group .form-control {
   width: 100%;
   margin-bottom: 0;
 }
+
 
 .input-group-addon,
 .input-group-btn {

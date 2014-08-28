@@ -44,12 +44,13 @@
 	padding:0;
 	
 	.new-report {
-		margin:0;
+		margin:0 auto;
+		width:95%;
 	}
 
 	#reports-search {
 		input[type="text"] {
-			height:38px;
+			height:36px;
 		}
 	}
 }
