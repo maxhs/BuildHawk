@@ -18,7 +18,7 @@ gem 'postmark-rails'
 gem 'shadowbox-rails'
 gem 'sass-rails'
 gem 'protected_attributes'
-gem 'rails-observers'
+gem 'rails-observers'  #probably not really necessary
 gem 'multi_fetch_fragments'
 gem 'resque', '1.24.1'
 gem 'resque-scheduler', '2.2.0'
