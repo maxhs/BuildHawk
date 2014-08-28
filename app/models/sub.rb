@@ -36,6 +36,7 @@ class Sub < ActiveRecord::Base
                                :thumb  => ["100x100#", :jpg]
                    },
                   :storage        => :s3,
+                  :s3_protocol => :https,
                   :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
                   :url            => "buildhawk.s3.amazonaws.com",
                   :path           => "sub_image_:id_:style.:extension"

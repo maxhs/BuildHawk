@@ -20,6 +20,7 @@ class Photo < ActiveRecord::Base
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },
 	                    :storage        => :s3,
+	                    :s3_protocol => :https,
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    

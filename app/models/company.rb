@@ -23,11 +23,12 @@ class Company < ActiveRecord::Base
     default_scope { order('name') }
 
     has_attached_file :image, 
-                    :styles => { :medium => ["600x600#", :jpg],
-                               :small  => ["200x200#", :jpg],
-                               :thumb  => ["100x100#", :jpg]
+                    :styles => {:medium => ["600x600#", :jpg],
+                                :small  => ["200x200#", :jpg],
+                                :thumb  => ["100x100#", :jpg]
                                 },
                     :storage        => :s3,
+                    :s3_protocol => :https,
                     :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
                     :url            => "buildhawk.s3.amazonaws.com",
                     :path           => "company_image_:id_:style.:extension"
