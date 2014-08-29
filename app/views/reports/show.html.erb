@@ -1,4 +1,3 @@
 <div class="col-xs-12" id="main">
-	<%= render :partial => "reports/edit" %>
+	<%= render :partial => "reports/index",locals:{reports: @reports, report: @report, project: @project} %>
 </div>
-

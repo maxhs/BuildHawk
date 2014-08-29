@@ -156,6 +156,13 @@ class ReportsController < AppController
 		index = reports.index(@report)
 		@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at
 		@previous = reports[index+1] if reports[index+1] && reports[index+1].created_at < @report.created_at
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			@reports = @project.ordered_reports
+		end
 	end
 
 	def generate

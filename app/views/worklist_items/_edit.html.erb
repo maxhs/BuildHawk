@@ -94,7 +94,7 @@
 		<h5 id="comment-toggle">View Comments</h5>
 	</div>
 
-	<div id="comment-container" class="collapsed border-box">
+	<div class="comment-container collapsed border-box">
 		<div id="comments-form">
 			<%= form_for task.comments.new, :method => :post, remote: true do |f| %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -113,15 +113,15 @@
 		dismissTask();
 	});
 	$('#comment-toggle').click(function(){
-		if ($('#comment-container').hasClass('collapsed')){
+		if ($('.comment-container').hasClass('collapsed')){
 			$(this).text('Comments');
-			$('#comment-container').show(170,function(){
+			$('.comment-container').show(170,function(){
 				$(this).removeClass('collapsed');
 			});
 		} else {
 			$(this).text('View Comments');
-			$('#comment-container').addClass('collapsed');
-			$('#comment-container').hide(170);
+			$('.comment-container').addClass('collapsed');
+			$('.comment-container').hide(170);
 		}
 	});
 </script>

@@ -2,11 +2,11 @@
 	
 	<div id="reports-header" class="row">
 		<div class="col-xs-3">
-			<%= link_to "+ Report", new_report_path(:project_id => @project.id), :class=>"simple-btn new-report remote", remote: true %>
+			<%= link_to "+ Report", new_report_path(:project_id => project.id), :class=>"simple-btn new-report remote", remote: true %>
 		</div>
 		
 		<div class="col-xs-9">
-			<%= form_tag search_reports_path(:project_id => @project.id), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
+			<%= form_tag search_reports_path(:project_id => project.id), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
 				<%= text_field_tag :search, nil, :placeholder => "Search Reports...", :class => "form-control search" %>
 				<span class="input-group-addon cancel-search" style="cursor: pointer;" id="remove" >
 					<span class="glyphicon glyphicon-remove"></span>
@@ -16,7 +16,7 @@
 	</div>
 
 	<div style="border:1px solid #ddd;">
-		<% if @reports && @reports.count > 0 %>
+		<% if reports && reports.count > 0 %>
 			<div class="header row">
 				<div class="col-xs-3"><h5>Report Date</h5></div>
 				<div class="col-xs-3"><h5>Type</h5></div>
@@ -24,7 +24,7 @@
 				<div class="col-xs-3"><h5>Photos</h5></div>
 			</div>
 	
-			<%= render partial:"reports/index_row", collection: @reports, as: :report, cache: true %>
+			<%= render partial:"reports/index_row", collection: reports, as: :report, cache: true %>
 				
 		<% else %>
 			<div class="col-xs-12 loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;margin:50px auto;">No reports</h4></div>
@@ -34,8 +34,8 @@
 </div>
 
 <div id="report-focus">
-	<% if @report %>
-		<%= render partial:"reports/edit", locals:{report:@report} %>
+	<% if report %>
+		<%= render partial:"reports/edit", locals:{report: report} %>
 	<% end %>
 </div>
 
@@ -44,4 +44,15 @@
 		$('#search').val('');
 		$('#reports-search').submit();
 	});
+	<% if report %>
+		$("#project-reports").addClass('reports-panel');
+		var reportOffset = document.getElementById('report-<%=report.id %>').offsetTop;
+		var focusOffset = document.getElementById('project-reports').offsetHeight;
+		var posTop = reportOffset-focusOffset-100;
+		$('.active-report').removeClass('active-report');
+		$('.report').addClass('faded');
+		$('#report-<%=report.id %>').addClass('active-report');
+		$('#report-focus').css({'margin-top':posTop,'left':'50%'});
+		$("html, body").delay(200).animate({ scrollTop: $("#report-<%=report.id %>").offset().top-200 }, 200);
+	<% end %>
 </script>
