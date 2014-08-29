@@ -12,8 +12,8 @@ class CommentsController < AppController
 			@worklist_item = WorklistItem.find params[:comment][:worklist_item_id]
 			@comments = @worklist_item.comments
 		end
-
 		if request.xhr?
+			puts "should be rails ujs"
 			respond_to do |format|
 				format.js
 			end
