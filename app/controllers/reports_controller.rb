@@ -140,7 +140,7 @@ class ReportsController < AppController
 		@reports = @project.ordered_reports
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "reports/index"}
+				format.js
 			end
 		else 
 			redirect_to reports_project_path(@project)

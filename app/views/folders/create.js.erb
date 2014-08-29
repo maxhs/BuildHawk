@@ -1,5 +1,5 @@
 $('#photo-table').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/folders" %>');
+	$(this).html('<%= j render :partial => "projects/folders", locals: {folders: @folders, project: @project} %>');
 	$(this).fadeIn(170);
 });
 $('#add-folder-link').on('click',function(){

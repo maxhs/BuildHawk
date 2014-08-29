@@ -1,5 +1,5 @@
-module BillingDay
-	@queue = :billingday
+module DailyBilling
+	@queue = :daily_billing
 
 	def self.perform(project_user_id)
 		project_user = ProjectUser.where(:id => project_user_id).first
