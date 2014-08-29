@@ -2,8 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.comment-container {
+#comment-container {
 	margin:0 auto;
+	clear:both;
+	padding:20px;
 	
 	textarea {
 		width:100%;
@@ -11,7 +13,19 @@
 	}
 }
 
-.comment-container.border-box {
+#comment-toggle {
+	cursor:pointer;
+	text-align:center; 
+	width:50%;
+	margin:0px auto 10px; 
+	display:block;
+}
+
+.collapsed {
+	display:none;
+}
+
+#comment-container.border-box {
 	padding-top:10px;
 	margin-top:10px;
 }

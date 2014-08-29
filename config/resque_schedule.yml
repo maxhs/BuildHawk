@@ -3,3 +3,9 @@ monthly_billing:
   class: MonthlyBilling
   args:
   description: Handle monthly billing
+
+billing_day:
+  cron: "0 * * * *"
+  class: BillingDay
+  args:
+  description: Track billing days per project_user

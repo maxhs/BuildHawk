@@ -57,8 +57,7 @@ ActiveRecord::Schema.define(version: 20140828030433) do
   end
 
   create_table "billing_days", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
+    t.integer  "project_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

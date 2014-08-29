@@ -1,6 +1,5 @@
 class BillingDay < ActiveRecord::Base
-	attr_accessible :user_id, :project_id
+	attr_accessible :project_user_id
 
-	belongs_to :user
-	belongs_to :project
+	belongs_to :project_user
 end

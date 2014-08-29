@@ -46,12 +46,14 @@
 
 <script>
 	<% if @task %>
-		var offset = $('#task-<%=@task.id %>').offset().top-180;
-		if (offset<=0){
-			offset = 0;
-		}
-		$('#task-focus').css({'top':offset,'left':'54%'});
-		$("html, body").animate({ scrollTop: offset }, 120);
+		var taskOffset = document.getElementById('task-<%=@task.id %>').offsetTop;
+		var focusOffset = document.getElementById('project-tasks').offsetHeight;
+		var posTop = taskOffset-focusOffset-45;
+		$('.active-task').removeClass('active-task');
+		$('.task').addClass('faded');
+		$('#task-<%=@task.id %>').addClass('active-task');
+		$('#task-focus').css({'top':posTop,'left':'50%'});
+		$("html, body").delay(200).animate({ scrollTop: $("#task-<%=@task.id %>").offset().top-84 }, 200);
 	<% end %>
 	$('#top-nav a').removeClass('current-page');
 	$('.nav-tasks a,#<%=@project.id%>-link').addClass('current-page');
