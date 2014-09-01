@@ -1,7 +1,7 @@
 source 'https://code.stripe.com'
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.5'
 gem 'passenger', :group => :production
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
@@ -18,7 +18,6 @@ gem 'postmark-rails'
 gem 'shadowbox-rails'
 gem 'sass-rails'
 gem 'protected_attributes'
-gem 'rails-observers'  #probably not really necessary
 gem 'multi_fetch_fragments'
 gem 'resque', '1.24.1'
 gem 'resque-scheduler', '2.2.0'
@@ -35,13 +34,16 @@ gem 'nprogress-rails'
 gem 'stripe'
 gem 'acts_as_list'
 gem 'actionview-encoded_mail_to'
-gem "recaptcha", :require => "recaptcha/rails"
 gem 'uglifier', '>= 1.3.0'
 gem 'httparty'
 gem 'geocoder'
 gem 'jquery-easing-rails'
-gem 'newrelic_rpm'
+gem "parsley-rails"
 gem 'gcm'
+gem 'newrelic_rpm'
+
+gem "recaptcha", :require => "recaptcha/rails"
+#gem 'rails-observers'  #probably not really necessary
 
 #gem 'capybara'
 #gem 'nokogiri'
