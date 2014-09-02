@@ -1,5 +1,4 @@
-class BillingController < ApplicationController
-
+class BillingController < AppController
 	before_filter :find_user
 
 	def index

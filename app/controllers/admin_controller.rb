@@ -202,23 +202,18 @@ class AdminController < AppController
 
 	def new_project
 		@company = @user.company
-		if @company.cards.where(:active=>true).nil?# && !current_user.uber_admin
+		if @company.customer_id.nil?
+			@charges = @company.charges
+		  	active_projects = @company.projects.where(:active => true).count
+		  	@amount = active_projects * 1000 / 100
+			redirect_to billing_index_path
+		else
 			@project = Project.new
 			@project.build_address
 			@project.project_users.build
 			@users = current_user.company.users
 			@subs = current_user.company.company_subs
 			@checklists = @user.company.checklists.where(:core => true)
-			if request.xhr?
-				respond_to do |format|
-					format.js
-				end
-			end
-		else
-			@charges = @company.charges
-		  	active_projects = @company.projects.where(:active => true).count
-		  	@amount = active_projects * 1000 / 100
-			redirect_to billing_index_path
 		end
 	end
 
