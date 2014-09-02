@@ -46,6 +46,9 @@ class BillingController < AppController
 		@card = @user.company.cards.create :card_id => card.id, :last4 => card.last4, :exp_month => card.exp_month, :exp_year => card.exp_year, :brand => card.brand
 		@card.update_attribute :active, true if @company.cards.count == 1
 		redirect_to billing_index_path
+	rescue Stripe::CardError => e
+		flash[:error] = e.message
+	 	redirect_to billing_index_path
 	end
 
 	def edit_card
@@ -79,12 +82,11 @@ class BillingController < AppController
 			customer.default_card = @card.card_id
 			customer.save
 		end
-
-		#rescue Stripe::CardError => e
-		#  flash[:error] = e.message
-		#  redirect_to charges_path
-		#end
 		redirect_to billing_index_path
+	
+	rescue Stripe::CardError => e
+		 flash[:error] = e.message
+		 redirect_to billing_index_path
 	end
 
 	def pay
