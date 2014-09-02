@@ -54,4 +54,9 @@ class UsersController < AppController
 
 		render projects_path
 	end
+
+	def basic
+		@user = User.find params[:id]
+		puts "deactivating #{@user.full_name}"
+	end
 end

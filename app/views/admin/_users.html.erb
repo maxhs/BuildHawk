@@ -1,5 +1,38 @@
+<div id="billing-page" class="page border-box">
+	<h3 style="margin-top:10px;margin-bottom:30px;"><%=Time.now.strftime("%B")%> Billing</h3>
+	<!--<header>
+		<div class="input-group pull-right" style="width: 100%; margin: 0 auto 1%;">
+			<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
+			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
+		</div>
+	</header>-->
+	<table class="table table-bordered table-responsive" id="users">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Projects</th>
+				<th>Phone</th>
+				<th>Created On</th>
+				<th>Deactivate</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @users.each do |user| %>
+				<tr>
+					<td style="width:23%;"><%= user.full_name %></td>
+					<td style="width:23%;"><%= user.projects.to_sentence %></td>
+					<td style="width:23%;"><%= user.formatted_phone %></td>
+					<td style="width:23%;"><%= parse_time user.created_at%></td>
+					<td><%= link_to "Deactivate", basic_user_path(:id => user.id), method: :post, :class => "simple-btn", remote: true %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
 <div id="users-page" class="page border-box">
-	<div><%= link_to "Add New User", new_user_admin_index_path, :id => "add-user-button", :remote => true %></div>
+	<div><%= link_to "Add New User", new_user_admin_index_path, :id => "add-user-button", :class=>"simple-btn", :remote => true %></div>
 	<h3 style="margin-top:10px;margin-bottom:30px;"><%=@company.name%> Personnel</h3>
 	<!--<header>
 		<div class="input-group pull-right" style="width: 100%; margin: 0 auto 1%;">
@@ -7,7 +40,6 @@
 			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
 		</div>
 	</header>-->
-
 	<table class="table table-bordered table-responsive" id="users">
 		<thead>
 			<tr>
@@ -36,7 +68,7 @@
 </div>
 
 <div id="subs-page" class="page border-box" style="padding-top:20px;margin-top:20px;">
-	<div><%= link_to "Add New Subcontractor", new_subcontractor_admin_index_path, :id => "add-sub-button", :remote => true %></div>
+	<div><%= link_to "Add New Subcontractor", new_subcontractor_admin_index_path, :id => "add-sub-button", :class=>"simple-btn", :remote => true %></div>
 	<h3 style="margin-top:10px;margin-bottom:30px;">Subcontractors</h3>
 	<table class="table table-bordered table-responsive" id="subs">
 		<thead>

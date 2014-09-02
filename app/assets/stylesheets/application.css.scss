@@ -884,11 +884,11 @@ a.search-button {
 .simple-btn {
 	cursor:pointer;
 	background:#fff;
-	border:1px solid #ccc;
-	box-shadow: inset -1px -1px 0px -1px rgba(0,0,0,.1);
-	border-radius:3px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
+	border: 1px solid rgba(0,0,0,.1);
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
 	padding:10px 20px;
 	position:relative;
 	display:inline-block;
@@ -896,13 +896,12 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:'Proxima Nova',"Montserrat",'Helvetica',sans-serif;
-	font-size:14px;
+	font-family:"Montserrat","Helvetica",sans-serif;
+	font-size:12px;
 	line-height:14px;
 	letter-spacing:2px;
 	font-weight:normal;
 	text-transform:uppercase;
-
 	-webkit-transition: all 0.1s ease;
     -moz-transition: all 0.1s ease;
     -o-transition: all 0.1s ease;
@@ -914,9 +913,7 @@ a.search-button {
 }
 
 .simple-btn:hover {
-	border-color:#aaa;
-	background:#f7f7f7;
-	//box-shadow: inset 0px -1px 0px 0px rgba(0,0,0,.5);
+	border-color:#ccc;
 }
 
 .delete-link {
@@ -1000,7 +997,7 @@ a.search-button {
 	width:100%;
 	max-width:160px;
 	margin:1% auto 0;
-	height:41px;
+	background:#cc0000;
 }
 
 .export {

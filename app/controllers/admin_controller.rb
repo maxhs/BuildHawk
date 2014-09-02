@@ -18,20 +18,20 @@ class AdminController < AppController
 
 	def users
 		@company = @user.company
-		if @company.cards.where(:active => true).nil? && !current_user.uber_admin
-			@users = current_user.company.users
-			@subcontractors = current_user.company.company_subs
-			if request.xhr?
-				respond_to do |format|
-					format.js
-				end
-			end
-		else
+		if @company.customer_id.nil?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
 			redirect_to billing_index_path
+		else
+			@users = current_user.company.users
+			@subcontractors = current_user.company.company_subs			
 		end
+	end
+
+	def deactivate
+		@user = User.find params[:id]
+		puts "deactivating #{@user.full_name}"
 	end
 
 	def new_user

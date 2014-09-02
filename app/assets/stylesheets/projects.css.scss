@@ -268,19 +268,29 @@
 	}
 }
 
-.delete-confirmation {
-	margin:0 auto;
-	
+.destroy-box {
+	margin:5% auto;
+	max-width:700px;
 
-	h3 {
-		text-align:center;
-		margin:0 auto 0;	
+	.delete-confirmation {
+		margin:0 auto;
+		padding-top:2em;
+
+		h3 {
+			text-align:center;
+			margin:0 auto 0;	
+		}
+			
+		p {
+			font-size:1.2em;
+			margin:2em auto;
+			width:75%;
+		}
 	}
-		
-	p {
-		font-size:1.2em;
+
+	.delete-project-link {
 		margin:2em auto;
-		width:75%;
+		max-width:220px;
 	}
 }
 

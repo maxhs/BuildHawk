@@ -36,6 +36,7 @@ Buildhawk::Application.routes.draw do
     end
     member do
       get :email_unsubscribe
+      post :basic
     end
   end
   resources :home, only: [:index], path:"" do 

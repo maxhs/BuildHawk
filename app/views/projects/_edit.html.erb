@@ -2,82 +2,82 @@
 	<h3 class="edit-header">Edit Project</h3>
 	<%= nested_form_for @project, :method => :put, :remote => true do |f| %>
 
-			<%= hidden_field_tag :company_id, current_user.company.id %>
-			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<%= hidden_field_tag :company_id, current_user.company.id %>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<div class="row">
+			<div class="col-xs-3 project-label"><h4>Name</h4></div>
+			<div class="col-xs-9"><%= f.text_field :name, :placeholder => "Project name" %></div>
+		</div>
+		
+		<%= f.fields_for :address do |a| %>
 			<div class="row">
-				<div class="col-xs-3 project-label"><h4>Name</h4></div>
-				<div class="col-xs-9"><%= f.text_field :name, :placeholder => "Project name" %></div>
+				<div class="col-xs-3 project-label"><h4>Street</h4></div>
+				<div class="col-xs-9"><%= a.text_field :street1 , :placeholder => "Street address" %></div>
 			</div>
-			
-			<%= f.fields_for :address do |a| %>
-				<div class="row">
-					<div class="col-xs-3 project-label"><h4>Street</h4></div>
-					<div class="col-xs-9"><%= a.text_field :street1 , :placeholder => "Street address" %></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-3 project-label"><h4>City</h4></div>
-					<div class="col-xs-9"><%= a.text_field :city , :placeholder => "City" %></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-3 project-label"><h4>State</h4></div>
-					<div class="col-xs-9"><%= a.text_field :state , :placeholder => "State" %></div>
-				</div>
-				<div class="row" style="margin-bottom:10px;">
-					<div class="col-xs-3 project-label"><h4>Zip</h4></div>
-					<div class="col-xs-9"><%= a.text_field :zip , :placeholder => "Zip" %></div>
-				</div>
-			<% end %>
-			
-			<% if @project_groups %>
-			    <div class="row personnel">
-			    	<div class="col-xs-3"><h4>Project Group</h4></div>
-			    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id) %></div>
-			    </div>
-		    <% end %>
-
-		    <div class="row personnel">
-		    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>
-		    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-		    		<% @users.each do |user| %>
-		    			<% if @project.users.include?(user) %>
-		    				<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id, checked: true %><span style="padding-left:10px;"><%= user.full_name %></span></div>
-	    				<% else %>
-	    					<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span></div>
-	    				<% end %>
-		    		<% end %>
-		    	</div>
-		    </div>
-
-		    <div class="row personnel">
-		    	<div class="col-xs-3"><h4>Subcontractors Assigned</h4></div>
-		    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-		    		<% @subs.each do |company_sub| %>
-		    			<% if @project.companies.include?(company_sub.subcontractor) %>
-		    				<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id, checked: true %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
-	    				<% else %>
-	    					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
-	    				<% end %>
-		    		<% end %>
-		    	</div>
-		    	
-		    </div>
-
-		    <% if current_user.uber_admin %>
-			    <div class="row" style="margin-top:1em;">
-			    	<div class="col-xs-3"><h4>Use as Demo</h4></div>
-			    	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %><% if f.object.core %> <span id="core-warning"> WARNING: This will make the project visible to all users</span><% end %></div>
-			    </div>
-			<% end %>
-			
-			<div class="button-container">
-				<%= f.submit "Save", :class => "simple-btn save", style:"display:block;" %>
-	<% end %>
-				<% if current_user.project_users.where(:project_id => @project.id, :archived => true).first %>
-					<%= link_to "Activate", unarchive_project_path(@project), :method => :post, id: "archive-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to unarchive this project?"}, remote: true %>
-				<% else %>
-					<%= link_to "Archive", archive_project_path(@project), :method => :post, id: "archive-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to archive this project?"}, remote: true %>
-				<% end %>
-				<%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"btn btn-danger btn-md remote", style:"display:inline-block;", remote: true %>
+			<div class="row">
+				<div class="col-xs-3 project-label"><h4>City</h4></div>
+				<div class="col-xs-9"><%= a.text_field :city , :placeholder => "City" %></div>
 			</div>
-			
+			<div class="row">
+				<div class="col-xs-3 project-label"><h4>State</h4></div>
+				<div class="col-xs-9"><%= a.text_field :state , :placeholder => "State" %></div>
+			</div>
+			<div class="row" style="margin-bottom:10px;">
+				<div class="col-xs-3 project-label"><h4>Zip</h4></div>
+				<div class="col-xs-9"><%= a.text_field :zip , :placeholder => "Zip" %></div>
+			</div>
+		<% end %>
+		
+		<% if @project_groups %>
+		    <div class="row personnel">
+		    	<div class="col-xs-3"><h4>Project Group</h4></div>
+		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id) %></div>
+		    </div>
+	    <% end %>
+
+	    <div class="row personnel">
+	    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>
+	    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
+	    		<% @users.each do |user| %>
+	    			<% if @project.users.include?(user) %>
+	    				<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id, checked: true %><span style="padding-left:10px;"><%= user.full_name %></span></div>
+    				<% else %>
+    					<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span></div>
+    				<% end %>
+	    		<% end %>
+	    	</div>
+	    </div>
+
+	    <div class="row personnel">
+	    	<div class="col-xs-3"><h4>Subcontractors Assigned</h4></div>
+	    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
+	    		<% @subs.each do |company_sub| %>
+	    			<% if @project.companies.include?(company_sub.subcontractor) %>
+	    				<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id, checked: true %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
+    				<% else %>
+    					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
+    				<% end %>
+	    		<% end %>
+	    	</div>
+	    	
+	    </div>
+
+	    <% if current_user.uber_admin %>
+		    <div class="row" style="margin-top:1em;">
+		    	<div class="col-xs-3"><h4>Use as Demo</h4></div>
+		    	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %><% if f.object.core %> <span id="core-warning"> WARNING: This will make the project visible to all users</span><% end %></div>
+		    </div>
+		<% end %>
+		
+		<div class="button-container">
+			<%= f.submit "Save", :class => "simple-btn save", style:"display:block;" %>
+<% end %>
+			<% if current_user.project_users.where(:project_id => @project.id, :archived => true).first %>
+				<%= link_to "Activate", unarchive_project_path(@project), :method => :post, id: "archive-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to unarchive this project?"}, remote: true %>
+			<% else %>
+				<%= link_to "Archive", archive_project_path(@project), :method => :post, id: "archive-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to archive this project?"}, remote: true %>
+			<% end %>
+			<%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"btn btn-danger btn-md", remote: true %>
+		</div>
+		
 </div>
