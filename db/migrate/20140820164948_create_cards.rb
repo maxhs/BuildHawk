@@ -17,6 +17,6 @@ class CreateCards < ActiveRecord::Migration
         	t.boolean :active, default: false
           	t.timestamps
         end
-        add_column :companies, :customer_token, :string
+        add_column :companies, :customer_id, :string
     end
 end
