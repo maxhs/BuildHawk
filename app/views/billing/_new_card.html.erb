@@ -1,17 +1,4 @@
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#payment-form').submit(function(event) {
-		    var form = $(this);
-		    form.find('button').prop('disabled', true);
-		    Stripe.setPublishableKey('<%=@stripe_key%>');
-		    var token = Stripe.card.createToken(form, stripeResponseHandler);
-		    console.log('stripe token? '+token);
-		    event.preventDefault();
-		    return false;
-		});
-	});
-</script>
+
 <div id="billing">
 	<div id="edit-billing-container" class="border-box">
 		<div id="dismiss-card-container">
@@ -54,8 +41,9 @@
 		$('#payment-form').submit(function(event) {
 		    var form = $(this);
 		    form.find('button').prop('disabled', true);
-		    Stripe.setPublishableKey(<%=@stripe_key%>);
+		    Stripe.setPublishableKey('<%=@stripe_key%>');
 		    var token = Stripe.card.createToken(form, stripeResponseHandler);
+		    console.log('token? '+token);
 		    event.preventDefault();
 		    return false;
 		});

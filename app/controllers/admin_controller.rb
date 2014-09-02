@@ -137,18 +137,13 @@ class AdminController < AppController
 
 	def reports
 		@company = @user.company
-		if @company.cards.where(:active => true).nil? && !current_user.uber_admin
-			@projects = current_user.company.projects
-			if request.xhr?
-				respond_to do |format|
-					format.js
-				end
-			end
-		else
+		if @company.customer_id.nil?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
 			redirect_to billing_index_path
+		else
+			@projects = current_user.company.projects
 		end
 	end
 

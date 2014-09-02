@@ -46,7 +46,19 @@ class BillingController < AppController
 		@card = @user.company.cards.create :card_id => card.id, :last4 => card.last4, :exp_month => card.exp_month, :exp_year => card.exp_year, :brand => card.brand
 		@card.update_attribute :active, true if @company.cards.count == 1
 		redirect_to billing_index_path
+	rescue Stripe::InvalidRequestError => e
+		@error_message = e.message
+		if request.xhr?
+			respond_to do |format|
+				format.js {render template:"billing/errors"}
+			end
+		else
+			flash[:error] = e.message
+	 		redirect_to billing_index_path
+		end
+		puts "rescquing invalid request #{e.message}"
 	rescue Stripe::CardError => e
+		puts "rescquing card error #{e}"
 		flash[:error] = e.message
 	 	redirect_to billing_index_path
 	end
