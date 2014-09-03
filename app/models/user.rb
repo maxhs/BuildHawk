@@ -159,6 +159,12 @@ class User < ActiveRecord::Base
         end
     end
 
+    def cost(company)
+        project_count = 0
+        company.projects.map{|p| project_count+=1 if p.users.include?(self)}
+        return 20*project_count
+    end
+
     def notify_all_devices(options)
         push_tokens.each do |push_token|
             if push_token.device_type == 3

@@ -16,7 +16,7 @@ class AdminController < AppController
 
 	end
 
-	def users
+	def personnel
 		@company = @user.company
 		if @company.customer_id.nil?
 			@charges = @company.charges
@@ -27,11 +27,6 @@ class AdminController < AppController
 			@users = current_user.company.users
 			@subcontractors = current_user.company.company_subs			
 		end
-	end
-
-	def deactivate
-		@user = User.find params[:id]
-		puts "deactivating #{@user.full_name}"
 	end
 
 	def new_user

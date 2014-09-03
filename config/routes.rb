@@ -48,7 +48,7 @@ Buildhawk::Application.routes.draw do
   end
   resources :admin do
     collection do
-      get :users
+      get :personnel
       get :safety_topics
       get :edit_user
       get :new_user
