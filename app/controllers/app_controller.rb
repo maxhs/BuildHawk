@@ -1,6 +1,5 @@
 class AppController < ApplicationController
 	before_filter :user_projects
-
 	layout 'app'
 
     def user_projects

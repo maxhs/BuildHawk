@@ -23,7 +23,7 @@ class Project < ActiveRecord::Base
     has_many :activities, :dependent => :destroy
 
     after_create :default_folders
-    after_commit :adjust_users
+    after_commit :adjust_users, :if => :persisted?
 
     accepts_nested_attributes_for :address, :allow_destroy => true
     accepts_nested_attributes_for :users, :allow_destroy => true

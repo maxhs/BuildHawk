@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
   	belongs_to :phase
   	has_many :checklist_items, :dependent => :destroy
 
-    after_commit :check_completed
+    after_commit :check_completed, :if => :persisted?
     after_create :order_indices
 
     acts_as_list scope: :phase, column: :order_index

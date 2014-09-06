@@ -45,16 +45,16 @@ class Phase < ActiveRecord::Base
   	acts_as_api
 
   	api_accessible :projects do |t|
-      t.add :id
+        t.add :id
   		t.add :name
   		t.add :milestone_date
   		t.add :completed_date
-      t.add :item_count
-      t.add :completed_count
-      t.add :not_applicable_count
-      t.add :progress_count
-      t.add :order_index
-      t.add :checklist_id
+        t.add :item_count
+        t.add :completed_count
+        t.add :not_applicable_count
+        t.add :progress_count
+        t.add :order_index
+        t.add :checklist_id
   	end
 
     api_accessible :details, :extend => :projects do |t|
@@ -62,27 +62,27 @@ class Phase < ActiveRecord::Base
     end
 
     api_accessible :checklists do |t|
-      t.add :id
-      t.add :categories
-      t.add :name
-      t.add :completed_date
-      t.add :milestone_date
-      t.add :item_count
-      t.add :not_applicable_count
-      t.add :completed_count
-      t.add :progress_percentage
-      t.add :order_index
-      t.add :checklist_id
+        t.add :id
+        t.add :categories
+        t.add :name
+        t.add :completed_date
+        t.add :milestone_date
+        t.add :item_count
+        t.add :not_applicable_count
+        t.add :completed_count
+        t.add :progress_percentage
+        t.add :order_index
+        t.add :checklist_id
     end
 
     api_accessible :dashboard do |t|
-      t.add :id
-      t.add :name
-      t.add :item_count
-      t.add :not_applicable_count
-      t.add :completed_count
-      t.add :progress_count
-      t.add :order_index
-      t.add :checklist_id
+        t.add :id
+        t.add :name
+        t.add :item_count
+        t.add :not_applicable_count
+        t.add :completed_count
+        t.add :progress_count
+        t.add :order_index
+        t.add :checklist_id
     end
 end
