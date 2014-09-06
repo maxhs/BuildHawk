@@ -16,9 +16,14 @@
 #comment-toggle {
 	cursor:pointer;
 	text-align:center; 
-	width:50%;
-	margin:0px auto 10px; 
+	width:200px;
+	margin:20px auto; 
 	display:block;
+	border-color:transparent;
+}
+
+#comment-toggle:hover {
+	border-color:#eee;
 }
 
 .collapsed {

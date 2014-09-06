@@ -27,10 +27,10 @@
 			<div class="col-xs-3"><h5>Status</h5></div>
 			<div class="col-xs-9">
 				<div>
-					<%= f.radio_button :completed, false %><h5 style="display:inline-block">IN PROGRESS</h5>
+					<%= f.radio_button :completed, false %><span style="display:inline-block">IN PROGRESS</span>
 				</div>
 				<div>
-					<%= f.radio_button :completed, true %><h5 style="display:inline-block">COMPLETED</h5>
+					<%= f.radio_button :completed, true %><span style="display:inline-block">COMPLETED</span>
 					<% if task.completed_by_user %>
 						<h5 style="color:#aaa;margin-left:5%;display:inline-block;font-size:1em;font-weight:100;"> by <%= task.completed_by_user.full_name %>, <%= parse_time task.completed_at %></h5>
 					<% end %>
@@ -91,7 +91,7 @@
 			<% end %>
 		</div>
 
-		<h5 id="comment-toggle">View Comments</h5>
+		<div id="comment-toggle" class="simple-btn">View Comments</div>
 	</div>
 
 	<div class="comment-container collapsed border-box">

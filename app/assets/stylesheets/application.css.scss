@@ -385,7 +385,7 @@ body {
 		}
 
 		.faded {
-			opacity:.25;
+			opacity:.5;
 		}
 	}
 
@@ -695,6 +695,9 @@ body {
 
 @page {
 	margin:0;
+	padding:0;
+	size:auto;
+
 	body {
 		background:#fff;
 		margin:0;
@@ -702,6 +705,8 @@ body {
 			display:none;
 		}
 	}
+
+	#header, #footer, #nav, header, footer, nav { display: none !important; } 
 }
 
 #dropdown {
