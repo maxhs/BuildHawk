@@ -1,0 +1,10 @@
+<div id="billing-summary" class="row summary">
+	<div class="col-xs-3"><%= parse_month_date(month.beginning_of_month) %> - <%= parse_month_date_year(month.end_of_month) %></div>
+	<div class="col-xs-3"><%= pro_users.count %></div>
+	<div class="col-xs-2"><%= number_to_currency(user.company.projected_cost, precision: 2) %></div>
+	<div class="col-xs-2"><%= parse_date((month + 1.month).beginning_of_month) %> </div>
+	<div class="col-xs-2">
+		codes
+		<span id="redeem-code-link">redeem</span>
+	</div>
+</div>

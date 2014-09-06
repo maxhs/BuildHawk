@@ -5,12 +5,14 @@
 		   		<%= text_field_tag :search, params[:search], :id => "projects-search-form", :placeholder => "Search", :class=>"tt-hint form-control" %>
 			<% end %>
 		</li>
+		<% if current_user.any_admin? %>
+			<li class="project buttons" style="padding:0">
+				<%= link_to "+ NEW PROJECT", new_project_admin_index_path, id:"new-project-button", remote: true %>
+				<%= link_to "+ NEW GROUP", new_project_group_path, id:"new-group-button", remote: true %>
+			</li>
+		<% end %>
 		<aside id="projects">
-			<% if current_user.any_admin? %>
-				<li class="project" style="padding:0">
-					<%= link_to "+ NEW PROJECT", new_project_admin_index_path, id:"new-project-button", remote: true %>
-				</li>
-			<% end %>
+			
 			<% @projects.each do |project| %>
 				<% if project.checklist && project.checklist.item_count > 0 %>
 					<li class="project">

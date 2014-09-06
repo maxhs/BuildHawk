@@ -1,17 +1,30 @@
 module MonthlyBilling
+    require "stripe"
+
 	@queue = :monthly_billing
   	def self.perform
   		puts "handling monthly billing"
-  		first = Date.today.beginning_of_month
-  		last = Date.today.end_of_month
   		Company.all.each do |c|
-  			recent_charge = c.charges.last
-  			c.projects.where(active: true).each do |p|
-  				puts "Calculating billing for #{p.name}"
-  				p.project_users.each do |pu|
-  					active_days = pu.billing_days.where('created_at > ? and created_at < ?',first,last).count
-  				end
-  			end
+            billing_days = c.billing_days_for(1.month.ago)
+            if billing_days.count > 0
+                pro_users = billing_days.map{|day| day.project_user.user}.compact.uniq
+                if pro_users.count > 0
+                    if c.customer_id
+                        #create an invoice item
+                        Stripe::InvoiceItem.create(
+                            :customer => c.customer_id,
+                            :amount => pro_users.count*2000,
+                            :currency => "usd",
+                            :description => "#{1.month.ago.beginning_of_month.strftime('%B')} Billing"
+                        )
+                        puts "#{c.name} pro user count for #{1.month.ago.strftime("%b")}: #{pro_users.count}"
+                    else
+                        #customer does not have a stripe token. raise some sort of an error
+                    end
+                end
+            end
+
+
   		end
   	end
 end

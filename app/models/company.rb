@@ -15,6 +15,7 @@ class Company < ActiveRecord::Base
     has_many :subcontractors, :through => :company_subs, :source => :subcontractor
     has_many :connect_users, :dependent => :destroy
     has_many :cards
+    has_many :billing_days
 
     validates_presence_of :name
     validates_uniqueness_of :name
@@ -58,10 +59,6 @@ class Company < ActiveRecord::Base
         User.where(:company_id => id, :company_admin => true).count > 0
     end
 
-    def users_count
-        users.count
-    end
-
     def formatted_phone
         if phone && phone.length > 0
             clean_phone if phone.include?(' ')
@@ -79,6 +76,19 @@ class Company < ActiveRecord::Base
         companies_array.each do |c|
             company_subs.create :subcontractor_id => c.id
         end
+    end
+
+    def billing_days_for(month)
+        first = month.beginning_of_month
+        last = month.end_of_month
+        billing_days.where("created_at > ? and created_at < ?",first, last)
+    end
+
+    def projected_cost
+        #assumes current month
+        month = Time.now.to_datetime
+        pro_users = billing_days_for(month).map{|day| day.project_user.user}.compact.uniq
+        return pro_users.count * 20
     end
 
 	acts_as_api

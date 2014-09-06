@@ -1,5 +1,10 @@
 class ProjectGroupsController < AppController
 	before_filter :authenticate_user!
+	
+	def new
+		@project_group = ProjectGroup.new
+	end
+
 	def create
 		@company = current_user.company
 		params[:project_group][:company_id] = @company.id

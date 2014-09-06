@@ -5,7 +5,6 @@
 			<tr>
 				<th>Name</th>
 				<th>Projects</th>
-				<th><%=Time.now.strftime("%b")%> Cost</th>
 				<th>Deactivate</th>
 			</tr>
 		</thead>
@@ -15,7 +14,6 @@
 				<tr>
 					<td><%= user.full_name %></td>
 					<td><%= user.projects.map{|p| link_to p.name, project_path(p), target:'_blank'}.to_sentence.html_safe %></td>
-					<td><%= number_to_currency(user.cost(current_user.company),precision:2)%></td>
 					<td style="width:240px;"><%= link_to "Deactivate", basic_user_path(:id => user.id), method: :post, :class => "simple-btn centered", remote: true %></td>
 				</tr>
 			<% end %>

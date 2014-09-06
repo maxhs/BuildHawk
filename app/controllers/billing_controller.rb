@@ -1,18 +1,22 @@
 class BillingController < AppController
 	before_filter :find_user
+	layout 'print', only: :invoice
 
 	def index
 		@cards = @company.cards.where("card_id IS NOT NULL")
 		@stripe_key = Rails.configuration.stripe[:publishable_key]
 		@active_card = @company.cards.where(:active => true).first 
+		@month = Time.now.to_datetime
+		@pro_users = @user.company.billing_days_for(@month).map{|day| day.project_user.user}.compact.uniq
+
 		if @company.customer_id
 			customer = Stripe::Customer.retrieve(@company.customer_id)
-			invoices = Stripe::Invoice.all(
+			invs = Stripe::Invoice.all(
 				:customer => customer.id,
 			)
 
 			@subtotal = 0
-			@invoices = invoices["data"].as_json
+			@invoices = invs["data"].as_json
 			@invoices.map{|c| @subtotal += c["amount_due"]}
 		else 
 			@card = @company.cards.new
@@ -61,6 +65,55 @@ class BillingController < AppController
 		puts "rescquing card error #{e}"
 		flash[:error] = e.message
 	 	redirect_to billing_index_path
+	end
+
+	def invoice
+		@invoice = Stripe::Invoice.retrieve(params[:invoice_id])
+		if @invoice
+			@data = @invoice["lines"]["data"].first
+			@month = Time.at(@invoice["period_start"]).to_datetime
+			@pro_users = @user.company.billing_days_for(@month).map{|day| day.project_user.user}.compact.uniq
+			if @invoice["discount"]
+			 	discount = @invoice["discount"]["coupon"]
+			 	@credit_name = discount["id"]
+			 	if discount["amount_off"]
+			 		@credit = discount["amount_off"]
+			 	else
+			 		@credit = @invoice["subtotal"] * discount["percent_off"]/100
+			 	end
+			end
+			puts "invoice: #{@invoice} for month: #{@month.strftime("%b")}"
+		else
+			flash[:alert] = "Something went wrong while trying to view this invoice."
+			redirect_to billing_index_path
+		end
+		@company = @user.company
+		@billing_days = @user.company.billing_days_for(@month)
+		@pro_users = @billing_days.map{|day| day.project_user.user}.compact.uniq
+
+		start_of_month = @month.beginning_of_month
+		puts "start of month: #{start_of_month}"
+		end_of_month = @month.end_of_month
+		puts "end of month: #{end_of_month}"
+
+		live_projects = @user.company.projects.where(active:true)
+		if live_projects.count == 1
+			@live_projects_count_string = "1 Live Project"
+		else
+			@live_projects_count_string = "#{live_projects.count} Live Projects"
+		end
+
+		@documents = @user.company.photos.where("created_at > ? and created_at < ?",start_of_month, end_of_month)
+		@tasks = @user.company.projects.map(&:worklists).flatten.map{|w|w.worklist_items.where("created_at > ? and created_at < ?",start_of_month, end_of_month)}.compact
+		@reports = @user.company.projects.map{|p|p.reports.where("created_at > ? and created_at < ?",start_of_month, end_of_month)}
+		@items = @user.company.projects.map(&:checklist).compact.map{|c|c.checklist_items.where("completed_date > ? and completed_date < ?",start_of_month, end_of_month)}.compact
+		puts "items: #{@items}"
+	end
+
+	def summary
+		@month = Time.now.to_datetime
+		@pro_users = @user.company.billing_days_for(@month).map{|day| day.project_user.user}.compact.uniq
+		puts "invoice: #{@invoice} for month: #{@month.strftime("%b")}"
 	end
 
 	def edit_card
@@ -112,9 +165,9 @@ class BillingController < AppController
 
 	private
 
-	def invoice
-		invoice = Stripe::Invoice.create(customer: @user.company.customer_id)
-	end
+	# def invoice
+	# 	invoice = Stripe::Invoice.create(customer: @user.company.customer_id)
+	# end
 
 	def find_user
 		unless current_user.any_admin?

@@ -11,4 +11,10 @@ module ApplicationHelper
 	def parse_billing_date(time)
 		time.strftime("%B %Y") if time
 	end
+	def parse_month_date(time)
+		time.strftime("%B %e") if time
+	end
+	def parse_month_date_year(time)
+		time.strftime("%B %e, %Y") if time
+	end
 end

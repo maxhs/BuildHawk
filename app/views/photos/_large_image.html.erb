@@ -9,31 +9,31 @@
 			<%= form_for @p, :method => :patch, :remote => true do |f| %>
 			
 				<div class="row">
-					<span class="label col-xs-3">Date:</span>
+					<span class="label col-xs-3"><h5>Date</h5></span>
 					<span class="col-xs-9"><%= @p.created_date %></span>
 				</div>
 				<% if @p.user %>
 					<div class="row">
-						<span class="label col-xs-3">Uploaded by:</span>
+						<span class="label col-xs-3"><h5>Uploaded by</h5></span>
 						<span class="col-xs-9"><%= @p.user.full_name %><span>
 					</div>
 				<% end %>
 				<div class="row">	
-					<span class="label col-xs-3">Source:</span>
+					<span class="label col-xs-3"><h5>Source</h5></h5></span>
 					<span class="col-xs-9"><%= f.text_field :source, :style=>"" %></span>
 				</div> 
 			
 				<div class="row">
-					<span class="label col-xs-3">Name:</span>	
+					<span class="label col-xs-3"><h5>Name</h5></span>	
 					<span class="col-xs-9"><%= f.text_field :name, :style=>"display:inline-block" %></span>
 				</div>
 				<div class="row">
-					<span class="label col-xs-3">Description:</span>
+					<span class="label col-xs-3"><h5>Description</h5></span>
 					<span class="col-xs-9"><%= f.text_area :description, :style=>"width:90%; display:inline-block" %></span>
 				</div>
 				<div style="text-align:center;">
 					<span class="col-xs-12">
-						<%= f.submit :save, :class => "simple-btn", :style => "display:none;margin-top:10px;width:120px;" %>
+						<%= f.submit :save, :class => "simple-btn", :style => "margin-top:10px;width:120px;" %>
 					</span>
 				</div>
 			<% end %>
@@ -55,13 +55,11 @@
 			$(this).text('(enter/return to save)');
 			$(this).fadeIn(170);
 		});
-		$('.edit_photo input[type="submit"]').fadeIn(200);
 	});
 	$("#photo_name,#photo_description").focusout(function(){
 		$('#click-to-edit').fadeOut(170,function(){
 			$(this).text('(click name to edit)');
 			$(this).fadeIn(170);
 		});
-		$('.edit_photo input[type="submit"]').fadeOut(200);
 	});
 </script>

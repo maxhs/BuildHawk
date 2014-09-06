@@ -2,10 +2,12 @@ module DailyBilling
 	@queue = :daily_billing
 
 	def self.perform
-		Project.where(active: true).each do |p|
-			p.project_users.each do |pu|
-				pu.billing_days.create
-				puts "creatign a billing day for #{pu.user.full_name} on project: #{pu.project.name}"
+		#creates a billing day for each project user
+		yesterday = DateTime.now - 1.day
+		ProjectUser.all.each do |p|
+			last_billing = p.billing_days.last
+			if !last_billing || last_billing.created_at < yesterday
+				p.billing_days.create :company_id => p.user.company_id
 			end
 		end
 	end

@@ -1,0 +1,3 @@
+$('#billing-link').addClass('current-page');
+$('#main').html('<%= j render :partial => "invoice", locals: {invoice: @invoice, company: @company} %>');
+$("html, body").animate({ scrollTop: 0 }, 0);

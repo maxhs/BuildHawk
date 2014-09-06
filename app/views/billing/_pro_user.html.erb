@@ -1,0 +1,19 @@
+<tr class="pro-user">
+	<td><%= pro_user.full_name %></td>
+	<td><%= pro_user.billable_days(user.company, month) %></td>
+	<td><%= number_to_currency(pro_user.cost(user.company, month), precision:2) %></td>
+	<td>
+		<ol>
+			<% pro_user.projects.each do |p| %>
+				<li><%= p.name %></li>
+			<% end %>
+		</ol>
+	</td>
+	<td>
+		<ol>
+			<% pro_user.projects.each do |p| %>
+				<li><%= p.name %></li>
+			<% end %>
+		</ol>
+	</td>
+</tr>

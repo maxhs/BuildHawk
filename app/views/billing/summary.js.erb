@@ -1,0 +1,4 @@
+$('#navigation a').removeClass('current-page');
+$('#billing-link').addClass('current-page');
+$('#main').html('<%= j render :partial => "summary" %>');
+$("html, body").animate({ scrollTop: 0 }, 0);

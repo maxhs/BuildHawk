@@ -1,10 +1,65 @@
-<div class="row invoice <% if invoice["paid"] == true %>paid<% end %>">
-	<div class="col-xs-3"><%= parse_billing_date Time.at(invoice["period_end"]).to_datetime %></div>
-	<div class="col-xs-3"><%= number_to_currency invoice["amount_due"]/100 %></div>
-	<div class="col-xs-3"><%= invoice["description"] %></div>
-	<% if invoice["paid"] == true %>
-		<div class="col-xs-3">Paid</div>
-	<% else %>
-		<div class="col-xs-3 unpaid"><%= link_to "Pay Now", pay_billing_index_path(invoice: invoice["id"]), method: :post, :class=>"pay-now-button" %></div>
-	<% end %>
+<div id="invoice-<%=invoice['id']%>" class="invoice">
+	
+	<section class="top-section">
+		<%= image_tag 'logo.png', :class=>"print-logo" %>
+		<h5><%= company.name %></h5>
+
+		<div class="invoice-details">
+			<h4>
+				<%= parse_month_date(Time.at(invoice["period_start"]).to_datetime) %> - <%= parse_month_date_year(Time.at(invoice["period_end"]).to_datetime) %>
+			</h4>
+			<div><%= invoice["description"] %></div>
+			<% if invoice["paid"] == true %>
+				<span class="due-date paid">Paid</span>
+			<% else %>
+				<span class="due-date">Due: Now</span>
+			<% end %>
+		</div>
+	</section>
+
+	<div class="middle">
+		<div class="breakdown">
+			<h4>Breakdown</h4>
+			<table>
+				<tr>
+					<td>Use:</td>
+					<td><%= number_to_currency(invoice["subtotal"]/100, precision:2)%> </td>
+				</tr>
+				<tr>
+					<td>Credit:</td>
+					<td><%= number_to_currency(credit/100,precision:2) %> <span style="padding-left:.1in; color: #aaa">(<%= credit_name %>)</span></td>
+				</tr>
+
+				<tr>
+					<td>Billed:</td>
+					<td><%= number_to_currency(invoice["amount_due"],precision:2) %></td>
+				</tr>
+			</table>
+		</div>
+		<div class="metrics">
+			<h4>Key Metrics</h4>
+			<ul>
+				<li><%= @live_projects_count_string %></li>
+				<li><%= @documents.count %> photos/documents uploaded</li>
+				<li><%= @tasks.count %> tasks created</li>
+				<li><%= @items.count %> checklist items completed</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="summary">
+		<h3>Summary of Charges</h3>
+		<table class="charges">
+			<theader>
+				<th>User</th>
+				<th># Days Billed</th>
+				<th>Total Cost</th>
+				<th>Projects</th>
+				<th>Days</th>
+			</theader>
+			<tbody>
+				<%= render partial:"billing/pro_user", collection: @pro_users, as: :pro_user, locals: {user: @user, billing_days: @billing_days, month: @month}, cache: true %>
+			</tbody>
+		</table>
+	</div>
 </div>

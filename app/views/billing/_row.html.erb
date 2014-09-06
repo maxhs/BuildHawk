@@ -1,0 +1,12 @@
+<%= link_to invoice_billing_index_path(invoice_id: invoice["id"]), remote: true do %>
+	<div class="row invoice <% if invoice["paid"] == true %>paid<% end %>">
+		<div class="col-xs-3"><%= parse_billing_date Time.at(invoice["period_end"]).to_datetime %></div>
+		<div class="col-xs-3"><%= number_to_currency invoice["amount_due"]/100 %></div>
+		<div class="col-xs-3"><%= invoice["description"] %></div>
+		<% if invoice["paid"] == true %>
+			<div class="col-xs-3">Paid</div>
+		<% else %>
+			<div class="col-xs-3 unpaid"><%= link_to "Pay Now", pay_billing_index_path(invoice: invoice["id"]), method: :post, :class=>"pay-now-button" %></div>
+		<% end %>
+	</div>
+<% end %>

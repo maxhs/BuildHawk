@@ -1,68 +1,51 @@
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-	var stripeResponseHandler = function(status, response) {
-		var form = $('#payment-form');
-		if (response.error) {
-		    form.find('.payment-errors').text(response.error.message);
-		    form.find('button').prop('disabled', false);
-		} else {
-		    var token = response.id;
-		    form.append($('<input type="hidden" name="stripeToken" />').val(token));
-		    form.get(0).submit();
-		}
-	};
-	$(document).ready(function() {
-		$('#payment-form').submit(function(event) {
-		    var form = $(this);
-		    form.find('button').prop('disabled', true);
-		    Stripe.setPublishableKey('<%=@stripe_key%>');
-		    var token = Stripe.card.createToken(form, stripeResponseHandler);
-		    event.preventDefault();
-		    return false;
-		});
-	});
-</script>
-
-<div id="billing" class="border-box">
-	<h2>BILLING MANAGEMENT</h2>
+<div id="billing" class="border-box" style="">
+	<h3><%= @month.strftime("%b") %> SUMMARY</h3>
 	<% if @company.cards.count > 0 %>
-		<div id="billing-container" class="border-box">
+		<div id="billing-container"style="border:1px solid #eee;">
 			<div class="row">
-				<div class="col-xs-3"><h4>Period Ending</h4></div>
-				<div class="col-xs-3"><h4>Amount</h4></div>
-				<div class="col-xs-3"><h4>Description</h4></div>
-				<div class="col-xs-3"><h4>Paid</h4></div>
-				<!--<div class="col-xs-2"><h4>Promo Code</h4></div>-->
+				<div class="col-xs-3"><h4>Billing Cycle</h4></div>
+				<div class="col-xs-3"><h4># Pro Users</h4></div>
+				<div class="col-xs-2"><h4>Projected Cost</h4></div>
+				<div class="col-xs-2"><h4>Due</h4></div>
+				<div class="col-xs-2"><h4>Credit</h4></div>
 			</div>
-			<% if @invoices && @invoices.count > 0 %>
-				<%= render partial:"billing/invoice", collection: @invoices, as: :invoice %>
-
-				<div class="row summary">
-					<div class="col-xs-3"><h5 style="text-align:right;padding-right:20px;">Current Balance:</h5></div>
-					<div class="col-xs-3"><h5><%= number_to_currency @invoices.last["ending_balance"]%> </h5></div>
-				</div>
-			<% else %>
-				<div class="col-xs-12" style="font-weight:200;font-style:italic;font-size:1em;text-align:center;padding-top:30px;margin:0px auto 40px;color:#aaa;border-top:1px solid #eee">No bills</div>
-			<% end %>
+				
+			<%= render partial:"billing/summary", locals: {pro_users: @pro_users, invoice: @invoice, month: @month, user: @user} %>
+			
 		</div>
 
-		<div id="cards-management">
-			<h4>CARDS ON FILE</h4>
-			<% if @cards %>
-				<table>
-					<% @cards.each do |c| %>
-						<tr>
-							<td><%= link_to "#{c.brand} - *** #{c.last4}", edit_card_billing_index_path(card_id: c.id), remote: true %></td>
-							<td><% if c.active %><span style='padding-left:10px;font-size:.9em;color:#aaa;'>(Primary)</span><% end %></td>
-						</tr>
-					<% end %>
-				</table>
-			<% else %>
-				<span>You don't have any active cards.</span>
-			<% end %>
+		<div class="row">
+			<div class="col-xs-6" id="cards-management">
+				<h3>CARDS ON FILE</h3>
+				<% if @cards %>
+					<table>
+						<% @cards.each do |c| %>
+							<tr>
+								<td><%= link_to "#{c.brand} - *** #{c.last4}", edit_card_billing_index_path(card_id: c.id), remote: true %></td>
+								<td><% if c.active %><span style='padding-left:10px;font-size:.9em;color:#aaa;'>(Primary)</span><% end %></td>
+							</tr>
+						<% end %>
+					</table>
+				<% else %>
+					<span>You don't have any active cards.</span>
+				<% end %>
 
-			<%= link_to "Add New Card", new_card_billing_index_path, :class=>"simple-btn", id:"new-card", remote:true %>
-			
+				<%= link_to "Add New Card", new_card_billing_index_path, :class=>"simple-btn", id:"new-card", remote:true %>
+				
+			</div>
+
+			<div class="col-xs-6" id="billing-history">
+				<h3>Past Bills</h3>
+				<span id="bill-label">View bill for:</span>
+				<select id="past-invoices">
+					<%= @invoices.each do |invoice| %>
+						<option value="<%=invoice['id']%>">
+							<%= parse_month_date(Time.at(invoice["period_start"]).to_datetime) %> - <%= parse_month_date_year(Time.at(invoice["period_end"]).to_datetime) %>
+						</option>
+					<% end %>
+				</select>
+				<%= link_to "View",'',id:"view-invoice-link", :class=>"simple-btn", target:"_top" %>
+			</div>
 		</div>
 
 		<div style="font-style:italic;color:#aaa;text-align:center;margin-top:20px;" class="font-smoothing">Your card on file will be automatically billed at the end of each month</div>
@@ -99,3 +82,35 @@
 		</div>
 	<% end %>
 </div>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+	var stripeResponseHandler = function(status, response) {
+		var form = $('#payment-form');
+		if (response.error) {
+		    form.find('.payment-errors').text(response.error.message);
+		    form.find('button').prop('disabled', false);
+		} else {
+		    var token = response.id;
+		    form.append($('<input type="hidden" name="stripeToken" />').val(token));
+		    form.get(0).submit();
+		}
+	};
+	$('#view-invoice-link').click(function(e){
+		e.preventDefault();
+		var stuff = $('#past-invoices').val();
+		$(this).attr('href','<%= invoice_billing_index_url %>?invoice_id='+stuff);
+		window.open('<%= invoice_billing_index_url %>?invoice_id='+stuff);
+		//$(this).click();
+	});
+	$(document).ready(function() {
+		$('#payment-form').submit(function(event) {
+		    var form = $(this);
+		    form.find('button').prop('disabled', true);
+		    Stripe.setPublishableKey('<%=@stripe_key%>');
+		    var token = Stripe.card.createToken(form, stripeResponseHandler);
+		    event.preventDefault();
+		    return false;
+		});
+	});
+</script>

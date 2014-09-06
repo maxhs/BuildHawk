@@ -80,6 +80,8 @@ Buildhawk::Application.routes.draw do
       get :new_card
       get :edit_card
       post :pay
+      get :invoice
+      get :summary
     end
   end 
   resources :company_subs, only: [:destroy]

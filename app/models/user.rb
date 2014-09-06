@@ -159,10 +159,21 @@ class User < ActiveRecord::Base
         end
     end
 
-    def cost(company)
-        project_count = 0
-        company.projects.map{|p| project_count+=1 if p.users.include?(self)}
-        return 20*project_count
+    def cost(company,month)
+        days_in_month = Time.days_in_month(Time.now.month,Time.now.year)
+        beginning_of_month = Time.now.beginning_of_month
+        end_of_month = Time.now.end_of_month
+        count = company.billing_days.where("created_at > ? and created_at < ?",beginning_of_month, end_of_month).map{|b| b if b.project_user.user.id == id}.count
+        puts "#{full_name} cost count: #{count}"
+        puts "monthly calc: #{days_in_month}"
+        return 20.to_f/days_in_month*count
+    end
+
+    def billable_days(company,month)
+        beginning_of_month = Time.now.beginning_of_month
+        end_of_month = Time.now.end_of_month
+        count = company.billing_days.where("created_at > ? and created_at < ?",beginning_of_month, end_of_month).map{|b| b if b.project_user.user.id == id}.count
+        return count
     end
 
     def notify_all_devices(options)

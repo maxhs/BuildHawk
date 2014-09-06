@@ -83,7 +83,6 @@
 .new_photo {
 	display:inline-block;
 	.dz-message {
-		font-size: .9em;
 		margin:0;
 		padding:7px 15px;
 		letter-spacing:1px;
@@ -111,19 +110,26 @@
 form.edit_photo {
 	width:100%;
 	display:inline-block;
+	border-top:1px solid #ddd;
 
 	.row {
 		margin-left:0;
 		margin-right:0;
-		line-height:1.5em;
+		padding:5px;
+		border-bottom:1px solid #ddd;
+		border-left:1px solid #ddd;
+		border-right:1px solid #ddd;
 	}
 	.label {
+		h5 {
+			margin:0 auto;
+			line-height:inherit;
+		}
 		text-align:left;
 		vertical-align:middle;
 	}
 	input {
 		display:inline-block;
-		//width:77%;
 	}
 
 	input[type="submit"]{
