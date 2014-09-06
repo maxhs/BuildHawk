@@ -2,7 +2,7 @@ source 'https://code.stripe.com'
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.5'
-gem 'unicorn'
+gem 'puma'
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
@@ -43,7 +43,6 @@ gem 'gcm'
 gem 'newrelic_rpm'
 
 gem "recaptcha", :require => "recaptcha/rails"
-#gem 'rails-observers'  #probably not really necessary
 
 #gem 'capybara'
 #gem 'nokogiri'
