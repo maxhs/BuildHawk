@@ -14,12 +14,13 @@ class WorklistItemsController < AppController
 		@users = @project.users
 		@subs = @project.project_subs
 		@locations = @project.worklists.last.worklist_items.map{|i| i.location if i.location && i.location.length > 0}.flatten
+		@tasks = @worklist.worklist_items
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else 
-			render :new
+			render template:"projects/worklist"
 		end
 	end
 

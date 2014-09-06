@@ -5,39 +5,38 @@
 	<div class="image-block large" id="photo-<%=@p.id%>">
 		<%= link_to image_tag(@p.image.url(:large)), @p.image.url(:original), :class => "shadow-photo remote", :rel => "shadowbox[Mixed]" %> 
 		
-		<div class="image-details">
+		<table class="image-details">
 			<%= form_for @p, :method => :patch, :remote => true do |f| %>
-			
-				<div class="row">
-					<span class="label col-xs-3"><h5>Date</h5></span>
-					<span class="col-xs-9"><%= @p.created_date %></span>
-				</div>
+				<tr>
+					<td><h5>Date</h5></td>
+					<td><%= @p.created_date %></td>
+				</tr>
 				<% if @p.user %>
-					<div class="row">
-						<span class="label col-xs-3"><h5>Uploaded by</h5></span>
-						<span class="col-xs-9"><%= @p.user.full_name %><span>
-					</div>
+					<tr>
+						<td><h5>Uploaded by</h5></td>
+						<td><%= @p.user.full_name %><td>
+					</tr>
 				<% end %>
-				<div class="row">	
-					<span class="label col-xs-3"><h5>Source</h5></h5></span>
-					<span class="col-xs-9"><%= f.text_field :source, :style=>"" %></span>
-				</div> 
+				<tr>
+					<td><h5>Source</h5></h5></td>
+					<td><%= f.text_field :source %></td>
+				</tr> 
 			
-				<div class="row">
-					<span class="label col-xs-3"><h5>Name</h5></span>	
-					<span class="col-xs-9"><%= f.text_field :name, :style=>"display:inline-block" %></span>
-				</div>
-				<div class="row">
-					<span class="label col-xs-3"><h5>Description</h5></span>
-					<span class="col-xs-9"><%= f.text_area :description, :style=>"width:90%; display:inline-block" %></span>
-				</div>
-				<div style="text-align:center;">
-					<span class="col-xs-12">
+				<tr>
+					<td><h5>Name</h5></td>	
+					<td><%= f.text_field :name %></td>
+				</tr>
+				<tr>
+					<td><h5>Description</h5></td>
+					<td><%= f.text_area :description %></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center">
 						<%= f.submit :save, :class => "simple-btn", :style => "margin-top:10px;width:120px;" %>
-					</span>
-				</div>
+					</td>
+				</tr>
 			<% end %>
-		</div>
+		</table>
 		
 		<% if current_user.admin || current_user.company_admin || @p.user == current_user %>
 			<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), photo_path(@p), :method => :delete, :class=>"delete-link", :remote => true, :data => {:confirm => "Are you sure you want to delete this photo? This can't be undone."} %>

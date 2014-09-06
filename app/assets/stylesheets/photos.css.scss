@@ -103,8 +103,13 @@
 }
 
 .image-details {
+	width:100%;
 	text-align:left;
 	cursor:default;
+	
+	input, textarea {
+		width:100%;
+	}
 }
 
 form.edit_photo {

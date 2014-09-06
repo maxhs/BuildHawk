@@ -298,8 +298,8 @@ class Api::V3::ReportsController < Api::V3::ApiController
     end
 
     def destroy
-        report = Report.find params[:id]
-        if report.destroy
+        report = Report.where(id: params[:id]).first
+        if report && report.destroy
             render :json=>{:success=>true}
         else
             render :json=>{:success=>false}

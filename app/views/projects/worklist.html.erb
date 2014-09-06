@@ -1,3 +1,3 @@
 <div class="col-xs-12" id="main">
-	<%= render :partial => "worklist", :locals => {:worklists => @worklists} %>
+	<%= render :partial => "projects/worklist", :locals => {project: @project, :tasks => @tasks, :task => @task} %>
 </div>
