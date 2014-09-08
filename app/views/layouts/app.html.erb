@@ -69,6 +69,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				<%= image_tag 'search.png', id:'project-search-button' %>
 			</div>
 				
+			<%= render partial: "projects/sidebar", locals:{projects:@projects, groups: @groups, archived_projects: @archived_projects} %>
 			
 			<div id="bottom-menu" class="app">
 				<div>
@@ -88,7 +89,17 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 		<div class="navbar navbar-fixed-top app" id="top-nav">
 			<ul id="navigation">
-				
+				<% if params[:controller] == "admin" || params[:controller] == "billing" %>
+					<%= render partial: "admin/top_nav" %>
+				<% elsif params[:controller] == "uber_admin" %>
+					<%= render partial: "uber_admin/top_nav" %>
+				<% elsif params[:controller] == "connect" %>
+					<%= render partial: "connect/top_nav" %>
+				<% elsif @project %>
+					<%= render partial: "projects/project_nav" %>
+				<% elsif user_signed_in? %>
+
+				<% end %>
 			</ul>
 
 			<div id="dropdown">
