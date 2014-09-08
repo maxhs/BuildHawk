@@ -1,7 +1,7 @@
 class ProjectsController < AppController
-	#before_filter :authenticate_user!
-	#before_filter :find_user
-	#before_filter :find_project
+	before_filter :authenticate_user!
+	before_filter :find_user
+	before_filter :find_project
 
 	def new
 		@project = Project.new
