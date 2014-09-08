@@ -5,5 +5,7 @@ class CreateBillingDays < ActiveRecord::Migration
       t.belongs_to :company
       t.timestamps
     end
+
+    add_column :projects, :order_index, :integer
   end
 end

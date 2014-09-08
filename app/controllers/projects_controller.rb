@@ -27,9 +27,6 @@ class ProjectsController < AppController
 	def index
 		if params[:company_id]
 			@company = Company.find params[:company_id]
-			@projects = @company.projects
-		else
-			find_projects
 		end
 
 		if request.xhr?
@@ -42,7 +39,6 @@ class ProjectsController < AppController
 	end
 
 	def show
-		find_projects
 		if @project.checklist 
 			@checklist = @project.checklist
 			items = @checklist.checklist_items
@@ -104,7 +100,7 @@ class ProjectsController < AppController
 			@upcoming_items = items.select{|i| i.critical_date if i.critical_date && i.critical_date > current_time}.sort_by(&:critical_date).last(5)
 			@recent_photos = @project.photos.last(5).sort_by(&:created_at).reverse
 		end
-		@projects = @project.company.projects
+
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -281,7 +277,6 @@ class ProjectsController < AppController
 	def archive
 		project_user = current_user.project_users.where(:project_id => @project.id).first
 		project_user.update_attribute :archived, true if project_user
-		find_projects
 		if request.xhr?
 			respond_to do |format|
 				format.js { render template:"projects/index" }
@@ -294,7 +289,6 @@ class ProjectsController < AppController
 	def unarchive
 		project_user = current_user.project_users.where(:project_id => @project.id).first
 		project_user.update_attribute :archived, false if project_user
-		find_projects
 		if request.xhr?
 			respond_to do |format|
 				format.js { render template:"projects/index" }
@@ -357,20 +351,7 @@ class ProjectsController < AppController
 				flash[:notice] = "You don't have access to that project.".html_safe
 				redirect_to root_url
 			end
-		else
-			find_projects
 		end
 		@connect_users = @project.connect_users if @project
 	end
-
-	def find_projects
-		if @user.company_admin? || @user.admin?
-			@projects = @company.projects
-			@archived_projects = current_user.project_users.where(:archived => true).map(&:project)
-		else
-			@projects = @user.project_users.where(:archived => false).map{|p| p.project if p.project.company_id == @user.company_id}.compact.uniq
-			@archived_projects = @user.project_users.where(:archived => true).map(&:project).compact.uniq
-		end
-	end
-
 end

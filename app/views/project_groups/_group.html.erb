@@ -1,13 +1,14 @@
-<div id="pg-<%= project_group.id %>" class="project-group">
-	<div class="row">
-		<div class="col-xs-4">
-			<%= project_group.name %>
-		</div>
-		<div class="col-xs-2">
-			<%= project_group.projects.count %>
-		</div>
-		<div class="col-xs-2">
-			<%= link_to "Edit", edit_project_group_path(project_group), :class=>"remote", remote: true %>
-		</div>
-	</div>
+<div class="group-header">
+	<h5 class="group-name"><%= link_to project_group.name, edit_project_group_path(project_group), :class=>"remote",remote: true %></h5>
 </div>
+<li class="group project">	
+	<% project_group.projects.each do |project| %>
+		<%= link_to project_path(project),:id=>"#{project.id}-link",remote: true do %>
+			<div class="inner-padding">
+				<span class="project-name"><%= project.name %></span>
+				<span class="percentage"><%= project.checklist.progress_percentage %></span>
+				<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
+			</div>
+		<% end %>
+	<% end %>
+</li>

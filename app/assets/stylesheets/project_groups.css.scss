@@ -13,6 +13,13 @@
 	}
 }
 
+.group-header {
+	.group-name {
+		color:#222;
+		text-align:left;
+	}
+}
+
 #groups-container {
 	margin-top:20px;
 
@@ -43,4 +50,14 @@
 	position:relative;
 	top:9px;
 	font-size:1.25em;
+}
+
+.new_project_group {
+	input[type="text"] {
+		width:75%;
+	}
+
+	input[type="submit"] {
+		width:25;
+	}
 }

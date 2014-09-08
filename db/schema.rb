@@ -341,6 +341,7 @@ ActiveRecord::Schema.define(version: 20140828030433) do
     t.boolean  "core",             default: false
     t.integer  "project_group_id"
     t.boolean  "archived",         default: false
+    t.integer  "order_index"
   end
 
   add_index "projects", ["company_id"], name: "projects_company_id_ix"
