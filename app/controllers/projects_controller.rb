@@ -310,6 +310,13 @@ class ProjectsController < AppController
 
 	def order_projects
 		puts "request: #{params}"
+		params[:project].each_with_index do |p,i|
+			project = Project.where(id: p).first
+			project.update_attribute :order_index, i if project
+		end
+		# respond_to do |format|
+		# 	format.js  { render :template => "checklists/reorder"}
+		# end
 		if request.xhr?
 			render json:{success:true}
 		end

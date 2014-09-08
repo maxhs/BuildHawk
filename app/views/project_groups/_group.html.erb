@@ -1,14 +1,19 @@
 <div class="group-header">
 	<h5 class="group-name"><%= link_to project_group.name, edit_project_group_path(project_group), :class=>"remote",remote: true %></h5>
 </div>
-<li class="group project">	
-	<% project_group.projects.each do |project| %>
-		<%= link_to project_path(project),:id=>"#{project.id}-link",remote: true do %>
-			<div class="inner-padding">
-				<span class="project-name"><%= project.name %></span>
-				<span class="percentage"><%= project.checklist.progress_percentage %></span>
-				<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
-			</div>
+
+<% if project_group.projects.count > 0 %>	
+	<li class="group project">
+		<% project_group.projects.each do |project| %>
+			<%= link_to project_path(project),:id=>"#{project.id}-link",remote: true do %>
+				<div class="inner-padding">
+					<span class="project-name"><%= project.name %></span>
+					<span class="percentage"><%= project.checklist.progress_percentage %></span>
+					<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
+				</div>
+			<% end %>
 		<% end %>
-	<% end %>
-</li>
+	</li>
+<% else %>
+	<span style="color: #aaa;padding-left: 10px;height: 47px; line-height: 47px;">No projects in this group</span>
+<% end %>

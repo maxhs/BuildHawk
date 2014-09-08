@@ -1,4 +1,4 @@
 $('#p-<%= @photo.id %> a').fadeOut(200,function(){
-	$(this).text('<%= @photo.name %>');
+	$(this).html('<%= j render partial:"folders/p", locals: {p: @photo} %>');
 	$(this).fadeIn(200);
 });

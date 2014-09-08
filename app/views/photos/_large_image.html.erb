@@ -5,8 +5,8 @@
 	<div class="image-block large" id="photo-<%=@p.id%>">
 		<%= link_to image_tag(@p.image.url(:large)), @p.image.url(:original), :class => "shadow-photo remote", :rel => "shadowbox[Mixed]" %> 
 		
-		<table class="image-details">
-			<%= form_for @p, :method => :patch, :remote => true do |f| %>
+		<%= form_for @p, :method => :patch, :remote => true do |f| %>
+			<table class="image-details">
 				<tr>
 					<td><h5>Date</h5></td>
 					<td><%= @p.created_date %></td>
@@ -35,9 +35,8 @@
 						<%= f.submit :save, :class => "simple-btn", :style => "margin-top:10px;width:120px;" %>
 					</td>
 				</tr>
-			<% end %>
-		</table>
-		
+			</table>
+		<% end %>
 		<% if current_user.admin || current_user.company_admin || @p.user == current_user %>
 			<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), photo_path(@p), :method => :delete, :class=>"delete-link", :remote => true, :data => {:confirm => "Are you sure you want to delete this photo? This can't be undone."} %>
 		<% end %>

@@ -14,7 +14,7 @@
 			<% folder.photos.sort_by(&:name).each do |p| %>
 				<li class="photo-name" id="p-<%= p.id %>">
 					<%= link_to show_photo_project_path(project,:photo_id => p.id), :class=>"remote", :remote => true do %>
-						<%= p.name.html_safe %><span class="photo-timestamp"><%= parse_datetime p.created_at %></span>
+						<%= render partial:"folders/p", locals: {p: p} %>
 					<% end %>
 				</li>
 			<% end %>

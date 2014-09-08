@@ -1,17 +1,6 @@
 <div id="item-container" class="border-box">
 	<div class="checklist-item-form">
 
-		<!--<% if @previous %>
-			<div class="previous-item">
-				<h5><%= link_to "&#8592;#{truncate("#{@previous.body}", length:30)}".html_safe, checklist_item_project_path(@project, :item_id => @previous.id), remote:true %></h5>
-			</div>
-		<% end %>
-		<% if @next %>
-			<div class="next-item">
-				<h5><%= link_to "#{truncate("#{@next.body}", length:30)} &#8594;".html_safe, checklist_item_project_path(@project, :item_id => @next.id), remote:true %></h5>
-			</div>
-		<% end %>-->
-
 		<button id="export-checklist-item"><%=image_tag "export.png" %></button>
 		<div id="dismiss-checklist-item"><%=image_tag "blackX.png" %></div>
 		<div style="clear:both">
