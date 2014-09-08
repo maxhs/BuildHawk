@@ -32,8 +32,8 @@
 			<% end %>
 		
 			<div id="group-container">
-				<% if @groups && @groups.count > 0 %>
-					<%= render partial:"project_groups/group", collection: @groups, as: :project_group, cache:true %>
+				<% if @project_groups && @project_groups.count > 0 %>
+					<%= render partial:"project_groups/group", collection: @project_groups, as: :project_group, cache:true %>
 				<% else %>
 					<li style="color:#aaa;font-weight:100;">N/A</li>
 				<% end %>
@@ -73,7 +73,17 @@
 				<% end %>
 		    <% end %>
 	    <% end %>
-	    
+	    <% if @project_groups %>
+		    <% @project_groups.each do |g| %>
+		    	<% g.projects.each do |p| %>
+					<% if p.checklist %>
+						$('#sidebar-progress-link-<%=p.id%>').progressbar({
+					    	value:<%=p.checklist.progress%>
+					    });
+					<% end %>
+				<% end %>
+		    <% end %>
+	    <% end %>
 	})
 	$('#projects').sortable({
       	axis: 'y',
