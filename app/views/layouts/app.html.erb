@@ -61,7 +61,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			<ul id="main-dropdown-menu">
 				<% if @projects && @projects.count > 0 %>
 					<% @projects.each do |p| %>
-						<% if p && p.id %><li><%= link_to p.name, project_path(p), remote:true %></li><% end %>
+						<li><%= link_to p.name, project_path(p), remote:true %></li>
 					<% end %>
 				<% end %>
 			</ul>
@@ -73,7 +73,6 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				<%= image_tag 'search.png', id:'project-search-button' %>
 			</div>
 				
-			<%= render partial: "projects/sidebar", locals:{projects:@projects, groups: @groups, archived_projects: @archived_projects} %>
 			
 			<div id="bottom-menu" class="app">
 				<div>
