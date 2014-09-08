@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
     require "resque"
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist, :photos,
-                        :user_ids, :core, :project_group_id, :companies, :company_ids
+                        :user_ids, :core, :project_group_id, :companies, :company_ids, :order_index
   	
   	has_many :project_users, :dependent => :destroy, autosave: true
   	has_many :users, :through => :project_users, autosave: true

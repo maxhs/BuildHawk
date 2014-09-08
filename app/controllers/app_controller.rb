@@ -5,11 +5,7 @@ class AppController < ApplicationController
     def user_projects
         if user_signed_in?
             if current_user.any_admin?
-                @projects = current_user.company.projects.where("project_group_id IS NULL")
-                @projects.each do |p|
-                    puts "@projects from appcontroller: #{p.name}"    
-                end
-                
+                @projects = current_user.company.projects.where("project_group_id IS NULL")    
                 @archived_projects = current_user.project_users.where(:archived => true).map(&:project)
             else
                 @projects = current_user.project_users.where("archived = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq
