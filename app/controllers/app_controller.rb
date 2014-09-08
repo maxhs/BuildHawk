@@ -13,7 +13,7 @@ class AppController < ApplicationController
             end
             
             @items = current_user.connect_items(nil)
-            #@companies = @items.map{|t| t.worklist.project.company}.compact.uniq
+            @companies = @items.map{|t| t.worklist.project.company}.compact.uniq
         end
     end
 
