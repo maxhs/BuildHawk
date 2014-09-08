@@ -1,8 +1,8 @@
 <div id="main">
 	<div id="company-dashboard" class="border-box">
 
-		<% if @projects.count > 0 %>
-			<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
+		<% if projects.count > 0 %>
+			<%= render :partial => "projects/company_dashboard", collection: projects, as: :project, cache: true %>
 		<% else %>
 			<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects.</div>
 		<% end %>

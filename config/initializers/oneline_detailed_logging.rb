@@ -11,49 +11,50 @@
 # - an optional stash which is available to subscribers. Basically, flash[:log].inspect will be logged.
 # 3.0: https://github.com/rails/rails/blob/3-0-stable/actionpack/lib/action_controller/metal/instrumentation.rb
 # 3.1: https://github.com/rails/rails/blob/master/actionpack/lib/action_controller/metal/instrumentation.rb
-ActionController::Instrumentation.send(:define_method, "process_action") do |arg|
-  raw_payload = {
-    :controller => self.class.name,
-    :action     => self.action_name,
-    :params     => request.filtered_parameters,
-    :formats    => request.formats.map(&:to_sym),
-    :method     => request.method,
-    :path       => (request.fullpath rescue "unknown"),
+
+# ActionController::Instrumentation.send(:define_method, "process_action") do |arg|
+#   raw_payload = {
+#     :controller => self.class.name,
+#     :action     => self.action_name,
+#     :params     => request.filtered_parameters,
+#     :formats    => request.formats.map(&:to_sym),
+#     :method     => request.method,
+#     :path       => (request.fullpath rescue "unknown"),
     
-    :ip         => request.remote_ip,
-    :stash      => request.session['flash'] && request.session['flash'][:log]
-  }
+#     :ip         => request.remote_ip,
+#     :stash      => request.session['flash'] && request.session['flash'][:log]
+#   }
  
-  ActiveSupport::Notifications.instrument("start_processing.action_controller", raw_payload.dup)
+#   ActiveSupport::Notifications.instrument("start_processing.action_controller", raw_payload.dup)
  
-  ActiveSupport::Notifications.instrument("process_action.action_controller", raw_payload) do |payload|
-    result = super(arg)
-    payload[:status] = response.status
-    append_info_to_payload(payload)
-    result
-  end
-end
+#   ActiveSupport::Notifications.instrument("process_action.action_controller", raw_payload) do |payload|
+#     result = super(arg)
+#     payload[:status] = response.status
+#     append_info_to_payload(payload)
+#     result
+#   end
+# end
  
-ActiveSupport::Notifications.subscribe "process_action.action_controller" do |name, start, finish, id, payload|
-  # borrows from 
-  # https://github.com/rails/rails/blob/3-0-stable/actionpack/lib/action_controller/log_subscriber.rb
-  params  = payload[:params].except('controller', 'action', 'format', '_method', 'only_path')
+# ActiveSupport::Notifications.subscribe "process_action.action_controller" do |name, start, finish, id, payload|
+#   # borrows from 
+#   # https://github.com/rails/rails/blob/3-0-stable/actionpack/lib/action_controller/log_subscriber.rb
+#   params  = payload[:params].except('controller', 'action', 'format', '_method', 'only_path')
  
-  format  = payload[:formats].first.to_s.upcase
-  duration = (finish-start)*1000
+#   format  = payload[:formats].first.to_s.upcase
+#   duration = (finish-start)*1000
   
-  status = payload[:status]
-  if status.nil? && payload[:exception].present?
-    # 3.1: http://rubydoc.info/docs/rails/3.1.1/ActionController/LogSubscriber#process_action-instance_method
-    status = Rack::Utils.status_code(ActionDispatch::ShowExceptions.rescue_responses[payload[:exception].first]) rescue nil 
-  end 
+#   status = payload[:status]
+#   if status.nil? && payload[:exception].present?
+#     # 3.1: http://rubydoc.info/docs/rails/3.1.1/ActionController/LogSubscriber#process_action-instance_method
+#     status = Rack::Utils.status_code(ActionDispatch::ShowExceptions.rescue_responses[payload[:exception].first]) rescue nil 
+#   end 
  
-  m = "%s %s %s %s %s %s\#%s %s %.1f (DB %.1f, View %.1f) %s %s" % [ 
-    payload[:ip], payload[:method], payload[:path], 
-    status, Rack::Utils::HTTP_STATUS_CODES[status],
-    payload[:controller], payload[:action], format, 
-    duration || 0, payload[:db_runtime] || 0, payload[:view_runtime] || 0,
-    params.inspect, payload[:stash].try(:inspect) || {}.inspect ]
+#   m = "%s %s %s %s %s %s\#%s %s %.1f (DB %.1f, View %.1f) %s %s" % [ 
+#     payload[:ip], payload[:method], payload[:path], 
+#     status, Rack::Utils::HTTP_STATUS_CODES[status],
+#     payload[:controller], payload[:action], format, 
+#     duration || 0, payload[:db_runtime] || 0, payload[:view_runtime] || 0,
+#     params.inspect, payload[:stash].try(:inspect) || {}.inspect ]
     
-  Rails.logger.warn(m)
-end
+#   Rails.logger.warn(m)
+# end

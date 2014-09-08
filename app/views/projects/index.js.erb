@@ -7,5 +7,5 @@ $('#navigation').fadeOut(170,function(){
 	});
 });
 
-$('#inner-wrap').html('<%= j render :partial => "index" %>');
+$('#inner-wrap').html('<%= j render :partial => "index", locals:{projects:@projects} %>');
 $("html, body").animate({ scrollTop: 0 }, 0);
