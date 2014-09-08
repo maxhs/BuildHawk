@@ -1,5 +1,5 @@
 class ProjectsController < AppController
-	before_filter :authenticate_user!
+	#before_filter :authenticate_user!
 	#before_filter :find_user
 	#before_filter :find_project
 
@@ -27,6 +27,14 @@ class ProjectsController < AppController
 	def index
 		if params[:company_id]
 			@company = Company.find params[:company_id]
+		end
+
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			render :index
 		end
 	end
 
