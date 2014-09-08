@@ -12,8 +12,8 @@ class AppController < ApplicationController
                 @archived_projects = current_user.project_users.where(:archived => true).map(&:project).compact.uniq
             end
             
-            #@items = current_user.connect_items(nil)
-            @companies = @items.map{|t| t.worklist.project.company}.compact.uniq
+            @items = current_user.connect_items(nil)
+            #@companies = @items.map{|t| t.worklist.project.company}.compact.uniq
         end
     end
 
