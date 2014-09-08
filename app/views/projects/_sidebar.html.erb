@@ -13,19 +13,21 @@
 		<% end %>
 
 		<aside id="projects">
-			<% @projects.each do |project| %>
-				<% if project.checklist && project.checklist.item_count > 0 %>
-					<li class="project">
-						<%= link_to project_path(project),:id=>"#{project.id}-link",remote: true do %>
-							<div class="inner-padding">
-								<span class="project-name"><%= project.name %></span>
-								<span class="percentage"><%= project.checklist.progress_percentage %></span>
-								<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
-							</div>
-						<% end %>
-					</li>
-				<% else %>
-					<li><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></li>
+			<% if @projects && @projects.count > 0 %>
+				<% @projects.each do |project| %>
+					<% if project.checklist && project.checklist.item_count > 0 %>
+						<li class="project">
+							<%= link_to project_path(project),:id=>"#{project.id}-link",remote: true do %>
+								<div class="inner-padding">
+									<span class="project-name"><%= project.name %></span>
+									<span class="percentage"><%= project.checklist.progress_percentage %></span>
+									<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
+								</div>
+							<% end %>
+						</li>
+					<% else %>
+						<li><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></li>
+					<% end %>
 				<% end %>
 			<% end %>
 		
@@ -62,21 +64,25 @@
 <script type="text/javascript">
 	$(function(){
 		sidebarSetup();
-		<% @projects.each do |p| %>
-			<% if p.checklist %>
-				$('#sidebar-progress-link-<%=p.id%>').progressbar({
-			    	value:<%=p.checklist.progress%>
-			    });
-			<% end %>
-	    <% end %>
-	    <% @groups.each do |g| %>
-	    	<% g.projects.each do |p| %>
+		<% if @projects %>
+			<% @projects.each do |p| %>
 				<% if p.checklist %>
 					$('#sidebar-progress-link-<%=p.id%>').progressbar({
 				    	value:<%=p.checklist.progress%>
 				    });
 				<% end %>
-			<% end %>
+		    <% end %>
+	    <% end %>
+	    <% if @groups %>
+		    <% @groups.each do |g| %>
+		    	<% g.projects.each do |p| %>
+					<% if p.checklist %>
+						$('#sidebar-progress-link-<%=p.id%>').progressbar({
+					    	value:<%=p.checklist.progress%>
+					    });
+					<% end %>
+				<% end %>
+		    <% end %>
 	    <% end %>
 	})
 	$('#projects').sortable({
