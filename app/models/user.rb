@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
         if project
             WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project.id == project.id && t.worklist.project.company.id != company_id}.compact
         else
-            #WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project.company.id != company_id}.compact if company
+            #WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project.company.id != company_id}.compact if company_id
         end
     end
 
