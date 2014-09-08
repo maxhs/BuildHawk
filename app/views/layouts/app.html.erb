@@ -60,7 +60,9 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			<%= image_tag "menu.png", id:"toggle" %>
 			<ul id="main-dropdown-menu">
 				<% @projects.each do |p| %>
-					<li><%= link_to p.name, project_path(p), remote:true %></li>
+					<% if p && p.id %>
+						<li><%= link_to p.name, project_path(p), remote:true %></li>
+					<% end %>
 				<% end %>
 			</ul>
 
