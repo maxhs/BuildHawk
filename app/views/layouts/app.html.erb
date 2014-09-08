@@ -66,54 +66,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 		</nav>
 		<nav id="main-sidebar">
-			<div id="settings-row">
-				<a href="/"><%= image_tag 'logo.png', id: "logo" %></a>
-				<%= image_tag 'search.png', id:'project-search-button' %>
-			</div>
-				
-			<%= render partial: "projects/sidebar", locals:{projects:@projects, groups: @groups, archived_projects: @archived_projects} %>
-			
-			<div id="bottom-menu" class="app">
-				<div>
-					<%= link_to image_tag('settings.png', id: "settings"),edit_user_path(current_user), remote:true %>
-				</div>
-				<div>
-					<% if current_user.any_admin? %>
-						<h6><%= link_to "Admin", admin_index_path, id:"admin-link", remote: true %></h6>
-					<% end %>
-					<% if current_user.uber_admin? %>
-						<h6><%= link_to "Uber Admin", uber_admin_index_path, id:"uber-admin-link", remote: true %></h6>
-					<% end %>
-				</div>
-			</div>
-		</nav>
-	
 
-		<div class="navbar navbar-fixed-top app" id="top-nav">
-			<ul id="navigation">
-				<% if params[:controller] == "admin" || params[:controller] == "billing" %>
-					<%= render partial: "admin/top_nav" %>
-				<% elsif params[:controller] == "uber_admin" %>
-					<%= render partial: "uber_admin/top_nav" %>
-				<% elsif params[:controller] == "connect" %>
-					<%= render partial: "connect/top_nav" %>
-				<% elsif @project %>
-					<%= render partial: "projects/project_nav" %>
-				<% elsif user_signed_in? %>
-					<%= render partial: "layouts/internal_nav" %>
-				<% end %>
-			</ul>
-
-			
-		</div>
-		
-		<% if user_signed_in? %>
-			<div id="inner-wrap">
-				<%= yield %>
-			</div>
-		<% else %>
-			<%= yield %>
-		<% end %>
 	</div>
 
 <script type="text/javascript">
