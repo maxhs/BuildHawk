@@ -1,0 +1,18 @@
+<div id="main">
+	<div id="company-dashboard" class="border-box">
+
+		<% if @projects.count > 0 %>
+			<%= render :partial => "projects/company_dashboard", collection: @projects, as: :project, cache: true %>
+		<% else %>
+			<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects.</div>
+		<% end %>
+		
+		<% unless current_user.company.has_admin? %>
+			<div class="col-md-2 border-box pro-signup">
+				<div>Want to add projects?</div> 
+				<div>Need access to checklists, reports, tasks and documents? </div>
+				<div class="call-to-action">Sign up for <%= link_to "BuildHawk pro", :style=>"color:#cc0000;", remote:true %>.</div>
+			</div>		
+		<% end %>
+	</div>
+</div>
