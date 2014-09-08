@@ -69,15 +69,7 @@
 			    });
 			<% end %>
 	    <% end %>
-	    <% @groups.each do |g| %>
-	    	<% g.projects.each do |p| %>
-				<% if p.checklist %>
-					$('#sidebar-progress-link-<%=p.id%>').progressbar({
-				    	value:<%=p.checklist.progress%>
-				    });
-				<% end %>
-			<% end %>
-	    <% end %>
+	    
 	})
 	$('#projects').sortable({
       	axis: 'y',
