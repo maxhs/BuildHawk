@@ -57,12 +57,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
     <div id="wrap" style="margin-bottom:0;">
 
 		<nav id="condensed-sidebar">
-			<%= image_tag "menu.png", id:"toggle" %>
-			<ul id="main-dropdown-menu">
-				<% @projects.each do |p| %>
-					<li><%= link_to p.name, project_path(p), remote:true %></li>
-				<% end %>
-			</ul>
+			
 
 		</nav>
 		<nav id="main-sidebar">
