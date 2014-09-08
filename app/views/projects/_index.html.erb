@@ -15,18 +15,4 @@
 			</div>		
 		<% end %>
 	</div>
-
-	<!--<% if user_signed_in? && current_user.connect_items(nil).count > 0 %>
-		<div style="width:100%;clear:both;text-align:center;padding-top:2%;">
-			<h2 style="border-top:1px solid #ddd; padding-top:2%;">BuildHawk Connect</h2>
-		</div>
-
-		<div id="connect-container">
-			<% if @companies && @companies.count > 0 %>
-				<%= render partial:"connect/company", collection: @companies, as: :company, cache:true %>
-			<% else %>
-				<span style="color:#aaa;font-weight:100;">You don't have any Connect items</span>
-			<% end %>
-		</div>
-	<% end %>-->
 </div>

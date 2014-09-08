@@ -8,19 +8,6 @@
 					<%= link_to project.address.formatted_address, "https://www.google.com/maps/preview#!q=#{project.address.formatted_address.html_safe}", :target=>"_blank" %>
 				<% end %>
 			</div>
-			<!--<div>
-				<% if project.checklist %>
-					<div id="progress-link-<%=project.id%>" class="progress-link" ></div>
-					<%= link_to "#{project.checklist.progress_percentage}", project_path(project), remote: true, :style=>"text-transform:uppercase;letter-spacing:1px;" %>
-					<script type="text/javascript">
-						$(function(){
-							$('#progress-link-<%=project.id%>').progressbar({
-						    	value:<%=project.checklist.progress%>
-						    });
-						})
-					</script>
-				<% end %>
-			</div>-->
 		</div>
 
 		<div class="col-xs-6">
