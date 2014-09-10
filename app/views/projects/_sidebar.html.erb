@@ -37,7 +37,7 @@
 	</ul>
 	<ul id="groups" class="sortable-projects">
 		<% if @project_groups && @project_groups.count > 0 %>
-			<%= render partial:"project_groups/group", collection: @project_groups, as: :project_group, cache:true %>
+			<%= render partial:"project_groups/group", collection: @project_groups, as: :project_group %>
 		<% else %>
 			<li style="color:#aaa;font-weight:100;">N/A</li>
 		<% end %>
