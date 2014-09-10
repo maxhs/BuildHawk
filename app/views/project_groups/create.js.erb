@@ -1,4 +1,4 @@
-$('#groups-container').fadeOut(200,function(){
-	$(this).append('<%= j render partial:"project_groups/group", :locals => {:project_group => @project_group} %>');
-	$(this).fadeIn(200);
-});
+$('.new.project.group').fadeOut(200,function(){
+	$(this).remove();
+	$('#groups').prepend('<%= j render partial:"project_groups/group", :locals => {:project_group => @project_group} %>');
+})

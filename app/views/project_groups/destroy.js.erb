@@ -1,0 +1,4 @@
+$('#<%=@project_group_id%>').fadeOut(170,function(){
+	$(this).remove();
+	$('#projects-sidebar').replaceWith('<%= j render partial:"projects/sidebar" %>');
+});

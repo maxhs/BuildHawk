@@ -1,1 +1,9 @@
-$('#projects').prepend('<%= j render partial:"new", locals: {project_group: @project_group}%>');
+if ($('.new_project_group').length === 0){
+	$('#projects').prepend('<%= j render partial:"new", locals: {project_group: @project_group}%>');
+	$('.new_project_group input[type="text"]').focus();
+}
+$('#cancel-new-group').click(function(){
+	$('.new.project.group').fadeOut(200,function(){
+		$(this).remove();
+	})
+})

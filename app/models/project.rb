@@ -22,6 +22,8 @@ class Project < ActiveRecord::Base
     has_many :reminders, :dependent => :destroy
     has_many :activities, :dependent => :destroy
 
+    acts_as_list scope: :project_group_id, column: :order_index
+
     after_create :default_folders
     after_commit :adjust_users, :if => :persisted?
 

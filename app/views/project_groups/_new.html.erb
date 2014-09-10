@@ -1,6 +1,7 @@
-<li class="project group">
+<li class="project group new unsortable">
 	<%= form_for project_group, method: :post, :class=>"remote", remote: true do |f| %>
 		<%= f.text_field :name, placeholder: "Group name" %>
 		<%= f.submit "Create", :class=> "simple-btn" %>
+		<span id="cancel-new-group">Cancel</span> 
 	<% end %>
 </li>

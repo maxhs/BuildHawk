@@ -310,15 +310,24 @@ class ProjectsController < AppController
 
 	def order_projects
 		puts "request: #{params}"
-		params[:project].each_with_index do |p,i|
-			project = Project.where(id: p).first
-			project.update_attribute :order_index, i if project
+		if params[:project]
+			params[:project].each_with_index do |p,i|
+				project = Project.where(id: p).first
+				project.update_attribute :order_index, i if project
+			end
 		end
-		# respond_to do |format|
-		# 	format.js  { render :template => "checklists/reorder"}
-		# end
+		if params[:project_id]
+			project = Project.where(id: params[:project_id]).first
+			if project && params[:group_id]
+				params[:group_id] = nil if params[:group_id] == 'undefined'
+				project.update_attribute :project_group_id, params[:group_id]
+			end
+		end
+
 		if request.xhr?
-			render json:{success:true}
+			respond_to do |format|
+				format.js
+			end
 		end
 	end
 

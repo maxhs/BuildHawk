@@ -7,29 +7,75 @@
 
 	.new_project_group {
 		margin:0 auto;
+
 		input[type="text"] {
 			width:100%;
 		}
 	}
 }
 
-#group-container {
+#cancel-new-group {
+	cursor:pointer;
+	margin-left:5%;
+}
+
+#cancel-new-group:hover {
+	color:#cc0000;	
+}
+
+#groups {
 	.group-header {
+		height:35px;
 		border-bottom:1px solid #ccc;
 		
 		.group-name {
-			color:#222;
+			display:inline-block;
 			text-align:left;
+			margin-left:7px;
+			margin-top:0;
+			padding-top:10px;
 		}
 	}
 }
 
 .new_project_group {
 	input[type="text"] {
-		width:75%;
+		width:90%;
+		margin:0 auto;
+		font-size:16px;
+		line-height:16px;
 	}
 
 	input[type="submit"] {
-		width:25;
+		margin:5px 0 0 5%;
+	}
+}
+.project-group.editing {
+	height:35px;
+	overflow:auto;
+
+	.edit_project_group {
+
+		input[type="text"] {
+			width:100%;
+			height:34px;
+			font-weight:bolder;
+			border:0;
+		}
+
+		input[type="submit"]{
+			box-shadow:0 0 0 0;
+			-moz-box-shadow:0 0 0 0;
+			-webkit-box-shadow:0 0 0 0;
+			border:0;
+			padding:10px;
+		}
+
+		#cancel-group {
+			margin:0 10px 0 0;
+			cursor:pointer;
+			position:relative;
+			top:2px;
+		}
 	}
 }

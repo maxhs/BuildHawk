@@ -1,4 +1,13 @@
-$('#pg-<%=@project_group.id%>').fadeOut(200,function(){
-	$(this).replaceWith('<%= j render partial:"project_groups/edit", :locals => {:project_group => @project_group} %>');
-	$(this).fadeIn(200);
+var originalGroup = $('#<%=@project_group.id%> .group-header').html();
+$('#<%=@project_group.id%> .group-header').fadeOut(170,function(){
+	$(this).html('<%= j render partial:"project_groups/edit", :locals => {:project_group => @project_group} %>');
+	$(this).fadeIn(170,function(){
+		$('#edit-group-name').focus();
+	});
+	$('#cancel-group').click(function(){
+		$('#<%=@project_group.id%> .group-header').fadeOut(function(){
+			$(this).html(originalGroup);
+			$(this).fadeIn(170);
+		})
+	});
 });

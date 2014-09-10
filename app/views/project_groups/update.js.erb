@@ -1,4 +1,4 @@
-$('#pg-<%=@project_group.id%>').fadeOut(200,function(){
+$('#<%=@project_group.id%>').fadeOut(170,function(){
 	$(this).replaceWith('<%= j render partial:"project_groups/group", :locals => {:project_group => @project_group} %>');
-	$(this).fadeIn(200);
+	$(this).fadeIn(170);
 });
