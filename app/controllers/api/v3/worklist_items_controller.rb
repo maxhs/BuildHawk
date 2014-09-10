@@ -9,15 +9,15 @@ class Api::V3::WorklistItemsController < Api::V3::ApiController
             notify = true unless task.assignee_id == assignee.id
             params[:worklist_item][:connect_assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
-        elsif params[:worklist_item][:connect_assignee_id]
-            connect_user = ConnectUser.where(:id => params[:worklist_item][:connect_assignee_id]).first
-            notify = true unless task.connect_assignee_id == connect_user.id
-            params[:worklist_item][:assignee_id] = nil
-            params[:worklist_item][:sub_assignee_id] = nil
+        # elsif params[:worklist_item][:connect_assignee_id]
+        #     connect_user = ConnectUser.where(:id => params[:worklist_item][:connect_assignee_id]).first
+        #     notify = true unless task.connect_assignee_id == connect_user.id
+        #     params[:worklist_item][:assignee_id] = nil
+        #     params[:worklist_item][:sub_assignee_id] = nil
         else
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
-            params[:worklist_item][:connect_assignee_id] = nil
+            #params[:worklist_item][:connect_assignee_id] = nil
         end
         
         if params[:worklist_item][:completed] == "1"
@@ -36,10 +36,11 @@ class Api::V3::WorklistItemsController < Api::V3::ApiController
     	task.update_attributes params[:worklist_item]
 
         if notify
-            if connect_user        
-                connect_user.text_task(task) if connect_user.phone && connect_user.phone.length > 0
-                connect_user.email_task(task) if connect_user.email && connect_user.email.length > 0
-            elsif assignee
+            # if connect_user        
+            #     connect_user.text_task(task) if connect_user.phone && connect_user.phone.length > 0
+            #     connect_user.email_task(task) if connect_user.email && connect_user.email.length > 0
+            # els
+            if assignee
                 assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
                 assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length > 0
             end

@@ -18,7 +18,7 @@ class AdminController < AppController
 
 	def personnel
 		@company = @user.company
-		if @company.customer_id.nil?
+		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
@@ -132,7 +132,7 @@ class AdminController < AppController
 
 	def reports
 		@company = @user.company
-		if @company.customer_id.nil?
+		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
@@ -192,7 +192,7 @@ class AdminController < AppController
 
 	def new_project
 		@company = @user.company
-		if @company.customer_id.nil?
+		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100

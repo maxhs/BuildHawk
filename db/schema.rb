@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828030433) do
+ActiveRecord::Schema.define(version: 20140910043104) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -476,8 +476,8 @@ ActiveRecord::Schema.define(version: 20140828030433) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                  default: ""
+    t.string   "encrypted_password",     default: ""
     t.string   "first_name",             default: ""
     t.string   "last_name",              default: ""
     t.string   "full_name",              default: ""
@@ -490,7 +490,7 @@ ActiveRecord::Schema.define(version: 20140828030433) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -502,7 +502,7 @@ ActiveRecord::Schema.define(version: 20140828030433) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.boolean  "active",                 default: true
+    t.boolean  "active",                 default: false
     t.boolean  "company_admin",          default: false
     t.boolean  "text_permissions",       default: true
   end

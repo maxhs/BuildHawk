@@ -8,13 +8,7 @@ class Api::V3::CommentsController < Api::V3::ApiController
       	end
     end
 
-    def show
-        ### api compatibility ###
-        # if params[:comment][:punchlist_item_id]
-        #     params[:comment][:worklist_item_id] = params[:comment][:punchlist_item_id]
-        #     params[:comment].delete(:punchlist_item_id)
-        # end
-        
+    def show 
         if params[:checklist_item_id].present?
             checklist_item = ChecklistItem.find params[:report_id]
             comments = report.comments
@@ -31,12 +25,6 @@ class Api::V3::CommentsController < Api::V3::ApiController
     end
 
     def create
-        ### api compatibility ###
-        # if params[:comment][:punchlist_item_id]
-        #     params[:comment][:worklist_item_id] = params[:comment][:punchlist_item_id]
-        #     params[:comment].delete(:punchlist_item_id)
-        # end
-        
         comment = Comment.create params[:comment]
         comment.update_attribute :mobile, true
         if params[:comment][:checklist_item_id].present?

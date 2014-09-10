@@ -40,21 +40,27 @@ class User < ActiveRecord::Base
                       :path           => "user_image_:id_:style.:extension"
 
     validates_attachment :image, :content_type => { :content_type => /\Aimage/ }
-    validates_presence_of :first_name
-    validates_presence_of :last_name
-    validates_presence_of :email
+    #validates_presence_of :first_name
+    #validates_presence_of :last_name
+    #validates_presence_of :email
     validates_uniqueness_of :email
     validates_confirmation_of :password, :if => :password_required?
     validates_presence_of :password, :if => :password_required?
 
     #after_create :welcome
     after_commit :clean_phone, :if => :persisted?
-    after_commit :clean_name, :if => :persisted?
-    
+
     def welcome
         UserMailer.welcome(self).deliver if email 
         full_name = "#{first_name} #{last_name}"
         self.save
+    end
+
+    def clean_phone   
+        if phone && phone.length > 0
+            phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+            self.save
+        end
     end
 
     def full_name 
@@ -102,20 +108,6 @@ class User < ActiveRecord::Base
         end
     end
 
-    def clean_phone   
-        if phone && phone.length > 0
-            phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
-            self.save
-        end
-    end
-
-    def clean_name
-        unless full_name == "#{first_name} #{last_name}" 
-            self.full_name = "#{first_name} #{last_name}"
-            self.save
-        end
-    end
-
     def formatted_phone
       if phone && phone.length > 0
         clean_phone if phone.include?(' ')
@@ -124,7 +116,7 @@ class User < ActiveRecord::Base
     end
 
     def password_required?
-      password.present?
+        password.present? && active?
     end
 
     def coworkers
