@@ -228,19 +228,4 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         end
     end
 
-    private
-
-    def find_projects
-        @user = User.find params[:user_id]
-        @projects = @user.project_users.where(:archived => false).map{|u| u.project if u.project.project_group_id == nil}.compact
-
-        @archived_projects = @user.project_users.where(:archived => true).map(&:project)
-        new_projects = []
-        Project.where(:core => true).flatten.each do |c|
-            new_projects << c unless @archived_projects.include?(c)
-        end
-
-        @projects += new_projects
-        @projects = @projects.uniq.sort_by{|p| p.name.downcase}
-    end
 end

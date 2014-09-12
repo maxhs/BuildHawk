@@ -41,6 +41,7 @@ gem 'jquery-easing-rails'
 gem "parsley-rails"
 gem 'gcm'
 gem 'newrelic_rpm'
+gem "oink"
 
 gem "recaptcha", :require => "recaptcha/rails"
 
