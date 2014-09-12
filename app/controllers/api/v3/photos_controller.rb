@@ -1,14 +1,22 @@
 class Api::V3::PhotosController < Api::V3::ApiController
 
-    def update
-
-    end
-
     def create
-        photo = Photo.create params[:photo]
+        ## android ##
+        if params[:file]
+            photo = Photo.new(image: params[:file])
+            if params[:file].original_filename
+                photo.name = params[:file].original_filename
+                photo.save
+            end
+            params[:photo][:mobile] = true
+            photo.update_attributes params[:photo]
+        else
+        ## ios ##
+            photo = Photo.create params[:photo]
+        end
 
         respond_to do |format|
-            format.json { render_for_api :worklist, :json => photo.worklist_item, :root => :task}
+            format.json { render_for_api :worklist, json: photo, root: :photo}
         end
     end
 
