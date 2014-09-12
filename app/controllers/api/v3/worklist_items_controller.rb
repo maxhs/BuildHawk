@@ -105,6 +105,7 @@ class Api::V3::WorklistItemsController < Api::V3::ApiController
     end
 
     def photo
+        puts "task photo params: #{params}"
         params[:photo][:worklist_item_id] = params[:id] if params[:id]
 
         ## android ##
