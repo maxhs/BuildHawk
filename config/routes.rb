@@ -353,7 +353,6 @@ Buildhawk::Application.routes.draw do
           get :review_report
         end
         collection do
-          post :photo
           get :options
           delete :remove_personnel
         end
@@ -373,11 +372,7 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :worklists, :only => [:show, :index]
-      resources :worklist_items do
-        member do
-          post :photo
-        end
-      end
+      resources :worklist_items
     end
   end
 
