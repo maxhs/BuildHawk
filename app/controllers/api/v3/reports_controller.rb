@@ -235,26 +235,6 @@ class Api::V3::ReportsController < Api::V3::ApiController
         end
     end
 
-    def photo
-        if params[:photo]
-            photo = Photo.create params[:photo]
-            photo.update_attribute :mobile, true
-            respond_to do |format|
-                format.json { render_for_api :reports, :json => photo.report, :root => :report}
-            end
-        elsif params[:photos]
-            params[:photos].each do |p|
-                photo = Photo.new(image: p)
-                photo.save
-                photo.update_attributes params[:photo]
-            end
-            report = Report.find params[:photo][:report_id]
-            respond_to do |format|
-                format.json { render_for_api :reports, :json => report, :root => :report}
-            end
-        end
-    end
-
     def remove_personnel
         report = Report.find params[:report_id]
         if params[:sub_id]

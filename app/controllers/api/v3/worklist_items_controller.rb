@@ -104,32 +104,6 @@ class Api::V3::WorklistItemsController < Api::V3::ApiController
         end
     end
 
-    def photo
-        task = WorklistItem.where(id: params[:id]).first
-        puts "task photo params: #{params} for task: #{task}"
-        if task
-            ## android ##
-            if params[:file]
-                photo = task.photos.new(image: params[:file])
-                if params[:file].original_filename
-                    photo.name = params[:file].original_filename
-                    photo.save
-                end
-                params[:photo][:mobile] = true
-                photo.update_attributes params[:photo]
-            else
-            ## ios ##
-                photo = task.photos.create params[:photo]
-            end
-
-            respond_to do |format|
-                format.json { render_for_api :worklist, :json => task}
-            end
-        else
-
-        end
-    end
-
     def destroy
         item = WorklistItem.find params[:id]
         if item.destroy
