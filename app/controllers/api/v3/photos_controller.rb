@@ -15,9 +15,9 @@ class Api::V3::PhotosController < Api::V3::ApiController
             photo = Photo.create params[:photo]
         end
 
-        if photo.task
+        if photo.worklist_item
             respond_to do |format|
-                format.json { render_for_api :worklist, json: photo.task, root: :task}
+                format.json { render_for_api :worklist, json: photo.worklist_item, root: :task}
             end
         elsif photo.report
             respond_to do |format|
