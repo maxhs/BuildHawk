@@ -105,7 +105,7 @@ class Api::V3::WorklistItemsController < Api::V3::ApiController
     end
 
     def photo
-        task = Task.where(id: params[:id]).first
+        task = WorklistItem.where(id: params[:id]).first
         puts "task photo params: #{params} for task: #{task}"
         if task
             ## android ##
