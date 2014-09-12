@@ -35,6 +35,8 @@ class ConnectUser < ActiveRecord::Base
             :to => phone,
             :body => "You've been assigned a task on BuildHawk: \"#{truncated_task}\". Click here to view: https://buildhawk.com/task/#{task.id}?m="
         )
+    rescue Twilio::REST::RequestError => e
+        puts e.message
     end
 
     def clean_phone
