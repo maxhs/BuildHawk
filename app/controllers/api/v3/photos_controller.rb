@@ -4,6 +4,14 @@ class Api::V3::PhotosController < Api::V3::ApiController
 
     end
 
+    def create
+        photo = Photo.create params[:photo]
+
+        respond_to do |format|
+            format.json { render_for_api :worklist, :json => photo.worklist_item, :root => :task}
+        end
+    end
+
     def show
     	project = Project.find params[:id]
     	photos = project.photos.where("image_file_name IS NOT NULL").order('created_at DESC')

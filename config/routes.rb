@@ -374,7 +374,7 @@ Buildhawk::Application.routes.draw do
       end
       resources :worklists, :only => [:show, :index]
       resources :worklist_items do
-        collection do
+        member do
           post :photo
         end
       end
