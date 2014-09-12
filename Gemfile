@@ -2,9 +2,9 @@ source 'https://code.stripe.com'
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.5'
-#gem 'puma'
 gem 'unicorn'
 gem 'unicorn-worker-killer'
+gem "unicorn-rails", :group => :development
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
