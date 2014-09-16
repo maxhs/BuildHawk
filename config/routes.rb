@@ -213,7 +213,6 @@ Buildhawk::Application.routes.draw do
   #temporary - deprecated after 1.05
   get "/api/v2/users/:id/worklist_connect", to: "api/v2/users#connect"
   post "/api/v2/company_subs", to: "api/v2/project_subs#create"
-
   #
 
   #mobile API v2
