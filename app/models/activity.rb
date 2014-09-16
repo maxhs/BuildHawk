@@ -30,6 +30,10 @@ class Activity < ActiveRecord::Base
 		task.tasklist.id if task
 	end
 
+	def tasklist_id
+		task.tasklist.id if task
+	end
+
 	def worklist_item
 		task
 	end
