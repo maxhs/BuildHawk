@@ -105,7 +105,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             #params[:user].delete(:company_name)
         end
        
-        task = WorklistItem.find params[:task_id] if params[:task_id] && params[:task_id] != 0
+        task = Task.find params[:task_id] if params[:task_id] && params[:task_id] != 0
         report = Report.find params[:report_id] if params[:report_id] && params[:report_id] != 0
 
         email = params[:user][:email].strip if params[:user][:email]
