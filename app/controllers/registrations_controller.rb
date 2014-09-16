@@ -75,7 +75,6 @@ class RegistrationsController < Devise::RegistrationsController
     def find_connect_items(user)
         @connect_user = ConnectUser.where(:email => user.email).first
         @connect_user = ConnectUser.where(:phone => user.phone).first unless @connect_user
-        puts "did we find a connect user? #{@connect_user.email} and tasks count: #{@connect_user.tasks.count}"
         return unless @connect_user
         tasks = @connect_user.tasks
         tasks.each do |t|
