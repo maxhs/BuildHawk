@@ -9,15 +9,15 @@ class Api::V3::TasksController < Api::V3::ApiController
             notify = true unless task.assignee_id == assignee.id
             params[:task][:connect_assignee_id] = nil
             params[:task][:sub_assignee_id] = nil
-        # elsif params[:worklist_item][:connect_assignee_id]
-        #     connect_user = ConnectUser.where(:id => params[:worklist_item][:connect_assignee_id]).first
-        #     notify = true unless task.connect_assignee_id == connect_user.id
-        #     params[:worklist_item][:assignee_id] = nil
-        #     params[:worklist_item][:sub_assignee_id] = nil
+        elsif params[:task][:connect_assignee_id]
+            connect_user = ConnectUser.where(:id => params[:task][:connect_assignee_id]).first
+            notify = true unless task.connect_assignee_id == connect_user.id
+            params[:task][:assignee_id] = nil
+            params[:task][:sub_assignee_id] = nil
         else
             params[:task][:assignee_id] = nil
             params[:task][:sub_assignee_id] = nil
-            #params[:worklist_item][:connect_assignee_id] = nil
+            params[:task][:connect_assignee_id] = nil
         end
         
         if params[:task][:completed] == "1"
@@ -36,11 +36,10 @@ class Api::V3::TasksController < Api::V3::ApiController
     	task.update_attributes params[:task]
 
         if notify
-            # if connect_user        
-            #     connect_user.text_task(task) if connect_user.phone && connect_user.phone.length > 0
-            #     connect_user.email_task(task) if connect_user.email && connect_user.email.length > 0
-            # els
-            if assignee
+            if connect_user        
+                connect_user.text_task(task) if connect_user.phone && connect_user.phone.length > 0
+                connect_user.email_task(task) if connect_user.email && connect_user.email.length > 0
+            elsif assignee
                 assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
                 assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length > 0
             end
@@ -59,16 +58,16 @@ class Api::V3::TasksController < Api::V3::ApiController
     def create
         project = Project.find params[:project_id]
 
-        # ## remove in 1.05
-        # if params[:worklist_item][:user_assignee].present? 
-        #     assignee = User.where(:full_name => params[:worklist_item][:user_assignee]).first
-        #     params[:worklist_item][:assignee_id] = assignee.id
-        #     params[:worklist_item].delete(:user_assignee)
-        # elsif params[:worklist_item][:sub_assignee].present?
-        #     sub = Sub.where(:name => params[:worklist_item][:sub_assignee]).first_or_create
-        #     params[:worklist_item][:sub_assignee_id] = sub.id
-        #     params[:worklist_item].delete(:sub_assignee)
-        # end
+        # ## remove after 1.05
+        if params[:task][:user_assignee].present? 
+            assignee = User.where(:full_name => params[:task][:user_assignee]).first
+            params[:task][:assignee_id] = assignee.id
+            params[:task].delete(:user_assignee)
+        elsif params[:task][:sub_assignee].present?
+            sub = Sub.where(:name => params[:task][:sub_assignee]).first_or_create
+            params[:task][:sub_assignee_id] = sub.id
+            params[:task].delete(:sub_assignee)
+        end
         # ###
 
         params[:task][:mobile] = true
