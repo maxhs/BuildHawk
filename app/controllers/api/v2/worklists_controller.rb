@@ -20,7 +20,7 @@ class Api::V2::WorklistsController < Api::V2::ApiController
     		tasklist = project.tasklists.create
     	end
 
-        puts "returning tasklist count: #{tasklist.count}"
+        puts "returning tasklist count: #{tasklist.tasks.count}"
     	respond_to do |format|
         	format.json { render_for_api :tasklist, :json => tasklist, :root => :worklist}
       	end
