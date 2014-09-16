@@ -67,8 +67,8 @@ class Report < ActiveRecord::Base
         # if date_string && date_string.length > 0 && date_string.include?("/20")
         #     Date.strptime(date_string,"%m/%d/%Y")
         # else 
-        #     created_at
-        # end
+            created_at
+        #end
     end
 
     def to_param
