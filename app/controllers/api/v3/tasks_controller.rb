@@ -52,7 +52,7 @@ class Api::V3::TasksController < Api::V3::ApiController
         end
         
     	respond_to do |format|
-        	format.json { render_for_api :worklist, :json => task, :root => :task}
+        	format.json { render_for_api :tasklist, :json => task, :root => :task}
       	end
     end
 
@@ -92,7 +92,7 @@ class Api::V3::TasksController < Api::V3::ApiController
 
         if task.save
             respond_to do |format|
-                format.json { render_for_api :worklist, :json => task, :root => :task}
+                format.json { render_for_api :tasklist, :json => task, :root => :task}
             end
         end
     end

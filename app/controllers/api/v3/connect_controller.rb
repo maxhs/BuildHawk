@@ -11,7 +11,7 @@ class Api::V3::ConnectController < Api::V3::ApiController
 				items = @user.connect_items(nil)
 			end
 			respond_to do |format|
-	        	format.json { render_for_api :connect, :json => items, :root => :worklist_items}
+	        	format.json { render_for_api :connect, :json => items, :root => :tasks}
 	      	end
 		else
       		render json: {success: false}
