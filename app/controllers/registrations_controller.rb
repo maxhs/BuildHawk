@@ -76,7 +76,7 @@ class RegistrationsController < Devise::RegistrationsController
         @connect_user = ConnectUser.where(:email => user.email).first
         @connect_user = ConnectUser.where(:phone => user.phone).first unless @connect_user
         return unless @connect_user
-        tasks = @connect_user.worklist_items
+        tasks = @connect_user.tasks
         tasks.each do |t|
             t.update_attributes :assignee_id => user.id, :connect_assignee_id => nil
             t.project.project_users.create :user_id => user.id
