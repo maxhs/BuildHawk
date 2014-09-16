@@ -15,8 +15,8 @@ class AppController < ApplicationController
             end
             
             @project_groups = current_user.company.project_groups
-            @items = current_user.connect_items(nil)
-            @companies = @items.map{|t| t.tasklist.project.company}.compact.uniq if @items
+            @tasks = current_user.connect_items(nil)
+            @companies = @tasks.map{|t| t.tasklist.project.company}.compact.uniq if @items
         end
     end
 

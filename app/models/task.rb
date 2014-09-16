@@ -120,7 +120,7 @@ class Task < ActiveRecord::Base
     end
 
     def worklist_id
-        task.id
+        tasklist.id
     end
     ###
 
