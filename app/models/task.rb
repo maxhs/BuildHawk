@@ -129,7 +129,7 @@ class Task < ActiveRecord::Base
     api_accessible :tasklist do |t|
   		t.add :id
         t.add :worklist_id
-        t.add :task_id
+        t.add :tasklist_id
         t.add :user
         t.add :photos
   		t.add :body

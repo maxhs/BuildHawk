@@ -2,7 +2,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     before_filter :refactor_punchlist
 
     def update
-    	task = WorklistItem.find params[:id]
+    	task = Task.find params[:id]
         
         notify = false
         ## to remove in 1.05
@@ -12,7 +12,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee]
-            sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.worklist.project.company.id).first_or_create
+            sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.tasklist.project.company.id).first_or_create
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:connect_assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = sub.id
@@ -65,7 +65,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
         
     	respond_to do |format|
-        	format.json { render_for_api :worklist, :json => task, :root => @root}
+        	format.json { render_for_api :tasklist, :json => task, :root => @root}
       	end
     end
 
@@ -86,7 +86,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
         params[:worklist_item][:mobile] = true
         
-        worklist_item = project.worklists.last.worklist_items.create params[:worklist_item]
+        worklist_item = project.tasklists.last.tasks.create params[:worklist_item]
         worklist_item.activities.create(
             :worklist_item_id => worklist_item.id,
             :project_id => project.id,
@@ -105,15 +105,15 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
         if worklist_item.save
             respond_to do |format|
-                format.json { render_for_api :worklist, :json => worklist_item, :root => @root}
+                format.json { render_for_api :tasklist, :json => worklist_item, :root => @root}
             end
         end
     end
 
     def show
-        worklist_item = WorklistItem.find params[:id]
+        task = Task.find params[:id]
         respond_to do |format|
-            format.json { render_for_api :details, :json => worklist_item, :root => @root}
+            format.json { render_for_api :details, :json => task, :root => @root}
         end
     end
 
@@ -135,12 +135,12 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
 
         respond_to do |format|
-            format.json { render_for_api :worklist, :json => photo.worklist_item, :root => @root}
+            format.json { render_for_api :tasklist, :json => photo.task, :root => @root}
         end
     end
 
     def destroy
-        item = WorklistItem.find params[:id]
+        item = Task.find params[:id]
         if item.destroy
             render json: {success: true}
         else

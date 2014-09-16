@@ -19,7 +19,7 @@ class Api::V2::CommentsController < Api::V2::ApiController
             checklist_item = ChecklistItem.find params[:report_id]
             comments = report.comments
         elsif params[:worklist_item_id].present?
-            worklist_item = WorklistItem.find params[:worklist_item_id]
+            worklist_item = Task.find params[:worklist_item_id]
             comments = report.comments
         elsif params[:report_id].present?
             report = Report.find params[:report_id]
@@ -43,15 +43,15 @@ class Api::V2::CommentsController < Api::V2::ApiController
             checklist_item = ChecklistItem.find params[:comment][:checklist_item_id]
             comments = checklist_item.comments
         elsif params[:comment][:worklist_item_id].present?
-            worklist_item = WorklistItem.find params[:comment][:worklist_item_id]
-            comments = worklist_item.comments
+            task = Task.find params[:comment][:worklist_item_id]
+            comments = task.comments
         elsif params[:comment][:report_id].present?
             report = Report.find params[:comment][:report_id]
             comments = report.comments
         end
 
         if comment.save
-            if comment.checklist_item || comment.worklist_item
+            if comment.checklist_item || comment.task
                 respond_to do |format|
                     format.json { render_for_api :projects, :json => comment.activity, :root => :activity}
                 end
