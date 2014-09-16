@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
     def detect_redirect
         if params[:m]
             @mobile_redirect = true
-            if params[:controller] == "worklist_items" && params[:id]
-                @item = WorklistItem.where(:id => params[:id]).first
-                render "/" and return if @item
+            if params[:controller] == "tasks" && params[:id]
+                @task = Task.where(:id => params[:id]).first
+                render "/" and return if @task
             end
         end 
     end

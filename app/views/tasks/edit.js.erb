@@ -1,10 +1,10 @@
 var locations = <%= raw @locations.to_json %>; 
-$('#worklist_item_location').autocomplete({
+$('#task_location').autocomplete({
   	source: locations
 });
 
 $("#project-tasks").addClass('tasks-panel');
-$('#task-focus').html('<%= j render :partial => "worklist_items/edit", :locals => {:task => @task } %>');
+$('#task-focus').html('<%= j render :partial => "tasks/edit", :locals => {:task => @task } %>');
 var taskOffset = document.getElementById('task-<%=@task.id %>').offsetTop;
 var focusOffset = document.getElementById('project-tasks').offsetHeight;
 var posTop = taskOffset-focusOffset-45;

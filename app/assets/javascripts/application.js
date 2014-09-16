@@ -26,6 +26,12 @@
 //= require turbolinks
 //= require_tree .
 
+NProgress.configure({
+    showSpinner: true,
+    ease: 'easeInOut',
+    speed: 400
+});
+
 if (history && history.pushState){
     $(function(){
         $('body').on('click', 'a',function(e){

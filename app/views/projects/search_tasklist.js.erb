@@ -1,0 +1,4 @@
+$('#project-tasklist').fadeOut(170,function(){
+	$(this).html('<%= j render :partial => "search_tasklist" %>');
+	$(this).fadeIn(170);
+});

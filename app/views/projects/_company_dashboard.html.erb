@@ -16,7 +16,7 @@
 					<td><%= link_to "Checklist",checklist_project_path(project), :remote => true %></td>
 					<td><%= link_to "Reports", reports_path(:project_id => project.id), :remote => true %></td>
 					<td><%= link_to "Documents", document_photos_project_path(project), remote: true %></td>
-					<td><%= link_to "Tasks", worklist_project_path(project), :remote => true %></td>
+					<td><%= link_to "Tasks", tasklist_project_path(project), :remote => true %></td>
 				</tr>
 			</table>
 		</div>
@@ -44,10 +44,10 @@
 						</tr>
 						<% project.most_recent_activities.each do |activity| %>
 							<tr>
-								<% if activity.worklist_item %>
+								<% if activity.task %>
 									<td>
-										<%= link_to edit_worklist_item_path(project, :worklist_item_id => activity.worklist_item.id), :remote => true do %>
-											<%= activity.worklist_item.body %>
+										<%= link_to edit_task_path(project, :task_id => activity.task.id), :remote => true do %>
+											<%= activity.task.body %>
 										<% end %>
 									</td>
 									<td class="activity-icon"><%= image_tag 'task.png' %></td>

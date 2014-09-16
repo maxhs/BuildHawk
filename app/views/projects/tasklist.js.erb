@@ -1,0 +1,10 @@
+$('#main').html('<%= j render :partial => "projects/tasklist", locals:{project: @project, tasks:@tasks, task: @task} %>');
+$("html, body").animate({ scrollTop: 0 }, 0);
+
+if (history && history.pushState){
+    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>/tasklist');
+    $(window).bind("popstate", function(){
+      $.getScript(location.href);
+    });
+}
+closeMenu();

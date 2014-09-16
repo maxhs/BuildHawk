@@ -1,10 +1,10 @@
 class Activity < ActiveRecord::Base
-	attr_accessible :user_id, :project_id, :worklist_item_id, :checklist_item_id, :report_id, :comment_id, :body,
+	attr_accessible :user_id, :project_id, :task_id, :checklist_item_id, :report_id, :comment_id, :body,
 					:hidden, :activity_type, :message_id, :photo_id
 
 	belongs_to :user
 	belongs_to :project
-	belongs_to :worklist_item
+	belongs_to :task
 	belongs_to :checklist_item
 	belongs_to :report
 	belongs_to :comment
@@ -30,6 +30,14 @@ class Activity < ActiveRecord::Base
 		worklist_item.worklist.id if worklist_item
 	end
 
+	def worklist_item
+		task
+	end
+
+	def worklist_item_id
+		task.id
+	end
+
 	acts_as_api
 
 	api_accessible :dashboard do |t|
@@ -41,6 +49,8 @@ class Activity < ActiveRecord::Base
 		t.add :comment
 		t.add :worklist_id
 		t.add :worklist_item
+		t.add :tasklist_id
+		t.add :task
 		t.add :project_id
 		t.add :body
 		t.add :hidden
@@ -73,6 +83,7 @@ class Activity < ActiveRecord::Base
 		t.add :report_id
 		t.add :comment
 		t.add :worklist_item_id
+		t.add :task_id
 		t.add :project_id
 		t.add :body
 		t.add :hidden
@@ -84,7 +95,7 @@ class Activity < ActiveRecord::Base
       
     end
 
-    api_accessible :worklist, :extend => :details do |t|
+    api_accessible :tasklist, :extend => :details do |t|
       
     end
 

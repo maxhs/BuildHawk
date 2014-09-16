@@ -1,7 +1,7 @@
 <div class="border-box destroy-box">
 	<div class="delete-confirmation"> 
 		<h3>Are you sure you want to delete this project?</h3>
-		<p>This will permanently delete the project along with all associated documents, worklist items, reports and checklist items.</p>
+		<p>This will permanently delete the project along with all associated documents, tasks, reports and checklist items.</p>
 	</div>
 	<div class="button=container">
 		<%= link_to "Destroy Project", project_path(@project), :method => :delete, :class=>"btn btn-danger btn-lg delete-project-link remote", :data => {:confirm => "Are you absolutely sure you want to delete this project? This cannot be undone."} %>

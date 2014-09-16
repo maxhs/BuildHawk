@@ -1,10 +1,10 @@
-class WorklistItem < ActiveRecord::Base
+class Task < ActiveRecord::Base
 
-	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :worklist_id, :worklist, :photos_attributes, 
+	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, :photos_attributes, 
                     :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
                     :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :connect_assignee_id, :connect_assignee
 
-    belongs_to :worklist
+    belongs_to :tasklist
     belongs_to :user
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
@@ -30,7 +30,7 @@ class WorklistItem < ActiveRecord::Base
             assignee.full_name if assignee
         end
         integer :project_id do
-            worklist.project.id if worklist
+            tasklist.project.id if tasklist
         end
         time    :created_at
     end
@@ -60,34 +60,34 @@ class WorklistItem < ActiveRecord::Base
         
         if completed
             
-            text = "#{worklist.project.name} (Worklist) - \"#{truncated}\" was completed by #{current_user.full_name}"
-            Notification.where(:body => text,:user_id => user_id, :worklist_item_id => id, :notification_type => "Worklist").first_or_create
+            text = "#{tasklist.project.name} (Tasklist) - \"#{truncated}\" was completed by #{current_user.full_name}"
+            Notification.where(:body => text,:user_id => user_id, :task_id => id, :notification_type => "Tasklist").first_or_create
             activities.create(
                 :user_id => current_user.id,
-                :project_id => worklist.project.id,
-                :worklist_item_id => id,
+                :project_id => tasklist.project.id,
+                :task_id => id,
                 :body => "This item was completed by #{current_user.full_name}.",
                 :activity_type => self.class.name
             )
         else
-            body = "#{worklist.project.name} (Worklist) - \"#{truncated}\" has been modified"
-            user.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
+            body = "#{tasklist.project.name} (Tasklist) - \"#{truncated}\" has been modified"
+            user.notifications.where(:body => body,:task_id => id,:notification_type => "Tasklist").first_or_create
             activities.create(
                 :user_id => current_user.id,
-                :project_id => worklist.project.id,
-                :worklist_item_id => id,
+                :project_id => tasklist.project.id,
+                :task_id => id,
                 :body => "This item was modified by #{current_user.full_name}.",
                 :activity_type => self.class.name
             )
         end
 
         if assignee
-            body = "\"#{truncated}\" has been assigned to you for #{worklist.project.name}"
-            assignee.notifications.where(:body => body,:worklist_item_id => id,:notification_type => "Worklist").first_or_create
+            body = "\"#{truncated}\" has been assigned to you for #{tasklist.project.name}"
+            assignee.notifications.where(:body => body,:task_id => id,:notification_type => "Tasklist").first_or_create
             activities.create(
                 :user_id => current_user.id,
-                :project_id => worklist.project.id,
-                :worklist_item_id => id,
+                :project_id => tasklist.project.id,
+                :task_id => id,
                 :body => "This item was assigned to #{assignee.full_name}.",
                 :activity_type => self.class.name
             )
@@ -99,11 +99,11 @@ class WorklistItem < ActiveRecord::Base
     end
 
     def project_id
-        worklist.project.id
+        tasklist.project.id
     end
 
     def project
-        worklist.project
+        tasklist.project
     end
 
     def abbreviated_body
@@ -118,13 +118,18 @@ class WorklistItem < ActiveRecord::Base
     def epoch_time
         created_date
     end
+
+    def worklist_id
+        task.id
+    end
     ###
 
     acts_as_api
 
-    api_accessible :worklist do |t|
+    api_accessible :tasklist do |t|
   		t.add :id
         t.add :worklist_id
+        t.add :task_id
         t.add :user
         t.add :photos
   		t.add :body
@@ -143,6 +148,7 @@ class WorklistItem < ActiveRecord::Base
     api_accessible :connect do |t|
         t.add :id
         t.add :worklist_id
+        t.add :tasklist_id
         t.add :photos
         t.add :body
         t.add :assignee
@@ -155,19 +161,19 @@ class WorklistItem < ActiveRecord::Base
         t.add :project
     end
 
-    api_accessible :dashboard, :extend => :worklist do |t|
+    api_accessible :dashboard, :extend => :tasklist do |t|
 
     end
 
-    api_accessible :projects, :extend => :worklist do |t|
+    api_accessible :projects, :extend => :tasklist do |t|
 
     end
 
-    api_accessible :notifications, :extend => :worklist do |t|
+    api_accessible :notifications, :extend => :tasklist do |t|
 
     end
 
-    api_accessible :details, :extend => :worklist do |t|
+    api_accessible :details, :extend => :tasklist do |t|
         t.add :activities
         t.add :comments
     end
@@ -175,6 +181,7 @@ class WorklistItem < ActiveRecord::Base
     api_accessible :reminders do |t|
         t.add :id
         t.add :worklist_id
+        t.add :tasklist_id
         t.add :user
         t.add :body
         t.add :assignee

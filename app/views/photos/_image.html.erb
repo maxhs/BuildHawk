@@ -16,13 +16,13 @@
 							<span class="label">Source:</span>
 							<%= link_to "Checklist", checklist_photos_project_path(@project), :remote => true %>
 						<% end %>
-					<% elsif p.source == "Worklist" %>
-						<% if p.worklist_item %>
+					<% elsif p.source == "Tasklist" %>
+						<% if p.task %>
 							<span class="label">Item:</span>
-							<%= link_to p.worklist_item.abbreviated_body, edit_worklist_item_path(p.worklist_item), :remote => true %>
+							<%= link_to p.task.abbreviated_body, edit_task_path(p.task), :remote => true %>
 						<% else %>
 							<span class="label">Source:</span>
-							<%= link_to "Worklist", worklist_photos_project_path(@project), :remote => true %>
+							<%= link_to "Tasklist", tasklist_photos_project_path(@project), :remote => true %>
 						<% end %>
 					<% elsif p.source == "Reports" %>
 						<% if p.report %>

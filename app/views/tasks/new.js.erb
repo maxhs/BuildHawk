@@ -1,5 +1,5 @@
 $("#project-tasks").addClass('tasks-panel');
-$('#task-focus').html('<%= j render :partial => "worklist_items/new", :locals => {:task => @task, :tasks => @tasks, :project => @project } %>');
+$('#task-focus').html('<%= j render :partial => "tasks/new", :locals => {:task => @task, :tasks => @tasks, :project => @project } %>');
 var tasksOffset = document.getElementById('project-tasks').offsetHeight;
 $('.active-task').removeClass('active-task');
 $('.faded').removeClass('faded');
@@ -7,6 +7,6 @@ $('.faded').removeClass('faded');
 $('#task-focus').css({'margin-top':-tasksOffset,'left':'50%'});
 $("html, body").delay(200).animate({ scrollTop: 0 }, 200);
 var locations = <%= raw @locations.to_json %>; 
-$('#worklist_item_location').autocomplete({
+$('#task_location').autocomplete({
   	source: locations
 });

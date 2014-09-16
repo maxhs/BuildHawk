@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912220015) do
+ActiveRecord::Schema.define(version: 20140912223012) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
     t.integer  "user_id"
     t.integer  "checklist_item_id"
-    t.integer  "worklist_item_id"
+    t.integer  "task_id"
     t.integer  "project_id"
     t.text     "body"
     t.boolean  "hidden",            default: false
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20140912220015) do
   create_table "comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "report_id"
-    t.integer  "worklist_item_id"
+    t.integer  "task_id"
     t.integer  "checklist_item_id"
     t.text     "body"
     t.datetime "created_at"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 20140912220015) do
     t.integer  "message_id"
   end
 
-  add_index "comments", ["user_id", "report_id", "checklist_item_id", "worklist_item_id"], name: "comments_ix"
+  add_index "comments", ["user_id", "report_id", "checklist_item_id", "task_id"], name: "comments_ix"
 
   create_table "companies", force: true do |t|
     t.string   "name",               default: "", null: false
@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(version: 20140912220015) do
     t.boolean  "sent",              default: false
     t.integer  "user_id"
     t.integer  "report_id"
-    t.integer  "worklist_item_id"
+    t.integer  "task_id"
     t.integer  "checklist_item_id"
     t.text     "body"
     t.string   "notification_type"
@@ -261,7 +261,6 @@ ActiveRecord::Schema.define(version: 20140912220015) do
   add_index "notifications", ["project_id"], name: "project_id_idx"
   add_index "notifications", ["report_id"], name: "report_id_idx"
   add_index "notifications", ["user_id"], name: "user_id_idx"
-  add_index "notifications", ["worklist_item_id"], name: "worklist_item_id_idx"
 
   create_table "phases", force: true do |t|
     t.integer  "order_index"
@@ -291,7 +290,7 @@ ActiveRecord::Schema.define(version: 20140912220015) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "report_id"
-    t.integer  "worklist_item_id"
+    t.integer  "task_id"
     t.integer  "checklist_item_id"
     t.string   "phase"
     t.string   "name",               default: "",          null: false
@@ -301,7 +300,7 @@ ActiveRecord::Schema.define(version: 20140912220015) do
     t.integer  "comment_id"
   end
 
-  add_index "photos", ["report_id", "checklist_item_id", "worklist_item_id", "user_id"], name: "photos_ix"
+  add_index "photos", ["report_id", "checklist_item_id", "task_id", "user_id"], name: "photos_ix"
 
   create_table "project_groups", force: true do |t|
     t.integer  "company_id"
@@ -378,7 +377,7 @@ ActiveRecord::Schema.define(version: 20140912220015) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",            default: true
-    t.integer  "worklist_item_id"
+    t.integer  "task_id"
   end
 
   create_table "report_companies", force: true do |t|
@@ -459,7 +458,7 @@ ActiveRecord::Schema.define(version: 20140912220015) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "count",              default: 0
-    t.integer  "worklist_item_id"
+    t.integer  "task_id"
     t.string   "contact_name"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -470,9 +469,34 @@ ActiveRecord::Schema.define(version: 20140912220015) do
   create_table "task_assignees", force: true do |t|
     t.integer  "user_id"
     t.integer  "connect_user_id"
-    t.integer  "worklist_item_id"
+    t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tasklists", force: true do |t|
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.text     "body"
+    t.integer  "tasklist_id"
+    t.integer  "user_id"
+    t.string   "location"
+    t.integer  "order_index"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "assignee_id"
+    t.boolean  "completed",            default: false
+    t.datetime "completed_at"
+    t.integer  "completed_by_user_id"
+    t.integer  "photos_count"
+    t.integer  "comments_count"
+    t.integer  "sub_assignee_id"
+    t.boolean  "mobile",               default: false
+    t.integer  "connect_assignee_id"
   end
 
   create_table "users", force: true do |t|
@@ -510,31 +534,5 @@ ActiveRecord::Schema.define(version: 20140912220015) do
   add_index "users", ["company_id"], name: "users_company_id_ix"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "worklist_items", force: true do |t|
-    t.text     "body"
-    t.integer  "worklist_id"
-    t.integer  "user_id"
-    t.string   "location"
-    t.integer  "order_index"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "assignee_id"
-    t.boolean  "completed",            default: false
-    t.datetime "completed_at"
-    t.integer  "completed_by_user_id"
-    t.integer  "photos_count"
-    t.integer  "comments_count"
-    t.integer  "sub_assignee_id"
-    t.boolean  "mobile",               default: false
-    t.integer  "connect_assignee_id"
-  end
-
-  create_table "worklists", force: true do |t|
-    t.boolean  "worklist",   default: false
-    t.integer  "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end

@@ -1,9 +1,3 @@
-NProgress.configure({
-  showSpinner: false,
-  ease: 'easeInOut',
-  speed: 400
-});
-
 function homeSlideshow(){
     var lspace = '0%';
     var offscreen = "-200%";

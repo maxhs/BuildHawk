@@ -7,14 +7,14 @@
 	<div style="width:100%;clear:both;">
 		<% if item.photos && item.photos.count > 0 && item.photos.first.image_file_name %>
 			<% photo = item.photos.first %>
-			<%= link_to edit_worklist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:0 10px 10px 0;" do %>
+			<%= link_to edit_task_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:0 10px 10px 0;" do %>
 				<%= image_tag(photo.image.url(:small), :style => "width:100px;display:block;") %> 
 			<% end %>
 		<% else %>
 			<div style="float:left;margin:0 10px 10px 0;background:#eee;line-height:100px;height:100px;width:100px;text-align:center;vertical-align:middle;color:#aaa;">No photo</div>
 		<% end %>
 
-		<span style="font-size:16px;"><%= link_to item.body, edit_worklist_item_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"color:#000;text-decoration:none;" %></span>
+		<span style="font-size:16px;"><%= link_to item.body, edit_task_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"color:#000;text-decoration:none;" %></span>
 
 		<table>
 			<% if item.assignee || item.sub_assignee || item.connect_assignee %>

@@ -13,7 +13,7 @@ class Project < ActiveRecord::Base
     belongs_to :project_group, counter_cache: true
   	belongs_to :company
   	has_one :address, :dependent => :destroy
-  	has_many :worklists, :dependent => :destroy
+  	has_many :tasklists, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     has_many :reports, :dependent => :destroy
   	has_one :checklist, :dependent => :destroy
@@ -96,7 +96,7 @@ class Project < ActiveRecord::Base
 
     def duplicate_project
         new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :state}}}
-        new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :worklist_item, :report, :project,:folder]}, {:worklists => :worklist_items}, :address, :folders, :users, :project_users]
+        new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :task, :report, :project,:folder]}, {:tasklists => :tasks}, :address, :folders, :users, :project_users]
         new_project.checklist = new_checklist
         new_project.save
         return new_project
@@ -107,7 +107,7 @@ class Project < ActiveRecord::Base
         feed = []
         feed += checklist_items.order('updated_at DESC').limit(limit)
         feed += reports.order('updated_at DESC').limit(limit)
-        feed += WorklistItem.where(:worklist_id => worklists.first.id).order('updated_at DESC').limit(limit) if worklists && worklists.first
+        feed += Task.where(:tasklist_id => tasklists.first.id).order('updated_at DESC').limit(limit) if tasklists && tasklists.first
         feed += recent_photos(limit)
         return feed.flatten.sort_by(&:updated_at).compact.reverse.first(limit)
     end
@@ -133,12 +133,6 @@ class Project < ActiveRecord::Base
         Resque.enqueue(DestroyProject, id)
     end
 
-    ## deprecated
-    def categories
-        checklist.phases if checklist
-    end
-    ##
-
     acts_as_api
 
   	api_accessible :projects do |t|
@@ -152,23 +146,15 @@ class Project < ActiveRecord::Base
         t.add :users
         t.add :progress
         t.add :reminders
-        #t.add :phases
-        #t.add :upcoming_items
-        #t.add :recently_completed
-        #t.add :recent_documents
-        #t.add :recent_activities
-        ### slated for deletion in 1.04 ###
-        #t.add :categories
-        ###
   	end
 
-    api_accessible :worklist do |t|
+    api_accessible :tasklist do |t|
         t.add :id
         t.add :name
         t.add :company
     end
 
-    api_accessible :connect, :extend => :worklist do |t|
+    api_accessible :connect, :extend => :tasklist do |t|
     
     end
 
@@ -209,8 +195,5 @@ class Project < ActiveRecord::Base
         t.add :recent_documents
         t.add :phases
         t.add :recent_activities
-        ### slated for deletion ###
-        t.add :categories
-        ###
     end
 end

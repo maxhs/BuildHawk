@@ -1,5 +1,5 @@
 $('#top-nav a').removeClass('current-page');
-$('.nav-worklists a,#<%=@project.id%>-link').addClass('current-page');
+$('.nav-tasklists a,#<%=@project.id%>-link').addClass('current-page');
 $('#task-focus').css({'left':'100%','top':'0'});
 $('#project-tasks').removeClass('tasks-panel');
 $('#tasks').html('<%= j render partial: "projects/task", collection: @tasks, as: :task, cache: true %>');

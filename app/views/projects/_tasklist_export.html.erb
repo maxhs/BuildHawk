@@ -1,7 +1,7 @@
-<div id="export-worklist-modal" class="border-box">
-	<span id="cancel-worklist-modal" class="cancel-x"></span>
+<div id="export-tasklist-modal" class="border-box">
+	<span id="cancel-tasklist-modal" class="cancel-x"></span>
 	<h3>Select Recipient(s)</h3>
-	<%= form_tag export_worklists_path(:project_id => @project.id), remote: true, :method => :post do %>
+	<%= form_tag export_tasklists_path(:project_id => @project.id), remote: true, :method => :post do %>
 		<% current_user.company.personnel.each do |person| %>
 			<% if person == current_user.full_name %>
 				<div class="checkboxes"><%= check_box_tag "names[]", person, :checked => true %><span style="padding-left:1em;"><%= person %></span></div>
@@ -11,7 +11,7 @@
 		<% end %>
 		<%= text_field_tag :email, "", :placeholder => "Enter email addresses (separated by commas" %>
 		<div class="button-container">
-			<%= submit_tag "Send", :date => { :confirm => "This will send a worklist report to you and each of the selected parties. Continue?" }, :class => "btn btn-success btn-md"  %>
+			<%= submit_tag "Send", :date => { :confirm => "This will send a tasklist report to you and each of the selected parties. Continue?" }, :class => "btn btn-success btn-md"  %>
 		</div>
 	<% end %>
 </div>

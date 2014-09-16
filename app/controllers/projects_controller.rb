@@ -164,24 +164,24 @@ class ProjectsController < AppController
 		#@previous = category.checklist_items.where(:order_index => @item.order_index-1).first
 	end  
 
-	def worklist
-		@worklist = @project.worklists.first_or_create
+	def tasklist
+		@tasklist = @project.tasklists.first_or_create
 		@connect
-		@tasks = @worklist.worklist_items
+		@tasks = @tasklist.tasks
 	end
 
-	def search_worklist
+	def search_tasklist
 		if params[:search] && params[:search].length > 0
 			search_term = "%#{params[:search]}%" 
 			@project = Project.find params[:id]
-			initial = WorklistItem.search do
+			initial = Task.search do
 				fulltext search_term
 				with :project_id, params[:id]
 			end
 			@tasks = initial.results.uniq
 			@prompt = "No search results"
 		else
-			@tasks = @project.worklists.map(&:worklist_items).flatten.sort_by{|r| r.created_at}
+			@tasks = @project.tasklists.map(&:tasks).flatten.sort_by{|r| r.created_at}
 		end
 
 		if request.xhr?
@@ -189,7 +189,7 @@ class ProjectsController < AppController
 				format.js
 			end
 		else
-			render :worklist
+			render :tasklist
 		end
 	end
 
@@ -234,8 +234,8 @@ class ProjectsController < AppController
 			render :documents
 		end
 	end	
-	def worklist_photos
-		@photos = @project.photos.where(:source => "Worklist").order('created_at DESC')
+	def tasklist_photos
+		@photos = @project.photos.where(:source => "Tasklist").order('created_at DESC')
 		@folders = @photos.map(&:folder).flatten
 		@p = @photos.first
 		@nav = "tasks-hotos-nav"
@@ -350,13 +350,13 @@ class ProjectsController < AppController
 			else
 				@items = current_user.connect_items(nil)
 			end
-			@companies = @items.map{|t| t.worklist.project.company}.uniq
+			@companies = @items.map{|t| t.tasklist.project.company}.uniq
       	end
 	end
 
 	def find_project
 		if params[:id].present?
-			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_worklist_item"
+			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_task"
 		end
 		if @project && !@project.users.include?(@user) && params[:id] != @project.to_param
 			if request.xhr?

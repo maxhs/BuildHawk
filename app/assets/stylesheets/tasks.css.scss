@@ -1,8 +1,8 @@
-// Place all the styles related to the WorklistItems controller here.
+// Place all the styles related to the Tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#worklist-item-container {
+#tasklist-item-container {
 	display:block;
 	padding:0;
 	position:relative;
@@ -67,4 +67,10 @@
 
 .task {
 	padding:10px 0;
+}
+
+.task.row {
+	img {
+		max-width:100%;
+	}
 }

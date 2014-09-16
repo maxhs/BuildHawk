@@ -16,12 +16,12 @@ Buildhawk::Application.routes.draw do
   post "projects/order_projects", :to => "projects#order_projects"
   #post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
-  get "/projects/:id/update_worklist_item", :to => "projects#update_worklist_item"
+  get "/projects/:id/update_task", :to => "projects#update_task"
   post "/users/preregister", :to => "users#preregister"
   post "/users/:id", :to => "users#update"
   post "/checklist_items/:id", :to => "checklist_items#update"
   post "/admin/billing", :to => "admin#update_billing"
-  get "/task/:id", :to => "worklist_items#edit"
+  get "/task/:id", :to => "tasks#edit"
   get 'mobile', :to => "home#mobile_redirect", :as => 'mobile_redirect'
 
   resources :registrations, :only =>[] do
@@ -116,15 +116,15 @@ Buildhawk::Application.routes.draw do
     member do
       post :archive
       post :unarchive
-      get :worklist
-      post :search_worklist
+      get :tasklist
+      post :search_tasklist
       get :checklist
       get :checklist_item
       get :documents
       get :show_photo
       get :document_photos
       get :checklist_photos
-      get :worklist_photos
+      get :tasklist_photos
       get :report_photos
       get :destroy_confirmation
     end
@@ -168,7 +168,7 @@ Buildhawk::Application.routes.draw do
       get :generate
     end
   end
-  resources :worklist_items do
+  resources :tasks do
     member do
       get :generate
     end
@@ -181,7 +181,7 @@ Buildhawk::Application.routes.draw do
       post :photo
     end
   end
-  resources :worklists do
+  resources :tasklists do
     collection do
       post :export
     end
@@ -210,9 +210,10 @@ Buildhawk::Application.routes.draw do
   patch "/api/v2/punchlist_items/:id", to: "api/v2/worklist_items#update"
   post "/api/v2/punchlist_items/photo", to: "api/v2/worklist_items#photo"
 
-  #temporary - deprecated by 1.05
+  #temporary - deprecated after 1.05
   get "/api/v2/users/:id/worklist_connect", to: "api/v2/users#connect"
   post "/api/v2/company_subs", to: "api/v2/project_subs#create"
+
   #
 
   #mobile API v2
@@ -371,8 +372,8 @@ Buildhawk::Application.routes.draw do
           post :delete_alternate
         end
       end
-      resources :worklists, :only => [:show, :index]
-      resources :worklist_items
+      resources :tasklists, :only => [:show, :index]
+      resources :tasklist_items
     end
   end
 

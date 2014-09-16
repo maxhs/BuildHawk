@@ -12,10 +12,10 @@
 	<script type="text/javascript">	
 		<% if @mobile_redirect %>
 			var userAgent = window.navigator.userAgent;
-		   	if ((userAgent.match(/iPhone/i)) && window.location != "<%=root_url%>" && window.location != "<%=root_url%>mobile") {
+		   	if ((userAgent.match(/iPhone/i) || (userAgent.match(/iPad/i)) && window.location != "<%=root_url%>" && window.location != "<%=root_url%>mobile") {
 		   		setTimeout(function () { window.location = "https://itunes.apple.com/us/app/buildhawk/id816590963?mt=8" }, 25);
-		   	 	<% if @item %>
-		  	 		window.location = "buildhawk://?task_id=<%= j @item.id.to_s %>"	
+		   	 	<% if @task %>
+		  	 		window.location = "buildhawk://?task_id=<%= j @task.id.to_s %>"	
 		  	 	<% end %>
 		  	}
 	  	<% end %>
@@ -115,7 +115,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 						<li class="nav-checklists admin"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
 						<li class="nav-documents admin"><%= link_to "Documents", document_photos_project_path(@project), :remote => true %></a></li>
 						<li class="nav-reports admin"><%= link_to "Reports", reports_path(:project_id => @project.id), :remote => true %></li>
-						<li class="nav-worklists admin"><%= link_to "Tasks", worklist_project_path(@project), :remote => true %></li>
+						<li class="nav-tasklists admin"><%= link_to "Tasks", tasklist_project_path(@project), :remote => true %></li>
 						<% if current_user.admin %> 
 							<li class="nav-edit admin"><%= link_to "Edit", edit_project_path(@project), :remote => true %></li> 
 						<% end %>

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
     has_many :message_users, :dependent => :destroy, autosave: true
     has_many :messages, :through => :message_users , autosave: true
     has_many :comments, dependent: :destroy
-    has_many :worklist_items, foreign_key: "assignee_id"
+    has_many :tasks, foreign_key: "assignee_id"
 
     has_many :photos
 
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
         puts "Sending a task email to a user with email: #{email}"
         task_array = []
         task_array << task
-        WorklistMailer.export(email, task_array, task.worklist.project).deliver
+        TasklistMailer.export(email, task_array, task.tasklist.project).deliver
     end
 
     def text_task(task)
@@ -104,9 +104,9 @@ class User < ActiveRecord::Base
 
     def connect_items(project)
         if project
-            WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project.id == project.id && t.worklist.project.company.id != company_id}.compact
+            Task.where(:assignee_id => id).map{|t| t if t.tasklist.project.id == project.id && t.tasklist.project.company.id != company_id}.compact
         else
-            WorklistItem.where(:assignee_id => id).map{|t| t if t.worklist.project && t.worklist.project.company && t.worklist.project.company.id != company_id}.compact if company_id
+            Task.where(:assignee_id => id).map{|t| t if t.tasklist.project && t.tasklist.project.company && t.tasklist.project.company.id != company_id}.compact if company_id
         end
     end
 
@@ -188,7 +188,7 @@ class User < ActiveRecord::Base
         
             data = {
                 message: options[:alert],
-                worklist_item_id: options[:worklist_item_id],
+                task_id: options[:task_id],
                 checklist_item_id: options[:checklist_item_id],
                 report_id: options[:report_id],
                 project_id: options[:project_id],
@@ -241,7 +241,7 @@ class User < ActiveRecord::Base
 
     end
 
-    api_accessible :worklist, :extend => :user do |t|
+    api_accessible :tasklist, :extend => :user do |t|
       
     end
 
@@ -257,19 +257,19 @@ class User < ActiveRecord::Base
 
     end
 
-    api_accessible :checklists, :extend => :worklist do |t|
+    api_accessible :checklists, :extend => :tasklist do |t|
         
     end
 
-    api_accessible :reports, :extend => :worklist do |t|
+    api_accessible :reports, :extend => :tasklist do |t|
         
     end
 
-    api_accessible :company, :extend => :worklist do |t|
+    api_accessible :company, :extend => :tasklist do |t|
 
     end
 
-    api_accessible :reminders, :extend => :worklist do |t|
+    api_accessible :reminders, :extend => :tasklist do |t|
 
     end
 end

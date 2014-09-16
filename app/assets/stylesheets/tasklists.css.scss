@@ -1,4 +1,4 @@
-// Place all the styles related to the Worklists controller here.
+// Place all the styles related to the Tasklists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/	
 
@@ -77,8 +77,9 @@
 
 	.task.row {
 		border-top:2px solid #eee;
-		.col-xs-3.task-body, .task-body {
-			text-align:left;
-		}
 	}
+}
+
+.col-xs-3.task-body, .task-body {
+	text-align:left;
 }

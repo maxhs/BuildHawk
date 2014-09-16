@@ -1,11 +1,10 @@
 <div class="border-box <%if task%>tasks-panel<%end%>" id="project-tasks">
-
 	<div style="margin-bottom: 15px" class="header row">
 		<div class="col-xs-3">
-			<%= link_to "+ New Task", new_worklist_item_path(:project_id => project.id), :class=>"simple-btn new-task", remote: true %>
+			<%= link_to "+ New Task", new_task_path(:project_id => project.id), :class=>"simple-btn new-task", remote: true %>
 		</div>
 		<div class="col-xs-9">
-			<%= form_tag search_worklist_project_path(project), :id => "task-search", :method => :post, :class=>"input-group", :remote => true do %>
+			<%= form_tag search_tasklist_project_path(project), :id => "task-search", :method => :post, :class=>"input-group", :remote => true do %>
 				<%= text_field_tag :search, nil, :placeholder=>"Search tasks...", :class=>"form-control search" %>
 				<span class="input-group-addon cancel-search" style="cursor: pointer;" id="remove">
 					<span class="glyphicon glyphicon-remove"></span></span>
@@ -19,7 +18,7 @@
 				<div class="header row">
 					<!--<div class="col-xs-1">
 						<% if tasks && tasks.count > 0 %>
-							<button class="export" id="export-worklist-items">Export</button>
+							<button class="export" id="export-tasks">Export</button>
 						<% end %>
 					</div>-->
 					<div class="col-xs-2"><h5>Photo</h5></div>
@@ -30,7 +29,7 @@
 				</div>		
 				
 				<div id="tasks">
-					<%= render partial: "projects/task", collection: tasks, as: :task, cache: true %>
+					<%= render partial: "projects/task_row", collection: tasks, as: :task, cache: true %>
 				</div>
 			<% else %>
 				<div class="col-xs-12 loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;margin:50px auto;">No tasks</h4></div>
@@ -41,9 +40,9 @@
 <div id="task-focus">
 	<% if task %>
 		<% if task.new_record? %> 
-			<%= render partial:"worklist_items/new", locals:{task: task} %>
+			<%= render partial:"tasks/new", locals:{task: task} %>
 		<% else %>
-			<%= render partial:"worklist_items/edit", locals:{task: task} %>
+			<%= render partial:"tasks/edit", locals:{task: task} %>
 		<% end %>
 	<% end %>
 </div>
@@ -75,22 +74,22 @@
 		$('#task-search').submit();
 	});
 	$('#export-tasks').click(function(){
-		if (!$('#export-worklist-modal').length > 0){
-			$('#project-worklist').before('<%= j render partial:"projects/worklist_export" %>');
+		if (!$('#export-tasklist-modal').length > 0){
+			$('#project-tasklist').before('<%= j render partial:"projects/tasklist_export" %>');
 		}
 
 		var values = [];
-		$('.worklist-item-checkbox input').each(function(i,obj){
+		$('.task-checkbox input').each(function(i,obj){
 			if (obj.checked) {
 				values.push(obj.value);		
 			}
 		});
 		$('body').append('<div class="modal-backdrop in"></div>');
 
-		$('#export-worklist-modal form').append('<input type="hidden" id="items" name="items" value="'+values+'">');
-		$('#export-worklist-modal').animate({"left":"25%",'opacity':'1'},300);
-		$('#cancel-worklist-modal,.modal-backdrop.in').on('click',function(){
-			$('#export-worklist-modal').animate({"left":"100%",'opacity':'0'},300);
+		$('#export-tasklist-modal form').append('<input type="hidden" id="items" name="items" value="'+values+'">');
+		$('#export-tasklist-modal').animate({"left":"25%",'opacity':'1'},300);
+		$('#cancel-tasklist-modal,.modal-backdrop.in').on('click',function(){
+			$('#export-tasklist-modal').animate({"left":"100%",'opacity':'0'},300);
 			$('.modal-backdrop.in').fadeOut(300,function(){
 				$(this).remove();
 			});
