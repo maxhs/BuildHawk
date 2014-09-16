@@ -64,11 +64,11 @@ class Report < ActiveRecord::Base
 
     def date_for_sort
         ## a blunt check to make sure the date_string is formatted properly
-        # if date_string && date_string.length > 0 && date_string.include?("/20")
-        #     Date.strptime(date_string,"%m/%d/%Y")
-        # else 
+        if date_string && date_string.length > 0 && date_string.include?("/20")
+            Date.strptime(date_string,"%m/%d/%Y")
+        else 
             created_at
-        #end
+        end
     end
 
     def to_param
@@ -180,11 +180,11 @@ class Report < ActiveRecord::Base
         t.add :activities
         t.add :daily_activities, :if => :is_daily?
         ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
-        t.add :created_date
-        t.add :epoch_time
-        t.add :safety_topics
-        t.add :report_subs
-        t.add :personnel
+        # t.add :created_date
+        # t.add :epoch_time
+        # t.add :safety_topics
+        # t.add :report_subs
+        # t.add :personnel
         ###
   	end
 

@@ -39,7 +39,7 @@ class Activity < ActiveRecord::Base
 	end
 
 	def worklist_item_id
-		task.id
+		task.id if task
 	end
 
 	acts_as_api
