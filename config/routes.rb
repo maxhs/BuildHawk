@@ -372,7 +372,7 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :tasklists, :only => [:show, :index]
-      resources :tasklist_items
+      resources :tasks
     end
   end
 
