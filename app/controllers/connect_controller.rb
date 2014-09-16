@@ -17,21 +17,21 @@ class ConnectController < AppController
 			else
 				@items = current_user.connect_items(nil)
 			end
-			@companies = @items.map{|t| t.worklist.project.company}.uniq
+			@companies = @items.map{|t| t.tasklist.project.company}.uniq
       	end
 	    
 	end
 
 	def show
 		@company = Company.find params[:id]
-		@tasks = current_user.connect_items(nil).map{|t| t if t.worklist.project.company.id == @company.id}.compact
+		@tasks = current_user.connect_items(nil).map{|t| t if t.tasklist.project.company.id == @company.id}.compact
 	end
 
 	def task
-		@task = WorklistItem.find params[:id]
-		@project = @task.worklist.project
+		@task = Task.find params[:id]
+		@project = @task.tasklist.project
 		@company = @project.company
-		@tasks = current_user.connect_items(nil).map{|t| t if t.worklist.project.company.id == @company.id}.compact
+		@tasks = current_user.connect_items(nil).map{|t| t if t.tasklist.project.company.id == @company.id}.compact
 		
 		if request.xhr?
 			respond_to do |format|
