@@ -19,7 +19,7 @@ class Tasklist < ActiveRecord::Base
         t.add :tasks
         t.add :worklist_items
         ###slated for deletion###
-        #t.add :personnel
+        t.add :personnel
         ###
     end
 
