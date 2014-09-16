@@ -1,13 +1,13 @@
 class Notification < ActiveRecord::Base
 
-	attr_accessible :user_id, :comment_id, :read, :sent, :checklist_item_id, :worklist_item_id, 
+	attr_accessible :user_id, :comment_id, :read, :sent, :checklist_item_id, :task_id, 
 					:report_id, :body, :notification_type, :project_id, :feed, :message_id
 
 	belongs_to :user
 	belongs_to :target_user, :class_name => "User"
 	belongs_to :project
 	belongs_to :report
-	belongs_to :worklist_item
+	belongs_to :task
 	belongs_to :checklist_item
 	belongs_to :comment
 	belongs_to :message
@@ -20,7 +20,7 @@ class Notification < ActiveRecord::Base
 			user.notify_all_devices(
 		        :alert          	=> body, 
 		        :report_id 			=> report_id, 
-		        :worklist_item_id 	=> worklist_item_id,
+		        :task_id 			=> task_id,
 		        :checklist_item_id 	=> checklist_item_id,
 		        :comment_id 		=> comment_id,
 		        :project_id 		=> project_id,
@@ -40,7 +40,7 @@ class Notification < ActiveRecord::Base
 	api_accessible :notifications do |t|
 		t.add :id
 		t.add :report_id
-		t.add :worklist_item_id
+		t.add :task_id
 		t.add :checklist_item_id
 		t.add :message
 		t.add :created_date

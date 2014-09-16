@@ -27,7 +27,7 @@ class Activity < ActiveRecord::Base
 	end
 
 	def worklist_id
-		worklist_item.worklist.id if worklist_item
+		task.tasklist.id if task
 	end
 
 	def worklist_item

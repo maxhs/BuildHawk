@@ -1,12 +1,12 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :project_id, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:worklist_item_id, :phase, :name, :folder_id, :description, :mobile, :comment_id
+					:task_id, :phase, :name, :folder_id, :description, :mobile, :comment_id
 
 	belongs_to :user
 	belongs_to :project
 	belongs_to :report
 	belongs_to :company
-	belongs_to :worklist_item, counter_cache: true
+	belongs_to :task, counter_cache: true
 	belongs_to :checklist_item, counter_cache: true
 	belongs_to :folder
 	belongs_to :comment
@@ -101,8 +101,8 @@ class Photo < ActiveRecord::Base
 	def date_string
 		if report
 			report.created_at.to_date
-		elsif worklist_item
-			worklist_item.created_at.to_date
+		elsif task
+			task.created_at.to_date
 		else
 			created_at.to_date	
 		end
@@ -113,11 +113,11 @@ class Photo < ActiveRecord::Base
 	end
 
 	def assignee
-		worklist_item.assignee.full_name if worklist_item && worklist_item.assignee
+		task.assignee.full_name if task && task.assignee
 	end
 
 	def has_assignee?
-		!worklist_item_id.nil?
+		!task_id.nil?
 	end
 
 	def has_folder?
@@ -169,7 +169,7 @@ class Photo < ActiveRecord::Base
 
 	end
 
-	api_accessible :worklist, :extend => :dashboard do |t|
+	api_accessible :tasklist, :extend => :dashboard do |t|
 
 	end
 

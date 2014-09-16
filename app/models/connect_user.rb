@@ -2,14 +2,14 @@ class ConnectUser < ActiveRecord::Base
 	include ActionView::Helpers::TextHelper
 	attr_accessible :first_name, :last_name, :phone, :email, :company_id, :company_name
 
-	has_many :worklist_items, foreign_key: "connect_assignee_id"
+	has_many :tasks, foreign_key: "connect_assignee_id"
     has_many :project_users, dependent: :destroy
     belongs_to :company
 
     before_destroy :cleanup
 
     def cleanup
-        WorklistItem.where(:connect_assignee_id => id).each do |t|
+        Task.where(:connect_assignee_id => id).each do |t|
             puts "Cleaning a connect user who's about to be deleted (#{full_name}) from a worklist item."
             t.update_attribute :connect_assignee_id, nil
         end
@@ -19,7 +19,7 @@ class ConnectUser < ActiveRecord::Base
 		puts "Sending a worklist item email to a connect user with email: #{email}"
 		task_array = []
 		task_array << task
-		WorklistMailer.export(email, task_array, task.worklist.project).deliver
+		TasklistMailer.export(email, task_array, task.tasklist.project).deliver
 	end
 
 	def text_task(task)
@@ -85,7 +85,7 @@ class ConnectUser < ActiveRecord::Base
     api_accessible :details, :extend => :user do |t|
         
     end
-    api_accessible :worklist, :extend => :user do |t|
+    api_accessible :tasklist, :extend => :user do |t|
         
     end
     api_accessible :connect, :extend => :user do |t|

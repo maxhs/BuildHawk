@@ -1,7 +1,7 @@
 class TaskAssignee < ActiveRecord::Base
-	attr_accessible :user_id, :connect_user_id, :worklist_item_id
+	attr_accessible :user_id, :connect_user_id, :task_id
 
 	belongs_to :user
 	belongs_to :connect_user
-	belongs_to :worklist_item
+	belongs_to :task
 end
