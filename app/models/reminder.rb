@@ -84,7 +84,7 @@ class Reminder < ActiveRecord::Base
       
     end
 
-    api_accessible :worklist, :extend => :details do |t|
+    api_accessible :tasklist, :extend => :details do |t|
       
     end
 

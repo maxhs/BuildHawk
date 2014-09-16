@@ -1,16 +1,16 @@
 class Sub < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
-	attr_accessible :name, :company_id, :company, :email, :phone, :count, :worklist_item_id,
-                  :worklist_item, :image, :image_file_name, :contact_name
+	attr_accessible :name, :company_id, :company, :email, :phone, :count, :task_id,
+                  :task, :image, :image_file_name, :contact_name
   	belongs_to :company
-    belongs_to :worklist_item
+    belongs_to :task
 
     after_save :clean_phone
     before_destroy :clean_up
 
     def clean_up
         ReportSub.where(:sub_id => id).destroy_all
-        WorklistItem.where(:sub_assignee_id => id).each do |i|
+        Task.where(:sub_assignee_id => id).each do |i|
             puts "cleaning up worklist item: #{i.id}"
             i.update_attribute :sub_assignee_id, nil
         end
@@ -65,7 +65,7 @@ class Sub < ActiveRecord::Base
 
     end
 
-    api_accessible :worklist, :extend => :reports do |t|
+    api_accessible :tasklist, :extend => :reports do |t|
 
     end
 
