@@ -179,9 +179,9 @@ class Report < ActiveRecord::Base
         t.add :body, :if => :has_body?
         t.add :activities
         t.add :daily_activities, :if => :is_daily?
+        t.add :created_date
+        t.add :epoch_time
         ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
-        # t.add :created_date
-        # t.add :epoch_time
         # t.add :safety_topics
         # t.add :report_subs
         # t.add :personnel
