@@ -52,9 +52,11 @@ class RegistrationsController < Devise::RegistrationsController
         if params[:user][:company]
             @company = Company.where(name: params[:user][:company][:name]).first_or_create!
             @company.projects.build unless @company.projects.count
+            params[:user][:company_id] = @company.id
         end
 
         super
+        puts "we just got past registraiton super: #{current_user}"
         find_connect_items(current_user)
     end
 

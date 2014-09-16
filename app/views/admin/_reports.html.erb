@@ -1,11 +1,4 @@
 <div id="reports-page" class="page border-box">
-	<!--<header>
-		<h3 style="margin-top:0;">Reports Index</h3>
-		<div class="input-group pull-right" style="width: 100%; margin: 1% auto;">
-			<input type="text" class="form-control" name="query" autocomplete="off" placeholder="Search Users">
-			<span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search"></span></span>
-		</div>
-	</header>-->
 	<% projects.each do |project| %>
 		<h4><%= link_to project.name, reports_path(:project_id => project.id), :remote => true %> </h4>
 		<table class="table table-bordered table-responsive report">
