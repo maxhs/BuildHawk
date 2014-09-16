@@ -134,6 +134,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
                 elsif phone && user.text_permissions
                     user.text_task(task)
                 end
+                task.update_attribute :assignee_id, user.id
             elsif report
                 report.report_users.where(:user_id => user.id).first_or_create
             end
@@ -160,6 +161,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
                 elsif phone
                     connect_user.text_task(task)
                 end
+                task.update_attribute :connect_assignee_id, connect_user.id
             elsif report
                 report.report_users.where(:connect_user_id => connect_user.id).first_or_create
             end
