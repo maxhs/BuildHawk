@@ -75,11 +75,12 @@ class RegistrationsController < Devise::RegistrationsController
     def find_connect_items(user)
         @connect_user = ConnectUser.where(:email => user.email).first
         @connect_user = ConnectUser.where(:phone => user.phone).first unless @connect_user
+        puts "did we find a connect user? #{@connect_user.email} and tasks count: #{@connect_user.tasks.count}"
         return unless @connect_user
         tasks = @connect_user.tasks
         tasks.each do |t|
             t.update_attributes :assignee_id => user.id, :connect_assignee_id => nil
-            t.project.project_users.create :user_id => user.id
+            t.project.project_users.where(user_id: user.id).first_or_create
         end
     end
 end 
