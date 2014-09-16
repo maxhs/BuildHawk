@@ -40,7 +40,7 @@ class CompanySub < ActiveRecord::Base
         t.add :users_count, :if => :has_subcontractor?
     end
 
-    api_accessible :worklist, :extend => :projects do |t|
+    api_accessible :tasklist, :extend => :projects do |t|
 		
 	end
 end

@@ -1,10 +1,10 @@
 class Comment < ActiveRecord::Base
     
-	attr_accessible :body, :user_id, :report_id, :checklist_item_id, :worklist_item_id, :mobile, :message_id
+	attr_accessible :body, :user_id, :report_id, :checklist_item_id, :task_id, :mobile, :message_id
   	belongs_to :user
   	belongs_to :report
   	belongs_to :checklist_item, counter_cache: true
-  	belongs_to :worklist_item, counter_cache: true
+  	belongs_to :task, counter_cache: true
     belongs_to :message
     has_one :notification, dependent: :destroy
   	has_many :photos
@@ -21,8 +21,8 @@ class Comment < ActiveRecord::Base
             report.project
         elsif checklist_item
             checklist_item.checklist.project
-        elsif worklist_item
-            worklist_item.worklist.project
+        elsif task
+            task.tasklist.project
         elsif message
             message.target_project
         end
@@ -34,7 +34,7 @@ class Comment < ActiveRecord::Base
             :body => "\"#{body}\"",
             :checklist_item_id => checklist_item_id,
             :report_id => report_id,
-            :worklist_item_id => worklist_item_id,
+            :task_id => task_id,
             :message_id => message_id,
             :project_id => project.id, 
             :comment_id => id,
@@ -48,10 +48,10 @@ class Comment < ActiveRecord::Base
                 :comment_id => id,
                 :notification_type => self.class.name
             ).first_or_create
-        elsif worklist_item
-            worklist_item.user.notifications.where(
+        elsif task
+            task.user.notifications.where(
                 :body => body, 
-                :worklist_item_id => worklist_item_id,
+                :task_id => task_id,
                 :comment_id => id,
                 :notification_type => self.class.name
             ).first_or_create
@@ -83,7 +83,7 @@ class Comment < ActiveRecord::Base
 
     end
 
-    api_accessible :worklist, :extend => :projects do |t|
+    api_accessible :tasklist, :extend => :projects do |t|
 
     end
 
