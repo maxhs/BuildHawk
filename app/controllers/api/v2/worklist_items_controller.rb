@@ -8,24 +8,24 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         ## to remove in 1.05
         if params[:worklist_item][:user_assignee]
             user = User.where(:full_name => params[:worklist_item][:user_assignee]).first
-            params[:worklist_item][:assignee_id] = user.id
+            params[:worklist_item][:assignee_id] = user.id if user
             params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee]
             sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.tasklist.project.company.id).first_or_create
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:connect_assignee_id] = nil
-            params[:worklist_item][:sub_assignee_id] = sub.id
+            params[:worklist_item][:sub_assignee_id] = sub.id if sub
             params[:worklist_item].delete(:sub_assignee)
         ###
         elsif params[:worklist_item][:assignee_id]
             assignee = User.where(:id => params[:worklist_item][:assignee_id]).first
-            notify = true unless task.assignee_id == assignee.id
+            notify = true if assignee && task.assignee_id != assignee.id
             params[:worklist_item][:connect_assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
         elsif params[:worklist_item][:connect_assignee_id]
             connect_user = ConnectUser.where(:id => params[:worklist_item][:connect_assignee_id]).first
-            notify = true unless task.connect_assignee_id == connect_user.id
+            notify = true if connect_user && task.connect_assignee_id != connect_user.id
             params[:worklist_item][:assignee_id] = nil
             params[:worklist_item][:sub_assignee_id] = nil
         else
