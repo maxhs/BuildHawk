@@ -92,6 +92,9 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
     def add_user
         project = Project.find params[:id]
+        task = Task.find params[:task_id] if params[:task_id] && params[:task_id] != 0
+        report = Report.find params[:report_id] if params[:report_id] && params[:report_id] != 0
+
         if params[:user][:company_name]
             company_name = "#{params[:user][:company_name]}"
             company = Company.where("name ILIKE ?",company_name).first
@@ -100,13 +103,12 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
             ## create a new project subcontractor object for the project
             project.project_subs.create :company_id => company.id
+
             ## create a new company subcontractor object for the company that owns the project
             project.company.company_subs.where(:subcontractor_id => company.id).first_or_create 
-            #params[:user].delete(:company_name)
+
+            params[:user].delete(:company_name)
         end
-       
-        task = Task.find params[:task_id] if params[:task_id] && params[:task_id] != 0
-        report = Report.find params[:report_id] if params[:report_id] && params[:report_id] != 0
 
         email = params[:user][:email].strip if params[:user][:email]
         puts "do we have an email? #{email}"
@@ -116,59 +118,40 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user = User.where(:email => email).first
         user = User.where(:phone => phone).first unless user
 
-        if user
-            ## existing user. ensure they're attached to the project
-        else
+        unless user
             alternate = Alternate.where(:email => email).first if email
             alternate = Alternate.where(:phone => phone).first if phone && !alternate
             user = alternate.user if alternate
         end
-        
-        if user
-            project.project_users.where(:user_id => user.id).first_or_create
-            project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
 
-            if task
-                if email && user.email_permissions
-                    user.email_task(task)
-                elsif phone && user.text_permissions
-                    user.text_task(task)
-                end
-                task.update_attribute :assignee_id, user.id
-            elsif report
-                report.report_users.where(:user_id => user.id).first_or_create
-            end
-
-            respond_to do |format|
-                format.json { render_for_api :user, :json => user, :root => :user}
-            end
-        else
-
+        unless user
+            ## still no user? This means they're a "connect user". Creating a new user here will create an inactive user by default.
             if email
-                connect_user = ConnectUser.where(:email => email).first_or_create
+                user = User.where(:email => email).first_or_create
             elsif phone
-                connect_user = ConnectUser.where(:phone => phone).first_or_create
+                user = User.where(:phone => phone).first_or_create
             end
-            puts "do we now have a connect user from the add user section? #{connect_user}"
+        end
 
-            connect_user.update_attributes params[:user]
-            project.project_users.where(:connect_user_id => connect_user.id).first_or_create
-            company.connect_users << connect_user if company
+        ## update the user and ensure they're attached to the project
+        user.update_attributes params[:user]
+        project.project_users.where(:user_id => user.id).first_or_create
+        project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
 
-            if task
-                if email
-                    connect_user.email_task(task)
-                elsif phone
-                    connect_user.text_task(task)
-                end
-                task.update_attribute :connect_assignee_id, connect_user.id
-            elsif report
-                report.report_users.where(:connect_user_id => connect_user.id).first_or_create
+        ## notify the user
+        if task
+            if email && user.email_permissions
+                user.email_task(task)
+            elsif phone && user.text_permissions
+                user.text_task(task)
             end
+            task.update_attribute :assignee_id, user.id
+        elsif report
+            report.report_users.where(:user_id => user.id).first_or_create
+        end
 
-            respond_to do |format|
-                format.json { render_for_api :user, :json => connect_user, :root => :connect_user}
-            end
+        respond_to do |format|
+            format.json { render_for_api :user, :json => user, :root => :user}
         end
     end
 
