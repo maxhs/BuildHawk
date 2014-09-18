@@ -164,6 +164,7 @@ body {
 		position:fixed;
 		top:0;
 		left:0;
+		font-size:1.1em;
 		background:#fff;
 		
 		//background-image: image-url('crossword.png');
@@ -343,8 +344,8 @@ body {
 		min-height:100%;
 		height: 100%;
 		width:100%;
-		background:#eee;
-		background-image: image-url('fabric_1.png');
+		background:#f7f7f7;
+		//background-image: image-url('fabric_1.png');
 		margin:0 auto -50px;
 
 		#inner-wrap {
@@ -394,7 +395,8 @@ body {
 
 	.navbar {
 		margin-bottom:0;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
+		background:#fff;
+		//background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
 
 		.container {
 			padding:0;
