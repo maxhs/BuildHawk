@@ -12,7 +12,7 @@
 		</div>
 	</div>
 		
-	<div  style="border:1px solid #ddd;">	
+	<div>	
 		<div id="task-table">
 			<% if tasks && tasks.count > 0 %>
 				<div class="header row">
@@ -32,7 +32,7 @@
 					<%= render partial: "projects/task_row", collection: tasks, as: :task, cache: true %>
 				</div>
 			<% else %>
-				<div class="col-xs-12 loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;margin:50px auto;">No tasks</h4></div>
+				<div class="no-contents-placeholder font-smoothing">No tasks</div>
 			<% end %>
 		</div>
 	</div>

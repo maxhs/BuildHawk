@@ -213,42 +213,42 @@
 }
 
 .checklist-item {
-			min-height:40px;
+	min-height:40px;
 
-			.left-edit-checklist {
-				top: -5px;
-				margin-right:10px;
-				padding: 5px 10px 5px 20px;
-				font-size: 13px;
-				letter-spacing:1px;
-				font-weight:normal;
-				text-transform:uppercase;
-				position: absolute;
-				right: 100%;
-				background: #fff;
-				border-left: 1px solid #eee;
-				border-radius:20px 0 0 20px;
-				display:none;
-				z-index:5;
-				font-family: "Proxima Nova","Source Sans Pro","Helvetica Neue","Helvetica",sans-serif;
-			}
+	.left-edit-checklist {
+		top: -5px;
+		margin-right:10px;
+		padding: 5px 10px 5px 20px;
+		font-size: 13px;
+		letter-spacing:1px;
+		font-weight:normal;
+		text-transform:uppercase;
+		position: absolute;
+		right: 100%;
+		background: #fff;
+		border-left: 1px solid #eee;
+		border-radius:20px 0 0 20px;
+		display:none;
+		z-index:5;
+		font-family: "Proxima Nova","Source Sans Pro","Helvetica Neue","Helvetica",sans-serif;
+	}
 
-			.checklist.body {
-				display:table;
-				height:33px;
+	.checklist.body {
+		display:table;
+		height:33px;
 
-				a {
-					vertical-align:middle;
-					display:table-cell;
-				}
-			}
+		a {
+			vertical-align:middle;
+			display:table-cell;
 		}
+	}
+}
 
-		.checklist-item:hover {
-			.left-edit-checklist {
-				display:block;
-			}
-		}
+.checklist-item:hover {
+	.left-edit-checklist {
+		display:block;
+	}
+}
 
 .phase {
 	padding:10px 0;
@@ -261,9 +261,10 @@
 	}
 
 	.left-edit {
-		top: 10px;
-		padding: 5px 5px 5px 15px;
+		top: 8px;
 		font-size: 14px;
+		padding:10px 10px 10px 20px;
+		margin:0;
 		letter-spacing:1px;
 		text-transform:uppercase;
 		position: absolute;
@@ -272,13 +273,16 @@
 		border-left: 1px solid #eee;
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
+		border-right:1px solid transparent;
 		display: none;
-		font-family: "Proxima Nova","Source Sans Pro","Helvetica",sans-serif;
 		border-radius: 18px 0 0 18px;
 		-webkit-border-radius: 18px 0 0 18px;
 		-moz-border-radius: 18px 0 0 18px;
 		z-index: 5;
 		font-weight: normal;
+		box-shadow:0 0 0 0;
+		-moz-box-shadow:0 0 0 0;
+		-webkit-box-shadow:0 0 0 0;
 	}
 }
 
