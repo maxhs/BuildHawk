@@ -45,6 +45,12 @@ class Api::V2::CommentsController < Api::V2::ApiController
         elsif params[:comment][:worklist_item_id].present?
             task = Task.find params[:comment][:worklist_item_id]
             comments = task.comments
+        elsif params[:comment][:worklist_item_id].present?
+            task = Task.find params[:comment][:worklist_item_id]
+            comments = task.comments
+        elsif params[:worklist_item_id].present?
+            task = Task.find params[:worklist_item_id]
+            comments = task.comments
         elsif params[:comment][:report_id].present?
             report = Report.find params[:comment][:report_id]
             comments = report.comments
