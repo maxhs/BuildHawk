@@ -35,16 +35,16 @@ class Api::V2::CommentsController < Api::V2::ApiController
         if params[:comment][:punchlist_item_id]
             params[:comment][:worklist_item_id] = params[:comment][:punchlist_item_id]
             params[:comment].delete(:punchlist_item_id)
+        elsif params[:worklist_item_id]
+            params[:comment][:worklist_item_id] = params[:worklist_item_id]
         end
         
+        params[:comment][:mobile] = true
         comment = Comment.create params[:comment]
-        comment.update_attribute :mobile, true
+
         if params[:comment][:checklist_item_id].present?
             checklist_item = ChecklistItem.find params[:comment][:checklist_item_id]
             comments = checklist_item.comments
-        elsif params[:comment][:worklist_item_id].present?
-            task = Task.find params[:comment][:worklist_item_id]
-            comments = task.comments
         elsif params[:comment][:worklist_item_id].present?
             task = Task.find params[:comment][:worklist_item_id]
             comments = task.comments
