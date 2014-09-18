@@ -48,7 +48,8 @@ class RegistrationsController < Devise::RegistrationsController
             params[:user][:company_id] = @company.id
         end
 
-        super
+        redirect_to projects_path
+        #super
 
         #find_connect_items(current_user) if current_user
     end
