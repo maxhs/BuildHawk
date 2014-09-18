@@ -47,7 +47,7 @@
 	<ul id="archived-projects" class="sortable-projects">
 		<% if @archived_projects && @archived_projects.count > 0 %>
 		
-			<li><h5 id="archived-projects-button">Archived Projects</h5></li>	
+			<li><h4 id="archived-projects-button">Archived Projects</h4></li>	
 			<% @archived_projects.each do |p| %>
 				<li class="project"><%= link_to p.name, project_path(p), :id=>"#{p.id}-link", :remote => true %></li>
 			<% end %>
