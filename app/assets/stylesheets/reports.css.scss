@@ -69,7 +69,8 @@
 	.header.row {
 		margin:0;
 		border-bottom:1px solid #ddd;
-		//background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #eee));
+		color:#fff;
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#666666), color-stop(100%, #444444));
 	}
 	.report.row {
 		padding:10px 0 !important;

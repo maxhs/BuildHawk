@@ -934,7 +934,7 @@ a.search-button {
 .simple-btn {
 	cursor:pointer;
 	background:#fff;
-	border: 1px solid transparent;
+	border: 1px solid rgba(0,0,0,.05);
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -1031,7 +1031,7 @@ a.search-button {
 }
 
 .btn-danger, .btn-danger a, .btn-danger a:hover, .btn-danger:hover, {
-	color:#fff;
+	color:#fff !important;
 }
 
 .btn.save {
