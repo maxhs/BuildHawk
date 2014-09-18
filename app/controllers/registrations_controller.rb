@@ -5,17 +5,11 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def connect
-        @user = User.new
-        @connect_user = ConnectUser.find params[:connect_user_id]
-        @user.first_name = @connect_user.first_name
-        @user.last_name = @connect_user.last_name
-        @user.email = @connect_user.email
-        @user.phone = @connect_user.phone
-        @user.company = @connect_user.company
-
-        if @connect_user.company && @connect_user.company.name.length > 0
+        @user = User.find params[:user_id]
+        
+        if @user.company && @user.company.name.length > 0
             #companies search
-            search_term = @connect_user.company.name     
+            search_term = @user.company.name     
             initial = Company.search do
                 fulltext search_term
             end
@@ -56,7 +50,7 @@ class RegistrationsController < Devise::RegistrationsController
 
         super
 
-        find_connect_items(current_user) if current_user
+        #find_connect_items(current_user) if current_user
     end
 
     def update
