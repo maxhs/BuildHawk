@@ -11,7 +11,7 @@
 					<% end %>				
 					<div class="checklist-header row">
 						<div class="col-xs-1">
-							<%= image_tag "search.png", id:"checklist-search-button" %>
+							<%= image_tag "whiteSearch.png", id:"checklist-search-button" %>
 						</div>
 						<div class="col-xs-7">
 							<h5 style="display:inline-block;">Phase</h5>					
@@ -24,7 +24,7 @@
 					<%= render :partial => 'projects/phase', collection: @checklist.phases, :as => :p, cache: true %>
 				</ul>
 				<% if current_user.admin %>
-					<%= link_to "Add a new phase", new_phase_path(:checklist_id => @checklist.id,:project_id => @project.id), :id=>"new-phase", :class=>"remote new-phase", remote: true %>
+					<%= link_to "Add a new phase", new_phase_path(:checklist_id => @checklist.id,:project_id => @project.id), :id=>"new-phase", :class=>"remote new-phase simple-btn", remote: true %>
 				<% end %>
 			</div>
 		</div>

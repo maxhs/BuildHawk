@@ -53,7 +53,8 @@
 	}
 		
 	#checklist-items header {
-		background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #eee));
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#666666), color-stop(100%, #444444));
+		color:#fff;
 		border-bottom:1px solid #ddd;
 		padding:0;
 	}
@@ -457,19 +458,10 @@
 
 .new-checklist-item, .new-phase, .new-category, .edit-category, .edit-phase {
 	border:1px solid #eee;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	padding:5px 10px;
 	position:relative;
 	display:inline-block;
 	margin:0;
 	width:auto;
-	text-align:center;
-	clear:both;
-	font-family:"Proxima Nova","Source Sans Pro",'Helvetica',sans-serif;
-	font-size:.9em;
-	line-height:1em;
 	text-transform:uppercase;
 	letter-spacing:1px;
 }

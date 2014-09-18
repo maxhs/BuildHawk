@@ -4,7 +4,7 @@
 			<h5 class="title" id="<%= category.id %>"><%= category.name %></h5>
 			<span style="padding:0 1em;color:#aaa;">(<%=category.completed_count%> of <%= category.checklist_items.count%>)</span>
 			<% if current_user.admin || current_user.company_admin %>
-				<%= link_to "Edit", edit_category_path(category, :project_id => @project.id), :class=>"edit-category", :remote => true %>
+				<%= link_to "Edit", edit_category_path(category, :project_id => @project.id), :class=>"edit-category simple-btn", :remote => true %>
 			<% end %>
 			
 		</div>
@@ -20,6 +20,6 @@
 		<ul class="category-items" id="items-<%=category.id%>">
 			<%= render partial:"projects/item", collection:category.checklist_items, as: :item, cache: false %>
 		</ul>
-		<%= link_to "Add Item", new_checklist_item_path(:project_id => @project.id, :category_id => category.id), :id=>"new-item-#{category.id}", :class=>"new-checklist-item", :remote => true %>
+		<%= link_to "Add Item", new_checklist_item_path(:project_id => @project.id, :category_id => category.id), :id=>"new-item-#{category.id}", :class=>"new-checklist-item simple-btn", :remote => true %>
 	</div>
 </li>
