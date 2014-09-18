@@ -125,9 +125,12 @@ body {
 
 	.border-box {
 		background-color:#fff;
-		border:1px solid #ccc;
+		border:1px solid rgba(0,0,0,.1);
 		padding:10px;
 		box-shadow: 0 0 7px 0 rgba(0,0,0,.1);
+		border-radius:2px;
+		-moz-border-radius:2px;
+		-webkit-border-radius:2px;
 	}
 
 	.delete-button {
@@ -160,11 +163,11 @@ body {
 		position:fixed;
 		top:0;
 		left:0;
-		font-size:1.1em;
-		background:#fff;
+		font-size:1.15em;
+		background:#444;
 		
 		//background-image: image-url('crossword.png');
-		border-right:1px solid #ccc;
+		border-right:1px solid #555;
 		overflow-y:scroll;
 
 		#settings-row{
@@ -173,7 +176,7 @@ body {
 
 		#projects-search-form {
 			width:100%;
-			border-top:1px solid #ccc;
+			border-color:#777;
 			border-right:0;
 			border-left:0;
 		}
@@ -199,6 +202,9 @@ body {
 		#project-search-button {
 			width:24px;
 			float:right;
+			position:absolute;
+			right:18px;
+			top:19px;
 		}
 
 		.project-sidebar {
@@ -211,28 +217,30 @@ body {
 				input {
 					padding:0 10px;
 					height:44px;
-					border-bottom:0;
+					margin-bottom:-1px;
+					background:transparent;
+					color:#fff;
 				}
 
 				input.form-control:focus, input.form-control:active {
 					box-shadow:0 0 0 0;
 					-webkit-box-shadow:0 0 0 0;
 					-moz-box-shadow:0 0 0 0;
-					background:#f9f9f9;
+					background:transparent;
 				}
 			}
 
 			.project {
 				cursor:default;
-				background:#f7f7f7;
-				box-shadow:inset 0 1px 0 0 rgba(255,255,255,1);
-				border-bottom: 1px solid #ccc;
+				background:#555;
+				box-shadow:inset 0 1px 0 0 rgba(255,255,255,.1);
 				padding: 13px 0 7px 0;
-				line-height:13px;
-				-webkit-transition: all 0.17s ease;
-    			-moz-transition: all 0.17s ease;
-    			-o-transition: all 0.17s ease;
-    			transition: all 0.17s ease;
+				line-height:15px;
+				-webkit-transition: all 0.23s ease;
+    			-moz-transition: all 0.23s ease;
+    			-ms-transition: all 0.23s ease;
+    			-o-transition: all 0.23s ease;
+    			transition: all 0.23s ease;
     			font-size:.9em;
     			letter-spacing:1px;
     			text-transform:uppercase;
@@ -246,7 +254,12 @@ body {
 					float:left;
 					cursor:pointer;
 					width:75%;
+					color:#fff;
 				}
+			}
+
+			.project:hover {
+				background:#666;
 			}
 
 			.unsortable {
@@ -263,12 +276,15 @@ body {
 					vertical-align:middle;
 					height: 20px;
 					text-align:center;
-					border-top:1px solid #ddd;
-					font-size:1em;
+					background:#555;
+					color:#fff;
+					border:0;
+					font-size:1.1em;
 				}
 
-				#new-project-button {
-					border-right:1px solid #ddd;
+				#new-project-button:hover, #new-group-button:hover {
+					background:#666;
+					color:#fff !important;
 				}
 			}
 
@@ -278,10 +294,12 @@ body {
 				width: 25%;
 				vertical-align: middle;
 				text-align: center;
+				color:#fff;
 			}
 			.ui-progressbar {
 				display:inline-block;
-				border:1px solid #fff;
+				background:#777;
+				border:0;
 				border-radius:0px;
 				-moz-border-radius:0px;
 				-webkit-border-radius:0px;
@@ -310,14 +328,17 @@ body {
 			position: fixed;
 			left: 0;
 			bottom: 0;
-			border-top: 1px solid #ccc;
-			border-right: 1px solid #ccc;
+			border-top: 1px solid #555;
+			border-right: 1px solid #555;
 			display: table;
-			background:#fff;
-			background-image: image-url('crossword.png');
+			background:transparent;
+
+			a, a:hover {
+				color:#fff !important;
+			}
 
 			div:first-child {
-				border-right:1px solid #ccc;
+				border-right:1px solid #555;
 			}
 
 			div {
@@ -346,7 +367,7 @@ body {
 
 		#inner-wrap {
 			margin-top:44px;
-			padding:10px;
+			padding:15px;
 			width:80%;
 			left:20%;
 			position:relative;
@@ -408,13 +429,14 @@ body {
 		width:100%;
 		left:0%;
 		z-index:6;
-		border-bottom:1px solid #ccc;
-		box-shadow: 0 0px 2px 0 rgba(255,255,255,1);
+		border-bottom:1px solid #eee;
+		box-shadow: 0 0px 3px 0 rgba(255,255,255,1);
 		height:44px;
 
 		.nav-icon {
 			margin-right:6px;
 			width:18px;
+			vertical-align:bottom;
 		}
 
 		.logo {
@@ -497,13 +519,20 @@ body {
 		}
 	}
 
+	#dropdown-toggle {
+		font-size:16px;
+	}
+	#dropdown-toggle:hover {
+		color:#336699;
+	}
+
 	.dropdown-menu {
 		width:auto;
 
 		li{ 
 			a {
 				line-height:2.25em;
-				font-size:1.1em;
+				font-size:1em;
 				padding:3px 40px;
 				text-align:right;
 				color:#000;
@@ -731,7 +760,7 @@ body {
 			#condensed-sidebar {
 				z-index:10;
 				display:block;
-				background:#fff;
+				background:#444;
 				position:fixed;
 				height:100%;
 				width:40px;
@@ -807,27 +836,27 @@ body {
 				display:block;
 				position:absolute;
 				left:2%;
-				top:4px;
 				width:100%;
 
 				#dropdown-menu {
 					display:none;
 					position:relative;
-					top:-28px;
-					left:44px;
+					top:-34px;
+					left:52px;
 					background:white;
 					border:1px solid #ddd;
 					padding:10px;
 					width:50%;
 					max-width:200px;
+					font-size:17px;
+					line-height:23px;
 
 					li {
 						display:block;
 						border:0;
-						height:30px;
 						a {
 							text-transform:uppercase;
-							font-size:1em;
+							
 							letter-spacing:1px;
 						}
 					}
@@ -866,9 +895,9 @@ body {
 }
 
 input[type="email"], input[type="password"], input[type="text"], textarea {
-	border-radius:0px;
-	-moz-border-radius:0px;
-	-webkit-border-radius:0px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
 	box-shadow:0 0 0 0 transparent;
 	-moz-box-shadow:0 0 0 0 transparent;
 	-webkit-box-shadow:0 0 0 0 transparent;
@@ -894,8 +923,8 @@ a.search-button {
 .simple-btn {
 	cursor:pointer;
 	background:#fff;
-	border: 1px solid rgba(0,0,0,.1);
-	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);
+	border: 1px solid #ddd;
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
@@ -912,10 +941,10 @@ a.search-button {
 	letter-spacing:2px;
 	font-weight:normal;
 	text-transform:uppercase;
-	-webkit-transition: all 0.1s ease;
-    -moz-transition: all 0.1s ease;
-    -o-transition: all 0.1s ease;
-   	transition: all 0.1s ease;
+	-webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+   	transition: all 0.2s ease;
 }
 
 .simple-btn.save {
@@ -924,6 +953,7 @@ a.search-button {
 
 .simple-btn:hover {
 	border-color:#ccc;
+	background:#fcfcfc;
 }
 
 .delete-link {
@@ -992,7 +1022,7 @@ a.search-button {
 }
 
 .btn-danger, .btn-danger a, .btn-danger a:hover, .btn-danger:hover, {
-	color:#fff !important;
+	color:#fff;
 }
 
 .btn.save {

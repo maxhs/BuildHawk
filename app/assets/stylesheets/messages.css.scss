@@ -2,11 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.messages-container {
-	background:#fff;
-	max-width:800px;
-	margin:0 auto;
-	padding:20px 10px;
+#messages {
+
+	margin:2.5% auto;
+	padding:20px 0;
+
+	h2, h3, h4 {
+		text-align:center;
+		margin:1.5% auto 2%;
+	}
+
+	.explanation {
+		text-align:center;
+		color:#aaa;
+		font-size:1.1em;
+		margin-bottom:2%;
+
+		a {
+			color:#aaa;
+			text-decoration:underline;
+		}
+	}
 
 	#messages-table {
 		width:100%;

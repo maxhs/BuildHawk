@@ -16,4 +16,15 @@
 		</div>		
 	<% end %>
 
+	<div id="messages" class="container">
+		<div class="border-box">
+			<h4>Messages</h4>
+			<div class="explanation font-smoothing">Use the messages section to communicate with your team.  <%= link_to "Send a new message", new_message_path, remote:true %>.</div>
+			<table id="messages-table">
+
+			</table>
+
+		</div>
+	</div>
+
 </div>

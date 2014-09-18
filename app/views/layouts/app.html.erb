@@ -57,7 +57,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
     <div id="wrap" style="margin-bottom:0;">
 
 		<nav id="condensed-sidebar">
-			<%= image_tag "menu.png", id:"toggle" %>
+			<%= image_tag "whiteMenu.png", id:"toggle" %>
 			<ul id="main-dropdown-menu">
 				<% if @projects && @projects.count > 0 %>
 					<% @projects.each do |p| %>
@@ -69,8 +69,8 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		</nav>
 		<nav id="main-sidebar">
 			<div id="settings-row">
-				<a href="/"><%= image_tag 'logo.png', id: "logo" %></a>
-				<%= image_tag 'search.png', id:'project-search-button' %>
+				<a href="/"><%= image_tag 'logo_white.png', id: "logo" %></a>
+				<%= image_tag 'whiteSearch.png', id:'project-search-button' %>
 			</div>
 				
 			<%= render partial: "projects/sidebar" %>
@@ -78,7 +78,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			
 			<div id="bottom-menu" class="app">
 				<div>
-					<%= link_to image_tag('settings.png', id: "settings"),edit_user_path(current_user), remote:true %>
+					<%= link_to image_tag('settings_white.png', id: "settings"),edit_user_path(current_user), remote:true %>
 				</div>
 				<div>
 					<% if current_user.any_admin? %>
@@ -108,7 +108,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			</ul>
 
 			<div id="dropdown">
-				<%= image_tag("menu.png",style:"width:34px;",id:"dropdown-toggle") %>
+				<span id="dropdown-toggle">Menu</span>
 				<% if @project %>
 					<ul id="dropdown-menu">
 						<li class="nav-dashboard admin"><%= link_to @project.name, project_path(@project), :remote => true %></li>

@@ -1,12 +1,13 @@
 <div id="<%= @project_group.id %>" class="project-group editing">
 	<%= form_for @project_group, url: project_group_path(@project_group), method: :patch, remote: true do |f| %>
+		<div class="col-xs-5">
+			<%= f.submit "Save", :class =>"simple-btn" %>
+			<span class="glyphicon glyphicon-remove remote" style="color:#fff;" id="cancel-group"></span>
+			<%= link_to image_tag('whiteTrashButton.png', :class=>"remote delete-img"), project_group_path(project_group), :class=>"remote", method: :delete, remote: true, id:"delete-group", data: {confirm:"Are you sure you want to delete this project group? Projects will not be deleted."} %>
+		</div>
 		<div class="col-xs-7">
 			<%= f.text_field :name, id:'edit-group-name' %>
 		</div>
-		<div class="col-xs-5">
-			<%= f.submit "Save", :class =>"simple-btn" %>
-			<span class="glyphicon glyphicon-remove remote" id="cancel-group"></span>
-			<%= link_to image_tag('trashButton.png', :class=>"remote delete-img"), project_group_path(project_group), :class=>"remote", method: :delete, remote: true, data: {confirm:"Are you sure you want to delete this project group? Projects will not be deleted."} %>
 	<% end %>
-		</div>
+		
 </div>
