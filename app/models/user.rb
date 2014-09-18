@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
     require 'gcm'
     
     attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
-    				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, 
-                    :uber_admin, :authentication_token, :company_admin, :text_permissions
+    				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin, 
+                    :authentication_token, :company_admin, :text_permissions, :active
 
     belongs_to :company
   	has_many :project_users, :dependent => :destroy
@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
                       :path           => "user_image_:id_:style.:extension"
 
     validates_attachment :image, :content_type => { :content_type => /\Aimage/ }
-    #validates_presence_of :first_name
-    #validates_presence_of :last_name
-    #validates_presence_of :email
+    validates_presence_of :first_name, :if => :is_active?
+    validates_presence_of :last_name, :if => :is_active?
+    validates_presence_of :email, :if => :is_active?
     validates_uniqueness_of :email
     validates_confirmation_of :password, :if => :password_required?
     validates_presence_of :password, :if => :password_required?
@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
         UserMailer.welcome(self).deliver if email 
         full_name = "#{first_name} #{last_name}"
         self.save
+    end
+
+    def is_active?
+        active
     end
 
     def clean_phone   
@@ -74,10 +78,10 @@ class User < ActiveRecord::Base
     end
 
     def email_task(task)
-        puts "Sending a task email to a user with email: #{email}"
+        puts "Sending a task email to a user with email: #{email}. Is the user active? #{active}"
         task_array = []
         task_array << task
-        TasklistMailer.export(email, task_array, task.tasklist.project).deliver
+        TasklistMailer.export(email, active, task_array, task.tasklist.project).deliver
     end
 
     def text_task(task)

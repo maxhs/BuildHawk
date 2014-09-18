@@ -3,11 +3,7 @@ class TasklistMailer < ActionMailer::Base
 
   	def export(recipient_email, task_array, project)
   		@recipient = User.where(:email => recipient_email).first
-  		@recipient = Sub.where(:email => recipient_email).first unless @recipient
-      unless @recipient
-        @recipient = ConnectUser.where(:email => recipient_email).first
-        @connect_user = @recipient if @recipient
-      end
+      @connect_user = @recipient if @recipient && !@recipient.active
   		@project = project
       @company = @project.company
   		@task_array = task_array
