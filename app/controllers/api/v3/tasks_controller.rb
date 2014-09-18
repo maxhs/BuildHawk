@@ -6,18 +6,11 @@ class Api::V3::TasksController < Api::V3::ApiController
         notify = false
         if params[:task][:assignee_id]
             assignee = User.where(:id => params[:task][:assignee_id]).first
-            notify = true unless task.assignee_id == assignee.id
-            params[:task][:connect_assignee_id] = nil
-            params[:task][:sub_assignee_id] = nil
-        elsif params[:task][:connect_assignee_id]
-            connect_user = ConnectUser.where(:id => params[:task][:connect_assignee_id]).first
-            notify = true unless task.connect_assignee_id == connect_user.id
-            params[:task][:assignee_id] = nil
+            notify = true if assignee && task.assignee_id != assignee.id
             params[:task][:sub_assignee_id] = nil
         else
             params[:task][:assignee_id] = nil
             params[:task][:sub_assignee_id] = nil
-            params[:task][:connect_assignee_id] = nil
         end
         
         if params[:task][:completed] == "1"
@@ -36,18 +29,15 @@ class Api::V3::TasksController < Api::V3::ApiController
     	task.update_attributes params[:task]
 
         if notify
-            if connect_user        
-                connect_user.text_task(task) if connect_user.phone && connect_user.phone.length > 0
-                connect_user.email_task(task) if connect_user.email && connect_user.email.length > 0
-            elsif assignee
-                assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
-                assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length > 0
-            end
+            
+            assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
+            assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length > 0
+            
         end
         
         if params[:user_id]
-            current_user = User.find params[:user_id]
-            task.log_activity(current_user)
+            current_user = User.where(id: params[:user_id]).first
+            task.log_activity(current_user) if current_user
         end
         
     	respond_to do |format|
