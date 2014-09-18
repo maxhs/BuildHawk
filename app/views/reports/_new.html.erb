@@ -6,7 +6,7 @@
 		<div id="dismiss-report"><%=image_tag "blackX.png" %></div>
 		<div class="thin-form">
 			<div class="row form-title">
-				<div class="col-md-12"><h4>Date</h4></div>
+				<div class="col-md-12"><h5>Date</h5></div>
 			</div>
 			<div class="row">
 				<div class="input-append date col-md-12" data-date-format="dd-mm-yyyy">
@@ -15,31 +15,31 @@
 			</div>
 
 			<div class="row form-title">
-				<div class="col-md-4"><h4 style="display:inline-block;">Type</h4></div>
+				<div class="col-md-4"><h5 style="display:inline-block;">Type</h5></div>
 				<div class="col-md-8" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types) %></div>
 			</div>
 				
 			<div class="row form-title">
-				<div class="col-md-12"><h4>General Remarks</h4></div>
+				<div class="col-md-12"><h5>General Remarks</h5></div>
 			</div>
 			<div class="row">
 				<div class="col-md-12"><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></div>
 			</div>
 
 			<div class="row form-title">
-				<div class="col-md-12"><h4>Weather</h4></div>
+				<div class="col-md-12"><h5>Weather</h5></div>
 			</div>
 			<div class="row">
 				<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
 			</div>
 
 			<div class="row weather-titles">
-				<div class="col-md-3"><h4>Temp.</h4></div>
-				<div class="col-md-3"><h4>Wind</h4></div>
-				<div class="col-md-3"><h4>Precip.</h4></div>
-				<div class="col-md-3"><h4>Humidity</h4></div>
+				<div class="col-md-3"><h5>Temp</h5></div>
+				<div class="col-md-3"><h5>Wind</h5></div>
+				<div class="col-md-3"><h5>Precip</h5></div>
+				<div class="col-md-3"><h5>Humidity</h5></div>
 			</div>
-			<div class="row">
+			<div class="row weather-fields">
 				<div class="col-md-3"><%= f.text_field :temp, :value => @report.temp, :placeholder => "N/A" %></div>
 				<div class="col-md-3"><%= f.text_field :wind, :value => @report.wind, :placeholder => "N/A" %></div>
 				<div class="col-md-3"><%= f.text_field :precip, :value => @report.precip, :placeholder => "N/A" %></div>
@@ -47,8 +47,8 @@
 			</div>
 
 			<div class="row form-title">
-				<div class="col-md-6"><h4><%=current_user.company.name%> Personnel<br/>(# hours)</h4></div>
-				<div class="col-md-6"><h4>Other Personnel<br/>(# onsite)</h4></div>
+				<div class="col-md-6"><h5><%=current_user.company.name%> Personnel<br/>(# hours)</h5></div>
+				<div class="col-md-6"><h5>Other Personnel<br/>(# onsite)</h5></div>
 			</div>
 
 			<div class="row">
@@ -87,7 +87,7 @@
 			<% end %>
 
 			<div class="row">
-				<div class="col-md-12"><h4>Add a photo</h4></div>
+				<div class="col-md-12"><h5>Add a photo</h5></div>
 			</div>
 			
 			<div class="row">
