@@ -77,8 +77,9 @@ body {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-family:"Proxima Nova","Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica",sans-serif;
+		font-family:"Myriad Pro","Myriad Web Pro","Proxima Nova","Source Sans Pro","Helvetica",sans-serif;
 		text-transform:uppercase;
+		font-weight:600;
 		letter-spacing:1px;
 		line-height:1;
 	}
@@ -1213,8 +1214,15 @@ body {
 	}
 }
 
-.select2-container {
+.select2-container, .select2-container-multi {
 	width:50%;
+
+	.select2-choices {
+		.select2-search-choice {
+			line-height:inherit !important;
+			font-size:1.1em;
+		}
+	}
 }
 
 @media only screen and (max-width: 768px), only screen and (max-device-width: 768px) {
@@ -1501,6 +1509,48 @@ body {
          asset-url('ProximaNova-Reg.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: font-url('MyriadPro-Regular.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: font-url('MyriadPro-Regular.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: font-url('MyriadPro-Semibold.otf') format('otf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: font-url('MyriadPro-Bold.otf') format('otf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: font-url('MyriadPro-Light.otf') format('otf');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: font-url('MyriadPro-It.otf') format('otf');
+    font-weight: normal;
+    font-style: italic;
 }
 
 /* Override Bootstrap 3 font locations */

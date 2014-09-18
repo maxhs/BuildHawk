@@ -31,7 +31,7 @@
 		<% if @project_groups %>
 		    <div class="row personnel">
 		    	<div class="col-xs-3"><h4>Project Group</h4></div>
-		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id, :class=>"for-select-2") %></div>
+		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id), {}, :class=>"for-select-2" %></div>
 		    </div>
 	    <% end %>
 
@@ -45,7 +45,7 @@
     					<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span></div>
     				<% end %>
 	    		<% end %>-->
-	    		<%= f.select :user_ids, options_for_select(@users.map{|u| [u.full_name, u.id]}, @project.project_users.map{|u| u.id}), {}, {:multiple => true, :class => "for-select-2", include_blank: false} %>
+	    		<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @project.user_ids}, {multiple: true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>
 	    </div>
 
@@ -59,7 +59,7 @@
     					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
     				<% end %>
 	    		<% end %>-->
-	    		<%= f.select :company_ids, options_for_select(@subs.map{|cs| [cs.subcontractor.name, cs.subcontractor.id]}, @project.project_subs.map{|s| s.created_at}), {}, {:multiple => true, :class => "for-select-2", include_blank: false} %>
+	    		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple:true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>
 	    	
 	    </div>
@@ -84,6 +84,5 @@
 </div>
 
 <script>
-	$("#project_project_group_id").select2();
 	$(".for-select-2").select2();
 </script>
