@@ -1929,7 +1929,7 @@ output {
           transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-.form-control:focus {
+.form-control:focus, input:focus {
   outline: 0;
   box-shadow:0 0 7px 0 rgba(0,0,0,.3);
   -moz-box-shadow:0 0 7px 0 rgba(0,0,0,.3);
