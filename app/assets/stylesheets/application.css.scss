@@ -408,6 +408,14 @@ body {
 		.faded {
 			opacity:.5;
 		}
+
+		.no-contents-placeholder {
+			text-align:center;
+			margin:5% auto;
+			color:#aaa; 
+			font-style:italic;
+			font-size:1.2em;
+		}
 	}
 
 	.navbar {
@@ -901,10 +909,10 @@ input[type="email"], input[type="password"], input[type="text"], textarea {
 	border-radius:2px;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
-	box-shadow:0 0 0 0 transparent;
-	-moz-box-shadow:0 0 0 0 transparent;
-	-webkit-box-shadow:0 0 0 0 transparent;
-	border:1px solid #ddd;
+	box-shadow:0 0 7px 0 rgba(0,0,0,.1);
+	-moz-box-shadow:0 0 7px 0 rgba(0,0,0,.1);
+	-webkit-box-shadow:0 0 7px 0 rgba(0,0,0,.1);
+	border-color:transparent;
 	padding:7px;
 }
 
@@ -926,7 +934,7 @@ a.search-button {
 .simple-btn {
 	cursor:pointer;
 	background:#fff;
-	border: 1px solid #ddd;
+	border: 1px solid transparent;
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -938,11 +946,11 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Proxima Nova","Helvetica",sans-serif;
+	font-family:"Myriad Pro","Proxima Nova","Helvetica",sans-serif;
 	font-size:13px;
 	line-height:14px;
 	letter-spacing:2px;
-	font-weight:normal;
+	font-weight:bold;
 	text-transform:uppercase;
 	-webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -956,7 +964,6 @@ a.search-button {
 
 .simple-btn:hover {
 	border-color:#ccc;
-	background:#fcfcfc;
 }
 
 .delete-link {

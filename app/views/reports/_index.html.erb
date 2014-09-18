@@ -15,7 +15,7 @@
 		</div>
 	</div>
 
-	<div style="border:1px solid #ddd;">
+	<div>
 		<% if reports && reports.count > 0 %>
 			<div class="header row">
 				<div class="col-xs-3"><h5>Report Date</h5></div>
@@ -27,7 +27,7 @@
 			<%= render partial:"reports/index_row", collection: reports, as: :report, cache: true %>
 				
 		<% else %>
-			<div class="col-xs-12 loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;text-transform:none;font-style:italic;font-weight:100;margin:50px auto;">No reports</h4></div>
+			<div class="no-contents-placeholder font-smoothing">No reports</div>
 		<% end %>
 		
 	</div>
