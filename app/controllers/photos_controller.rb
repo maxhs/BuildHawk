@@ -46,11 +46,9 @@ class PhotosController < AppController
 	def create
 		@project = Project.find params[:project_id]
 		@company = @project.company
-		#@p = Photo.new(image: params[:file])
 		@p = Photo.new(mobile:true, image: params[:file])
 		if params[:file].original_filename
 			@p.name = params[:file].original_filename
-			#@p.image.reprocess_without_delay!(:large)
 			@p.save
 		end
 		@p.update_attributes :folder_id => params[:photo][:folder_id], :user_id => current_user.id, :project_id => @project.id, :company_id => @company.id
