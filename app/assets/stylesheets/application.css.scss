@@ -75,7 +75,7 @@ body {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-family:"Proxima Nova","Montserrat","Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica",sans-serif;
+		font-family:"Proxima Nova","Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica",sans-serif;
 		text-transform:uppercase;
 		letter-spacing:1px;
 		line-height:1;
@@ -163,7 +163,7 @@ body {
 		position:fixed;
 		top:0;
 		left:0;
-		font-size:1.15em;
+		font-size:1.25em;
 		background:#444;
 		
 		//background-image: image-url('crossword.png');
@@ -279,7 +279,7 @@ body {
 					background:#555;
 					color:#fff;
 					border:0;
-					font-size:1.1em;
+					font-size:1em;
 				}
 
 				#new-project-button:hover, #new-group-button:hover {
@@ -472,7 +472,7 @@ body {
 				font-weight:normal;
 				text-transform:uppercase;
 				letter-spacing:2px;
-				font-size:15px;
+				font-size:14px;
 				font-family: "Proxima Nova","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
 			}
 
@@ -604,7 +604,6 @@ body {
 			letter-spacing:2px;
 			text-transform:uppercase;
 			font-size:8px;
-			font-family:"Montserrat","Helvetica",sans-serif;
 			position:relative;
 
 			ul {
@@ -935,7 +934,7 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Proxima Nova","Montserrat","Helvetica",sans-serif;
+	font-family:"Proxima Nova","Helvetica",sans-serif;
 	font-size:13px;
 	line-height:14px;
 	letter-spacing:2px;
@@ -965,7 +964,6 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Montserrat",'Helvetica',sans-serif;
 	font-size:12px;
 	text-transform:uppercase;
 	letter-spacing:2px;
@@ -1409,15 +1407,6 @@ body {
 
 .bootstrap-datetimepicker-widget {
 	width:auto !important;
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src: asset-url('Montserrat-Regular.eot');
-  src: asset-url('Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
-       font-url('Montserrat-Regular.woff') format('woff'),
-       asset-url('Montserrat-Regular.ttf') format('truetype'),
-       asset-url('Montserrat-Regular.svg#Montserrat-Regular') format('svg');
 }
 
 @font-face {

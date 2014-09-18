@@ -22,6 +22,7 @@
 		right:5px;
 		top:5px;
 		position:absolute;
+		cursor:pointer;
 
 		img {
 			width:24px;
@@ -35,8 +36,8 @@
 	left: 5%;
 	position: relative;
 	background: #fff;
-	border-bottom: 1px solid #ddd !important;
-	border-top: 1px solid #ddd !important;
+	border-bottom: 1px solid #eee !important;
+	//border-top: 1px solid #ddd !important;
 }
 
 #reports-header{
@@ -118,6 +119,12 @@
 		
 		h4 {
 			margin:15px auto 5px;
+		}
+	}
+
+	.weather-fields {
+		input {
+			width:80%;
 		}
 	}
 	

@@ -5,12 +5,12 @@
 
 		<!--<% if @previous %>
 			<div class="previous-report">
-				<h4><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h4>
+				<h5><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h5>
 			</div>
 		<% end %>
 		<% if @next %>
 			<div class="next-report">
-				<h4><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h4>
+				<h5><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h5>
 			</div>
 		<% end %>-->
 
@@ -19,7 +19,7 @@
 
 		<div class="thin-form">
 			<div class="row form-title" style="border:0;margin-top:0;padding-top:0">
-				<div class="col-md-12"><h4>Date</h4></div>
+				<div class="col-md-12"><h5>Date</h5></div>
 			</div>
 
 			<div class="row">
@@ -29,14 +29,14 @@
 			</div>
 
 			<div class="row form-title">
-				<div class="col-md-12"><h4 style="display:inline-block;">Type</h4></div>
+				<div class="col-md-12"><h5 style="display:inline-block;">Type</h5></div>
 			</div>
 			<div class="row">
 				<div class="col-md-12" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
 			</div>
 				
 			<div class="row form-title">
-				<div class="col-md-12"><h4>General Remarks</h4></div>
+				<div class="col-md-12"><h5>General Remarks</h5></div>
 			</div>
 			<div class="row">
 				<div class="col-md-12"><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></div>
@@ -44,7 +44,7 @@
 
 			<% if @report.report_type == "Safety" %>
 				<div class="row form-title">
-					<div class="col-md-12"><h4>Safety Topics Covered</h4></div>
+					<div class="col-md-12"><h5>Safety Topics Covered</h5></div>
 				</div>
 				
 				<% @report.safety_topics.each do |topic| %>
@@ -55,19 +55,19 @@
 				
 			<% else %>
 				<div class="row form-title">
-					<div class="col-md-12"><h4>Weather Description</h4></div>
+					<div class="col-md-12"><h5>Weather Description</h5></div>
 				</div>
 				<div class="row">
 					<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
 				</div>
 				
 				<div class="row weather-titles">
-					<div class="col-md-3"><h4>Temp.</h4></div>
-					<div class="col-md-3"><h4>Wind</h4></div>
-					<div class="col-md-3"><h4>Precip.</h4></div>
-					<div class="col-md-3"><h4>Humidity</h4></div>
+					<div class="col-md-3"><h5>Temp</h5></div>
+					<div class="col-md-3"><h5>Wind</h5></div>
+					<div class="col-md-3"><h5>Precip</h5></div>
+					<div class="col-md-3"><h5>Humidity</h5></div>
 				</div>
-				<div class="row">
+				<div class="row weather-fields">
 					<div class="col-md-3"><%= f.text_field :temp, :value => @report.temp, :placeholder => "N/A" %></div>
 					<div class="col-md-3"><%= f.text_field :wind, :value => @report.wind, :placeholder => "N/A" %></div>
 					<div class="col-md-3"><%= f.text_field :precip, :value => @report.precip, :placeholder => "N/A" %></div>
@@ -76,8 +76,8 @@
 			<% end %>
 
 			<div class="row form-title">
-				<div class="col-md-6"><h4><%=current_user.company.name%> Personnel<br/>(# hours)</h4></div>
-				<div class="col-md-6"><h4>Other Personnel<br/>(# onsite)</h4></div>
+				<div class="col-md-6"><h5><%=current_user.company.name%> Personnel<br/>(# hours)</h5></div>
+				<div class="col-md-6"><h5>Other Personnel<br/>(# onsite)</h5></div>
 			</div>
 
 			<div class="row">
@@ -134,7 +134,7 @@
 
 		<div class="thin-form">	
 			<div class="row">
-				<div class="col-md-12"><h4>Add a photo</h4></div>
+				<div class="col-md-12"><h5>Add a photo</h5></div>
 			</div>
 	
 			<div class="row">
@@ -159,7 +159,7 @@
 
 	</div>
 	<div class="comment-container border-box">
-		<h3 style="text-align:center; margin:20px auto; display:block;">Comments</h3>
+		<h5 style="text-align:center; margin:5px auto 15px; display:block;">Comments for <%= "#{@report.report_type} Report - #{@report.created_date}"%></h5>
 		<div id="comments-form">
 			<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -174,12 +174,12 @@
 
 	<% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
 		<div class="activity-container border-box">
-			<h3 style="text-align:center; margin:20px auto; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h3>
+			<h5 style="text-align:center; margin:5px auto 15px; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h5>
 			<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
 		</div>
 	<% elsif @report.activities.count > 0 %>
 		<div class="activity-container border-box">
-			<h3 style="text-align:center; margin:20px auto; display:block;">Activity</h3>
+			<h3 style="text-align:center; margin:5px auto 15px; display:block;">Activity</h3>
 			<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
 		</div>
 	<% end %>
