@@ -225,6 +225,7 @@ class User < ActiveRecord::Base
         t.add :admin
         t.add :company_admin
         t.add :uber_admin
+        t.add :active
   	end
 
     api_accessible :login, :extend => :user do |t|
@@ -242,6 +243,10 @@ class User < ActiveRecord::Base
     end
 
     api_accessible :details, :extend => :user do |t|
+
+    end
+
+    api_accessible :v3_details, :extend => :user do |t|
 
     end
 

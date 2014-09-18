@@ -134,6 +134,10 @@ class Company < ActiveRecord::Base
       
     end
 
+    api_accessible :v3_details, :extend => :login do |t|
+      
+    end
+
     api_accessible :tasklist, :extend => :login do |t|
         
     end

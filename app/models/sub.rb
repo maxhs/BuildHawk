@@ -84,4 +84,8 @@ class Sub < ActiveRecord::Base
     api_accessible :details, :extend => :reports do |t|
 
     end
+
+    api_accessible :v3_details, :extend => :reports do |t|
+
+    end
 end

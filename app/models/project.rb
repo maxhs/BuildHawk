@@ -170,6 +170,16 @@ class Project < ActiveRecord::Base
         t.add :companies
     end
 
+    api_accessible :v3_details do |t|
+        t.add :id
+        t.add :name
+        t.add :address
+        t.add :progress
+        t.add :company
+        t.add :users
+        t.add :companies
+    end
+
     api_accessible :notifications, :extend => :projects do |t|
         t.add :notifications
     end
