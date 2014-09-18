@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#task-container {
+	header {
+		background:#fff;
+
+		h4 {
+			text-align:center;
+			margin-bottom:20px;
+		}
+	}
+	.row {
+		padding:5px 0;
+	}
+	input[type="text"] {
+		width:100%;
+	}	
+}
+
 #tasklist-item-container {
 	display:block;
 	padding:0;

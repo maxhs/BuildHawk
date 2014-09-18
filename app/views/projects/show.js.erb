@@ -3,7 +3,8 @@ var nav = $('<%= j render partial: "projects/project_nav" %>');
 $('#navigation').html(nav);
 $("#main").html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
 $("html, body").animate({ scrollTop: 0 }, 0);
-
+$('.active.project').removeClass('active');
+$('#project_<%=@project.id%>').addClass('active');
 if ($("#dropdown-menu").length){
 	$("#dropdown-menu").replaceWith("<ul id='dropdown-menu'><%= j render partial: 'projects/project_nav'%></ul>");
 } else {

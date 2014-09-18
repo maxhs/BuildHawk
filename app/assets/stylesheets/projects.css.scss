@@ -5,7 +5,7 @@
 #edit-project {
 	.edit-header {
 		text-align:center;
-		margin:0 auto 20px;
+		margin:10px auto 20px;
 	}
 
 	#project_core {
@@ -58,7 +58,8 @@
 	}
 
 	.row.personnel {
-		padding:10px 0;
+		padding-top:10px;
+		padding-bottom:10px;
 		border-top:1px solid #eee;
 	}
 }

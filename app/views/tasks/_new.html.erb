@@ -5,22 +5,22 @@
 
 	<div id="task-container" class="border-box">
 		<header>
-			<h3>New task</h3>
+			<h4>New task</h4>
 		</header>
 		<div class="row">
-			<div class="col-xs-2"><h4>Item:</h4></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the task" %></div>
+			<div class="col-xs-2"><h5>Item</h5></div><div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the task" %></div>
 		</div>
 		<div class="row">
-			<div class="col-xs-2"><h4>Location:</h4></div><div class="col-xs-10"><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
+			<div class="col-xs-2"><h5>Location</h5></div><div class="col-xs-10"><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
 		</div>
 		<div class="row">
 			<%= f.fields_for :assignee do |a| %>
-				<h4 style="display:inline-block;width:16.666666664%;">Assignee:</h4>
+				<h5 style="display:inline-block;width:16.666666664%;">Assignee</h5>
 				<%= a.select :full_name, (@users.map(&:full_name)).unshift("No Assignment"), {:include_blank => false}, :class=>"assignee-select", :style => "text-align:center;display:inline-block;font-size:1.2em;" %>
 			<% end %>
 		</div>
 		<div class="row">
-			<h4>Add a photo</h4>
+			<h5>Add a photo</h5>
 			<%= f.fields_for :photos do |photo| %>
 				<%= photo.file_field :image %>
 				<%= photo.hidden_field :project_id, :value => @project.id %>

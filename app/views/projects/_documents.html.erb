@@ -1,7 +1,7 @@
 <div id="project-documents" class="border-box">
 	<div id="documents-nav">
 		<div id="filter-section">
-			<span id="filter-button">FILTER BY:</span><span id="current-filter">Project Docs</span>
+			<h5 id="filter-button">FILTER:</h5><h5 id="current-filter">Project Docs</h5>
 			<ul id="filters">
 				<%= link_to document_photos_project_path(@project), :id => "document-photos-nav", :class => "current-page filter-link", :remote => true do %>
 					<li>Project Docs</li>
@@ -40,7 +40,7 @@
 			<% if @photos && @photos.count > 0 %>	
 				<%= render :partial => "photos/large_image" %>
 			<% else %>
-				<div class="no-image-placeholder">No Documents</div>
+				<div class="no-photos-placeholder font-smoothing">No Documents</div>
 			<% end %>
 		</div>
 	</div>

@@ -57,6 +57,9 @@
 </ul>
 	
 <script type="text/javascript">
+	<% if @project %>
+		$('#project_<%= @project.id %>').addClass('active');
+	<% end %>
 	$(function(){
 		sidebarSetup();
 		<% if @sidebar_projects %>
