@@ -215,10 +215,21 @@
 	color:#aaa;
 	text-align:center;
 	font-weight:200;
-	font-size:1.5em; 
+	font-size:1.75em; 
 	font-style:italic;
 	margin-top:10px;
 	line-height:2em;
+}
+
+#pro-signup-prompt {
+	text-align:center;
+	color:#aaa;
+	font-size:1.5em;
+	font-weight:200;
+
+	a {
+		text-decoration:underline;
+	}	
 }
 
 #project-dashboard {
