@@ -31,33 +31,35 @@
 		<% if @project_groups %>
 		    <div class="row personnel">
 		    	<div class="col-xs-3"><h4>Project Group</h4></div>
-		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id) %></div>
+		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id, :class=>"for-select-2") %></div>
 		    </div>
 	    <% end %>
 
 	    <div class="row personnel">
 	    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>
 	    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-	    		<% @users.each do |user| %>
+	    		<!--<% @users.each do |user| %>
 	    			<% if @project.users.include?(user) %>
 	    				<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id, checked: true %><span style="padding-left:10px;"><%= user.full_name %></span></div>
     				<% else %>
     					<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span></div>
     				<% end %>
-	    		<% end %>
+	    		<% end %>-->
+	    		<%= f.select :user_ids, options_for_select(@users.map{|u| [u.full_name, u.id]}, @project.project_users.map{|u| u.id}), {}, {:multiple => true, :class => "for-select-2", include_blank: false} %>
 	    	</div>
 	    </div>
 
 	    <div class="row personnel">
 	    	<div class="col-xs-3"><h4>Subcontractors Assigned</h4></div>
 	    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-	    		<% @subs.each do |company_sub| %>
+	    		<!--<% @subs.each do |company_sub| %>
 	    			<% if @project.companies.include?(company_sub.subcontractor) %>
 	    				<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id, checked: true %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
     				<% else %>
     					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
     				<% end %>
-	    		<% end %>
+	    		<% end %>-->
+	    		<%= f.select :company_ids, options_for_select(@subs.map{|cs| [cs.subcontractor.name, cs.subcontractor.id]}, @project.project_subs.map{|s| s.created_at}), {}, {:multiple => true, :class => "for-select-2", include_blank: false} %>
 	    	</div>
 	    	
 	    </div>
@@ -79,5 +81,9 @@
 			<% end %>
 			<%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"btn btn-danger btn-md", remote: true %>
 		</div>
-		
 </div>
+
+<script>
+	$("#project_project_group_id").select2();
+	$(".for-select-2").select2();
+</script>

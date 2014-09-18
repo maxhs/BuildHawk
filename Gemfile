@@ -44,6 +44,7 @@ gem "parsley-rails"
 gem 'gcm'
 gem 'newrelic_rpm'
 gem "oink"
+gem "select2-rails"
 
 gem "recaptcha", :require => "recaptcha/rails"
 

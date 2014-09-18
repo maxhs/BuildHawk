@@ -24,6 +24,7 @@
 //= require nprogress-ajax
 //= require shadowbox
 //= require turbolinks
+//= require select2
 //= require_tree .
 
 NProgress.configure({
