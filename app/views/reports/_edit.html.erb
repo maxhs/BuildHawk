@@ -159,7 +159,7 @@
 
 	</div>
 	<div class="comment-container border-box">
-		<h5 style="text-align:center; margin:5px auto 15px; display:block;">Comments for <%= "#{@report.report_type} Report - #{@report.created_date}"%></h5>
+		<h4 style="text-align:center; margin:5px auto 15px; display:block;">Comments for <%= "#{@report.report_type} Report - #{@report.created_date}"%></h4>
 		<div id="comments-form">
 			<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -174,12 +174,12 @@
 
 	<% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
 		<div class="activity-container border-box">
-			<h5 style="text-align:center; margin:5px auto 15px; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h5>
+			<h4 style="text-align:center; margin:5px auto 15px; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h4>
 			<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
 		</div>
 	<% elsif @report.activities.count > 0 %>
 		<div class="activity-container border-box">
-			<h3 style="text-align:center; margin:5px auto 15px; display:block;">Activity</h3>
+			<h4 style="text-align:center; margin:5px auto 15px; display:block;">Activity</h4>
 			<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
 		</div>
 	<% end %>
