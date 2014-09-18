@@ -5,6 +5,11 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def connect
+        if current_user
+            flash[:notice] = "You're already signed in.".html_safe
+            redirect_to projects_path
+            return
+        end
         @user = User.find params[:user_id]
         
         if @user.company && @user.company.name.length > 0
@@ -33,7 +38,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def create
-        unless params[:user][:password] && params[:user][:password_confirmation]
+        unless params[:user] && params[:user][:password] && params[:user][:password_confirmation]
             if request.xhr?
                 respond_to do |format|
                     format.js {render template:"connect/validate"}
@@ -43,14 +48,18 @@ class RegistrationsController < Devise::RegistrationsController
                 redirect_to root_url
             end
         end 
+
         if params[:user][:company]
             @company = Company.where(name: params[:user][:company][:name]).first_or_create
             params[:user][:company_id] = @company.id
         end
 
-        redirect_to projects_path
-        #super
+        @user = User.find params[:user][:id]
+        @user.update_attributes params[:user]
 
+        flash[:notice] = "Welcome to BuildHawk! You've successfully signed up.".html_safe
+        sign_in_and_redirect(:user, @user)
+        #super
         #find_connect_items(current_user) if current_user
     end
 

@@ -13,9 +13,10 @@
 	<%= devise_error_messages! %>
 		<fieldset id="info">
 			<h3 class="fs-title">Is Your Information Correct?</h3>
+			<%= f.hidden_field :id, value: user.id %>
 			<%= hidden_field_tag :connect %>
-			<%= f.text_field :first_name, :placeholder => "First name", :autofocus => true %>
-			<%= f.text_field :last_name, :placeholder => "Last name" %>
+			<%= f.text_field :first_name, value: user.first_name, :placeholder => "First name", :autofocus => true %>
+			<%= f.text_field :last_name, value: user.last_name, :placeholder => "Last name" %>
 			<% if user.phone && user.phone.length > 0 %>
 				<%= f.email_field :email, :placeholder => "The email address you use for work", autocomplete:"off" %>
 			<% elsif user.email && user.email.length > 0 %>
