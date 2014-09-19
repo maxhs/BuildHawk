@@ -17,7 +17,6 @@ class Message < ActiveRecord::Base
 				:body 				=> body,
 				:message_id 		=> id,
 				:company_id			=> company_id,
-				:project_id 		=> target_project_id,
 				:notification_type 	=> self.class.name
 			)
 		end

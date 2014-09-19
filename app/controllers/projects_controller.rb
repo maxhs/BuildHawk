@@ -28,6 +28,8 @@ class ProjectsController < AppController
 		if params[:company_id]
 			@company = Company.find params[:company_id]
 		end
+		
+		@messages = current_user.messages 
 
 		if request.xhr?
 			respond_to do |format|

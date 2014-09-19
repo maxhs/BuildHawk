@@ -17,12 +17,8 @@
                 <% end %>
         </div>  
         <div class="col-xs-3">
-                <% if task.assignee_id && task.assignee %>
-                        <%= task.assignee.full_name %>
-                <% elsif task.sub_assignee_id && task.sub_assignee %>
-                        <%= task.sub_assignee.name %>
-                <% elsif task.connect_assignee_id && task.connect_assignee %>
-                        <%= task.connect_assignee.full_name %>
+                <% if task.users %>
+                        <%= task.users.map(&:full_name).to_sentence %>
                 <% else %>
                         <span style="color:#aaa;font-style:italic;">Not yet assigned</span>
                 <% end %>

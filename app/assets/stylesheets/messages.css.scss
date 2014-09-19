@@ -33,7 +33,7 @@
 #new-message {
 
 	h3, h4 {
-		margin:2.5% auto;
+		margin:1.5% auto 2%;
 	}
 
 	form {
@@ -43,4 +43,23 @@
 	textarea {
 		width:100%;
 	}
+
+	.row {
+		padding: 5px 0;
+	}
+}
+
+#back-from-message {
+	position:absolute;
+	left:1%;
+}
+
+.message{
+	max-width:50%;
+	margin:0 auto;
+	border-radius:18px;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	border:1px solid #eee;
+	padding:1%;
 }

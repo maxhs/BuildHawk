@@ -3,6 +3,8 @@
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
 
 	<div id="new-message" class="messages-container border-box">
+		<h5><%= link_to "&#8592; Back".html_safe, root_url, remote:true, id:"back-from-message" %></h5>
+
 		<h4 class="centered">New Message</h4>
 		<div class="row">
 			<div class="col-xs-2">
@@ -15,15 +17,18 @@
 		<div class="row">
 			<div class="col-xs-2"><h4>Projects</h4></div>
 			<div class="col-xs-10">			
+				<%= f.collection_select :project_ids, @projects, :id, :name, {selected: @message.project_ids}, {multiple: true, :include_blank => false, :class=>"project-select"} %>
+			</div>
+		</div>
 
-			<%= f.collection_select :project_ids, @projects, :id, :name, {selected: @message.project_ids}, {multiple: true, :include_blank => false, :class=>"project-select"} %>
+		<div class="row">
+			<div class="col-xs-2">
+				<h4>Recipients</h4>
+			</div>
+			<div class="col-xs-10">
+				<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @users.ids}, {multiple: true, :include_blank => false, :class=>"user-select"} %>
+			</div>
 		</div>
-		
-		</div>
-		<h4 style="display:inline-block;width:16.666666664%;">Recipients</h4>
-		<% @users.each do |user| %>
-			<%= check_box_tag "message[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span> 
-		<% end %>
 
 		<div class="button-container">
 			<%= f.submit "Add", :class=>"simple-btn save" %>
@@ -35,7 +40,11 @@
 
 <script>
 	$('.project-select').select2({
-		placeholder: "Send a message to all project personnel...",
+		placeholder: "Send a message to multiple project personnel at once...",
+    	allowClear: true
+	});
+	$('.user-select').select2({
+		placeholder: "Select individual recipients...",
     	allowClear: true
 	});
 </script>

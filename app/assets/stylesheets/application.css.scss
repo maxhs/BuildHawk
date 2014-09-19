@@ -302,7 +302,7 @@ body {
 			}
 			.ui-progressbar {
 				display:inline-block;
-				background:#777;
+				background:#999;
 				border:0;
 				border-radius:0px;
 				-moz-border-radius:0px;
@@ -941,6 +941,14 @@ a.search-button {
 	margin:0 auto;
 }
 
+.left {
+	text-align:left;
+}
+
+.right {
+	text-align:right;
+}
+
 .simple-btn {
 	cursor:pointer;
 	background:#fff;
@@ -1220,7 +1228,7 @@ body {
 }
 
 .select2-container, .select2-container-multi {
-	width:50%;
+	width:100%;
 	font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
 
 	.select2-choices {
@@ -1245,6 +1253,13 @@ body {
 		border-color:#eee !important;
 	}
 }
+
+.select2-drop-active {
+		border-top:1px solid #eee !important;
+		border-left:1px solid #eee !important;
+		border-right:1px solid #eee !important;
+		border-bottom:1px solid #eee !important;
+	}
 
 @media only screen and (max-width: 768px), only screen and (max-device-width: 768px) {
 	#navigation {
