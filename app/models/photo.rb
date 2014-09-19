@@ -12,7 +12,12 @@ class Photo < ActiveRecord::Base
 	belongs_to :comment
 
 	has_many :activities
-   
+    
+    if Rails.env.production?
+    	host_alias = "dw9f6h00eoolt.cloudfront.net"
+    else
+    	host_alias = "d2bs59u537xlvu.cloudfront.net"
+    end
 
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["1024x1024", :jpg],
@@ -21,6 +26,8 @@ class Photo < ActiveRecord::Base
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },
 	                    :storage        => :s3,
+	                    :url 			=> ":s3_alias_url",
+	                   	:s3_host_alias 	=> host_alias,
 	                    :s3_protocol 	=> :https,
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :path           => "photo_image_:id_:style.:extension"
