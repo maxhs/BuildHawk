@@ -25,11 +25,11 @@ class Photo < ActiveRecord::Base
 	                                 :small  => ["200x200#", :jpg],
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },
+	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :storage        => :s3,
 	                    :url 			=> ":s3_alias_url",
 	                   	:s3_host_alias 	=> host_alias,
 	                    :s3_protocol 	=> :https,
-	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
