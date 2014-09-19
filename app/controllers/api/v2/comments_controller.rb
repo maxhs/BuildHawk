@@ -33,11 +33,14 @@ class Api::V2::CommentsController < Api::V2::ApiController
     def create
         ### api compatibility ###
         if params[:comment][:punchlist_item_id]
-            params[:comment][:worklist_item_id] = params[:comment][:punchlist_item_id]
+            params[:comment][:task_id] = params[:comment][:punchlist_item_id]
             params[:comment].delete(:punchlist_item_id)
+        elsif params[:comment][:worklist_item_id]
+            params[:comment][:task_id] = params[:comment][:worklist_item_id]
+            params[:comment].delete(:worklist_item_id)
         elsif params[:worklist_item_id]
-            params[:comment][:worklist_item_id] = params[:worklist_item_id]
-            params.delete(:worklist_item_id)
+            params[:comment][:task_id] = params[:worklist_item_id]
+            params[:comment].delete(:worklist_item_id)
         end
         
         params[:comment][:mobile] = true

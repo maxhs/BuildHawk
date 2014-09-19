@@ -134,13 +134,15 @@ class TasksController < AppController
 	end
 		
 	def destroy
-		@task.destroy!
-		if request.xhr?
+		@task_id = @task.id
+		if @task && @task.destroy && request.xhr?
 			respond_to do |format|
 				format.js
 			end
-		else
+		elsif @project
 			redirect_to tasklist_project_path(@project)
+		else 
+			redirect_to root_url
 		end
 	end
 
@@ -162,7 +164,7 @@ class TasksController < AppController
 	end
 
 	def find_company
-		@task = Task.find params[:id] if params[:id]
+		@task = Task.where(id: params[:id]).first
 		if !user_signed_in?# && (@task.task.project.project_users.include?(current_user) || @task.assignee == current_user)
 			redirect_to projects_path
 			flash[:notice] = "You don't have access to this task".html_safe

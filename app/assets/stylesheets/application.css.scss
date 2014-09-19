@@ -245,7 +245,6 @@ body {
     			-ms-transition: all 0.23s ease;
     			-o-transition: all 0.23s ease;
     			transition: all 0.23s ease;
-    			font-size:.9em;
     			letter-spacing:1px;
     			text-transform:uppercase;
     			font-family: "Myriad Pro","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
@@ -273,7 +272,7 @@ body {
 			.buttons {
 				display:table;
 				width:100%;
-				min-height:47px;
+				min-height:50px;
 
 				#new-project-button, #new-group-button {
 					display:table-cell;
@@ -951,11 +950,11 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Myriad Pro","Proxima Nova","Helvetica",sans-serif;
+	font-family:"Myriad Pro","Myriad Web Pro","Proxima Nova","Helvetica",sans-serif;
 	font-size:13px;
 	line-height:14px;
 	letter-spacing:2px;
-	font-weight:bold;
+	font-weight:600;
 	text-transform:uppercase;
 	-webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;

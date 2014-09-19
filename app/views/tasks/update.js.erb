@@ -1,1 +1,2 @@
-$('#task-<%=@task.id%>').replaceWith('<%= j render partial:"projects/task", locals:{task:@task} %>');
+$('#task-<%=@task.id%>').replaceWith('<%= j render partial:"projects/task_row", locals:{task: @task} %>');
+$('#task-focus').html('<%= j render partial:"tasks/edit", locals:{task: @task} %>');

@@ -1,6 +1,6 @@
-$('#top-nav a').removeClass('current-page');
-$('.nav-tasklists a,#<%=@project.id%>-link').addClass('current-page');
 $('#task-focus').css({'left':'100%','top':'0'});
 $('#project-tasks').removeClass('tasks-panel');
-$('#tasks').html('<%= j render partial: "projects/task", collection: @tasks, as: :task, cache: true %>');
+$('#task-<%= @task_id %>').fadeOut(200,function(){
+	$(this).remove();
+});
 $("html, body").animate({ scrollTop: 0 }, 200);
