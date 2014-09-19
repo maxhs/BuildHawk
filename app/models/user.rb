@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
-    require 'gcm'
-    require 'houston'
 
     attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
     				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin, 
@@ -178,25 +176,28 @@ class User < ActiveRecord::Base
     def notify_all_devices(options)
         push_tokens.each do |push_token|
             if push_token.device_type == 3
-                #notify_android(options, push_token.token)
+                notify_android(options, push_token.token)
             else
                 notify_ios(options, push_token.token)
-                #APN.notify_async push_token.token, options
             end
         end
     end
 
     def notify_ios(options,token)
+        require 'houston'
+
         apn = Houston::Client.production
         apn.certificate = File.read("#{Rails.root}/config/certs/apn_production.pem")
         notification = Houston::Notification.new(device: token)
         notification.alert = options[:alert]
         notification.badge = options[:badge]
         notification.custom_data = options
+        puts "notification? #{notification}"
         apn.push(notification)
     end
 
     def notify_android(options, token)
+        require 'gcm'
         if token && token.length > 0
             ## project name: buildhawk-1
             ## project ID: 149110570482
