@@ -196,7 +196,6 @@ class Api::V3::ReportsController < Api::V3::ApiController
         	respond_to do |format|
             	format.json { render_for_api :reports, :json => project.reports.sort_by(&:date_for_sort).reverse, :root => :reports}
           	end
-            #render json: {reports: project.reports.sort_by(&:date_for_sort).reverse}
         else
             render :json => {:success => false}
         end

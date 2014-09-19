@@ -135,7 +135,6 @@ class Task < ActiveRecord::Base
 
     api_accessible :tasklist do |t|
   		t.add :id
-        t.add :worklist_id
         t.add :tasklist_id
         t.add :user
         t.add :photos
@@ -148,7 +147,8 @@ class Task < ActiveRecord::Base
   		t.add :completed
         t.add :created_date
         t.add :project_id
-        ## for deletion
+        ## deprecated
+        t.add :worklist_id
         t.add :epoch_time
   	end
 

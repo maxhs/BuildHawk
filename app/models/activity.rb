@@ -51,8 +51,6 @@ class Activity < ActiveRecord::Base
 		t.add :checklist_item
 		t.add :report
 		t.add :comment
-		t.add :worklist_id
-		t.add :worklist_item
 		t.add :tasklist_id
 		t.add :task
 		t.add :project_id
@@ -61,6 +59,9 @@ class Activity < ActiveRecord::Base
 		t.add :created_date
 		t.add :activity_type
 		t.add :photo
+		## deprecated
+		t.add :worklist_id
+		t.add :worklist_item
 	end
 
 	api_accessible :user, :extend => :dashboard do |t|

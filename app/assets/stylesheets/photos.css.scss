@@ -205,11 +205,13 @@ form.edit_photo {
 			display:none;
 			left:-1px;
 			top:32px;
-			letter-spacing:1px;
-			border:1px solid #ddd;
 			z-index:3;
 			width:160px;
 			font-family:"Myriad Pro",'Source Sans Pro',"Helvetica Neue",sans-serif;
+			border-radius:7px;
+			-webkit-border-radius:7px;
+			-moz-border-radius:7px;
+			box-shadow: 0 0 14px 0 rgba(0,0,0,.1);
 
 			li {
 				width:100%;

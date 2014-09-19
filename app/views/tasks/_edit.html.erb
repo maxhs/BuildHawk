@@ -38,7 +38,7 @@
 
 	<% unless task.completed_by_user %>
 		<div class="row">
-			<h5 class="col-xs-3">Assignee</h5>
+			<h5 class="col-xs-3">Assignees</h5>
 			<div class="col-xs-9">
 				<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: task.user_ids}, {:include_blank => false, multiple: true, :class=>"assignee-select", :style => "position:relative;top:10px;"} %>
 			</div>

@@ -17,9 +17,9 @@ class Tasklist < ActiveRecord::Base
         t.add :id
         t.add :project
         t.add :tasks
-        t.add :worklist_items
         ### slated for deletion. fucking click labs still needs it ###
         t.add :personnel
+        t.add :worklist_items
         ###
     end
 

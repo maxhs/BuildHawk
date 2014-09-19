@@ -170,11 +170,7 @@ body {
 		font-size:1.25em;
 		background:#444;
 		font-weight:200;
-		
-		//background-image: image-url('crossword.png');
-		border-right:1px solid #555;
 		overflow-y:scroll;
-
 		#settings-row{
 			padding:11px 10px;
 		}
@@ -787,7 +783,8 @@ body {
 				#toggle {
 					cursor:pointer;
 					width:34px;
-					margin-left:3px;
+					margin-top:2px;
+					margin-left:2px;
 				}
 
 				ul#main-dropdown-menu {
