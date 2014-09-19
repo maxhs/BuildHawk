@@ -1,20 +1,17 @@
 development:
   bucket: buildhawk-dev
-  url: ":s3_alias_url"
   s3_host_alias: d2bs59u537xlvu.cloudfront.net
   access_key_id: AKIAJC7K2IXFBN7BU2NA
   secret_access_key: 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
 
 test:
   bucket: buildhawk-dev
-  url: ":s3_alias_url"
   s3_host_alias: d2bs59u537xlvu.cloudfront.net
   access_key_id: AKIAJC7K2IXFBN7BU2NA
   secret_access_key: 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
 
 production:
   bucket: buildhawk
-  url: ":s3_alias_url"
   s3_host_alias: dw9f6h00eoolt.cloudfront.net
   access_key_id: AKIAJC7K2IXFBN7BU2NA
   secret_access_key: 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
