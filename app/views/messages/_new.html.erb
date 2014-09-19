@@ -3,7 +3,7 @@
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
 
 	<div id="new-message" class="messages-container border-box">
-		<h3>New Message</h3>
+		<h4 class="centered">New Message</h4>
 		<div class="row">
 			<div class="col-xs-2">
 				<h4>Location</h4>
@@ -13,23 +13,29 @@
 			</div>
 		</div>
 		<div class="row">
-		<%= f.fields_for :project_id do |a| %>
-			<div class="col-xs-2"><h4>Project</h4></div>
-			<div class="col-xs-10">
-			<%= a.select :name, @projects.map(&:name).unshift("No Project"), {:include_blank => false}, :class=>"project-select", :style => "margin-top:8px;font-size:1.2em;" %>
+			<div class="col-xs-2"><h4>Projects</h4></div>
+			<div class="col-xs-10">			
+
+			<%= f.collection_select :project_ids, @projects, :id, :name, {selected: @message.project_ids}, {multiple: true, :include_blank => false, :class=>"project-select"} %>
 		</div>
-		<% end %>
+		
 		</div>
 		<h4 style="display:inline-block;width:16.666666664%;">Recipients</h4>
 		<% @users.each do |user| %>
 			<%= check_box_tag "message[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span> 
 		<% end %>
-		
 
 		<div class="button-container">
-			<%= f.submit "Add", :class=>"btn btn-success btn-md save" %>
+			<%= f.submit "Add", :class=>"simple-btn save" %>
 		</div>
 		
 	</div>
 
 <% end %>
+
+<script>
+	$('.project-select').select2({
+		placeholder: "Send a message to all project personnel...",
+    	allowClear: true
+	});
+</script>

@@ -169,6 +169,7 @@ body {
 		left:0;
 		font-size:1.25em;
 		background:#444;
+		font-weight:200;
 		
 		//background-image: image-url('crossword.png');
 		border-right:1px solid #555;
@@ -935,6 +936,11 @@ a.search-button {
 	margin: 0 auto;
 }
 
+.centered {
+	text-align:center;
+	margin:0 auto;
+}
+
 .simple-btn {
 	cursor:pointer;
 	background:#fff;
@@ -943,7 +949,7 @@ a.search-button {
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
-	padding:10px 20px;
+	padding:10px;
 	position:relative;
 	display:inline-block;
 	margin:0 10px;
@@ -1215,11 +1221,22 @@ body {
 
 .select2-container, .select2-container-multi {
 	width:50%;
+	font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
 
 	.select2-choices {
+		border:1px solid #eee !important;
+		background:#fff !important;
+
 		.select2-search-choice {
 			line-height:inherit !important;
-			font-size:1.1em;
+			background:#f7f7f7 !important;
+		}
+
+		.select2-search-field {
+			.select2-default {
+				font-size:14px !important;
+				font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
+			}
 		}
 	}
 }

@@ -38,13 +38,7 @@
 	    <div class="row personnel">
 	    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>
 	    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-	    		<!--<% @users.each do |user| %>
-	    			<% if @project.users.include?(user) %>
-	    				<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id, checked: true %><span style="padding-left:10px;"><%= user.full_name %></span></div>
-    				<% else %>
-    					<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span></div>
-    				<% end %>
-	    		<% end %>-->
+	    		
 	    		<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @project.user_ids}, {multiple: true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>
 	    </div>
@@ -52,13 +46,7 @@
 	    <div class="row personnel">
 	    	<div class="col-xs-3"><h4>Subcontractors Assigned</h4></div>
 	    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-	    		<!--<% @subs.each do |company_sub| %>
-	    			<% if @project.companies.include?(company_sub.subcontractor) %>
-	    				<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id, checked: true %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
-    				<% else %>
-    					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
-    				<% end %>
-	    		<% end %>-->
+	    
 	    		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple:true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>
 	    	
