@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
     require 'gcm'
-    
+    require 'houston'
+
     attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
     				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin, 
                     :authentication_token, :company_admin, :text_permissions, :active
@@ -186,15 +187,13 @@ class User < ActiveRecord::Base
     end
 
     def notify_ios(options,token)
-        require 'houston'
-        # Environment variables are automatically read, or can be overridden by any specified options. You can also
-        # conveniently use `Houston::Client.development` or `Houston::Client.production`.
         APN = Houston::Client.production
         APN.certificate = File.read("#{Rails.root}/config/certs/apn_production.pem")
         notification = Houston::Notification.new(device: token)
         notification.alert = options[:alert]
         notification.badge = options[:badge]
         #notification.custom_data = {options}
+        APN.push(notification)
     end
 
     def notify_android(options, token)
