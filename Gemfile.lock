@@ -36,10 +36,6 @@ GEM
       rack (>= 1.1.0)
     acts_as_list (0.4.0)
       activerecord (>= 3.0)
-    apn_sender (2.0.1)
-      activesupport (>= 3.1)
-      connection_pool
-      daemons
     arel (5.0.1.20140414130214)
     aws-sdk (1.51.0)
       json (~> 1.4)
@@ -59,8 +55,6 @@ GEM
     coffee-script-source (1.7.1)
     commander (4.2.0)
       highline (~> 1.6.11)
-    connection_pool (2.0.0)
-    daemons (1.1.9)
     deep_cloneable (1.6.1)
       activerecord (>= 3.1.0)
     delayed_job (4.0.2)
@@ -276,9 +270,7 @@ DEPENDENCIES
   actionview-encoded_mail_to
   acts_as_api
   acts_as_list
-  apn_sender
   aws-sdk
-  daemons
   deep_cloneable (~> 1.6.0)
   delayed_job_active_record
   delayed_paperclip

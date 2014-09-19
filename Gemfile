@@ -26,8 +26,8 @@ gem 'resque-scheduler', '2.2.0'
 gem 'resque-pool'
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'
-gem 'apn_sender', require: ['apn', 'apn/jobs/resque_notification_job']
-gem 'daemons'
+#gem 'apn_sender', require: ['apn', 'apn/jobs/resque_notification_job']
+#gem 'daemons'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'turbolinks'
