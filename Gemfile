@@ -47,7 +47,7 @@ gem 'gcm'
 gem 'newrelic_rpm'
 gem "oink"
 gem "select2-rails"
-gem 'install houston'
+gem 'houston'
 
 gem "recaptcha", :require => "recaptcha/rails"
 

@@ -57,6 +57,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    commander (4.2.0)
+      highline (~> 1.6.11)
     connection_pool (2.0.0)
     daemons (1.1.9)
     deep_cloneable (1.6.1)
@@ -80,8 +82,12 @@ GEM
       httparty
       json
     geocoder (1.2.4)
+    highline (1.6.21)
     hike (1.2.3)
     hodel_3000_compliant_logger (0.1.1)
+    houston (2.2.1)
+      commander (~> 4.1)
+      json
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -279,6 +285,7 @@ DEPENDENCIES
   devise
   gcm
   geocoder
+  houston
   httparty
   jquery-easing-rails
   jquery-rails
