@@ -7,6 +7,6 @@ class CreateMessageProjects < ActiveRecord::Migration
     end
 
     remove_column :messages, :target_project_id, :integer
-    #rename_table :task_assignees, :task_users
+    rename_table :task_assignees, :task_users
   end
 end
