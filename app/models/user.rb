@@ -219,7 +219,7 @@ class User < ActiveRecord::Base
 
     def remove_push_tokens_except(device_type,token)
         ## 1 for iPhone, 2 for iPad, 3 for Android
-        tokens_for_type = @user.push_tokens.where(device_type: device_type)
+        tokens_for_type = push_tokens.where(device_type: device_type)
         
         tokens_for_type.each do |t|
             t.destroy unless t.token == token
