@@ -6,7 +6,7 @@ require 'resque/tasks'
 
 Buildhawk::Application.load_tasks
 
-require 'apn/tasks'
+#require 'apn/tasks'
 
 # this task will get called before resque:pool:setup
 # and preload the rails environment in the pool manager
