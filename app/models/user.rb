@@ -187,13 +187,13 @@ class User < ActiveRecord::Base
     end
 
     def notify_ios(options,token)
-        APN = Houston::Client.production
-        APN.certificate = File.read("#{Rails.root}/config/certs/apn_production.pem")
+        apn = Houston::Client.production
+        apn.certificate = File.read("#{Rails.root}/config/certs/apn_production.pem")
         notification = Houston::Notification.new(device: token)
         notification.alert = options[:alert]
         notification.badge = options[:badge]
         #notification.custom_data = {options}
-        APN.push(notification)
+        apn.push(notification)
     end
 
     def notify_android(options, token)
