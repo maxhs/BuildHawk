@@ -42,6 +42,8 @@ class Task < ActiveRecord::Base
             elsif assignee.text_permissions && assignee.phone && assignee.phone.length > 0
                 assignee.text_task(self)
             end
+        
+        ## deprecated as soon as we remove the connect user model
         elsif connect_assignee
             if connect_assignee.email && connect_assignee.email.length > 0
                 connect_assignee.email_task(self)
@@ -49,6 +51,7 @@ class Task < ActiveRecord::Base
                 connect_assignee.text_task(self)
             end
         end
+        ##
     end
 
     def log_activity(current_user)
