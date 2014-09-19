@@ -369,6 +369,7 @@ Buildhawk::Application.routes.draw do
           get :connect
           post :add_alternate
           post :delete_alternate
+          delete :remove_push_token
         end
       end
       resources :tasklists, :only => [:show, :index]

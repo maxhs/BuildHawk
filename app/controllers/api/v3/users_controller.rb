@@ -46,6 +46,10 @@ class Api::V3::UsersController < Api::V3::ApiController
 		end
 	end
 
+	def remove_push_token
+		render json: {success: @user.remove_push_tokens_except(params[:device_type], params[:token])}
+	end
+
 	private
 
 	def find_user
