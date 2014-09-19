@@ -1,8 +1,9 @@
 class Task < ActiveRecord::Base
 
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, :photos_attributes, 
-                    :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, :user_id,
-                    :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :connect_assignee_id, :connect_assignee
+                    :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, 
+                    :user_id, :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :user_ids,
+                    :connect_assignee_id, :connect_assignee
 
     belongs_to :tasklist
     belongs_to :user
@@ -14,6 +15,9 @@ class Task < ActiveRecord::Base
     has_many :photos, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
     has_many :activities, :dependent => :destroy
+
+    has_many :task_users, :dependent => :destroy, autosave: true
+    has_many :users, :through => :task_users, autosave: true
     
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }

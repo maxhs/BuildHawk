@@ -472,7 +472,7 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.datetime "image_updated_at"
   end
 
-  create_table "task_assignees", force: true do |t|
+  create_table "task_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "connect_user_id"
     t.integer  "task_id"
