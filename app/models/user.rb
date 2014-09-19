@@ -177,17 +177,29 @@ class User < ActiveRecord::Base
     def notify_all_devices(options)
         push_tokens.each do |push_token|
             if push_token.device_type == 3
-                notify_android(options, push_token.token)
+                #notify_android(options, push_token.token)
             else
-                APN.notify_async push_token.token, options
+                notify_ios(options, push_token.token)
+                #APN.notify_async push_token.token, options
             end
         end
     end
 
+    def notify_ios(options,token)
+        require 'houston'
+        # Environment variables are automatically read, or can be overridden by any specified options. You can also
+        # conveniently use `Houston::Client.development` or `Houston::Client.production`.
+        APN = Houston::Client.production
+        APN.certificate = File.read("#{Rails.root}/config/certs/apn_production.pem")
+        notification = Houston::Notification.new(device: token)
+        notification.alert = options[:alert]
+        notification.badge = options[:badge]
+        #notification.custom_data = {options}
+    end
 
     def notify_android(options, token)
         if token && token.length > 0
-            ## proejct name: buildhawk-1
+            ## project name: buildhawk-1
             ## project ID: 149110570482
         
             data = {
