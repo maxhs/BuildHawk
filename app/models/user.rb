@@ -192,7 +192,7 @@ class User < ActiveRecord::Base
         notification = Houston::Notification.new(device: token)
         notification.alert = options[:alert]
         notification.badge = options[:badge]
-        notification.custom_data = {options}
+        notification.custom_data = options
         apn.push(notification)
     end
 
