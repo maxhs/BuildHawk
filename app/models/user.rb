@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
             t.destroy unless t.token == token
         end
 
-        if user.push_tokens.count > 0
+        if push_tokens.count > 0
             return true
         else
             return false
