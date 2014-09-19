@@ -55,7 +55,7 @@ Buildhawk::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "assets.buildhawk.com"
+  config.action_controller.asset_host = "https://assets.buildhawk.com"
   # config.action_controller.asset_host = "dw9f6h00eoolt.cloudfront.net"
 
   # store assets in a 'folder' instead of bucket root
