@@ -119,7 +119,10 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
     def photo
         params[:photo][:task_id] = params[:id] if params[:id]
-        params[:photo][:task_id] = params[:worklist_item_id] if params[:worklist_item_id]
+        if params[:photo][:worklist_item_id]
+            params[:photo][:task_id] = params[:photo][:worklist_item_id]
+            params[:photo].delete(:worklist_item_id)
+        end
         params[:photo][:source] = "Tasklist"
 
         ## android ##
