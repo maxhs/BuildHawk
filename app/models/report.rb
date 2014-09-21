@@ -19,8 +19,8 @@ class Report < ActiveRecord::Base
     has_many :companies, :through => :report_companies
     has_many :photos, :dependent => :destroy
 
-    has_many :report_topics, :dependent => :destroy, autosave: true
-    has_many :safety_topics, :through => :report_topics, autosave: true
+    has_many :report_topics, :dependent => :destroy
+    has_many :safety_topics, :through => :report_topics
 
     has_many :activities, :dependent => :destroy
 
