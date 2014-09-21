@@ -1,5 +1,6 @@
 $('#report-focus').css({'left':'100%','top':'0'});
 $('#project-reports').removeClass('reports-panel');
+$('.faded').removeClass('faded');
 $('#report-<%= @report_id %>').fadeOut(200,function(){
 	$(this).remove();
 });

@@ -186,7 +186,6 @@ Buildhawk::Application.routes.draw do
       post :export
     end
   end
-
   resources :reports do
     member do
       get :generate
@@ -195,7 +194,6 @@ Buildhawk::Application.routes.draw do
       post :search
     end
   end
-  
   resources :folders
   resources :subs, :only => [:update]
   resources :charges do
