@@ -76,6 +76,12 @@ class TasksController < AppController
 		else 
 			render :edit
 		end
+	rescue
+		if @project
+			redirect_to tasklist_project_path @project
+		else
+			redirect_to root_url
+		end
 	end
 
 	def update
@@ -115,9 +121,10 @@ class TasksController < AppController
 				params[:task][:completed_by_user_id] = nil
 				params[:task][:completed_at] = nil
 			end
+			
 			@task.update_attributes params[:task]
 			@task.log_activity(current_user)
-			
+
 			if request.xhr?
 				respond_to do |format|
 					format.js

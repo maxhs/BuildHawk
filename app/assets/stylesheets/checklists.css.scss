@@ -376,9 +376,16 @@
 		text-align:center;
 	}		
 
+	.item-category {
+		h4{
+			padding-left:1%;
+		}
+	}
+
 	.item-body {
 		margin:0.5em auto 2em;
 		display:block;
+		padding-left:2%;
 	}
 
 	input[type="checkbox"] {
@@ -394,14 +401,16 @@
 
 	#clear-critical-date {
 		text-transform:uppercase;
-	}
-
-	#clear-critical-date:hover {
+		margin: 1% auto 0;
+		padding: 7px 10px 5px;
+		cursor:pointer;
 		-webkit-transition: all 0.25s ease-out;
 		-moz-transition: all 0.25s ease-out;
 		-o-transition: all 0.25s ease-out;
 		transition: all 0.25s ease-out;
-		cursor:pointer;
+	}
+
+	#clear-critical-date:hover {
 		color:#cc0000;
 	}	
 }

@@ -3,10 +3,11 @@
 
 		<button id="export-checklist-item"><%=image_tag "export.png" %></button>
 		<div id="dismiss-checklist-item"><%=image_tag "blackX.png" %></div>
-		<div style="clear:both">
-			<span class="header-description"><h3><%= item.phase_name %></h3></span>
-			<span class="header-description"><h4><%= item.category_name %></h4></span>
-			<span class="item-body">- <%= item.body %></span>
+
+		<div style="clear:both;padding-left:3.5%;">
+			<span class="header-description item-phase"><h3><%= item.phase_name %></h3></span>
+			<span class="item-category"><h4><%= item.category_name %></h4></span>
+			<span class="item-body"><%= item.body %></span>
 		</div>
 
 		<%= nested_form_for item, :url => {:controller => :checklist_items, :action => :update, :id => item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
@@ -28,7 +29,7 @@
 						<h4 style="text-align:center;">Critical Date</h4>
 						<div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
 							<%= f.text_field :critical_date, :value => parse_date(f.object.critical_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
-							<span id="clear-critical-date"> Clear Date</span>
+							<span id="clear-critical-date" class="simple-btn"> Clear Date</span>
 						</div>
 					</div>
 				<% end %>
