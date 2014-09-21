@@ -100,15 +100,9 @@ class Api::V3::ReportsController < Api::V3::ApiController
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
             user_ids = []
-            #connect_user_ids = []
             users.each do |u|
                 if u[:id]
                     user = User.where(:id => u[:id]).first
-                # elsif u[:connect_user_id]
-                #     connect_user = ConnectUser.where(:id => u[:connect_user_id]).first
-                #     ru = report.report_users.where(:connect_user_id => connect_user.id).first_or_create
-                #     ru.update_attribute :hours, u[:hours]
-                #     connect_user_ids << connect_user.id
                 elsif u[:full_name]
                     user = User.where(:full_name => u[:full_name]).first
                 end
@@ -160,17 +154,26 @@ class Api::V3::ReportsController < Api::V3::ApiController
         end
 
         if params[:report][:safety_topics].present?
+            new_topics = []
             params[:report][:safety_topics].each do |topic|
                 if topic["topic_id"]
-                    report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
+                    t = report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
+                    new_topics << t
                 else
                     if topic["id"].present?
-                        report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                        t = report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                        new_topics << t
                     else
                         new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
-                        report.report_topics.create(:safety_topic_id => new_topic.id)
+                        t = report.report_topics.create(:safety_topic_id => new_topic.id)
+                        new_topics << t
                     end
                 end
+            end
+            topics_for_deletion = report.report_topics - new_topics
+            puts "topics for deletion: #{topics_for_deletion}"
+            topics_for_deletion.each do |td|
+                puts "topic to delete: #{td.tite}"
             end
             params[:report].delete(:safety_topics)
         end
