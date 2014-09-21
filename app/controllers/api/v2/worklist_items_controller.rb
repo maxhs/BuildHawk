@@ -86,26 +86,26 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
 
         params[:worklist_item][:mobile] = true
         
-        worklist_item = project.tasklists.last.tasks.create params[:worklist_item]
-        worklist_item.activities.create(
-            :worklist_item_id => worklist_item.id,
+        task = project.tasklists.last.tasks.create params[:worklist_item]
+        task.activities.create(
+            :task_id => task.id,
             :project_id => project.id,
-            :user_id => worklist_item.user.id,
-            :body => "#{worklist_item.user.full_name} created this item.",
-            :activity_type => worklist_item.class.name
+            :user_id => task.user.id,
+            :body => "#{task.user.full_name} created this item.",
+            :activity_type => task.class.name
         )
         
         ### remove in 1.05
         if assignee
-            worklist_item.update_attribute :assignee_id, assignee.id
+            task.update_attribute :assignee_id, assignee.id
         elsif sub
-            worklist_item.update_attribute :sub_assignee_id, sub.id
+            task.update_attribute :sub_assignee_id, sub.id
         end
         ###
 
-        if worklist_item.save
+        if task.save
             respond_to do |format|
-                format.json { render_for_api :tasklist, :json => worklist_item, :root => @root}
+                format.json { render_for_api :tasklist, :json => task, :root => @root}
             end
         end
     end
