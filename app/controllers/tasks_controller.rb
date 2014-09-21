@@ -116,13 +116,8 @@ class TasksController < AppController
 				params[:task][:completed_at] = nil
 			end
 			@task.update_attributes params[:task]
-
-			@task.activities.create(
-				:user_id => current_user.id,
-				:body => "#{current_user.full_name} just updated this item",
-				:project_id => @task.tasklist.project.id,
-				:activity_type => @task.class.name
-			)
+			@task.log_activity(current_user)
+			
 			if request.xhr?
 				respond_to do |format|
 					format.js

@@ -48,11 +48,18 @@ class User < ActiveRecord::Base
 
     #after_create :welcome
     after_commit :clean_phone, :if => :persisted?
+    before_destroy :cleanup_user
 
     def welcome
         UserMailer.welcome(self).deliver if email 
         full_name = "#{first_name} #{last_name}"
         self.save
+    end
+
+    def cleanup_user
+        Task.where(user_id: id).each do |t|
+            t.update_attribute :user_id, nil
+        end
     end
 
     def is_active?

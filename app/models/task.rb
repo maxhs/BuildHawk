@@ -2,7 +2,7 @@ class Task < ActiveRecord::Base
 
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, :photos_attributes, 
                     :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, 
-                    :user_id, :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :user_ids,
+                    :user_id, :user, :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :user_ids,
                     :connect_assignee_id, :connect_assignee
 
     belongs_to :tasklist
@@ -78,7 +78,7 @@ class Task < ActiveRecord::Base
             )
         else
             body = "#{tasklist.project.name} (Tasklist) - \"#{truncated}\" has been modified"
-            user.notifications.where(:body => body,:task_id => id,:notification_type => "Tasklist").first_or_create
+            user.notifications.where(:body => body,:task_id => id,:notification_type => "Tasklist").first_or_create if user
             activities.create(
                 :user_id => current_user.id,
                 :project_id => tasklist.project.id,
