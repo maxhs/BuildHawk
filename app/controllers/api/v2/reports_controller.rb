@@ -160,18 +160,24 @@ class Api::V2::ReportsController < Api::V2::ApiController
         end
 
         if params[:report][:safety_topics].present?
+            new_topics = []
             params[:report][:safety_topics].each do |topic|
                 if topic["topic_id"]
-                    report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
+                    t = report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
+                    new_topics << t
                 else
                     if topic["id"].present?
-                        report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                        t = report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                        new_topics << t
                     else
                         new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
-                        report.report_topics.create(:safety_topic_id => new_topic.id)
+                        t = report.report_topics.create(:safety_topic_id => new_topic.id)
+                        new_topics << t
                     end
                 end
             end
+            topics_for_deletion = report.report_topics - new_topics
+            topics_for_deletion.each(&:destroy)
             params[:report].delete(:safety_topics)
         end
 
