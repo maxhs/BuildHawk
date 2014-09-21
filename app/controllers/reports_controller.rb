@@ -180,10 +180,8 @@ class ReportsController < AppController
 
 	def destroy
 		@project = @report.project
-		@report = Report.find params[:id]
-		if @report.destroy
-			redirect_to reports_path(:project_id => @project.id)
-		end
+		@report_id = @report.id
+		@report.destroy
 	end
 
 	private

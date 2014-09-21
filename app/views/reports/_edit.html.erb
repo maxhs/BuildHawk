@@ -1,21 +1,10 @@
 
-<%= nested_form_for @report, url: report_path(@report, :project_id => @report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
+<%= nested_form_for report, url: report_path(report, :project_id => report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
 	<div id="edit-report" class="border-box container">
 
-		<!--<% if @previous %>
-			<div class="previous-report">
-				<h5><%= link_to "&#8592;  #{@previous.date_string}".html_safe, report_path(@previous), remote:true, :class => "font-smoothing" %></h5>
-			</div>
-		<% end %>
-		<% if @next %>
-			<div class="next-report">
-				<h5><%= link_to "#{@next.date_string}  &#8594;  ".html_safe, report_path(@next), remote:true, :class => "font-smoothing" %></h5>
-			</div>
-		<% end %>-->
-
 		<div id="dismiss-report"><%=image_tag "blackX.png" %></div>
-		<!--<div class="simple-btn export"><%= link_to 'Email', generate_report_path(@report), :class=>"remote", remote: true %></div>-->
+		<!--<div class="simple-btn export"><%= link_to 'Email', generate_report_path(report), :class=>"remote", remote: true %></div>-->
 
 		<div class="thin-form">
 			<div class="row form-title" style="border:0;margin-top:0;padding-top:0">
@@ -24,7 +13,7 @@
 
 			<div class="row">
 				<div class="input-append date col-md-12" data-date-format="dd-mm-yyyy">
-					<%= f.text_field :date_string, :value => @report.date_string, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+					<%= f.text_field :date_string, :value => report.date_string, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 				</div>
 			</div>
 
@@ -32,7 +21,7 @@
 				<div class="col-md-12"><h5 style="display:inline-block;">Type</h5></div>
 			</div>
 			<div class="row">
-				<div class="col-md-12" style="padding-top:9px;"><%= f.select :report_type, options_for_select(@report.possible_types, :selected => @report.report_type) %></div>
+				<div class="col-md-12" style="padding-top:9px;"><%= f.select :report_type, options_for_select(report.possible_types, :selected => report.report_type) %></div>
 			</div>
 				
 			<div class="row form-title">
@@ -42,12 +31,12 @@
 				<div class="col-md-12"><%= f.text_area :body, :rows => 7, :placeholder => "General remarks" %></div>
 			</div>
 
-			<% if @report.report_type == "Safety" %>
+			<% if report.report_type == "Safety" %>
 				<div class="row form-title">
 					<div class="col-md-12"><h5>Safety Topics Covered</h5></div>
 				</div>
 				
-				<% @report.safety_topics.each do |topic| %>
+				<% report.safety_topics.each do |topic| %>
 					<div class="row">
 						<div class="col-md-12"><h5>&bull;&nbsp;<%= topic.title %></h5></div>
 					</div>
@@ -68,10 +57,10 @@
 					<div class="col-md-3"><h5>Humidity</h5></div>
 				</div>
 				<div class="row weather-fields">
-					<div class="col-md-3"><%= f.text_field :temp, :value => @report.temp, :placeholder => "N/A" %></div>
-					<div class="col-md-3"><%= f.text_field :wind, :value => @report.wind, :placeholder => "N/A" %></div>
-					<div class="col-md-3"><%= f.text_field :precip, :value => @report.precip, :placeholder => "N/A" %></div>
-					<div class="col-md-3"><%= f.text_field :humidity, :value => @report.humidity, :placeholder => "N/A" %></div>
+					<div class="col-md-3"><%= f.text_field :temp, :value => report.temp, :placeholder => "N/A" %></div>
+					<div class="col-md-3"><%= f.text_field :wind, :value => report.wind, :placeholder => "N/A" %></div>
+					<div class="col-md-3"><%= f.text_field :precip, :value => report.precip, :placeholder => "N/A" %></div>
+					<div class="col-md-3"><%= f.text_field :humidity, :value => report.humidity, :placeholder => "N/A" %></div>
 				</div>
 			<% end %>
 
@@ -82,17 +71,17 @@
 
 			<div class="row">
 				<div class="user-container col-md-6">
-					<% @project_users.each do |project_user| %>
-						<% if @report.users.include?(project_user.user) %>
-							<% report_user = @report.report_users.where(:user_id => project_user.user.id).first %>
+					<% project_users.each do |project_user| %>
+						<% if report.users.include?(project_user.user) %>
+							<% report_user = report.report_users.where(:user_id => project_user.user.id).first %>
 							<div><%= text_field_tag "report[user_ids][]", report_user.hours, :class => "report-personnel-input" %>
 								<span style="padding-left:1em;">
 									<%= project_user.user.full_name %>
 								</span>
 
 							</div>
-						<% elsif @report.connect_users.include?(project_user.connect_user) %>
-							<% report_user = @report.report_users.where(:connect_user_id => project_user.connect_user.id).first %>
+						<% elsif report.connect_users.include?(project_user.connect_user) %>
+							<% report_user = report.report_users.where(:connect_user_id => project_user.connect_user.id).first %>
 							<div>
 								<%= text_field_tag "report[connect_user_ids][]", report_user.hours, :class => "report-personnel-input" %>
 								<span style="padding-left:1em;">
@@ -109,7 +98,7 @@
 				<div class="sub-container col-md-6">
 					<% @subs.each do |sub| %>
 						<div>
-							<% report_company = @report.report_companies.where(:company_id => sub.id).first %>
+							<% report_company = report.report_companies.where(:company_id => sub.id).first %>
 							<% if report_company %>
 								<%= text_field_tag "report_companies[#{sub.id if sub}]", report_company.count, placeholder: "0", :class => "report-personnel-input" %>
 							<% else %>
@@ -122,9 +111,9 @@
 			</div>
 		</div>
 
-		<% if @report.photos && @report.photos.count > 0 %>
+		<% if report.photos && report.photos.count > 0 %>
 			<div class="row" style="margin-top:20px;">
-				<% @report.photos.each do |p| %>
+				<% report.photos.each do |p| %>
 					<% if p.image_file_name%>
 						<%= render :partial => "photos/image", :locals => {:p => p} %> 
 					<% end %>
@@ -139,10 +128,10 @@
 	
 			<div class="row">
 				<div class="col-md-12">
-					<%= f.fields_for :photos, @report.photos.build do |photo| %>
+					<%= f.fields_for :photos, report.photos.build do |photo| %>
 						<%= photo.file_field :image %>
-						<%= photo.hidden_field :report_id, :value => @report.id %>
-						<%= photo.hidden_field :project_id, :value => @project.id %>
+						<%= photo.hidden_field :report_id, :value => report.id %>
+						<%= photo.hidden_field :project_id, :value => project.id %>
 						<%= photo.hidden_field :source, :value => "Reports" %>
 					<% end %>
 				</div>
@@ -151,36 +140,36 @@
 			<div class="button-container">
 				<%= f.submit "Save", :class => "simple-btn save" %>
 <% end %>
-				<% if current_user.admin || current_user.company_admin || current_user.uber_admin || @report.author == current_user %>
-					<%= link_to image_tag('trashButton.png', :class=>"remote delete-img"), report_path(@report, :project_id => @project.id), :method => :delete, :class => "delete-link", :style=>"margin:0 auto;width:82px;display:block;", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."} %>
+				<% if current_user.admin || current_user.company_admin || current_user.uber_admin || report.author == current_user %>
+					<%= link_to image_tag('trashButton.png', :class=>"remote delete-img"), report_path(report, :project_id => project.id), :method => :delete, :class => "delete-link", :style=>"margin:0 auto;width:82px;display:block;", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."}, remote: true %>
 				<% end %>
 			</div>
 		</div>
 
 	</div>
 	<div class="comment-container border-box">
-		<h4 style="text-align:center; margin:5px auto 15px; display:block;">Comments for <%= "#{@report.report_type} Report - #{@report.created_date}"%></h4>
+		<h4 style="text-align:center; margin:5px auto 15px; display:block;">Comments for <%= "#{report.report_type} Report - #{report.created_date}"%></h4>
 		<div id="comments-form">
-			<%= form_for @report.comments.new, :method => :post, :remote => true do |f| %>
+			<%= form_for report.comments.new, :method => :post, :remote => true do |f| %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
 				<%= f.hidden_field :user_id, :value => current_user.id %>
-				<%= f.hidden_field :report_id, :value => @report.id %>
+				<%= f.hidden_field :report_id, :value => report.id %>
 				<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
 			<% end %>
 		</div>
-		<%= render :partial => "comments/comments", :locals => {:comments => @report.comments} %>
+		<%= render :partial => "comments/comments", :locals => {:comments => report.comments} %>
 	</div>
 
-	<% if @report.report_type == "Daily" && @report.daily_activities.count > 0 %>
+	<% if report.report_type == "Daily" && report.daily_activities.count > 0 %>
 		<div class="activity-container border-box">
-			<h4 style="text-align:center; margin:5px auto 15px; display:block;"><%= @report.project.name %> Activity for <%= @report.date_string %></h4>
-			<%= render :partial => "activities/activity", collection: @report.daily_activities, as: :activity, cache:true %>
+			<h4 style="text-align:center; margin:5px auto 15px; display:block;"><%= report.project.name %> Activity for <%= report.date_string %></h4>
+			<%= render :partial => "activities/activity", collection: report.daily_activities, as: :activity, cache:true %>
 		</div>
-	<% elsif @report.activities.count > 0 %>
+	<% elsif report.activities.count > 0 %>
 		<div class="activity-container border-box">
 			<h4 style="text-align:center; margin:5px auto 15px; display:block;">Activity</h4>
-			<%= render :partial => "activities/activity", collection: @report.activities, as: :activity, cache:true %>
+			<%= render :partial => "activities/activity", collection: report.activities, as: :activity, cache:true %>
 		</div>
 	<% end %>
 

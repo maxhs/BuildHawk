@@ -35,7 +35,7 @@
 
 <div id="report-focus">
 	<% if report %>
-		<%= render partial:"reports/edit", locals:{report: report} %>
+		<%= render partial:"reports/edit", locals:{report: report, project: @project, project_users: @project_users} %>
 	<% end %>
 </div>
 

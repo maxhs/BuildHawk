@@ -5,7 +5,7 @@ if ($('.datepicker.dropdown-menu').length){
 }
 
 $("#project-reports").addClass('reports-panel');
-$('#report-focus').html('<%= j render :partial => "reports/edit", :locals => {:report => @report } %>');
+$('#report-focus').html('<%= j render :partial => "reports/edit", :locals => {report: @report, project: @project, project_users: @project_users } %>');
 var reportOffset = document.getElementById('report-<%=@report.id %>').offsetTop;
 var focusOffset = document.getElementById('project-reports').offsetHeight;
 var posTop = reportOffset-focusOffset-100;

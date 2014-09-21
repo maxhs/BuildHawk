@@ -1,0 +1,12 @@
+$('#report-focus').css({'left':'100%','top':'0'});
+$('#project-reports').removeClass('reports-panel');
+$('#report-<%= @report_id %>').fadeOut(200,function(){
+	$(this).remove();
+});
+$("html, body").animate({ scrollTop: 0 }, 200);
+if (history && history.pushState){
+    history.pushState(null, null, '<%=root_url%>reports?project_id=<%=@project.id%>');
+    $(window).bind("popstate", function(){
+      $.getScript(location.href);
+    });
+}

@@ -19,10 +19,10 @@
 
 $nprogress-color: #cc0000;
 
+@import 'bootstrap';
 @import 'nprogress';
 @import 'nprogress-bootstrap';
 @import 'shadowbox';
-@import 'bootstrap';
 
 html {
 	height: 100%;
@@ -171,6 +171,7 @@ body {
 		background:#444;
 		font-weight:200;
 		overflow-y:scroll;
+
 		#settings-row{
 			padding:11px 10px;
 		}
