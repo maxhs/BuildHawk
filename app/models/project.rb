@@ -146,6 +146,7 @@ class Project < ActiveRecord::Base
         t.add :users
         t.add :progress
         t.add :reminders
+        t.add :order_index
   	end
 
     api_accessible :tasklist do |t|
