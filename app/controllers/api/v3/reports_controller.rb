@@ -173,6 +173,8 @@ class Api::V3::ReportsController < Api::V3::ApiController
             topics_for_deletion = report.report_topics - new_topics
             topics_for_deletion.each(&:destroy)
             params[:report].delete(:safety_topics)
+        else 
+            report.report_topics.destroy_all
         end
 
         ## finally. an update.
