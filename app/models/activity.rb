@@ -104,6 +104,9 @@ class Activity < ActiveRecord::Base
     api_accessible :reports, :extend => :details do |t|
       
     end
+    api_accessible :v3_reports, :extend => :details do |t|
+      
+    end
 
     api_accessible :tasklist, :extend => :details do |t|
       

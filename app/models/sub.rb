@@ -53,6 +53,10 @@ class Sub < ActiveRecord::Base
         t.add :count
   	end
 
+    api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
+
     api_accessible :user, :extend => :reports do |t|
 
     end

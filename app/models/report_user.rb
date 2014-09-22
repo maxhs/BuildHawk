@@ -16,4 +16,8 @@ class ReportUser < ActiveRecord::Base
   		t.add :connect_user
   		t.add :hours
   	end
+
+  	api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
 end

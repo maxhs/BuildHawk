@@ -81,7 +81,7 @@ class Api::V3::ReportsController < Api::V3::ApiController
             )
 
             respond_to do |format|
-                format.json { render_for_api :reports, :json => report, :root => :report}
+                format.json { render_for_api :v3_reports, :json => report, :root => :report}
             end
         end
     end
@@ -186,7 +186,7 @@ class Api::V3::ReportsController < Api::V3::ApiController
         )
 
     	respond_to do |format|
-        	format.json { render_for_api :reports, :json => report, :root => :report}
+        	format.json { render_for_api :v3_reports, :json => report, :root => :report}
       	end
     end
 
@@ -227,7 +227,7 @@ class Api::V3::ReportsController < Api::V3::ApiController
         end
         if report 
             respond_to do |format|
-                format.json { render_for_api :reports, :json => report, :root => :report}
+                format.json { render_for_api :v3_reports, :json => report, :root => :report}
             end
         else
             render :json => {:success => false}

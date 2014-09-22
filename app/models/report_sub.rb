@@ -14,4 +14,8 @@ class ReportSub < ActiveRecord::Base
   		t.add :sub
   		t.add :count
   	end
+
+  	api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
 end

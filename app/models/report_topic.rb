@@ -10,4 +10,8 @@ class ReportTopic < ActiveRecord::Base
   		t.add :report_id
   		t.add :safety_topic
   	end
+
+  	api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
 end

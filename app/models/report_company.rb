@@ -10,4 +10,8 @@ class ReportCompany < ActiveRecord::Base
   		t.add :company
   		t.add :count
   	end
+
+  	api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
 end
