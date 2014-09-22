@@ -210,7 +210,7 @@ class Report < ActiveRecord::Base
         t.add :report_companies
         t.add :report_topics
         t.add :body, :if => :has_body?
-        t.add :activities
+        t.add :activities, :unless => :is_daily?
         t.add :daily_activities, :if => :is_daily?
         t.add :epoch_time
     end

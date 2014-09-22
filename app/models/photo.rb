@@ -185,6 +185,10 @@ class Photo < ActiveRecord::Base
 
 	end
 
+	api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
+
 	api_accessible :details, :extend => :dashboard do |t|
 
 	end
