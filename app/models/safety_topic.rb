@@ -12,4 +12,8 @@ class SafetyTopic < ActiveRecord::Base
   		t.add :report_id
   		t.add :company_id
   	end
+
+    api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
 end
