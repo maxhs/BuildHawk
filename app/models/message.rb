@@ -22,6 +22,10 @@ class Message < ActiveRecord::Base
 		end
 	end
 
+	def epoch_time
+		created_at.to_i
+	end
+
 	acts_as_api
 
 	api_accessible :notifications do |t|
@@ -30,6 +34,7 @@ class Message < ActiveRecord::Base
         t.add :company
         t.add :target_project
         t.add :comments
+        t.add :epoch_time
     end
 
     api_accessible :projects, :extend => :notifications do |t|

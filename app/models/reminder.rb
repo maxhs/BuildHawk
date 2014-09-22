@@ -39,6 +39,10 @@ class Reminder < ActiveRecord::Base
 		reminder_datetime.to_i
 	end
 
+	def epoch_time
+		created_at.to_i
+	end
+
 	acts_as_api
 
 	api_accessible :reminders do |t|
@@ -52,6 +56,7 @@ class Reminder < ActiveRecord::Base
 		t.add :push
 		t.add :active
 		t.add :project_id
+		t.add :epoch_time
 	end
 
 	api_accessible :projects, :extend => :reminders do |t|

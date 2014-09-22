@@ -105,6 +105,7 @@ class Task < ActiveRecord::Base
         created_at.to_i
     end
 
+
     def project_id
         tasklist.project.id
     end
@@ -121,11 +122,11 @@ class Task < ActiveRecord::Base
         end        
     end
 
-    ##for deletion
     def epoch_time
         created_date
     end
 
+    ###
     def worklist_id
         tasklist.id
     end
@@ -147,9 +148,9 @@ class Task < ActiveRecord::Base
   		t.add :completed
         t.add :created_date
         t.add :project_id
+        t.add :epoch_time
         ## deprecated
         t.add :worklist_id
-        t.add :epoch_time
   	end
 
     api_accessible :connect do |t|
@@ -198,5 +199,6 @@ class Task < ActiveRecord::Base
         t.add :created_at
         t.add :completed
         t.add :created_date
+        t.add :epoch_time
     end
 end

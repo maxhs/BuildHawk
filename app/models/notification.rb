@@ -34,6 +34,10 @@ class Notification < ActiveRecord::Base
 	def created_date
         created_at.to_i
     end
+
+    def epoch_time
+		created_at.to_i
+	end
    
 	acts_as_api
 
@@ -44,6 +48,7 @@ class Notification < ActiveRecord::Base
 		t.add :checklist_item_id
 		t.add :message
 		t.add :created_date
+		t.add :epoch_time
 	end
 
 	api_accessible :details, :extend => :notifications do |t|

@@ -4,6 +4,10 @@ class Alternate < ActiveRecord::Base
 
 	acts_as_api
 
+	def epoch_time
+		created_at.to_i
+	end
+	
   	api_accessible :user do |t|
 		t.add :id
 		t.add :user_id

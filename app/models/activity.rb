@@ -22,6 +22,10 @@ class Activity < ActiveRecord::Base
 		created_at.to_i
 	end
 
+	def epoch_time
+		created_at.to_i
+	end
+
 	def checklist_id
 		checklist_item.checklist.id if checklist_item
 	end
@@ -93,6 +97,7 @@ class Activity < ActiveRecord::Base
 		t.add :body
 		t.add :hidden
 		t.add :created_date
+		t.add :epoch_time
 		t.add :activity_type
     end
 

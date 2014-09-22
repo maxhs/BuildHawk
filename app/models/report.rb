@@ -181,12 +181,39 @@ class Report < ActiveRecord::Base
         t.add :daily_activities, :if => :is_daily?
         t.add :created_date
         t.add :epoch_time
-        ### slated for deletion in next version. replace epoch_time with created_date as soon as 1.04 is out ###
+        ###
         t.add :safety_topics
         t.add :report_subs
         t.add :personnel
         ###
   	end
+
+    api_accessible :v3_reports do |t|
+        t.add :id
+        t.add :author
+        t.add :updated_at
+        t.add :created_at
+        t.add :date_string
+        t.add :title
+        t.add :report_type
+        t.add :weather
+        t.add :weather_icon
+        t.add :precip
+        t.add :temp
+        t.add :wind
+        t.add :humidity
+        t.add :report_fields
+        t.add :possible_types
+        t.add :comments
+        t.add :photos
+        t.add :report_users
+        t.add :report_companies
+        t.add :report_topics
+        t.add :body, :if => :has_body?
+        t.add :activities
+        t.add :daily_activities, :if => :is_daily?
+        t.add :epoch_time
+    end
 
     api_accessible :notifications, :extend => :reports do |t|
 
