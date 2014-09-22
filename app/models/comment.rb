@@ -90,6 +90,10 @@ class Comment < ActiveRecord::Base
     api_accessible :reports, :extend => :projects do |t|
 
     end
+
+    api_accessible :v3_reports, :extend => :reports do |t|
+
+    end
     
     api_accessible :notifications, :extend => :projects do |t|
 
