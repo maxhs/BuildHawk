@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-    require "resque"
+    
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist, :photos,
                         :user_ids, :core, :project_group_id, :companies, :company_ids, :order_index
@@ -130,6 +130,7 @@ class Project < ActiveRecord::Base
     end
 
     def background_destroy
+        require "resque"
         Resque.enqueue(DestroyProject, id)
     end
 
