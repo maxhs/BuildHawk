@@ -53,7 +53,7 @@ h2 {
 	text-align:center;
 }
 
-#new-billing-container, #edit-billing-container {
+#new-billing-container, #edit-billing-container, #edit-card-container {
 	position:relative;
 	width:50%;
 	margin:0 auto;
@@ -81,6 +81,26 @@ h2 {
 		text-align: center;
 		margin: 10px auto 0;
 		display: block;
+	}
+}
+
+#edit-card-container {
+	form {
+		width:50%;
+		margin:10px auto;
+		padding:1%;
+		min-width:300px;
+		border:1px solid #ddd;
+		border-radius:17px;
+	}
+
+	.row {
+		padding:15px 15px 5px;
+		border-bottom:1px solid #eee;
+	}
+
+	.row:last-child {
+		border:0;
 	}
 }
 

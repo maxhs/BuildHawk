@@ -12,6 +12,6 @@ class AddIndicesToActivities < ActiveRecord::Migration
   		add_index :alternates, :user_id, name: "alternates_idx"
   		add_index :photos, :folder_id, name: "photos_folder_idx"
   		remove_column :safety_topics, :report_id, :integer
-  		remove_column :checklist_items, :user_id, :integer
+  		#remove_column :checklist_items, :user_id, :integer
   	end
 end

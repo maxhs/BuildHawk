@@ -367,7 +367,7 @@
 		}
 
 		input[type="text"],input[type="email"]{
-			margin: .5em auto;
+			margin: 2px auto;
 			font-weight: lighter;
 			font-family: helvetica;
 			font-size: 1.1em;
@@ -377,9 +377,12 @@
 			border-radius: 3px;
 		}
 
-		#recaptcha_area {
-			width:440px;
-			margin:0 auto 15px;
+		#dynamic_recaptcha {
+			margin-top:2px;
+			#recaptcha_area {
+				width:440px;
+				margin:0 auto 15px;
+			}
 		}
 
 		button {
@@ -399,6 +402,11 @@
 		.confirmation {
 			font-size:1.25em;
 			margin-top:2em;
+		}
+
+		form {
+			margin:0 auto;
+			width:50%;
 		}
 	}
 }
