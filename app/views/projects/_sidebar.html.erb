@@ -78,7 +78,7 @@
 	<% end %>
 	$(function(){
 		sidebarSetup();
-		<% if @sidebar_projects %>
+		<% if @sidebar_projects && @sidebar_projects.count > 0 %>
 			<% @sidebar_projects.each do |p| %>
 				<% if p.checklist %>
 					$('#sidebar-progress-link-<%=p.id%>').progressbar({
@@ -86,7 +86,16 @@
 				    });
 				<% end %>
 		    <% end %>
+		<% elsif @demo_projects %>
+			<% @demo_projects.each do |p| %>
+				<% if p.checklist %>
+					$('#sidebar-progress-link-<%=p.id%>').progressbar({
+				    	value:<%=p.checklist.progress%>
+				    });
+				<% end %>
+		    <% end %>
 	    <% end %>
+
 	    <% if @project_groups %>
 		    <% @project_groups.each do |g| %>
 		    	<% g.projects.each do |p| %>
