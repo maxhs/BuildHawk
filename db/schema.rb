@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919035228) do
+ActiveRecord::Schema.define(version: 20140923231743) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.integer  "comment_id"
     t.integer  "message_id"
   end
+
+  add_index "activities", ["user_id", "project_id", "report_id", "task_id", "comment_id", "checklist_item_id", "message_id"], name: "activities_idxs"
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -56,12 +58,16 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.datetime "updated_at"
   end
 
+  add_index "alternates", ["user_id"], name: "alternates_idx"
+
   create_table "billing_days", force: true do |t|
     t.integer  "project_user_id"
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "billing_days", ["project_user_id", "company_id"], name: "billing_days_idx"
 
   create_table "cards", force: true do |t|
     t.string   "last4"
@@ -119,7 +125,6 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.datetime "updated_at"
     t.integer  "photos_count"
     t.integer  "comments_count"
-    t.integer  "user_id"
     t.integer  "state"
   end
 
@@ -237,6 +242,8 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.datetime "updated_at"
   end
 
+  add_index "message_users", ["user_id", "message_id"], name: "message_users_idx"
+
   create_table "messages", force: true do |t|
     t.integer  "author_id"
     t.integer  "company_id"
@@ -244,6 +251,8 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "messages", ["author_id", "company_id"], name: "messages_idx"
 
   create_table "notifications", force: true do |t|
     t.boolean  "read",              default: false
@@ -283,6 +292,7 @@ ActiveRecord::Schema.define(version: 20140919035228) do
   end
 
   add_index "phases", ["checklist_id"], name: "categories_checklist_id_ix"
+  add_index "phases", ["core_checklist_id"], name: "phase_core_checklist_idx"
 
   create_table "photos", force: true do |t|
     t.string   "image_file_name"
@@ -306,6 +316,7 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.integer  "comment_id"
   end
 
+  add_index "photos", ["folder_id"], name: "photos_folder_idx"
   add_index "photos", ["report_id", "checklist_item_id", "task_id", "user_id"], name: "photos_ix"
 
   create_table "project_groups", force: true do |t|
@@ -386,6 +397,8 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.integer  "task_id"
   end
 
+  add_index "reminders", ["user_id", "checklist_item_id", "task_id", "project_id"], name: "reminders_idx"
+
   create_table "report_companies", force: true do |t|
     t.integer  "report_id"
     t.integer  "company_id"
@@ -415,6 +428,8 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "report_topics", ["report_id", "safety_topic_id"], name: "report_topics_idx"
 
   create_table "report_users", force: true do |t|
     t.integer  "report_id"
@@ -448,7 +463,6 @@ ActiveRecord::Schema.define(version: 20140919035228) do
 
   create_table "safety_topics", force: true do |t|
     t.integer  "company_id"
-    t.integer  "report_id"
     t.string   "title"
     t.text     "info"
     t.boolean  "core",       default: false
@@ -486,6 +500,8 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.datetime "updated_at"
   end
 
+  add_index "tasklists", ["project_id"], name: "taskslists_idx"
+
   create_table "tasks", force: true do |t|
     t.text     "body"
     t.integer  "tasklist_id"
@@ -504,6 +520,8 @@ ActiveRecord::Schema.define(version: 20140919035228) do
     t.boolean  "mobile",               default: false
     t.integer  "connect_assignee_id"
   end
+
+  add_index "tasks", ["tasklist_id", "user_id", "completed_by_user_id"], name: "tasks_idx"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: ""

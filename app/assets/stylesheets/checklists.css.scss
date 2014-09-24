@@ -30,7 +30,6 @@
 
 .project-checklist-table.border-box, .admin-checklist-table.border-box, .core-checklist-table.border-box {
 	margin:0 auto; 
-	padding:0;
 	width:100%;
 
 	#search-button {
@@ -256,6 +255,10 @@
 	position:relative;	
 	list-style:none;
 
+	h2 {
+		text-align:left;
+		display:inline-block;
+	}
 	.phase-name {
 		cursor:move;
 	}
@@ -316,6 +319,7 @@
 	input[type="text"] {
 		width:100%;
 	}
+
 	.row {
 		border:0;
 		padding:5px;

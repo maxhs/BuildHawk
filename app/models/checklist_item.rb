@@ -1,9 +1,9 @@
 class ChecklistItem < ActiveRecord::Base
 	attr_accessible :body, :item_type, :completed_by_user_id, :category_id, :critical_date, 
                     :completed_date,:photos, :photos_attributes, :checklist_id, :order_index, :photos_count, 
-                    :comments_count, :user_id, :reminder_date, :state
+                    :comments_count, :reminder_date, :state#, :user_id
   	
-  	belongs_to :user
+  	#belongs_to :user
     belongs_to :category
     belongs_to :checklist
     belongs_to :completed_by_user, :class_name => "User"

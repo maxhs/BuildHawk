@@ -1,12 +1,12 @@
 <li class="phase" id="phase-<%=p.id%>">
-	<div class="phase editable">
-		<h2 class="title remote">
-			<%= link_to load_items_checklist_path(p), :id => "p-#{p.id}", :class=>"phase-link remote", remote: true do %>
-				<span class="disclosure">[&#45;]</span>
-				<%=p.name%>
-			<% end %>
-		</h2>
-		<%= link_to "Edit Phase", edit_phase_path(p), :class => "edit-phase remote", remote: true %>
-	</div>
+	
+	<h2 class="title remote">
+		<%= link_to load_items_checklist_path(p), :id => "p-#{p.id}", :class=>"phase-link remote", remote: true do %>
+			<span class="disclosure">[&#45;]</span>
+			<%=p.name%>
+		<% end %>
+	</h2>
+	<%= link_to "Edit Phase", edit_phase_path(p), :class => "simple-btn edit-phase remote", remote: true %>
+	
 	<div id="<%= p.id %>-items"></div>
 </li>
