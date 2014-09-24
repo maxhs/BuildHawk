@@ -1,21 +1,5 @@
-<% if report.users.include?(project_user.user) %>
-	<% report_user = report.report_users.where(:user_id => project_user.user.id).first %>
-	<div><%= text_field_tag "report[user_ids][]", report_user.hours, :class => "report-personnel-input" %>
-		<span style="padding-left:1em;">
-			<%= project_user.user.full_name %>
-		</span>
-
-	</div>
-<% elsif report.connect_users.include?(project_user.connect_user) %>
-	<% report_user = report.report_users.where(:connect_user_id => project_user.connect_user.id).first %>
-	<div>
-		<%= text_field_tag "report[connect_user_ids][]", report_user.hours, :class => "report-personnel-input" %>
-		<span style="padding-left:1em;">
-			<%= project_user.connect_user.full_name %>
-		</span>
-	</div>
-<% elsif project_user.user %>
-	<div><%= text_field_tag "report[user_ids][]", nil, placeholder:"0", :class => "report-personnel-input" %><span style="padding-left:1em;"><%= project_user.user.full_name %></span></div>
-<% elsif project_user.connect_user %>
-	<div><%= text_field_tag "report[connect_user_ids][]", nil, placeholder:"0", :class => "report-personnel-input" %><span style="padding-left:1em;"><%= project_user.connect_user.full_name %></span></div>
-<% end %>
+<div><%= text_field_tag "report_users[#{report_user.user.id if report_user.user.id}]", report_user.hours, :class => "report-personnel-input" %>
+	<span style="padding-left:1em;">
+		<%= report_user.user.full_name %>
+	</span>
+</div>

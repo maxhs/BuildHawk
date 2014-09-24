@@ -57,14 +57,21 @@ class ReportsController < AppController
 				if rc[1].to_i > 0
 					unless report_company
 						report_company = @report.report_companies.create :company_id => rc.first
-						#params[:report][:sub_ids] = [] unless params[:report][:sub_ids]
-						#params[:report][:sub_ids] << rs.first
 					end
 					report_company.update_attribute :count, rc[1]
-					#elsif params[:report][:sub_ids].present?
 				else
 					report_company.destroy if report_company
-					#params[:report][:sub_ids].delete(rs.first)
+				end
+			end
+		end
+
+		if params[:report_users].present?
+			params[:report_users].each do |ru|
+				report_user = @report.report_users.where(:user_id => ru.first).first_or_create
+				if ru[1].to_i > 0
+					report_user.update_attribute :hours, ru[1]
+				else
+					report_user.destroy if report_user
 				end
 			end
 		end

@@ -1,9 +1,4 @@
 <div>
-	<% report_company = report.report_companies.where(:company_id => sub.id).first %>
-	<% if report_company %>
-		<%= text_field_tag "report_companies[#{sub.id if sub}]", report_company.count, placeholder: "0", :class => "report-personnel-input" %>
-	<% else %>
-		<%= text_field_tag "report_companies[#{sub.id if sub}]", nil, placeholder: "0", :class => "report-personnel-input" %>
-	<% end %>
-	<span style="padding-left:1em;"><%= sub.name if sub %></span>
+	<%= text_field_tag "report_companies[#{report_company.company.id if report_company.company}]", report_company.count, placeholder: "0", :class => "report-personnel-input" %>
+	<span style="padding-left:1em;"><%= report_company.company.name if report_company.company %></span>
 </div>

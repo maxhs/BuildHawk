@@ -15,7 +15,7 @@
 
 				<div class="col-md-6">
 					<h5 style="display:inline-block;">Type</h5></div>
-					<%= select_tag :report_type, options_for_select(report.possible_types, :selected => report.report_type), :class=>"for-select-2", :style=>"width:50%;" %>
+					<%= select_tag :report_type, options_for_select(report.possible_types, :selected => report.report_type), :id=>"type-select", :style=>"width:50%;" %>
 			</div>
 				
 			<div class="row form-title">
@@ -65,15 +65,19 @@
 
 			<div class="row">
 				<div class="user-container col-md-6">
-					<% project_users.each do |project_user| %>
-						<%= render partial:"reports/user", locals:{report: report, project_user: project_user} %>
+					<%= select_tag :users, options_for_select(project_users.map{|pu| [pu.user.full_name, pu.user.id]}.unshift("")), :id=>"users-select", style:"padding-bottom:5px;" %>
+
+					<% report.report_users.each do |report_user| %>
+						<%= render partial:"reports/user", locals:{report: report, report_user: report_user} %>
 					<% end %>
 				</div>
 				<div class="sub-container col-md-6">
-					<% @subs.each do |sub| %>
-						<%= render partial:"reports/company", locals:{report: report, sub: sub} %>
+					<%= select_tag :subs, options_for_select(@subs.map{|s| [s.name, s.id]}.unshift("")), :id=>"subs-select", style:"padding-bottom:5px;" %>
+
+					<% report.report_companies.each do |rc| %>
+						<%= render partial:"reports/company", locals:{report: report, report_company: rc} %>
 					<% end %>
-					<!--<%= select_tag :subs, options_for_select(@subs.map{|sub| [sub.name, sub.id]}.unshift("")), :class=>"for-select-2" %>-->
+					
 				</div>
 			</div>
 		</div>
@@ -153,10 +157,18 @@
 	$('#dismiss-report').click(function(){
 		dismissReport();
 	});
-	$('.for-select-2').select2({
+	$('#type-select').select2();
+	$('#subs-select').select2({
 		placeholder: "Add the companies/subcontractors present"
 	});
-	$('.for-select-2').on("select2-selecting", function(e) { 
-	   console.log("what was selected? " + e.val);
+	$('#subs-select').on("select2-selecting", function(e) { 
+	   $('#subs-select').after('<div><input class="report-personnel-input" id="report_companies_'+e.val+'" name="report_companies['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
+	});
+
+	$('#users-select').select2({
+		placeholder: "Select the personnel present"
+	});
+	$('#users-select').on("select2-selecting", function(e) { 
+	   $('#users-select').after('<div><input class="report-personnel-input" id="report_user_ids_'+e.val+'" name="report_users['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
 	});
 </script>

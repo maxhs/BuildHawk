@@ -45,6 +45,7 @@ class Company < ActiveRecord::Base
 
     def clean_company_subs
         CompanySub.where(:subcontractor_id => id).destroy_all
+        ReportCompany.where(:company_id => id).destroy_all
     end
 
     def balance
