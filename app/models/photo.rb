@@ -33,7 +33,7 @@ class Photo < ActiveRecord::Base
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
-	process_in_background :image, :only_process => lambda { |a| a.instance.is_mobile? ? [:thumb, :small, :medium, :large] : [] }
+	process_in_background :image, :only_process => lambda { |a| a.instance.mobile? ? [:thumb, :small, :medium, :large] : [] }
 
 	# websolr
     searchable do
@@ -56,14 +56,6 @@ class Photo < ActiveRecord::Base
 			:activity_type => self.class.name,
 			:body => "#{user.full_name} added a document."
 		)
-	end
-
-	def is_mobile?
-		if mobile?
-			return true
-		else
-			return false
-		end
 	end
 
 	def url_medium
