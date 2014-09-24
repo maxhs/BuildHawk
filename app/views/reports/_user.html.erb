@@ -1,5 +1,5 @@
 <div><%= text_field_tag "report_users[#{report_user.user.id if report_user.user.id}]", report_user.hours, :class => "report-personnel-input" %>
 	<span style="padding-left:1em;">
-		<%= report_user.user.full_name %>
+		<%= report_user.user.full_name if report_user.user %>
 	</span>
 </div>
