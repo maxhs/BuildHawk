@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .reports-panel {
 	width:50% !important;
 }
@@ -94,6 +93,11 @@
 
 	input[type="text"], textarea {
 		width:100%;
+	}
+
+	#dp {
+		width:90%;
+		margin-left:0;
 	}
 
 	input[type="checkbox"] {
