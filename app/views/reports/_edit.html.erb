@@ -18,10 +18,8 @@
 			</div>
 
 			<div class="row form-title">
-				<div class="col-md-12"><h5 style="display:inline-block;">Type</h5></div>
-			</div>
-			<div class="row">
-				<div class="col-md-12" style="padding-top:9px;"><%= f.select :report_type, options_for_select(report.possible_types, :selected => report.report_type) %></div>
+				<div class="col-md-3"><h5 style="display:inline-block;">Type</h5></div>
+				<div class="col-md-9" style="padding-top:4px;"><%= f.select :report_type, options_for_select(report.possible_types, :selected => report.report_type) %></div>
 			</div>
 				
 			<div class="row form-title">

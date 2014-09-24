@@ -59,9 +59,19 @@
 	}
 
 	input[type="submit"] {
-		margin:5px 0 0 5%;
+		margin:0 0 0 5%;
+		position:relative;
+		top:4px;
+	}
+
+	#cancel-new-group {
+		color:#fff;
+		font-size:14px;
+		position:relative;
+		top:5px;
 	}
 }
+
 .project-group.editing {
 	height:44px;
 	overflow:auto;

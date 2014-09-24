@@ -50,8 +50,6 @@ class ReportsController < AppController
 	end
 
 	def update
-		@project = Project.find params[:project_id]
-		@report = Report.find params[:id]
 
 		if params[:report_companies].present?
 			params[:report_companies].each do |rc|
@@ -100,7 +98,7 @@ class ReportsController < AppController
 		@reports = @project.ordered_reports
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "reports/index"}
+				format.js
 			end
 		else 
 			render :index
