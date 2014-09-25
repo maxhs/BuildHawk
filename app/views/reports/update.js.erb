@@ -1,3 +1,6 @@
+$('#alert').text("Saved").fadeIn(200).delay(2000).fadeOut(500, function(){
+	$(this).text("");
+});
 $('#report-<%= @report.id %>').replaceWith('<%= j render partial:"reports/index_row", locals: {report: @report} %>');
 $('#report-<%= @report.id %>').addClass('active-report');
 //$('#report-focus').html('<%= j render partial:"reports/edit", locals: {report: @report, project: @project, project_users: @project_users} %>');

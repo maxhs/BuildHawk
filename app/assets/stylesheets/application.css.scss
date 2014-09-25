@@ -971,6 +971,35 @@ a.search-button {
 	width:50%;
 }
 
+.action-buttons {
+	display:table;
+	max-width:50%;
+	float:right;
+	z-index:777;
+
+	div {
+		display:table-cell;
+		vertical-align:middle;
+		height:100%;
+		margin: 0 10px;
+		padding:0 20px 0 0;
+		cursor:pointer;
+	}
+
+	.save-img {
+		width:24px;
+	}
+
+	.dismiss {
+		padding-right:0;
+
+		img {
+			width:24px;
+		}
+	}
+
+}
+
 .simple-btn:hover {
 	border-color:#ccc;
 }

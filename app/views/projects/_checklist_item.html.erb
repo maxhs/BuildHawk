@@ -1,16 +1,18 @@
 <div id="item-container" class="border-box">
 	<div class="checklist-item-form">
-
-		<button id="export-checklist-item"><%=image_tag "export.png" %></button>
-		<div id="dismiss-checklist-item"><%=image_tag "blackX.png" %></div>
-
-		<div style="clear:both;padding-left:3.5%;">
-			<span class="header-description item-phase"><h3><%= item.phase_name %></h3></span>
-			<span class="item-category"><h4><%= item.category_name %></h4></span>
-			<span class="item-body"><%= item.body %></span>
-		</div>
-
 		<%= nested_form_for item, :url => {:controller => :checklist_items, :action => :update, :id => item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
+			<div class="action-buttons">
+				<div id="floating-save"><%= f.submit "Save", type: :image, src: image_path('save.png'), :class => "save-img" %></div>
+				<div id="export-checklist-item"><%=image_tag "export.png" %></div>
+				<div id="dismiss-checklist-item" class="dismiss"><%=image_tag "blackX.png" %></div>
+			</div>
+
+			<div style="clear:both;padding-left:3.5%;">
+				<span class="header-description item-phase"><h3><%= item.phase_name %></h3></span>
+				<span class="item-category"><h4><%= item.category_name %></h4></span>
+				<span class="item-body"><%= item.body %></span>
+			</div>
+
 			<div class="row">
 				<div class="col-xs-12" style="text-align:center; display:inline-block;float:left;">
 					<h4>Status</h4>

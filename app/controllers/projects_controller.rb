@@ -45,11 +45,13 @@ class ProjectsController < AppController
 			@checklist = @project.checklist
 			items = @checklist.checklist_items
 			@item_count = items.count
-			@recently_completed = @project.recent_feed
+			
 			current_time = Time.now
 			@upcoming_items = items.select{|i| i.critical_date if i.critical_date && i.critical_date > current_time}.sort_by(&:critical_date).last(5)
-			@recent_photos = @project.recent_photos(5)
 		end
+
+		@recent_photos = @project.recent_photos(5)
+		@activities = @project.activities.first(5)
 
 		if request.xhr?
 			respond_to do |format|

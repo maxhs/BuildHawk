@@ -7,28 +7,10 @@
 	position:relative;
 
 	#export-checklist-item {
-		background:transparent;
-		position:absolute;
-		right:50px;
-		top:5px;
-		margin:0;
-		outline:0;
-		border:0;
+		padding-left:8px;
 
 		img {
-			width:20px;
-		}
-	}
-
-	#export-checklist-item:hover {
-		box-shadow:0 0 3px 0 rgba(0,0,0,.25);
-	}
-
-	#dismiss-checklist-item {
-		float:right;
-
-		img {
-			width:24px;
+			width:30px;
 		}
 	}
 }
