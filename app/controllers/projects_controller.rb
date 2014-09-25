@@ -373,6 +373,6 @@ class ProjectsController < AppController
 				redirect_to root_url
 			end
 		end
-		@connect_users = @project.connect_users if @project
+		#@connect_users = @project.connect_users if @project
 	end
 end
