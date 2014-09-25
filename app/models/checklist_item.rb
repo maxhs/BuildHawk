@@ -58,16 +58,16 @@ class ChecklistItem < ActiveRecord::Base
         end        
     end
 
-    def log_activity(u)
+    def log_activity(current_user)
         puts "should be logging a checklist item activity"
-        puts "user? #{u.full_name}" if u
+        puts "user? #{current_user.full_name}" if current_user
         if state == 1 && completed_date.nil?
             #category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
             
-            if u
+            if current_user
                 activities.create(
-                    :body => "#{u.full_name} marked this item complete.",
-                    :user_id => u.id,
+                    :body => "#{current_user.full_name} marked this item complete.",
+                    :user_id => current_user.id,
                     :project_id => checklist.project.id,
                     :activity_type => self.class.name
                 )
@@ -92,12 +92,12 @@ class ChecklistItem < ActiveRecord::Base
                     verbal_state = ""
                 end
 
-                if u
+                if current_user
                     puts "current user activity"
                     activities.create(
-                        :body => "#{u.full_name} updated the status for this item\" to #{verbal_state}\".",
+                        :body => "#{current_user.full_name} updated the status for this item\" to #{verbal_state}\".",
                         :project_id => checklist.project.id,
-                        :user_id => u.id,
+                        :user_id => current_user.id,
                         :activity_type => self.class.name
                     )
                 else 

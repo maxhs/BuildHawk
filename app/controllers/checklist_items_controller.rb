@@ -1,5 +1,6 @@
 class ChecklistItemsController < AppController
 	before_filter :authenticate_user!
+	
 	def edit
 		@item = ChecklistItem.find params[:id]	
 		@checklist = @item.category.phase.checklist
@@ -25,7 +26,8 @@ class ChecklistItemsController < AppController
 		end
 
 		@checklist_item.update_attributes params[:checklist_item]
-		
+		@checklist_item.log_activity(current_user)
+
 		@checklist = @checklist_item.category.phase.checklist
 		if @checklist.core && @checklist.company_id.nil?
 			@items = @checklist.items

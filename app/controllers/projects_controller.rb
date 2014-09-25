@@ -156,7 +156,7 @@ class ProjectsController < AppController
 	end   
 
 	def checklist_item
-		@item = ChecklistItem.find params[:item_id]
+		@item = ChecklistItem.find params[:item_id] if params[:item_id]
 		@category = @item.category
 		@phase = @category.phase
 		@categories = @phase.categories
@@ -172,6 +172,7 @@ class ProjectsController < AppController
 		@tasklist = @project.tasklists.first_or_create
 		@connect
 		@tasks = @tasklist.tasks
+		@task = Task.find params[:task_id] if params[:task_id]
 	end
 
 	def search_tasklist

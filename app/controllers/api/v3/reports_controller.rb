@@ -2,6 +2,28 @@ class Api::V3::ReportsController < Api::V3::ApiController
 
     before_filter :refactor
 
+    def index
+        project = Project.find params[:project_id]
+        if project.reports 
+            respond_to do |format|
+                format.json { render_for_api :v3_reports, :json => project.reports.sort_by(&:date_for_sort).reverse, :root => :reports}
+            end
+        else
+            render :json => {:success => false}
+        end
+    end
+
+    def show
+        report = Report.find params[:id]
+        if report 
+            respond_to do |format|
+                format.json { render_for_api :v3_reports, :json => report, :root => :report}
+            end
+        else
+            render :json => {:success => false}
+        end
+    end
+
     def create
         current_user = User.find params[:report][:author_id]
         project = Project.find params[:report][:project_id]
@@ -190,17 +212,6 @@ class Api::V3::ReportsController < Api::V3::ApiController
     	respond_to do |format|
         	format.json { render_for_api :v3_reports, :json => report, :root => :report}
       	end
-    end
-
-    def show
-    	project = Project.find params[:id]
-        if project.reports 
-        	respond_to do |format|
-            	format.json { render_for_api :v3_reports, :json => project.reports.sort_by(&:date_for_sort).reverse, :root => :reports}
-          	end
-        else
-            render :json => {:success => false}
-        end
     end
 
     def options

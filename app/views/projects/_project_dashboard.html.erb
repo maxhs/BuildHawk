@@ -20,25 +20,29 @@
 		<% if @activities && @activities.count > 0 %>
 			<div id="recent-items">
 				<div class="row">
-					<div class="col-xs-2 header-label"><h4>Last Updated</h4></div>
-					<div class="col-xs-2 header-label"><h4>Item</h4></div>
+					<div class="col-xs-1 header-label"><h5>Type</h5></div>
+					<div class="col-xs-2 header-label"><h5>Date</h5></div>
+					<div class="col-xs-2 header-label"><h5>Item</h5></div>
 				</div>
 
 				<% @activities.each do |activity| %>
 					<% if activity.checklist_item %>
 						<div class="row">	
+							<div class="col-xs-1"><%= image_tag 'checklist.png', :class=>"dashboard-image" %></div>
 							<div class="col-xs-2">(<%= parse_date activity.created_at %>)</div>
-							<div class="col-xs-8"><%= link_to activity.checklist_item.body, checklist_item_project_path(@project, :item_id => activity.checklist_item.id), :class => "recently-completed", :remote => true %></div>
+							<div class="col-xs-8"><%= link_to activity.checklist_item.body, checklist_item_project_path(project_id: @project.id, :item_id => activity.checklist_item.id), :class => "recently-completed", :remote => true %></div>
 						</div>
 					<% elsif activity.report %>
 						<div class="row">	
+							<div class="col-xs-1"><%= image_tag 'reports.png', :class=>"dashboard-image" %></div>
 							<div class="col-xs-2">(<%= parse_date activity.created_at %>)</div>
-							<div class="col-xs-8"><%= link_to "#{activity.report.date_string}", report_path(activity.report), :class => "recently-completed", :remote => true %></div>
+							<div class="col-xs-8"><%= link_to "#{activity.report.date_string}", reports_path(project_id: @project.id, report_id: activity.report), :class => "recently-completed", :remote => true %></div>
 						</div>
 					<% elsif activity.task %>
 						<div class="row">	
+							<div class="col-xs-1"><%= image_tag 'task.png', :class=>"dashboard-image" %></div>
 							<div class="col-xs-2">(<%= parse_date activity.created_at %>)</div>
-							<div class="col-xs-8"><%= link_to activity.task.body, edit_task_path(activity.task, :project_id => @project.id), :class => "recently-completed", :remote => true %></div>
+							<div class="col-xs-8"><%= link_to activity.task.body, tasklist_project_path(:project_id => @project.id, :task_id => activity.task.id), :class => "recently-completed", :remote => true %></div>
 						</div>
 					
 					<% end %>

@@ -5,8 +5,13 @@ class ReportsController < AppController
 	def index
 		@project = Project.find params[:project_id]
 		@reports = @project.ordered_reports
+		@report = Report.find params[:report_id] if params[:report_id]
 	rescue
-		redirect_to root_url
+		if @project
+			redirect_to project_path @project
+		else
+			redirect_to root_url
+		end
 	end
 
 	def search
