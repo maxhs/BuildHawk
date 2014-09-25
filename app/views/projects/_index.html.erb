@@ -7,7 +7,14 @@
 		<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects.</div>
 	<% end %>
 		
-	<% unless current_user.company.has_admin? %>
+	<% if current_user.company.has_admin? %>
+		<% if !projects || projects.count == 0 %>
+			<div id="pro-signup-prompt" class="font-smoothing">
+			<div class="call-to-action">Send your company administrator <%= mail_to "support@buildhawk.com", "an email", remote: true %> asking them to set up <%= link_to "BuildHawk", root_url, target:"_blank" %>.</div>
+			<div>Efficiency through organization.</div>
+		</div>
+		<% end %>
+	<% else %>
 		<div id="pro-signup-prompt" class="font-smoothing">
 			<!--<div>Want to add projects?</div> 
 			<div>Need access to checklists, reports, tasks and documents? </div>-->
@@ -17,7 +24,7 @@
 	<% end %>
 
 	<div id="messages" class="container">
-		<div class="border-box">
+		<div>
 			<h4>Messages</h4>
 			<div class="explanation font-smoothing">Use the messages section to communicate with your team.  <%= link_to "Send a new message", new_message_path, remote:true %>.</div>
 			<table id="messages-table">

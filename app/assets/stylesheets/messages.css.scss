@@ -4,7 +4,8 @@
 
 #messages {
 
-	margin:1% auto 1.5%;
+	border-top:1px solid #eee;
+	margin:2.5% auto;
 	padding:20px 0;
 
 	h2, h3, h4 {
@@ -51,7 +52,7 @@
 
 #back-from-message {
 	position:absolute;
-	left:1%;
+	left:3%;
 }
 
 .message{
@@ -61,5 +62,6 @@
 	-moz-border-radius:18px;
 	-webkit-border-radius:18px;
 	border:1px solid #eee;
+	background:#fff;
 	padding:1%;
 }

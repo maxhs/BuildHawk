@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-xs-2"><h4>Projects</h4></div>
 			<div class="col-xs-10">			
-				<%= f.collection_select :project_ids, @projects, :id, :name, {selected: @message.project_ids}, {multiple: true, :include_blank => false, :class=>"project-select"} %>
+				<%= f.collection_select :project_ids, @projects, :id, :name, {selected: @message.project_ids}, {multiple: true, :include_blank => false, :class=>"project-select",:style=>"width:100%;"} %>
 			</div>
 		</div>
 
@@ -31,7 +31,7 @@
 		</div>
 
 		<div class="button-container">
-			<%= f.submit "Add", :class=>"simple-btn save" %>
+			<%= f.submit "Send Message", :class=>"simple-btn save" %>
 		</div>
 		
 	</div>
@@ -40,7 +40,7 @@
 
 <script>
 	$('.project-select').select2({
-		placeholder: "Send a message to multiple project personnel at once...",
+		placeholder: "Select multiple projects...",
     	allowClear: true
 	});
 	$('.user-select').select2({

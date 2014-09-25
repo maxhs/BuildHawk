@@ -29,11 +29,16 @@
 				<div class="row form-title">
 					<div class="col-md-12"><h5>Safety Topics Covered</h5></div>
 				</div>
-				
-				<% report.safety_topics.each do |topic| %>
-					<div class="row">
-						<div class="col-md-12"><h5>&bull;&nbsp;<%= topic.title %></h5></div>
-					</div>
+				<% if report.report_topics.count > 0 %>
+					<% report.report_topics.each do |rt| %>
+						<div class="row">
+							<div class="col-md-12"><h5>&bull;&nbsp;<%= r.ttopic.title %></h5></div>
+						</div>
+					<% end %>
+				<% else %>
+						<div class="row">
+							<div class="col-md-12"><div class="font-smoothing" style="color:#aaa;font-style:italic;font-weight:200">N/A</span></div>
+						</div>
 				<% end %>
 				
 			<% else %>
