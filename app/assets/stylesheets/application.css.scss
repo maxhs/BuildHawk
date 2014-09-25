@@ -231,11 +231,14 @@ body {
 				}
 			}
 
+			.project:last-child, .project.buttons {
+				border-bottom:1px solid rgba(255,255,255,.15);
+			}
+
 			.project {
 				cursor:default;
 				background:#555;
-				border-bottom:1px rgba(255,255,255,.1);
-				padding: 13px 0 7px 0;
+				border-top:1px solid rgba(255,255,255,.15);
 				line-height:15px;
 				-webkit-transition: all 0.23s ease;
     			-moz-transition: all 0.23s ease;
@@ -256,8 +259,21 @@ body {
 					width:75%;
 					color:#fff;
 				}
+
+				a, a:hover {
+					color:#fff !important;
+					padding:0 10px;
+				}
+
+				a:hover {
+					text-decoration:underline;
+				}
 			}
 
+			.hidden-project {
+				padding:20px 10px;
+			}
+			
 			.project:hover, .project.active {
 				background:#777;
 			}

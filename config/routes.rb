@@ -114,8 +114,8 @@ Buildhawk::Application.routes.draw do
   end
   resources :projects do
     member do
-      post :archive
-      post :unarchive
+      post :hide
+      post :activate
       get :tasklist
       post :search_tasklist
       get :checklist

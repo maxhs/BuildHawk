@@ -60,12 +60,13 @@
 			<!--<li style="color:#aaa;font-weight:100;">N/A</li>-->
 		<% end %>
 	</ul>
-	<ul id="archived-projects" class="sortable-projects">
-		<% if @archived_projects && @archived_projects.count > 0 %>
+	<ul id="hidden-projects" class="sortable-projects">
+		<%= @hidden_projects.count %>
+		<% if @hidden_projects && @hidden_projects.count > 0 %>
 		
-			<li><h4 id="archived-projects-button">Archived Projects</h4></li>	
-			<% @archived_projects.each do |p| %>
-				<li class="project"><%= link_to p.name, project_path(p), :id=>"#{p.id}-link", :remote => true %></li>
+			<li><h4 id="hidden-projects-button">Hidden Projects</h4></li>	
+			<% @hidden_projects.each do |p| %>
+				<li class="project hidden-project"><%= link_to p.name, project_path(p), :id=>"#{p.id}-link", :remote => true %></li>
 			<% end %>
 		
 		<% end %>
@@ -109,7 +110,7 @@
 	    <% end %>
 	})
 	var groupId, projectId;
-	$('#projects, #groups, #archived-projects').sortable({
+	$('#projects, #groups, #hidden-projects').sortable({
       	axis: 'y',
       	dropOnEmpty:true,
       	cursor: 'move',
@@ -122,7 +123,7 @@
         	groupId = ui.item.parent('.group').attr('id');
             $.ajax({
                 type: 'post',
-                data: $('#projects, #groups, #archived-projects').sortable('serialize') + '&group_id='+groupId + "&project_id="+projectId,
+                data: $('#projects, #groups, #hidden-projects').sortable('serialize') + '&group_id='+groupId + "&project_id="+projectId,
                 dataType: 'script',
                 url: '/projects/order_projects'})
             }

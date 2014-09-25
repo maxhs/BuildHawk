@@ -17,21 +17,22 @@
 	}
 }
 
-#archived-projects-button {
+#hidden-projects-button {
 	text-align:center;
 	color:#aaa;
 	cursor:default;
 	margin:5% auto;
 }
 
-.projects.archived {
+.projects.hidden {
 	display:none;
+
 	.sidebarProjects div {
 		margin:15px auto;
 	}
 }
 
-#archive-button {
+#hide-button {
 	margin:1% auto 0;
 	width:100%;
 	max-width:160px;
@@ -44,7 +45,7 @@
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);*/
 }
 
-#archive-button:hover {
+#hide-button:hover {
 	border: 1px solid #ccc;
 }
 .edit_project {
