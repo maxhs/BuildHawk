@@ -210,6 +210,7 @@ body {
 
 		.project-sidebar {
 			clear:both;
+			padding-bottom:50px;
 
 			#search-section {
 				display:none;
@@ -273,7 +274,7 @@ body {
 			.hidden-project {
 				padding:20px 10px;
 			}
-			
+
 			.project:hover, .project.active {
 				background:#777;
 			}
@@ -347,7 +348,7 @@ body {
 			border-top: 1px solid #555;
 			border-right: 1px solid #555;
 			display: table;
-			background:transparent;
+			background:#444;
 
 			a, a:hover {
 				color:#fff !important;
