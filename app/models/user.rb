@@ -67,10 +67,10 @@ class User < ActiveRecord::Base
     end
 
     def clean_phone   
-        if self.phone && self.phone.length > 0
-            self.phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
-            self.save
-        end
+        #if self.phone && self.phone.length > 0
+        #    self.phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+        #    self.save
+        #end
     end
 
     def full_name 
