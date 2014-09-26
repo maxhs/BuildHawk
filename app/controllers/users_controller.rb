@@ -31,15 +31,15 @@ class UsersController < AppController
 	end
 
 	def update	
-		params[:user][:phone] = current_user.clean_phone(params[:user][:phone]) if params[:user][:phone]	
-		current_user.update_attributes params[:user]
+		params[:user][:phone] = @user.clean_phone(params[:user][:phone]) if params[:user][:phone]	
+		@user.update_attributes params[:user]
 		
-		if current_user.save
-			sign_in(current_user, :bypass => true) if params[:user][:password].present? && params[:user][:password_confirmation].present?
+		if @user.save
+			sign_in(@user, :bypass => true) if params[:user][:password].present? && params[:user][:password_confirmation].present?
 			flash[:notice] = "Settings updated!"
 			render :edit
 		else
-			redirect_to edit_user_path(current_user)
+			redirect_to edit_user_path(@user)
 			flash[:notice] = "Please make sure you've completed the form and that your password(s) are valid".html_safe
 		end
 	end
