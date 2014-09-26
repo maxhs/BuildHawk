@@ -32,7 +32,11 @@ class UsersController < AppController
 
 	def update	
 		@user = current_user
-		params[:user][:phone] = @user.clean_phone(params[:user][:phone]) if params[:user][:phone]	
+		if params[:user][:phone]
+			params[:user][:phone] = @user.clean_phone(params[:user][:phone])	
+		else
+			params[:user][:phone] = nil
+		end
 		@user.update_attributes params[:user]
 		
 		if @user.save
