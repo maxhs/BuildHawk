@@ -6,12 +6,10 @@ class AppController < ApplicationController
         if user_signed_in?
             if current_user.any_admin?
                 @sidebar_projects = current_user.company.projects.where("project_group_id IS NULL and archived = ?",false).order('order_index')
-                @projects = current_user.company.projects
-                
+                @projects = current_user.company.projects.where(core: false)
             else
                 @sidebar_projects = current_user.project_users.where("archived = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
                 @projects = current_user.project_users.where("archived = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
-       
             end
         
             @hidden_projects = current_user.project_users.where(archived: true).map(&:project).compact.uniq     
