@@ -8,6 +8,7 @@ class Api::V3::UsersController < Api::V3::ApiController
 	end
 
 	def update
+		params[:user][:phone] = @user.clean_phone(params[:user][:phone]) if params[:user][:phone]
 		@user.update_attributes params[:user]
 		respond_to do |format|
         	format.json { render_for_api :user, :json => @user, :root => :user}

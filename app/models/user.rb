@@ -112,10 +112,12 @@ class User < ActiveRecord::Base
         end
     end
 
+    def clean_phone(phone_string)
+        phone_string.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+    end
+
     def formatted_phone
-      
         number_to_phone(phone, area_code:true) if phone && phone.length > 0
-      
     end
 
     def password_required?

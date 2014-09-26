@@ -30,21 +30,16 @@ class UsersController < AppController
 		@user = User.find params[:id]
 	end
 
-	def update
-		@user = current_user
+	def update	
+		params[:user][:phone] = current_user.clean_phone(params[:user][:phone]) if params[:user][:phone]	
+		current_user.update_attributes params[:user]
 		
-		if params[:user][:phone]
-			params[:user][:phone] = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
-			puts "new stuff: #{params[:user][:phone]}"
-		end
-
-		@user.update_attributes params[:user] if params[:user]
-		if @user.save
+		if current_user.save
 			sign_in(current_user, :bypass => true) if params[:user][:password].present? && params[:user][:password_confirmation].present?
 			flash[:notice] = "Settings updated!"
 			render :edit
 		else
-			redirect_to edit_user_path(@user)
+			redirect_to edit_user_path(current_user)
 			flash[:notice] = "Please make sure you've completed the form and that your password(s) are valid".html_safe
 		end
 	end
