@@ -67,8 +67,8 @@ class User < ActiveRecord::Base
     end
 
     def clean_phone   
-        if phone && phone.length > 0
-            phone = phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+        if self.phone && self.phone.length > 0
+            self.phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             self.save
         end
     end
