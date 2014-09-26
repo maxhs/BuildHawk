@@ -21,7 +21,13 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
     def groups
         user = User.find params[:user_id]
-        group_ids = user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        
+        if user.any_admin?
+            group_ids = user.company.projects.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        else
+            group_ids = user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        end
+
         groups = []
         if group_ids.count > 0
             group_ids.each do |g|
