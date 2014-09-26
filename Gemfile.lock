@@ -78,6 +78,7 @@ GEM
     geocoder (1.2.4)
     highline (1.6.21)
     hike (1.2.3)
+    hodel_3000_compliant_logger (0.1.1)
     houston (2.2.1)
       commander (~> 4.1)
       json
@@ -111,6 +112,9 @@ GEM
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     nprogress-rails (0.1.6.2)
+    oink (0.10.1)
+      activerecord
+      hodel_3000_compliant_logger
     orm_adapter (0.5.0)
     paperclip (4.2.0)
       activemodel (>= 3.0.0)
@@ -282,6 +286,7 @@ DEPENDENCIES
   nested_form
   newrelic_rpm
   nprogress-rails
+  oink
   paperclip
   parsley-rails
   pg

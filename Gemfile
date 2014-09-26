@@ -45,6 +45,7 @@ gem 'houston'
 gem 'gcm'
 gem "recaptcha", :require => "recaptcha/rails"
 
+gem 'oink'
 gem 'raygun4ruby'
 gem "remotipart"
 
