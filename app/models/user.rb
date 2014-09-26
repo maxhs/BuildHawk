@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
     end
 
     def text_task(task)
-        #clean_phone
+        
         account_sid = 'AC9876d738bf527e6b9d35af98e45e051f'
         auth_token = '217b868c691cd7ec356c7dbddb5b5939'
         twilio_phone = "14157234334"
@@ -113,10 +113,9 @@ class User < ActiveRecord::Base
     end
 
     def formatted_phone
-      if phone && phone.length > 0
-        clean_phone if phone.include?(' ')
-        number_to_phone(phone, area_code:true)
-      end
+      
+        number_to_phone(phone, area_code:true) if phone && phone.length > 0
+      
     end
 
     def password_required?
