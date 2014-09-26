@@ -47,7 +47,6 @@ class User < ActiveRecord::Base
     validates_presence_of :password, :if => :password_required?
 
     #after_create :welcome
-    after_commit :clean_phone, :if => :persisted?
     before_destroy :cleanup_user
 
     def welcome
@@ -64,13 +63,6 @@ class User < ActiveRecord::Base
 
     def is_active?
         active
-    end
-
-    def clean_phone   
-        #if self.phone && self.phone.length > 0
-        #    self.phone.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
-        #    self.save
-        #end
     end
 
     def full_name 

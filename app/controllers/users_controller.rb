@@ -32,6 +32,12 @@ class UsersController < AppController
 
 	def update
 		@user = current_user
+		
+		if params[:user][:phone]
+			params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+			puts "new stuff: #{params[:user][:phone]}"
+		end
+
 		@user.update_attributes params[:user] if params[:user]
 		if @user.save
 			sign_in(current_user, :bypass => true) if params[:user][:password].present? && params[:user][:password_confirmation].present?
