@@ -34,7 +34,7 @@ class UsersController < AppController
 		@user = current_user
 		
 		if params[:user][:phone]
-			params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
+			params[:user][:phone] = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
 			puts "new stuff: #{params[:user][:phone]}"
 		end
 
