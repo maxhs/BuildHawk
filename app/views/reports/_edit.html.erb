@@ -23,8 +23,10 @@
 					</div>
 
 					<div class="col-md-6">
-						<h5 style="display:inline-block;">Type</h5></div>
-						<%= select_tag :report_type, options_for_select(report.possible_types, :selected => report.report_type), :id=>"type-select", :style=>"width:50%;" %>
+						<h5 style="display:inline-block;">Type</h5>
+					</div>
+					
+					<%= select_tag :report_type, options_for_select(report.possible_types, :selected => report.report_type), :id=>"type-select", :style=>"width:50%;" %>
 				</div>
 					
 				<div class="row form-title">

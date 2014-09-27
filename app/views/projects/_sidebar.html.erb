@@ -60,7 +60,7 @@
 			<!--<li style="color:#aaa;font-weight:100;">N/A</li>-->
 		<% end %>
 	</ul>
-	<ul id="hidden-projects" class="sortable-projects">
+	<ul id="hidden-projects">
 		<%= @hidden_projects.count %>
 		<% if @hidden_projects && @hidden_projects.count > 0 %>
 		
@@ -110,7 +110,7 @@
 	    <% end %>
 	})
 	var groupId, projectId;
-	$('#projects, #groups, #hidden-projects').sortable({
+	$('#projects, #groups').sortable({
       	axis: 'y',
       	dropOnEmpty:true,
       	cursor: 'move',
@@ -123,7 +123,7 @@
         	groupId = ui.item.parent('.group').attr('id');
             $.ajax({
                 type: 'post',
-                data: $('#projects, #groups, #hidden-projects').sortable('serialize') + '&group_id='+groupId + "&project_id="+projectId,
+                data: $('#projects, #groups').sortable('serialize') + '&group_id='+groupId + "&project_id="+projectId,
                 dataType: 'script',
                 url: '/projects/order_projects'})
             }

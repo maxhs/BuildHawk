@@ -22,6 +22,14 @@ class ProjectUser < ActiveRecord::Base
 	    end
 	end
 
+	def hide_project
+		self.archived = true
+		self.project_group_id = nil
+		self.save
+
+		project.update_attribute :project_group_id, nil
+	end
+
 	acts_as_api
 
   	api_accessible :details do |t|

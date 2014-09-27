@@ -281,10 +281,13 @@ class ProjectsController < AppController
 
 	def hide
 		project_user = current_user.project_users.where(:project_id => @project.id).first
-		project_user.update_attribute :archived, true if project_user
+		project_user.hide_project
+
+		reset_projects
+
 		if request.xhr?
 			respond_to do |format|
-				format.js { render template:"projects/index" }
+				format.js
 			end
 		else
 			render :index
@@ -294,14 +297,18 @@ class ProjectsController < AppController
 	def activate
 		project_user = current_user.project_users.where(:project_id => @project.id).first
 		project_user.update_attribute :archived, false if project_user
+
+		reset_projects
+
 		if request.xhr?
 			respond_to do |format|
-				format.js { render template:"projects/index" }
+				format.js
 			end
 		else
 			render :index
 		end
 	end
+
 
 	def destroy_confirmation
 		if request.xhr?
@@ -337,6 +344,18 @@ class ProjectsController < AppController
 	end
 
 	private
+
+	def reset_projects
+		if current_user.any_admin?
+            @sidebar_projects = current_user.company.projects.where("project_group_id IS NULL and archived = ?",false).order('order_index')
+            @projects = current_user.company.projects.where(core: false)
+        else
+            @sidebar_projects = current_user.project_users.where("archived = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
+            @projects = current_user.project_users.where("archived = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
+        end
+    
+        @hidden_projects = current_user.project_users.where(archived: true).map(&:project).compact.uniq
+	end
 
 	def find_user
 		if params[:user_id].present?
