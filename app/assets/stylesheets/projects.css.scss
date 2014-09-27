@@ -223,8 +223,15 @@
 	font-weight:200;
 	font-size:1.75em; 
 	font-style:italic;
-	margin:2% auto;
+	margin:2% auto .5%;
 	line-height:2em;
+}
+
+#demo-prompt {
+	color:#aaa;
+	text-align:center;
+	font-size:1.25em; 
+	margin:0% auto 2%;
 }
 
 #pro-signup-prompt {
