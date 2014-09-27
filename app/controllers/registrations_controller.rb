@@ -54,7 +54,7 @@ class RegistrationsController < Devise::RegistrationsController
             params[:user][:company_id] = @company.id
         end
 
-        @user = User.find params[:user][:id]
+        @user = User.where(email: params[:user][:email]).first_or_create
         @user.update_attributes params[:user]
 
         flash[:notice] = "Welcome to BuildHawk! You've successfully signed up.".html_safe

@@ -1,6 +1,6 @@
 source 'https://code.stripe.com'
 source 'https://rubygems.org'
-
+ruby '2.1.2'
 gem 'rails', '4.1.5'
 gem 'unicorn'
 gem "unicorn-rails", :group => :development
@@ -53,4 +53,3 @@ gem "remotipart"
 #gem 'capybara'
 #gem 'non-stupid-digest-assets'
 
-ruby '2.1.2'
