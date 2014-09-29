@@ -3,7 +3,8 @@ class Company < ActiveRecord::Base
 	attr_accessible :name, :phone, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name,
                     :active, :customer_id
   
-    has_many :users, :dependent => :destroy
+    has_many :project_users, :dependent => :destroy, autosave: true
+    has_many :users, :through => :project_users, autosave: true
     has_many :subs, :dependent => :destroy
     has_many :projects, :dependent => :destroy
 	has_many :photos, :dependent => :destroy

@@ -1,7 +1,8 @@
 class ProjectUser < ActiveRecord::Base
-	attr_accessible :project_id, :user_id, :archived, :project_group_id, :core
+	attr_accessible :project_id, :user_id, :archived, :project_group_id, :core, :company_id
 	belongs_to :project
 	belongs_to :user
+	belongs_to :company
 	#belongs_to :connect_user
 	has_many :billing_days
 	validates :user, presence: true
