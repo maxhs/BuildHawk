@@ -5,7 +5,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
 
         if user.any_admin?
-            projects = user.company.projects.where("core = ? and project_group_id IS NULL",false).order('order_index')
+            projects = user.company.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).order('order_index').map(&:project).compact.uniq
         else
             projects = user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by(&:order_index)
         end
