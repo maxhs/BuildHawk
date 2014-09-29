@@ -265,46 +265,42 @@
 			cursor:default;
 
 			li {
+				display:table;
 				margin: 0 auto;
 				list-style: none;
 				height: 25%;
-				border-bottom: 2px dashed #000;
-				padding-top: 4%;
+				border-bottom: 1px dashed #ddd;
 			}
 
 			li:last-child {
 				border:0;
-				padding-top:1%;
 			}
 
 			.benefit {
-				display:inline-table;
-				width:60%;
-				margin:.5% auto 2.5%;
-				float:right;
+				display:table-cell;
+				vertical-align:middle;
+				height: 100%;
+				width: 65%;
+
+				h2, h3 {
+					font-weight:200;
+					text-align:left;
+					margin-bottom:15px;
+				}
+
+				p {
+					font-family:"Proxima Nova", "Myriad Pro","Helvetica Neue","Helvetica", sans-serif;
+				}
 			}
 
-			.benefit.image {
-				float:left;
+			.benefit-image {
+				display:table-cell;
+				vertical-align:middle;
 				width:25%;
-				margin-left:10%;
-				margin-top:-.5%;
-
-				#lock {
-
-				}
-
-				#messaging {
-					margin-left:5px;
-					margin-top:5%;
-				}
-				#personnel {
-					margin-left:15px;
-					margin-top:10%;
-				}
+				padding-left:10%;
 
 				img {
-					max-width:120px;
+					max-width:84px;
 				}
 			}
 		}
@@ -453,12 +449,6 @@
 		border-radius:3px;
 		-webkit-border-radius:3px;
 		-moz-border-radius:3px;
-		
-		/*border:1px solid #ddd;
-		box-shadow: 0 0 10px 0 #ddd;
-		-moz-box-shadow: 0 0 10px 0 #ddd;
-		-webkit-box-shadow: 0 0 10px 0 #ddd;
-		background:#fff;*/
 		height:auto !important;
 
 		li {
@@ -478,21 +468,8 @@
 				margin-right:2.5%;
 			}
 
-			p {
-				font-size:1.1em;
-				line-height:1.5em;
-			}
-
-			.benefit.image {
-				width:20%;
-				float:left;
-			}
-
-			.benefit {
-				width:70%;
-				float:right;
-			}
 		}
+		
 		li:last-child {
 			border:0;
 		}

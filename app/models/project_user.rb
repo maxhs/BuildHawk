@@ -1,11 +1,11 @@
 class ProjectUser < ActiveRecord::Base
-	attr_accessible :project_id, :user_id, :connect_user_id, :archived, :project_group_id, :core
+	attr_accessible :project_id, :user_id, :archived, :project_group_id, :core
 	belongs_to :project
 	belongs_to :user
-	belongs_to :connect_user
+	#belongs_to :connect_user
 	has_many :billing_days
 	validates :user, presence: true
-	validates_uniqueness_of :project_id, :scope => :user_id, if: "connect_user_id.nil?"
+	#validates_uniqueness_of :project_id, :scope => :user_id, if: "connect_user_id.nil?"
 	validates_uniqueness_of :project_id, :scope => :connect_user_id, if: "user_id.nil?"
 
 	after_create :notify

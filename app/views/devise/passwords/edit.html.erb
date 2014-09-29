@@ -1,18 +1,18 @@
 <div class="session-container">
 	<h3 style="text-align:center">Change your password</h3>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  	<%= devise_error_messages! %>
-  	<%= f.hidden_field :reset_password_token %>
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }, data: {'parsley-validate' => ''}) do |f| %>
+	  	<%= devise_error_messages! %>
+	  	<%= f.hidden_field :reset_password_token %>
 
-  	<div><%= f.label :password, "New password" %><br />
-  	<%= f.password_field :password, :autofocus => true %></div>
+	  	<div><%= f.label :password, "New password" %><br />
+	  	<%= f.password_field :password, :autofocus => true, required: true, id:"new-password-field" %></div>
 
-  	<div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  	<%= f.password_field :password_confirmation %></div>
+	  	<div><%= f.label :password_confirmation, "Confirm new password" %><br />
+	  	<%= f.password_field :password_confirmation, required: true, 'data-parsley-equalto' => "#new-password-field" %></div>
 
-  	<div class="button-container"><%= f.submit "Change my password", :class => "btn btn-success btn-lg" %></div>
-<% end %>
+	  	<div class="button-container"><%= f.submit "Change my password", :class => "simple-btn" %></div>
+	<% end %>
 
-<%= render "devise/shared/links" %>
+	<%= render "devise/shared/links" %>
 </div>

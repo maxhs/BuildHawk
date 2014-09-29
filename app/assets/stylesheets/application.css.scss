@@ -892,18 +892,20 @@ body {
 
 
 .session-container {
-	height:100%;
 	display:table;
 	width:500px;
 	margin:10% auto;
 	border:1px solid #ddd;
-	padding:1% 2% 2%;
+	padding:1% 2%;
 	background:#fff;
+
+	h2 {
+		margin:10px auto 15px;
+	}
 
 	.inner-container {
 		vertical-align:middle;
 		display:table-cell;
-
 
 		form {
 			width:100%;
@@ -913,6 +915,13 @@ body {
 				width:100%;
 			}
 		}
+	}
+
+	.forgot-password-link {
+		width:100%;
+		margin: 0px auto;
+		text-align:center;
+		display:block;
 	}
 }
 
@@ -961,13 +970,15 @@ a.search-button {
 
 .simple-btn {
 	cursor:pointer;
-	background:#fff;
-	border: 1px solid rgba(0,0,0,.05);
+	background:#fefefe;
+	border: 1px solid rgba(0,0,0,.1);
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
-	border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	padding:10px;
+	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
+	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	padding:10px 17px;
 	position:relative;
 	display:inline-block;
 	margin:0 10px;
@@ -984,6 +995,14 @@ a.search-button {
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
    	transition: all 0.2s ease;
+}
+
+.simple-btn:hover {
+	border-color:#ccc;
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
+	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
+	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
+	color:#000;
 }
 
 .simple-btn.save {
@@ -1017,10 +1036,6 @@ a.search-button {
 		}
 	}
 
-}
-
-.simple-btn:hover {
-	border-color:#ccc;
 }
 
 .delete-link {
