@@ -1,5 +1,5 @@
 <%- if controller_name != 'sessions' %>
-  <div class="button-container"><%= link_to "SIGN IN", new_session_path(resource_name), :class => "simple-btn", :style => "text-align:center;" %></div>
+  <div class="button-container"><h6><%= link_to "Log in", new_session_path(resource_name), :style => "text-align:center; font-size: 1.1em;" %></h6></div>
 <% end -%>
 
 <!--<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
@@ -7,7 +7,7 @@
 <% end -%>-->
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  <%= link_to "Forgot your password?", new_password_path(resource_name), :class => "forgot-password-link" %><br />
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

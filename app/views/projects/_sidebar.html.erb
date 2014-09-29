@@ -61,7 +61,6 @@
 		<% end %>
 	</ul>
 	<ul id="hidden-projects">
-		<%= @hidden_projects.count %>
 		<% if @hidden_projects && @hidden_projects.count > 0 %>
 		
 			<li><h4 id="hidden-projects-button">Hidden Projects</h4></li>	
@@ -74,11 +73,14 @@
 </ul>
 	
 <script type="text/javascript">
-	<% if @project %>
-		$('#project_<%= @project.id %>').addClass('active');
-	<% end %>
+	
 	$(function(){
 		sidebarSetup();
+		
+		<% if @project %>
+			$('#project_<%= @project.id %>').addClass('active');
+		<% end %>
+
 		<% if @sidebar_projects && @sidebar_projects.count > 0 %>
 			<% @sidebar_projects.each do |p| %>
 				<% if p.checklist %>

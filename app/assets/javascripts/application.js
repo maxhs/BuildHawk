@@ -20,6 +20,7 @@
 //= require bootstrap
 //= require dropzone
 //= require jquery.remotipart
+//= require parsley
 //= require nprogress
 //= require nprogress-ajax
 //= require shadowbox

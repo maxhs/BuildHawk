@@ -300,6 +300,7 @@ class User < ActiveRecord::Base
     api_accessible :reports, :extend => :tasklist do |t|
         
     end
+    
     api_accessible :v3_reports, :extend => :tasklist do |t|
         
     end

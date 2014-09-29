@@ -1,22 +1,24 @@
 <div class="session-container">
 	<div class="inner-container">
-	<h3>Sign up</h3>
+		<h3>Sign up</h3>
+		<h5 style="margin-bottom: 2em;">Please note that you'll need a beta code in order to get started:</h5>
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), data: {'parsley-validate' => ''}) do |f| %>
+		  	<%= devise_error_messages! %>
 
-	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-	  <%= devise_error_messages! %>
+		  	<%= text_field_tag :beta_code, nil, :placeholder => "Your beta code", required: true, 'data-parsley-equalto' => "BuildHawkBeta", "data-parsley-error-message" => "Sorry, but that's not the right code." %>
+		  	<%= f.text_field :first_name, :placeholder => "First name", :autofocus => true, required: true %>
+		  	<%= f.text_field :last_name, :placeholder => "Last name", required: true %>
+		  	<%= f.fields_for resource.build_company do |c| %>
+		  		<%= c.text_field :name, :placeholder => "Company name", required: true  %>
+		  	<% end %>
+		  	<%= f.email_field :email, :placeholder => "The email address you use for work" %>
 
-	  <%= f.text_field :first_name, :placeholder => "First name", :autofocus => true %>
-	  <%= f.text_field :last_name, :placeholder => "Last name" %>
-	  <%= f.fields_for resource.build_company do |c| %>
-	  	<%= c.text_field :name, :placeholder => "Company name"  %>
-	  <% end %>
-	  <%= f.email_field :email, :placeholder => "The email address you use for work" %>
-	  <%= f.password_field :password, :placeholder => "Password", :autocomplete => "off" %>
-	  <%= f.password_field :password_confirmation, :placeholder => "Password confirmation", :autocomplete => "off" %>
+		  	<%= f.password_field :password, :placeholder => "Password", :autocomplete => "off", required: true %>
+		  	<%= f.password_field :password_confirmation, :placeholder => "Password confirmation", :autocomplete => "off", required: true, 'data-parsley-equalto' => "#user_password" %>
 
-	  <div><%= f.submit "Sign up", :class=>"simple-btn", :style=>"margin:15px auto;" %></div>
-	<% end %>
+		  	<div><%= f.submit "Sign up", :class=>"simple-btn", :style=>"margin:15px auto;" %></div>
+		<% end %>
 
-	<%= render "devise/shared/links" %>
-</div>
+		<%= render "devise/shared/links" %>
+	</div>
 </div>

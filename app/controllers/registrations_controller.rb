@@ -38,6 +38,11 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def create
+        unless params[:beta_code] && params[:beta_code] == "BuildHawkBeta"
+            flash[:notice] = "Sorry, but your beta code was invalid."
+            return redirect_to register_url
+        end
+
         unless params[:user] && params[:user][:password] && params[:user][:password_confirmation]
             if request.xhr?
                 respond_to do |format|
@@ -45,21 +50,23 @@ class RegistrationsController < Devise::RegistrationsController
                 end
             else
                 flash[:notice] = "Sorry, but something went wrong while trying to validate your account."
-                redirect_to root_url
+                return redirect_to root_url
             end
-        end 
+        end        
 
         if params[:user][:company]
             @company = Company.where(name: params[:user][:company][:name]).first_or_create
             params[:user][:company_id] = @company.id
         end
 
-        @user = User.where(email: params[:user][:email]).first_or_create
-        @user.update_attributes params[:user]
+        #@user = User.where(email: params[:user][:email]).first_or_create
+        #@user.update_attributes params[:user]
+        
+        super 
 
-        flash[:notice] = "Welcome to BuildHawk! You've successfully signed up.".html_safe
-        sign_in_and_redirect(:user, @user)
-        #super
+        #flash[:notice] = "Welcome to BuildHawk! You've successfully signed up.".html_safe
+        #sign_in_and_redirect(:user, @user)
+        
         #find_connect_items(current_user) if current_user
     end
 
