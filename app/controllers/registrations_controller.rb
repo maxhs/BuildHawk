@@ -57,10 +57,8 @@ class RegistrationsController < Devise::RegistrationsController
         if params[:user][:company]
             @company = Company.where(name: params[:user][:company][:name]).first_or_create
             params[:user][:company_id] = @company.id
+            params[:user][:company_admin] = true unless @company.has_admin?
         end
-
-        #@user = User.where(email: params[:user][:email]).first_or_create
-        #@user.update_attributes params[:user]
         
         super 
 

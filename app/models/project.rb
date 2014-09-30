@@ -125,10 +125,6 @@ class Project < ActiveRecord::Base
         activities.first(3) if activities.count
     end
 
-    def connect_users
-        project_users.where("connect_user_id IS NOT NULL").map(&:connect_user).compact
-    end
-
     def background_destroy
         require "resque"
         Resque.enqueue(DestroyProject, id)
@@ -167,7 +163,6 @@ class Project < ActiveRecord::Base
         t.add :progress
         t.add :company
         t.add :users
-        t.add :connect_users
         t.add :project_users
         t.add :companies
     end
