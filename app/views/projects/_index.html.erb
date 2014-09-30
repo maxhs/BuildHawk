@@ -19,7 +19,7 @@
 		<div id="pro-signup-prompt" class="font-smoothing">
 			<!--<div>Want to add projects?</div> 
 			<div>Need access to checklists, reports, tasks and documents? </div>-->
-			<%= unless current_user.company.has_admin? %>
+			<% unless current_user.company.has_admin? %>
 				<div class="call-to-action">Sign up for <%= link_to "BuildHawk pro", :style=>"color:#cc0000;", remote:true %> to start adding some.</div>
 			<% end %>
 			

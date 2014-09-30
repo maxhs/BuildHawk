@@ -37,27 +37,19 @@
         <div class="row personnel">
         	<div class="col-xs-3"><h4>Users:</h4></div>
         	<div class="col-xs-9">
-        		<%= @users.count %>
-				<%= select_tag :users, options_for_select(@users.map{|u| [u.full_name, u.id]}.unshift("")), :id=>"users-select", style:"padding-bottom:5px;" %>
+        		<%= f.collection_select :user_ids, @users, :id, :full_name, {}, {:include_blank => false, multiple: true, :id=>"users-select", :style => "position:relative;top:2px;"} %>
 	    	</div>
         </div>
-         <div class="row personnel">
+        
+        <div class="row personnel">
         	<div class="col-xs-3">
         		<h4>Subs:</h4>
         	</div>
-        	<div class="col-xs-3" id="sub-list">
-				<% @subs.each do |company_sub| %>
-	    			<% if @project.companies.include?(company_sub.subcontractor) %>
-	    				<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id, checked: true %><span style="padding-left:10px;"><%= sub.name %></span></div>
-    				<% else %>
-    					<div style="padding-top:5px;"><%= check_box_tag "project[company_ids][]", company_sub.subcontractor.id %><span style="padding-left:10px;"><%= company_sub.subcontractor.name %></span></div>
-    				<% end %>
-	    		<% end %>
+        	<div class="col-xs-9">
+        		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple:true, :id => "companies-select", include_blank: false, include_empty: false} %>
 	    	</div>
-	    	<div class="col-xs-6" id="add-sub-section">
-        		
-        	</div>
         </div>
+
 		<div class="button-container">
 			<%= f.submit "CREATE PROJECT", :id=>"new-project-submit", :class => "simple-btn" %>
 		</div>
@@ -68,5 +60,8 @@
 	newProjectSetup();
 	$('#users-select').select2({
 		placeholder: "Add personnel to the project"
+	});
+	$('#companies-select').select2({
+		placeholder: "Connect other companies to the project"
 	});
 </script>
