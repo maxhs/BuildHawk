@@ -37,13 +37,8 @@
         <div class="row personnel">
         	<div class="col-xs-3"><h4>Users:</h4></div>
         	<div class="col-xs-9">
-				<% @users.each do |user| %>
-	    			<% if @project.users.include?(user) %>
-	    				<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id, checked: true %><span style="padding-left:10px;"><%= user.full_name %></span></div>
-    				<% else %>
-    					<div style="padding-top:5px;"><%= check_box_tag "project[user_ids][]", user.id %><span style="padding-left:10px;"><%= user.full_name %></span></div>
-    				<% end %>
-	    		<% end %>
+        		<%= @users.count %>
+				<%= select_tag :users, options_for_select(@users.map{|u| [u.full_name, u.id]}.unshift("")), :id=>"users-select", style:"padding-bottom:5px;" %>
 	    	</div>
         </div>
          <div class="row personnel">
@@ -71,4 +66,7 @@
 
 <script>
 	newProjectSetup();
+	$('#users-select').select2({
+		placeholder: "Add personnel to the project"
+	});
 </script>

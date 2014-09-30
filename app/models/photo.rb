@@ -21,7 +21,7 @@ class Photo < ActiveRecord::Base
 
   	has_attached_file 	:image, 
 	                    :styles => { :large => ["1024x1024", :jpg],
-	                                 #:medium  => ["640x640", :jpg],
+	                                 :medium  => ["640x640", :jpg],
 	                                 :small  => ["200x200#", :jpg],
 	                                 :thumb  => ["100x100#", :jpg]
 	                     },
@@ -33,7 +33,7 @@ class Photo < ActiveRecord::Base
 	                    :path           => "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
-	process_in_background :image, :only_process => lambda { |a| a.instance.mobile? ? [:small, :large] : [] }
+	process_in_background :image, :only_process => lambda { |a| a.instance.mobile? ? [:thumb, :small, :medium, :large] : [] }
 
 	# websolr
     searchable do

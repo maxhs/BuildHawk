@@ -192,6 +192,9 @@ class AdminController < AppController
 
 	def new_project
 		@company = @user.company
+		@users = current_user.company.users
+		@subs = current_user.company.company_subs
+
 		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
@@ -201,8 +204,7 @@ class AdminController < AppController
 			@project = Project.new
 			@project.build_address
 			@project.project_users.build
-			@users = current_user.company.users
-			@subs = current_user.company.company_subs
+			
 			@checklists = @user.company.checklists.where(:core => true)
 		end
 	end
