@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
                     :active, :customer_id
   
     has_many :project_users, :dependent => :destroy, autosave: true
-    has_many :users, :through => :project_users, autosave: true
+    #has_many :users, :through => :project_users, autosave: true
     has_many :subs, :dependent => :destroy
     has_many :projects, :dependent => :destroy
 	has_many :photos, :dependent => :destroy
@@ -51,6 +51,10 @@ class Company < ActiveRecord::Base
 
     def balance
         charges.where(:paid => false).map(&:amount).flatten.inject(:+)
+    end
+
+    def users
+        project_users.map(&:user).compact.uniq
     end
 
     def personnel
