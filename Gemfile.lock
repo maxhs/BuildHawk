@@ -60,11 +60,6 @@ GEM
     daemon_controller (1.2.0)
     deep_cloneable (1.6.1)
       activerecord (>= 3.1.0)
-    delayed_job (4.0.4)
-      activesupport (>= 3.0, < 4.2)
-    delayed_job_active_record (4.0.2)
-      activerecord (>= 3.0, < 4.2)
-      delayed_job (>= 3.0, < 4.1)
     delayed_paperclip (2.8.0)
       paperclip (>= 3.3)
     devise (3.3.0)
@@ -268,7 +263,6 @@ DEPENDENCIES
   acts_as_list
   aws-sdk
   deep_cloneable (~> 1.6.0)
-  delayed_job_active_record
   delayed_paperclip
   devise
   gcm
