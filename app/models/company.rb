@@ -158,9 +158,8 @@ class Company < ActiveRecord::Base
         
     end
     
-    api_accessible :dashboard do |t|
+    api_accessible :dashboard, :extend => :login do |t|
     
     end
 
-   
 end
