@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
 			u.notifications.create(
 				:body 				=> body,
 				:message_id 		=> id,
-				:company_id			=> company_id,
+				#:company_id			=> company_id,  ## this foreign key doesn't exist yet
 				:notification_type 	=> self.class.name
 			)
 		end
@@ -30,11 +30,11 @@ class Message < ActiveRecord::Base
 
 	api_accessible :notifications do |t|
         t.add :id
+        t.add :epoch_time
         t.add :body
         t.add :company
         t.add :target_project
         t.add :comments
-        t.add :epoch_time
     end
 
     api_accessible :projects, :extend => :notifications do |t|

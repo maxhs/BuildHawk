@@ -6,6 +6,5 @@ $('#navigation').fadeOut(170,function(){
 		$('#alert').fadeOut(400);
 	});
 });
-
-$('#inner-wrap').html('<%= j render :partial => "index", locals:{projects:@projects} %>');
+$('#inner-wrap').html('<%= j render :partial => "projects/index", locals: {projects:@projects} %>');
 $("html, body").animate({ scrollTop: 0 }, 0);
