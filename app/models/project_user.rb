@@ -7,7 +7,7 @@ class ProjectUser < ActiveRecord::Base
 	validates :user, presence: true
 	validates_uniqueness_of :project_id, :scope => :user_id
 
-	#after_create :notify
+	after_create :notify
 
 	def notify
 		user = User.where(:id => user_id).first
