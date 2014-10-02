@@ -5,6 +5,7 @@ class ProjectsController < AppController
 
 	def new
 		@project = Project.new
+		@project.build_address
 		@users = current_user.company.users
 		if request.xhr?
 			respond_to do |format|
@@ -19,6 +20,7 @@ class ProjectsController < AppController
 		list = Checklist.find params[:checklist_id]
 		@checklist = list.duplicate
 		puts "Freshly duplicated checklist: #{@checklist.id}"
+		params[:project][:checklist_id] = @checklist.id
 	    project = @company.projects.create params[:project]
 	    @checklist.update_attributes :company_id => @company.id, :project_id => project.id, :core => false
 		redirect_to projects_path
