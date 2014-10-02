@@ -26,7 +26,7 @@
 				<h4>Recipients</h4>
 			</div>
 			<div class="col-xs-10">
-				<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @users.ids}, {multiple: true, :include_blank => false, :class=>"user-select"} %>
+				<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @users.map(&:id)}, {multiple: true, :include_blank => false, :class=>"user-select"} %>
 			</div>
 		</div>
 
