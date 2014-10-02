@@ -33,7 +33,6 @@ class Message < ActiveRecord::Base
         t.add :epoch_time
         t.add :body
         t.add :company
-        t.add :target_project
         t.add :comments
     end
 
