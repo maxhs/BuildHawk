@@ -60,6 +60,9 @@
 			<!--<li style="color:#aaa;font-weight:100;">N/A</li>-->
 		<% end %>
 	</ul>
+
+	<%= render partial: "projects/connect_sidebar" %>
+	
 	<ul id="hidden-projects">
 		<% if @hidden_projects && @hidden_projects.count > 0 %>
 		

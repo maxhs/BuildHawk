@@ -15,5 +15,6 @@ class AddIndicesToActivities < ActiveRecord::Migration
   		remove_column :safety_topics, :report_id, :integer
       remove_column :project_users, :connect_user_id, :integer
       add_column :project_users, :company_id, :integer
+      add_column :message_users, :archived, :boolean, default: false
   	end
 end

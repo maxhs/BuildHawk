@@ -241,6 +241,7 @@ ActiveRecord::Schema.define(version: 20140923231743) do
     t.boolean  "read",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "archived",   default: false
   end
 
   add_index "message_users", ["user_id", "message_id"], name: "message_users_idx"
