@@ -49,6 +49,7 @@ class Notification < ActiveRecord::Base
 		t.add :message
 		t.add :created_date
 		t.add :epoch_time
+		t.add :read
 	end
 
 	api_accessible :details, :extend => :notifications do |t|
