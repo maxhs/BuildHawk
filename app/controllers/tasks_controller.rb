@@ -10,7 +10,6 @@ class TasksController < AppController
 		@tasklist = @project.tasklists.last
 		@company = @project.company
 		@projects = @company.projects
-		@connect_users = @project.connect_users
 		@users = @project.users
 		@subs = @project.project_subs
 		@locations = @project.tasklists.last.tasks.map{|i| i.location if i.location && i.location.length > 0}.flatten
@@ -104,15 +103,15 @@ class TasksController < AppController
 				end
 			end
 
-			if params[:task][:connect_assignee].present?
-				connect_assignee = ConnectUser.where(:id => params[:task][:connect_assignee][:id]).first
-				params[:task].delete(:connect_assignee)
-				if connect_assignee
-					params[:task][:connect_assignee_id] = connect_assignee.id 
-				else
-					params[:task][:connect_assignee_id] = nil 
-				end
-			end
+			# if params[:task][:connect_assignee].present?
+			# 	connect_assignee = ConnectUser.where(:id => params[:task][:connect_assignee][:id]).first
+			# 	params[:task].delete(:connect_assignee)
+			# 	if connect_assignee
+			# 		params[:task][:connect_assignee_id] = connect_assignee.id 
+			# 	else
+			# 		params[:task][:connect_assignee_id] = nil 
+			# 	end
+			# end
 					
 			if params[:task][:completed] == "true"
 				params[:task][:completed_by_user_id] = current_user.id
