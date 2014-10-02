@@ -136,6 +136,7 @@ class Task < ActiveRecord::Base
 
     api_accessible :tasklist do |t|
   		t.add :id
+        t.add :epoch_time
         t.add :tasklist_id
         t.add :user
         t.add :photos
@@ -148,13 +149,13 @@ class Task < ActiveRecord::Base
   		t.add :completed
         t.add :created_date
         t.add :project_id
-        t.add :epoch_time
         ## deprecated
         t.add :worklist_id
   	end
 
     api_accessible :connect do |t|
         t.add :id
+        t.add :epoch_time
         t.add :worklist_id
         t.add :tasklist_id
         t.add :user
