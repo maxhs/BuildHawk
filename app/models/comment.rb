@@ -58,6 +58,10 @@ class Comment < ActiveRecord::Base
         end
     end
 
+    def epoch_time
+        created_at.to_i
+    end
+
   	acts_as_api
 
   	api_accessible :user do |t|
@@ -69,6 +73,7 @@ class Comment < ActiveRecord::Base
         t.add :body
         t.add :user
         t.add :created_at
+        t.add :epoch_time
   	end
 
   	api_accessible :dashboard, :extend => :projects do |t|
