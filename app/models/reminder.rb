@@ -1,11 +1,11 @@
 class Reminder < ActiveRecord::Base
 	require 'resque'
-	attr_accessible :user_id, :checklist_item_id, :project_id, :reminder_datetime, :email, :text, :push, :active
+	attr_accessible :user_id, :checklist_item_id, :task_id, :project_id, :reminder_datetime, :email, :text, :push, :active
 
 	belongs_to :user
 	belongs_to :checklist_item
 	belongs_to :project
-	belongs_to :worklist_item
+	belongs_to :task
 
 	validates_presence_of :reminder_datetime
 	validates_uniqueness_of :checklist_item_id, :scope => :user_id
@@ -43,20 +43,25 @@ class Reminder < ActiveRecord::Base
 		created_at.to_i
 	end
 
+	def worklist_item
+		task
+	end
+
 	acts_as_api
 
 	api_accessible :reminders do |t|
 		t.add :id
+		t.add :epoch_time
 		t.add :user
 		t.add :checklist_item
-		t.add :worklist_item
+		t.add :task
 		t.add :reminder_date
 		t.add :email
 		t.add :text
 		t.add :push
 		t.add :active
 		t.add :project_id
-		t.add :epoch_time
+		t.add :worklist_item
 	end
 
 	api_accessible :projects, :extend => :reminders do |t|

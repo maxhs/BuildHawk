@@ -1,9 +1,8 @@
 class Api::V3::RemindersController < Api::V3::ApiController
 
 	def create
-
 		if params[:reminder][:checklist_item_id]
-			reminder = Reminder.where(:user_id => params[:reminder][:user_id],:checklist_item_id => params[:reminder][:checklist_item_id]).first_or_create
+			reminder = Reminder.where(:user_id => params[:reminder][:user_id],:checklist_item_id => params[:reminder][:checklist_item_id], :project_id => params[:reminder][:project_id]).first_or_create
 			reminder.update_attribute :reminder_datetime, Time.at(params[:date].to_i)
 			if reminder.save
 				respond_to do |format|

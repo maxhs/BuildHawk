@@ -14,7 +14,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-xs-12" style="text-align:center; display:inline-block;float:left;">
+				<div class="col-xs-12" style="text-align:center;">
 					<h4>Status</h4>
 					<%= f.select :state, options_for_select({"In-Progress"=>0,"Completed"=>1,"Not Applicable"=>-1,"No Status"=>nil}, selected: item.state), {:include_blank => false}, :multiple => true %>
 					<span style="color:#ccc;font-weight:100;display:block;">&#8984; / Ctrl click to deselect <span>
@@ -91,24 +91,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		checklistItem();
-		$('#export-checklist-item').on('click',function(){
-			if (!$('#export-checklist-modal').length > 0){
-				$('#item-container').prepend('<%= j render partial:"checklist_item_export", locals: {:item => item} %>');
-			}
-
-			$('body').append('<div class="modal-backdrop in"></div>');
-			$('#export-checklist-modal').animate({"left":"25%",'opacity':'1'},200);
-			$('#cancel-checklist-modal,.modal-backdrop.in').on('click',function(){
-				$('#export-checklist-modal').animate({"left":"100%",'opacity':'0'},200);
-				$('.modal-backdrop.in').fadeOut(200,function(){
-					$(this).remove();
-				});
-			});
-		});
-
-		$('#dismiss-checklist-item').click(function(){
-			dismissChecklistItem();
-		});
+		checklistItem("<%= j render partial:'checklist_item_export', locals: {:item => item} %>");
 	});
 </script>

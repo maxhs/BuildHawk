@@ -360,6 +360,11 @@
 	overflow-y:auto;
 	overflow-x:hidden;
 
+	.row {
+		padding:15px;
+		border-bottom:1px solid #eee;
+	}
+
 	.previous-item {
 		float:left;
 	}
@@ -406,8 +411,13 @@
 	#clear-critical-date {
 		text-transform:uppercase;
 		margin: 1% auto 0;
-		padding: 7px 10px 5px;
+		padding: 7px 17px;
 		cursor:pointer;
+		letter-spacing:0;
+		height:28px;
+		border-radius:14px;
+		-webkit-border-radius:14px;
+		-moz-border-radius:14px;
 		-webkit-transition: all 0.25s ease-out;
 		-moz-transition: all 0.25s ease-out;
 		-o-transition: all 0.25s ease-out;
