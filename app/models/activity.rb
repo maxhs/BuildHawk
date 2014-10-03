@@ -50,6 +50,8 @@ class Activity < ActiveRecord::Base
 
 	api_accessible :dashboard do |t|
 		t.add :id
+		t.add :created_date
+		t.add :epoch_time
 		t.add :user_id
 		t.add :checklist_id
 		t.add :checklist_item
@@ -60,7 +62,6 @@ class Activity < ActiveRecord::Base
 		t.add :project_id
 		t.add :body
 		t.add :hidden
-		t.add :created_date
 		t.add :activity_type
 		t.add :photo
 		## deprecated
@@ -86,6 +87,8 @@ class Activity < ActiveRecord::Base
 
     api_accessible :details do |t|
       	t.add :id
+      	t.add :created_date
+		t.add :epoch_time
 		t.add :user_id
 		t.add :checklist_id
 		t.add :checklist_item_id
@@ -96,8 +99,6 @@ class Activity < ActiveRecord::Base
 		t.add :project_id
 		t.add :body
 		t.add :hidden
-		t.add :created_date
-		t.add :epoch_time
 		t.add :activity_type
     end
 
