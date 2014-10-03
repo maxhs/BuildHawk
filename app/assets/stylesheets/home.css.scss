@@ -13,7 +13,7 @@
 		margin:0 auto;
 
 		li {
-			padding:0;
+			padding:4px 0 0;
 			width:25%;
 			border:0;
 			text-align:center;
@@ -36,8 +36,8 @@
 		margin:0 auto;
 		max-width:1140px;
 		position:relative;
-		height:90%;
-		top:22.5%;
+		height:85%;
+		top:25%;
 
 		.slide {
 			width:100%;
@@ -361,8 +361,8 @@
 			padding-top:10px;
 			font-size:1.15em;
 		}
-
 		input[type="text"],input[type="email"]{
+			display:block;
 			margin: 2px auto;
 			font-weight: lighter;
 			font-family: helvetica;
@@ -582,7 +582,7 @@
 				border-bottom:0;
 
 				span {
-				margin-top:8% !important;
+					margin-top:8% !important;
 				}
 
 				p {

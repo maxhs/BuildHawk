@@ -460,7 +460,6 @@ body {
 		left:0%;
 		z-index:6;
 		border-bottom:1px solid #eee;
-		box-shadow: 0 0px 3px 0 rgba(255,255,255,1);
 		height:44px;
 
 		.nav-icon {
@@ -976,10 +975,10 @@ a.search-button {
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
 	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
 	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
-	border-radius:3px;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	padding:10px 17px;
+	border-radius:13px;
+	-moz-border-radius:13px;
+	-webkit-border-radius:13px;
+	padding:10px 20px;
 	position:relative;
 	display:inline-block;
 	margin:0 10px;
