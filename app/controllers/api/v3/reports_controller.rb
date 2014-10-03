@@ -137,7 +137,7 @@ class Api::V3::ReportsController < Api::V3::ApiController
             end
             # clean out any report users not included in the most recent update
             report.report_users.each do |ru|
-                ru.destroy unless user_ids.include?(ru.user_id) #|| connect_user_ids.include?(ru.connect_user_id)
+                ru.destroy unless user_ids.include?(ru.user_id)
             end
             params[:report].delete(:report_users)
         end
@@ -270,13 +270,7 @@ class Api::V3::ReportsController < Api::V3::ApiController
             else
                 render :json=>{:success=>false}
             end
-        # elsif params[:connect_user_id]
-        #     ru = report.report_users.where(:connect_user_id => params[:connect_user_id]).first
-        #     if ru && ru.destroy
-        #         render :json=>{:success=>true}
-        #     else
-        #         render :json=>{:success=>false}
-        #     end
+
         elsif params[:report_user_id]
             ru = report.report_users.where(:id => params[:report_user_id]).first
             if ru && ru.destroy

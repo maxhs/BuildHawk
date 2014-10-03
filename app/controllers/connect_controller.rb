@@ -5,7 +5,6 @@ class ConnectController < AppController
 		# unless user_signed_in?
 		# 	if params[:email]
 		# 		current_user = User.where(:email => params[:email]).first
-		# 		current_user = ConnectUser.where(:email => params[:email]).first
 		# 	end
 		# end
 

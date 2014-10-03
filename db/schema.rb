@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923231743) do
+ActiveRecord::Schema.define(version: 20141003155542) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -439,7 +439,6 @@ ActiveRecord::Schema.define(version: 20140923231743) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "hours"
-    t.integer  "connect_user_id"
   end
 
   create_table "reports", force: true do |t|
@@ -490,7 +489,6 @@ ActiveRecord::Schema.define(version: 20140923231743) do
 
   create_table "task_users", force: true do |t|
     t.integer  "user_id"
-    t.integer  "connect_user_id"
     t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -520,7 +518,6 @@ ActiveRecord::Schema.define(version: 20140923231743) do
     t.integer  "comments_count"
     t.integer  "sub_assignee_id"
     t.boolean  "mobile",               default: false
-    t.integer  "connect_assignee_id"
   end
 
   add_index "tasks", ["tasklist_id", "user_id", "completed_by_user_id"], name: "tasks_idx"

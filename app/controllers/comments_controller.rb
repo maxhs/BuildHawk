@@ -1,5 +1,6 @@
 class CommentsController < AppController
 	before_filter :authenticate_user!
+	
 	def create
 		@comment = Comment.create params[:comment]
 		if params[:comment][:report_id].present?
@@ -13,7 +14,6 @@ class CommentsController < AppController
 			@comments = @worklist_item.comments
 		end
 		if request.xhr?
-			puts "should be rails ujs"
 			respond_to do |format|
 				format.js
 			end

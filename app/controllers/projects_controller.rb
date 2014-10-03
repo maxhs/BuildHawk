@@ -172,7 +172,7 @@ class ProjectsController < AppController
 
 	def tasklist
 		@tasklist = @project.tasklists.first_or_create
-		@connect
+		#@connect
 		@tasks = @tasklist.tasks
 		@task = Task.find params[:task_id] if params[:task_id]
 	end
@@ -394,6 +394,5 @@ class ProjectsController < AppController
 				redirect_to root_url
 			end
 		end
-		#@connect_users = @project.connect_users if @project
 	end
 end
