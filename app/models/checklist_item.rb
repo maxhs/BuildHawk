@@ -158,6 +158,9 @@ class ChecklistItem < ActiveRecord::Base
     def critical_date_epoch_time
         critical_date.to_i
     end
+    def completed_date_epoch_time
+        critical_date.to_i
+    end
 
     api_accessible :dashboard do |t|
         t.add :id
@@ -165,6 +168,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :critical_date, :if => :has_critical_date?
         t.add :critical_date_epoch_time, :if => :has_critical_date?
         t.add :completed_date, :if => :has_completed_date?
+        t.add :completed_date_epoch_time, :if => :has_completed_date?
         t.add :item_type
         t.add :photos_count
         t.add :comments_count
