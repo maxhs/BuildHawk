@@ -155,17 +155,22 @@ class ChecklistItem < ActiveRecord::Base
     #     end
     # end
 
+    def critical_date_epoch_time
+        critical_date.to_i
+    end
+
     api_accessible :dashboard do |t|
         t.add :id
         t.add :body
         t.add :critical_date, :if => :has_critical_date?
+        t.add :critical_date_epoch_time, :if => :has_critical_date?
         t.add :completed_date, :if => :has_completed_date?
-        t.add :state
         t.add :item_type
         t.add :photos_count
         t.add :comments_count
         t.add :checklist_id
         t.add :project_id
+        t.add :state
         ## slated for deletion
         t.add :status
     end
@@ -183,15 +188,7 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     api_accessible :reminders, :extend => :dashboard do |t|
-        t.add :id
-        t.add :body
-        t.add :critical_date, :if => :has_critical_date?
-        t.add :completed_date, :if => :has_completed_date?
-        t.add :status
-        t.add :state
-        t.add :item_type
-        t.add :photos_count
-        t.add :checklist_id
+        
     end
 
     api_accessible :details, :extend => :dashboard do |t|
