@@ -12,7 +12,7 @@ class Comment < ActiveRecord::Base
 
     validates_presence_of :body
     validates :body, :length => { :minimum => 1 }
-    default_scope { order('created_at') }
+    default_scope { order('created_at ASC') }
 
     after_commit :notify, on: :create
 
