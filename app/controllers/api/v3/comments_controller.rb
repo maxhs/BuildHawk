@@ -25,8 +25,9 @@ class Api::V3::CommentsController < Api::V3::ApiController
     end
 
     def create
+        params[:comment][:mobile] = true
         comment = Comment.create params[:comment]
-        comment.update_attribute :mobile, true
+        
         if params[:comment][:checklist_item_id].present?
             checklist_item = ChecklistItem.find params[:comment][:checklist_item_id]
             comments = checklist_item.comments
@@ -39,14 +40,8 @@ class Api::V3::CommentsController < Api::V3::ApiController
         end
 
         if comment.save
-            if comment.checklist_item || comment.task
-                respond_to do |format|
-                    format.json { render_for_api :projects, :json => comment.activity, :root => :activity}
-                end
-            else
-                respond_to do |format|
-                    format.json { render_for_api :projects, :json => comments, :root => :comments}
-                end
+            respond_to do |format|
+                format.json { render_for_api :projects, :json => comment, :root => :comment}
             end
         end
     end
