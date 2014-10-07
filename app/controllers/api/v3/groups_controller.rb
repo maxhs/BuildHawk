@@ -2,7 +2,7 @@ class Api::V3::GroupsController < Api::V3::ApiController
 
     def index
         @user = User.find params[:user_id]
-        group_ids = @user.project_users.where("project_group_id IS NOT NULL").map(&:project_group_id).uniq
+        group_ids = @user.project_users.where("project_group_id IS NOT NULL and archived = ?",false).map(&:project_group_id).uniq
         groups = []
         if group_ids.count > 0
             group_ids.each do |g|
