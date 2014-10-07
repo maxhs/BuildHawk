@@ -23,9 +23,9 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user = User.find params[:user_id]
         
         if user.any_admin?
-            group_ids = user.company.projects.where("project_group_id IS NOT NULL and archived = ?",false).map(&:project_group_id).uniq
+            group_ids = user.company.projects.where("project_group_id IS NOT NULL and archived = ? and core = ?",false,false).map(&:project_group_id).uniq
         else
-            group_ids = user.project_users.where("project_group_id IS NOT NULL and archived = ?",false).map(&:project_group_id).uniq
+            group_ids = user.project_users.where("project_group_id IS NOT NULL and archived = ? and core = ?",false,false).map(&:project_group_id).uniq
         end
 
         groups = []
