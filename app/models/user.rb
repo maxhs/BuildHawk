@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
         puts e.message
     end
 
-    def connect_items(project)
+    def connect_tasks(project)
         if project
             Task.where(:assignee_id => id).map{|t| t if t.tasklist.project.id == project.id && t.tasklist.project.company.id != company_id}.compact
         else

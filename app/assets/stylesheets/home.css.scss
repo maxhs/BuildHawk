@@ -36,8 +36,8 @@
 		margin:0 auto;
 		max-width:1140px;
 		position:relative;
-		height:85%;
-		top:23%;
+		height:75%;
+		top:25%;
 
 		.slide {
 			width:100%;
@@ -80,46 +80,44 @@
 		#slide-2, #slide-3, #slide-4 {
 			left:200%;
 		}
-	}
-	#call-to-action{
-		text-align:center;
-		position:relative;
-		bottom:1.5%;
+	
+		#call-to-action{
+			text-align:center;
+			position:absolute;
+			bottom:5%;
+			left:50%;
+			width:320px;
+			margin-left:-160px;
 
-		#appstore {
-			position:relative;
-			bottom:20px;
-			img {
-				width:160px;
-			}
-		}
-
-		#beta-login {
-
-			a {
-				width:160px;
-				background:rgba(255,255,255,.1);
-				padding:10px 30px;
-				color:#fff;
-				font-weight:bolder;
-				-webkit-font-smoothing:antialiased;
-				font-size:1.3em;
-				letter-spacing:1px;
-				font-family:'Montserrat','Helvetica',sans-serif;
-				border-radius:2px;
-				-webkit-border-radius:2px;
-				-moz-border-radius:2px;
-				text-transform:uppercase;
-				box-shadow: 
-				  0 0x 0px transparent, /*bottom external highlight*/
-				  0 -1px 1px #666, /*top external shadow*/ 
-				  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
-				  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
+			#appstore {
+				position:relative;
+				bottom:20px;
+				img {
+					width:160px;
+				}
 			}
 
-			a:hover {
-				color:#fff !important;
-				background:rgba(255,255,255,.3);
+			#beta-login {
+
+				a {
+					background:rgba(255,255,255,.1);
+					padding:15px 40px 14px;
+					color:#fff;
+					font-weight:600;
+					-webkit-font-smoothing:antialiased;
+					font-size:1.6em;
+					letter-spacing:1px;
+					font-family:'Myriad Pro','Source Sans Pro','Helvetica',sans-serif;
+					border-radius:2px;
+					-webkit-border-radius:2px;
+					-moz-border-radius:2px;
+					text-transform:uppercase;
+				}
+
+				a:hover {
+					color:#fff !important;
+					background:rgba(255,255,255,.3);
+				}
 			}
 		}
 	}
@@ -314,17 +312,17 @@
 
 	#pricing {
 		height:50%;
+		background-color:#336699;
+		padding:2% 0;
+		box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
+		-webkit-box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
+		-moz-box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
 
-		#left {
-			display:inline-block;
-			float:left;
-			width:100%;
+		#pricing-block {
+			width:25%;
+			min-width:320px;
+			margin: 0 auto;
 			height:100%;
-			background-color:#336699;
-			padding:2% 0;
-			box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
-			-webkit-box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
-			-moz-box-shadow: inset 0 0px 100px 30px rgba(0,0,0,0.1);
 
 			p {
 				width:100%;
@@ -332,7 +330,6 @@
 				font-size:1.6em;
 				color:#fff;
 				line-height:3.25em;
-				text-align:center;
 				font-weight:lighter;
 			}
 		}

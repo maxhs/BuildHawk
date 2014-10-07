@@ -24,6 +24,17 @@
 	margin:5% auto;
 }
 
+.no-projects-placeholder {
+	padding: 0; 
+	color: #aaa; 
+	font-weight: 200; 
+	font-size:.9em; 
+	height: 47px; 
+	line-height: 47px; 
+	font-style:italic; 
+	text-align:center;	
+}
+
 .projects.hidden {
 	display:none;
 

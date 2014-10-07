@@ -148,13 +148,7 @@ class ProjectsController < AppController
 	def checklist
 		@checklist = @project.checklist
 		@phase = @checklist.phases.find params[:phase_id] if params[:phase_id] 
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			render :checklist
-		end
+
 	end   
 
 	def checklist_item
@@ -360,11 +354,12 @@ class ProjectsController < AppController
 	end
 
 	def find_user
-		if params[:user_id].present?
+		if params[:user_id].present? && current_user.uber_admin
 			@user = User.where(:id => params[:user_id]).first
 		else
 			@user = current_user
 		end
+		
 		@company = @user.company
 		@users = @company.users
 		@subs = @company.company_subs
@@ -372,9 +367,9 @@ class ProjectsController < AppController
 		project = Project.where(:id => params[:project_id]).first if params[:project_id]
 		if current_user
 			if project
-				@items = current_user.connect_items(project)
+				@items = current_user.connect_tasks(project)
 			else
-				@items = current_user.connect_items(nil)
+				@items = current_user.connect_tasks(nil)
 			end
 			@companies = @items.map{|t| t.tasklist.project.company}.uniq
       	end
@@ -384,7 +379,7 @@ class ProjectsController < AppController
 		if params[:id].present?
 			@project = Project.find params[:id] unless params[:id] == "search" || params[:id] == "delete_task"
 		end
-		if @project && !@project.users.include?(@user) && params[:id] != @project.to_param
+		if @project && !@project.core && !@project.users.include?(@user) && params[:id] != @project.to_param
 			if request.xhr?
 				respond_to do |format|
 					format.js {render template: "projects/no_access"}

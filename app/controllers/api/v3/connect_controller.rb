@@ -6,9 +6,9 @@ class Api::V3::ConnectController < Api::V3::ApiController
     	project = Project.find params[:project_id] if params[:project_id]
 		if @user
 			if project
-				tasks = @user.connect_items(project)
+				tasks = @user.connect_tasks(project)
 			else
-				tasks = @user.connect_items(nil)
+				tasks = @user.connect_tasks(nil)
 			end
 			respond_to do |format|
 	        	format.json { render_for_api :connect, :json => tasks, :root => :tasks}
