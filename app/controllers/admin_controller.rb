@@ -195,7 +195,7 @@ class AdminController < AppController
 		@users = current_user.company.users
 		@subs = current_user.company.company_subs
 
-		if @company.customer_id.nil? && current_user.uber_admin?
+		if @company.customer_id.nil?# && current_user.uber_admin?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100

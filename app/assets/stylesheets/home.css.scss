@@ -37,7 +37,7 @@
 		max-width:1140px;
 		position:relative;
 		height:85%;
-		top:25%;
+		top:23%;
 
 		.slide {
 			width:100%;
@@ -55,23 +55,24 @@
 					background:rgba(0,0,0,.2);
 					color:#fff;
 					padding:4% 6%;
-					font-weight:bolder;
-					-webkit-font-smoothing:antialiased;
-					font-size:1.65em;
+					font-size:1.5em;
 					line-height:1.3em;
-					font-family:'Source Sans Pro','Helvetica',sans-serif;
+					font-family:"Myriad Pro",'Helvetica',sans-serif;
 					border-radius:2px;
 					-moz-border-radius:2px;
 					-webkit-border-radius:2px;
 					box-shadow:0 0 30px rgba(255,255,255,.3);
-					border:1px solid #fff;
 				}
+
 				.splash-header {
 					text-transform: uppercase;
-					margin: 0 auto 4%;
+					-webkit-font-smoothing:antialiased;
+					margin: 1.5% auto 5%;
 					text-align: center;
 					display: block;
-					font-family:"Montserrat","Gotham Book",'Helvetica',sans-serif;
+					font-weight: 600;
+					font-size:1.5em;
+					font-family:'Source Sans Pro','Helvetica',sans-serif;
 				}
 			}
 		}
@@ -94,10 +95,10 @@
 		}
 
 		#beta-login {
+
 			a {
 				width:160px;
-				background:transparent;
-				border:1px solid #fff;
+				background:rgba(255,255,255,.1);
 				padding:10px 30px;
 				color:#fff;
 				font-weight:bolder;
@@ -118,7 +119,7 @@
 
 			a:hover {
 				color:#fff !important;
-				background:rgba(255,255,255,.1);
+				background:rgba(255,255,255,.3);
 			}
 		}
 	}
@@ -296,11 +297,16 @@
 			.benefit-image {
 				display:table-cell;
 				vertical-align:middle;
-				width:25%;
-				padding-left:10%;
+				width:20%;
+				padding-left:7.5%;
 
 				img {
-					max-width:84px;
+					max-width:80px;
+				}
+
+				#messaging {
+					max-width:70px;
+					margin-left:5px;
 				}
 			}
 		}

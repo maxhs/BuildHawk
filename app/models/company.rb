@@ -14,7 +14,7 @@ class Company < ActiveRecord::Base
     has_many :safety_topics, :dependent => :destroy
     has_many :company_subs, :dependent => :destroy
     has_many :subcontractors, :through => :company_subs, :source => :subcontractor
-    has_many :connect_users, :dependent => :destroy
+    has_one :billing_address, :class_name => "Address"
     has_many :cards
     has_many :billing_days
 

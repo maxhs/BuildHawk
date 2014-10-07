@@ -60,10 +60,15 @@ h2 {
 	
 	input{
 		display:inline-block;
+		margin-top:3px;
+	}
+
+	.address {
+		width:100%;
 	}
 
 	input.card-info {
-		widht:70%;
+		
 	}
 
 	#dismiss-card-container {

@@ -1,5 +1,24 @@
-<li><%= link_to "Personnel", personnel_admin_index_path, :id => "personnel-link", :remote => true %></li>
-<li><%= link_to "Checklists", checklists_admin_index_path, :id => "admin-checklists-link", :remote => true %></li>
-<li><%= link_to "Safety Topics", safety_topics_admin_index_path, :id => "admin-safety-topics-link", remote: true %></li>
-<li><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></li>
-<% if current_user.uber_admin %><li><%= link_to "Billing", billing_index_path, :id => "billing-link", :remote => true %></li><% end %>
+<li>
+	<%= link_to personnel_admin_index_path, :id => "personnel-link", remote: true do %>
+		<%= image_tag "personnel.png", :class=>"nav-icon" %> 
+		<div>Personnel</div>
+	<% end %>
+</li>
+<li>
+	<%= link_to checklists_admin_index_path, :id => "admin-checklists-link", remote: true do %>
+		<%= image_tag "checklist.png", :class=>"nav-icon" %> 
+		<div>Checklist</div>
+	<% end %>
+</li>
+<li>
+	<%= link_to safety_topics_admin_index_path, :id => "admin-safety-topics-link", remote: true do %>
+		<%= image_tag "hardhat_solid.png", :class=>"nav-icon" %> 
+		<div>Safety Topics</div>
+	<% end %>
+</li>
+<!--<li><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></li>-->
+<% if current_user.uber_admin %>
+	<li>
+		<%= link_to "Billing", billing_index_path, :id => "billing-link", :remote => true %>
+	</li>
+<% end %>

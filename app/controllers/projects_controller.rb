@@ -281,7 +281,7 @@ class ProjectsController < AppController
 		end
 	end
 
-	def hide
+	def archive
 		project_user = current_user.project_users.where(:project_id => @project.id).first
 		project_user.hide_project
 
@@ -296,7 +296,7 @@ class ProjectsController < AppController
 		end
 	end
 
-	def activate
+	def unarchive
 		project_user = current_user.project_users.where(:project_id => @project.id).first
 		project_user.update_attribute :archived, false if project_user
 

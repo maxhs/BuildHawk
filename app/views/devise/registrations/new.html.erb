@@ -14,7 +14,7 @@
 		  	<%= f.email_field :email, :placeholder => "The email address you use for work" %>
 
 		  	<%= f.password_field :password, :placeholder => "Password", :autocomplete => "off", required: true %>
-		  	<%= f.password_field :password_confirmation, :placeholder => "Password confirmation", :autocomplete => "off", required: true, 'data-parsley-equalto' => "#user_password" %>
+		  	<%= f.password_field :password_confirmation, :placeholder => "Password confirmation", :autocomplete => "off", required: true, 'data-parsley-equalto' => "#user_password", "data-parsley-error-message" => "Your passwords don't match." %>
 
 		  	<div><%= f.submit "Sign up", :class=>"simple-btn", :style=>"margin:15px auto;" %></div>
 		<% end %>

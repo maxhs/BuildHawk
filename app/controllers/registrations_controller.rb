@@ -12,8 +12,8 @@ class RegistrationsController < Devise::RegistrationsController
         end
         @user = User.find params[:user_id]
         
+        #companies search
         if @user.company && @user.company.name.length > 0
-            #companies search
             search_term = @user.company.name     
             initial = Company.search do
                 fulltext search_term
@@ -54,10 +54,11 @@ class RegistrationsController < Devise::RegistrationsController
             end
         end        
 
-        if params[:user][:company]
+        if params[:user][:company][:name]
             @company = Company.where(name: params[:user][:company][:name]).first_or_create
             params[:user][:company_id] = @company.id
             params[:user][:company_admin] = true unless @company.has_admin?
+            params[:user].delete(:company)
         end
         
         super 
