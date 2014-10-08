@@ -10,7 +10,7 @@ class ProjectGroup < ActiveRecord::Base
 	
 	acts_as_api
 
-  	api_accessible :projects, :extend => :projects do |t|
+  	api_accessible :projects do |t|
         t.add :id
         t.add :name
         t.add :projects
