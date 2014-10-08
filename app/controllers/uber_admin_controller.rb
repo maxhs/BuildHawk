@@ -167,7 +167,7 @@ class UberAdminController < AppController
 			redirect_to projects_path
 		else
 			@user = current_user
-			@projects = @user.project_users.where(:archived => false).map(&:project).compact.uniq
+			@projects = @user.project_users.where(:hidden => false).map(&:project).compact.uniq
 			@company = @user.company
 		end
 	end

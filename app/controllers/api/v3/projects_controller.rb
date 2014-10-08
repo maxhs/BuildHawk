@@ -5,9 +5,9 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
 
         if user.any_admin?
-            projects = user.company.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.uniq.sort_by(&:order_index)
+            projects = user.company.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.uniq.sort_by(&:order_index)
         else
-            projects = user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by(&:order_index)
+            projects = user.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by(&:order_index)
         end
 
         if projects
@@ -147,9 +147,9 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         end
     end
 
-    def archived
+    def hidden
         user = User.find params[:user_id]    
-        projects = user.project_users.where(:archived => true).map(&:project).compact
+        projects = user.project_users.where(:hidden => true).map(&:project).compact
      
         if projects
             respond_to do |format|
@@ -160,7 +160,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         end
     end
 
-    def archive
+    def hide
         user = User.find params[:user_id]
         project = Project.find params[:id]
         if project.core
@@ -169,7 +169,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
             project_user = project.project_users.where(:user_id => user).first
             if project_user
-                project_user.update_attribute :archived, true
+                project_user.update_attribute :hidden, true
                 render :json => {success: true}
             else
                 render :json => {success: false}
@@ -177,13 +177,13 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         end
     end
 
-    def unarchive
+    def activate
         @user = User.find params[:user_id]
         @project = Project.find params[:id]
         project_user = @project.project_users.where(:user_id => @user).first
 
         if project_user
-            project_user.update_attribute :archived, false
+            project_user.update_attribute :hidden, false
             render :json => {success: true}
         else
             render :json => {success: false}

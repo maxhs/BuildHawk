@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
     
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist_id, :photos,
-                    :user_ids, :core, :project_group_id, :companies, :company_ids, :order_index
+                    :user_ids, :core, :project_group_id, :companies, :company_ids, :order_index, :hidden
   	
   	has_many :project_users, :dependent => :destroy, autosave: true
   	has_many :users, :through => :project_users, autosave: true
@@ -52,9 +52,9 @@ class Project < ActiveRecord::Base
         "#{id}-#{(Digest::SHA1.hexdigest id.to_s)[0..4]}"
     end
 
-    def archived_for_user?(current_user)
+    def hidden_for_user?(current_user)
         project_user = ProjectUser.where(project_id: id, user_id: current_user.id).first
-        if project_user && project_user.archived
+        if project_user && project_user.hidden
             return true
         else
             return false

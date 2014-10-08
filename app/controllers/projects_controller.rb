@@ -292,7 +292,7 @@ class ProjectsController < AppController
 
 	def unarchive
 		project_user = current_user.project_users.where(:project_id => @project.id).first
-		project_user.update_attribute :archived, false if project_user
+		project_user.update_attribute :hidden, false if project_user
 
 		reset_projects
 
@@ -343,14 +343,14 @@ class ProjectsController < AppController
 
 	def reset_projects
 		if current_user.any_admin?
-            @sidebar_projects = current_user.company.projects.where("project_group_id IS NULL and archived = ?",false).order('order_index')
+            @sidebar_projects = current_user.company.projects.where("project_group_id IS NULL and hidden = ?",false).order('order_index')
             @projects = current_user.company.projects.where(core: false)
         else
-            @sidebar_projects = current_user.project_users.where("archived = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
-            @projects = current_user.project_users.where("archived = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
+            @sidebar_projects = current_user.project_users.where("hidden = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
+            @projects = current_user.project_users.where("hidden = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
         end
     
-        @hidden_projects = current_user.project_users.where(archived: true).map(&:project).compact.uniq
+        @hidden_projects = current_user.project_users.where(hidden: true).map(&:project).compact.uniq
 	end
 
 	def find_user

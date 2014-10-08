@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003155542) do
+ActiveRecord::Schema.define(version: 20141008221005) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -309,33 +309,11 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.datetime "updated_at"
   end
 
-  create_table "project_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "archived",         default: false
-    t.boolean  "core",             default: false
-    t.integer  "project_group_id"
-    t.integer  "company_id"
-  end
+# Could not dump table "project_users" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
-  add_index "project_users", ["project_id", "user_id"], name: "project_users_ix"
-
-  create_table "projects", force: true do |t|
-    t.boolean  "active",           default: true
-    t.integer  "company_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "checklist_id"
-    t.boolean  "core",             default: false
-    t.integer  "project_group_id"
-    t.boolean  "archived",         default: false
-    t.integer  "order_index",      default: 0
-  end
-
-  add_index "projects", ["company_id"], name: "projects_company_id_ix"
+# Could not dump table "projects" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "promo_codes", force: true do |t|
     t.integer  "user_id"

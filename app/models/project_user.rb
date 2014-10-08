@@ -1,5 +1,5 @@
 class ProjectUser < ActiveRecord::Base
-	attr_accessible :project_id, :user_id, :archived, :project_group_id, :core, :company_id
+	attr_accessible :project_id, :user_id, :hidden, :project_group_id, :core, :company_id
 	belongs_to :project
 	belongs_to :user
 	belongs_to :company
@@ -21,7 +21,7 @@ class ProjectUser < ActiveRecord::Base
 	end
 
 	def hide_project
-		self.archived = true
+		self.hidden = true
 		self.project_group_id = nil
 		self.save
 
