@@ -247,13 +247,13 @@ Buildhawk::Application.routes.draw do
         end
         collection do
           get :dash
-          get :archived
+          get :hidden
           get :groups
           get :demo
         end
         member do
-          post :archive
-          post :unarchive
+          post :hide
+          post :activate
           post :find_user
           post :add_user
         end
@@ -330,13 +330,13 @@ Buildhawk::Application.routes.draw do
         end
         collection do
           get :dash
-          get :archived
+          get :hidden
           get :groups
           get :demo
         end
         member do
-          post :archive
-          post :unarchive
+          post :hide
+          post :activate
           post :find_user
           post :add_user
         end
