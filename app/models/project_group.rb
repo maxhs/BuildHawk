@@ -13,7 +13,6 @@ class ProjectGroup < ActiveRecord::Base
   	api_accessible :projects do |t|
         t.add :id
         t.add :name
-        t.add :projects
         #deprecated in 1.06
   		t.add :projects_count
   	end
@@ -23,6 +22,6 @@ class ProjectGroup < ActiveRecord::Base
   	end
 
   	api_accessible :details, :extend => :projects do |t|
-  		
+  		t.add :projects
   	end
 end
