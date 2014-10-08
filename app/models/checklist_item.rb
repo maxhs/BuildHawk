@@ -183,6 +183,10 @@ class ChecklistItem < ActiveRecord::Base
   		
   	end
 
+    api_accessible :visible_projects, :extend => :projects do |t|
+        
+    end
+    
     api_accessible :checklists, :extend => :dashboard do |t|
        
     end
