@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003155542) do
+ActiveRecord::Schema.define(version: 20141008221005) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.string   "activity_type"
     t.integer  "comment_id"
     t.integer  "message_id"
+    t.integer  "photo_id"
   end
 
   add_index "activities", ["user_id", "project_id", "report_id", "task_id", "comment_id", "checklist_item_id", "message_id"], name: "activities_idxs"
@@ -97,7 +98,7 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.datetime "milestone_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "state"
+    t.string   "status"
   end
 
   add_index "categories", ["phase_id"], name: "subcategories_category_id_ix"
@@ -112,9 +113,11 @@ ActiveRecord::Schema.define(version: 20141003155542) do
   end
 
   create_table "checklist_items", force: true do |t|
+    t.string   "status"
     t.string   "item_type"
     t.text     "body"
     t.integer  "order_index"
+    t.integer  "subcategory_id"
     t.integer  "category_id"
     t.integer  "checklist_id"
     t.integer  "completed_by_user_id"
@@ -125,11 +128,10 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.datetime "updated_at"
     t.integer  "photos_count"
     t.integer  "comments_count"
-    t.integer  "state"
     t.integer  "user_id"
   end
 
-  add_index "checklist_items", ["category_id", "checklist_id"], name: "checklist_items_ix"
+  add_index "checklist_items", ["subcategory_id", "checklist_id"], name: "checklist_items_ix"
 
   create_table "checklists", force: true do |t|
     t.integer  "project_id"
@@ -173,6 +175,7 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "customer_token"
     t.boolean  "active"
     t.string   "customer_id"
   end
@@ -263,7 +266,7 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "state"
+    t.string   "status"
   end
 
   add_index "phases", ["checklist_id"], name: "categories_checklist_id_ix"
@@ -304,16 +307,38 @@ ActiveRecord::Schema.define(version: 20141003155542) do
 
   create_table "project_subs", force: true do |t|
     t.integer  "project_id"
-    t.integer  "company_id"
+    t.integer  "company_sub_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-# Could not dump table "project_users" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "project_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",           default: false
+    t.boolean  "core",             default: false
+    t.integer  "project_group_id"
+    t.integer  "company_id"
+  end
 
-# Could not dump table "projects" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  add_index "project_users", ["project_id", "user_id"], name: "project_users_ix"
+
+  create_table "projects", force: true do |t|
+    t.boolean  "active",           default: true
+    t.integer  "company_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "checklist_id"
+    t.boolean  "core",             default: false
+    t.integer  "project_group_id"
+    t.boolean  "hidden",           default: false
+    t.integer  "order_index",      default: 0
+  end
+
+  add_index "projects", ["company_id"], name: "projects_company_id_ix"
 
   create_table "promo_codes", force: true do |t|
     t.integer  "user_id"
@@ -347,10 +372,7 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",            default: true
-    t.integer  "task_id"
   end
-
-  add_index "reminders", ["user_id", "checklist_item_id", "task_id", "project_id"], name: "reminders_idx"
 
   create_table "report_companies", force: true do |t|
     t.integer  "report_id"
@@ -401,7 +423,7 @@ ActiveRecord::Schema.define(version: 20141003155542) do
     t.text     "weather"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "date_string"
+    t.string   "created_date"
     t.string   "weather_icon"
     t.string   "temp"
     t.string   "wind"
