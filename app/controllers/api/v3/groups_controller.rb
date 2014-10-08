@@ -6,7 +6,7 @@ class Api::V3::GroupsController < Api::V3::ApiController
 
         if groups.count > 0
 
-            render json: {groups: groups.map{|group| {id: group.id, name: group.name, projects_count: group.projects_count, projects: group.projects.map{|project| {id: project.id, name: project.name, archived: project.archived_for_user?(user) } } } }
+            render json: {groups: groups.map{|group| {id: group.id, name: group.name, projects_count: group.projects_count, projects: group.projects.map{|project| {id: project.id, name: project.name, archived: project.archived_for_user?(user) } } } } }
             #respond_to do |format|
             #    format.json { render_for_api :details, :json => groups, :root => :groups}
             #end
