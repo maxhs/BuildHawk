@@ -150,6 +150,7 @@ class Project < ActiveRecord::Base
         t.add :id
         t.add :name
         t.add :company
+        t.add :active
     end
 
     api_accessible :connect, :extend => :tasklist do |t|
@@ -159,6 +160,7 @@ class Project < ActiveRecord::Base
     api_accessible :details do |t|
         t.add :id
         t.add :name
+        t.add :active
         t.add :address
         t.add :progress
         t.add :company
@@ -170,6 +172,7 @@ class Project < ActiveRecord::Base
     api_accessible :v3_details do |t|
         t.add :id
         t.add :name
+        t.add :active
         t.add :address
         t.add :progress
         t.add :company
@@ -185,6 +188,7 @@ class Project < ActiveRecord::Base
         t.add :id
         t.add :name
         t.add :address
+        t.add :active
     end
 
     api_accessible :company, :extend => :user do |t|
@@ -196,7 +200,6 @@ class Project < ActiveRecord::Base
     end
 
     api_accessible :dashboard, :extend => :projects do |t|
-        t.add :id
         t.add :upcoming_items
         t.add :recently_completed
         t.add :recent_documents
