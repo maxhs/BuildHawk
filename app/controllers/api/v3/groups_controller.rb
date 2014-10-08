@@ -12,7 +12,9 @@ class Api::V3::GroupsController < Api::V3::ApiController
         # end
 
         if groups.count > 0
-            render json: {groups: groups}
+            respond_to do |format|
+                format.json { render_for_api :details, :json => groups, :root => :groups}
+            end
         else
             render json: {success: false}
         end
