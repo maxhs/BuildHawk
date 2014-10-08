@@ -12,11 +12,9 @@ class Api::V3::GroupsController < Api::V3::ApiController
         # end
 
         if groups.count > 0
-            respond_to do |format|
-                format.json { render_for_api :dashboard, :json => groups, :root => :groups}
-            end
+            render json: {groups: groups}
         else
-            render :json => {success: false}
+            render json: {success: false}
         end
     end
 
@@ -30,9 +28,9 @@ class Api::V3::GroupsController < Api::V3::ApiController
     def destroy
     	@photo = Photo.find params[:id]
     	if @photo.destroy
-        	render :json=>{:success=>true}
+        	render json: {success: true}
       	else 
-        	render :json=>{:success=>false}
+        	render json: {success: false}
       	end
     end
 
