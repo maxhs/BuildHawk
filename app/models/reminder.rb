@@ -68,6 +68,10 @@ class Reminder < ActiveRecord::Base
      	
     end
 
+    api_accessible :visible_projects, :extend => :projects do |t|
+     	
+    end
+
     api_accessible :user, :extend => :reminders do |t|
      
     end

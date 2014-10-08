@@ -1,4 +1,4 @@
 $('#folders').fadeOut(200,function(){
-	$(this).html('<%= j render partial:"projects/folders", locals: {folders: @folders} %>');
+	$(this).html('<%= j render partial:"projects/folders", locals: {folders: @folders, project: @project} %>');
 	$(this).fadeIn(200);
 });
