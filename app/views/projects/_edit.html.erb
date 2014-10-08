@@ -61,7 +61,7 @@
 		<div class="button-container">
 			<%= f.submit "Save", :class => "simple-btn save", style:"display:block;" %>
 <% end %>
-			<% if current_user.project_users.where(:project_id => @project.id, :archived => true).first %>
+			<% if current_user.project_users.where(:project_id => @project.id, :hidden => true).first %>
 				<%= link_to "Activate", activate_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to activate this project?"}, remote: true %>
 			<% else %>
 				<%= link_to "Hide", hide_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to hide this project?"}, remote: true %>
