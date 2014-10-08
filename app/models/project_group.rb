@@ -10,23 +10,19 @@ class ProjectGroup < ActiveRecord::Base
 	
 	acts_as_api
 
-  	api_accessible :projects do |t|
-      t.add :id
-      t.add :name
-  		t.add :projects_count
-  		#t.add :group_projects
-  	end
-
-  	api_accessible :dashboard do |t|
-  		t.add :name
-  		t.add :id
+  	api_accessible :projects, :extend => :projects do |t|
+        t.add :id
+        t.add :name
+        t.add :projects
+        #deprecated in 1.06
   		t.add :projects_count
   	end
 
-  	api_accessible :details do |t|
-  		t.add :name
-  		t.add :id
-  		t.add :projects_count
-  		t.add :projects
+  	api_accessible :dashboard, :extend => :projects do |t|
+  		
+  	end
+
+  	api_accessible :details, :extend => :projects do |t|
+  		
   	end
 end
