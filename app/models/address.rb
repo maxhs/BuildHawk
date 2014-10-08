@@ -27,6 +27,10 @@ class Address < ActiveRecord::Base
       t.add :longitude
   	end
 
+    api_accessible :visible_projects, :extend => :projects do |t|
+      
+    end
+
     api_accessible :user, :extend => :projects do |t|
       
     end

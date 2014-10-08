@@ -124,6 +124,10 @@ class Company < ActiveRecord::Base
     api_accessible :projects, :extend => :login do |t|
   
     end
+
+    api_accessible :visible_projects, :extend => :projects do |t|
+  
+    end
     
     api_accessible :messages, :extend => :login do |t|
       
