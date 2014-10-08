@@ -19,31 +19,6 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         end
     end
 
-    def groups
-        user = User.find params[:user_id]
-        
-        if user.any_admin?
-            group_ids = user.company.projects.where("project_group_id IS NOT NULL and archived = ? and core = ?",false,false).map(&:project_group_id).uniq
-        else
-            group_ids = user.project_users.where("project_group_id IS NOT NULL and archived = ? and core = ?",false,false).map(&:project_group_id).uniq
-        end
-
-        groups = []
-        if group_ids.count > 0
-            group_ids.each do |g|
-                groups << ProjectGroup.find(g)
-            end 
-        end
-
-        if groups.count > 0
-            respond_to do |format|
-                format.json { render_for_api :projects, :json => groups, :root => :groups}
-            end
-        else
-            render :json => {success: false}
-        end
-    end
-
     def demo
         projects = Project.where(:core => true)
         if projects.count > 0
@@ -190,18 +165,14 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         project = Project.find params[:id]
         if project.core
             render :json => {success: true}
-        elsif  user.admin || user.company_admin || user.uber_admin
-            project_user = project.project_users.where(:user_id => user).first
+        else
 
+            project_user = project.project_users.where(:user_id => user).first
             if project_user
                 project_user.update_attribute :archived, true
                 render :json => {success: true}
             else
                 render :json => {success: false}
-            end
-        else
-            respond_to do |format|
-                format.json { render_for_api :login, :json => user, :root => :user}
             end
         end
     end

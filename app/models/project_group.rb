@@ -14,7 +14,7 @@ class ProjectGroup < ActiveRecord::Base
         t.add :id
         t.add :name
         #deprecated in 1.06
-  		t.add :projects_count
+  		  t.add :projects_count
   	end
 
   	api_accessible :dashboard, :extend => :projects do |t|
