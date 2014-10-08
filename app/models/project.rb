@@ -52,6 +52,15 @@ class Project < ActiveRecord::Base
         "#{id}-#{(Digest::SHA1.hexdigest id.to_s)[0..4]}"
     end
 
+    def archived_for_user?(current_user)
+        project_user = ProjectUser.where(project_id: id, user_id: current_user.id).first
+        if project_user && project_user.archived
+            return true
+        else
+            return false
+        end
+    end
+
     def adjust_users
         if project_group_id != nil
             puts 'inside check_groups'

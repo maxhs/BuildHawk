@@ -15,7 +15,8 @@ class Api::V3::GroupsController < Api::V3::ApiController
 
     def show
     	group = ProjectGroup.find params[:id]
-    	render json: {id: group.id, name: group.name, projects: group.projects.map{|project| {name: project.name, archived: project.archived} } }
+        user = User.find params[:user_id]
+    	render json: {id: group.id, name: group.name, projects: group.projects.map{|project| {name: project.name, archived: project.archived_for_user?(user)} } }
         #respond_to do |format|
         #	format.json { render_for_api :details, :json => group, :root => :group}
       	#end
