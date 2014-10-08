@@ -1,5 +1,5 @@
 $("#project-reports").addClass('reports-panel');
-$('#report-focus').html('<%= j render :partial => "new", :locals => {:report => @report, :project => @project } %>');
+$('#report-focus').html('<%= j render :partial => "new", :locals => {report: @report, project: @project, project_users: @project_users} %>');
 var reportsOffset = document.getElementById('project-reports').offsetHeight;
 $('.active-report').removeClass('active-report');
 $('.faded').removeClass('faded');

@@ -5,11 +5,7 @@
 	<div id="add-report" class="border-box container">
 		<div id="dismiss-report"><%=image_tag "blackX.png" %></div>
 		<div class="thin-form">
-			<div class="row form-title">
-				<div class="col-md-12"><h5>Date</h5></div>
-			</div>
 			<div class="row">
-					
 				<div class="input-append date col-md-6" data-date-format="dd-mm-yyyy">
 					<h5>Date</h5>
 					<%= f.text_field :date_string, :value => report.date_string, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
@@ -116,7 +112,7 @@
 	$('#dismiss-report').click(function(){
 		dismissReport();
 	});
-	$('#type-select').select2();
+	$('#report_type').select2();
 	$('#subs-select').select2({
 		placeholder: "Add the companies/subcontractors present"
 	});
