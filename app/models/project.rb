@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
     
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist_id, :photos,
-                    :user_ids, :core, :project_group_id, :companies, :company_ids, :order_index, :hidden
+                    :user_ids, :core, :project_group_id, :companies, :company_ids, :order_index
   	
   	has_many :project_users, :dependent => :destroy, autosave: true
   	has_many :users, :through => :project_users, autosave: true
@@ -139,6 +139,10 @@ class Project < ActiveRecord::Base
         Resque.enqueue(DestroyProject, id)
     end
 
+    def visible
+        true
+    end
+
     acts_as_api
 
   	api_accessible :projects do |t|
@@ -154,6 +158,10 @@ class Project < ActiveRecord::Base
         t.add :reminders
         t.add :order_index
   	end
+
+    api_accessible :visible_projects, :extend => :projects do |t|
+        t.add :visible
+    end
 
     api_accessible :tasklist do |t|
         t.add :id

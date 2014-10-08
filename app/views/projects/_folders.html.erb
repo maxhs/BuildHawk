@@ -1,4 +1,4 @@
-<% if @folders && @folders.count %>
+<% if folders && folders.count %>
 	<ul>
 		<%= render partial: "folders/folder", collection: folders, as: :folder, locals:{project:project},cache: false %>
 	</ul>

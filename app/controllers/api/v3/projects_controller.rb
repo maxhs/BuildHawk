@@ -12,7 +12,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
         if projects
             respond_to do |format|
-                format.json { render_for_api :projects, :json => projects, :root => :projects}
+                format.json { render_for_api :visible_projects, :json => projects, :root => :projects}
             end
         else
             render :json => {success: false}
