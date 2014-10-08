@@ -2,7 +2,7 @@ class CreateChecklistItems < ActiveRecord::Migration
   	def change
     	create_table :checklist_items do |t|
 	    	t.boolean :complete, :default => false
-	    	t.string :status
+	    	t.integer :state
 	    	t.string :item_type
 	    	t.text :body
 	    	t.integer :order_index

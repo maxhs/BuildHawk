@@ -3,6 +3,7 @@ class CreateReminders < ActiveRecord::Migration
     create_table :reminders do |t|
     	t.belongs_to :user
     	t.belongs_to :checklist_item
+      t.references :punchlist_item
     	t.belongs_to :project
     	t.datetime :reminder_datetime
     	t.boolean :email

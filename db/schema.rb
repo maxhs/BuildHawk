@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20141008221005) do
   end
 
   create_table "checklist_items", force: true do |t|
-    t.string   "status"
+    t.integer  "state"
     t.string   "item_type"
     t.text     "body"
     t.integer  "order_index"
@@ -364,6 +364,7 @@ ActiveRecord::Schema.define(version: 20141008221005) do
   create_table "reminders", force: true do |t|
     t.integer  "user_id"
     t.integer  "checklist_item_id"
+    t.integer  "task_id"
     t.integer  "project_id"
     t.datetime "reminder_datetime"
     t.boolean  "email"
@@ -373,6 +374,8 @@ ActiveRecord::Schema.define(version: 20141008221005) do
     t.datetime "updated_at"
     t.boolean  "active",            default: true
   end
+
+  add_index "reminders", ["user_id", "checklist_item_id", "task_id", "project_id"], name: "reminders_idx"
 
   create_table "report_companies", force: true do |t|
     t.integer  "report_id"
@@ -412,6 +415,7 @@ ActiveRecord::Schema.define(version: 20141008221005) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "hours"
+    t.integer  "connect_user_id"
   end
 
   create_table "reports", force: true do |t|
@@ -462,6 +466,7 @@ ActiveRecord::Schema.define(version: 20141008221005) do
 
   create_table "task_users", force: true do |t|
     t.integer  "user_id"
+    t.integer  "connect_user_id"
     t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -491,6 +496,7 @@ ActiveRecord::Schema.define(version: 20141008221005) do
     t.integer  "comments_count"
     t.integer  "sub_assignee_id"
     t.boolean  "mobile",               default: false
+    t.integer  "connect_assignee_id"
   end
 
   add_index "tasks", ["tasklist_id", "user_id", "completed_by_user_id"], name: "tasks_idx"
