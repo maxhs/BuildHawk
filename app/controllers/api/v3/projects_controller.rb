@@ -164,7 +164,6 @@ class Api::V3::ProjectsController < Api::V3::ApiController
     end
 
     def hide
-        
         project_user = ProjectUser.where(user_id: params[:user_id], project_id: params[:id]).first
         if project_user
             project_user.update_attribute :hidden, true

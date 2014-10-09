@@ -28,17 +28,13 @@ class Api::V3::ReportsController < Api::V3::ApiController
         current_user = User.find params[:report][:author_id]
         project = Project.find params[:report][:project_id]
         reports_with_type = project.reports.where(:report_type => params[:report][:report_type])
+
         if reports_with_type && reports_with_type.map(&:date_string).include?(params[:report][:date_string])
             render json: {duplicate: "#{params[:report][:date_string]}"}
         else
             if params[:report][:report_users].present?
                 users = params[:report][:report_users]
                 params[:report].delete(:report_users)
-            end
-
-            if params[:report][:report_subs].present?
-                subs = params[:report][:report_subs]
-                params[:report].delete(:report_subs)
             end
 
             if params[:report][:report_companies].present?
@@ -51,8 +47,8 @@ class Api::V3::ReportsController < Api::V3::ApiController
                 params[:report].delete(:safety_topics)
             end
 
+            params[:report][:mobile] = true
             report = Report.create params[:report]
-            report.update_attribute :mobile, true
             
             if topics
                 topics.each do |topic|
@@ -75,13 +71,6 @@ class Api::V3::ReportsController < Api::V3::ApiController
                     report.project.companies << company unless report.project.companies.flatten.include?(company)
                     report_company = report.report_companies.where(:company_id => company.id).first_or_create
                     report_company.update_attribute :count, c[:count]
-                end
-            end
-            if subs
-                subs.each do |s|
-                    sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
-                    the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                    the_sub.update_attribute :count, s[:count]
                 end
             end
 
@@ -108,16 +97,9 @@ class Api::V3::ReportsController < Api::V3::ApiController
         end
     end
 
-    def update
-        ##API compatibility
-        if params[:report][:author_id]
-            current_user = User.find params[:report][:author_id]
-            params[:report].delete(:author_id)
-        ##
-        else
-            current_user = User.find params[:user_id] 
-        end
-        
+    def update    
+        current_user = User.find params[:user_id] 
+    
     	report = Report.find params[:id]
         if params[:report][:report_users].present?
             users = params[:report][:report_users]
@@ -163,16 +145,6 @@ class Api::V3::ReportsController < Api::V3::ApiController
                 rc.destroy unless company_ids.include?(rc.company_id)
             end
             params[:report].delete(:report_companies)
-        end
-
-        if params[:report][:report_subs].present?
-            subs = params[:report][:report_subs]
-            subs.each do |s|
-                sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
-                the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                the_sub.update_attribute :count, s[:count]
-            end
-            params[:report].delete(:report_subs)
         end
 
         if params[:report][:safety_topics].present?
