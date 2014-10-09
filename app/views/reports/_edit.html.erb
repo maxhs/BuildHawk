@@ -43,7 +43,7 @@
 					<% if report.report_topics.count > 0 %>
 						<% report.report_topics.each do |rt| %>
 							<div class="row">
-								<div class="col-md-12"><h5>&bull;&nbsp;<%= rt.topic.title %></h5></div>
+								<div class="col-md-12"><h5>&bull;&nbsp;<%= rt.safety_topic.title %></h5></div>
 							</div>
 						<% end %>
 					<% else %>
