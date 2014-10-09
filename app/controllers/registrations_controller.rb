@@ -62,9 +62,7 @@ class RegistrationsController < Devise::RegistrationsController
         end
         
         super 
-
-        #flash[:notice] = "Welcome to BuildHawk! You've successfully signed up.".html_safe
-        #sign_in_and_redirect(:user, @user)
+        
     end
 
     def update
