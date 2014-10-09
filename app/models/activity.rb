@@ -91,15 +91,16 @@ class Activity < ActiveRecord::Base
 		t.add :epoch_time
 		t.add :user_id
 		t.add :checklist_id
-		t.add :checklist_item_id
+		t.add :checklist_item
 		t.add :report_id
 		t.add :comment
-		t.add :worklist_item_id
 		t.add :task_id
 		t.add :project_id
 		t.add :body
 		t.add :hidden
 		t.add :activity_type
+		## deprecated
+		t.add :worklist_item_id
     end
 
     api_accessible :reports, :extend => :details do |t|
