@@ -21,6 +21,9 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
     def demo
         projects = Project.where(:core => true)
+        if params[:user_id]
+            projects = projects.map{|project| project unless ProjectUser.where(project_id: project.id, user_id: params[:user_id].first.hidden)}.compact.uniq
+        end
         if projects.count > 0
             respond_to do |format|
                 format.json { render_for_api :projects, :json => projects, :root => :projects}

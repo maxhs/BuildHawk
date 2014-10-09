@@ -48,7 +48,7 @@
 			span{
 				display:table-cell;
 				vertical-align:middle;
-				text-shadow:1px 1px rgba(0,0,0,.15);
+				text-shadow:1px 1px rgba(0,0,0,.1);
 				cursor:default;
 
 				p{
@@ -98,14 +98,13 @@
 			}
 
 			#beta-login {
-
 				a {
 					background:rgba(255,255,255,.1);
 					padding:15px 40px 14px;
 					color:#fff;
-					font-weight:normal;
+					font-weight:600;
 					-webkit-font-smoothing:antialiased;
-					font-size:1.75em;
+					font-size:1.5em;
 					letter-spacing:1px;
 					font-family:'Myriad Pro','Source Sans Pro','Helvetica',sans-serif;
 					border-radius:2px;
