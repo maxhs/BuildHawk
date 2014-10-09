@@ -65,8 +65,6 @@ class RegistrationsController < Devise::RegistrationsController
 
         #flash[:notice] = "Welcome to BuildHawk! You've successfully signed up.".html_safe
         #sign_in_and_redirect(:user, @user)
-        
-        #find_connect_items(current_user) if current_user
     end
 
     def update
@@ -76,21 +74,12 @@ class RegistrationsController < Devise::RegistrationsController
     private
 
     def after_sign_up_path_for(resource)
-        if @company && @company.users.count == 0
+        @company = current_user.company
+        if current_user.any_admin?    
             admin_index_path
         else
             projects_path
         end
     end
 
-    # def find_connect_items(user)
-    #     @connect_user = ConnectUser.where(:email => user.email).first
-    #     @connect_user = ConnectUser.where(:phone => user.phone).first unless @connect_user
-    #     return unless @connect_user
-    #     tasks = @connect_user.tasks
-    #     tasks.each do |t|
-    #         t.update_attributes :assignee_id => user.id, :connect_assignee_id => nil
-    #         t.project.project_users.where(user_id: user.id).first_or_create
-    #     end
-    # end
 end 

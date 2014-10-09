@@ -7,7 +7,9 @@ class CreateCompanies < ActiveRecord::Migration
     	t.boolean :pre_register
     	t.string :contact_name
     	t.integer :projects_count
-      	t.timestamps
+      t.boolean :active
+      t.string :customer_id
+      t.timestamps
     end
   end
 end

@@ -1,6 +1,6 @@
-class CreateCategories < ActiveRecord::Migration
+class CreatePhases < ActiveRecord::Migration
   def change
-    create_table :categories do |t|
+    create_table :phases do |t|
  	  t.integer :order_index
  	  t.belongs_to :checklist
  	  t.belongs_to :core_checklist

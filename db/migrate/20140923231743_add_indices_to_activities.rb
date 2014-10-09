@@ -6,7 +6,7 @@ class AddIndicesToActivities < ActiveRecord::Migration
   		add_index :phases, :core_checklist_id, name: "phase_core_checklist_idx"
   		add_index :reminders, [:user_id, :checklist_item_id, :task_id, :project_id], name: "reminders_idx"
   		add_index :report_topics, [:report_id, :safety_topic_id], name: "report_topics_idx"
-  		add_index :tasks, [:tasklist_id, :user_id, :completed_by_user_id], name: "tasks_idx"
+  		add_index :tasks, [:tasklist_id, :assignee_id, :completed_by_user_id], name: "tasks_idx"
   		add_index :tasklists, :project_id, name: "taskslists_idx"
   		add_index :billing_days, [:project_user_id, :company_id], name: "billing_days_idx"
   		add_index :alternates, :user_id, name: "alternates_idx"

@@ -23,6 +23,9 @@ class BillingController < AppController
 		end
 	  	active_projects = @company.projects.where(:active => true).count
 	  	@amount = active_projects * 1000 / 100
+	rescue Stripe::InvalidRequestError => e
+		flash[:error] = "Something went wrong while trying to fetch your billing information."
+	 	redirect_to admin_index_path
 	end
 
 	def new_card

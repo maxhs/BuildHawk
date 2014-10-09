@@ -2,14 +2,15 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Database authenticatable
-      t.string :email,              :null => false, :default => ""
-      t.string :encrypted_password, :null => false, :default => ""
+      t.string :email
+      t.string :encrypted_password
       t.string :first_name, :default => ""
       t.string :last_name, :default => ""
       t.string :full_name, :default => ""
       t.string :phone_number, :default => ""
       t.string :first_name, :default => ""
       t.boolean :admin, :default => false
+      t.boolean :company_admin, :default => false
       t.boolean :uber_admin, :default => false
       t.string :authentication_token
 
@@ -24,7 +25,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer  :sign_in_count, :default => 0, :null => false
+      t.integer  :sign_in_count, :default => 0
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
@@ -41,7 +42,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
       t.belongs_to :company
-
+      t.boolean :active, default: false
       t.timestamps
     end
 

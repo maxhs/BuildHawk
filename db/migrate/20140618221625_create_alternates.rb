@@ -10,7 +10,6 @@ class CreateAlternates < ActiveRecord::Migration
     rename_column :companies, :phone_number, :phone
     rename_column :addresses, :phone_number, :phone
     rename_column :leads, :phone_number, :phone
-    rename_column :subs, :phone_number, :phone
     add_column :users, :text_permissions, :boolean, default: true
   end
 end
