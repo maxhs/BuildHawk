@@ -43,12 +43,12 @@
 					<% if report.report_topics.count > 0 %>
 						<% report.report_topics.each do |rt| %>
 							<div class="row">
-								<div class="col-md-12"><h5>&bull;&nbsp;<%= r.ttopic.title %></h5></div>
+								<div class="col-md-12"><h5>&bull;&nbsp;<%= rt.topic.title %></h5></div>
 							</div>
 						<% end %>
 					<% else %>
 							<div class="row">
-								<div class="col-md-12"><div class="font-smoothing" style="color:#aaa;font-style:italic;font-weight:200">N/A</span></div>
+								<div class="col-md-12"><div class="font-smoothing" style="color:#aaa;font-style:italic;font-weight:200">N/A</div></div>
 							</div>
 					<% end %>
 					
@@ -123,16 +123,9 @@
 						<% end %>
 					</div>
 				</div>
-			
-				<div class="button-container">
-					<%= f.submit "Save", :class => "simple-btn save" %>
-	<% end %>
-					<% if current_user.admin || current_user.company_admin || current_user.uber_admin || report.author == current_user %>
-						<%= link_to image_tag('trashButton.png', :class=>"remote delete-img"), report_path(report, :project_id => project.id), :method => :delete, :class => "delete-link", :style=>"margin:0 auto;width:82px;display:block;", :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."}, remote: true %>
-					<% end %>
-				</div>
 			</div>
 		</div>
+	<% end %>
 	
 	<div class="comment-container border-box">
 		<h4 style="text-align:center; margin:5px auto 15px; display:block;">Comments for <%= "#{report.report_type} Report - #{report.created_date}"%></h4>
