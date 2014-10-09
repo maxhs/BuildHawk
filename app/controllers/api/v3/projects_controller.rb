@@ -164,19 +164,13 @@ class Api::V3::ProjectsController < Api::V3::ApiController
     end
 
     def hide
-        user = User.find params[:user_id]
-        project = Project.find params[:id]
-        if project.core
+        
+        project_user = ProjectUser.where(user_id: params[:user_id], project_id: params[:id]).first
+        if project_user
+            project_user.update_attribute :hidden, true
             render :json => {success: true}
         else
-
-            project_user = project.project_users.where(:user_id => user).first
-            if project_user
-                project_user.update_attribute :hidden, true
-                render :json => {success: true}
-            else
-                render :json => {success: false}
-            end
+            render :json => {success: false}
         end
     end
 
