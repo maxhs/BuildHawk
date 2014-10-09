@@ -136,16 +136,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
             params[:report].delete(:report_companies)
         end
 
-        if params[:report][:report_subs].present?
-            subs = params[:report][:report_subs]
-            subs.each do |s|
-                sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
-                the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                the_sub.update_attribute :count, s[:count]
-            end
-            params[:report].delete(:report_subs)
-        end
-
         if params[:report][:safety_topics].present?
             new_topics = []
             params[:report][:safety_topics].each do |topic|
@@ -252,14 +242,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
 
     def remove_personnel
         report = Report.find params[:report_id]
-        if params[:sub_id]
-            rs = report.report_subs.where(:sub_id => params[:sub_id]).first
-            if rs && rs.destroy
-                render :json=>{:success=>true}
-            else
-                render :json=>{:success=>false}
-            end
-        elsif params[:user_id]
+        if params[:user_id]
             ru = report.report_users.where(:user_id => params[:user_id]).first
             if ru && ru.destroy
                 render :json=>{:success=>true}

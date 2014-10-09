@@ -72,7 +72,7 @@ class Report < ActiveRecord::Base
     end
 
     def personnel
-        report_users + report_subs
+        report_users
     end
 
     def personnel_count
@@ -90,22 +90,22 @@ class Report < ActiveRecord::Base
         created_at.to_i
     end
 
-    def clone_report_subs
-        report_subs.each do |rs|
-            puts "Updating #{date_string} for sub: #{rs.sub.name}"
-            company = Company.where(:name => rs.sub.name).first
-            if company
-                puts "found company: #{company.name}"
-                company_sub = project.company.company_subs.where(:subcontractor_id => company.id).first
-                if company_sub
-                    rc = report_companies.where(:company_id => company_sub.subcontractor.id).first_or_create
-                    rc.update_attribute :count, rs.count
-                else
-                    puts "Couldn't find company sub for #{rs.sub.name}"
-                end
-            end
-        end
-    end
+    # def clone_report_subs
+    #     report_subs.each do |rs|
+    #         puts "Updating #{date_string} for sub: #{rs.sub.name}"
+    #         company = Company.where(:name => rs.sub.name).first
+    #         if company
+    #             puts "found company: #{company.name}"
+    #             company_sub = project.company.company_subs.where(:subcontractor_id => company.id).first
+    #             if company_sub
+    #                 rc = report_companies.where(:company_id => company_sub.subcontractor.id).first_or_create
+    #                 rc.update_attribute :count, rs.count
+    #             else
+    #                 puts "Couldn't find company sub for #{rs.sub.name}"
+    #             end
+    #         end
+    #     end
+    # end
 
     def updated_date
         updated_at.to_i
@@ -179,7 +179,6 @@ class Report < ActiveRecord::Base
         t.add :epoch_time
         ###
         t.add :safety_topics
-        t.add :report_subs
         t.add :personnel
         ###
   	end
