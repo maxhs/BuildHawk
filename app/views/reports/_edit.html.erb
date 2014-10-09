@@ -1,7 +1,7 @@
 
 <%= nested_form_for report, url: report_path(report, :project_id => report.project.id), :multipart => true, :remote => true, :method => :patch do |f| %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
-	<div id="edit-report" class="container">
+	<div id="edit-report">
 		<div class="border-box">
 			<div class="action-buttons">
 				<div id="floating-save"><%= f.submit "Save", type: :image, src: image_path('save.png'), :class => "save-img" %></div>
@@ -14,7 +14,7 @@
 				<!--<div class="simple-btn export"><%= link_to 'Email', generate_report_path(report), :class=>"remote", remote: true %></div>-->
 			</div>
 
-			<div class="thin-form">
+			<div class="thin-form" style="margin-top:40px;">
 				<div class="row form-title" style="border:0;margin-top:0;padding-top:0">
 					
 					<div class="input-append date col-md-6" data-date-format="dd-mm-yyyy">

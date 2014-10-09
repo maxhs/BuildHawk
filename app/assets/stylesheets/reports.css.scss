@@ -71,13 +71,9 @@
 
 #add-report, #edit-report {
 	position:relative;
+	margin-left:1%;
 
 	#dismiss-report {
-		position:absolute;
-		right:4px;
-		top:4px;
-		cursor:pointer;
-
 		img {
 			width:24px;
 		}
