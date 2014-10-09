@@ -14,11 +14,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
                 params[:report].delete(:report_users)
             end
 
-            if params[:report][:report_subs].present?
-                subs = params[:report][:report_subs]
-                params[:report].delete(:report_subs)
-            end
-
             if params[:report][:report_companies].present?
                 companies = params[:report][:report_companies]
                 params[:report].delete(:report_companies)
@@ -53,13 +48,6 @@ class Api::V2::ReportsController < Api::V2::ApiController
                     report.project.companies << company unless report.project.companies.flatten.include?(company)
                     report_company = report.report_companies.where(:company_id => company.id).first_or_create
                     report_company.update_attribute :count, c[:count]
-                end
-            end
-            if subs
-                subs.each do |s|
-                    sub = Sub.where(:name => s[:name], :company_id => current_user.company.id).first_or_create
-                    the_sub = report.report_subs.where(:sub_id => sub.id).first_or_create
-                    the_sub.update_attribute :count, s[:count]
                 end
             end
 

@@ -5,9 +5,9 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
 
         if user.any_admin?
-            projects = user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map(&:project)
+            projects = user.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map(&:project)
         else
-            projects = user.project_users.where("archived = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by{|p| p.name.downcase}
+            projects = user.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by{|p| p.name.downcase}
         end
 
         if projects
@@ -166,7 +166,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def archived
         user = User.find params[:user_id]    
-        projects = user.project_users.where(:archived => true).map(&:project).compact
+        projects = user.project_users.where(:hidden => true).map(&:project).compact
      
         if projects
             respond_to do |format|
@@ -186,7 +186,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
             project_user = project.project_users.where(:user_id => user).first
 
             if project_user
-                project_user.update_attribute :archived, true
+                project_user.update_attribute :hidden, true
                 render :json => {success: true}
             else
                 render :json => {success: false}
@@ -204,7 +204,7 @@ class Api::V2::ProjectsController < Api::V2::ApiController
         project_user = @project.project_users.where(:user_id => @user).first
 
         if project_user
-            project_user.update_attribute :archived, false
+            project_user.update_attribute :hidden, false
             render :json => {success: true}
         else
             render :json => {success: false}
@@ -215,9 +215,9 @@ class Api::V2::ProjectsController < Api::V2::ApiController
 
     def find_projects
         @user = User.find params[:user_id]
-        @projects = @user.project_users.where(:archived => false).map{|u| u.project if u.project.project_group_id == nil}.compact
+        @projects = @user.project_users.where(:hidden => false).map{|u| u.project if u.project.project_group_id == nil}.compact
 
-        @archived_projects = @user.project_users.where(:archived => true).map(&:project)
+        @archived_projects = @user.project_users.where(:hidden => true).map(&:project)
         new_projects = []
         Project.where(:core => true).flatten.each do |c|
             new_projects << c unless @archived_projects.include?(c)
