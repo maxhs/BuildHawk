@@ -48,11 +48,14 @@
 		$("#project-reports").addClass('reports-panel');
 		var reportOffset = document.getElementById('report-<%=report.id %>').offsetTop;
 		var focusOffset = document.getElementById('project-reports').offsetHeight;
-		var posTop = reportOffset-focusOffset-100;
+		var posTop = reportOffset-focusOffset;
 		$('.active-report').removeClass('active-report');
 		$('.report').addClass('faded');
 		$('#report-<%=report.id %>').addClass('active-report');
 		$('#report-focus').css({'margin-top':posTop,'left':'50%'});
 		$("html, body").delay(200).animate({ scrollTop: $("#report-<%=report.id %>").offset().top-200 }, 200);
+	<% else %>
+		focusOffset = document.getElementById('project-reports').offsetHeight;
+		$('#report-focus').css({'margin-top':-focusOffset,'left':'50%'});
 	<% end %>
 </script>

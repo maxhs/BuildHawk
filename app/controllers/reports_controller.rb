@@ -41,7 +41,6 @@ class ReportsController < AppController
 		@project = Project.find params[:project_id]
 		@report = @project.reports.new
 		@report.users.build
-		@report.subs.build
 		@report.report_companies.build
 		@report_title = "Add a New Report"
 		if request.xhr?
@@ -133,7 +132,10 @@ class ReportsController < AppController
 			end
 			return
 		end
-		@report = @project.reports.create params[:report]
+
+		## ensure the report type is properly included, despite the Select2 stuff happening on the front end 
+		params[:report][:report_type] = params[:report_type] if params[:report_type]
+		@report = @project.reports.create! params[:report]
 
 		@report.activities.create(
             :project_id => @report.project.id,
@@ -161,7 +163,7 @@ class ReportsController < AppController
 		@report_title = ""
 		@report = Report.find params[:id]
 		@report.users.build
-		@report.subs.build
+		@report.companies.build
 		reports = @project.ordered_reports
 		index = reports.index(@report)
 		@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at

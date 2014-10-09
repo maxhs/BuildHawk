@@ -1,7 +1,7 @@
 <div class="border-box <%if task%>tasks-panel<%end%>" id="project-tasks">
 	<div style="margin-bottom: 15px" class="header row">
 		<div class="col-xs-3">
-			<%= link_to "+ New Task", new_task_path(:project_id => project.id), :class=>"simple-btn new-task", remote: true %>
+			<%= link_to "+ Task", new_task_path(:project_id => project.id), :class=>"simple-btn new-task", remote: true %>
 		</div>
 		<div class="col-xs-9">
 			<%= form_tag search_tasklist_project_path(project), :id => "task-search", :method => :post, :class=>"input-group", :remote => true do %>

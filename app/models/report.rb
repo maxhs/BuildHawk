@@ -1,8 +1,8 @@
 class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :author_id, :project_id, :report_fields, :weather, :photos_attributes, 
-                  :users_attributes, :report_users_attributes, :users, :user_ids, :date_string, :subs, :sub_ids, :subs_attributes,
-                  :report_subs_attributes, :weather_icon, :temp, :wind, :precip, :humidity, :precip_accumulation, :mobile,
-                  :company_ids, :companies, :report_companies_attributes, :connect_user_ids
+                  :users_attributes, :report_users_attributes, :users, :user_ids, :date_string, :weather_icon, :temp, 
+                  :wind, :precip, :humidity, :precip_accumulation, :mobile, :company_ids, :companies, 
+                  :report_companies_attributes, :connect_user_ids
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
@@ -13,8 +13,6 @@ class Report < ActiveRecord::Base
     has_many :users, :through => :report_users
     has_many :connect_users, :through => :report_users
 
-    has_many :report_subs, :dependent => :destroy
-    has_many :subs, :through => :report_subs
     has_many :report_companies, :dependent => :destroy
     has_many :companies, :through => :report_companies
     has_many :photos, :dependent => :destroy
@@ -28,10 +26,8 @@ class Report < ActiveRecord::Base
     validates_presence_of :date_string
 
     accepts_nested_attributes_for :users, :allow_destroy => true
-    accepts_nested_attributes_for :subs, :allow_destroy => true
-    accepts_nested_attributes_for :report_companies, :allow_destroy => true
-    accepts_nested_attributes_for :report_subs, :allow_destroy => true
     accepts_nested_attributes_for :report_users, :allow_destroy => true
+    accepts_nested_attributes_for :report_companies, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
     #after_commit :log_activity
