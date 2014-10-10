@@ -212,6 +212,9 @@ class ChecklistItem < ActiveRecord::Base
         t.add :comments
         t.add :phase_name
         t.add :reminders
+    end
+
+    api_accessible :checklist_item, :extend => :details do |t|
         t.add :activities
     end
 

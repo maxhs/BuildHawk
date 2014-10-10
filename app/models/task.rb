@@ -181,6 +181,10 @@ class Task < ActiveRecord::Base
 
     end
 
+    api_accessible :notifications, :extend => :tasklist do |t|
+
+    end
+
     api_accessible :details, :extend => :tasklist do |t|
         t.add :activities
         t.add :comments

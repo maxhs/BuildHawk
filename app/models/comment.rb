@@ -88,6 +88,10 @@ class Comment < ActiveRecord::Base
 
     end
 
+    api_accessible :checklist_item, :extend => :projects do |t|
+
+    end
+
     api_accessible :tasklist, :extend => :projects do |t|
 
     end

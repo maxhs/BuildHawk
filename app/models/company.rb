@@ -117,6 +117,22 @@ class Company < ActiveRecord::Base
         
     end
 
+    api_accessible :tasklist, :extend => :login do |t|
+        
+    end
+
+    api_accessible :connect, :extend => :login do |t|
+        
+    end
+
+    api_accessible :checklists, :extend => :login do |t|
+        
+    end
+    
+    api_accessible :dashboard, :extend => :login do |t|
+    
+    end
+    
     api_accessible :notifications, :extend => :login do |t|
         
     end
@@ -150,20 +166,8 @@ class Company < ActiveRecord::Base
       
     end
 
-    api_accessible :tasklist, :extend => :login do |t|
-        
-    end
+    api_accessible :checklist_item, :extend => :v3_details do |t|
 
-    api_accessible :connect, :extend => :login do |t|
-        
-    end
-
-    api_accessible :checklists, :extend => :login do |t|
-        
-    end
-    
-    api_accessible :dashboard, :extend => :login do |t|
-    
     end
 
 end

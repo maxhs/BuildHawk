@@ -193,6 +193,10 @@ class Photo < ActiveRecord::Base
 
 	end
 
+	api_accessible :checklist_item, :extend => :dashboard do |t|
+
+	end
+
 	api_accessible :notifications, :extend => :dashboard do |t|
 
 	end
