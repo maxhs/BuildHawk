@@ -139,13 +139,24 @@
 			width:95%;
 		}
 	}
-	
+
+	.report-user, .report-company {
+		width: 95%;
+
+		.remove-personnel {
+			width:18px;
+			margin-top:9px;
+			cursor:pointer;
+			float:right;
+		}
+	}
+
+	.report-photos {
+		min-height:200px;
+	}
+
 	.thin-form {
 		clear:both;
-
-		div:first-child {
-			border-top:0;
-		}
 	}
 }
 

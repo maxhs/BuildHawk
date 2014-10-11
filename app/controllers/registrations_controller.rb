@@ -57,7 +57,10 @@ class RegistrationsController < Devise::RegistrationsController
         if params[:user][:company][:name]
             @company = Company.where(name: params[:user][:company][:name]).first_or_create
             params[:user][:company_id] = @company.id
-            params[:user][:company_admin] = true unless @company.has_admin?
+            unless @company.has_admin?
+                params[:user][:company_admin] = true
+                params[:user][:admin] = true
+            end 
             params[:user].delete(:company)
         end
         

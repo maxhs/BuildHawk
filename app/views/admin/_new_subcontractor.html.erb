@@ -10,6 +10,8 @@
 				<div><%= sub_fields.email_field :email, :placeholder => "Contact email address (optional)", :class=>"tt-hint form-control" %></div>
 				<div><%= sub_fields.text_field :phone, :placeholder => "Contact phone number (optional)", :class=>"tt-hint form-control" %></div>
 			<% end %>
-		<div><%= f.submit "Create", :id=>"new-sub-button", :class => "btn btn-success btn-md pull-right" %></div>
+		<div class="button-container center">
+			<%= f.submit "Create", :id=>"new-sub-button", :class => "simple-btn save" %>
+		</div>
 	</div>
 <% end %>

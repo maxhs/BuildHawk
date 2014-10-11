@@ -111,8 +111,8 @@
 				</div>
 			<% end %>
 
-			<div class="thin-form">	
-				<div class="row">
+			<div class="thin-form report-photos">	
+				<div class="row form-title">
 					<div class="col-md-12"><h5>Add a photo</h5></div>
 				</div>
 		
@@ -165,6 +165,11 @@
 		});
 	});
 
+	$('.remove-personnel').click(function(){
+		$(this).parent().parent().fadeOut(200,function(){
+			$(this).remove();
+		});
+	});
 	$('#report-save').click(function(){
 		$('.edit_report, .new_report').submit();
 	});

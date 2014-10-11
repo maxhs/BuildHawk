@@ -1,4 +1,5 @@
-<div>
+<div class="report-company">
 	<%= text_field_tag "report_companies[#{report_company.company.id if report_company.company}]", report_company.count, placeholder: "0", :class => "report-personnel-input" %>
 	<span style="padding-left:1em;"><%= report_company.company.name if report_company.company %></span>
+	<%= link_to image_tag('blackX.png', :class=>"remove-personnel remote"), remove_report_company_report_path(report_company), id:"remove-report-company-#{report_company.id}", method: :delete, remote: true, data: {confirm: "Are you sure you want to remove #{report_company.company.name} from this report?"} %>
 </div>

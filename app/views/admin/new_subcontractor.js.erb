@@ -1,7 +1,7 @@
 if ($('#add-sub-section').length){
-	$('#add-sub-section').html('<%= j render :partial => "new_subcontractor", :locals => {:subcontractor => @subcontractor } %>');
+	$('#add-sub-section').html('<%= j render :partial => "new_subcontractor", locals: {subcontractor: @subcontractor } %>');
 	$("html, body").animate({ scrollTop: 0 }, 0);
 } else {
-	$('#main').html('<div class="border-box"><h3>Add New Subcontractor</h3><%= j render :partial => "new_subcontractor", :locals => {:subcontractor => @subcontractor } %></div>');
+	$('#main').html('<%= j render :partial => "new_subcontractor", locals: {subcontractor: @subcontractor } %>');
 	$("html, body").animate({ scrollTop: 0 }, 0);
 }

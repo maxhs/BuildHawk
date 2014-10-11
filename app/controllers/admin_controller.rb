@@ -75,17 +75,17 @@ class AdminController < AppController
 		company = Company.where(:name => params[:company_sub][:subcontractor][:name]).first_or_create
 		@company_sub = current_user.company.company_subs.where(:subcontractor_id => company.id).first_or_create
 		@users = current_user.company.users
-		@subcontractors = current_user.company.subcontractors
+		@subcontractors = current_user.company.company_subs
 		if @company_sub.save & request.xhr?
 			respond_to do |format|
-				format.js
+				format.js {render template:"admin/personnel"}
 			end
 		elsif @company_sub.save
 			flash[:notice] = "Subcontractor created"
-			redirect_to users_admin_index_path
+			redirect_to personnel_admin_index_path
 		else
 			flash[:notice] = "Unable to create subcontractor. Please make sure the form is complete."
-			redirect_to users_admin_index_path
+			redirect_to personnel_admin_index_path
 		end
 	end
 

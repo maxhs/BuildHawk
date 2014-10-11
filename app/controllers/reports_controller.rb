@@ -116,6 +116,16 @@ class ReportsController < AppController
 		end
 	end
 
+	def remove_report_user
+		report_user = ReportUser.find params[:id]
+		report_user.destroy
+	end
+
+	def remove_report_company
+		report_company = ReportCompany.find params[:id]
+		report_company.destroy
+	end
+
 	def create
 		@project = Project.find params[:report][:project_id]
 		@project_users = @project.project_users

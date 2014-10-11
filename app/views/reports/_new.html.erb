@@ -78,18 +78,20 @@
 				</div>
 			<% end %>
 
-			<div class="row">
-				<div class="col-md-12"><h5>Add a photo</h5></div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<%= f.fields_for :photos, @report.photos.build do |photo| %>
-						<%= photo.file_field :image %>
-						<%= photo.hidden_field :report_id, :value => @report.id %>
-						<%= photo.hidden_field :project_id, :value => @project.id %>
-						<%= photo.hidden_field :source, :value => "Reports" %>
-					<% end %>
+			<div class="thin-form report-photos">	
+				<div class="row form-title">
+					<div class="col-md-12"><h5>Add a photo</h5></div>
+				</div>
+		
+				<div class="row">
+					<div class="col-md-12">
+						<%= f.fields_for :photos, report.photos.build do |photo| %>
+							<%= photo.file_field :image %>
+							<%= photo.hidden_field :report_id, :value => report.id %>
+							<%= photo.hidden_field :project_id, :value => project.id %>
+							<%= photo.hidden_field :source, :value => "Reports" %>
+						<% end %>
+					</div>
 				</div>
 			</div>
 			

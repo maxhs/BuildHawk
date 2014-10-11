@@ -189,6 +189,8 @@ Buildhawk::Application.routes.draw do
   resources :reports do
     member do
       get :generate
+      delete :remove_report_user
+      delete :remove_report_company
     end
     collection do
       post :search

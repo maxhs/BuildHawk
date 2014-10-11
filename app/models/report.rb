@@ -98,7 +98,7 @@ class Report < ActiveRecord::Base
     end
 
     def daily_activities
-        ## a blunt check to make sure the date string is in a proper, sortable format. Also checking to make sure we're not sending report activities, because that seems redundant...
+        ## a blunt check to make sure the date string is in a proper, sortable format.
         project.activities.map{|a| a if date_string.include?("/20") && a.created_at.to_date == Date.strptime(date_string,"%m/%d/%Y")}.compact
     end
 
