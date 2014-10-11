@@ -10,6 +10,9 @@ function taskSetup(){
 	$('#dismiss-task').click(function(){
 		dismissTask();
 	});
+	$('#task-save').click(function(){
+		$('.new_task, .edit_task').submit();
+	});
 	$('.assignee-select').select2({
 		placeholder: "Select assignees...",
 		allowClear: true

@@ -1,2 +1,5 @@
+$('#alert').text("Saved").fadeIn(200).delay(1700).fadeOut(500, function(){
+	$(this).text("");
+});
 $('#task-<%=@task.id%>').replaceWith('<%= j render partial:"projects/task_row", locals:{task: @task} %>');
 $('#task-focus').html('<%= j render partial:"tasks/edit", locals:{task: @task} %>');

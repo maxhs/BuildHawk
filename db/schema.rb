@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008221005) do
+ActiveRecord::Schema.define(version: 20141011003245) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -454,6 +454,7 @@ ActiveRecord::Schema.define(version: 20141008221005) do
     t.integer  "photos_count"
     t.integer  "comments_count"
     t.boolean  "mobile",               default: false
+    t.integer  "user_id"
   end
 
   add_index "tasks", ["assignee_id"], name: "tasks_assignee_id_idx"
