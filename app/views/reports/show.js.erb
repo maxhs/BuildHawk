@@ -14,4 +14,4 @@ $('.report').addClass('faded');
 $('#report-<%= @report.id %>').replaceWith('<%= j render partial:"reports/index_row", locals: {report: @report} %>');
 $('#report-<%= @report.id %>').addClass('active-report');
 $('#report-focus').css({'margin-top':posTop,'left':'50%'});
-$("html, body").delay(200).animate({ scrollTop: $("#report-<%=@report.id %>").offset().top-200 }, 200);
+$("html, body").delay(200).animate({ scrollTop: $("#report-<%=@report.id %>").offset().top-100 }, 200);

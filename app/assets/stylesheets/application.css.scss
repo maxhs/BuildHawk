@@ -1013,18 +1013,18 @@ a.search-button {
 	display:table;
 	max-width:50%;
 	position:absolute;
-	z-index:777;
+	z-index:5;
 	border-spacing:4px;
 	top:1px;
 	right:1px;
 
-	div {
+	.action {
 		display:table-cell;
-		width:50px;
-		height:50px;
+		width:44px;
+		height:44px;
 		vertical-align:middle;
 		border-radius:3px;
-		border:1px solid #eee;
+		border:1px solid #ddd;
 		margin: 5px 10px;
 		padding:0;
 		cursor:pointer;
