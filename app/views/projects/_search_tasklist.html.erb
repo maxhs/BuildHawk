@@ -1,8 +1,8 @@
-<div id="project-worklist">	
-		<table class="table table-bordered table-responsive" id="worklist-table">
+<div id="project-tasklist">	
+		<table class="table table-bordered table-responsive" id="tasklist-table">
 			<thead>
 				<tr>
-					<th><button class="export" id="export-worklist-items">Export</button></th>
+					<th><button class="export" id="export-tasklist-items">Export</button></th>
 					<th>Photo</th>
 					<th>Name</th>
 					<th>Assignee</th>
@@ -16,7 +16,7 @@
 					<% @items.each do |item| %>
 						<tr>
 							<td style="width:76px;">
-								<span class="worklist-item-checkbox"><%= check_box_tag :select, item.id %></span>
+								<span class="tasklist-item-checkbox"><%= check_box_tag :select, item.id %></span>
 							</td>
 							<% if item.photos && item.photos.count > 0 %>
 								<td style="width:100px;height:100px;">
@@ -52,7 +52,7 @@
 						</tr>
 					<% end %>
 				<% else %>
-					<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;font-style:italic;font-weight:100;">No Worklist Items</h4></td></tr>
+					<tr><td colspan="5" class="loading"><h4 style="text-align:center;color:#aaa;font-family:'Helvetica',sans-serif;font-style:italic;font-weight:100;">No tasklist Items</h4></td></tr>
 				<% end %>
 			</tbody>
 		</table>

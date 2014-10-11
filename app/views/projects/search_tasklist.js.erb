@@ -1,4 +1,4 @@
-$('#project-tasklist').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "search_tasklist" %>');
+$('#tasks').fadeOut(170,function(){
+	$(this).html('<%= j render partial: "projects/task_row", collection: @tasks, as: :task, cache: true %>');
 	$(this).fadeIn(170);
 });
