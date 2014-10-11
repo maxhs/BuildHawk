@@ -23,9 +23,9 @@
 				<div class="col-xs-3"><h5>Personnel</h5></div>
 				<div class="col-xs-3"><h5>Photos</h5></div>
 			</div>
-	
-			<%= render partial:"reports/index_row", collection: reports, as: :report, cache: true %>
-				
+			<div id="reports-table">
+				<%= render partial:"reports/index_row", collection: reports, as: :report, cache: true %>
+			</div>
 		<% else %>
 			<div class="no-contents-placeholder font-smoothing">No reports</div>
 		<% end %>

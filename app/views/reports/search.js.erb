@@ -1,5 +1,5 @@
 $('a').removeClass('current-page');
-$('#project-reports').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "search" %>');
+$('#reports-table').fadeOut(170,function(){
+	$(this).html('<%= j render partial:"reports/index_row", collection: @reports, as: :report, cache: true %>');
 	$(this).fadeIn(170);
 });

@@ -35,6 +35,7 @@ class Report < ActiveRecord::Base
         text    :body
         text    :weather
         text    :date_string
+        text    :report_type
         integer :project_id
         text    :users do
             users.map(&:full_name)
