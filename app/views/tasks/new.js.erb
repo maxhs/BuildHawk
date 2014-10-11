@@ -4,7 +4,7 @@ var tasksOffset = document.getElementById('project-tasks').offsetHeight;
 $('.active-task').removeClass('active-task');
 $('.faded').removeClass('faded');
 
-$('#task-focus').css({'margin-top':-tasksOffset,'left':'50%'});
+$('#task-focus').css({/*'margin-top':-tasksOffset,*/'left':'50%'});
 $("html, body").delay(200).animate({ scrollTop: 0 }, 200);
 var locations = <%= raw @locations.to_json %>; 
 $('#task_location').autocomplete({
