@@ -21,10 +21,10 @@ class Api::V3::PhotosController < Api::V3::ApiController
             end
         elsif photo.report
             respond_to do |format|
-                format.json { render_for_api :reports, json: photo.report, root: :report}
+                format.json { render_for_api :reports, json: photo, root: :photo}
             end
         else
-            render json:{photo:photo}
+            render json: {photo:photo}
         end
     end
 

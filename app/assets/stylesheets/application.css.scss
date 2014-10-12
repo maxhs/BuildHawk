@@ -380,6 +380,7 @@ body {
 		height: 100%;
 		width:100%;
 		background:#f7f7f7;
+		overflow:auto;
 		//background-image: image-url('fabric_1.png');
 		margin:0 auto -50px;
 
@@ -992,7 +993,7 @@ a.search-button {
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-family:"Myriad Pro","Myriad Web Pro","Proxima Nova","Helvetica",sans-serif;
+	font-family:"Proxima Nova","Myriad Pro","Myriad Web Pro","Helvetica",sans-serif;
 	font-size:13px;
 	line-height:14px;
 	letter-spacing:2px;
