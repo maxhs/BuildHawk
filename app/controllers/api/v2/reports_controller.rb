@@ -85,7 +85,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
         end
         
     	report = Report.find params[:id]
-        if params[:report][:report_users].present?
+        if params[:report][:report_users]
             users = params[:report][:report_users]
             user_ids = []
             users.each do |u|
@@ -113,7 +113,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             params[:report].delete(:report_users)
         end
 
-        if params[:report][:report_companies].present?
+        if params[:report][:report_companies]
             companies = params[:report][:report_companies]
             company_ids = []
             companies.each do |c|
@@ -136,7 +136,7 @@ class Api::V2::ReportsController < Api::V2::ApiController
             params[:report].delete(:report_companies)
         end
 
-        if params[:report][:safety_topics].present?
+        if params[:report][:safety_topics]
             new_topics = []
             params[:report][:safety_topics].each do |topic|
                 if topic["topic_id"]
