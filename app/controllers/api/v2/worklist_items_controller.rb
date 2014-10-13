@@ -12,21 +12,15 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         if params[:worklist_item][:user_assignee]
             user = User.where(:full_name => params[:worklist_item][:user_assignee]).first
             params[:worklist_item][:assignee_id] = user.id if user
-            params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee]
-            #sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.tasklist.project.company.id).first_or_create
-            #params[:worklist_item][:assignee_id] = nil
-            #params[:worklist_item][:sub_assignee_id] = sub.id if sub
             params[:worklist_item].delete(:sub_assignee)
         ###
         elsif params[:worklist_item][:assignee_id]
             assignee = User.where(:id => params[:worklist_item][:assignee_id]).first
             notify = true if assignee && task.assignee_id != assignee.id
-            params[:worklist_item][:sub_assignee_id] = nil
         else
             params[:worklist_item][:assignee_id] = nil
-            params[:worklist_item][:sub_assignee_id] = nil
         end
         
         if params[:worklist_item][:completed] == "1"
@@ -70,8 +64,6 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:assignee_id] = assignee.id
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee].present?
-            #sub = Sub.where(:name => params[:worklist_item][:sub_assignee]).first_or_create
-            #params[:worklist_item][:sub_assignee_id] = sub.id
             params[:worklist_item].delete(:sub_assignee)
         end
         ###
@@ -90,8 +82,6 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         ### remove in 1.05
         if assignee
             task.update_attribute :assignee_id, assignee.id
-        elsif sub
-            task.update_attribute :sub_assignee_id, sub.id
         end
         ###
 

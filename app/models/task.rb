@@ -2,7 +2,7 @@ class Task < ActiveRecord::Base
 
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, :photos_attributes, 
                     :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, 
-                    :user_id, :user, :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :user_ids
+                    :user_id, :user, :assigned_name, :assigned_phone, :assigned_email, :user_ids
 
     belongs_to :tasklist
     belongs_to :user

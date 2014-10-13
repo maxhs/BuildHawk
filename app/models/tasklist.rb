@@ -5,12 +5,13 @@ class Tasklist < ActiveRecord::Base
   	belongs_to :project
 
     def personnel
-        (tasks.map(&:sub_assignee).flatten + tasks.map(&:assignee).flatten).uniq.compact
+        tasks.map(&:assignee).flatten.uniq.compact
     end
 
     def worklist_items
         tasks
     end
+    
 	acts_as_api
 
     api_accessible :tasklist do |t|
