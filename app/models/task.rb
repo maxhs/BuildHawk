@@ -2,15 +2,12 @@ class Task < ActiveRecord::Base
 
 	attr_accessible :body, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, :photos_attributes, 
                     :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, 
-                    :user_id, :user, :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :user_ids,
-                    :connect_assignee_id, :connect_assignee
+                    :user_id, :user, :sub_assignee_id, :assigned_name, :assigned_phone, :assigned_email, :user_ids
 
     belongs_to :tasklist
     belongs_to :user
     belongs_to :completed_by_user, :class_name => "User"
 	belongs_to :assignee, :class_name => "User"
-    belongs_to :sub_assignee, :class_name => "Sub"
-    belongs_to :connect_assignee, :class_name => "ConnectUser"
     has_many :comments, :dependent => :destroy
     has_many :photos, :dependent => :destroy
     has_many :notifications, :dependent => :destroy
@@ -46,16 +43,7 @@ class Task < ActiveRecord::Base
             elsif assignee.text_permissions && assignee.phone && assignee.phone.length > 0
                 assignee.text_task(self)
             end
-        
-        ## deprecated as soon as we remove the connect user model
-        elsif connect_assignee
-            if connect_assignee.email && connect_assignee.email.length > 0
-                connect_assignee.email_task(self)
-            elsif connect_assignee.phone && connect_assignee.phone.length > 0
-                connect_assignee.text_task(self)
-            end
         end
-        ##
     end
 
     def log_activity(current_user)
@@ -197,7 +185,6 @@ class Task < ActiveRecord::Base
         t.add :user
         t.add :body
         t.add :assignee
-        t.add :connect_assignee
         t.add :location
         t.add :completed_at
         t.add :created_at

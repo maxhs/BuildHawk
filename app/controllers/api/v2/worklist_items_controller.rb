@@ -4,6 +4,9 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     def update
     	task = Task.find params[:id]
         
+        
+        params[:worklist_item].delete(:connect_assignee_id) if params[:worklist_item][:connect_assignee_id]
+        
         notify = false
         ## to remove in 1.05
         if params[:worklist_item][:user_assignee]
@@ -12,9 +15,9 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:sub_assignee_id] = nil
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee]
-            sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.tasklist.project.company.id).first_or_create
-            params[:worklist_item][:assignee_id] = nil
-            params[:worklist_item][:sub_assignee_id] = sub.id if sub
+            #sub = Sub.where(:name => params[:worklist_item][:sub_assignee], :company_id => task.tasklist.project.company.id).first_or_create
+            #params[:worklist_item][:assignee_id] = nil
+            #params[:worklist_item][:sub_assignee_id] = sub.id if sub
             params[:worklist_item].delete(:sub_assignee)
         ###
         elsif params[:worklist_item][:assignee_id]
@@ -67,8 +70,8 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             params[:worklist_item][:assignee_id] = assignee.id
             params[:worklist_item].delete(:user_assignee)
         elsif params[:worklist_item][:sub_assignee].present?
-            sub = Sub.where(:name => params[:worklist_item][:sub_assignee]).first_or_create
-            params[:worklist_item][:sub_assignee_id] = sub.id
+            #sub = Sub.where(:name => params[:worklist_item][:sub_assignee]).first_or_create
+            #params[:worklist_item][:sub_assignee_id] = sub.id
             params[:worklist_item].delete(:sub_assignee)
         end
         ###
