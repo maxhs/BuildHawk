@@ -12,6 +12,7 @@
 			<th><h4>Name</h4></th>
 			<th><h4>Company</h4></th>
 			<th><h4>Email</h4></th>
+			<th><h4>Phone</h4></th>
 			<th><h4>Created On</h4></th>
 		</thead>
 
@@ -22,6 +23,7 @@
 					<td class="user-name"><%= link_to user.full_name, edit_user_uber_admin_index_path(:user_id => user.id), :remote => true %></td>
 					<td><%= user.company.name if user && user.company %></td>
 					<td><%= user.email %></td>
+					<td><%= user.formatted_phone %></td>
 					<td><%= parse_time user.created_at %></td>
 				</tr>
 			<% end %>
