@@ -4,7 +4,6 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     def update
     	task = Task.find params[:id]
         
-        
         params[:worklist_item].delete(:connect_assignee_id) if params[:worklist_item][:connect_assignee_id]
         
         notify = false
@@ -58,6 +57,8 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
     def create
         project = Project.find params[:project_id]
 
+        params[:worklist_item].delete(:connect_assignee_id) if params[:worklist_item][:connect_assignee_id]
+
         ## remove in 1.05
         if params[:worklist_item][:user_assignee].present? 
             assignee = User.where(:full_name => params[:worklist_item][:user_assignee]).first
@@ -78,13 +79,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             :body => "#{task.user.full_name} created this item.",
             :activity_type => task.class.name
         )
-        
-        ### remove in 1.05
-        if assignee
-            task.update_attribute :assignee_id, assignee.id
-        end
-        ###
-
+    
         if task.save
             respond_to do |format|
                 format.json { render_for_api :tasklist, :json => task, :root => @root}
