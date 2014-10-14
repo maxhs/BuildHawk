@@ -111,14 +111,17 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
             end
             params[:photo][:mobile] = true
             photo.update_attributes params[:photo]
+            respond_to do |format|
+                format.json { render_for_api :tasklist, :json => photo.task, :root => @root}
+            end
         else
         ## ios ##
             photo = Photo.create params[:photo]
+            respond_to do |format|
+                format.json { render_for_api :tasklist, :json => photo.task, :root => @root}
+            end
         end
 
-        respond_to do |format|
-            format.json { render_for_api :tasklist, :json => photo.task, :root => @root}
-        end
     end
 
     def destroy
