@@ -1,7 +1,7 @@
 <%= nested_form_for @phase, :remote => true, :method => :post do |f| %>
 	<%= f.hidden_field :checklist_id, :value => @checklist.id %>
 	<div class="row">
-		<div class="col-xs-10" style="padding-left:0;padding-right:0;"><%= f.text_field :name, :placeholder => "Name the new phase...", :style=>"width:99%;" %></div>
-		<%= f.submit "Add", :class => "btn btn-success btn-md pull-right col-xs-2", :style=>"margin:0 auto;padding-top: 0;line-height: 36px;height: 36px;margin: 0 auto;" %>
+		<div class="col-xs-10" style="padding-left:0;padding-right:0;"><%= f.text_field :name, :placeholder => "Name the new phase..." %></div>
+		<%= f.submit "Add", :class => "simple-btn col-xs-2" %>
 	</div>
 <% end %>

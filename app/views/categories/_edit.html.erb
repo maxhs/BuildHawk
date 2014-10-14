@@ -33,7 +33,7 @@
 			<% end %>
 
 			<div class="button-container">
-				<%= f.submit "Update", :class => "no-link btn btn-success btn-md save" %>
+				<%= f.submit "Update", :class => "simple-btn remote save" %>
 		<% end %>
 				<div style="">
 					<%= link_to "Delete", destroy_category_checklist_path(@category.phase.checklist, :category_id => @category), :method => :delete, :data => {:confirm => "Are you sure you want to delete this category?"}, :class=>"btn btn-danger btn-md remote", :remote => true %>

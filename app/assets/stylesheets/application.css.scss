@@ -355,6 +355,10 @@ body {
 				color:#fff !important;
 			}
 
+			a.current-page {
+				text-decoration:underline;
+			}
+
 			div:first-child {
 				border-right:1px solid #555;
 			}

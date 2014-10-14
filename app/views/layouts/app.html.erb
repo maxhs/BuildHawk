@@ -32,7 +32,7 @@
 	    })
 		window.Dropzone;
 	</script>
-	
+
 	<script type="text/javascript">
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-43601553-1']);
@@ -81,10 +81,10 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				</div>
 				<div>
 					<% if current_user.any_admin? %>
-						<h6><%= link_to "Admin", admin_index_path, id:"admin-link", remote: true %></h6>
+						<h5><%= link_to "Admin", admin_index_path, id:"admin-link", remote: true %></h5>
 					<% end %>
 					<% if current_user.uber_admin? %>
-						<h6><%= link_to "Uber Admin", uber_admin_index_path, id:"uber-admin-link", remote: true %></h6>
+						<h5><%= link_to "Uber Admin", uber_admin_index_path, id:"uber-admin-link", remote: true %></h5>
 					<% end %>
 				</div>
 			</div>
@@ -153,6 +153,13 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		$.ajaxSetup({ cache: false });
 		datetimepickers();
 	});
+	<% if params[:controller] == "admin" %>
+		$('#bottom-menu .current-page').removeClass('current-page');
+		$('#admin-link').addClass('current-page');
+	<% elsif params[:controller] == "uber_admin" %>
+		$('#bottom-menu .current-page').removeClass('current-page');
+		$('#uber-admin-link').addClass('current-page');
+	<% end %>
 </script>
 <!-- begin olark code -->
 <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){

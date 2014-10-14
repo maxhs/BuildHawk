@@ -38,7 +38,6 @@
 	    <div class="row personnel">
 	    	<div class="col-xs-3"><h4>Personnel Assigned</h4></div>
 	    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-	    		
 	    		<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @project.user_ids}, {multiple: true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>
 	    </div>
@@ -48,7 +47,6 @@
 	    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
 	    		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple:true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>
-	    	
 	    </div>
 
 	    <% if current_user.uber_admin %>
@@ -58,15 +56,19 @@
 		    </div>
 		<% end %>
 		
-		<div class="button-container">
-			<%= f.submit "Save", :class => "simple-btn save", style:"display:block;" %>
-<% end %>
-			<% if current_user.project_users.where(:project_id => @project.id, :hidden => true).first %>
-				<%= link_to "Activate", activate_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to activate this project?"}, remote: true %>
-			<% else %>
-				<%= link_to "Hide", hide_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to hide this project?"}, remote: true %>
-			<% end %>
-			<%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, :class=>"btn btn-danger btn-md", remote: true %>
+		<div class="button-section">
+			<div class="button-container">
+				<%= f.submit "Save", :class => "simple-btn save", style:"display:block;" %>
+	<% end %>
+			</div>
+			<div class="button-container">
+				<% if current_user.project_users.where(:project_id => @project.id, :hidden => true).first %>
+					<%= link_to "Activate", activate_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to activate this project?"}, remote: true %>
+				<% else %>
+					<%= link_to "Hide", hide_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to hide this project?"}, remote: true %>
+				<% end %>
+				<%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, id:"remove-project-button", :class=>"btn btn-danger btn-md", remote: true %>
+			</div>
 		</div>
 </div>
 

@@ -1,7 +1,7 @@
 <%= nested_form_for @category, :remote => true, :method => :post do |f| %>
 	<%= f.hidden_field :phase_id, :value => @phase.id %>
 	<div class="row">
-		<div class="col-xs-10"><%= f.text_field :name, :placeholder => "Name the new category...", :style=>"width:98%;margin-left:1%;margin-right:-1%;" %></div>
-		<%= f.submit "Add", :class => "btn btn-success btn-md pull-right col-xs-2", :style=>"margin:0 auto;padding-top: 0;line-height: 36px;height: 36px;margin: 0 auto;" %>
+		<div class="col-xs-10"><%= f.text_field :name, :placeholder => "Name the new category..." %></div>
+		<%= f.submit "Add", :class => "simple-btn col-xs-2" %>
 	</div>
 <% end %>

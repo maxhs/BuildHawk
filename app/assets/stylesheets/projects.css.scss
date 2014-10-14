@@ -47,32 +47,45 @@
 	margin:1% auto 0;
 	width:100%;
 	max-width:160px;
-	display: block;
+	display: inline-block;
 	border-color:transparent;
-	/*border-radius: 3px;
+	border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border: 1px solid rgba(0,0,0,0);
-	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.5);*/
 }
 
 #hide-button:hover {
 	border: 1px solid #ccc;
 }
-.edit_project {
 
-	form, input[type="text"] {
-		width:100%;
-	}
-	input[type="checkbox"] {
-		width:auto;
-		margin-left:0;
-	}
+#remove-project-button {
+	margin:0;
+	display:inline-block;
+}
 
-	.row.personnel {
-		padding-top:10px;
-		padding-bottom:10px;
-		border-top:1px solid #eee;
+#edit-project {
+
+	.button-section {
+		margin:2.5% auto;
+
+		form, input[type="text"] {
+			width:100%;
+		}
+		input[type="checkbox"] {
+			width:auto;
+			margin-left:0;
+		}
+
+		.button-container {
+			margin: 0 auto;
+		}
+
+		.row.personnel {
+			padding-top:10px;
+			padding-bottom:10px;
+			border-top:1px solid #eee;
+		}
 	}
 }
 

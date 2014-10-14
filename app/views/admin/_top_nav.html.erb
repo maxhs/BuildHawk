@@ -19,6 +19,9 @@
 <!--<li><%= link_to "Reports", reports_admin_index_path, :id => "admin-reports-link", :remote => true %></li>-->
 <% if current_user.uber_admin %>
 	<li>
-		<%= link_to "Billing", billing_index_path, :id => "billing-link", :remote => true %>
+		<%= link_to billing_index_path, :id => "billing-link", :remote => true do %>
+			<%= image_tag "billing.png", :class=>"nav-icon" %> 
+			<div>Billing</div>
+		<% end %>
 	</li>
 <% end %>
