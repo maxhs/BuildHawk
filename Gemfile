@@ -50,4 +50,3 @@ gem "remotipart"
 #gem 'resque-pool'
 #gem 'capybara'
 #gem 'non-stupid-digest-assets'
-
