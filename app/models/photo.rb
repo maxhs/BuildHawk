@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 	attr_accessible :image, :user_id, :project_id, :company_id, :image_file_name, :source, :report_id, :checklist_item_id,
-					:task_id, :phase, :name, :folder_id, :description, :mobile, :comment_id
+					:task_id, :phase, :name, :folder_id, :description, :mobile, :comment_id, :taken_at
 
 	belongs_to :user
 	belongs_to :project
@@ -145,20 +145,20 @@ class Photo < ActiveRecord::Base
 		t.add :epoch_time	
 		t.add :original
 		t.add :url_large
-		#t.add :url_medium
 		t.add :url_small
 		t.add :url_thumb
 		t.add :image_file_size
 		t.add :image_content_type
 		t.add :source
 		t.add :phase
-		t.add :created_at
 		t.add :user_name
 		t.add :name
-		t.add :created_date
-		t.add :date_string
 		t.add :description
 		t.add :folder, :if => :has_folder?
+		t.add :created_date
+		t.add :date_string
+		#t.add :url_medium
+		#t.add :created_at
 		## deprecated
 		t.add :folder_name, :if => :has_folder?
 		t.add :folder_id, :if => :has_folder?

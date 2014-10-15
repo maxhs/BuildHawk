@@ -1,6 +1,9 @@
 class Api::V3::PhotosController < Api::V3::ApiController
 
     def create
+
+        params[:photo][:taken_at] = Time.at(params[:photo][:taken_at]).to_datetime if params[:photo][:taken_at]
+        
         ## android ##
         if params[:file]
             photo = Photo.new(image: params[:file])
