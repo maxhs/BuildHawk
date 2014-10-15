@@ -136,10 +136,14 @@ class Photo < ActiveRecord::Base
 		taken_at.to_i
 	end
 
+	def has_taken_date?
+		taken_at.nil?
+	end
+
 	api_accessible :dashboard do |t|
 		t.add :id
 		t.add :epoch_time
-		t.add :epoch_taken	
+		t.add :epoch_taken, :if => :has_taken_date?
 		t.add :original
 		t.add :url_large
 		t.add :url_small
