@@ -41,6 +41,7 @@ gem "select2-rails"
 gem 'houston'
 gem 'gcm'
 gem "recaptcha", :require => "recaptcha/rails"
+gem 'truncate_html'
 
 gem 'oink'
 gem 'raygun4ruby'
