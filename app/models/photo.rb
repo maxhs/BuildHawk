@@ -137,7 +137,7 @@ class Photo < ActiveRecord::Base
 	end
 
 	def has_taken_date?
-		taken_at.nil?
+		!taken_at.nil?
 	end
 
 	api_accessible :dashboard do |t|
