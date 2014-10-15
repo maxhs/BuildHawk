@@ -5,7 +5,11 @@
 			<div class="col-xs-3"><h5>Topic</h5></div>
 			<div class="col-xs-9"><h5>Description</h5></div>
 		</div>
-		<%= render partial:"admin/topic", collection: @uber_topics, as: :topic, cache: true %>
+		<% if @uber_topics && @uber_topics.count > 0 %>
+			<%= render partial:"admin/topic", collection: @uber_topics, as: :topic, cache: true %>
+		<% else %>
+			<div class="no-contents-placeholder font-smoothing">No standard safety topics</div>
+		<% end %>
 	</div>
 	
 	<div id="admin-safety-topics" style="padding-top:30px;">

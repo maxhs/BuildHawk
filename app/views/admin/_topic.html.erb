@@ -3,10 +3,11 @@
 	<div class="col-xs-3"><h5><%= topic.title %></h5></div>
 	<% if topic.info %>
 		<% if topic.info.length > 150 %>
-			<div class="col-xs-9 topic-description"><%= truncate_html(topic.info, length:150) %>
-				<span class="ellipsis">...</span>
+			<div class="col-xs-9 topic-description">
+				<div class="info truncated"><%= truncate_html(topic.info, length:150) %></div>
+				<div class="ifno full"><%= topic.info.html_safe %></div>
 				<div class="read-more simple-btn">Read more</div>
-				<span class="hiddenText"><%= topic.info[151..topic.info.length] %>
+				
 			</div>
 		<% else %>
 			<div class="col-xs-9 topic-description"><%= topic.info.html_safe %></div>
