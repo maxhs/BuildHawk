@@ -120,14 +120,6 @@ class Photo < ActiveRecord::Base
 		date_string
 	end
 
-	def assignee
-		task.assignee.full_name if task && task.assignee
-	end
-
-	def has_assignee?
-		!task_id.nil?
-	end
-
 	def has_folder?
 		folder.present?
 	end
@@ -140,9 +132,14 @@ class Photo < ActiveRecord::Base
       	created_at.to_i
 	end
 
+	def epoch_taken
+		taken_at.to_i
+	end
+
 	api_accessible :dashboard do |t|
 		t.add :id
-		t.add :epoch_time	
+		t.add :epoch_time
+		t.add :epoch_taken	
 		t.add :original
 		t.add :url_large
 		t.add :url_small
