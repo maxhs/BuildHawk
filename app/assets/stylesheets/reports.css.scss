@@ -151,6 +151,24 @@
 		}
 	}
 
+	.report-topic {
+		padding-left:2%;
+
+		.title {
+			font-size:1.25em;
+		}
+
+		.info {
+			display:none;
+			padding-left:2%;
+		}
+	}
+
+	.report-topic .title:hover {
+		cursor:pointer;
+		color:#cc0000;
+	}
+
 	.report-photos {
 		min-height:200px;
 	}

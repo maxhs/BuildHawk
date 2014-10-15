@@ -46,15 +46,22 @@
 					<% if report.report_topics.count > 0 %>
 						<% report.report_topics.each do |rt| %>
 							<div class="row">
-								<div class="col-md-12"><h5>&bull;&nbsp;<%= rt.safety_topic.title %></h5></div>
+								<div class="col-md-12">
+									<div id="report-topic-<%= rt.id %>" class="report-topic">
+										<div class='title'><%= rt.safety_topic.title %></div>
+										<div class='info'><%= rt.safety_topic.info.html_safe %></div>
+									</div>
+								</div>
 							</div>
 						<% end %>
 					<% else %>
-							<div class="row">
-								<div class="col-md-12"><div class="font-smoothing" style="color:#aaa;font-style:italic;font-weight:200">N/A</div></div>
-							</div>
+						<div class="row">
+							<div class="col-md-12"><div class="font-smoothing" style="color:#aaa;font-style:italic;font-weight:200">N/A</div></div>
+						</div>
 					<% end %>
-					
+					<div class="row">
+						<%= f.collection_select :safety_topics, report.project.company.safety_topics, :id, :title, {selected: report.safety_topics.map(&:id)}, {multiple:true, :class => "for-select-2", id:"topic-select", include_blank: false, include_empty: false} %>
+					</div>
 				<% else %>
 					<div class="row form-title">
 						<div class="col-md-12"><h5>Weather</h5></div>
@@ -164,6 +171,15 @@
 		    $('#dp').datepicker('hide');
 		});
 	});
+	$('.report-topic .title').click(function(){
+		var parent = $(this).parent();
+		var info = parent.find('.info');
+		if (info.css('display') == "none"){
+			info.show();
+		} else {
+			info.hide();
+		}
+	})
 
 	$('.remove-personnel').click(function(){
 		$(this).parent().parent().fadeOut(200,function(){
@@ -177,6 +193,9 @@
 		dismissReport();
 	});
 	$('#type-select').select2();
+	$('#topic-select').select2({
+		placeholder: "Select the safety topics covered"
+	});
 	$('#subs-select').select2({
 		placeholder: "Add the companies/subcontractors present"
 	});

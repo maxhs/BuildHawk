@@ -7,7 +7,7 @@
 				<span class="hiddenText"><%= topic.info[131..topic.info.length] %>
 			</div>
 		<% else %>
-			<div class="col-xs-6 topic-description"><%= topic.info %></div>
+			<div class="col-xs-6 topic-description"><%= topic.info.html_safe %></div>
 		<% end %>
 	<% end %>
 	<div class="col-xs-3" style="text-align:center;">

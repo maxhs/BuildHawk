@@ -55,6 +55,20 @@ class ReportsController < AppController
 
 	def update
 
+		unless params[:report][:date_string] == @report.date_string && params[:report][:report_type] == @report.report_type
+			if @project.reports.where(:date_string => params[:report][:date_string], :report_type => params[:report][:report_type]).first
+				if request.xhr?
+					respond_to do |format|
+						format.js { render :template => "reports/existing"}
+					end
+				else 
+					flash[:notice] = "A report for that date already exists"
+					redirect_to reports_project_path(@project)
+				end
+				return
+			end
+		end
+
 		if params[:report_companies].present?
 			params[:report_companies].each do |rc|
 				report_company = @report.report_companies.where(:company_id => rc.first).first
@@ -69,7 +83,7 @@ class ReportsController < AppController
 			end
 		end
 
-		if params[:report_users].present?
+		if params[:report_users]
 			params[:report_users].each do |ru|
 				report_user = @report.report_users.where(:user_id => ru.first).first_or_create
 				if ru[1].to_i > 0
@@ -80,21 +94,13 @@ class ReportsController < AppController
 			end
 		end
 
-		#unless params[:report][:sub_ids].present?
-		#	params[:report][:sub_ids] = nil
-		#end
-		unless params[:report][:date_string] == @report.date_string && params[:report][:report_type] == @report.report_type
-			if @project.reports.where(:date_string => params[:report][:date_string], :report_type => params[:report][:report_type]).first
-				if request.xhr?
-					respond_to do |format|
-						format.js { render :template => "reports/existing"}
-					end
-				else 
-					flash[:notice] = "A report for that date already exists"
-					redirect_to reports_project_path(@project)
+		if params[:report][:safety_topics]
+			params[:report][:safety_topics].each do |safety_topic_id|
+				unless safety_topic_id.nil? || safety_topic_id.length == 0
+					@report.report_topics.where(safety_topic_id: safety_topic_id).first_or_create
 				end
-				return
 			end
+			params[:report].delete(:safety_topics)
 		end
 		
 		@report.update_attributes params[:report]

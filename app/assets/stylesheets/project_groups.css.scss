@@ -50,6 +50,14 @@
 	}
 }
 
+.project.group.new {
+	min-height:82px;
+	.simple-btn {
+		background:transparent;
+		color:#fff;
+	}
+}
+
 .new_project_group {
 	input[type="text"] {
 		width:90%;
@@ -69,6 +77,8 @@
 		font-size:14px;
 		position:relative;
 		top:5px;
+		letter-spacing:1px;
+		font-family:"Proxima Nova","Myriad Pro","Source Sans Pro", "Helvetica", sans-serif;
 	}
 }
 
