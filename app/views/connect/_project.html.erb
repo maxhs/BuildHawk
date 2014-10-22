@@ -1,6 +1,6 @@
 <div class="connect-project" id="connect-project-<%=project.id%>">
 	<h4><%= link_to project.name, project_path(project), remote:true %></h4>
-	<% tasks = @items.map{|t| t if t.worklist.project && t.worklist.project.id == project.id}.compact %>
+	<% tasks = @tasks.map{|t| t if t.tasklist.project && t.tasklist.project.id == project.id}.compact %>
 	<% completed = tasks.map{|t| t if t.completed} %>
 	<div class="task-list">
 		<div class="row address">

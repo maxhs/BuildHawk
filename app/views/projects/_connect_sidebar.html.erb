@@ -1,10 +1,8 @@
 <div id="connect-container">
-	<% if @companies && @companies.count > 0 %>
+	<% if companies && companies.count > 0 %>
 		<h4>CONNECT</h4>
 		<ul id="connect-sidebar" role="navigation">
-		
-			<%= render partial:"connect/company_li", collection: @companies, as: :company, cache:true %>	
-		
+			<%= render partial:"connect/company_li", collection: companies, as: :company, cache:true %>	
 		</ul>
 	<% end %>
 </div>

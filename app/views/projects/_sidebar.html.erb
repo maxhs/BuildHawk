@@ -61,7 +61,7 @@
 		<% end %>
 	</ul>
 
-	<%= render partial: "projects/connect_sidebar" %>
+	<%= render partial: "projects/connect_sidebar", locals: {companies: @companies} if @companies %>
 	
 	<ul id="hidden-projects">
 		<% if @hidden_projects && @hidden_projects.count > 0 %>

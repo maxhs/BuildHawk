@@ -15,8 +15,8 @@ class AppController < ApplicationController
             @hidden_projects = current_user.project_users.where(hidden: true).map(&:project).compact.uniq     
             @demo_projects = Project.where(core: true)
             @project_groups = current_user.company.project_groups if current_user.company
-            @tasks = current_user.connect_tasks(nil)
-            @companies = @tasks.map{|t| t.tasklist.project.company}.compact.uniq if @items
+            tasks = current_user.connect_tasks(nil)
+            @companies = tasks.map{|t| t.tasklist.project.company}.compact.uniq if tasks && tasks.count > 0
         end
     end
 

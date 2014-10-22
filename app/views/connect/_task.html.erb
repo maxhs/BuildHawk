@@ -1,5 +1,5 @@
 
-	<div id="worklist-item-container" class="border-box container">
+	<div id="tasklist-item-container" class="border-box container">
 		<div class="row">
 			<div class="col-xs-3"><h4>Item</h4></div><div class="col-xs-9"><%= task.body %></div>
 		</div>
@@ -29,10 +29,10 @@
 	<h4>Add a photo</h4>
 	<%= form_for task.photos.build do |photo| %>
 		<%= photo.file_field :image %>
-		<%= photo.hidden_field :project_id, :value => task.worklist.project.id %>
+		<%= photo.hidden_field :project_id, :value => task.tasklist.project.id %>
 		<%= photo.hidden_field :user_id, :value => current_user.id %>
-		<% if task.id %><%= photo.hidden_field :worklist_item_id, :value => task.id %><% end %>
-		<%= photo.hidden_field :source, :value => "Worklist" %>
+		<% if task.id %><%= photo.hidden_field :tasklist_item_id, :value => task.id %><% end %>
+		<%= photo.hidden_field :source, :value => "Tasklist" %>
 	<% end %>
 
 <div class="comment-container" style="clear:both">
@@ -41,7 +41,7 @@
 		<%= form_for task.comments.new, :method => :post, :remote => true do |f| %>
 			<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
 			<%= f.hidden_field :user_id, :value => current_user.id %>
-			<%= f.hidden_field :worklist_item_id, :value => task.id %>
+			<%= f.hidden_field :tasklist_item_id, :value => task.id %>
 			<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
 		<% end %>
 	</div>

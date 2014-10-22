@@ -1071,6 +1071,10 @@ a.search-button {
 	.save-img {
 		width:28px;
 		margin: 0 auto;
+		box-shadow: 0 0 0 0 !important;
+		-moz-box-shadow: 0 0 0 0 !important;
+		-webkit-box-shadow: 0 0 0 0 !important;
+		outline: 0 !important;
 	}
 
 	.dismiss {
