@@ -49,7 +49,7 @@
 								<div class="col-md-12">
 									<div id="report-topic-<%= rt.id %>" class="report-topic">
 										<div class='title'><%= rt.safety_topic.title %></div>
-										<div class='info'><%= rt.safety_topic.info.html_safe %></div>
+										<div class='info'><%= rt.safety_topic.info.html_safe if rt.safety_topic.info && rt.safety_topic.info.length > 0 %></div>
 									</div>
 								</div>
 							</div>
