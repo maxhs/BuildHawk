@@ -5,7 +5,7 @@ class Api::V3::ApiController < ApplicationController
   	private
   	
   	def verify_mobile_token
-  		@user = User.where(mobile_token: params[:mobile_token], device_type: params[:device_type]).first
+  		@user = User.where(mobile_token: params[:mobile_token]).first
   		unless params[:device_type].present? && params[:mobile_token].present? && @user 
   			puts "Couldn't verify mobile token"
   			return false
