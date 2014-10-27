@@ -945,9 +945,9 @@ input[type="email"], input[type="password"], input[type="text"], textarea {
 	border-radius:2px;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
-	box-shadow:0 0 2px 0 rgba(0,0,0,.2);
-	-moz-box-shadow:0 0 2px 0 rgba(0,0,0,.2);
-	-webkit-box-shadow:0 0 2px 0 rgba(0,0,0,.2);
+	box-shadow:0 0 2px 0 rgba(0,0,0,.3);
+	-moz-box-shadow:0 0 2px 0 rgba(0,0,0,.3);
+	-webkit-box-shadow:0 0 2px 0 rgba(0,0,0,.3);
 	border-color:transparent;
 	padding:7px;
 }
@@ -983,10 +983,10 @@ a.search-button {
 .simple-btn {
 	cursor:pointer;
 	background:#fefefe;
-	border: 1px solid rgba(0,0,0,.1);
-	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
-	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
-	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
+	border: 1px solid rgba(0,0,0,.14);
+	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.33);
+	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.33);
+	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.33);
 	border-radius:9px;
 	-moz-border-radius:9px;
 	-webkit-border-radius:9px;
@@ -1010,7 +1010,7 @@ a.search-button {
 }
 
 .simple-btn:hover {
-	border-color:#ccc;
+	border-color: rgba(0,0,0,.23);
 	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
 	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
 	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
