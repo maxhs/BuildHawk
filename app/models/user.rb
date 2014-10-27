@@ -191,7 +191,6 @@ class User < ActiveRecord::Base
         notification.alert = options[:alert]
         notification.badge = options[:badge]
         notification.custom_data = options
-        puts "notification? #{notification}"
         apn.push(notification)
     end
 
@@ -200,7 +199,6 @@ class User < ActiveRecord::Base
         if token && token.length > 0
             ## project name: buildhawk-1
             ## project ID: 149110570482
-        
             data = {
                 message: options[:alert],
                 task_id: options[:task_id],
@@ -212,7 +210,7 @@ class User < ActiveRecord::Base
             gcm = GCM.new("AIzaSyDbRNKm1bztoL_w3SNBZ8JCJh-LC_UQsVc")
             options = {data: data}
             response = gcm.send([token], options)
-            puts "GCM response: #{response}"
+            #puts "GCM response: #{response}"
         end
     end
 

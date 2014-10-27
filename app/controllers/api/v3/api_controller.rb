@@ -1,6 +1,6 @@
 class Api::V3::ApiController < ApplicationController
   	skip_before_filter :verify_authenticity_token
-  	before_filter :verify_mobile_token
+  	#before_filter :verify_mobile_token
 
   	private
   	
