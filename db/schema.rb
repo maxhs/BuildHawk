@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015224101) do
+ActiveRecord::Schema.define(version: 20141027193046) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -186,6 +186,20 @@ ActiveRecord::Schema.define(version: 20141015224101) do
   create_table "company_subs", force: true do |t|
     t.integer  "company_id"
     t.integer  "subcontractor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "errors", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "report_id"
+    t.integer  "task_id"
+    t.integer  "checklist_item_id"
+    t.integer  "photo_id"
+    t.integer  "message_id"
+    t.text     "body"
+    t.boolean  "fixed",             default: false
+    t.string   "status_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

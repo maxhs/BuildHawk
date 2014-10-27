@@ -8,6 +8,7 @@ class CreateErrors < ActiveRecord::Migration
     	t.references :photo
     	t.references :message
     	t.text :body
+    	t.boolean :fixed, default: false
     	t.string :status_code
       	t.timestamps
     end
