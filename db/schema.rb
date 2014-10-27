@@ -491,6 +491,7 @@ ActiveRecord::Schema.define(version: 20141015224101) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "text_permissions",       default: true
+    t.string   "mobile_token"
   end
 
   add_index "users", ["company_id"], name: "users_company_id_idx"

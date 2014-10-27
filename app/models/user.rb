@@ -262,6 +262,8 @@ class User < ActiveRecord::Base
         t.add :authentication_token
         t.add :url_medium
         t.add :alternates
+        t.add :authentication_token
+        t.add :mobile_token
     end
 
     api_accessible :projects, :extend => :user do |t|
@@ -314,5 +316,20 @@ class User < ActiveRecord::Base
 
     api_accessible :reminders, :extend => :tasklist do |t|
 
+    end
+
+    #private
+
+    def reset_authentication_token
+        begin
+            self.authentication_token = SecureRandom.hex
+        end while self.class.exists?(authentication_token: self.authentication_token)
+    end
+
+    def reset_mobile_token
+        begin
+            self.mobile_token = SecureRandom.hex
+        end while self.class.exists?(mobile_token: self.mobile_token)
+        self.save
     end
 end
