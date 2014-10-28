@@ -6,7 +6,6 @@ gem 'passenger'
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
-#gem 'turbolinks'
 gem "paperclip"
 gem 'aws-sdk'
 gem 'acts_as_api'
@@ -43,6 +42,9 @@ gem 'gcm'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'truncate_html'
 gem "remotipart"
+gem 'font-awesome-rails'
+gem 'sweet-alert'
+gem 'sweet-alert-confirm'
 
 #gem 'resque-pool'
 #gem 'capybara'

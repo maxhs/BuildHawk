@@ -25,6 +25,7 @@
 //= require nprogress-ajax
 //= require shadowbox
 //= require select2
+//= require sweet-alert-confirm
 //= require_tree .
 
 NProgress.configure({

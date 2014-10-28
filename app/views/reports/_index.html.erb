@@ -6,10 +6,10 @@
 		</div>
 		
 		<div class="col-xs-9">
-			<%= form_tag search_reports_path(:project_id => project.id), :id => "reports-search", :method => :post, :class=>"input-group", :remote => true do %>
+			<%= form_tag search_reports_path(:project_id => project.id), :id => "reports-search", :method => :post, :class=>"input-group search", :remote => true do %>
 				<%= text_field_tag :search, nil, :placeholder => "Search Reports...", :class => "form-control search" %>
-				<span class="input-group-addon cancel-search" style="cursor: pointer;" id="remove" >
-					<span class="glyphicon glyphicon-remove"></span>
+				<span class="input-group-addon cancel-search" id="remove" >
+					<i class="fa fa-remove"></i>
 				</span>
 			<% end %>
 		</div>
