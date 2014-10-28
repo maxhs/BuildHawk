@@ -370,7 +370,7 @@ body {
 			border-top: 1px solid #555;
 			border-right: 1px solid #555;
 			display: table;
-			background:#444;
+			background:rgba(68,68,68,.9);
 
 			a, a:hover {
 				color:#fff !important;
@@ -1045,6 +1045,7 @@ a.search-button {
 .action-buttons {
 	display:table;
 	max-width:50%;
+	width:100%;
 	position:absolute;
 	z-index:5;
 	border-spacing:4px;
@@ -1082,7 +1083,6 @@ a.search-button {
 	.floating-save {
 		padding-right:23px;
 	}
-
 
 	.subtitle:hover {
 		opacity:1;

@@ -21,10 +21,10 @@
 			</ul>
 		</div>
 		<div id="photo-search">
-			<%= form_tag search_photos_path(:project_id => @project.id), :id => "document-search", :method => :post, :class=>"input-group", remote: true do %>
+			<%= form_tag search_photos_path(:project_id => @project.id), :id => "document-search", :method => :post, :class=>"input-group search", remote: true do %>
 				<%= text_field_tag :search, nil, :placeholder=>"Search for documents...", :class=>"form-control search" %>
-				<span class="input-group-addon cancel-search" style="cursor: pointer;" id="remove">
-					<span class="glyphicon glyphicon-remove"></span>
+				<span class="input-group-addon cancel-search" id="remove">
+					<i class="fa fa-remove"></i>
 				</span>
 			<% end %>
 		</div>
