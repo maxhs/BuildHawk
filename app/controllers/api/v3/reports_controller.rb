@@ -5,7 +5,7 @@ class Api::V3::ReportsController < Api::V3::ApiController
     def index
         project = Project.find params[:project_id]
         if project.reports 
-            reports = project.reports.order('report_date DESC')
+            reports = project.reports
             respond_to do |format|
                 format.json { render_for_api :v3_reports, :json => reports, :root => :reports}
             end

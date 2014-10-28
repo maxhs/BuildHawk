@@ -41,7 +41,7 @@ body {
 	min-height:100%;
 	height:100%;
 	font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
-	font-size:14px;
+	font-size:15px;
 
 	.font-smoothing, .menu-link {
 	    -webkit-font-smoothing: antialiased;
@@ -51,6 +51,7 @@ body {
 
 	a, a:focus, .hide-reveal {
 		cursor:pointer;
+		text-decoration: none;
 		color:#222;
 		-webkit-transition: all 0.2s ease-out;
 		-moz-transition: all 0.2s ease-out;
@@ -70,6 +71,10 @@ body {
 
 	.text-success {
 		color:#cc3333;
+	}
+
+	p {
+  		margin: 0 0 10px;
 	}
 
 	ul, ol {

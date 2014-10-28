@@ -23,12 +23,14 @@ class Report < ActiveRecord::Base
     validates_presence_of :report_type
     validates_presence_of :date_string
 
+    default_scope { order('report_date DESC') } 
+
     accepts_nested_attributes_for :users, :allow_destroy => true
     accepts_nested_attributes_for :report_users, :allow_destroy => true
     accepts_nested_attributes_for :report_companies, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
-    after_commit :assign_date
+    after_commit :assign_date, :if => :persisted?
 
     #websolr
     searchable do
@@ -96,8 +98,7 @@ class Report < ActiveRecord::Base
     end
 
     def daily_activities
-        ## a blunt check to make sure the date string is in a proper, sortable format.
-        project.activities.map{|a| a if report_date && a.created_at.to_date === report_date}.compact
+        project.activities.map{|a| a if a.created_at.to_date === report_date}.compact
     end
 
     def is_daily?

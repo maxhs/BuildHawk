@@ -99,10 +99,6 @@ class Project < ActiveRecord::Base
         checklist.phases if checklist
     end
 
-    def ordered_reports
-        reports.order('report_date DESC')
-    end
-
     def duplicate_project
         new_checklist = checklist.dup :include => [:company, {:phases => {:categories => :checklist_items}}], :except => {:phases => {:categories => {:checklist_items => :state}}}
         new_project = self.dup :include => [{:reports => [:comments, :report_users, :users, :photos]}, {:photos => [:user, :checklist_item, :task, :report, :project,:folder]}, {:tasklists => :tasks}, :address, :folders, :users, :project_users]

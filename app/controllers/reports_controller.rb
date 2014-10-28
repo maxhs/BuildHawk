@@ -4,7 +4,7 @@ class ReportsController < AppController
 
 	def index
 		@project = Project.find params[:project_id]
-		@reports = @project.ordered_reports
+		@reports = @project.reports
 		@report = Report.find params[:report_id] if params[:report_id]
 	rescue
 		if @project
@@ -25,7 +25,7 @@ class ReportsController < AppController
 			@reports = initial.results.uniq
 			@prompt = "No search results"
 		else
-			@reports = @project.ordered_reports
+			@reports = @project.reports
 		end
 
 		if request.xhr?
@@ -112,7 +112,7 @@ class ReportsController < AppController
             :body => "#{current_user.full_name} updated this report." 
         )
 
-		@reports = @project.ordered_reports
+		@reports = @project.reports
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -165,7 +165,7 @@ class ReportsController < AppController
 				p.update_attribute :user_id, current_user.id
 			end
 		end
-		@reports = @project.ordered_reports
+		@reports = @project.reports
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -180,7 +180,7 @@ class ReportsController < AppController
 		@report = Report.find params[:id]
 		@report.users.build
 		@report.companies.build
-		reports = @project.ordered_reports
+		reports = @project.reports
 		index = reports.flatten.index @report
 		@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at
 		@previous = reports[index+1] if reports[index+1] && reports[index+1].created_at < @report.created_at
@@ -189,7 +189,7 @@ class ReportsController < AppController
 				format.js
 			end
 		else
-			@reports = @project.ordered_reports
+			@reports = @project.reports
 		end
 	end
 
