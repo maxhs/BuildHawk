@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>BuildHawk</title>
-	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= stylesheet_link_tag    "application", media: "all" %>
+  	<%= javascript_include_tag "application" %>
  	<%= csrf_meta_tags %>
 	<link rel="shortcut icon" href="<%=root_url %>/favicon.ico?v=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +56,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
     <div id="wrap" style="margin-bottom:0;">
 
-		<nav id="condensed-sidebar">
+		<nav id="condensed-sidebar" role="sidebar">
 			<%= image_tag "whiteK.png", id:"toggle" %>
 			<ul id="main-dropdown-menu">
 				<% if @projects && @projects.count > 0 %>
@@ -67,7 +67,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			</ul>
 
 		</nav>
-		<nav id="main-sidebar">
+		<nav id="main-sidebar" role="sidebar">
 			<div id="settings-row">
 				<a href="/"><%= image_tag 'logo_white.png', id: "logo" %></a>
 				<%= image_tag 'whiteSearch.png', id:'project-search-button' %>
@@ -91,7 +91,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		</nav>
 	
 
-		<div class="navbar navbar-fixed-top app" id="top-nav">
+		<div class="navbar navbar-fixed-top app" id="top-nav" role="navigation">
 			<ul id="navigation">
 				<% if params[:controller] == "admin" || params[:controller] == "billing" %>
 					<%= render partial: "admin/top_nav" %>
