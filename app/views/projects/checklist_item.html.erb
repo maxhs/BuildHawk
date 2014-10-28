@@ -40,11 +40,15 @@
 	$('#nav-admin a, #nav-uber-admin a').removeClass('current-page');
 	$('#nav-projects a, li.nav-checklists a').addClass('current-page');
 	$('#item-<%=@item.id%>').addClass("active-item");
-	var offset = $('#item-<%=@item.id %>').offset().top-150;
-	if (offset > 50){
-		$('#checklist-focus').css('top',offset);
-		$("html, body").animate({ scrollTop: offset }, 200);
-	}
+	
+    $('#checklist-focus').html('<%= j render :partial => "checklist_item", :locals => {:item => @item } %>');
+    var itemOffset = document.getElementById('item-<%=@item.id %>').offsetTop;
+    var focusOffset = document.getElementById('project-checklist').offsetHeight;
+    var posTop = itemOffset-focusOffset;
+    $('.active-item').removeClass('active-item');
+    $('#item-<%=@item.id %>').addClass('active-item');
+    $('#checklist-focus').css({'top':posTop,'left':'54%'});
+    $("html, body").animate({ scrollTop: offset }, 200);
 
 	$('.category .title').on('click',function(e){
 		var catId = e.target.id;
