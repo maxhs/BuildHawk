@@ -5,12 +5,7 @@ class Api::V3::ReportsController < Api::V3::ApiController
     def index
         project = Project.find params[:project_id]
         if project.reports 
-            if project.id == 37
-                puts "using experimental thing"
-                reports = project.reports.order('report_date DESC')
-            else
-                reports = project.reports.sort_by(&:date_for_sort).reverse
-            end
+            reports = project.reports.order('report_date DESC')
             respond_to do |format|
                 format.json { render_for_api :v3_reports, :json => reports, :root => :reports}
             end
