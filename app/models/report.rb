@@ -64,15 +64,6 @@ class Report < ActiveRecord::Base
         ["Daily","Safety","Weekly"]
     end
 
-    def date_for_sort
-        ## a blunt check to make sure the date_string is formatted properly
-        if date_string && date_string.include?("/")
-            Date.strptime(date_string,"%m/%d/%Y")
-        else 
-            created_at
-        end
-    end
-
     def to_param
         "#{id}-#{(Digest::SHA1.hexdigest id.to_s)[0..4]}"
     end
@@ -106,7 +97,7 @@ class Report < ActiveRecord::Base
 
     def daily_activities
         ## a blunt check to make sure the date string is in a proper, sortable format.
-        project.activities.map{|a| a if date_string.include?("/20") && a.created_at.to_date == Date.strptime(date_string,"%m/%d/%Y")}.compact
+        project.activities.map{|a| a if report_date && a.created_at.to_date === report_date}.compact
     end
 
     def is_daily?
@@ -154,7 +145,6 @@ class Report < ActiveRecord::Base
         t.add :temp
         t.add :wind
         t.add :humidity
-  		t.add :report_fields
         t.add :possible_types
         t.add :comments
         t.add :photos
@@ -175,8 +165,8 @@ class Report < ActiveRecord::Base
     api_accessible :v3_reports do |t|
         t.add :id
         t.add :author
+        t.add :epoch_time
         t.add :updated_at
-        t.add :created_at
         t.add :date_string
         t.add :title
         t.add :report_type
@@ -186,7 +176,6 @@ class Report < ActiveRecord::Base
         t.add :temp
         t.add :wind
         t.add :humidity
-        t.add :report_fields
         t.add :possible_types
         t.add :comments
         t.add :photos
@@ -196,7 +185,6 @@ class Report < ActiveRecord::Base
         t.add :body, :if => :has_body?
         t.add :activities, :unless => :is_daily?
         t.add :daily_activities, :if => :is_daily?
-        t.add :epoch_time
     end
 
     api_accessible :notifications, :extend => :reports do |t|
