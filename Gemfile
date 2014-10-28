@@ -1,12 +1,12 @@
 source 'https://code.stripe.com'
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.1.4'
 gem 'rails', '4.1.5'
 gem 'passenger'
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
-gem 'turbolinks'
+#gem 'turbolinks'
 gem "paperclip"
 gem 'aws-sdk'
 gem 'acts_as_api'

@@ -100,7 +100,7 @@ class Project < ActiveRecord::Base
     end
 
     def ordered_reports
-        reports.sort_by{|r| r.date_for_sort}.reverse
+        reports.order('report_date DESC')
     end
 
     def duplicate_project

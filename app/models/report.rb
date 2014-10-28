@@ -1,8 +1,8 @@
 class Report < ActiveRecord::Base
 	attr_accessible :title, :report_type, :body, :author_id, :project_id, :report_fields, :weather, :photos_attributes, 
-                  :users_attributes, :report_users_attributes, :users, :user_ids, :date_string, :weather_icon, :temp, 
-                  :wind, :precip, :humidity, :precip_accumulation, :mobile, :company_ids, :companies, 
-                  :report_companies_attributes, :report_topics
+                    :users_attributes, :report_users_attributes, :users, :user_ids, :weather_icon, :temp, :wind, :precip, 
+                    :humidity, :precip_accumulation, :mobile, :company_ids, :companies, :report_companies_attributes, 
+                    :report_topics, :date_string, :report_date
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
@@ -28,7 +28,7 @@ class Report < ActiveRecord::Base
     accepts_nested_attributes_for :report_companies, :allow_destroy => true
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
 
-    #after_commit :log_activity
+    after_commit :assign_date
 
     #websolr
     searchable do
@@ -41,6 +41,13 @@ class Report < ActiveRecord::Base
             users.map(&:full_name)
         end
         time    :created_at
+    end
+
+    def assign_date
+        unless report_date
+            date = Date.strptime(date_string,"%m/%d/%Y") if date_string && date_string.include?("/")
+            self.update_column :report_date, date  
+        end
     end
 
     def log_activity
@@ -59,7 +66,7 @@ class Report < ActiveRecord::Base
 
     def date_for_sort
         ## a blunt check to make sure the date_string is formatted properly
-        if date_string && date_string.length > 0 && date_string.include?("/20")
+        if date_string
             Date.strptime(date_string,"%m/%d/%Y")
         else 
             created_at

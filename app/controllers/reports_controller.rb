@@ -181,7 +181,7 @@ class ReportsController < AppController
 		@report.users.build
 		@report.companies.build
 		reports = @project.ordered_reports
-		index = reports.index(@report)
+		index = reports.flatten.index @report
 		@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at
 		@previous = reports[index+1] if reports[index+1] && reports[index+1].created_at < @report.created_at
 		if request.xhr?

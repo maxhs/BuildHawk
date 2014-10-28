@@ -426,6 +426,7 @@ ActiveRecord::Schema.define(version: 20141027193046) do
     t.string   "temp"
     t.string   "wind"
     t.boolean  "mobile",              default: false
+    t.date     "report_date"
   end
 
   add_index "reports", ["author_id", "project_id"], name: "reports_idx"
@@ -470,6 +471,7 @@ ActiveRecord::Schema.define(version: 20141027193046) do
     t.integer  "comments_count"
     t.boolean  "mobile",               default: false
     t.integer  "user_id"
+    t.boolean  "approved"
   end
 
   add_index "tasks", ["assignee_id"], name: "tasks_assignee_id_idx"
