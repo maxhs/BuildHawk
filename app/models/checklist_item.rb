@@ -177,6 +177,10 @@ class ChecklistItem < ActiveRecord::Base
        
     end
 
+    api_accessible :v3_checklists, :extend => :dashboard do |t|
+       
+    end
+
     api_accessible :notifications, :extend => :dashboard do |t|
     
     end

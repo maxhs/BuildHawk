@@ -67,9 +67,21 @@ class Category < ActiveRecord::Base
         t.add :completed_count
         t.add :progress_percentage
         t.add :order_index
+        t.add :checklist_items
     end
 
-    api_accessible :phases, :extend => :checklists do |t|
+    api_accessible :v3_checklists do |t|
+        t.add :id
+        t.add :name
+        t.add :completed_date
+        t.add :milestone_date
+        t.add :not_applicable_count
+        t.add :completed_count
+        t.add :progress_percentage
+        t.add :order_index
+    end
+
+    api_accessible :phases, :extend => :v3_checklists do |t|
         t.add :checklist_items
     end
 end

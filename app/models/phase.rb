@@ -61,6 +61,17 @@ class Phase < ActiveRecord::Base
 
     end
 
+    api_accessible :dashboard do |t|
+        t.add :id
+        t.add :name
+        t.add :item_count
+        t.add :not_applicable_count
+        t.add :completed_count
+        t.add :progress_count
+        t.add :order_index
+        t.add :checklist_id
+    end
+
     api_accessible :checklists do |t|
         t.add :id
         t.add :categories
@@ -75,18 +86,21 @@ class Phase < ActiveRecord::Base
         t.add :checklist_id
     end
 
-    api_accessible :phases, :extend => :checklists do |t|
-        t.add :categories
-    end
-
-    api_accessible :dashboard do |t|
+    api_accessible :v3_checklists do |t|
         t.add :id
         t.add :name
+        t.add :completed_date
+        t.add :milestone_date
         t.add :item_count
         t.add :not_applicable_count
         t.add :completed_count
-        t.add :progress_count
+        t.add :progress_percentage
         t.add :order_index
         t.add :checklist_id
     end
+
+    api_accessible :phases, :extend => :v3_checklists do |t|
+        t.add :categories
+    end
+
 end

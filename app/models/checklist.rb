@@ -134,4 +134,11 @@ class Checklist < ActiveRecord::Base
         ##
     end
 
+    api_accessible :v3_checklists do |t|
+        t.add :id
+        t.add :phases
+        t.add :name
+        t.add :project_id
+    end
+
 end
