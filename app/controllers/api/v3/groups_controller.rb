@@ -17,13 +17,4 @@ class Api::V3::GroupsController < Api::V3::ApiController
     	render json: {id: group.id, name: group.name, projects: group.projects.map{|project| {name: project.name, hidden: project.hidden_for_user?(user), address: {id: project.address.id, formatted_address: project.address.formatted_address} } } }
     end
 
-    def destroy
-    	@photo = Photo.find params[:id]
-    	if @photo.destroy
-        	render json: {success: true}
-      	else 
-        	render json: {success: false}
-      	end
-    end
-
 end

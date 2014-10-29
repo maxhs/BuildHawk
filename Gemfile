@@ -13,7 +13,6 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 4.2.1'
 gem "nested_form"
-gem 'postmark-rails'
 gem 'shadowbox-rails'
 gem 'sass-rails'
 gem 'protected_attributes'
@@ -45,6 +44,9 @@ gem "remotipart"
 gem 'font-awesome-rails'
 gem 'sweet-alert'
 gem 'sweet-alert-confirm'
+gem 'postmark-rails'
+gem 'mandrill_mailer'
+gem 'gibbon'
 
 #gem 'resque-pool'
 #gem 'capybara'

@@ -1,11 +1,11 @@
 class Api::V3::ChecklistsController < Api::V3::ApiController
 
     def index
-    	@user = User.find params[:user_id]
-    	projects = @user.projects
-    	respond_to do |format|
-        	format.json { render_for_api :projects, :json => projects, :root => :projects}
-      	end
+        project = Project.find params[:project_id]
+        @checklist = project.checklist
+        respond_to do |format|
+            format.json { render_for_api :checklists, :json => @checklist, :root => :checklist}
+        end
     end
 
     def show

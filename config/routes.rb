@@ -304,7 +304,7 @@ Buildhawk::Application.routes.draw do
   namespace :api do
     namespace :v3 do
       resources :activities, only: [:destroy]
-      resources :comments
+      resources :comments, only: [:show, :create, :destroy]
       resources :companies do
         collection do
           get :search
@@ -312,14 +312,14 @@ Buildhawk::Application.routes.draw do
         end
       end
       resources :companies
-      resources :connect, :only => [:index]
-      resources :checklists
-      resources :checklist_items do
+      resources :connect, only: [:index]
+      resources :checklists, only: [:index, :show]
+      resources :checklist_items, only: [:update, :show, :photo] do
         collection do
           post :photo
         end
       end
-      resources :groups 
+      resources :groups, only: [:index, :show]
       resources :notifications, :only => [:index, :destroy] do
         collection do 
           get :messages

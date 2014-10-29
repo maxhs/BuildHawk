@@ -1,13 +1,5 @@
 class Api::V3::CommentsController < Api::V3::ApiController
 
-    def index
-    	@user = User.find params[:user_id]
-    	projects = @user.projects
-    	respond_to do |format|
-        	format.json { render_for_api :projects, :json => projects, :root => :projects}
-      	end
-    end
-
     def show 
         if params[:checklist_item_id].present?
             checklist_item = ChecklistItem.find params[:report_id]
@@ -48,6 +40,7 @@ class Api::V3::CommentsController < Api::V3::ApiController
 
     def destroy
         comment = Comment.find params[:id]
+        #user = User.where(id: params[:user_id]).first
         if comment.destroy
             render :json => {success: true}
         else
