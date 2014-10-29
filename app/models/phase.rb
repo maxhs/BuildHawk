@@ -10,6 +10,10 @@ class Phase < ActiveRecord::Base
     acts_as_list scope: :checklist, column: :order_index
     default_scope { order('order_index') }
 
+    def category_count
+        categories.count if categories
+    end
+
     def item_count
         categories.joins(:checklist_items).count if categories
     end
@@ -91,6 +95,7 @@ class Phase < ActiveRecord::Base
         t.add :name
         t.add :completed_date
         t.add :milestone_date
+        t.add :category_count
         t.add :item_count
         t.add :not_applicable_count
         t.add :completed_count
