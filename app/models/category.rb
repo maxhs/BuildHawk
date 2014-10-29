@@ -75,6 +75,7 @@ class Category < ActiveRecord::Base
         t.add :name
         t.add :completed_date
         t.add :milestone_date
+        t.add :item_count
         t.add :not_applicable_count
         t.add :completed_count
         t.add :progress_percentage
