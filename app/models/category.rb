@@ -10,31 +10,32 @@ class Category < ActiveRecord::Base
     acts_as_list scope: :phase, column: :order_index
     default_scope { order('order_index') }
 
-    def item_count
-        checklist_items.count
-    end
-
-    def completed_count
-        checklist_items.where(:state => 1).count if checklist_items
-    end
-
-    def check_completed
-        if phase.completed_count != 0 && phase.completed_count == phase.item_count
-            phase.update_attribute :completed_date, Date.today
-            self.state = 1 
-            self.save
-        elsif completed_date != nil
-            self.completed_date = nil
-            self.state = nil
-            self.save
-        end
-    end
-
     def order_indices
         if checklist_items.count > 0 && checklist_items.first.order_index.nil?
             checklist_items.each_with_index do |i,idx|
                 i.update_attribute :order_index, idx
             end
+        end
+    end
+
+    def item_count
+        checklist_items.count
+    end
+
+    def completed_count
+        checklist_items.where(state: 1).count if checklist_items
+    end
+
+    def check_completed
+        if phase.completed_count != 0 && phase.completed_count == phase.item_count
+            puts "updating column!"
+            phase.update_column :completed_date, Date.today
+            self.update_columns completed_date: Date.today, state: 1 
+        else
+            puts "updating columns!"
+            self.update_columns completed_date: nil, state: nil
+            phase.update_column :completed_date, nil
+
         end
     end
 
@@ -61,8 +62,8 @@ class Category < ActiveRecord::Base
     api_accessible :checklists do |t|
         t.add :id
         t.add :name
-        t.add :completed_date
-        t.add :milestone_date
+        #t.add :completed_date
+        #t.add :milestone_date
         t.add :not_applicable_count
         t.add :completed_count
         t.add :progress_percentage
@@ -73,8 +74,8 @@ class Category < ActiveRecord::Base
     api_accessible :v3_checklists do |t|
         t.add :id
         t.add :name
-        t.add :completed_date
-        t.add :milestone_date
+        #t.add :completed_date
+        #t.add :milestone_date
         t.add :item_count
         t.add :not_applicable_count
         t.add :completed_count
