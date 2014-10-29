@@ -314,6 +314,8 @@ Buildhawk::Application.routes.draw do
       resources :companies
       resources :connect, only: [:index]
       resources :checklists, only: [:index, :show]
+      resources :phases, only: [:show]
+      resources :categories, only: [:show]
       resources :checklist_items, only: [:update, :show, :photo] do
         collection do
           post :photo
