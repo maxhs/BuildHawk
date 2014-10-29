@@ -48,7 +48,7 @@
     $('.active-item').removeClass('active-item');
     $('#item-<%=@item.id %>').addClass('active-item');
     $('#checklist-focus').css({'top':posTop,'left':'54%'});
-    $("html, body").animate({ scrollTop: offset }, 200);
+    $("html, body").animate({ scrollTop: 0 }, 0);
 
 	$('.category .title').on('click',function(e){
 		var catId = e.target.id;

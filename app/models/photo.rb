@@ -35,7 +35,7 @@ class Photo < ActiveRecord::Base
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
 
 	## not using the background process for android right now. 
-	process_in_background :image, :only_process => lambda { |a| a.instance.mobile? && a.instance.name != 'android' ? [:large] : [] }
+	#process_in_background :image, :only_process => lambda { |a| a.instance.mobile? && a.instance.name != 'android' ? [:large] : [] }
 
 	# websolr
     searchable do
