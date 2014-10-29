@@ -59,11 +59,8 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity(current_user)
-        puts "should be logging a checklist item activity"
-        puts "user? #{current_user.full_name}" if current_user
         if state == 1 && completed_date.nil?
             #category.update_attribute :completed_date, Time.now if category.completed_count == category.item_count 
-            
             if current_user
                 activities.create(
                     :body => "#{current_user.full_name} marked this item complete.",
@@ -80,7 +77,6 @@ class ChecklistItem < ActiveRecord::Base
             end            
                
         elsif !completed_date.nil?
-            puts "no completed date"
             if state
                 if state == 1
                     verbal_state = "completed"
@@ -93,7 +89,6 @@ class ChecklistItem < ActiveRecord::Base
                 end
 
                 if current_user
-                    puts "current user activity"
                     activities.create(
                         :body => "#{current_user.full_name} updated the status for this item\" to #{verbal_state}\".",
                         :project_id => checklist.project.id,
@@ -101,7 +96,6 @@ class ChecklistItem < ActiveRecord::Base
                         :activity_type => self.class.name
                     )
                 else 
-                    puts "activity for someone else"
                     activities.create(
                         :body => "The status for this item was updated\" to #{verbal_state}\".",
                         :project_id => checklist.project.id,
@@ -139,22 +133,6 @@ class ChecklistItem < ActiveRecord::Base
         end
     end
 
-    # def ugh_parse
-    #     url = Rails.root.join("public","ugh.txt")
-    #     text = File.open(url).read.split("#<")
-    #     id = " id: "
-    #     state = " state: "
-    #     text.each do |t|
-    #         actual_id = t[/#{id}(.*?),/m,1]
-    #         actual_state = t[/#{state}(.*?)>/m,1]
-    #         if actual_id && actual_state
-    #             item = ChecklistItem.find actual_id
-    #             item.update_attribute :state, actual_state
-    #             puts "id: #{actual_id} and state #{actual_state}"
-    #         end
-    #     end
-    # end
-
     def critical_date_epoch_time
         critical_date.to_i
     end
@@ -188,6 +166,14 @@ class ChecklistItem < ActiveRecord::Base
     end
     
     api_accessible :checklists, :extend => :dashboard do |t|
+       
+    end
+
+    api_accessible :phases, :extend => :dashboard do |t|
+       
+    end
+
+    api_accessible :categories, :extend => :dashboard do |t|
        
     end
 

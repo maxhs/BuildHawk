@@ -32,6 +32,7 @@ Buildhawk::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:5000' }
+  config.mandrill_mailer.default_url_options = { :host => 'localhost:5000' }
 
   # Configure mailer SMTP settings
   config.action_mailer.delivery_method = :smtp

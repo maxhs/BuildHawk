@@ -86,5 +86,6 @@ Buildhawk::Application.configure do
   config.action_mailer.default_url_options = { :host => 'www.buildhawk.com' }
   config.action_mailer.asset_host = "https://www.buildhawk.com"
   config.action_mailer.delivery_method = :smtp
+  config.mandrill_mailer.default_url_options = { :host => 'www.buildhawk.com' }
 
 end
