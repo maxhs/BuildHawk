@@ -177,8 +177,9 @@ class ChecklistItem < ActiveRecord::Base
        
     end
 
-    api_accessible :v3_checklists, :extend => :dashboard do |t|
-       
+    api_accessible :v3_checklists do |t|
+       t.add :id
+       t.add :state
     end
 
     api_accessible :notifications, :extend => :dashboard do |t|
