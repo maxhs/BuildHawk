@@ -90,6 +90,7 @@ Buildhawk::Application.routes.draw do
       post :upload_template
       get :companies
       get :users
+      get :errors
       get :core_checklists
       get :edit_company
       get :edit_user
@@ -203,6 +204,7 @@ Buildhawk::Application.routes.draw do
       patch :promo_code
     end
   end
+  resources :errors
 
   get "/api/v2/punchlists", to: "api/v2/worklists#index"
   get "/api/v2/punchlists/:id", to: "api/v2/worklists#show"

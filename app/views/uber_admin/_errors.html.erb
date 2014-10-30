@@ -1,0 +1,10 @@
+<div id="errors-index" class="container">
+	<h2> Errors  </h2>
+
+	<table>
+		<th>Error</th>
+		<th>Logged</th>
+		<th>Addressed?</th>
+		<%= render partial:"errors/error", collection: errors, as: :error, cache: true %>
+	</table>
+</div>

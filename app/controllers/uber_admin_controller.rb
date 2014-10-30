@@ -108,6 +108,10 @@ class UberAdminController < AppController
 
 	end
 
+	def errors
+		@errors = Error.all
+	end
+
 	def companies
 		@companies = Company.all.order('name ASC')
 	end

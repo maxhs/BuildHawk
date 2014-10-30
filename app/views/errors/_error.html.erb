@@ -1,0 +1,5 @@
+<tr id="error-<%= error.id %>" class="error">
+	<td><%= error.body if error.body %></td>
+	<td><%= parse_datetime error.created_at %> </td>
+	<td><%= error.fixed %> </td>
+</tr>

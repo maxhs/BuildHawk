@@ -1,3 +1,17 @@
 // Place all the styles related to the Errors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#errors-index {
+	table {
+		width:100%;
+		border:1px solid #ddd;
+		th {
+			text-align:left;
+			padding:1%;
+		}
+		td {
+			padding:1%;
+		}
+	}
+}

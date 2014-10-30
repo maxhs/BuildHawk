@@ -1,0 +1,3 @@
+$('a').removeClass('current-page');
+$('#uber-admin-errors-link').addClass('current-page');
+$('#main').html('<%= j render :partial => "uber_admin/errors", locals: {errors: @errors} %>');
