@@ -91,13 +91,9 @@ class Phase < ActiveRecord::Base
         t.add :checklist_id
         t.add :categories
         t.add :name
+        t.add :order_index
         #t.add :completed_date
         #t.add :milestone_date
-        t.add :order_index
-    end
-
-    api_accessible :phases, :extend => :v3_checklists do |t|
-        
     end
 
 end

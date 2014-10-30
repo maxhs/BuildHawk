@@ -164,23 +164,6 @@ class ChecklistItem < ActiveRecord::Base
     api_accessible :visible_projects, :extend => :projects do |t|
         
     end
-    
-    api_accessible :checklists, :extend => :dashboard do |t|
-       
-    end
-
-    api_accessible :v3_checklists do |t|
-       t.add :id
-       t.add :state
-    end
-
-    api_accessible :phases, :extend => :v3_checklists do |t|
-       
-    end
-
-    api_accessible :categories, :extend => :dashboard do |t|
-       
-    end
 
     api_accessible :notifications, :extend => :dashboard do |t|
     
@@ -198,11 +181,32 @@ class ChecklistItem < ActiveRecord::Base
         
     end
 
+    api_accessible :checklists, :extend => :dashboard do |t|
+       
+    end
+
+    api_accessible :v3_checklists do |t|
+       t.add :id
+       t.add :state
+       t.add :body
+       t.add :item_type
+    end
+
+    api_accessible :categories, :extend => :v3_checklists do |t|
+        # t.add :critical_date, :if => :has_critical_date?
+        # t.add :critical_date_epoch_time, :if => :has_critical_date?
+        # t.add :completed_date, :if => :has_completed_date?
+        # t.add :completed_date_epoch_time, :if => :has_completed_date?
+        t.add :photos_count
+        t.add :comments_count
+    end
+
     api_accessible :details, :extend => :dashboard do |t|
         t.add :photos
         t.add :comments
         t.add :phase_name
         t.add :reminders
+        t.add :checklist_id
     end
 
     api_accessible :checklist_item, :extend => :details do |t|

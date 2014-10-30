@@ -72,15 +72,13 @@ class Category < ActiveRecord::Base
     api_accessible :v3_checklists do |t|
         t.add :id
         t.add :name
-        #t.add :completed_date
-        #t.add :milestone_date
-        # t.add :not_applicable_count
-        # t.add :completed_count
         t.add :order_index
         t.add :checklist_items
+        #t.add :completed_date
+        #t.add :milestone_date
     end
 
-    api_accessible :phases, :extend => :v3_checklists do |t|
+    api_accessible :categories, :extend => :v3_checklists do |t|
         
     end
 end
