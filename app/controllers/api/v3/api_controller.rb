@@ -1,16 +1,21 @@
 class Api::V3::ApiController < ApplicationController
   	skip_before_filter :verify_authenticity_token
-  	#before_filter :verify_mobile_token
+  	before_filter :verify_mobile_token
 
   	private
   	
   	def verify_mobile_token
-  		@user = User.where(mobile_token: params[:mobile_token]).first
-  		unless params[:device_type].present? && params[:mobile_token].present? && @user 
-  			puts "Couldn't verify mobile token"
-  			return false
+  		if params[:device_type].present? && params[:mobile_token].present? 
+            @user = User.where(mobile_token: params[:mobile_token]).first
+  			if @user
+                puts "Mobile token verified"
+                return true 
+  			else
+                puts "Could not verify mobile token"
+                return false
+            end
   		else
-  			puts "Mobile token verified"
+  			puts "No ,obile token params"
   			return true
   		end
   	end

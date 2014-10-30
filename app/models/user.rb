@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
     validates_uniqueness_of :email
     validates_confirmation_of :password, :if => :password_required?
     validates_presence_of :password, :if => :password_required?
+    validates_presence_of :company_id
 
     #after_create :welcome
     before_destroy :cleanup_user
@@ -124,7 +125,7 @@ class User < ActiveRecord::Base
     end
 
     def coworkers
-      company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone => user.phone, :id => user.id, :url_thumb => user.url_thumb}} if company
+        company.users.map{|user| {:full_name => user.full_name,:first_name => user.first_name,:last_name => user.last_name, :email => user.email, :formatted_phone => user.formatted_phone, :phone => user.phone, :id => user.id, :url_thumb => user.url_thumb}} if company
     end
 
     def any_admin?
@@ -229,10 +230,6 @@ class User < ActiveRecord::Base
         end
     end
 
-    def has_company?
-        company
-    end
-
   	acts_as_api
 
   	api_accessible :user do |t|
@@ -253,7 +250,7 @@ class User < ActiveRecord::Base
   	end
 
     api_accessible :login, :extend => :user do |t|
-        t.add :coworkers#, :if => :has_company?
+        t.add :coworkers
         t.add :text_permissions
         t.add :email_permissions
         t.add :push_permissions
