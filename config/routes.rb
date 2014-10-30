@@ -378,6 +378,7 @@ Buildhawk::Application.routes.draw do
       end
       resources :tasklists, :only => [:show, :index]
       resources :tasks
+      resources :errors, only: [:create]
     end
   end
 
