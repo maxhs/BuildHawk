@@ -43,8 +43,6 @@ gem 'truncate_html'
 gem "remotipart"
 gem 'font-awesome-rails'
 gem 'sweet-alert'
-gem 'sweet-alert-confirm'
-gem 'postmark-rails'
 gem 'mandrill_mailer'
 gem 'gibbon'
 

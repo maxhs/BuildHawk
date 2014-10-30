@@ -1,5 +1,6 @@
 <tr id="error-<%= error.id %>" class="error">
 	<td><%= error.body if error.body %></td>
 	<td><%= parse_datetime error.created_at %> </td>
-	<td><%= error.fixed %> </td>
+	<td><%= error.fixed %></td>
+	<td><%= link_to "Delete", error_path(error), method: :delete, :class=>"remote", data: {confirm: "Are you sure you want to delete this error? This will permanently remove it from the logs."}, remote: true %></td>
 </tr>

@@ -10,4 +10,10 @@ class ErrorsController < ApplicationController
   	def not_found
 
 	end
+
+	def destroy
+		error = Error.find params[:id]
+		@error_id = error.id
+		error.destroy
+	end
 end
