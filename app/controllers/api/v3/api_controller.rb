@@ -5,6 +5,7 @@ class Api::V3::ApiController < ApplicationController
   	private
   	
   	def verify_mobile_token
+        puts "Request: #{request}"
   		if params[:device_type].present? && params[:mobile_token].present? 
             @user = User.where(mobile_token: params[:mobile_token]).first
   			if @user

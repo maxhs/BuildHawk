@@ -247,6 +247,8 @@ class User < ActiveRecord::Base
         t.add :company_admin
         t.add :uber_admin
         t.add :active
+        t.add :authentication_token
+        t.add :mobile_token
   	end
 
     api_accessible :login, :extend => :user do |t|
@@ -254,11 +256,8 @@ class User < ActiveRecord::Base
         t.add :text_permissions
         t.add :email_permissions
         t.add :push_permissions
-        t.add :authentication_token
         t.add :url_medium
         t.add :alternates
-        t.add :authentication_token
-        t.add :mobile_token
     end
 
     api_accessible :projects, :extend => :user do |t|
