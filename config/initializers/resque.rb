@@ -16,9 +16,7 @@ Resque.redis.namespace = "resque:buildhawk-rails"
 
 Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 
-if Rails.env.production?
-	Resque.schedule = YAML.load_file('config/resque_schedule.yml')
-end
+#Resque.schedule = YAML.load_file('config/resque_schedule.yml')
 
 if defined?(PhusionPassenger)
   PhusionPassenger.on_event(:starting_worker_process) do |forked|
