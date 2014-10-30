@@ -7,10 +7,8 @@ class Api::V3::TasksController < Api::V3::ApiController
         if params[:task][:assignee_id]
             assignee = User.where(:id => params[:task][:assignee_id]).first
             notify = true if assignee && task.assignee_id != assignee.id
-            params[:task][:sub_assignee_id] = nil
         else
             params[:task][:assignee_id] = nil
-            params[:task][:sub_assignee_id] = nil
         end
         
         if params[:task][:completed] == "1"
@@ -22,17 +20,13 @@ class Api::V3::TasksController < Api::V3::ApiController
             params[:task][:completed_by_user_id] = nil
         end
 
-        unless params[:task][:location].present?
-            params[:task][:location] = nil
-        end
+        params[:task][:location] = nil unless params[:task][:location].present?    
 
     	task.update_attributes params[:task]
 
         if notify
-            
             assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
             assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length > 0
-            
         end
         
         if params[:user_id]
@@ -48,17 +42,13 @@ class Api::V3::TasksController < Api::V3::ApiController
     def create
         project = Project.find params[:project_id]
 
-        # ## remove after 1.05
+        ### remove after 1.05
         if params[:task][:user_assignee].present? 
             assignee = User.where(:full_name => params[:task][:user_assignee]).first
             params[:task][:assignee_id] = assignee.id
             params[:task].delete(:user_assignee)
-        elsif params[:task][:sub_assignee].present?
-            sub = Sub.where(:name => params[:task][:sub_assignee]).first_or_create
-            params[:task][:sub_assignee_id] = sub.id
-            params[:task].delete(:sub_assignee)
         end
-        # ###
+        ####
 
         params[:task][:mobile] = true
         
@@ -72,11 +62,7 @@ class Api::V3::TasksController < Api::V3::ApiController
         )
         
         ### remove in 1.05
-        if assignee
-            task.update_attribute :assignee_id, assignee.id
-        elsif sub
-            task.update_attribute :sub_assignee_id, sub.id
-        end
+        task.update_attribute :assignee_id, assignee.id if assignee
         ###
 
         if task.save

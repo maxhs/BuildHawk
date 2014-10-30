@@ -12,10 +12,10 @@ class Activity < ActiveRecord::Base
 	belongs_to :photo
 
 	default_scope { order('created_at DESC') }
-	after_create :notify
+	#after_create :notify
 
 	def notify
-		puts "just created an activty"
+		
 	end
 
 	def created_date

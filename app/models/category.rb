@@ -28,11 +28,9 @@ class Category < ActiveRecord::Base
 
     def check_completed
         if phase.completed_count != 0 && phase.completed_count == phase.item_count
-            puts "updating column!"
             phase.update_column :completed_date, Date.today
             self.update_columns completed_date: Date.today, state: 1 
         else
-            puts "updating columns!"
             self.update_columns completed_date: nil, state: nil
             phase.update_column :completed_date, nil
 
@@ -64,9 +62,9 @@ class Category < ActiveRecord::Base
         t.add :name
         #t.add :completed_date
         #t.add :milestone_date
+        t.add :progress_percentage
         t.add :not_applicable_count
         t.add :completed_count
-        t.add :progress_percentage
         t.add :order_index
         t.add :checklist_items
     end
@@ -76,10 +74,8 @@ class Category < ActiveRecord::Base
         t.add :name
         #t.add :completed_date
         #t.add :milestone_date
-        t.add :item_count
         t.add :not_applicable_count
         t.add :completed_count
-        t.add :progress_percentage
         t.add :order_index
         t.add :checklist_items
     end
