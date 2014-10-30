@@ -2,9 +2,9 @@ require 'resque'
 require 'resque/scheduler'
 require 'resque/scheduler/server'
 
-# uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
-# Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-# Resque.redis.namespace = "resque:buildhawk-rails"
+Resque.redis = REDIS
+Resque.redis.namespace = "resque:buildhawk-rails"
+Resque.schedule = YAML.load_file('config/resque_schedule.yml')
 
 # If you want to be able to dynamically change the schedule,
 # uncomment this line.  A dynamic schedule can be updated via the
@@ -16,13 +16,12 @@ require 'resque/scheduler/server'
 
 Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 
-#Resque.schedule = YAML.load_file('config/resque_schedule.yml')
 
-# if defined?(PhusionPassenger)
-#   PhusionPassenger.on_event(:starting_worker_process) do |forked|
-#     # We're in smart spawning mode.
-#     if forked
-#       Resque.redis.client.reconnect
-#     end
-#   end
-# end
+if defined?(PhusionPassenger)
+  	PhusionPassenger.on_event(:starting_worker_process) do |forked|
+    	# We're in smart spawning mode.
+    	if forked
+      		Resque.redis.client.reconnect
+    	end
+  	end
+end

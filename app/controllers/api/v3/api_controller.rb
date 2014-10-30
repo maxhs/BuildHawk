@@ -15,7 +15,7 @@ class Api::V3::ApiController < ApplicationController
                 return false
             end
   		else
-  			puts "No ,obile token params"
+  			puts "No mobile token params"
   			return true
   		end
   	end
