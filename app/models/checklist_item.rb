@@ -38,16 +38,8 @@ class ChecklistItem < ActiveRecord::Base
 
   	acts_as_api
 
-    def category_name
-        category.name if category
-    end
-
     def types
         ["S&C","Doc","Com"]
-    end
-
-    def phase_name
-        category.phase.name if category && category.phase
     end
 
     def abbreviated_body
@@ -190,6 +182,8 @@ class ChecklistItem < ActiveRecord::Base
        t.add :state
        t.add :body
        t.add :item_type
+       t.add :photos_count
+        t.add :comments_count
     end
 
     api_accessible :categories, :extend => :v3_checklists do |t|
@@ -197,16 +191,12 @@ class ChecklistItem < ActiveRecord::Base
         # t.add :critical_date_epoch_time, :if => :has_critical_date?
         # t.add :completed_date, :if => :has_completed_date?
         # t.add :completed_date_epoch_time, :if => :has_completed_date?
-        t.add :photos_count
-        t.add :comments_count
     end
 
     api_accessible :details, :extend => :dashboard do |t|
         t.add :photos
         t.add :comments
-        t.add :phase_name
         t.add :reminders
-        t.add :checklist_id
     end
 
     api_accessible :checklist_item, :extend => :details do |t|
