@@ -60,8 +60,8 @@ class Category < ActiveRecord::Base
     api_accessible :checklists do |t|
         t.add :id
         t.add :name
-        #t.add :completed_date
-        #t.add :milestone_date
+        t.add :completed_date
+        t.add :milestone_date
         t.add :progress_percentage
         t.add :not_applicable_count
         t.add :completed_count
