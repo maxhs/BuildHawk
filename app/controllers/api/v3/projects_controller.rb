@@ -1,6 +1,7 @@
 class Api::V3::ProjectsController < Api::V3::ApiController
 
     def index
+        puts "user device type: #{@device_type}"
         user = User.find params[:user_id]
         user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
 
