@@ -178,11 +178,11 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     api_accessible :v3_checklists do |t|
-       t.add :id
-       t.add :state
-       t.add :body
-       t.add :item_type
-       t.add :photos_count
+        t.add :id
+        t.add :state
+        t.add :body
+        t.add :item_type
+        t.add :photos_count
         t.add :comments_count
     end
 
