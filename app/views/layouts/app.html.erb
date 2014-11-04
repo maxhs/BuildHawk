@@ -67,7 +67,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			</ul>
 		</nav>
 
-		<nav id="main-sidebar" role="sidebar">
+		<nav id="main-sidebar" class="revealed" role="sidebar">
 			<div id="settings-row">
 				<a href="/"><%= image_tag 'logo_white.png', id: "logo" %></a>
 				<%= image_tag 'whiteSearch.png', id:'project-search-button' %>
@@ -76,7 +76,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				
 			<%= render partial: "projects/sidebar" %>
 			
-			<div id="bottom-menu" class="app">
+			<div id="bottom-menu" class="app revealed">
 				<div>
 					<%= link_to image_tag('settings_white.png', id: "settings"),edit_user_path(current_user), remote:true %>
 				</div>
@@ -92,7 +92,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		</nav>
 	
 
-		<div class="navbar navbar-fixed-top app" id="top-nav" role="navigation">
+		<div class="navbar navbar-fixed-top app revealed" id="top-nav" role="navigation">
 			<ul id="navigation">
 				<% if params[:controller] == "admin" || params[:controller] == "billing" %>
 					<%= render partial: "admin/top_nav" %>
@@ -140,7 +140,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		</div>
 		
 		<% if user_signed_in? %>
-			<div id="inner-wrap">
+			<div id="inner-wrap" class="revealed">
 				<%= yield %>
 			</div>
 		<% else %>
