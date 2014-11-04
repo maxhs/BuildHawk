@@ -48,6 +48,7 @@ if (history && history.pushState){
         });
     });
 }
+
 function setupWindow(){
     var notice = document.getElementById("notice");
     var alert = document.getElementById("alert");
@@ -75,6 +76,14 @@ function setupWindow(){
             });
         } else {
             $('#search-section').hide(100);
+        }
+    });
+    $('#menu-toggle').click(function(){
+        console.log('clicked');
+        if ($('#main-sidebar').hasClass('revealed')){
+            $('.revealed').removeClass('revealed');
+        } else {
+            $('#main-sidebar, #bottom-menu, #inner-wrap, #top-nav').addClass('revealed');
         }
     });
     $('#toggle').click(function(){

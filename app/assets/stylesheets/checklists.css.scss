@@ -255,6 +255,10 @@
 	position:relative;	
 	list-style:none;
 
+	.revealed {
+		border-left:1px dotted #ddd;
+	}
+
 	h2 {
 		text-align:left;
 		display:inline-block;
@@ -426,10 +430,6 @@
 	#clear-critical-date:hover {
 		color:#cc0000;
 	}	
-}
-
-.revealed {
-	border-left:1px dotted #ddd;
 }
 
 .category-items {

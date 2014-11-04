@@ -65,12 +65,13 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 					<% end %>
 				<% end %>
 			</ul>
-
 		</nav>
+
 		<nav id="main-sidebar" role="sidebar">
 			<div id="settings-row">
 				<a href="/"><%= image_tag 'logo_white.png', id: "logo" %></a>
 				<%= image_tag 'whiteSearch.png', id:'project-search-button' %>
+				<%= image_tag "whiteK.png", id:"menu-toggle", :class=>"revealed" %>
 			</div>
 				
 			<%= render partial: "projects/sidebar" %>
