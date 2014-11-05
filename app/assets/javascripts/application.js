@@ -79,7 +79,6 @@ function setupWindow(){
         }
     });
     $('#menu-toggle').click(function(){
-        console.log('clicked');
         if ($('#main-sidebar').hasClass('revealed')){
             $('.revealed').removeClass('revealed');
         } else {

@@ -180,7 +180,7 @@ body {
 	#main-sidebar.revealed {
 		left:0;
 
-		li {
+		li, #project-search-button, .projects-count {
 			opacity: 1;
 		}
 	}
@@ -202,7 +202,7 @@ body {
 		-o-transition: all 0.3s ease;
 		transition: all 0.3s ease;
 
-		li {
+		li, #project-search-button, .projects-count {
 			opacity:.1;
 		}
 
