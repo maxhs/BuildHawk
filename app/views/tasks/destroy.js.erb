@@ -1,5 +1,7 @@
 $('#task-focus').css({'left':'100%','top':'0'});
 $('#project-tasks').removeClass('tasks-panel');
+$('.active-task').removeClass('active-task');
+$('.faded').removeClass('faded');
 $('#task-<%= @task_id %>').fadeOut(200,function(){
 	$(this).remove();
 });

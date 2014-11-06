@@ -44,10 +44,9 @@ class TasksController < AppController
 			@task.update_attribute :sub_assignee_id, sub_assignee.id
 		end
 
-		@tasks = @tasklist.tasks if @tasklist
 		if request.xhr?
 			respond_to do |format|
-				format.js { render :template => "projects/tasklist"}
+				format.js
 			end
 		else 
 			redirect_to tasklist_project_path(@project)

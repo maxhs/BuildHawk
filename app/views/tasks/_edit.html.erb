@@ -5,13 +5,13 @@
 
 		<div class="action-buttons">
 			<div id="task-save" class="action">
-				<%= f.submit "Save", type: :image, src: image_path('save.png'), :class => "save-img" %>
+				<%= f.submit "Save", type: :image, src: image_path('save.png'), :class => "remote save-img" %>
 			</div>
 			<% if current_user.any_admin? %>
-				<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), task_path(task), :method => :delete, :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true, :class=>"action" %>
+				<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), task_path(task), :method => :delete, :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true, :class=>"action remote" %>
 			<% end %>
 			<div id="dismiss-task" class="action">
-				<%= image_tag "blackX.png",id:"dismiss-task" %>
+				<%= image_tag "blackX.png", id:"dismiss-task" %>
 			</div>
 		</div>
 
@@ -77,14 +77,14 @@
 		<% end %>
 	</div>
 
-		<div class="button-container row">
-			<%= f.submit "Save", :class => "simple-btn save" %>
+		<!--<div class="button-container row">
+			<%= f.submit "Save", :class => "simple-btn save" %>-->
 	<% end %>
 
-			<% if current_user.any_admin? || task.user == current_user %>
+			<!--<% if current_user.any_admin? || task.user == current_user %>
 				<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), task_path(task), :method => :delete, :class=> "delete-link", :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true %>
 			<% end %>
-		</div>
+		</div>-->
 
 		<div id="comment-toggle" class="simple-btn">View Comments</div>
 	</div>

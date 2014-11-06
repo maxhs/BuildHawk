@@ -537,9 +537,16 @@ body {
 		}
 	}
 
-	#top-nav{
+	#top-nav.app {
 		left: 4%;
-		width: 96%;
+		
+		#navigation {
+			width: 96%;
+		}
+	}
+
+	#top-nav {
+		left: 0%;
 		-webkit-transform: translatez(0);
     	-moz-transform: translatez(0);
     	-ms-transform: translatez(0);
@@ -1076,10 +1083,10 @@ a.search-button {
 .simple-btn {
 	cursor:pointer;
 	background:#fefefe;
-	border: 1px solid rgba(0,0,0,.14);
-	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.33);
-	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.33);
-	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.33);
+	border: 1px solid rgba(0,0,0,.1);
+	box-shadow: 1px 1px 3px -1px rgba(0,0,0,.43);
+	-moz-box-shadow: 1px 1px 3px -1px rgba(0,0,0,.43);
+	-webkit-box-shadow: 1px 1px 3px -1px rgba(0,0,0,.43);
 	border-radius:9px;
 	-moz-border-radius:9px;
 	-webkit-border-radius:9px;
@@ -1103,10 +1110,10 @@ a.search-button {
 }
 
 .simple-btn:hover {
-	border-color: rgba(0,0,0,.23);
-	box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
-	-moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
-	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.4);
+	border-color: rgba(0,0,0,.5);
+	box-shadow: 1px 1px 3px -1px rgba(0,0,0,.5);
+	-moz-box-shadow: 1px 1px 3px -1px rgba(0,0,0,.5);
+	-webkit-box-shadow: 1px 1px 3px -1px rgba(0,0,0,.5);
 	color:#000;
 }
 
@@ -1117,7 +1124,6 @@ a.search-button {
 .action-buttons {
 	display:table;
 	max-width:50%;
-	width:100%;
 	position:absolute;
 	z-index:5;
 	border-spacing:4px;
