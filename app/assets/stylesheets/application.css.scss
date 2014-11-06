@@ -529,7 +529,7 @@ body {
 		-webkit-box-shadow:0 0 0 0;
 	}
 
-	#top-nav.revealed {
+	#top-nav.revealed, #top-nav.revealed.app {
 		left: 20%;
 
 		#navigation {
