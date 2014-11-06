@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 
-    attr_accessible :first_name, :last_name, :full_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
+    attr_accessible :first_name, :last_name, :user_id, :email, :password, :push_permissions, :email_permissions, :phone,
     				:company_id, :company_attributes, :image, :image_file_name, :password_confirmation, :admin, :uber_admin, 
                     :authentication_token, :company_admin, :text_permissions, :active
 
@@ -47,13 +47,12 @@ class User < ActiveRecord::Base
     validates_presence_of :password, :if => :password_required?
     validates_presence_of :company_id
 
-    #after_create :welcome
+    after_create :welcome
     before_destroy :cleanup_user
 
     def welcome
-        UserMailer.welcome(self).deliver if email 
-        full_name = "#{first_name} #{last_name}"
-        self.save
+        #UserMailer.welcome(self).deliver if email 
+        full_name
     end
 
     def cleanup_user
@@ -68,12 +67,14 @@ class User < ActiveRecord::Base
 
     def full_name 
         if first_name.length > 0 && last_name.length > 0
-            "#{first_name} #{last_name}"
+            full_name = "#{first_name} #{last_name}"
         elsif first_name && first_name.length > 0
-            "#{first_name}"
+            full_name = "#{first_name}"
         else
-            email
+            full_name = email
         end
+        self.update_column :full_name, full_name
+        return full_name
     end
 
     def email_task(task)

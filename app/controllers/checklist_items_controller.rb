@@ -106,16 +106,23 @@ class ChecklistItemsController < AppController
 	end
 
 	def export
-		item = ChecklistItem.find params[:id]
-		project = item.checklist.project
+		@item = ChecklistItem.find params[:id]
+		project = @item.checklist.project
+		@recipients = []
 		params[:names].each do |r|
 			puts "r: #{r}"
 			recipient = User.where(:full_name => r).first
-			recipient = Sub.where(:name => r).first unless recipient
-			ChecklistMailer.export(recipient.email, item, project).deliver
+			if recipient
+				ChecklistMailer.export(recipient.email, @item, project).deliver 
+				@recipients << recipient.full_name
+			end
 		end
 		params[:email].split(',').each do |e|
-			ChecklistMailer.export(e, item, project).deliver
+			email = e.strip if e.include?("@")
+			if email
+				ChecklistMailer.export(e, @item, project).deliver
+				@recipients << email
+			end
 		end
 
 		if request.xhr?

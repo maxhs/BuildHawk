@@ -1,4 +1,4 @@
-$('#alert').text("Checklist Item successfully exported").fadeIn(200).delay(2000).fadeOut(500, function(){
+$('#alert').text("\"<%= @item.abbreviated_body %>\" sent to <%= @recipients.to_sentence %>.").fadeIn(200).delay(2000).fadeOut(500, function(){
 	$(this).text("");
 	$('#export-checklist-modal').animate({"left":"100%",'opacity':'0'},300);
 	$('.modal-backdrop.in').fadeOut(300,function(){
