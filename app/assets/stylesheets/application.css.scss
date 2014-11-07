@@ -278,14 +278,14 @@ body {
 			}
 
 			.project:last-child, .project.buttons {
-				border-bottom:2px solid rgba(255,255,255,.05);
+				//border-bottom:2px solid rgba(255,255,255,.05);
 				margin-bottom:-2px;
 			}
 
 			.project {
 				cursor:default;
 				background:#555;
-				border-top:2px solid rgba(255,255,255,.05);
+				//border-top:2px solid rgba(255,255,255,.05);
 				line-height:15px;
 				-webkit-transition: all 0.23s ease;
     			-moz-transition: all 0.23s ease;
