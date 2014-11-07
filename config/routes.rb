@@ -14,7 +14,6 @@ Buildhawk::Application.routes.draw do
   end
 
   post "projects/order_projects", :to => "projects#order_projects"
-  #post "/projects/:id", :to => "projects#update"
   get "/projects/:id/update_report", :to => "projects#update_report"
   get "/projects/:id/update_task", :to => "projects#update_task"
   post "/users/preregister", :to => "users#preregister"

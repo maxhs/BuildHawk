@@ -18,10 +18,10 @@
 	<div>
 		<% if reports && reports.count > 0 %>
 			<div class="header row">
-				<div class="col-xs-3"><h5>Report Date</h5></div>
-				<div class="col-xs-3"><h5>Type</h5></div>
-				<div class="col-xs-3"><h5>Personnel</h5></div>
-				<div class="col-xs-3"><h5>Photos</h5></div>
+				<div class="col-xs-3"><h6>Report Date</h6></div>
+				<div class="col-xs-3"><h6>Type</h6></div>
+				<div class="col-xs-3"><h6>Personnel</h6></div>
+				<div class="col-xs-3"><h6>Photos</h6></div>
 			</div>
 			<div id="reports-table">
 				<%= render partial:"reports/index_row", collection: reports, as: :report, cache: true %>

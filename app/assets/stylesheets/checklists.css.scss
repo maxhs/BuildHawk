@@ -439,11 +439,11 @@
 	border-left:1px dotted #ddd;
 	
 	.checklist-item.active-item {
-		position:relative;
-		left:2.5%;
-		z-index:5;
-		background:#fff !important;
-		color:#000;
+		position: relative;
+		z-index: 5;
+		right:-1%;
+		background:#fff5cf !important;
+		color: #000;
 	}
 
 	.checklist-item {

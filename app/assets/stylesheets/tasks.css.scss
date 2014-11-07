@@ -3,6 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #task-container {
+	padding:5%;
+	
+	.task-title {
+		margin:0 0 1em;
+		max-width:50%;
+	}
+
 	header {
 		background:#fff;
 
@@ -78,8 +85,11 @@
 }
 
 .active-task {
-	background:#fff;
-	opacity:1 !important;
+	background: #fff5cf !important;
+	opacity: 1 !important;
+	margin-left: -2%;
+	padding: 10px 2% !important;
+	width: 104%;
 }
 
 .task {
