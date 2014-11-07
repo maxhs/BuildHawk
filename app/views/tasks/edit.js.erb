@@ -12,4 +12,4 @@ $('.active-task').removeClass('active-task');
 $('.task').addClass('faded');
 $('#task-<%=@task.id %>').addClass('active-task');
 $('#task-focus').css({/*'top':posTop,*/'left':'50%'});
-$("html, body").delay(200).animate({ scrollTop: $("#task-<%=@task.id %>").offset().top-84 }, 200);
+$("html, body").delay(200).animate({ scrollTop: $("#task-<%=@task.id %>").offset().top}, 200);
