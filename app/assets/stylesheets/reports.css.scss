@@ -17,17 +17,6 @@
 	transition: all 0.15s;
 }
 
-.active-report {
-	opacity: 1 !important;
-	z-index: 5;
-	margin-left:-2%;
-	padding:10px 2%;
-	width:104%;
-	position: relative;
-	background:#fff5cf !important;
-	border-bottom: 1px solid #eee !important;
-}
-
 #reports-header{
 	margin-bottom: 15px;
 	padding:0;
@@ -50,16 +39,30 @@
 	transition: all 0.15s;
 	width:100%;
 	float:left;
+	padding-bottom:0;
 
 	h4, h5 {
 		text-align:center;
 	}
+
 	.report.row {
 		border-bottom:1px solid #eee;
 		text-align:center;
+		padding:10px 0;
 	}
 	.row:last-child {
 		border-bottom:0;
+	}
+
+	.active-report.report.row {
+		opacity: 1 !important;
+		z-index: 5;
+		margin-left: -2%;
+		padding:10px 2%;
+		width:104%;
+		position: relative;
+		background:#fff5cf;
+		border-bottom: 1px solid #eee;
 	}
 }
 
