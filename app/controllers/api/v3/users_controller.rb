@@ -52,7 +52,6 @@ class Api::V3::UsersController < Api::V3::ApiController
 	end
 
 	def remove_push_token
-		puts "user device type: #{@device_type}"
 		render json: {success: @user.remove_push_tokens_except(@device_type, params[:token])} if @device_type
 	end
 
