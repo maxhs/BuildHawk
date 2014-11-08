@@ -201,12 +201,12 @@ body {
 		-ms-transition: all 0.3s ease;
 		-o-transition: all 0.3s ease;
 		transition: all 0.3s ease;
-		-webkit-transform: translateZ(0);
+		/*-webkit-transform: translateZ(0);
 		-ms-transform: translateZ(0);
 		transform: translateZ(0);
 		-webkit-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
-		backface-visibility: hidden;
+		backface-visibility: hidden;*/
 
 		li, #project-search-button, .projects-count {
 			opacity:.1;
@@ -391,12 +391,13 @@ body {
 
 		#bottom-menu.revealed {
 			left:0;
+			width:20%;
 			opacity: 1;
 		}
 
 		#bottom-menu {
 			height: 50px;
-			width: 100%;
+			width: 4%;
 			min-width: 200px;
 			position: fixed;
 			left: -16%;
