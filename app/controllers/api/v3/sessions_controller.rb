@@ -6,14 +6,9 @@ class Api::V3::SessionsController < Api::V3::ApiController
             device_token = params[:user][:device_token]
             params[:user].delete(:device_token)
           end
-          if params[:user][:device_type]
-            device_type = params[:user][:device_type]
-            params[:user].delete(:device_type)
-          end
         end
 
         device_token = params[:device_token] if params[:device_token]
-        device_type = params[:device_type] if params[:device_type]
 
         if params[:user].present?
             email = params[:user][:email]
@@ -31,8 +26,9 @@ class Api::V3::SessionsController < Api::V3::ApiController
   		return invalid_login_attempt unless @user
 
   		if @user.valid_password? password
-            if device_token && device_type
-  			    @user.push_tokens.where(:token => device_token, :device_type => device_type).first_or_create
+            if device_token && @device_type
+                put "had a device type on login: #{@device_type}"
+  			    @user.push_tokens.where(:token => device_token, :device_type => @device_type).first_or_create
             elsif device_token
                 @user.push_tokens.where(:token => device_token).first_or_create
             end
