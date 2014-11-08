@@ -10,6 +10,8 @@ class Api::V3::TasksController < Api::V3::ApiController
         else
             params[:task][:assignee_id] = nil
         end
+
+        params[:task][:user_ids] = params[:task][:user_ids].split(',') if params[:task][:user_ids]
         
         if params[:task][:completed] == "1"
             params[:task][:completed] = true
@@ -42,14 +44,7 @@ class Api::V3::TasksController < Api::V3::ApiController
     def create
         project = Project.find params[:project_id]
 
-        ### remove after 1.05
-        if params[:task][:user_assignee].present? 
-            assignee = User.where(:full_name => params[:task][:user_assignee]).first
-            params[:task][:assignee_id] = assignee.id
-            params[:task].delete(:user_assignee)
-        end
-        ####
-
+        params[:task][:user_ids] = params[:task][:user_ids].split(',') if params[:task][:user_ids]
         params[:task][:mobile] = true
         
         task = project.tasklists.last.tasks.create params[:task]
