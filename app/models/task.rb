@@ -114,7 +114,7 @@ class Task < ActiveRecord::Base
         created_date
     end
 
-    ###
+    ### API compatibility
     def worklist_id
         tasklist.id
     end
@@ -136,6 +136,7 @@ class Task < ActiveRecord::Base
   		t.add :completed
         t.add :created_date
         t.add :project_id
+        t.add :approved
         ## deprecated
         t.add :worklist_id
   	end
@@ -155,6 +156,7 @@ class Task < ActiveRecord::Base
         t.add :completed
         t.add :created_date
         t.add :project
+        t.add :approved
     end
 
     api_accessible :dashboard, :extend => :tasklist do |t|
