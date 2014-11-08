@@ -25,9 +25,10 @@ class Api::V3::SessionsController < Api::V3::ApiController
   		@user = User.find_for_database_authentication email: email if email
   		return invalid_login_attempt unless @user
 
+        puts "user device type: #{@device_type}"
+
   		if @user.valid_password? password
             if device_token && @device_type
-                put "had a device type on login: #{@device_type}"
   			    @user.push_tokens.where(:token => device_token, :device_type => @device_type).first_or_create
             elsif device_token
                 @user.push_tokens.where(:token => device_token).first_or_create
