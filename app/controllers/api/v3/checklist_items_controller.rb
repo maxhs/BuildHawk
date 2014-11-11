@@ -2,6 +2,7 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
 
     def update
     	item = ChecklistItem.find params[:id]
+        puts "params: #{params[:checklist_item][:state].to_i} and item state #{item.state}"
         if params[:checklist_item] && params[:checklist_item][:state].to_i != item.state
             should_log_activity = true
             if params[:checklist_item][:state] == 1
@@ -11,6 +12,7 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
             should_log_activity = false
         end
 
+        puts "should we log the activity? #{should_log_activity}"
         if params[:checklist_item]
             unless params[:checklist_item][:state]
                 params[:checklist_item][:state] = nil
@@ -22,7 +24,7 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
             item.update_attribute :state, nil
         end
 
-        if should_log_activity
+        if should_log_activity?
             if params[:user_id]
                 user = User.where(:id => params[:user_id]).first
                 item.log_activity(user) if user
