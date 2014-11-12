@@ -9,10 +9,11 @@ class ChecklistMailer < ActionMailer::Base
       @project = project
       @checklist_item = item
       mail(
-          :subject => "#{project.name} - #{item.body[0..20]}...",
-          :to      => recipient_email,
-          :from    => "support@buildhawk.com",
-          :tag     => 'Checklist Item Export'
+          :subject  => "#{project.name} - #{item.body[0..20]}...",
+          :to       => recipient_email,
+          :from     => "support@buildhawk.com",
+          :reply_to => "checklists@buildhawk.com",
+          :tag      => 'Checklist Item Export'
       )
     end
 end

@@ -172,7 +172,7 @@ Buildhawk::Application.routes.draw do
     post :tasks
     post :support
     post :reports
-    post :checklist_items
+    post :checklists
   end
   resources :tasks do
     member do

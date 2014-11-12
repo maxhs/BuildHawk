@@ -72,9 +72,10 @@
 			<h5>Add a photo</h5>
 			<%= f.fields_for :photos, task.photos.build do |photo| %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= photo.file_field :image %>
+				<%= photo.hidden_field :name, value: "Task Photo" %>
 				<%= photo.hidden_field :project_id, :value => @project.id %>
 				<%= photo.hidden_field :user_id, :value => current_user.id %>
+				<%= photo.file_field :image %>
 				<% if task.id %><%= photo.hidden_field :task_id, :value => task.id %><% end %>
 				<%= photo.hidden_field :source, :value => "Tasklist" %>
 			<% end %>

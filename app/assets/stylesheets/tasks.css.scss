@@ -103,7 +103,8 @@
 }
 
 .task.row {
-	img {
+	img, .photo-placeholder {
 		max-width:100%;
+		background:#ddd;
 	}
 }

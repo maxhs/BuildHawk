@@ -4,16 +4,16 @@
     </div>-->
     <div class="col-xs-2">
         <% if task.photos && task.photos.count > 0 %>
-                <% photo = task.photos.where("image_file_name IS NOT NULL").first %>
-                <% if photo %><%=image_tag(photo.image.url(:thumb)) %><% end %>
+            <% photo = task.photos.where("image_file_name IS NOT NULL").first %>
+            <%= image_tag(photo.image.url(:small)) if photo %>
         <% end %>
     </div>
     
     <div class="col-xs-3 task-body">
         <% if task.body && task.body.length > 0 %>
-                <%= link_to task.body, edit_task_path(task), :remote => true %> 
+            <%= link_to task.body, edit_task_path(task), :remote => true %> 
         <% else %>
-                <%= link_to edit_task_path(task), :remote => true do %> <span style="width:100%;">&nbsp;</span><% end %>
+            <%= link_to edit_task_path(task), :remote => true do %> <span style="width:100%;">&nbsp;</span><% end %>
         <% end %>
     </div>  
     <div class="col-xs-3">

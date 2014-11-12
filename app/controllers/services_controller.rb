@@ -12,4 +12,8 @@ class ServicesController < ApplicationController
 		puts "reports webhooks from mandrill: #{parameters}"
 	end
 
+	def checklists
+		puts "checklists webhooks from mandrill: #{parameters}"
+	end
+
 end
