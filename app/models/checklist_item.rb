@@ -184,6 +184,7 @@ class ChecklistItem < ActiveRecord::Base
         t.add :item_type
         t.add :photos_count
         t.add :comments_count
+        t.add :checklist_id
     end
 
     api_accessible :categories, :extend => :v3_checklists do |t|

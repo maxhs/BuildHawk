@@ -20,7 +20,9 @@ class Photo < ActiveRecord::Base
     end
 
   	has_attached_file 	:image, 
-	                    :styles => { :small  => ["200x200#", :jpg] },
+	                    :styles => { :large => ["1024x1024", :jpg],
+	                                 :small  => ["200x200#", :jpg],
+	                     },
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :storage        => :s3,
 	                    :url 			=> ":s3_alias_url",
@@ -82,7 +84,7 @@ class Photo < ActiveRecord::Base
 
 	def url_large
 		if image_file_name
-			image.url(:original)
+			image.url(:large)
 		else
 			""
 		end
