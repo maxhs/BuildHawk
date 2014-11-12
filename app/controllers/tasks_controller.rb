@@ -32,7 +32,6 @@ class TasksController < AppController
 		end
 		if params[:task][:assignee_attributes].present?
 			assignee = User.where(:full_name => params[:task][:assignee_attributes][:full_name]).first
-			sub_assignee = Sub.where(:name => params[:task][:assignee_attributes][:full_name]).first unless assignee
 			params[:task].delete(:assignee_attributes)
 		end
 
@@ -40,8 +39,6 @@ class TasksController < AppController
 		
 		if assignee
 			@task.update_attribute :assignee_id, assignee.id
-		elsif sub_assignee
-			@task.update_attribute :sub_assignee_id, sub_assignee.id
 		end
 
 		if request.xhr?
@@ -54,26 +51,11 @@ class TasksController < AppController
 	end
 
 	def show
-		@task = Task.find params[:id]
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else 
-			render :show
-		end
+		
 	end
 
 	def edit
 		@locations = @tasklist.tasks.map{|i| i.location if i.location && i.location.length > 0}.flatten
-		@task.build_assignee if @task.assignee.nil?
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else 
-			render :edit
-		end
 	rescue
 		if @project
 			redirect_to tasklist_project_path @project
@@ -137,12 +119,10 @@ class TasksController < AppController
 	end
 
 	def generate
-		if @task.assignee
-			@recipient = @task.assignee
-			TaskMailer.task(@task,@recipient).deliver
-		elsif @task.sub_assignee
-			@recipient = @task.sub_assignee
-			TaskMailer.task(@task,@recipient).deliver
+		if @task.assignees && @task.assignees.count > 0
+			@task.assignees.each do |recipient|
+				TasklistMailer.export(recipient.email,[@task],@task.project).deliver
+			end
 		end
 		if request.xhr?
 			respond_to do |format|

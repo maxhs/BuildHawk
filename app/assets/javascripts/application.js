@@ -53,13 +53,13 @@ function setupWindow(){
     var notice = document.getElementById("notice");
     var alert = document.getElementById("alert");
     if (notice.textContent.length > 0) {
-        $('#notice').delay(500).fadeIn("normal", function() {
-            $(this).delay(3300).fadeOut(function(){$(this).text("");});
+        $('#notice').delay(400).fadeIn("normal", function() {
+            $(this).delay(3000).fadeOut(function(){$(this).text("");});
         });
     }
     if (alert.textContent.length > 0) {
-        $("#alert").delay(500).fadeIn("normal", function() {
-            $(this).delay(3300).fadeOut(function(){$(this).text("");});
+        $("#alert").delay(400).fadeIn("normal", function() {
+            $(this).delay(3000).fadeOut(function(){$(this).text("");});
         });
     }
     $('#dropdown-toggle').click(function(){

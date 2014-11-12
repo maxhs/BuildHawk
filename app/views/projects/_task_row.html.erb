@@ -17,8 +17,8 @@
         <% end %>
     </div>  
     <div class="col-xs-3">
-        <% if task.users %>
-                <%= task.users.map(&:full_name).to_sentence %>
+        <% if task.assignees %>
+                <%= task.assignees.map(&:full_name).to_sentence %>
         <% else %>
                 <span style="color:#aaa;font-style:italic;">Not yet assigned</span>
         <% end %>

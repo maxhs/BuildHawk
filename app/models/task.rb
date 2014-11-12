@@ -1,8 +1,9 @@
 class Task < ActiveRecord::Base
 
-	attr_accessible :body, :user_ids, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, :photos_attributes, 
-                    :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, :comments_count, :mobile, 
-                    :user_id, :user, :assigned_name, :assigned_phone, :assigned_email, :approved
+	attr_accessible :body, :user_ids, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, 
+                    :photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, 
+                    :comments_count, :mobile, :user_id, :user, :assigned_name, :assigned_phone, :assigned_email, :approved,
+                    :assignee_ids
 
     belongs_to :tasklist
     belongs_to :user
@@ -14,7 +15,7 @@ class Task < ActiveRecord::Base
     has_many :activities, :dependent => :destroy
 
     has_many :task_users, :dependent => :destroy, autosave: true
-    has_many :users, :through => :task_users, autosave: true
+    has_many :assignees, :through => :task_users, autosave: true, source: :user
     
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
     accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }

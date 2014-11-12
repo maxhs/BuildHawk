@@ -3,44 +3,37 @@
 <% if @connect_user %>
 	<div style="max-width:800px;margin:20px auto;padding:20px;border:1px solid #ddd;text-align:center;font-size:1.3em;background: #f7f7f7;">Want to view and/or edit these tasks? <%= link_to "Sign up", register_connect_url( :user_id=> @connect_user.id, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> for BuildHawk.</div>
 <% end %>
-<% @task_array.each do |item| %>
+
+<% @task_array.each do |task| %>
 	<div style="width:100%;clear:both;">
-		<% if item.photos && item.photos.count > 0 && item.photos.first.image_file_name %>
-			<% photo = item.photos.first %>
-			<%= link_to edit_task_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:0 10px 10px 0;" do %>
+		<% if task.photos && task.photos.count > 0 && task.photos.first.image_file_name %>
+			<% photo = task.photos.first %>
+			<%= link_to edit_task_url(task, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"float:left;margin:0 10px 10px 0;" do %>
 				<%= image_tag(photo.image.url(:small), :style => "width:100px;display:block;") %> 
 			<% end %>
 		<% else %>
 			<div style="float:left;margin:0 10px 10px 0;background:#eee;line-height:100px;height:100px;width:100px;text-align:center;vertical-align:middle;color:#aaa;">No photo</div>
 		<% end %>
 
-		<span style="font-size:16px;"><%= link_to item.body, edit_task_url(item, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"color:#000;text-decoration:none;" %></span>
+		<span style="font-size:16px;"><%= link_to task.body, edit_task_url(task, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"color:#000;text-decoration:none;" %></span>
 
 		<table>
-			<% if item.assignee || item.sub_assignee || item.connect_assignee %>
+			<% task.assignees.each do |assignee| %>
 				<tr>
 					<td style="padding-right:2em;">Assignee:</td>
-					<td>
-						<% if item.assignee %>
-							<%= item.assignee.full_name %>
-						<% elsif item.sub_assignee %>
-							<%= item.sub_assignee.name %>
-						<% elsif item.connect_assignee %>
-							<%= item.connect_assignee.full_name %>
-						<% end %>
-					</td>
+					<td><%= assignee.full_name %></td>
 				</tr>
 			<% end %>
 
 			<tr>
 				<td style="padding-right:2em;">Date:</td>
-				<td><%= item.created_at.strftime("%b %e, %l:%M %p") %></td>
+				<td><%= task.created_at.strftime("%b %e, %l:%M %p") %></td>
 			</tr>
 		
 			<tr>
 				<td style="display:inline-block;margin:0 auto;padding-right:2em;">Status:</td>
 					<td>
-						<% if item.completed %>
+						<% if task.completed %>
 							<span>Complete</span>
 						<% else %>
 							<span style="color:#cc0000;">IN PROGRESS</span>

@@ -7,7 +7,7 @@
 						<%= f.submit "Save", type: :image, src: image_path('save.png'), :class => "save-img" %>
 					</div>
 					<div id="export-checklist-item" class="action">
-						<%=image_tag "export.png" %>
+						<%= image_tag "export.png" %>
 					</div>
 					
 					<% if current_user.admin || current_user.company_admin %>
