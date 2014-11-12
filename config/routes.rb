@@ -169,10 +169,12 @@ Buildhawk::Application.routes.draw do
   resources :phases
   resources :safety_topics
   resources :services do
-    post :tasks
-    post :support
-    post :reports
-    post :checklists
+    collection do
+      post :tasks
+      post :support
+      post :reports
+      post :checklists
+    end
   end
   resources :tasks do
     member do
