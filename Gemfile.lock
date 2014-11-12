@@ -53,8 +53,6 @@ GEM
     daemon_controller (1.2.0)
     deep_cloneable (1.6.1)
       activerecord (>= 3.1.0)
-    delayed_paperclip (2.8.0)
-      paperclip (>= 3.3)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -64,8 +62,6 @@ GEM
     erubis (2.7.0)
     excon (0.39.5)
     execjs (2.2.1)
-    filepicker-rails (1.2.0)
-      rails (>= 3.2)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     gcm (0.0.8)
@@ -257,9 +253,7 @@ DEPENDENCIES
   acts_as_list
   aws-sdk
   deep_cloneable (~> 1.6.0)
-  delayed_paperclip
   devise
-  filepicker-rails
   font-awesome-rails
   gcm
   geocoder
