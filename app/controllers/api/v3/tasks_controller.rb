@@ -55,11 +55,7 @@ class Api::V3::TasksController < Api::V3::ApiController
             :body => "#{task.user.full_name} created this item.",
             :activity_type => task.class.name
         )
-        
-        ### remove in 1.05
-        task.update_attribute :assignee_id, assignee.id if assignee
-        ###
-
+    
         if task.save
             respond_to do |format|
                 format.json { render_for_api :tasklist, :json => task, :root => :task}
