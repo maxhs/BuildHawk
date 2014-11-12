@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027193046) do
+ActiveRecord::Schema.define(version: 20141111235641) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -508,6 +508,7 @@ ActiveRecord::Schema.define(version: 20141027193046) do
     t.datetime "image_updated_at"
     t.boolean  "text_permissions",       default: true
     t.string   "mobile_token"
+    t.string   "avatar_url"
   end
 
   add_index "users", ["company_id"], name: "users_company_id_idx"

@@ -18,16 +18,17 @@
 			<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (if changing)", :class=>"tt-hint form-control" %></td></tr>
 			<tr><td><div style="padding:10px 0 0;display:inline-block; width:25%;">Email Permissions</div> <%= f.check_box :email_permissions %></td></tr>
 			<tr><td><div style="padding:10px 0 30px;display:inline-block; width:25%;">Push Permissions</div> <%= f.check_box :push_permissions %></td></tr>
-			<% if @user.image_file_name %>
+			<% if @user.avatar_url && @user.avatar_url.length > 0 %>
 				<tr><td>
-					<%= image_tag @user.image.url(:small), :class => "user-pic" %>
+					<%= filepicker_image_tag @user.avatar_url, w: 160, h: 160, fit: 'clip', :class=>"user-pic" %>
+					
 				</td></tr>
 				<tr><td>
-					Replace your photo: <%= f.file_field :image %>
+					Replace your photo: <%= f.filepicker_field :avatar_url, :class => "simple-btn" %>
 				</td></tr>
 			<% else %>
 				<tr><td>
-					Add a photo: <%= f.file_field :image %>
+					Add a photo: <%= f.filepicker_field :avatar_url, :class => "simple-btn" %>
 				</td></tr>
 			<% end %>
 			<tr>

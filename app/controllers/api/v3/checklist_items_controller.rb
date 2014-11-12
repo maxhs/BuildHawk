@@ -24,7 +24,7 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
             item.update_attribute :state, nil
         end
 
-        if should_log_activity?
+        if should_log_activity
             if params[:user_id]
                 user = User.where(:id => params[:user_id]).first
                 item.log_activity(user) if user

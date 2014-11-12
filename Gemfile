@@ -45,6 +45,7 @@ gem 'font-awesome-rails'
 gem 'sweet-alert'
 gem 'mandrill_mailer'
 gem 'gibbon'
+gem 'filepicker-rails'
 
 #gem 'resque-pool'
 #gem 'capybara'
