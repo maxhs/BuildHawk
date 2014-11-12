@@ -4,15 +4,12 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user = User.find params[:user_id]
         user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
 
-        if user.any_admin?
-            projects = user.company.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.uniq.sort_by(&:order_index)
-        else
-            projects = user.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by(&:order_index)
-        end
-
+        projects = user.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by(&:order_index)
+        projects += user.company.projects if user.any_admin?
+           
         if projects
             respond_to do |format|
-                format.json { render_for_api :visible_projects, :json => projects, :root => :projects}
+                format.json { render_for_api :projects, :json => projects.uniq, :root => :projects}
             end
         else
             render :json => {success: false}
