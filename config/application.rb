@@ -35,8 +35,9 @@ module Buildhawk
     config.assets.precompile += %w( .png .jpg .jpeg .svg .eot .woff .ttf )
 
     config.action_mailer.default_url_options = { host: "www.buildhawk.com" }
-
     ActionMailer::Base.default :from => 'support@buildhawk.com'
+    ActionMailer::Base.default :reply_to => 'support@buildhawk.com'
+    config.mandrill_mailer.default_url_options = { :host => 'www.buildhawk.com' }
     
     config.exceptions_app = self.routes
   end

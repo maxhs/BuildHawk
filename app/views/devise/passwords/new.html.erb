@@ -1,11 +1,10 @@
-<div class="session-container">
+<div class="session-container reset-password">
 	<h3 style="text-align:center">Forgot your password?</h3>
 
 	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {method: :post }, data: {'parsley-validate' => ''}) do |f| %>
 	  	<%= devise_error_messages! %>
 
 	  	<div><%= f.email_field :email, :placeholder => "Your email address", :class=>"form-control", :autofocus => true, :style=>"margin-top:5%;border-color:#ddd;" %></div>
-	
 	  	<div class="button-container"><%= f.submit "Reset password", :class => "simple-btn" %></div>
 	<% end %>
 

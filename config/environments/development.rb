@@ -36,7 +36,5 @@ Buildhawk::Application.configure do
 
   # Configure mailer SMTP settings
   config.action_mailer.delivery_method = :smtp
-
-  #ENV["REDISTOGO_URL"] = "redis://localhost:6379/"
   
 end

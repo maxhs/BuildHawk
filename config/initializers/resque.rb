@@ -16,7 +16,6 @@ Resque.schedule = YAML.load_file('config/resque_schedule.yml')
 
 Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 
-
 if defined?(PhusionPassenger)
   	PhusionPassenger.on_event(:starting_worker_process) do |forked|
     	# We're in smart spawning mode.

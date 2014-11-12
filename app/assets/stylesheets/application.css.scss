@@ -921,6 +921,16 @@ body {
 	}
 }
 
+.reset-password, .change-password {
+	#error_explanation {
+		padding:20px 0 0;
+		
+		h2, h3 {
+			display:none;
+		}
+	}
+}
+
 .input-group {
 	width:100%;
 }
