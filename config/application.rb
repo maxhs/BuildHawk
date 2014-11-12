@@ -37,8 +37,6 @@ module Buildhawk
     config.action_mailer.default_url_options = { host: "www.buildhawk.com" }
 
     ActionMailer::Base.default :from => 'support@buildhawk.com'
-
-    config.filepicker_rails.api_key = ENV['FILEPICKER_API_KEY']
     
     config.exceptions_app = self.routes
   end
