@@ -12,7 +12,8 @@ class ReminderMailer < ActionMailer::Base
          	:subject => "Reminder: #{@checklist_item.body[0..20]}...",
           	:to      => @recipient.email,
           	:from    => "support@buildhawk.com",
-          	:tag     => 'Checklist Item Reminder'
+          	:tag     => 'Checklist Item Reminder',
+            :reply_to => "reminders@inbound.buildhawk.com"
       	)
     end
 end

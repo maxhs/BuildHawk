@@ -142,6 +142,13 @@ Buildhawk::Application.routes.draw do
   resources :project_groups
   resources :leads, only: [:create, :index]
   resources :messages
+  resources :categories
+  resources :checklist_items do
+    member do
+      post :export
+      get :generate
+    end
+  end
   resources :checklists do 
     collection do 
       post :order_phases
@@ -160,13 +167,12 @@ Buildhawk::Application.routes.draw do
     end
   end
   resources :phases
-  resources :categories
   resources :safety_topics
-  resources :checklist_items do
-    member do
-      post :export
-      get :generate
-    end
+  resources :services do
+    post :tasks
+    post :support
+    post :reports
+    post :checklist_items
   end
   resources :tasks do
     member do

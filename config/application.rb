@@ -36,7 +36,7 @@ module Buildhawk
 
     config.action_mailer.default_url_options = { host: "www.buildhawk.com" }
     ActionMailer::Base.default :from => 'support@buildhawk.com'
-    ActionMailer::Base.default :reply_to => 'support@buildhawk.com'
+    ActionMailer::Base.default :reply_to => 'support@inbound.buildhawk.com'
     config.mandrill_mailer.default_url_options = { :host => 'www.buildhawk.com' }
     
     config.exceptions_app = self.routes

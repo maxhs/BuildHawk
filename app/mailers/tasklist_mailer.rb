@@ -8,10 +8,11 @@ class TasklistMailer < ActionMailer::Base
       @company = @project.company
   		@task_array = task_array
   		mail(
-      		:subject => "#{project.name} - Tasks Assigned to You",
-      		:to      => recipient_email,
-      		:from 	 => "support@buildhawk.com",
-      		:tag     => 'Task Export'
+      		:subject  => "#{project.name} - Tasks Assigned to You",
+      		:to       => recipient_email,
+      		:from     => "support@buildhawk.com",
+          :reply_to => "tasks@inbound.buildhawk.com",
+      		:tag      => 'Task Export'
     	)
   	end
 end
