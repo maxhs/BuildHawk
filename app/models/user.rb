@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
         puts "Sending a task email to a user with email: #{email}. Is the user active? #{active}"
         task_array = []
         task_array << task
-        TasklistMailer.export(email, task_array, task.tasklist.project).deliver
+        TasklistMailer.export(self, task_array).deliver
     end
 
     def text_task(task)

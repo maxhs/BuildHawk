@@ -118,19 +118,9 @@ class TasksController < AppController
 		end
 	end
 
-	def generate
-		if @task.assignees && @task.assignees.count > 0
-			@task.assignees.each do |recipient|
-				TasklistMailer.export(recipient.email,[@task],@task.project).deliver
-			end
-		end
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			redirect_to tasklist_project_path(@project)
-		end
+	def export
+		@task.export
+		redirect_to tasklist_project_path(@project) unless request.xhr?
 	end
 
 	def find_company

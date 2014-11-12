@@ -176,7 +176,7 @@ Buildhawk::Application.routes.draw do
   end
   resources :tasks do
     member do
-      get :generate
+      get :export
     end
   end
   resources :photos do

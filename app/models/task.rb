@@ -38,11 +38,21 @@ class Task < ActiveRecord::Base
     end
 
     def notify
-        if assignee
-            if assignee.email_permissions && assignee.email && assignee.email.length > 0
-                assignee.email_task(self)
-            elsif assignee.text_permissions && assignee.phone && assignee.phone.length > 0
-                assignee.text_task(self)
+        if assignees && assignees.count > 0
+            assignees.each do |assignee|
+                if assignee.email_permissions && assignee.email && assignee.email.length > 0
+                    assignee.email_task(self)
+                elsif assignee.text_permissions && assignee.phone && assignee.phone.length > 0
+                    assignee.text_task(self)
+                end
+            end
+        end
+    end
+
+    def export
+        if assignees && assignees.count > 0
+            assignees.each do |assignee|
+                assignee.email_task(self) if assignee.email_permissions && assignee.email && assignee.email.length > 0    
             end
         end
     end

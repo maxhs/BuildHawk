@@ -1,14 +1,14 @@
 class TasklistMailer < ActionMailer::Base
   	layout "list_mailer"
 
-  	def export(recipient_email, task_array, project)
-  		@recipient = User.where(:email => recipient_email).first
+  	def export(recipient, task_array)
+  		@recipient = recipient
         @connect_user = @recipient if @recipient && !@recipient.active
-  		@project = project
   		@task_array = task_array
+        @project = task_array[0].tasklist.project
   		mail(
-      		:subject  => "#{project.name} - Tasks Assigned to You",
-      		:to       => recipient_email,
+      		:subject  => "#{@project.name} - Tasks Assigned to You",
+      		:to       => @recipient.email,
       		:from     => "support@buildhawk.com",
             :reply_to => "tasks@inbound.buildhawk.com",
       		:tag      => 'Task Export'
