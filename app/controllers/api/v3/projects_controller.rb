@@ -5,7 +5,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
 
         projects = user.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by(&:order_index)
-        projects += user.company.projects.map{|p| p unless user.hidden_project_ids.include?(p.id)} if user.any_admin?
+        projects += user.company.projects.map{|p| p unless user.hidden_project_ids.include?(p.id)}.compact if user.any_admin?
            
         if projects
             respond_to do |format|

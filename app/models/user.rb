@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
     end
 
     def hidden_project_ids
-        ProjectUser.where(user_id: id, hidden: true).map{|pu| pu.project.id}
+        ProjectUser.where(user_id: id, hidden: true).map{|pu| pu.project.id}.compact.uniq
     end
 
     def clean_phone(phone_string)
