@@ -5,16 +5,20 @@
 
 		<div class="action-buttons">
 			<div id="task-save" class="action">
-				<%= f.submit "Save", type: :image, src: image_path('save.png'), :class => "remote save-img" %>
+               	<i class="fa fa-floppy-o remote"></i>
 			</div>
-			<div id="export-task" class="action">
-				<%= link_to image_tag("export.png", :class=>"remote"), export_task_path(task), remote: true %>
-			</div>
+			
+			<%= link_to export_task_path(task), :class=>"action remote", id:"export-task", remote: true do %>
+				<i class="fa fa-share"></i>
+			<% end %>
+			
 			<% if current_user.any_admin? %>
-				<%= link_to image_tag('trashButton.png',:class=> "remote delete-img"), task_path(task), :method => :delete, :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true, :class=>"action remote" %>
+				<%= link_to task_path(task), :method => :delete, :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true, :class=>"action remote" do %>
+					<i class="fa fa-trash-o remote"></i>
+				<% end %>
 			<% end %>
 			<div id="dismiss-task" class="action">
-				<%= image_tag "blackX.png", id:"dismiss-task" %>
+				<i class="fa fa-remove" id="dismiss-task"></i>
 			</div>
 		</div>
 

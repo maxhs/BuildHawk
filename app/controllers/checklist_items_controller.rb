@@ -40,11 +40,7 @@ class ChecklistItemsController < AppController
 			end
 		elsif @checklist.project_id
 			@project = @checklist.project
-			if request.xhr?
-				respond_to do |format|
-					format.js {render :template => "projects/checklist"}
-				end
-			else 
+			unless request.xhr?
 				redirect_to checklist_project_path(@project)
 			end
 		else

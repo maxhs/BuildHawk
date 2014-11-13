@@ -1,8 +1,11 @@
-$('#main').fadeOut(100,function(){
 <% if @project %>
-	$(this).html('<%= j render :partial => "projects/checklist", :locals => {:checklist => @checklist, :project => @project} %>');
+	
+	//TODO update row
+
 <% else %>
-	$(this).html('<%= j render :partial => "admin/editor", :locals => {:checklist => @checklist} %>');
+	$('#main').fadeOut(100,function(){
+
+		$(this).html('<%= j render :partial => "admin/editor", :locals => {:checklist => @checklist} %>');
+		$(this).fadeIn(100);
+	});
 <% end %>
-	$(this).fadeIn(100);
-});

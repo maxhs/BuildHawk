@@ -4,15 +4,18 @@ class Api::V3::TasksController < Api::V3::ApiController
     	task = Task.find params[:id]
         
         notify = false
+        ## compatibility briding ##
         if params[:task][:assignee_id]
             assignee = User.where(:id => params[:task][:assignee_id]).first
             notify = true if assignee && task.assignee_id != assignee.id
         else
             params[:task][:assignee_id] = nil
         end
-
         params[:task][:user_ids] = params[:task][:user_ids].split(',') if params[:task][:user_ids]
-        
+        ###
+
+        params[:task][:assignee_ids] = params[:task][:assignee_ids].split(',') if params[:task][:assignee_ids]
+
         if params[:task][:completed] == "1"
             params[:task][:completed] = true
             params[:task][:completed_at] = Time.now
