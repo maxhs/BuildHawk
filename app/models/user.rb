@@ -113,6 +113,10 @@ class User < ActiveRecord::Base
         end
     end
 
+    def hidden_project_ids
+        ProjectUser.where(user_id: id, hidden: true).map{|p|p.id}
+    end
+
     def clean_phone(phone_string)
         phone_string.gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
     end
