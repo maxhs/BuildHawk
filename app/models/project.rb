@@ -135,10 +135,6 @@ class Project < ActiveRecord::Base
         Resque.enqueue(DestroyProject, id)
     end
 
-    def visible
-        true
-    end
-
     acts_as_api
 
   	api_accessible :projects do |t|
@@ -154,10 +150,6 @@ class Project < ActiveRecord::Base
         t.add :reminders
         t.add :order_index
   	end
-
-    api_accessible :visible_projects, :extend => :projects do |t|
-        t.add :visible
-    end
 
     api_accessible :tasklist do |t|
         t.add :id
