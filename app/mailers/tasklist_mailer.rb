@@ -5,7 +5,8 @@ class TasklistMailer < ActionMailer::Base
   		@recipient = recipient
         @connect_user = @recipient if @recipient && !@recipient.active
   		@task_array = task_array
-        @project = task_array[0].tasklist.project
+        @tasklist = task_array[0].tasklist
+        @project = @tasklist.project
   		mail(
       		:subject  => "#{@project.name} - Tasks Assigned to You",
       		:to       => @recipient.email,

@@ -1,4 +1,4 @@
-<div>Write ABOVE THIS LINE to reply to this task or <%= link_to "View on BuildHawk",edit_task_url(task, :project_id => @project.id, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;margin-bottom:5px" %></div>
+<div>Write ABOVE THIS LINE to reply to this task or <%= link_to "View on BuildHawk", tasklist_project_url(@project), :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;margin-bottom:5px" %></div>
 
 <h1 style="text-align:center;margin:0 auto;"> <%= @project.name %> | Tasks assigned to you </h1>
 
