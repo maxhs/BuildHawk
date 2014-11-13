@@ -1,5 +1,6 @@
 class ServicesController < ApplicationController
-
+	skip_before_filter :verify_authenticity_token
+	
 	def support
 		puts "support webhook from mandrill: #{parameters}"
 	end
