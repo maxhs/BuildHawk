@@ -1,4 +1,4 @@
 // $('#notice').text("Saved").fadeIn(200).delay(3300).fadeOut(400, function(){
 // 	$(this).text("");
 // });
-$('#task-<%= @task.id %>').replaceWith('<%= j render partial:"projects/task_row", locals: {task: @task} %>');
+$('#task-<%= @task.id %>').replaceWith('<%= j render partial:"tasks/row", locals: {task: @task} %>');
