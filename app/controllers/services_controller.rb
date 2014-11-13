@@ -8,9 +8,8 @@ class ServicesController < ApplicationController
 	def tasks
 		events = JSON.parse params[:mandrill_events]
 		events.each do |e|
-			puts "e text:#{e['msg']['text']}"
+			puts "e text:#{e['msg']['text'].partition('Write ABOVE THIS LINE to reply').first.html_safe}"
 		end
-		
 		render json: {success: true}
 	end
 
