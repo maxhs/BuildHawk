@@ -1,6 +1,6 @@
-<div>Write ABOVE THIS LINE to reply to this task or <%= link_to "View on BuildHawk", tasklist_project_url(@project, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;margin-bottom:5px" %></div>
+<div style="margin-bottom: 2.5%; color: #777; font-size: .95em;">Write ABOVE THIS LINE to reply to this task or <%= link_to "View on BuildHawk", tasklist_project_url(@project, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;" %></div>
 
-<h1 style="text-align:center;margin:0 auto;"> <%= @project.name %> | Tasks assigned to you </h1>
+<h1 style="text-align:center;margin:0 auto 2.5%;"> <%= @project.name %> | Tasks assigned to you </h1>
 
 <% if @connect_user %>
 	<div style="max-width:800px;margin:20px auto;padding:20px;border:1px solid #ddd;text-align:center;font-size:1.3em;background: #f7f7f7;">Want to view and/or edit these tasks? <%= link_to "Sign up", register_connect_url( :user_id=> @connect_user.id, :host => "www.buildhawk.com"), :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> for BuildHawk.</div>

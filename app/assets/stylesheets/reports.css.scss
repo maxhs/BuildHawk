@@ -15,6 +15,12 @@
 	-ms-transition: all 0.15s;
 	-o-transition: all 0.15s;
 	transition: all 0.15s;
+
+	#export-report {
+		img {
+			width:35px;
+		}
+	}
 }
 
 #reports-header{
