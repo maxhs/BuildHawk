@@ -1,4 +1,4 @@
-$('#alert').text("Saved").fadeIn(200).delay(1700).fadeOut(500, function(){
+$('#alert').text("Saved").fadeIn(200).delay(1700).fadeOut(300, function(){
 	$(this).text("");
 });
 $('#report-<%= @report.id %>').replaceWith('<%= j render partial:"reports/index_row", locals: {report: @report} %>');

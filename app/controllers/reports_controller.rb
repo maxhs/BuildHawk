@@ -124,11 +124,13 @@ class ReportsController < AppController
 
 	def remove_report_user
 		report_user = ReportUser.find params[:id]
+		@report_user_id = report_user.id
 		report_user.destroy
 	end
 
 	def remove_report_company
 		report_company = ReportCompany.find params[:id]
+		@report_company_id = report_company.id
 		report_company.destroy
 	end
 

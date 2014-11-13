@@ -1,1 +1,3 @@
-console.log('success removing personnel');
+$('#report-user-<%= @report_user_id %>').hide(170,function(){
+	$(this).remove();
+});

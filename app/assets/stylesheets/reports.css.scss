@@ -152,9 +152,9 @@
 	.report-user, .report-company {
 		width: 95%;
 
-		.remove-personnel {
-			width:18px;
-			margin-top:9px;
+		.fa-remove {
+			font-size: 1.25em;
+			margin:6px 2px 0 0;
 			cursor:pointer;
 			float:right;
 		}
