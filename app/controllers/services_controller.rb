@@ -6,7 +6,7 @@ class ServicesController < ApplicationController
 	end
 
 	def tasks
-		events = params[:mandrill_events]
+		events = JSON.parse params[:mandrill_events]
 		events.each do |e|
 			puts "e message: #{e['msg']}"
 			puts "e text:#{e['message']['text']}"
