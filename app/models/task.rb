@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
 
-	attr_accessible :body, :user_ids, :assignee_id, :assignee, :location, :order_index, :photos, :tasklist_id, :tasklist, 
-                    :photos_attributes, :completed, :completed_at, :assignee_attributes, :completed_by_user_id, :photos_count, 
+	attr_accessible :body, :user_ids, :location, :order_index, :photos, :tasklist_id, :tasklist, :photos_attributes, :completed, 
+                    :completed_at, :completed_by_user_id, :photos_count, 
                     :comments_count, :mobile, :user_id, :user, :assigned_name, :assigned_phone, :assigned_email, :approved,
                     :assignee_ids
 
@@ -18,7 +18,7 @@ class Task < ActiveRecord::Base
     has_many :assignees, :through => :task_users, autosave: true, source: :user
     
     accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
-    accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
+    #accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
     after_create :notify
 
@@ -123,6 +123,10 @@ class Task < ActiveRecord::Base
 
     def epoch_time
         created_date
+    end
+
+    def assignee
+        assignees[0]
     end
 
     ### API compatibility

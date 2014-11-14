@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027193046) do
+ActiveRecord::Schema.define(version: 20141114015654) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -458,7 +458,6 @@ ActiveRecord::Schema.define(version: 20141027193046) do
   create_table "tasks", force: true do |t|
     t.text     "body"
     t.integer  "tasklist_id"
-    t.integer  "assignee_id"
     t.string   "location"
     t.integer  "order_index"
     t.string   "assignee_name"
@@ -474,8 +473,7 @@ ActiveRecord::Schema.define(version: 20141027193046) do
     t.boolean  "approved"
   end
 
-  add_index "tasks", ["assignee_id"], name: "tasks_assignee_id_idx"
-  add_index "tasks", ["tasklist_id", "assignee_id", "completed_by_user_id"], name: "tasks_idx"
+  add_index "tasks", ["tasklist_id", "user_id", "completed_by_user_id"], name: "tasks_indexes"
 
   create_table "users", force: true do |t|
     t.string   "email"

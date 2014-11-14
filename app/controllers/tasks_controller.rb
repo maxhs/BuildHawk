@@ -5,7 +5,6 @@ class TasksController < AppController
 	def new
 		@task = Task.new
 		@task.photos.build
-		@task.build_assignee
 		@project = Project.find params[:project_id]
 		@tasklist = @project.tasklists.last
 		@company = @project.company
