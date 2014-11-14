@@ -20,8 +20,10 @@ class Photo < ActiveRecord::Base
     end
 
   	has_attached_file 	:image, 
-	                    :styles => { :large => ["1024x1024", :jpg],
-	                                 :small  => ["200x200#", :jpg],
+  						:convert_options => { :all => "-quality 75" },
+	                    :styles => {:large 	=> ["640x640#", :jpg],
+	                    			:medium => ["200x200#", :jpg],
+	                                :small  => ["100x100#", :jpg],
 	                     },
 	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
 	                    :storage        => :s3,
@@ -146,6 +148,7 @@ class Photo < ActiveRecord::Base
 		t.add :epoch_taken, :if => :has_taken_date?
 		t.add :original
 		t.add :url_large
+		t.add :url_medium
 		t.add :url_small
 		t.add :url_thumb
 		t.add :image_file_size
@@ -158,7 +161,6 @@ class Photo < ActiveRecord::Base
 		t.add :folder, :if => :has_folder?
 		t.add :created_date
 		t.add :date_string
-		#t.add :url_medium
 		#t.add :created_at
 		## deprecated
 		t.add :folder_name, :if => :has_folder?
