@@ -12,8 +12,8 @@
 	</table>
 		<% else %>
 	</table>
-			<div id="admin-no-checklists">You don't have any core checklist templates, but you can create some for your company from the list below.</div>
-		<% end %>
+		<div id="admin-no-checklists">You don't have any core checklist templates, but you can create some for your company from the list below.</div>
+	<% end %>
 </div>
 
 <div class="project-checklist-table standard-templates border-box">
@@ -34,9 +34,9 @@
 				<td>1</td>
 				<td>1</td>
 				<td>1</td>
-				<td><h5><%= link_to "Use", create_blank_template_admin_index_path(:company_id => current_user.company.id, :name => "Blank Template"), :class=>"remote", :method => :post, :remote => true %></h5></td>
+				<td><h5><%= link_to "Use", create_blank_template_admin_index_path(company_id: current_user.company.id, name: "Blank Template"), :class=>"remote simple-btn", method: :post, remote: true %></h5></td>
 			</tr>
-			<%= render :partial => "admin/core_checklist_row", collection: @uber_checklists, :as => :c, cache: true %>
+			<%= render :partial => "admin/core_checklist_row", collection: @uber_checklists, as: :c, cache: true %>
 		</tbody>
 	</table>
 </div>
