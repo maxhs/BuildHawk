@@ -37,13 +37,17 @@
 		display:inline-block;
 	}
 
+	.cancel, .delete {
+		font-size:1.5em;
+	}
+	
 	.cancel {
 		position:relative;
 		left:10px;
 		cursor:pointer;
 	}
 
-	.delete-img {
+	.delete {
 		position:relative;
 		left:20px;
 	}

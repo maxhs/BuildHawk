@@ -1,6 +1,37 @@
-<li><%= link_to "Companies", companies_uber_admin_index_path, :id => "uber-admin-companies-link", remote: true %></li>
-<li><%= link_to "Users", users_uber_admin_index_path, :id => "uber-admin-users-link", remote: true %></li>
-<li><%= link_to "Safety Topics", safety_topics_uber_admin_index_path, :id => "uber-admin-safety-topics-link", remote: true %></li>
-<li><%= link_to "Core Checklists", core_checklists_uber_admin_index_path, :id => "uber-admin-checklists-link", remote: true %></li>
-<li><%= link_to "Leads", leads_path, :id => "uber-admin-leads-link", remote: true %></li>
-<li><%= link_to "Errors", errors_uber_admin_index_path, :id => "uber-admin-errors-link", remote: true %></li>	
+<li>
+	<%= link_to companies_uber_admin_index_path, :id => "uber-admin-companies-link", remote: true do %>
+		<i class="fa fa-database nav-icon"></i>
+		<div>Companies</div>
+	<% end %>
+</li>
+<li>
+	<%= link_to users_uber_admin_index_path, :id => "uber-admin-users-link", remote: true do %>
+		<i class="fa fa-users nav-icon"></i>
+		<div>Users</div>
+	<% end %>
+</li>
+<li>
+	<%= link_to safety_topics_uber_admin_index_path, :id => "uber-admin-safety-topics-link", remote: true do %>
+		<i class="fa fa-medkit nav-icon"></i>
+		<div>Safety Topics</div>
+	<% end %>
+</li>
+<li>
+	<%= link_to core_checklists_uber_admin_index_path, :id => "uber-admin-checklists-link", remote: true do %>
+		<i class="fa fa-list-alt nav-icon"></i>
+		<div>Core Checklists</div>
+	<% end %>
+</li>
+<li>
+	<%= link_to leads_path, :id => "uber-admin-leads-link", remote: true do %>
+		<i class="fa fa-cloud-download nav-icon"></i>
+		<div>Leads</div>
+	<% end %>
+</li>
+<li>
+	<%= link_to errors_uber_admin_index_path, :id => "uber-admin-errors-link", remote: true do %>
+		<i class="fa fa-chain-broken"></i>
+		<div>Errors</div>
+	<% end %>
+
+</li>	
