@@ -30,7 +30,7 @@
 				</div>		
 				
 				<div id="tasks">
-					<%= render partial: "tasks/row", collection: tasks, as: :task, cache: true %>
+					<%= render partial: "tasks/row", collection: tasks, as: :task, cache: false %>
 				</div>
 			<% else %>
 				<div class="no-contents-placeholder font-smoothing">No tasks</div>
