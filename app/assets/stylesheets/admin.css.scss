@@ -74,15 +74,14 @@
 	border-bottom:1px solid #ddd;
 }
 
-#core-checklist {
+#core-checklists {
 	padding:20px; 
 	margin-top:40px; 
-	border:1px solid #eee;
 	margin:0 auto; 
 	width:100%;
 
 	th {
-		background:#eee;
+
 	}
 
 	td {
@@ -91,6 +90,10 @@
 
 	td.category,td.subcategory,td.timestamp, td.edit {
 		width:10%;
+	}
+
+	.fa-trash-o {
+		font-size:1.5em;
 	}
 }
 
