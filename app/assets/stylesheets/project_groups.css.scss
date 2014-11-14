@@ -124,11 +124,11 @@
 			float:left;
 			position:relative;
 			left:10px;
-			top:9px;
-
-			.fa-trash-o {
-				font-size:1.5em;
-			}
+			top:12px;
+		}
+		.fa-trash-o, .fa-remove {
+			font-size:1.25em;
+			color:#fff;
 		}
 	}
 }

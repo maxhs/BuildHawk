@@ -15,13 +15,13 @@ class Api::V3::ReportsController < Api::V3::ApiController
     end
 
     def show
-        report = Report.find params[:id]
+        report = Report.where(id: params[:id]).first
         if report 
             respond_to do |format|
                 format.json { render_for_api :v3_reports, :json => report, :root => :report}
             end
         else
-            render :json => {:success => false}
+            render :json => {:success => false, message: "No report"}
         end
     end
 

@@ -28,19 +28,19 @@
 				<% @activities.each do |activity| %>
 					<% if activity.checklist_item %>
 						<div class="row">	
-							<div class="col-xs-1"><%= image_tag 'checklist.png', :class=>"dashboard-image" %></div>
+							<div class="col-xs-1"><i class="fa fa-list-alt dashboard-image"></i></div>
 							<div class="col-xs-2">(<%= parse_date activity.created_at %>)</div>
 							<div class="col-xs-8"><%= link_to activity.checklist_item.body, checklist_item_project_path(project_id: @project.id, :item_id => activity.checklist_item.id), :class => "recently-completed", :remote => true %></div>
 						</div>
 					<% elsif activity.report %>
 						<div class="row">	
-							<div class="col-xs-1"><%= image_tag 'reports.png', :class=>"dashboard-image" %></div>
+							<div class="col-xs-1"><i class="fa fa-pencil dashboard-image"></i></div>
 							<div class="col-xs-2">(<%= parse_date activity.created_at %>)</div>
 							<div class="col-xs-8"><%= link_to "#{activity.report.date_string}", reports_path(project_id: @project.id, report_id: activity.report), :class => "recently-completed", :remote => true %></div>
 						</div>
 					<% elsif activity.task %>
 						<div class="row">	
-							<div class="col-xs-1"><%= image_tag 'task.png', :class=>"dashboard-image" %></div>
+							<div class="col-xs-1"><i class="fa fa-tasks dashboard-image"></i></div>
 							<div class="col-xs-2">(<%= parse_date activity.created_at %>)</div>
 							<div class="col-xs-8"><%= link_to activity.task.body, tasklist_project_path(:project_id => @project.id, :task_id => activity.task.id), :class => "recently-completed", :remote => true %></div>
 						</div>
