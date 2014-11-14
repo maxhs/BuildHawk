@@ -101,8 +101,8 @@ class Api::V3::ReportsController < Api::V3::ApiController
     def update    
         current_user = User.where(id: params[:user_id]).first 
     	report = Report.where(id: params[:id]).first
-        
-        render text: "No report" and return unless report
+
+        render json: {:success => false, message: "No report"} and return unless report
         
         if params[:report][:report_users].present?
             users = params[:report][:report_users]

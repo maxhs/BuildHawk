@@ -1,7 +1,8 @@
 class Api::V3::TasksController < Api::V3::ApiController
     
     def update
-    	task = Task.find params[:id]
+    	task = Task.where(id: params[:id]).first
+        render json: {:success => false, message: "No task"} and return unless task
         
         notify = false
         ## compatibility briding ##
