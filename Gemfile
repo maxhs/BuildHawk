@@ -6,7 +6,7 @@ gem 'passenger'
 gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 gem 'rails_12factor', group: :production
-gem "paperclip"
+gem 'paperclip'
 gem 'aws-sdk'
 gem 'acts_as_api'
 gem 'devise'
@@ -19,6 +19,8 @@ gem 'protected_attributes'
 gem 'multi_fetch_fragments'
 gem 'resque'
 gem 'resque-scheduler'
+gem 'resque-ensure-connected'
+gem 'delayed_paperclip'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'roo'
