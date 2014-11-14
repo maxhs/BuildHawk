@@ -2,7 +2,6 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
 
     def update
     	item = ChecklistItem.find params[:id]
-        puts "params: #{params[:checklist_item][:state].to_i} and item state #{item.state}"
         if params[:checklist_item] && params[:checklist_item][:state].to_i != item.state
             should_log_activity = true
             if params[:checklist_item][:state] == 1
