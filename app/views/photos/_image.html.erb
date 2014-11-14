@@ -38,9 +38,9 @@
 			<div class="label-container">
 				<% if p.user %>
 					<% if p.source == "Documents"%>
-						<span class="label">Uploaded:</span>
+						<span class="label">From:</span>
 					<% else %>
-						<span class="label">Taken by:</span>
+						<span class="label">By:</span>
 					<% end %>
 					<%= p.user.full_name%>
 				<% else %>

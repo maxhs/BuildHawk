@@ -61,6 +61,10 @@ class Project < ActiveRecord::Base
         end
     end
 
+    def tasks
+        tasklists.map{|t| t.tasks}.compact.flatten
+    end
+
     def adjust_users
         if project_group_id != nil
             puts 'inside check_groups'

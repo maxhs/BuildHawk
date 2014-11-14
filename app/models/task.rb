@@ -161,6 +161,7 @@ class Task < ActiveRecord::Base
         t.add :photos
         t.add :body
         t.add :assignee
+        t.add :assignees
         t.add :location
         t.add :completed_at
         t.add :created_at

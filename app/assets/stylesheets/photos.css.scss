@@ -18,7 +18,7 @@
 }
 
 .image-block{
-	width:210px;
+	width:160px;
 	text-align:center;
 	padding:5px;
 	margin:10px 10px 10px 0;
@@ -28,8 +28,14 @@
 	display:inline-block;
 	position:relative;
 
+	img {
+		width:100%;
+	}
+
 	.label-container {
 		text-align:left;
+		font-size:.95em;
+
 		.label {
 			color:#aaa;
 			padding-right:7px;
