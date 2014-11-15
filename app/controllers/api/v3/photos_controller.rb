@@ -1,9 +1,6 @@
 class Api::V3::PhotosController < Api::V3::ApiController
 
     def create
-
-        #render json: {failure: true} and return
-
         params[:photo][:taken_at] = Time.at(params[:photo][:taken_at].to_i).to_datetime if params[:photo][:taken_at]
         
         ## android ##
@@ -15,22 +12,14 @@ class Api::V3::PhotosController < Api::V3::ApiController
             end
             params[:photo][:mobile] = true
             photo.update_attributes params[:photo]
+            render json: {photo: photo}
         else
         ## ios ##
             photo = Photo.create params[:photo]
+            respond_to do |format|
+                format.json { render_for_api :dashboard, json: photo.report, root: :report}
+            end
         end
-
-        # if photo.task
-        #     respond_to do |format|
-        #         format.json { render_for_api :tasklist, json: photo.task, root: :task}
-        #     end
-        # elsif photo.report
-        #     respond_to do |format|
-        #         format.json { render_for_api :reports, json: photo.report, root: :report}
-        #     end
-        # else
-            render json: {photo: photo}
-        #end
     end
 
     def show
