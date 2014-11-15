@@ -140,11 +140,10 @@ body {
 
 	.border-box {
 		background-color:#fff;
-		border:1px solid rgba(0,0,0,.11);
 		padding:1%;
-		box-shadow: 0 0 11px 0 rgba(0,0,0,.1);
-		-moz-box-shadow: 0 0 11px 0 rgba(0,0,0,.1);
-		-webkit-box-shadow: 0 0 11px 0 rgba(0,0,0,.1);
+		box-shadow: 0 0 7px 0 rgba(0,0,0,.07);
+		-moz-box-shadow: 0 0 7px 0 rgba(0,0,0,.07);
+		-webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,.07);
 		border-radius:2px;
 		-moz-border-radius:2px;
 		-webkit-border-radius:2px;
@@ -208,7 +207,7 @@ body {
 		}
 
 		#settings-row{
-			padding:11px 10px;
+			padding:5px 10px;
 		}
 
 		#projects-search-form {
@@ -225,9 +224,7 @@ body {
 		}
 
 		#logo {
-			padding-bottom:0;
-			width:148px;
-			text-align:center;
+			width:170px;
 		}
 
 		#settings {
@@ -240,16 +237,16 @@ body {
 			width:24px;
 			float:right;
 			position:absolute;
-			right:45px;
-			top:19px;
+			right:55px;
+			top:15px;
 		}
 
 		#menu-toggle {
 			width:24px;
 			float:right;
 			position:absolute;
-			right:10px;
-			top:19px;
+			right:17px;
+			top:15px;
 			cursor:pointer;
 			opacity:1 !important;
 		}

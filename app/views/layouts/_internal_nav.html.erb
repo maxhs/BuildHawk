@@ -1,7 +1,22 @@
 <% if current_user.any_admin? %>
-	<li><%= link_to "Admin", admin_index_path, remote: true %></li>
+	<li>
+		<%= link_to admin_index_path, remote: true do %>
+			<i class="fa fa-university"></i>
+			<div>Admin</div>
+		<% end %>
+	</li>
 <% end %>
 <% if current_user.uber_admin? %>
-	<li><%= link_to "Uber Admin", uber_admin_index_path, remote: true %></li>
-	<li class="nav-help" id="nav-help"><%= link_to 'Help' %></li>
+	<li>
+		<%= link_to uber_admin_index_path, remote: true do %>
+			<i class="fa fa-beer"></i>
+			<div>Uber Admin</div>
+		<% end %>
+	</li>
+	<li>
+		<%= link_to admin_index_path, remote: true do %>
+			<i class="fa fa-life-ring"></i>
+			<div>Help</div>
+		<% end %>
+	</li>
 <% end %>
