@@ -239,6 +239,9 @@ body {
 			position:absolute;
 			right:55px;
 			top:15px;
+			color:#fff;
+			font-size:24px;
+			cursor:pointer;
 		}
 
 		#menu-toggle {
@@ -526,9 +529,9 @@ body {
 
 	.navbar-fixed-top.app {
 		background:#f7f7f7;
-		box-shadow:0 0 0 0;
-		-moz-box-shadow:0 0 0 0;
-		-webkit-box-shadow:0 0 0 0;
+		box-shadow: 0 -1px 3px 0 rgba(0,0,0,.14);
+		-moz-box-shadow: 0 -1px 3px 0 rgba(0,0,0,.14);
+		-webkit-box-shadow: 0 -1px 3px 0 rgba(0,0,0,.14);
 	}
 
 	#top-nav.revealed, #top-nav.revealed.app {
@@ -613,9 +616,12 @@ body {
 				font-weight:normal;
 				text-transform:uppercase;
 				letter-spacing:2px;
-				font-size:1.1em;
 				font-weight:bold;
 				font-family: "Myriad Pro","Open Sans","OpenSans","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
+
+				.fa {
+					font-size:1.1em;
+				}
 			}
 
 			a:hover {
