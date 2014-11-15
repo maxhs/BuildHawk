@@ -21,7 +21,7 @@ class Photo < ActiveRecord::Base
 
   	has_attached_file 	:image, 
   						:convert_options 	=> { :all => "-quality 75" },
-	                    :styles => {:large 	=> ["640x640>", :jpg],
+	                    :styles => {:large 	=> ["1024x1024>", :jpg],
 	                    			:medium => ["200x200#", :jpg],
 	                                :small  => ["100x100#", :jpg],
 	                     },
