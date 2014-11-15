@@ -22,7 +22,7 @@
 				</div>
 			</div>
 
-			<div class="thin-form" style="margin-top:40px;">
+			<div class="thin-form">
 				<div class="row form-title" style="border:0;margin-top:0;padding-top:0">
 					
 					<div class="input-append date col-md-6" data-date-format="dd-mm-yyyy">
@@ -98,15 +98,19 @@
 					<div class="user-container col-md-6">
 						<%= select_tag :users, options_for_select(project_users.map{|pu| [pu.user.full_name, pu.user.id]}.unshift("")), :id=>"users-select", style:"padding-bottom:5px;" %>
 
-						<% report.report_users.each do |report_user| %>
-							<%= render partial:"reports/user", locals:{report: report, report_user: report_user} %>
+						<% unless report.new_record? %>
+							<% report.report_users.each do |report_user| %>
+								<%= render partial:"reports/user", locals:{report: report, report_user: report_user} %>
+							<% end %>
 						<% end %>
 					</div>
 					<div class="sub-container col-md-6">
 						<%= select_tag :subs, options_for_select(@subs.map{|s| [s.name, s.id]}.unshift("")), :id=>"subs-select", style:"padding-bottom:5px;" %>
 
-						<% report.report_companies.each do |rc| %>
-							<%= render partial:"reports/company", locals:{report: report, report_company: rc} %>
+						<% unless report.new_record? %>
+							<% report.report_companies.each do |rc| %>
+								<%= render partial:"reports/company", locals:{report: report, report_company: rc} %>
+							<% end %>
 						<% end %>
 						
 					</div>

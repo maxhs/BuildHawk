@@ -1,7 +1,10 @@
 <div class="report-company" id="report-company-<%=report_company.id%>">
 	<%= text_field_tag "report_companies[#{report_company.company.id if report_company.company}]", report_company.count, placeholder: "0", :class => "report-personnel-input" %>
 	<span style="padding-left:1em;"><%= report_company.company.name if report_company.company %></span>
-	<%= link_to remove_report_company_report_path(report_company), id:"remove-report-company-#{report_company.id}", method: :delete, remote: true, data: {confirm: "Are you sure you want to remove #{report_company.company.name} from this report?"} do %>
-		<i class="fa fa-remove remote"></i>
+
+	<% unless report.new_record? %>
+		<%= link_to remove_report_company_report_path(report_company), id:"remove-report-company-#{report_company.id}", method: :delete, remote: true, data: {confirm: "Are you sure you want to remove #{report_company.company.name} from this report?"} do %>
+			<i class="fa fa-remove remote"></i>
+		<% end %>
 	<% end %>
 </div>

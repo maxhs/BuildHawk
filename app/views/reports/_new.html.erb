@@ -3,7 +3,20 @@
 	<%= f.hidden_field :project_id, value: @project.id %>
 	<%= f.hidden_field :author_id, value: current_user.id %>
 	<div id="add-report" class="border-box container">
-		<div id="dismiss-report"><%=image_tag "blackX.png" %></div>
+		<div class="action-buttons">
+			<div style="display:table-row">
+				<div id="report-save" class="action">
+					<i class="fa fa-floppy-o remote"></i>
+				</div>
+				<div id="export-report" class="action">
+					<%= link_to generate_report_path(report), remote: true do %>
+						<i class="fa fa-share"></i>
+					<% end %>
+				</div>
+				<div id="dismiss-report" class="action dismiss"><i class="fa fa-remove"></i></div>
+			</div>
+		</div>
+
 		<div class="thin-form">
 			<div class="row">
 				<div class="input-append date col-md-6" data-date-format="dd-mm-yyyy">

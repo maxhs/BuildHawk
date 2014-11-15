@@ -3,7 +3,10 @@
 	<span style="padding-left:1em;">
 		<%= report_user.user.full_name if report_user.user %>
 	</span>
-	<%= link_to remove_report_user_report_path(report_user), id:"remove-report-user-#{report_user.id}", method: :delete, remote: true, data: {confirm: "Are you sure you want to remove #{report_user.user.full_name} from this report?"} do %>
-		<i class="fa fa-remove remote"></i>
+
+	<% unless report.new_record? %>
+		<%= link_to remove_report_user_report_path(report_user), id:"remove-report-user-#{report_user.id}", method: :delete, remote: true, data: {confirm: "Are you sure you want to remove #{report_user.user.full_name} from this report?"} do %>
+			<i class="fa fa-remove remote"></i>
+		<% end %>
 	<% end %>
 </div>
