@@ -26,12 +26,12 @@ class Api::V3::ReportsController < Api::V3::ApiController
     end
 
     def create
-        current_user = User.find params[:report][:author_id]
-        project = Project.find params[:report][:project_id]
+        current_user = User.where(id: params[:report][:author_id]).first
+        project = Project.where(id: params[:report][:project_id]).first
         reports_with_type = project.reports.where(:report_type => params[:report][:report_type])
 
         if reports_with_type && reports_with_type.map(&:date_string).include?(params[:report][:date_string])
-            render json: {duplicate: "#{params[:report][:date_string]}"}
+            render json: {duplicate: "#{params[:report][:date_string]}"} and return
         else
             if params[:report][:report_users].present?
                 users = params[:report][:report_users]

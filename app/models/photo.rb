@@ -20,17 +20,17 @@ class Photo < ActiveRecord::Base
     end
 
   	has_attached_file 	:image, 
-  						:convert_options => { :all => "-quality 75" },
+  						:convert_options 	=> { :all => "-quality 75" },
 	                    :styles => {:large 	=> ["640x640>", :jpg],
 	                    			:medium => ["200x200#", :jpg],
 	                                :small  => ["100x100#", :jpg],
 	                     },
-	                    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
-	                    :storage        => :s3,
-	                    :url 			=> ":s3_alias_url",
-	                   	:s3_host_alias 	=> host_alias,
-	                    :s3_protocol 	=> :https,
-	                    :path           => "photo_image_:id_:style.:extension"
+	                    :s3_credentials 	=> "#{Rails.root.to_s}/config/s3.yml",
+	                    :storage        	=> :s3,
+	                    :url 				=> ":s3_alias_url",
+	                   	:s3_host_alias 		=> host_alias,
+	                    :s3_protocol 		=> :https,
+	                    :path           	=> "photo_image_:id_:style.:extension"
 	                    
 	validates_attachment :image, :content_type => { :content_type => [/\Aimage/, "application/pdf"] }
 
@@ -62,7 +62,7 @@ class Photo < ActiveRecord::Base
 
 	def url_medium
 		if image_file_name
-			image.url(:small)
+			image.url(:medium)
 		else
 			""
 		end
