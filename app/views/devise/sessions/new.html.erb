@@ -1,6 +1,6 @@
-<div class="session-container">
+<div class="session-container border-box">
 	<div class="inner-container">
-		<h2>Sign in</h2>
+		<h2 class="center">Log In</h2>
 
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:role=>"form", data: {'parsley-validate' => ''}) do |f| %>
 		  
@@ -11,7 +11,11 @@
 		    	<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
 		  	<% end -%>
 
-		  	<div class="button-container"><%= f.submit "Log in", :class => "simple-btn save" %></div>
+		  	<div class="button-container">
+		  		<%= button_tag(type: 'submit', :class=> "simple-btn save", style:"margin:15px auto;display:block;") do %>
+			    	<i class="fa fa-sign-in"></i> Log in
+			  	<% end %>
+		  	</div>
 		  	<%= render "devise/shared/links" %>
 		<% end %>
 	</div>

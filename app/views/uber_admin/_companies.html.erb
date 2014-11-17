@@ -1,31 +1,33 @@
-<table class="table table-bordered table-responsive border-box" id="users">
-	<% if @companies && @companies.count > 0 %>
-		<thead>
-			<tr>
-				<th style="width: 100px;"><h4>Photo</h4></th>
-				<th><h4>Company Name</h4></th>
-				<th><h4>Projects</h4></th>
-				<th><h4>Users</h4></th>
-				<th><h4>Subs</h4></th>
-				<th><h4>Created On</h4></th>
-				<th><h4>Edit</h4></th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<% @companies.each do |company| %>
+<div id="companies-page" class="uber-admin container page border-box">
+	<table id="companies">
+		<% if @companies && @companies.count > 0 %>
+			<thead>
 				<tr>
-					<td style="width: 100px;"><% if company.image_file_name %><%= image_tag company.image.url(:thumb), :class =>"uber-admin-company-pic" %><% end %></td>
-					<td><%= link_to company.name, projects_path(:company_id => company.id), :remote => true %></td>
-					<td><%= company.projects.count %></td>
-					<td><%= company.users.count %></td>
-					<td><%= company.company_subs.count %></td>
-					<td><%= parse_time company.created_at %></td>
-					<td><%= link_to "Edit", edit_company_uber_admin_index_path(:company_id => company.id), :remote => true  %></td>
+					<th style="width: 100px;"><h4>Photo</h4></th>
+					<th><h4>Company Name</h4></th>
+					<th><h4>Projects</h4></th>
+					<th><h4>Users</h4></th>
+					<th><h4>Subs</h4></th>
+					<th><h4>Created On</h4></th>
+					<th><h4>Edit</h4></th>
 				</tr>
-			<% end %>
-		</tbody>
-	<% else %>
-		<tbody><tr><td>No companies</td></tr></tbody>
-	<% end %>
-</table>
+			</thead>
+
+			<tbody>
+				<% @companies.each do |company| %>
+					<tr>
+						<td style="width: 100px;"><% if company.image_file_name %><%= image_tag company.image.url(:thumb), :class =>"uber-admin-company-pic" %><% end %></td>
+						<td><%= link_to company.name, projects_path(:company_id => company.id), :remote => true %></td>
+						<td><%= company.projects.count %></td>
+						<td><%= company.users.count %></td>
+						<td><%= company.company_subs.count %></td>
+						<td><%= parse_time company.created_at %></td>
+						<td><%= link_to "Edit", edit_company_uber_admin_index_path(:company_id => company.id), :remote => true  %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		<% else %>
+			<tbody><tr><td>No companies</td></tr></tbody>
+		<% end %>
+	</table>
+</div>

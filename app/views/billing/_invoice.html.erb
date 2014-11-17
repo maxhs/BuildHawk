@@ -25,11 +25,12 @@
 					<td>Use:</td>
 					<td><%= number_to_currency(invoice["subtotal"]/100, precision:2)%> </td>
 				</tr>
-				<tr>
-					<td>Credit:</td>
-					<td><%= number_to_currency(credit/100,precision:2) %> <span style="padding-left:.1in; color: #aaa">(<%= credit_name %>)</span></td>
-				</tr>
-
+				<% if credit %>
+					<tr>
+						<td>Credit:</td>
+						<td><%= number_to_currency(credit/100,precision:2) %> <span style="padding-left:.1in; color: #aaa">(<%= credit_name %>)</span></td>
+					</tr>
+				<% end %>
 				<tr>
 					<td>Billed:</td>
 					<td><%= number_to_currency(invoice["amount_due"],precision:2) %></td>

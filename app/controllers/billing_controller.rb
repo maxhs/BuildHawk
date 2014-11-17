@@ -107,7 +107,7 @@ class BillingController < AppController
 		end
 
 		@documents = @user.company.photos.where("created_at > ? and created_at < ?",start_of_month, end_of_month)
-		@tasks = @user.company.projects.map(&:worklists).flatten.map{|w|w.worklist_items.where("created_at > ? and created_at < ?",start_of_month, end_of_month)}.compact
+		@tasks = @user.company.projects.map(&:tasklists).flatten.map{|t|t.tasks.where("created_at > ? and created_at < ?",start_of_month, end_of_month)}.compact
 		@reports = @user.company.projects.map{|p|p.reports.where("created_at > ? and created_at < ?",start_of_month, end_of_month)}
 		@items = @user.company.projects.map(&:checklist).compact.map{|c|c.checklist_items.where("completed_date > ? and completed_date < ?",start_of_month, end_of_month)}.compact
 		puts "items: #{@items}"

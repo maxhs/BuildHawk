@@ -625,11 +625,12 @@ body {
 				font-weight:normal;
 				text-transform:uppercase;
 				letter-spacing:2px;
-				font-weight:bold;
-				font-family: "Myriad Pro","Open Sans","OpenSans","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
+				font-weight:600;
+				font-family: "Open Sans","OpenSans","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
 
 				.fa {
 					font-size:1.1em;
+					vertical-align:bottom;
 				}
 			}
 
@@ -754,7 +755,6 @@ body {
 			width:70%;
 			max-width:800px;
 			margin: 0 auto;
-			font-size:12px;
 			position:relative;
 
 			ul {
@@ -894,11 +894,9 @@ body {
 
 .session-container {
 	display:table;
-	width:500px;
-	margin:10% auto;
-	border:1px solid #ddd;
-	padding:1% 2%;
-	background:#fff;
+	margin:0 auto;
+	width:50%;
+	height:100%;
 
 	h2 {
 		margin:10px auto 15px;
@@ -912,7 +910,7 @@ body {
 			width:100%;
 			
 			input {
-				margin:0px auto;
+				margin:7px auto;
 				width:100%;
 			}
 		}
@@ -1159,6 +1157,10 @@ a.search-button {
 
 .btn-danger, .btn-danger a, .btn-danger a:hover, .btn-danger:hover, {
 	color:#fff !important;
+
+	.fa-trash, .fa-trash-o {
+		font-size:1.5em;
+	}
 }
 
 .btn.save {

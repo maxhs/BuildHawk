@@ -1,5 +1,12 @@
 <%- if controller_name != 'sessions' %>
-  <div class="button-container" style="margin-bottom:0;"><h6><%= link_to "Log in", new_session_path(resource_name) %></h6></div>
+  	<div class="button-container" style="margin-bottom:0;">
+  		<h6>
+  			<%= link_to new_session_path(resource_name) do %>
+  				<i class="fa fa-sign-in"></i>
+  				Log in
+  			<% end %>
+  		</h6>
+  	</div>
 <% end -%>
 
 <!--<%- if devise_mapping.registerable? && controller_name != 'registrations' %>

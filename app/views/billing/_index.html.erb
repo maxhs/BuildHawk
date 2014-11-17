@@ -1,22 +1,21 @@
 <div id="billing" class="border-box container">
 	<% if @company.customer_id && @company.cards.count > 0 %>
 		<h3><%= @month.strftime("%b") %> SUMMARY</h3>
-		<div id="billing-container"style="border:1px solid #eee;">
+		<section id="billing-container"style="border:1px solid #eee;">
 			<div class="row">
-				<div class="col-xs-3"><h4>Billing Cycle</h4></div>
+				<div class="col-xs-4"><h4>Billing Cycle</h4></div>
 				<div class="col-xs-3"><h4># Pro Users</h4></div>
-				<div class="col-xs-2"><h4>Projected Cost</h4></div>
+				<div class="col-xs-3"><h4>Projected Cost</h4></div>
 				<div class="col-xs-2"><h4>Due</h4></div>
-				<div class="col-xs-2"><h4>Credit</h4></div>
+				<!--<div class="col-xs-2"><h4>Credit</h4></div>-->
 			</div>
 				
 			<%= render partial:"billing/summary", locals: {pro_users: @pro_users, invoice: @invoice, month: @month, user: @user} %>
-			
-		</div>
+		</section>
 
-		<div class="row">
+		<section class="row">
 			<div class="col-xs-6" id="cards-management">
-				<h3>CARDS ON FILE</h3>
+				<h4>CARDS ON FILE</h4>
 				<% if @cards %>
 					<table>
 						<% @cards.each do |c| %>
@@ -29,13 +28,12 @@
 				<% else %>
 					<span>You don't have any active cards.</span>
 				<% end %>
-
 				<%= link_to "Add New Card", new_card_billing_index_path, :class=>"simple-btn", id:"new-card", remote:true %>
 				
 			</div>
 
 			<div class="col-xs-6" id="billing-history">
-				<h3>Past Bills</h3>
+				<h4>Past Bills</h4>
 				<span id="bill-label">View bill for:</span>
 				<select id="past-invoices">
 					<%= @invoices.each do |invoice| %>
@@ -46,13 +44,13 @@
 				</select>
 				<%= link_to "View",'',id:"view-invoice-link", :class=>"simple-btn remote", target:"_blank" %>
 			</div>
-		</div>
+		</section>
 		
 		<div id="auto-billing-prompt" class="font-smoothing">Your card on file will be automatically billed at the end of each month</div>
 		<div id="security-prompt" class="font-smoothing"><i class="fa fa-lock"></i><span>Your billing information is transmit using a secure, 128-bit encrypted connection.</span></div>
 
 	<% else %>
-		<div id="new-billing-container" class="border-box">
+		<section id="new-billing-container" class="border-box">
 			<div class="billing-prompt" style="padding:10px;">
 				Please set up your company's billing information in order to create new projects, manage users and more.
 			</div>
@@ -98,7 +96,7 @@
 				  	<div style="text-align:center;"><%=submit_tag "Add Card", :class=>"simple-btn" %></div>
 			  	</section>
 			<% end %>
-		</div>
+		</section>
 	<% end %>
 </div>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114015654) do
+ActiveRecord::Schema.define(version: 20141117031816) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -351,6 +351,16 @@ ActiveRecord::Schema.define(version: 20141114015654) do
 
   add_index "projects", ["company_id"], name: "projects_company_id_idx"
 
+  create_table "promos", force: true do |t|
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.float    "percentage"
+    t.string   "name"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "push_tokens", force: true do |t|
     t.integer  "user_id"
     t.text     "token"
@@ -474,6 +484,14 @@ ActiveRecord::Schema.define(version: 20141114015654) do
   end
 
   add_index "tasks", ["tasklist_id", "user_id", "completed_by_user_id"], name: "tasks_indexes"
+
+  create_table "used_promos", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "promo_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"
