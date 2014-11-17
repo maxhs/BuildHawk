@@ -25,7 +25,7 @@
 
 #groups {
 	.group-header {
-		padding-right:10px;
+		
 		height:44px;
 		text-align:right;
 		line-height:0;
@@ -44,6 +44,7 @@
 			margin-top:0;
 			padding-top:14px;
 			font-size:1em;
+			padding-right:10px;
 		}
 
 		.projects-count {
@@ -113,19 +114,35 @@
 			float:left;
 		}
 
+		.action-icon {
+			display:table-cell;
+			vertical-align:middle;
+		}
+
+		.no-btn {
+			float:left;
+			position:relative;
+			top:13px;
+			left:10px;
+			color:#fff;
+			font-size:1.1em;
+			border:0;
+			background:0;
+		}
+
 		#cancel-group {
 			margin:0 10px 0 0;
 			cursor:pointer;
 			position:relative;
 			top:12px;
-			left:5px;
+			left:30px;
 			float:left;
 		}
 
 		#delete-group {
 			float:left;
 			position:relative;
-			left:10px;
+			left:20px;
 			top:12px;
 		}
 		.fa-trash-o, .fa-remove {

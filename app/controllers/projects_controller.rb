@@ -1,7 +1,6 @@
 class ProjectsController < AppController
 	before_filter :authenticate_user!
-	before_filter :find_user
-	before_filter :find_project
+	before_filter :fetch
 
 	def new
 		@project = Project.new
@@ -118,13 +117,7 @@ class ProjectsController < AppController
 	end 
 
 	def destroy
-		@project.update_attribute :company_id, nil
-		if Rails.env.production?
-			@project.background_destroy
-		else
-			@project.destroy
-		end
-
+		@project.update_attributes active: false, hidden: true
 		redirect_to projects_path
 	end
 
@@ -343,17 +336,17 @@ class ProjectsController < AppController
 
 	def reset_projects
 		if current_user.any_admin?
-            @sidebar_projects = current_user.company.projects.where("project_group_id IS NULL and hidden = ?",false).order('order_index')
-            @projects = current_user.company.projects.where(core: false)
+            @sidebar_projects = current_user.company.projects.where("project_group_id IS NULL and hidden = ? and active = ?",false, true).order('order_index')
+            @projects = current_user.company.projects.where(core: false, active: true, hidden: false)
         else
-            @sidebar_projects = current_user.project_users.where("hidden = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
-            @projects = current_user.project_users.where("hidden = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
+            @sidebar_projects = current_user.project_users.where("hidden = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id && p.project.active && !p.project.hidden}.compact.uniq.sort_by(&:order_index)
+            @projects = current_user.project_users.where("hidden = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id && p.project.active && !p.project.hidden}.compact.uniq.sort_by(&:order_index)
         end
     
         @hidden_projects = current_user.project_users.where(hidden: true).map(&:project).compact.uniq
 	end
 
-	def find_user
+	def fetch
 		if params[:user_id].present? && current_user.uber_admin
 			@user = User.where(:id => params[:user_id]).first
 		else
@@ -363,11 +356,12 @@ class ProjectsController < AppController
 		@company = @user.company
 		@users = @company.users
 		@subs = @company.company_subs
+		
+		find_project
 
-		project = Project.where(:id => params[:project_id]).first if params[:project_id]
 		if current_user
-			if project
-				@items = current_user.connect_tasks(project)
+			if @project
+				@items = current_user.connect_tasks(@project)
 			else
 				@items = current_user.connect_tasks(nil)
 			end

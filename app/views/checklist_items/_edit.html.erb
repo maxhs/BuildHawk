@@ -1,10 +1,10 @@
 <%= nested_form_for @item, :url => {:controller => :checklist_items, :action => :update, :id => @item.id, :multipart => true}, :remote => true, :method => :post do |f| %>
 	<div class="item-editor" class="border-box;" style="overflow:auto;">
 		<div class="row">
-			<h4>Phase:</h4><%= @item.phase_name %>
+			<h4>Phase:</h4><%= @item.category.phase.name %>
 		</div>
 		<div class="row">
-			<h4>Category:</h4><%= @item.category_name %>
+			<h4>Category:</h4><%= @item.category.name %>
 		</div>
 		<div class="row">
 			<h4>Type:</h4>"<%= @item.item_type %>"

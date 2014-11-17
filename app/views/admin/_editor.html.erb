@@ -1,55 +1,27 @@
-<% if @checklist %>
-	<div class="admin-checklist-table border-box">
-
-		<div id="checklist-items">
-			<header>
-				<%= render partial:"admin/edit_checklist" %>
-			</header>
-			
-			<ul id="phases">
-				<%= render :partial => 'admin/phase', collection: @checklist.phases, :as => :p, cache: false %>
-			</ul>
-			<%= link_to "Add a new phase", new_phase_path(:checklist_id => @checklist), :id=>"new-phase", :class=>"simple-btn remote new-phase", remote: true %>
-		</div>
+<div class="admin-checklist-table border-box">
+	<div id="checklist-items">
+		<header>
+			<%= render partial:"admin/edit_checklist" %>
+		</header>
+		
+		<ul id="phases">
+			<%= render :partial => 'admin/phase', collection: @checklist.phases, :as => :p, cache: false %>
+		</ul>
+		<%= link_to "Add a new phase", new_phase_path(:checklist_id => @checklist), :id=>"new-phase", :class=>"simple-btn remote new-phase", remote: true %>
 	</div>
-<% end %>
+</div>
+
+<div id="checklist-focus">
+	<% if @item %>
+		<%= render :partial => "checklist_item", :locals => {:item => @item} %>
+	<% end %>
+</div>
 
 <script>
 $(document).ready(function(){
-	$('#phases').sortable({
-          axis: 'y',
-          dropOnEmpty:true,
-          cursor: 'move',
-          items: 'li',
-          opacity: 0.4,
-          scroll: true,
-          stop: function(){
-            $.ajax({
-                type: 'post',
-                data: $('#phases').sortable('serialize') + '&id=<%=@checklist.id-%>',
-                dataType: 'script',
-                url: '/checklists/order_phases'})
-            }
-        })
-
-        <% @checklist.phases.each do |p| %>
-        	$('#<%= p.id %>-items').sortable({
-	          axis: 'y',
-	          dropOnEmpty:true,
-	          cursor: 'move',
-	          items: 'li',
-	          opacity: 0.4,
-	          scroll: true,
-	          stop: function(){
-	            $.ajax({
-	                type: 'post',
-	                data: $('#<%= p.id %>-items').sortable('serialize') + '&id=<%=p.id-%>',
-	                dataType: 'script',
-	                url: '/checklists/order_categories'})
-	            }
-	        });
-        <% end %>
-        
-        $('#phases li:first-child .phase-link').click();
-    });
+	checklistSort('<%=@checklist.id%>');
+	<% @checklist.phases.each do |p| %>
+		phaseSort('#<%= p.id %>-items','<%= p.id %>')
+	<% end %>
+});
 </script>

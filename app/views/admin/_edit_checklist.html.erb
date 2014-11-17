@@ -4,5 +4,9 @@
 		<div><%= f.text_area :description, :placeholder => "A brief description of this checklist...", :style=> "width:100%;" %></div>
 	</div>
 			
-	<div><%= f.submit "Save", :class => "simple-btn pull-right", :remote => true %></div>
+	<div>
+		<%= button_tag(type: 'submit', :class=> "simple-btn remote", style:"float:right;margin:1% auto;", remote: true) do %>
+	    	<i class="fa fa-floppy-o remote"></i> Save
+	  	<% end %>
+	</div>
 <% end %>

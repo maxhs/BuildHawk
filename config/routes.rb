@@ -5,7 +5,6 @@ Buildhawk::Application.routes.draw do
 
   devise_scope :user do
     get "sign_in", :to => "devise/sessions#new", :as => :login
-    get "login", :to => "devise/sessions#new"
     get "registrations/new", :to => "devise/sessions#new"
     get "logout", :to => "devise/sessions#destroy", :as => :logout
     get '/sign_up', :to => "registrations#new"
@@ -206,7 +205,6 @@ Buildhawk::Application.routes.draw do
     end
   end
   resources :folders
-  resources :subs, :only => [:update]
   resources :charges do
     member do 
       patch :promo_code

@@ -508,7 +508,7 @@ body {
 			opacity:.4;
 		}
 
-		.no-contents-placeholder {
+		.no-content.placeholder {
 			text-align:center;
 			margin:5% auto;
 			color:#aaa; 
@@ -907,8 +907,12 @@ body {
 		form {
 			width:100%;
 			
+			label {
+				margin-top:7px;
+			}
+
 			input {
-				margin:0 auto 14px;
+				margin:0 auto 7px;
 				width:100%;
 			}
 		}
@@ -1214,12 +1218,14 @@ input, textarea {
 	display:block;
 }
 
+button {
+	outline:0 !important;
+}
+
 input[type="submit"] {
 	margin:0 auto;
 	text-transform:uppercase;
 }
-
-
 
 .sidebarAdmin, .sidebarUberadmin {
 	div {
