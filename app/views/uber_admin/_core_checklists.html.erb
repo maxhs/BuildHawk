@@ -4,7 +4,7 @@
 			<div>
 				<h3>Upload a New Core Checklist</h3>
 				<div style="text-align:center;width:200px;margin:2.5% auto;"><%= f.file_field :file %></div>
-				<%= f.submit "Upload", :class =>"btn btn-default btn-md", :style => "color:#000;display:none" %>
+				<%= f.submit "Upload", :class =>"simple-btn", :style => "display:none" %>
 			</div>
 		<% end %>
 	</div>
@@ -29,6 +29,6 @@
 </div>
 <script>
 	$('.new_checklist input[type="file"]').change(function(){
-		$('.new_checklist input[type="submit"]').fadeIn(200);
+		$('.new_checklist input[type="submit"]').toggle();
 	});
 </script>

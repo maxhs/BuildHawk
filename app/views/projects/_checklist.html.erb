@@ -41,56 +41,11 @@
 </div>
 
 <script>
-
-	$(document).on('click',".checklist-item-link",function(){
-		$('.active-item').removeClass('active-item');
-		$(this).parent().parent().addClass('active-item');
-	});
-	$(document).ready(function(){
-		$('#checklist-search-button').click(function(){
-			if ($('#checklist-search').css('display') == "none"){
-				$('#checklist-search').fadeIn().css('display','table');
-			} else {
-				$('#checklist-search').fadeOut(200);
-			}
-		});
-		$('#remove').on('click',function(){
-			$('#search').val('');
-			$('#checklist-search').submit();
-		});
-
-		$('#phases').sortable({
-          axis: 'y',
-          dropOnEmpty:true,
-          cursor: 'move',
-          items: 'li',
-          opacity: 0.4,
-          scroll: true,
-          stop: function(){
-            $.ajax({
-                type: 'post',
-                data: $('#phases').sortable('serialize') + '&id=<%=@checklist.id-%>',
-                dataType: 'script',
-                url: '/checklists/order_phases'})
-            }
-        })
-
-        <% @checklist.phases.each do |p| %>
-        	$('#<%= p.id %>-items').sortable({
-	          axis: 'y',
-	          dropOnEmpty:true,
-	          cursor: 'move',
-	          items: 'li',
-	          opacity: 0.4,
-	          scroll: true,
-	          stop: function(){
-	            $.ajax({
-	                type: 'post',
-	                data: $('#<%= p.id %>-items').sortable('serialize') + '&id=<%=p.id-%>',
-	                dataType: 'script',
-	                url: '/checklists/order_categories'})
-	            }
-	        });
-        <% end %>
-	});
+$(document).ready(function(){
+	projectChecklistSetup();
+	checklistSort('<%= @checklist.id %>');
+	<% @checklist.phases.each do |p| %>
+		phaseSort('#<%= p.id %>-items','<%= p.id %>')
+	<% end %>
+});
 </script>

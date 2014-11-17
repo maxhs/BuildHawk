@@ -19,9 +19,18 @@
 			<div><%= f.password_field :password, :placeholder => "Password (only required if changing)", :class=>"tt-hint form-control" %></div>
 			<div><%= f.label "Password confirmation" %></div>
 			<div><%= f.password_field :password_confirmation, :placeholder => "Confirm password (only required if changing)", :class=>"tt-hint form-control" %></div>
-			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Admin</div> <%= f.check_box :admin %></div>
-			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Company Admin</div> <%= f.check_box :company_admin %></div>
-			<div><div style="padding:10px 0 0;display:inline-block; width:25%;">Uber Admin</div> <%= f.check_box :uber_admin %></div>
+			<div>
+				<%= f.check_box :admin %>
+				<span style="padding:10px 0 0;display:">Admin</span>
+			</div>
+			<div>
+				<%= f.check_box :company_admin %>
+				<span style="padding:10px 0 0;">Company Admin</span>
+			</div>
+			<div>
+				<%= f.check_box :uber_admin %>
+				<span style="padding:10px 0 0;">Uber Admin</span>
+			</div>
 
 			<div id="photo-section">
 				<% if @user.image_file_name %>
@@ -41,7 +50,9 @@
 			</div>
 			
 			<div class="button-container center">
-				<%= f.submit "Save", :class=>"simple-btn save" %>
+				<%= button_tag(type: 'submit', :class=> "simple-btn save", style:"margin:15px auto 0;display;block;") do %>
+			    	<i class="fa fa-floppy-o"></i> Save
+			  	<% end %>
 				<%= link_to destroy_user_uber_admin_index_path(:user_id => @user.id), :class=>"uber-delete-user", :method => :delete, :data => {:confirm => "Are you sure you want to delete #{@user.full_name}?"} do %>
 					<i class="fa fa-trash-o"></i>
 				<% end %>

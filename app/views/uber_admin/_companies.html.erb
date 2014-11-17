@@ -22,7 +22,7 @@
 						<td><%= company.users.count %></td>
 						<td><%= company.company_subs.count %></td>
 						<td><%= parse_time company.created_at %></td>
-						<td><%= link_to "Edit", edit_company_uber_admin_index_path(:company_id => company.id), :remote => true  %></td>
+						<td><%= link_to "Edit", edit_company_uber_admin_index_path(:company_id => company.id), :class=>"simple-btn", :remote => true  %></td>
 					</tr>
 				<% end %>
 			</tbody>
