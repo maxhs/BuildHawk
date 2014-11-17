@@ -1,6 +1,9 @@
 <% unless @company.cards.count > 0 %>
-	$('#alert').css({'color':'#fff','background':'#cc0000','border':'0'}).text("Please setup your billing preferences in order to create new projects").fadeIn(500).delay(4000).fadeOut(500, function(){
-		$(this).css({'color':'#000','background':'#fff', 'border':'1px solid #eee'}).text("");
+	$('#alert #alert-text, .fa-remove').css('color','#fff');
+	$('#alert #alert-text').text("Please setup your billing preferences in order to create new projects");
+	$('#alert').css({'background':'#cc0000','border':'0'}).fadeIn(500).delay(4000).fadeOut(500, function(){
+		$(this).css({'background':'#fff', 'border':'1px solid #eee'});
+		$('#alert #alert-text, .fa-remove').css('color','#000');
 	});
 <% end %>
 

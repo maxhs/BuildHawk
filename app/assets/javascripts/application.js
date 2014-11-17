@@ -53,15 +53,28 @@ function setupWindow(){
     var notice = document.getElementById("notice");
     var alert = document.getElementById("alert");
     if (notice.textContent.length > 0) {
-        $('#notice').delay(400).fadeIn("normal", function() {
-            $(this).delay(3000).fadeOut(function(){$(this).text("");});
+        $('#notice').delay(500).fadeIn("normal", function() {
+            $(this).delay(4000).fadeOut(function(){
+                $('#notice-text').text("");
+            });
         });
     }
     if (alert.textContent.length > 0) {
-        $("#alert").delay(400).fadeIn("normal", function() {
-            $(this).delay(3000).fadeOut(function(){$(this).text("");});
+        $("#alert").delay(500).fadeIn("normal", function() {
+            $(this).delay(4000).fadeOut(function(){
+                $('#alert-text').text("");
+            });
         });
     }
+    $('.remove-top').click(function(){
+        $('#alert').stop().fadeOut(function(){
+            $('#alert-text').text("");
+        });
+        $('#notice').stop().fadeOut(function(){
+            $('#notice-text').text("");
+        });
+    });
+    
     $('#dropdown-toggle').click(function(){
         if ($("#dropdown #dropdown-menu").css('display') == 'none'){
             $('#dropdown #dropdown-menu').fadeIn(0);

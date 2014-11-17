@@ -41,8 +41,8 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 </head>
 
 <body>
-	<p class="notice" id="notice"><%= notice %></p>
-    <p class="alert" id="alert"><%= alert %></p>
+	<p id="notice" class="font-smoothing"><span id="notice-text"><%= notice %></span><i class="fa fa-remove remove-top right"></i></p>
+    <p id="alert" class="font-smoothing"><span id="alert-text"><%= alert %></span><i class="fa fa-remove remove-top right"></i></p>
 
     <div id="wrap">
 		<div class="navbar navbar-fixed-top <% if !user_signed_in? && (current_page?(root_url) || current_page?(login_path) )%>splash<% end %>" id="top-nav" role="navigation">

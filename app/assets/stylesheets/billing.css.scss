@@ -75,10 +75,7 @@ h2 {
 		position:absolute;
 		right:5px;
 		top:5px;
-
-		img {
-			width:18px;
-		}
+		font-size:1.5em;
 	}
 
 	#trash-button {
@@ -91,7 +88,7 @@ h2 {
 
 #edit-card-container {
 	form {
-		width:50%;
+		width:90%;
 		margin:10px auto;
 		padding:1%;
 		min-width:300px;
@@ -107,10 +104,37 @@ h2 {
 	.row:last-child {
 		border:0;
 	}
+
+	.delete-card {
+		margin:0 auto;
+		display:block;
+		text-align:center;
+		padding-top:7px;
+
+		.fa-trash-o {
+			font-size:1.75em;
+		}
+	}
 }
 
 #billing {
 	padding-top:20px;
+
+	#security-prompt {
+		color:#aaa;
+		text-align:center;
+		margin-top:2em;
+		span {
+			margin-left:10px;
+		}
+	}
+
+	#auto-billing-prompt {
+		font-style:italic;
+		color:#aaa;
+		text-align:center;
+		margin-top:10px;
+	}
 
 	button .edit-link {
 		color:#fff;
@@ -120,7 +144,6 @@ h2 {
 	}
 
 	h1 {
-		font-family:'Gotham Book','Helvetica',sans-serif;
 		text-align:center;
 		margin:30px auto 30px;	
 	}
@@ -164,11 +187,11 @@ h2 {
 			color:#cc0000;
 		}
 	}
+
 	#invoice-form {
 		text-align:center;
 		margin-bottom:30px;
 		label {
-			font-family:'Gotham Book','Helvetica',sans-serif;
 			padding-right:2em;
 		}
 	}
@@ -179,6 +202,20 @@ h2 {
 
 	select {
 		margin-right: 5%;
+	}
+
+	#new-billing-container {
+		section#billing-address {
+			margin-bottom:5%;
+		}
+
+		section#card-info {
+
+		}
+
+		payment-errors {
+			text-align:center;
+		}
 	}
 }
 

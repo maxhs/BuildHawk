@@ -103,7 +103,7 @@ body {
 		padding:0;
 	}
 
-	.alert, .notice {
+	#alert, #notice {
 		font-size: 1.25em;
 		line-height: 60px;
 		vertical-align: middle;
@@ -126,6 +126,15 @@ body {
 		-moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,.17);
 		padding:0 !important;
 		font-family:"Myriad Pro","Source Sans Pro", 'Helvetica Neue','Helvetica',sans-serif;
+
+		/* specific to alerts & notices */
+		.fa-remove {
+			cursor: pointer;
+			position: absolute;
+			right: 5px;
+			top:5px;
+			font-size:1.25em;
+		}
 	}
 
 	.centered {
