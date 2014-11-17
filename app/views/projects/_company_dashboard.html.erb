@@ -50,7 +50,7 @@
 											<%= activity.task.body %>
 										<% end %>
 									</td>
-									<td class="activity-icon"><%= image_tag 'task.png' %></td>
+									<td class="activity-icon"><i class="fa fa-tasks nav-icon"></i></td>
 								
 								<% elsif activity.report %>
 									<td>
@@ -58,14 +58,14 @@
 											<%= "#{activity.report.report_type} Report - #{activity.report.date_string}" %>
 										<% end %>
 									</td>
-									<td class="activity-icon"><%= image_tag 'report.png' %></td>
+									<td class="activity-icon"><i class="fa fa-pencil nav-icon"></i></td>
 								<% elsif activity.checklist_item %>
 									<td>
 										<%= link_to checklist_item_project_path(project, :checklist_item_id => activity.checklist_item.id), :remote => true do %>
 											<%= activity.checklist_item.body %>
 										<% end %>
 									</td>
-									<td class="activity-icon"><%= image_tag 'checklist.png' %></td>
+									<td class="activity-icon"><i class="fa fa-list-alt nav-icon"></i></td>
 								<% else %>
 
 									<td class="activity-icon"></td>

@@ -6,14 +6,14 @@ class User < ActiveRecord::Base
                     :authentication_token, :company_admin, :text_permissions, :active
 
     belongs_to :company
-  	has_many :project_users, :dependent => :destroy
+  	has_many :project_users, dependent: :destroy
   	has_many :projects, :through => :project_users
-    has_many :report_users, :dependent => :destroy
+    has_many :report_users, dependent: :destroy
     has_many :reports, :through => :report_users
-    has_many :notifications, :dependent => :destroy
-    has_many :push_tokens, :dependent => :destroy
-    has_many :message_users, :dependent => :destroy, autosave: true
-    has_many :messages, :through => :message_users , autosave: true
+    has_many :notifications, dependent: :destroy
+    has_many :push_tokens, dependent: :destroy
+    has_many :message_users, dependent: :destroy, autosave: true
+    has_many :messages, through: :message_users , autosave: true
     has_many :comments, dependent: :destroy
     has_many :tasks, foreign_key: "assignee_id"
 
@@ -47,12 +47,12 @@ class User < ActiveRecord::Base
     validates_presence_of :password, :if => :password_required?
     validates_presence_of :company_id
 
-    after_create :welcome
+    after_commit :welcome, :if => :persisted?
     before_destroy :cleanup_user
 
     def welcome
         #UserMailer.welcome(self).deliver if email 
-        full_name
+        assign_full_name
     end
 
     def cleanup_user
@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
         active
     end
 
-    def full_name 
+    def assign_full_name 
         if first_name.length > 0 && last_name.length > 0
             full_name = "#{first_name} #{last_name}"
         elsif first_name && first_name.length > 0
@@ -74,7 +74,6 @@ class User < ActiveRecord::Base
             full_name = email
         end
         self.update_column :full_name, full_name
-        return full_name
     end
 
     def email_task(task)

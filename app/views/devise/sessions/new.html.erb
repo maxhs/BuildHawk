@@ -4,12 +4,15 @@
 
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:role=>"form", data: {'parsley-validate' => ''}) do |f| %>
 		  
+		  	<%= f.label "Email" %>
 		  	<%= f.email_field :email, placeholder: "The email address you use for work", :autofocus => true, required: true %>
+
+		  	<%= f.label "Password" %>
 		 	<%= f.password_field :password, placeholder: "Password", :autocomplete => "off", required: true %>
 
-		  	<% if devise_mapping.rememberable? -%>
+		  	<% if devise_mapping.rememberable? %>
 		    	<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-		  	<% end -%>
+		  	<% end %>
 
 		  	<div class="button-container">
 		  		<%= button_tag(type: 'submit', :class=> "simple-btn save", style:"margin:15px auto;display:block;") do %>

@@ -12,8 +12,6 @@
  *= require datetimepicker
  *= require jquery.ui.progressbar
  *= require jquery.ui.autocomplete
- *= require select2
- *= require sweet-alert
  *= require_tree .
  */
 
@@ -617,7 +615,7 @@ body {
 			li {
 				display:table-cell;
 				width:10%;
-				vertical-align:bottom;
+				vertical-align:middle;
 				text-align:center;
 			}
 
@@ -910,7 +908,7 @@ body {
 			width:100%;
 			
 			input {
-				margin:7px auto;
+				margin:0 auto 14px;
 				width:100%;
 			}
 		}
@@ -964,7 +962,7 @@ a.search-button {
 	margin: 0 auto;
 }
 
-.centered {
+.center {
 	text-align:center;
 	margin:0 auto;
 }
@@ -1319,40 +1317,6 @@ body {
 		margin:0 !important;
 		padding:2px 4px !important;
 	}
-}
-
-.select2-container, .select2-container-multi {
-	width:100%;
-	font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
-
-	.select2-choices {
-		border:1px solid #eee !important;
-		background:#fff !important;
-
-		.select2-search-choice {
-			line-height:inherit !important;
-			background:#f7f7f7 !important;
-		}
-
-		.select2-search-field {
-			.select2-default {
-				font-size:14px !important;
-				font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
-			}
-		}
-	}
-
-	.select2-choice {
-		background:#fff !important;
-		border-color:#eee !important;
-	}
-}
-
-.select2-drop-active {
-	border-top:1px solid #eee !important;
-	border-left:1px solid #eee !important;
-	border-right:1px solid #eee !important;
-	border-bottom:1px solid #eee !important;
 }
 
 @media only screen and (max-width: 990px), only screen and (max-device-width: 990px) {

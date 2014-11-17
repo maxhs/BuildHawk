@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #messages {
-
 	border-top:1px solid #eee;
 	margin:2.5% auto;
 	padding:20px 0;
@@ -31,8 +30,15 @@
 	}
 }
 
-#new-message {
+.messages-container {
+	.personnel-label {
+		color:#aaa;
+		margin:1% auto;
+		font-size:.95em;
+	}
+}
 
+#new-message {
 	h3, h4 {
 		margin:1.5% auto 2%;
 	}
