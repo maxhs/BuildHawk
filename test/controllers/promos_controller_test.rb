@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PromoCodesControllerTest < ActionController::TestCase
+class PromosControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

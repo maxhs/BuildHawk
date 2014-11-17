@@ -1,0 +1,39 @@
+<div id="promo-container" class="border-box">
+	<div id="add-promo-section">
+		<h3 class="bold-header center">Add Promo</h3>
+		<%= form_for @promo, remote: true do |f|%>
+			<div class="row">
+				<div class="col-xs-4">
+					<h5 style="margin-right:1em;">Name:</h5>
+					<%= f.text_field :name, placeholder: 'Promo code (e.g. "NEW-USER-14")', style:"display:inline-block; width:95%;" %>
+				</div>
+				<div class="col-xs-2">
+					<h5 style="margin-right:1em;">Company:</h5>
+					<%= f.select :company_id, content_tag(:option,'Select...',value:"")+options_from_collection_for_select(@companies,:id,:name) %>
+				</div>
+				<div class="col-xs-2">
+					<h5 style="margin-right:1em;">Days Applicable:</h5>
+					<%= f.select :days, 0..31 %>
+				</div>
+				<div class="col-xs-2">
+					<h5 style="margin-right:1em;">% Discount:</h5>
+					<%= f.text_field :percentage, :placeholder =>"e.g. 50", :style=>"width:100px;display:inline-block" %> %
+				</div>
+				<div class="col-xs-2">
+					<%= f.submit "Create", :class=>"simple-btn", style:"display:block;margin:10% auto;text-align:center;" %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div id="all-codes">
+		<div class="row">
+			<div class="col-xs-3"><h5>Code</h5></div>
+			<div class="col-xs-2"><h5>Company</h5></div>
+			<div class="col-xs-2"><h5>Percentage</h5></div>
+			<div class="col-xs-1"><h5>Days</h5></div>
+			<div class="col-xs-1"><h5># Times Used</h5></div>
+			<div class="col-xs-3">&nbsp;</div>
+		</div>
+		<%= render partial:'promos/promo',collection: @promos %>
+	</div>
+</div>

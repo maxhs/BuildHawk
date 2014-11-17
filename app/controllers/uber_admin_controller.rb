@@ -157,10 +157,10 @@ class UberAdminController < AppController
 		@users = User.all.order('first_name')
 	end
 
-	def promo_codes
+	def promos
 		@companies = Company.all
-		@promo_codes = PromoCode.all
-		@new_code = PromoCode.new
+		@promos = Promo.all
+		@promo = Promo.new
 	end
 
 	protected

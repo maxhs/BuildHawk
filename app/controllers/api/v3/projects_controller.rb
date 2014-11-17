@@ -48,7 +48,6 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         end
 
         if user
-            puts "we found a user: #{user.full_name}"
             ## existing user. ensure they're attached to the project
             project.project_users.where(:user_id => user.id).first_or_create
             respond_to do |format|
@@ -126,7 +125,6 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             elsif phone && user.text_permissions
                 user.text_task(task)
             end
-            task.update_attribute :assignee_id, user.id
         elsif report
             report.report_users.where(:user_id => user.id).first_or_create
         end

@@ -1,8 +1,6 @@
 <div id="splash">
 	<section id="first-splash">
-
 		<div class="splash-container">
-			
 			<div class="slide" id="slide-1">
 				<%= image_tag("splash_checklists.png", :id => "macbook-iphone") %>
 				<span><p><span class="splash-header">Structure your Workflow</span>Increase efficiency, reduce the likelihood of errors and ensure quality. Use BuildHawk's pre-populated checklists or customize your own.</p></span>
@@ -101,10 +99,5 @@
 
 <script type="text/javascript">
 homeSlideshow();
-$('a').click(function(){
-    $('html, body').animate({
-        scrollTop: $( $.attr(this, 'href') ).offset().top
-    }, 500);
-    return false;
-});
+splash();
 </script>

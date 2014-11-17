@@ -4,6 +4,9 @@ class CreatePromos < ActiveRecord::Migration
     		t.decimal :amount, precision: 8, scale: 2
     		t.float :percentage
     		t.string :name
+        t.integer :days
+        t.integer :users
+        t.references :project
     		t.references :company
     		t.references :user
       		t.timestamps

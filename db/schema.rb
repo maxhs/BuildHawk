@@ -355,6 +355,9 @@ ActiveRecord::Schema.define(version: 20141117031816) do
     t.decimal  "amount",     precision: 8, scale: 2
     t.float    "percentage"
     t.string   "name"
+    t.integer  "days"
+    t.integer  "users"
+    t.integer  "project_id"
     t.integer  "company_id"
     t.integer  "user_id"
     t.datetime "created_at"

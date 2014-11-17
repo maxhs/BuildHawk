@@ -91,6 +91,7 @@ Buildhawk::Application.routes.draw do
       get :users
       get :errors
       get :core_checklists
+      get :promos
       get :edit_company
       get :edit_user
       post :update_company
@@ -102,11 +103,7 @@ Buildhawk::Application.routes.draw do
       get :create_blank_template
     end
   end
-  resources :promo_codes do
-    member do
-      get :cancel_editing
-    end
-  end
+  resources :promos
   resources :connect do
     member do 
       get :task
