@@ -59,22 +59,16 @@ class ChecklistItem < ActiveRecord::Base
 
         if state == 1
             category.update_column :completed_date, Time.now if category.completed_count == category.item_count 
-            if current_user
-                activities.create(
-                    :body => "#{current_user.full_name} marked this item complete.",
-                    :user_id => current_user.id,
-                    :project_id => checklist.project.id,
-                    :activity_type => self.class.name
-                )
-            else 
-                activities.create(
-                    :body => "This item was marked complete.",
-                    :project_id => checklist.project.id,
-                    :activity_type => self.class.name
-                )
-            end            
-               
+            attribution = current_user ? "#{current_user.full_name} marked this item complete." : "This item was marked complete."
+            user_id_field = current_user ? current_user.id : nil
+            activities.create(
+                :body => attribution,
+                :user_id => user_id_field,
+                :project_id => checklist.project.id,
+                :activity_type => self.class.name
+            )        
         else
+
             if state
                 if state == 1
                     verbal_state = "completed"
@@ -88,6 +82,7 @@ class ChecklistItem < ActiveRecord::Base
             else
                 verbal_state = ""
             end
+            puts "item is NOT complete, creating activity anyway with verbal state: #{verbal_state}"
 
             if current_user
                 activities.create(
