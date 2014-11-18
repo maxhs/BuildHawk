@@ -4,8 +4,12 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
     	item = ChecklistItem.find params[:id]
         if params[:checklist_item] && params[:checklist_item][:state].to_i != item.state
             should_log_activity = true
-            if params[:checklist_item][:state] == 1
+            if params[:checklist_item][:state] && params[:checklist_item][:state] == 1 
                 params[:checklist_item][:completed_by_user_id] = params[:user_id] if params[:user_id]
+                params[:checklist_item][:completed_date] = DateTime.now
+            else
+                params[:checklist_item][:completed_date] = nil
+                params[:checklist_item][:completed_by_user_id] = nil
             end
         else
             should_log_activity = false
@@ -13,11 +17,7 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
 
         puts "should we log the activity? #{should_log_activity}"
         if params[:checklist_item]
-            unless params[:checklist_item][:state]
-                params[:checklist_item][:state] = nil
-                params[:checklist_item][:completed_date] = nil
-                params[:checklist_item][:completed_by_user_id] = nil
-            end
+            params[:checklist_item][:state] = nil unless params[:checklist_item][:state]
             item.update_attributes params[:checklist_item]
         else
             item.update_attribute :state, nil

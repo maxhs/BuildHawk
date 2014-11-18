@@ -5,6 +5,7 @@ class Api::V3::TasksController < Api::V3::ApiController
         render json: {:success => false, message: "No task"} and return unless task
         
         notify = false
+        
         ## compatibility briding ##
         if params[:task][:assignee_id]
             assignee = User.where(:id => params[:task][:assignee_id]).first
