@@ -198,7 +198,7 @@ class ReportsController < AppController
 		@report.users.build
 		@report.companies.build
 
-		forecast(@project.address.latitude, @projects.address.longitude, @report.report_date.to_time.to_i)
+		forecast(@project.address.latitude, @project.address.longitude, @report.report_date.to_time.to_i)
 
 		if request.xhr?
 			respond_to do |format|
