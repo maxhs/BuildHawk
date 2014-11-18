@@ -57,7 +57,6 @@ class ReportsController < AppController
 	end
 
 	def update
-
 		unless params[:report][:date_string] == @report.date_string && params[:report][:report_type] == @report.report_type
 			if @project.reports.where(:date_string => params[:report][:date_string], :report_type => params[:report][:report_type]).first
 				if request.xhr?
@@ -180,8 +179,17 @@ class ReportsController < AppController
 		end
 	end
 
-	def edit
-		
+	def weather
+		raw_time = params[:date].to_i if params[:date]
+		report_time = Time.at(raw_time/1000.0)
+		forecast(params[:latitude],params[:longitude],report_time.to_i)
+		render json: {
+			summary: @summary, 
+			temp: "#{@temp_min.round(1)} - #{@temp_max.round(1)}".html_safe, 
+			wind: @wind_speed,
+			humidity: @humidity, 
+			precip: @precip
+		}
 	end
 
 	def show
@@ -189,22 +197,8 @@ class ReportsController < AppController
 		@report = Report.find params[:id]
 		@report.users.build
 		@report.companies.build
-		#reports = @project.reports
-		#index = reports.flatten.index @report
-		#@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at
-		#@previous = reports[index+1] if reports[index+1] && reports[index+1].created_at < @report.created_at
 
-		address = @project.address
-		@forecast = ForecastIO.forecast(address.latitude, address.longitude, time: @report.report_date.to_time.to_i)
-		@summary = @forecast.daily.data[0].summary
-		@temp_min = @forecast.daily.data[0].temperatureMin
-		@temp_max = @forecast.daily.data[0].temperatureMax
-		@bearing = @forecast.daily.data[0].windBearing
-		puts "wind bearing: #{@wbearing}"
-		@wind_speed = @forecast.daily.data[0].windSpeed.round(1)
-		puts "forecast? #{JSON.pretty_generate @forecast.currently}"
-		@humidity = @forecast.currently.humidity
-		@precip = @forecast.currently.precipProbability
+		forecast(@project.address.latitude, @projects.address.longitude, @report.report_date.to_time.to_i)
 
 		if request.xhr?
 			respond_to do |format|
@@ -213,6 +207,17 @@ class ReportsController < AppController
 		else
 			@reports = @project.reports
 		end
+	end
+
+	def forecast(latitude, longitude, time)
+		@forecast = ForecastIO.forecast(latitude, longitude, time: time)
+		@summary = @forecast.daily.data[0].summary
+		@temp_min = @forecast.daily.data[0].temperatureMin
+		@temp_max = @forecast.daily.data[0].temperatureMax
+		@bearing = @forecast.daily.data[0].windBearing
+		@wind_speed = @forecast.daily.data[0].windSpeed.round(1)
+		@humidity = @forecast.currently.humidity
+		@precip = @forecast.currently.precipProbability
 	end
 
 	def generate

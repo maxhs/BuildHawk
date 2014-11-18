@@ -1,4 +1,4 @@
-<%= nested_form_for @report, url: reports_path, :html=> {:multipart => true}, :remote => true, :method => :post do |f| %>
+<%= nested_form_for report, url: reports_path, :html=> {:multipart => true}, :remote => true, :method => :post do |f| %>
 	<%= f.hidden_field :project_id, value: @project.id %>
 	<%= f.hidden_field :author_id, value: current_user.id %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -52,10 +52,10 @@
 				<div class="col-md-3"><h5>Humidity</h5></div>
 			</div>
 			<div class="row weather-fields">
-				<div class="col-md-3"><%= f.text_field :temp, :value => @report.temp, :placeholder => "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :wind, :value => @report.wind, :placeholder => "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :precip, :value => @report.precip, :placeholder => "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :humidity, :value => @report.humidity, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :temp, :value => report.temp, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :wind, :value => report.wind, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :precip, :value => report.precip, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :humidity, :value => report.humidity, :placeholder => "N/A" %></div>
 			</div>
 
 			<div class="row form-title">
@@ -81,9 +81,9 @@
 				</div>
 			</div>
 
-			<% if @report.photos && @report.photos.count > 0 %>
+			<% if report.photos && report.photos.count > 0 %>
 				<div class="row">
-					<% @report.photos.each do |p| %>
+					<% report.photos.each do |p| %>
 						<% if p.image_file_name%>
 							<%= render :partial => "image", :locals => {:p => p} %> 
 						<% end %>
@@ -117,6 +117,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		newReport();
+		newReport('<%=project.address.latitude%>', '<%=project.address.longitude%>');
 	});
 </script>

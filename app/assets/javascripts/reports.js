@@ -6,15 +6,13 @@ function dismissReport(){
 	$("html, body").animate({ scrollTop: 0 }, 300);
 }
 
-function newReport() {
-	picker = $("#dp").datepicker();
-	$('#dp').datepicker().on('changeDate', function(){
+function newReport(latitude,longitude) {
+	$("#dp").datepicker();
+	$('#dp').datepicker().on('changeDate', function(ev){
 	    $('#dp').datepicker('hide');
+	    assignDate(latitude, longitude, ev.date.getTime());
 	});
-	$('#dp').datepicker().on('select', function(){
-	    console.log('you got it!');
-	    assignDate(picker.get('select'));
-	});
+	
 	$('#report-add').click(function(){
 		console.log('adding a report');
 		$(this).trigger('submit.rails');
@@ -39,6 +37,23 @@ function newReport() {
 	});
 }
 
-function assignDate(selected){
-	console.log('assign date '+selected);
+function assignDate(latitude, longitude, date){
+	console.log('assign date '+date);
+	$.ajax({
+      	type: "GET",
+     	url: "/reports/weather",
+      	data: { latitude: latitude, longitude: longitude, date: date },
+      	complete:function(){},
+      	success:function(data,textContent, xhr){
+      		console.log('data '+data.summary);
+      		$('#report_weather').val(data.summary);
+      		$('#report_temp').val(data.temp);
+      		$('#report_humidity').val(data.humidity);
+      		$('#report_wind').val(data.wind);
+      		$('#report_precip').val(data.precip);
+        },
+      	error:function(data) {
+      		
+        }
+    })
 }

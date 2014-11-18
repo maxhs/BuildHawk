@@ -197,6 +197,7 @@ Buildhawk::Application.routes.draw do
       delete :remove_report_company
     end
     collection do
+      get :weather
       post :search
     end
   end
