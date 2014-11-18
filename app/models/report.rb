@@ -1,8 +1,8 @@
 class Report < ActiveRecord::Base
-	attr_accessible :title, :report_type, :body, :author_id, :project_id, :report_fields, :weather, :photos_attributes, 
-                    :users_attributes, :report_users_attributes, :users, :user_ids, :weather_icon, :temp, :wind, :precip, 
-                    :humidity, :precip_accumulation, :mobile, :company_ids, :companies, :report_companies_attributes, 
-                    :report_topics, :date_string, :report_date
+	attr_accessible :title, :report_type, :body, :author_id, :project_id, :report_fields, :photos_attributes, :users_attributes, 
+                    :report_users_attributes, :users, :user_ids, :weather, :weather_icon, :temp, :wind, :precip, :humidity, 
+                    :precip_accumulation, :mobile, :company_ids, :companies, :report_companies_attributes, :report_topics, 
+                    :date_string, :report_date
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
@@ -103,6 +103,10 @@ class Report < ActiveRecord::Base
 
     def is_daily?
         report_type == "Daily"
+    end
+
+    def has_weather?
+        weather && weather.length > 0
     end
 
   	acts_as_api

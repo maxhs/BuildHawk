@@ -1,4 +1,3 @@
-
 <%= nested_form_for report, url: report_path(report, project_id: report.project.id), multipart: true, remote: true, method: :patch do |f| %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>	
 	<div id="edit-report">
@@ -23,17 +22,14 @@
 			</div>
 
 			<div class="thin-form">
-				<div class="row form-title" style="border:0;margin-top:0;padding-top:0">
-					
+				<div class="row form-title dates types">
 					<div class="input-append date col-md-6" data-date-format="dd-mm-yyyy">
 						<h5>Date</h5>
 						<%= f.text_field :date_string, :value => report.date_string, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 					</div>
-
 					<div class="col-md-6">
-						<h5 style="display:inline-block;">Type</h5>
+						<h5 class="inline">Type</h5>
 					</div>
-					
 					<%= select_tag :report_type, options_for_select(report.possible_types, :selected => report.report_type), :id=>"type-select", :style=>"width:50%;" %>
 				</div>
 					
@@ -175,47 +171,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#dp").datepicker();
-		$('#dp').datepicker().on('changeDate', function(){
-		    $('#dp').datepicker('hide');
-		});
-	});
-	$('.report-topic .title').click(function(){
-		var parent = $(this).parent();
-		var info = parent.find('.info');
-		if (info.css('display') == "none"){
-			info.show();
-		} else {
-			info.hide();
-		}
-	})
-
-	$('.remove-personnel').click(function(){
-		$(this).parent().parent().fadeOut(200,function(){
-			$(this).remove();
-		});
-	});
-	$('#report-save').click(function(){
-		$('.edit_report, .new_report').submit();
-	});
-	$('#dismiss-report').click(function(){
-		dismissReport();
-	});
-	$('#type-select').select2();
-	$('#topic-select').select2({
-		placeholder: "Select the safety topics covered"
-	});
-	$('#subs-select').select2({
-		placeholder: "Add the companies/subcontractors present"
-	});
-	$('#subs-select').on("select2-selecting", function(e) { 
-	   $('#subs-select').after('<div><input class="report-personnel-input" id="report_companies_'+e.val+'" name="report_companies['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
-	});
-
-	$('#users-select').select2({
-		placeholder: "Select the personnel present"
-	});
-	$('#users-select').on("select2-selecting", function(e) { 
-	   $('#users-select').after('<div><input class="report-personnel-input" id="report_user_ids_'+e.val+'" name="report_users['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
+		editReport('<%= report.project.address.latitude %>','<%= report.project.address.longitude %>');
 	});
 </script>

@@ -2,6 +2,7 @@ class ReportsController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_project
 	require 'forecast_io'
+	include ReportsHelper
 	ForecastIO.api_key = '32a0ebe578f183fac27d67bb57f230b5'
 
 	def index
@@ -43,8 +44,6 @@ class ReportsController < AppController
 		@project = Project.find params[:project_id]
 		@reports = @project.reports
 		@report = Report.new
-		@report.users.build
-		@report.report_companies.build
 		@report_title = "Add a New Report"
 		if request.xhr?
 			respond_to do |format|
@@ -185,8 +184,10 @@ class ReportsController < AppController
 		forecast(params[:latitude],params[:longitude],report_time.to_i)
 		render json: {
 			summary: @summary, 
-			temp: "#{@temp_min.round(1)} - #{@temp_max.round(1)}".html_safe, 
-			wind: @wind_speed,
+			tempMin: @temp_min.to_f.round(1),
+			tempMax: @temp_max.to_f.round(1), 
+			windSpeed: @wind_speed,
+			windBearing: wind_bearing(@bearing),
 			humidity: @humidity, 
 			precip: @precip
 		}
@@ -195,10 +196,8 @@ class ReportsController < AppController
 	def show
 		@report_title = ""
 		@report = Report.find params[:id]
-		@report.users.build
-		@report.companies.build
 
-		forecast(@project.address.latitude, @project.address.longitude, @report.report_date.to_time.to_i)
+		forecast(@project.address.latitude, @project.address.longitude, @report.report_date.to_time.to_i) unless @report.has_weather?
 
 		if request.xhr?
 			respond_to do |format|
@@ -211,13 +210,14 @@ class ReportsController < AppController
 
 	def forecast(latitude, longitude, time)
 		@forecast = ForecastIO.forecast(latitude, longitude, time: time)
+		puts "Forecast: #{@forecast.currently}"
 		@summary = @forecast.daily.data[0].summary
 		@temp_min = @forecast.daily.data[0].temperatureMin
 		@temp_max = @forecast.daily.data[0].temperatureMax
 		@bearing = @forecast.daily.data[0].windBearing
 		@wind_speed = @forecast.daily.data[0].windSpeed.round(1)
-		@humidity = @forecast.currently.humidity
-		@precip = @forecast.currently.precipProbability
+		@humidity = number_to_percentage(@forecast.currently.humidity*100, precision: 0) if @forecast.currently.humidity
+		@precip = number_to_percentage(@forecast.currently.precipProbability*100, precision: 0) if @forecast.currently.precipProbability
 	end
 
 	def generate
