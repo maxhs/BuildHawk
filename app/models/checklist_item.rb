@@ -51,25 +51,17 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity(current_user)
-        if current_user
-            puts "inside log checklist item activity with #{current_user.email}"
-        else
-            puts "inside log checklist item activity with no user"
-        end
-
         if state == 1
-            puts "item is complete"
             category.update_column :completed_date, Time.now if category.completed_count == category.item_count 
             attribution = current_user ? "#{current_user.full_name} marked this item complete." : "This item was marked complete."
             user_id_field = current_user ? current_user.id : nil
-            new_activity = activities.create!(
+            activities.create!(
                 :body => attribution,
                 :user_id => user_id_field,
                 :project_id => checklist.project.id,
                 :activity_type => self.class.name
             )        
         else
-
             if state
                 if state == 1
                     verbal_state = "completed"
@@ -83,20 +75,15 @@ class ChecklistItem < ActiveRecord::Base
             else
                 verbal_state = ""
             end
-            puts "item is NOT complete, creating activity anyway with verbal state: #{verbal_state}"
-
-            attribution = current_user ? "#{current_user.full_name} updated the status for this item\" to #{verbal_state}\"." : "The status for this item was updated\" to #{verbal_state}\"."
+            attribution = current_user ? "#{current_user.full_name} updated the status for this item to \"#{verbal_state}\"." : "The status for this item was updated to \"#{verbal_state}\"."
             user_id_field = current_user ? current_user.id : nil
-            new_activity = activities.create!(
+            activities.create!(
                 :body => attribution,
                 :project_id => checklist.project.id,
                 :user_id => user_id_field,
                 :activity_type => self.class.name
             )
-            
         end
-
-        puts "new_activity? #{new_activity.id}"
     end
 
     def project_id
@@ -198,9 +185,6 @@ class ChecklistItem < ActiveRecord::Base
         t.add :photos
         t.add :comments
         t.add :reminders
-    end
-
-    api_accessible :checklist_item, :extend => :details do |t|
         t.add :activities
     end
 
