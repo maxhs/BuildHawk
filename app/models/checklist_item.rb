@@ -8,10 +8,10 @@ class ChecklistItem < ActiveRecord::Base
     belongs_to :checklist
     belongs_to :completed_by_user, :class_name => "User"
   	has_many :photos
-  	has_many :comments, :dependent => :destroy
-    has_many :notifications, :dependent => :destroy
-    has_many :reminders, :dependent => :destroy
-    has_many :activities, :dependent => :destroy
+  	has_many :comments, dependent: :destroy
+    has_many :notifications, dependent: :destroy
+    has_many :reminders, dependent: :destroy
+    has_many :activities, dependent: :destroy
     acts_as_list scope: :category, column: :order_index
     default_scope { order('order_index') }
 
@@ -58,10 +58,11 @@ class ChecklistItem < ActiveRecord::Base
         end
 
         if state == 1
+            puts "item is complete"
             category.update_column :completed_date, Time.now if category.completed_count == category.item_count 
             attribution = current_user ? "#{current_user.full_name} marked this item complete." : "This item was marked complete."
             user_id_field = current_user ? current_user.id : nil
-            activities.create(
+            new_activity = activities.create!(
                 :body => attribution,
                 :user_id => user_id_field,
                 :project_id => checklist.project.id,
@@ -84,21 +85,18 @@ class ChecklistItem < ActiveRecord::Base
             end
             puts "item is NOT complete, creating activity anyway with verbal state: #{verbal_state}"
 
-            if current_user
-                activities.create(
-                    :body => "#{current_user.full_name} updated the status for this item\" to #{verbal_state}\".",
-                    :project_id => checklist.project.id,
-                    :user_id => current_user.id,
-                    :activity_type => self.class.name
-                )
-            else 
-                activities.create(
-                    :body => "The status for this item was updated\" to #{verbal_state}\".",
-                    :project_id => checklist.project.id,
-                    :activity_type => self.class.name
-                )
-            end
+            attribution = current_user ? "#{current_user.full_name} updated the status for this item\" to #{verbal_state}\"." : "The status for this item was updated\" to #{verbal_state}\"."
+            user_id_field = current_user ? current_user.id : nil
+            new_activity = activities.create!(
+                :body => attribution,
+                :project_id => checklist.project.id,
+                :user_id => user_id_field,
+                :activity_type => self.class.name
+            )
+            
         end
+
+        puts "new_activity? #{new_activity.id}"
     end
 
     def project_id
