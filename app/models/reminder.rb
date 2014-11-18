@@ -97,6 +97,10 @@ class Reminder < ActiveRecord::Base
     api_accessible :checklists, :extend => :details do |t|
       
     end
+    
+    api_accessible :checklist_item, :extend => :details do |t|
+      
+    end
 
     api_accessible :tasklist, :extend => :details do |t|
       
