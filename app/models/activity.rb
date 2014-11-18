@@ -120,13 +120,10 @@ class Activity < ActiveRecord::Base
 
     api_accessible :checklist_item do |t|
       	t.add :id
-      	t.add :created_date
+      	#t.add :created_date
 		t.add :epoch_time
 		t.add :user_id
-		t.add :report_id
 		t.add :comment
-		t.add :task_id
-		t.add :project_id
 		t.add :body
 		t.add :hidden
 		t.add :activity_type

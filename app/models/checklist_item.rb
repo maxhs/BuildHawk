@@ -52,10 +52,10 @@ class ChecklistItem < ActiveRecord::Base
 
     def log_activity(current_user)
         if state == 1
-            category.update_column :completed_date, Time.now if category.completed_count == category.item_count 
+            category.update_column :completed_date, DateTime.now if category.completed_count == category.item_count 
             attribution = current_user ? "#{current_user.full_name} marked this item complete." : "This item was marked complete."
             user_id_field = current_user ? current_user.id : nil
-            activities.create!(
+            activities.create(
                 :body => attribution,
                 :user_id => user_id_field,
                 :project_id => checklist.project.id,
@@ -185,6 +185,10 @@ class ChecklistItem < ActiveRecord::Base
         t.add :photos
         t.add :comments
         t.add :reminders
+        t.add :activities
+    end
+
+    api_accessible :checklist_item, :extend => :details do |t|
         t.add :activities
     end
 

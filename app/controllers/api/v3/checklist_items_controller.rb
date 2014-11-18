@@ -34,14 +34,14 @@ class Api::V3::ChecklistItemsController < Api::V3::ApiController
         end
 
     	respond_to do |format|
-        	format.json { render_for_api :details, :json => item, :root => :checklist_item}
+        	format.json { render_for_api :checklist_item, :json => item, :root => :checklist_item}
       	end
     end
 
     def show
     	item = ChecklistItem.find params[:id]
         respond_to do |format|
-            format.json { render_for_api :details, :json => item, :root => :checklist_item}
+            format.json { render_for_api :checklist_item, :json => item, :root => :checklist_item}
         end
     end
 
