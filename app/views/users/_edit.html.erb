@@ -1,7 +1,9 @@
 <div id="main">
 	<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
 		<table id="edit-user-form" class="border-box">
-		<tr><td><h2>Settings</h2></td></tr>
+
+			<tr><td><h2 class="bold-header">Settings</h2></td></tr>
+			
 			<%= hidden_field_tag :company_id, :value => current_user.company.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 			<tr><td><h4>First name</h4></td></tr>
@@ -42,15 +44,16 @@
 						<%= button_tag(type: 'submit', :class=> "simple-btn save", style:"margin:15px auto") do %>
 					    	<i class="fa fa-floppy-o"></i> Save
 					  	<% end %>
+					  	<%= link_to logout_path, :class =>"logout-button" do %>
+							<i class="fa fa-sign-out"></i>
+							Log out
+						<% end %>	
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align:center;">
-					<%= link_to logout_path, :class =>"simple-btn" do %>
-						<i class="fa fa-sign-out"></i>
-						Log out
-					<% end %>	
+					
 				</td>
 			</tr>
 		</table>

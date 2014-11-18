@@ -50,13 +50,16 @@ function stripe(key) {
 function setupBilling(invoice_url){
 	$('.current-page').removeClass('current-page');
 	$('#billing-link').addClass('current-page');
-	$('#view-invoice-link').click(function(e){
-		e.preventDefault();
-		var stuff = $('#past-invoices').val();
-		$(this).attr('href',invoice_url+stuff);
-		window.open(invoice_url+stuff);
-		//$(this).click();
-	});
+	
+	if (invoice_url){
+		$('#view-invoice-link').click(function(e){
+			e.preventDefault();
+			var stuff = $('#past-invoices').val();
+			$(this).attr('href',invoice_url+stuff);
+			window.open(invoice_url+stuff);
+			//$(this).click();
+		});
+	}
 	$(document).ready(function() {
 		$('#payment-form').submit(function(event) {
 		    var form = $(this);

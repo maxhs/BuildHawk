@@ -72,7 +72,7 @@
 						<div class="col-md-12"><h5>Weather</h5></div>
 					</div>
 					<div class="row">
-						<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
+						<div class="col-md-12"><%= f.text_area :weather, :rows => 2, value: report.weather && report.weather.length > 0 ? report.weather : @summary, placeholder: "Weather report" %></div>
 					</div>
 					
 					<div class="row weather-titles">
@@ -82,10 +82,10 @@
 						<div class="col-md-3"><h5>Humidity</h5></div>
 					</div>
 					<div class="row weather-fields">
-						<div class="col-md-3"><%= f.text_field :temp, :value => report.temp, :placeholder => "N/A" %></div>
-						<div class="col-md-3"><%= f.text_field :wind, :value => report.wind, :placeholder => "N/A" %></div>
-						<div class="col-md-3"><%= f.text_field :precip, :value => report.precip, :placeholder => "N/A" %></div>
-						<div class="col-md-3"><%= f.text_field :humidity, :value => report.humidity, :placeholder => "N/A" %></div>
+						<div class="col-md-3"><%= f.text_field :temp, value: report.temp && report.temp.length > 0 ? report.temp : "#{@temp_min.round(1)}&deg; - #{@temp_max.round(1)}&deg;".html_safe, :placeholder => "N/A" %></div>
+						<div class="col-md-3"><%= f.text_field :wind, value: report.wind && report.wind.length > 0 ? report.wind : "#{@wind_speed} #{wind_bearing(@bearing)}", placeholder: "N/A" %></div>
+						<div class="col-md-3"><%= f.text_field :precip, value: report.precip && report.precip.length > 0 ? report.precip : @precip, placeholder: "N/A" %></div>
+						<div class="col-md-3"><%= f.text_field :humidity, value: report.humidity && report.humidity.length > 0 ? report.humidity : @humidity, placeholder: "N/A" %></div>
 					</div>
 				<% end %>
 

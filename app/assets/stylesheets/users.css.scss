@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.logout-button {
+	display:block;
+	width:50%;
+	margin:2.5% auto 0;
+}
 
 #edit-user-form, #edit-company-form, #new-user-form {
 	display:block;
@@ -35,6 +40,10 @@
 	.user-pic {
 		margin:40px auto;
 		display:block;
+	}
+
+	.button-container {
+		margin-bottom:0;
 	}
 }
 

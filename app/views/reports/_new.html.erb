@@ -1,12 +1,12 @@
-
 <%= nested_form_for @report, url: reports_path, :html=> {:multipart => true}, :remote => true, :method => :post do |f| %>
 	<%= f.hidden_field :project_id, value: @project.id %>
 	<%= f.hidden_field :author_id, value: current_user.id %>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 	<div id="add-report" class="border-box container">
 		<div class="action-buttons">
 			<div style="display:table-row">
-				<div id="report-save" class="action">
-					<i class="fa fa-floppy-o remote"></i>
+				<div id="report-add" class="action">
+					<i class="fa fa-plus remote"></i>
 				</div>
 				<div id="export-report" class="action">
 					<%= link_to generate_report_path(report), remote: true do %>
@@ -109,36 +109,14 @@
 			</div>
 			
 			<div class="button-container">
-				<%= f.submit "Add", :class => "simple-btn save" %>
+				<%= f.submit "Add", :class => "simple-btn full-width" %>
 			</div>
-		</div>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>	
+		</div>	
 	</div>
 <% end %>
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#dp").datepicker();
-		$('#dp').datepicker().on('changeDate', function(){
-		    $('#dp').datepicker('hide');
-		});
-	});
-
-	$('#dismiss-report').click(function(){
-		dismissReport();
-	});
-	$('#report_type').select2();
-	$('#subs-select').select2({
-		placeholder: "Add the companies/subcontractors present"
-	});
-	$('#subs-select').on("select2-selecting", function(e) { 
-	   $('#subs-select').after('<div><input class="report-personnel-input" id="report_companies_'+e.val+'" name="report_companies['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
-	});
-
-	$('#users-select').select2({
-		placeholder: "Select the personnel present"
-	});
-	$('#users-select').on("select2-selecting", function(e) { 
-	   $('#users-select').after('<div><input class="report-personnel-input" id="report_user_ids_'+e.val+'" name="report_users['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
+		newReport();
 	});
 </script>

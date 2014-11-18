@@ -1,6 +1,8 @@
 class ReportsController < AppController
 	before_filter :authenticate_user!
 	before_filter :find_project
+	require 'forecast_io'
+	ForecastIO.api_key = '32a0ebe578f183fac27d67bb57f230b5'
 
 	def index
 		@project = Project.find params[:project_id]
@@ -39,7 +41,8 @@ class ReportsController < AppController
 
 	def new
 		@project = Project.find params[:project_id]
-		@report = @project.reports.new
+		@reports = @project.reports
+		@report = Report.new
 		@report.users.build
 		@report.report_companies.build
 		@report_title = "Add a New Report"
@@ -177,15 +180,32 @@ class ReportsController < AppController
 		end
 	end
 
+	def edit
+		
+	end
+
 	def show
 		@report_title = ""
 		@report = Report.find params[:id]
 		@report.users.build
 		@report.companies.build
-		reports = @project.reports
-		index = reports.flatten.index @report
-		@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at
-		@previous = reports[index+1] if reports[index+1] && reports[index+1].created_at < @report.created_at
+		#reports = @project.reports
+		#index = reports.flatten.index @report
+		#@next = reports[index-1] if reports[index-1] && reports[index-1].created_at > @report.created_at
+		#@previous = reports[index+1] if reports[index+1] && reports[index+1].created_at < @report.created_at
+
+		address = @project.address
+		@forecast = ForecastIO.forecast(address.latitude, address.longitude, time: @report.report_date.to_time.to_i)
+		@summary = @forecast.daily.data[0].summary
+		@temp_min = @forecast.daily.data[0].temperatureMin
+		@temp_max = @forecast.daily.data[0].temperatureMax
+		@bearing = @forecast.daily.data[0].windBearing
+		puts "wind bearing: #{@wbearing}"
+		@wind_speed = @forecast.daily.data[0].windSpeed.round(1)
+		puts "forecast? #{JSON.pretty_generate @forecast.currently}"
+		@humidity = @forecast.currently.humidity
+		@precip = @forecast.currently.precipProbability
+
 		if request.xhr?
 			respond_to do |format|
 				format.js

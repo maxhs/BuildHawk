@@ -113,8 +113,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             end
         end
 
-        ## update the user and ensure they're attached to the project
-        user.update_attributes params[:user]
+        ## ensure the user is attached to the project
         project.project_users.where(:user_id => user.id).first_or_create
         project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
 

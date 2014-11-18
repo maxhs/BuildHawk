@@ -12,32 +12,50 @@
 		  	<div class="payment-errors"></div>
 
 		  	<section id="card-info">
-				<div class="form-row">
-			    	<label>
+				<div class="row">
+			    	<div class="col-xs-4">
 			      		<span>Card Number</span>
+			      	</div>
+			      	<div class="col-xs-8">
 			     		<input type="text" size="20" data-stripe="number" class="cc-number card-info" required="true"/>
-			    	</label>
-			    	<label>
-			      		<span>CVC</span>
-			      		<input type="text" size="4" data-stripe="cvc" class="cc-cvc" required="true"/>
-			    	</label>
+			     	</div>
+			     </div>
+		     	<div class="row">
+		     		<div class="col-xs-4">
+			    		<span>CVC</span>
+			    	</div>
+			    	<div class="col-xs-8">
+			      		<input type="text" size="4" data-stripe="cvc" class="cc-cvc" placeholder="123" required="true"/>
+			    	</div>
 			 	</div>
 
-			  	<div class="form-row">
-			    	<label>
+			  	<div class="row">
+			    	<div class="col-xs-4">
 			      		<span>Expiration (MM/YYYY)</span>
+			      	</div>
+			      	<div class="col-xs-8">
 			      		<input type="text" size="8" class="cc-expiry" placeholder="MM/YYYY" required="true"/>
-			    	</label>
+			    	</div>
+			  	</div>
+			  	<div class="row">
+			    	<div class="col-xs-4">
+			      		<span>Primary?</span>
+			      	</div>
+			      	<div class="col-xs-8">
+			      		<%= check_box_tag :active %>
+			    	</div>
 			  	</div>
 		  	</section>
+		  
+		  	<div class="button-container">
+		  		<%=submit_tag "Create", :class=>"simple-btn save" %>
+		  	</div>
 
-		  	<label>Make Primary</label>
-		  	<%= check_box_tag :active %>
-		  	<div style="text-align:center;"><%=submit_tag "Create", :class=>"simple-btn" %></div>
 		<% end %>
 	</div>
 </div>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
-	stripe('<%=@stripe_key%>');
+	stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
+	setupBilling();
 </script>

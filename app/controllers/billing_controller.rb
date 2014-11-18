@@ -4,7 +4,6 @@ class BillingController < AppController
 
 	def index
 		@cards = @company.cards.where("card_id IS NOT NULL")
-		@stripe_key = Rails.configuration.stripe[:publishable_key]
 		@active_card = @company.cards.where(:active => true).first 
 		@month = Time.now.to_datetime
 		@pro_users = @user.company.billing_days_for(@month).map{|day| day.project_user.user}.compact.uniq
@@ -26,11 +25,6 @@ class BillingController < AppController
 	rescue Stripe::InvalidRequestError => e
 		flash[:alert] = "Something went wrong while trying to fetch your billing information."
 	 	redirect_to admin_index_path
-	end
-
-	def new_card
-		@stripe_key = Rails.configuration.stripe[:publishable_key]
-		@card = @company.cards.new
 	end
 
 	def create
@@ -122,7 +116,7 @@ class BillingController < AppController
 	def edit_card
 		@card = Card.where(:id => params[:card_id]).first
 		if @card
-			@stripe_key = Rails.configuration.stripe[:publishable_key]
+
 		else
 			redirect_to billing_index_path
 		end
@@ -130,15 +124,6 @@ class BillingController < AppController
 
 	def edit
 		
-	end
-
-	def destroy
-		card = Card.find params[:id]
-		customer = Stripe::Customer.retrieve(@company.customer_id)
-		stripe_card = customer.cards.retrieve(card.card_id)
-		stripe_card.delete if stripe_card 
-		card.destroy
-		redirect_to billing_index_path
 	end
 
 	def update

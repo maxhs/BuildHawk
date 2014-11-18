@@ -92,8 +92,10 @@ body {
 		line-height:1;
 	}
 
-	header {
-		//background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(100%, #f7f7f7));
+	.bold-header {
+		font-family:"Source Sans Pro","Open Sans","OpenSans","Myriad Pro","Myriad Web Pro","Helvetica",sans-serif;
+		text-transform:uppercase;
+		font-weight:bold;
 	}
 
 	.header.row {
@@ -1020,6 +1022,10 @@ a.search-button {
 	width:50%;
 }
 
+.full-width {
+	width:100%;
+}
+
 .action-buttons {
 	display:table;
 	max-width:50%;
@@ -1053,7 +1059,7 @@ a.search-button {
 			padding:0;
 			border:0;
 		}
-		.fa-trash-o, .fa-floppy-o, .fa-share, .fa-remove {
+		.fa {
 			font-size:1.6em;
 		}
 	}

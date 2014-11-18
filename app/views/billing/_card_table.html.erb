@@ -1,0 +1,30 @@
+<% if cards %>
+	<table>
+		<th></th>
+		<th>Added</th>
+		<th>Primary</th>
+		<th></th>
+		<% cards.each do |c| %>
+			<tr id='card-<%=c.id%>' class="card">
+				<td><%= "****#{c.last4}	(#{c.brand})" %></td>
+				<td><%= parse_datetime c.created_at %></td>
+				<td>
+					<% if c.active %>
+						<span class='primary-card-label'>Primary</span>
+					<% else %>	
+						<%= link_to "Make Primary", card_path(c, primary: true), :class=>"remote", method: :patch, remote: true %>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to card_path(c), method: :delete, data: {confirm: "Are you sure you want to remove this card? This can't be undone."}, remote: true do %>
+						<i class="fa fa-trash-o remote"></i>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+<% else %>
+	<span>You don't have any active cards.</span>
+<% end %>
+
+<%= link_to "Add New Card", new_card_path, :class=>"simple-btn", id:"new-card", remote:true %>

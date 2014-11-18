@@ -76,13 +76,12 @@ Buildhawk::Application.routes.draw do
   end
   resources :billing do 
     collection do
-      get :new_card
-      get :edit_card
       post :pay
       get :invoice
       get :summary
     end
   end 
+  resources :cards
   resources :company_subs, only: [:destroy]
   resources :uber_admin do
     collection do

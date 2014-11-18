@@ -2,7 +2,7 @@
 	
 	<div id="reports-header" class="row">
 		<div class="col-xs-3">
-			<%= link_to "+ Report", new_report_path(:project_id => project.id), :class=>"simple-btn new-report remote", remote: true %>
+			<%= link_to "+ Report", new_report_path(:project_id => project.id), :class=>"simple-btn new-report", remote: true %>
 		</div>
 		
 		<div class="col-xs-9">
@@ -35,7 +35,11 @@
 
 <div id="report-focus">
 	<% if report %>
-		<%= render partial:"reports/edit", locals:{report: report, project: @project, project_users: @project_users} %>
+		<% if report.new_record? %>
+			<%= render partial:"reports/new", locals:{report: report, project: @project, project_users: @project_users} %>
+		<% else %>
+			<%= render partial:"reports/edit", locals:{report: report, project: @project, project_users: @project_users} %>
+		<% end %>
 	<% end %>
 </div>
 
@@ -46,14 +50,19 @@
 	});
 	<% if report %>
 		$("#project-reports").addClass('reports-panel');
-		var reportOffset = document.getElementById('report-<%=report.id %>').offsetTop;
-		var focusOffset = document.getElementById('project-reports').offsetHeight;
-		var posTop = reportOffset-focusOffset;
+		<% if report.new_record? %>
+			var posTop = 0;
+		<% else %>
+			var reportOffset = document.getElementById('report-<%=report.id %>').offsetTop;
+			var focusOffset = document.getElementById('project-reports').offsetHeight;
+			var posTop = reportOffset-focusOffset;
+			$("html, body").delay(200).animate({ scrollTop: $("#report-<%=report.id %>").offset().top-140 }, 200);
+		<% end %>
 		$('.active-report').removeClass('active-report');
 		$('.report').addClass('faded');
 		$('#report-<%=report.id %>').addClass('active-report');
 		$('#report-focus').css({/*'margin-top':posTop,*/'left':'50%'});
-		$("html, body").delay(200).animate({ scrollTop: $("#report-<%=report.id %>").offset().top-200 }, 200);
+		
 	<% else %>
 		focusOffset = document.getElementById('project-reports').offsetHeight;
 		$('#report-focus').css({/*'margin-top':-focusOffset,*/'left':'50%'});
