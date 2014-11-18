@@ -150,7 +150,9 @@
 				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
 				<%= f.hidden_field :user_id, :value => current_user.id %>
 				<%= f.hidden_field :report_id, :value => report.id %>
-				<%= f.submit "Add Comment", :class => "simple-btn pull-right", :style => "margin-top:14px;" %>
+				<%= button_tag(type: 'submit', :class=> "simple-btn pull-right", style:"margin:14px auto;width:100%;", remote: true) do %>
+			    	<i class="fa fa-paper-plane remote"></i> Add			  	
+			    <% end %>
 			<% end %>
 		</div>
 		<%= render :partial => "comments/comments", :locals => {:comments => report.comments} %>
@@ -171,6 +173,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		editReport('<%= report.project.address.latitude %>','<%= report.project.address.longitude %>');
+		editReport('<%= report.project.address.latitude %>','<%= report.project.address.longitude %>','<%=report.project.to_param%>');
 	});
 </script>

@@ -1,12 +1,21 @@
-function dismissReport(){
+function dismissReport(projectId){
 	$('.reports-panel').removeClass('reports-panel');
 	$('.active-report').removeClass('active-report');
-	$('#report-focus').css('left','100%');
 	$('.faded').removeClass('faded');
-	$("html, body").animate({ scrollTop: 0 }, 300);
+	$('#report-focus').css('left','101%');
+	$("html, body").animate({ scrollTop: 0 }, 300 ,function(){
+		$('#report-focus').html('');
+	});
+
+	if (history && history.pushState){
+	    history.pushState(null, null, '/reports?p='+projectId);
+	    $(window).bind("popstate", function(){
+	      $.getScript(location.href);
+	    });
+	}
 }
 
-function newReport(latitude,longitude) {
+function newReport(latitude,longitude,projectId) {
 	$("#dp").datepicker();
 	$('#dp').datepicker().on('changeDate', function(ev){
 	    $('#dp').datepicker('hide');
@@ -23,9 +32,6 @@ function newReport(latitude,longitude) {
 		}
 	});
 
-	$('#dismiss-report').click(function(){
-		dismissReport();
-	});
 	$('#report_type').select2();
 	$('#subs-select').select2({
 		placeholder: "Add the companies/subcontractors present"
@@ -33,17 +39,20 @@ function newReport(latitude,longitude) {
 	$('#subs-select').on("select2-selecting", function(e) { 
 	   $('#subs-select').after('<div><input class="report-personnel-input" id="report_companies_'+e.val+'" name="report_companies['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
 	});
-
 	$('#users-select').select2({
 		placeholder: "Select the personnel present"
 	});
 	$('#users-select').on("select2-selecting", function(e) { 
 	   $('#users-select').after('<div><input class="report-personnel-input" id="report_user_ids_'+e.val+'" name="report_users['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
 	});
+
+	$('#dismiss-report').click(function(){
+		dismissReport(projectId);
+	});
 }
 
 function assignDate(latitude, longitude, date){
-	console.log('assign date '+date);
+	//console.log('assign date '+date);
 	$.ajax({
       	type: "GET",
      	url: "/reports/weather",
@@ -62,7 +71,7 @@ function assignDate(latitude, longitude, date){
     })
 }
 
-function editReport(latitude,longitude) {
+function editReport(latitude,longitude,projectId) {
 
 	$("#dp").datepicker();
 	$('#dp').datepicker().on('changeDate', function(ev){
@@ -94,9 +103,6 @@ function editReport(latitude,longitude) {
 			});
 		}
 	});
-	$('#dismiss-report').click(function(){
-		dismissReport();
-	});
 	$('#type-select').select2();
 	$('#topic-select').select2({
 		placeholder: "Select the safety topics covered"
@@ -113,5 +119,8 @@ function editReport(latitude,longitude) {
 	});
 	$('#users-select').on("select2-selecting", function(e) { 
 	   $('#users-select').after('<div><input class="report-personnel-input" id="report_user_ids_'+e.val+'" name="report_users['+e.val+']" placeholder="0" type="text"><span style="padding-left:1em;">'+ e.choice.text +'</span></div>')
+	});
+	$('#dismiss-report').click(function(){
+		dismissReport(projectId);
 	});
 }

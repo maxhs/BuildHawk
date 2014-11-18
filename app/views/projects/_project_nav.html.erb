@@ -16,7 +16,7 @@
 		<div>Documents</div>
 	<% end %>
 <li class="nav-reports admin">
-	<%= link_to reports_path(:project_id => @project.id), :remote => true do %>
+	<%= link_to reports_path(:p => @project.to_param), :remote => true do %>
 		<i class="fa fa-pencil nav-icon"></i>
 		<div>Reports</div>
 	<% end %>

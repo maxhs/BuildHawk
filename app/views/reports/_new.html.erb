@@ -117,6 +117,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		newReport('<%=project.address.latitude%>', '<%=project.address.longitude%>');
+		newReport('<%=project.address.latitude%>', '<%=project.address.longitude%>','<%=report.project.to_param%>');
 	});
 </script>

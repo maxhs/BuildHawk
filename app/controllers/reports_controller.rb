@@ -6,7 +6,8 @@ class ReportsController < AppController
 	ForecastIO.api_key = '32a0ebe578f183fac27d67bb57f230b5'
 
 	def index
-		@project = Project.find params[:project_id]
+		@project = Project.find params[:p]
+		redirect_to session[:previous_url] || root_url, notice:"Sorry, but you don't have access to that section.".html_safe unless params[:p] == @project.to_param
 		@reports = @project.reports
 		@report = Report.find params[:report_id] if params[:report_id]
 	rescue

@@ -1,14 +1,23 @@
-function dismissTask() {
+function dismissTask(projectId) {
 	$('.tasks-panel').removeClass('tasks-panel');
 	$('.active-task').removeClass('active-task');
 	$('.faded').removeClass('faded');
-	$('#task-focus').css({'left':"100%",'top':'0'});
-	$("html, body").delay(200).animate({ scrollTop: 0 }, 200);
+	$('#task-focus').css({'left':"101%",'top':'0'});
+	$("html, body").delay(200).animate({ scrollTop: 0 }, 230, function(){
+		$('#task-focus').html('');
+	});
+
+	if (history && history.pushState){
+	    history.pushState(null, null, '/projects/'+projectId+'tasklist');
+	    $(window).bind("popstate", function(){
+	      $.getScript(location.href);
+	    });
+	}
 }
 
-function taskSetup(){
+function taskSetup(projectId){
 	$('#dismiss-task').click(function(){
-		dismissTask();
+		dismissTask(projectId);
 	});
 	$('#task-save').click(function(){
 		$('.new_task, .edit_task').submit();
