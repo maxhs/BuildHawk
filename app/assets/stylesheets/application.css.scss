@@ -336,7 +336,17 @@ body {
 			}
 
 			.project:hover, .project.active {
-				background:#777;
+				background:#eee;
+				opacity: 1 !important;
+
+				* {
+					color:#000 !important;
+				}
+
+				.ui-progressbar {
+					background:#fff;
+					box-shadow: 0 0 3px 0 rgba(0,0,0,.15);
+				}
 			}
 
 			.unsortable {
