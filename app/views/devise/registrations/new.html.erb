@@ -8,20 +8,29 @@
 		  	<%= f.label "Beta Code" %>
 		  	<%= text_field_tag :beta_code, nil, :placeholder => "Your beta code", required: true, 'data-parsley-equalto' => "BuildHawkBeta", "data-parsley-error-message" => "Sorry, but that's not the right code." %>
 
-		  	<%= f.label "First name" %>
-		  	<%= f.text_field :first_name, :placeholder => "First name", :autofocus => true, required: true %>
-
-		  	<%= f.label "Last name" %>
-		  	<%= f.text_field :last_name, :placeholder => "Last name", required: true %>
-
 		  	<%= f.label "Company name" %>
 		  	<%= f.fields_for resource.build_company do |c| %>
 		  		<%= c.text_field :name, :placeholder => "Company name", required: true  %>
 		  	<% end %>
 
-		  	<%= f.label "Email" %>
-		  	<%= f.email_field :email, :placeholder => "The email address you use for work" %>
+		  	<div class="names">
+			  	<%= f.label "First name" %>
+			  	<%= f.text_field :first_name, :placeholder => "First name", :class=>"first-name", :autofocus => true, required: true %>
+			</div>
+			<div class="names">
+		  		<%= f.label "Last name" %>
+		  		<%= f.text_field :last_name, :placeholder => "Last name", required: true %>
+		  	</div>
 
+		  	<div class="contact-methods">
+			  	<%= f.label "Email" %>
+			  	<%= f.email_field :email, :placeholder => "The email address you use for work", :class=>"email", required: true %>
+		  	</div>
+		  	<div class="contact-methods">
+			  	<%= f.label "Phone number" %>
+			  	<%= f.text_field :phone, :placeholder => "The phone number you'd use work" %>
+		  	</div>
+		  	
 		  	<%= f.label "Password" %>
 		  	<%= f.password_field :password, :placeholder => "Password", :autocomplete => "off", required: true %>
 		  	<%= f.label "Confirm Password" %>

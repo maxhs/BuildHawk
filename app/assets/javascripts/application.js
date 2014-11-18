@@ -49,29 +49,34 @@ if (history && history.pushState){
     });
 }
 
+function showAlert(text){
+    $('#alert').text("Project Updated")
+    $('#alert, .remove-top.banner').fadeIn(270).delay(2000).fadeOut(270, function(){
+        $('#alert').text("");
+    });
+}
+
 function setupWindow(){
     var notice = document.getElementById("notice");
     var alert = document.getElementById("alert");
     if (notice.textContent.length > 0) {
-        $('#notice').delay(500).fadeIn("normal", function() {
+        $('#notice').delay(500).fadeIn(270, function() {
             $(this).delay(4000).fadeOut(function(){
-                $('#notice-text').text("");
+                $('#notice').text("");
             });
         });
     }
     if (alert.textContent.length > 0) {
-        $("#alert").delay(500).fadeIn("normal", function() {
+        $("#alert").delay(500).fadeIn(270, function() {
             $(this).delay(4000).fadeOut(function(){
-                $('#alert-text').text("");
+                $('#alert').text("");
             });
         });
     }
+
     $('.remove-top').click(function(){
-        $('#alert').stop().fadeOut(function(){
-            $('#alert-text').text("");
-        });
-        $('#notice').stop().fadeOut(function(){
-            $('#notice-text').text("");
+        $('#alert, #notice').stop().fadeOut(function(){
+            $('#alert, #notice').text("");
         });
     });
     

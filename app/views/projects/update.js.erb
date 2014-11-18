@@ -1,16 +1,12 @@
-$('#alert').text("Project Updated").fadeIn(200).delay(2000).fadeOut(500, function(){
-	$(this).text("");
-});
+showAlert("Project Updated");
 $('.sidebarProjects > li a').removeClass('current-page');
 $('#<%=@project.id%>-link').addClass('current-page');
-$('#main').fadeOut(170,function(){
-	$(this).html('<%= j render :partial => "projects/show", :locals => {:project => @project} %>');
-	$(this).fadeIn(170);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#project-name-<%=@project.id%>').text('<%= j @project.name.html_safe %>');
+$('#main').html('<%= j render partial: "projects/show", locals: {project: @project} %>');
+
 if (history && history.pushState){
-    history.pushState(null, null, '<%=root_url%>projects/<%=@project.id%>');
+    history.pushState(null, null, '<%=root_url%>projects/<%=@project.to_param%>');
     $(window).bind("popstate", function(){
-      $.getScript(location.href);
+      	$.getScript(location.href);
     });
 }

@@ -3,6 +3,23 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #edit-project {
+	form, input[type="text"] {
+		width:100%;
+	}
+	input[type="checkbox"] {
+		width:auto;
+		margin-left:0;
+	}
+
+	.button-container {
+		margin: 0 auto;
+	}
+
+	.row.personnel {
+		padding-top:10px;
+		padding-bottom:10px;
+		border-top:1px solid #eee;
+	}
 	.edit-header {
 		text-align:center;
 		margin:10px auto 20px;
@@ -62,28 +79,6 @@
 #remove-project-button {
 	margin:0;
 	display:inline-block;
-}
-
-#edit-project {
-		margin:2.5% auto;
-
-		form, input[type="text"] {
-			width:100%;
-		}
-		input[type="checkbox"] {
-			width:auto;
-			margin-left:0;
-		}
-
-		.button-container {
-			margin: 0 auto;
-		}
-
-		.row.personnel {
-			padding-top:10px;
-			padding-bottom:10px;
-			border-top:1px solid #eee;
-		}
 }
 
 #company-dashboard, #search-results {
