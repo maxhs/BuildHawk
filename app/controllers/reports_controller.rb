@@ -182,10 +182,12 @@ class ReportsController < AppController
 		raw_time = params[:date].to_i if params[:date]
 		report_time = Time.at(raw_time/1000.0)
 		forecast(params[:latitude],params[:longitude],report_time.to_i)
+		tmin = @temp_min ? @temp_min.to_f.round(1) : nil
+		tmax = @temp_max ? @temp_max.to_f.round(1) : nil
 		render json: {
 			summary: @summary, 
-			tempMin: @temp_min.to_f.round(1),
-			tempMax: @temp_max.to_f.round(1), 
+			tempMin: tmin,
+			tempMax: tmax, 
 			windSpeed: @wind_speed,
 			windBearing: wind_bearing(@bearing),
 			humidity: @humidity, 
