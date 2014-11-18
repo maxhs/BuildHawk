@@ -205,13 +205,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
   top: 0;
   border-left: 1px solid #aaa;
   border-radius: 0 4px 4px 0;
-  background-clip: padding-box;
-  background: #ccc;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #cccccc), color-stop(0.6, #eeeeee));
-  background-image: -webkit-linear-gradient(center bottom, #cccccc 0%, #eeeeee 60%);
-  background-image: -moz-linear-gradient(center bottom, #cccccc 0%, #eeeeee 60%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#eeeeee', endColorstr = '#cccccc', GradientType = 0);
-  background-image: linear-gradient(to top, #cccccc 0%, #eeeeee 60%);
+  background: #ddd;
 }
 
 html[dir="rtl"] .select2-container .select2-choice .select2-arrow {

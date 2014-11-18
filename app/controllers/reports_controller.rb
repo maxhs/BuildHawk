@@ -215,7 +215,7 @@ class ReportsController < AppController
 		@temp_min = @forecast.daily.data[0].temperatureMin
 		@temp_max = @forecast.daily.data[0].temperatureMax
 		@bearing = @forecast.daily.data[0].windBearing
-		@wind_speed = @forecast.daily.data[0].windSpeed.round(1)
+		@wind_speed = @forecast.daily.data[0].windSpeed.round(1) if @forecast.daily.data[0].windSpeed.
 		@humidity = number_to_percentage(@forecast.currently.humidity*100, precision: 0) if @forecast.currently.humidity
 		@precip = number_to_percentage(@forecast.currently.precipProbability*100, precision: 0) if @forecast.currently.precipProbability
 	end
