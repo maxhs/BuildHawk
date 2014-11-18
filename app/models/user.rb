@@ -296,23 +296,27 @@ class User < ActiveRecord::Base
 
     end
 
-    api_accessible :checklists, :extend => :tasklist do |t|
+    api_accessible :checklists, :extend => :user do |t|
         
     end
 
-    api_accessible :reports, :extend => :tasklist do |t|
+    api_accessible :checklist_item, :extend => :user do |t|
+        
+    end
+
+    api_accessible :reports, :extend => :user do |t|
         
     end
     
-    api_accessible :v3_reports, :extend => :tasklist do |t|
+    api_accessible :v3_reports, :extend => :user do |t|
         
     end
 
-    api_accessible :company, :extend => :tasklist do |t|
+    api_accessible :company, :extend => :user do |t|
 
     end
 
-    api_accessible :reminders, :extend => :tasklist do |t|
+    api_accessible :reminders, :extend => :user do |t|
 
     end
 
