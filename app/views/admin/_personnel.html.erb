@@ -43,7 +43,7 @@
 						<td><%= user.email %></td>
 						<td><%= user.formatted_phone %></td>
 						<td><%= parse_time user.created_at%></td>
-						<td><%= link_to "Edit", edit_user_path(user), :class => "simple-btn", remote: true %></td>
+						<td><%= link_to "Edit", edit_user_path(user), :class => "empty-btn", remote: true %></td>
 					</tr>
 				<% end %>
 			</tbody>

@@ -22,23 +22,4 @@
 			<% end %>
 		</tbody>
 	</table>
-
-	<script>
-	$(document).ready(function(){
-	    $("#filter").keyup(function(){
-	        // Retrieve the input field text and reset the count to zero
-	        var filter = $(this).val(), count = 0;
-	        if ($(this).val().length == 0) {
-	        	$(".user-row").fadeIn(0);
-	        } else {
-		        $(".user-row .user-name").each(function(){
-		            // If the list item does not contain the text phrase fade it out
-		            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-		                $(this).parent().fadeOut(0);
-		            }
-		        });
-		    }
-	    });
-	});
-	</script>
 </div>

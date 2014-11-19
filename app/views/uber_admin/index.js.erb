@@ -5,4 +5,5 @@ $('#inner-wrap').html('<%= j render :partial => "index" %>');
 $("html, body").animate({ scrollTop: 0 }, 0);
 $('#nav-uber-admin a, #uber-admin-link').addClass('current-page');
 $('#uber-admin-companies-link').addClass('current-page');
+$('.project.active').removeClass('active');
 mixpanel.track("Uber admin");
