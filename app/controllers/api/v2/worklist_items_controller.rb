@@ -36,7 +36,6 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         params[:worklist_item].delete(:connect_assignee_id) if params[:worklist_item][:connect_assignee_id]
         params[:worklist_item].delete(:assignee_id) if params[:worklist_item][:assignee_id]
 
-        puts "params? #{params[:worklist_item]}"
     	task.update_attributes params[:worklist_item]
 
         if notify

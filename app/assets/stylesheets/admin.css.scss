@@ -42,9 +42,15 @@
 	margin:0 auto;
 	padding:15px;
 	overflow:auto;
+	
 	div {
 		padding:2px 0;
 	}
+	
+	input[type="text"], input[type="email"] {
+		width:100%;
+	}
+
 	input[type="submit"] {
 		padding:10px 0;
 	}

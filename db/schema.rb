@@ -188,6 +188,9 @@ ActiveRecord::Schema.define(version: 20141117031816) do
     t.integer  "subcontractor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "contact_name"
   end
 
   create_table "errors", force: true do |t|

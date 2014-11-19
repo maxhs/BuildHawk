@@ -76,13 +76,13 @@
 
 			<tbody>
 				<% @subcontractors.each do |company_sub| %>
-					<tr id="subcontractor-<%= company_sub.id %>">
+					<tr id="subcontractor-<%= company_sub.id %>" class="subcontractor">
 						<td style="width:100px;padding:8px 0;"><% if company_sub.subcontractor.image_file_name %><%= image_tag company_sub.subcontractor.image.url(:thumb), :class =>"admin-user-pic" %><% else %><span style="text-align:center;width:100px;display:block;color:#aaa;"> - </span><% end %></td>
 						<td style="width:23%;"><%= company_sub.subcontractor.name %></td>
-						<td style="width:23%;"><%= company_sub.subcontractor.email %></td>
-						<td style="width:23%;"><%= company_sub.subcontractor.phone %></td>
+						<td style="width:23%;"><%= company_sub.email %></td>
+						<td style="width:23%;"><%= company_sub.phone %></td>
 						<td style="width:23%;"><%= parse_time company_sub.subcontractor.created_at %></td>
-						<td><%= link_to "Remove", company_sub_path(company_sub), :class => "simple-btn btn-danger remote", remote: true, method: :delete, data: {confirm: "Are you sure you want to remove this subcontractor?"} %></td>
+						<td><%= link_to company_sub_path(company_sub), :class => "remote", remote: true, method: :delete, data: {confirm: "Are you sure you want to remove this subcontractor?"} do %> <i class="fa fa-trash-o remote"></i><% end %></td>
 					</tr>
 				<% end %>
 			</tbody>

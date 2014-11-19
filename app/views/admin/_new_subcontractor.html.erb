@@ -2,14 +2,18 @@
 <%= form_for @subcontractor, :url => create_subcontractor_admin_index_path(@subcontractor), :method => :post, remote: true do |f| %>
 	<div id="new-sub-form" class="border-box">
 		<h2>New Subcontractor</h2>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 		<%= f.hidden_field :company_id, :value => current_user.company.id %>
-		<%= f.hidden_field :authenticity_token, :value => form_authenticity_token %>
+		
+			<%= f.label "Company Name" %> 
 			<%= f.fields_for :subcontractor do |sub_fields| %>
-				<div><%= sub_fields.text_field :name, :placeholder => "Name", :class=>"tt-hint form-control" %></div>
-				<div><%= sub_fields.text_field :contact_name, :placeholder => "Contact Name (optional)", :class=>"tt-hint form-control" %></div>
-				<div><%= sub_fields.email_field :email, :placeholder => "Contact email address (optional)", :class=>"tt-hint form-control" %></div>
-				<div><%= sub_fields.text_field :phone, :placeholder => "Contact phone number (optional)", :class=>"tt-hint form-control" %></div>
+				<div><%= sub_fields.text_field :name, :placeholder => "Company name", required: true %></div>
 			<% end %>
+
+			<%= f.label "Contact" %> 
+			<div><%= f.text_field :contact_name, :placeholder => "Contact Name (optional)" %></div>
+			<div><%= f.email_field :email, :placeholder => "Contact email address (optional)" %></div>
+			<div><%= f.text_field :phone, :placeholder => "Contact phone number (optional)" %></div>
 		<div class="button-container center">
 			<%= f.submit "Create", :id=>"new-sub-button", :class => "simple-btn save" %>
 		</div>

@@ -49,20 +49,22 @@ class AdminController < AppController
 	end
 
 	def create_subcontractor
-		company = Company.where(:name => params[:company_sub][:subcontractor][:name]).first_or_create
-		@company_sub = current_user.company.company_subs.where(:subcontractor_id => company.id).first_or_create
+		company = Company.where(name: params[:company_sub][:subcontractor][:name]).first_or_create
+		company_sub = current_user.company.company_subs.where(subcontractor_id: company.id).first_or_create
+		company_sub.update_attributes contact_name: params[:company_sub][:contact_name],email: params[:company_sub][:email],phone: params[:company_sub][:phone]
 		@users = current_user.company.users
 		@subcontractors = current_user.company.company_subs
-		if @company_sub.save & request.xhr?
-			respond_to do |format|
-				format.js {render template:"admin/personnel"}
+		
+		if company_sub.save
+			if request.xhr?
+				respond_to do |format|
+					format.js {render template:"admin/personnel"}
+				end
+			else
+				redirect_to personnel_admin_index_path, alert: "Subcontractor created"
 			end
-		elsif @company_sub.save
-			flash[:notice] = "Subcontractor created"
-			redirect_to personnel_admin_index_path
 		else
-			flash[:notice] = "Unable to create subcontractor. Please make sure the form is complete."
-			redirect_to personnel_admin_index_path
+			redirect_to personnel_admin_index_path, alert: "Unable to create subcontractor. Please make sure the form is complete."
 		end
 	end
 

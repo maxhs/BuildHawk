@@ -1,5 +1,5 @@
 class CompanySub < ActiveRecord::Base
-	attr_accessible :company_id, :subcontractor_id, :subcontractor
+	attr_accessible :company_id, :subcontractor_id, :subcontractor, :contact_name, :email, :phone
 	belongs_to :company
 	belongs_to :subcontractor, :class_name => "Company"
 	validates_presence_of :subcontractor_id

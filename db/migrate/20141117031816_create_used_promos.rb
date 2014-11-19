@@ -6,5 +6,9 @@ class CreateUsedPromos < ActiveRecord::Migration
       		t.references :company
       		t.timestamps
     	end
+
+    	add_column :company_subs, :email, :string
+    	add_column :company_subs, :phone, :string
+    	add_column :company_subs, :contact_name, :string
   	end
 end
