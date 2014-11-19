@@ -100,6 +100,15 @@ class AdminController < AppController
 
 	def editor
 		@checklist = Checklist.find params[:checklist_id]
+		unless current_user.company.checklists.map(&:id).include?(@checklist.id)
+			if request.xhr?
+				respond_to do |format|
+					format.js {render template:"checklists/denied"} 
+				end
+			else
+				redirect_to checklists_admin_index_path, alert:"Sorry, but you don't have access to that checklist.".html_safe
+			end
+		end
 		@project = @checklist.project
 	end
 
