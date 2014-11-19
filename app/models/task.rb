@@ -8,16 +8,16 @@ class Task < ActiveRecord::Base
     belongs_to :tasklist
     belongs_to :user
     belongs_to :completed_by_user, :class_name => "User"
-	belongs_to :assignee, :class_name => "User"
-    has_many :comments, :dependent => :destroy
-    has_many :photos, :dependent => :destroy
-    has_many :notifications, :dependent => :destroy
-    has_many :activities, :dependent => :destroy
+	#belongs_to :assignee, :class_name => "User"
+    has_many :comments, dependent: :destroy
+    has_many :photos, dependent: :destroy
+    has_many :notifications, dependent: :destroy
+    has_many :activities, dependent: :destroy
 
-    has_many :task_users, :dependent => :destroy, autosave: true
-    has_many :assignees, :through => :task_users, autosave: true, source: :user
+    has_many :task_users, dependent: :destroy, autosave: true
+    has_many :assignees, through: :task_users, autosave: true, source: :user
     
-    accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
+    accepts_nested_attributes_for :photos, allow_destroy: true, :reject_if => lambda { |c| c[:image].blank? }
     #accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
     after_create :notify

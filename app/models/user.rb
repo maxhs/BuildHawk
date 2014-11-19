@@ -7,21 +7,21 @@ class User < ActiveRecord::Base
 
     belongs_to :company
   	has_many :project_users, dependent: :destroy
-  	has_many :projects, :through => :project_users
+  	has_many :projects, through: :project_users
     has_many :report_users, dependent: :destroy
-    has_many :reports, :through => :report_users
+    has_many :reports, through: :report_users
     has_many :notifications, dependent: :destroy
     has_many :push_tokens, dependent: :destroy
     has_many :message_users, dependent: :destroy, autosave: true
     has_many :messages, through: :message_users , autosave: true
     has_many :comments, dependent: :destroy
-    has_many :tasks, foreign_key: "assignee_id"
+    #has_many :tasks, foreign_key: "assignee_id"
 
     has_many :photos
 
-    has_many :reminders, :dependent => :destroy
-    has_many :alternates, :dependent => :destroy
-    has_many :activities, :dependent => :destroy
+    has_many :reminders, dependent: :destroy
+    has_many :alternates, dependent: :destroy
+    has_many :activities, dependent: :destroy
 
   	devise :database_authenticatable, :registerable, :recoverable, :trackable
 
