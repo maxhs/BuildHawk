@@ -45,9 +45,7 @@ $(document).ready(function(){
 	projectChecklistSetup();
 	$('#top-nav a').removeClass('current-page');
 	$('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-page');
-	checklistSort('<%= @checklist.id %>');
-	<% @checklist.phases.each do |p| %>
-		phaseSort('#<%= p.id %>-items','<%= p.id %>')
-	<% end %>
+	checklistSort('<%= @checklist.id %>');	
+	phaseSort(<%= j @checklist.phases.map(&:id).to_json %>);
 });
 </script>

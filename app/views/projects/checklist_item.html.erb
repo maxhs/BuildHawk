@@ -1,5 +1,5 @@
 <div class="col-xs-12" id="main">
-	<%= render :partial => "projects/checklist", :locals => {:checklist => @checklist,:item => @item} %>
+	<%= render partial: "projects/checklist", locals: {checklist: @checklist, item: @item} %>
 </div>
 <script type="text/javascript">
 	var itemsHolder = $('#<%= @phase.id %>-items');
@@ -13,24 +13,8 @@
 	itemsHolder.addClass('revealed');
 	
 	$('#phase-<%=@phase.id%> .disclosure').text('[+]');
-	<% @phase.categories.each do |category| %>
-        $('#items-<%=category.id%>').sortable({
-            axis: 'y',
-            dropOnEmpty:true,
-            cursor: 'move',
-            items: 'li',
-            opacity: 0.4,
-            scroll: true,
-            stop: function(){
-                $.ajax({
-                    type: 'post',
-                    data: $('#items-<%=category.id%>').sortable('serialize') + '&id=<%= category.id %>',
-                    dataType: 'script',
-                    url: '/checklists/order_items'
-                })
-            }
-        });  
-    <% end %>
+    categorySort(<%= j @phase.categories.map(&:id).to_json %>);
+
 
     $('#category-<%=@category.id%>-container').removeClass('collapsed');
 	$("#project-checklist").addClass('checklist-panel');
@@ -38,13 +22,10 @@
 	$('#nav-projects a, li.nav-checklists a').addClass('current-page');
 	$('#item-<%=@item.id%>').addClass("active-item");
 	
-    $('#checklist-focus').html('<%= j render :partial => "checklist_item", :locals => {:item => @item } %>');
-    var itemOffset = document.getElementById('item-<%=@item.id %>').offsetTop;
-    var focusOffset = document.getElementById('project-checklist').offsetHeight;
-    var posTop = itemOffset-focusOffset;
+    $('#checklist-focus').html('<%= j render partial: "checklist_item", locals: {item: @item } %>');
     $('.active-item').removeClass('active-item');
     $('#item-<%=@item.id %>').addClass('active-item');
-    $('#checklist-focus').css({'top':posTop,'left':'54%'});
+    $('#checklist-focus').css('left','54%');
     $("html, body").animate({ scrollTop: 0 }, 0);
 
 	$('.category .title').on('click',function(e){

@@ -36,7 +36,7 @@ function coreChecklist(){
 function dismissChecklist(){
 	$('.checklist-panel').removeClass('checklist-panel');
 	$('.active-item').removeClass('active-item');
-	$('#checklist-focus').css({'left':"101%",'top':'0'});
+	$('#checklist-focus').css('left',"101%");
 	setTimeout(function(){$('#checklist-focus').html('')},230);
 }
 

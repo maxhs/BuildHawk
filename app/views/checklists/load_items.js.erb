@@ -20,24 +20,7 @@ if (itemsHolder.hasClass('revealed')){
 		$(this).addClass('revealed');
 		$(this).show(300,function(){
 			$('#phase-<%=@phase.id%> .disclosure').text('[+]');
-			<% @phase.categories.each do |category| %>
-		        $('#items-<%=category.id%>').sortable({
-		          axis: 'y',
-		          dropOnEmpty:true,
-		          cursor: 'move',
-		          items: 'li',
-		          opacity: 0.4,
-		          scroll: true,
-		          stop: function(){
-		            $.ajax({
-		                type: 'post',
-		                data: $('#items-<%=category.id%>').sortable('serialize') + '&id=<%= category.id %>',
-		                dataType: 'script',
-		                url: '/checklists/order_items'
-		            })
-		          }
-		        });  
-	        <% end %>
+			categorySort(<%= j @phase.categories.map(&:id).to_json %>);  
 		});
 
 		$('.category .title').on('click',function(e){

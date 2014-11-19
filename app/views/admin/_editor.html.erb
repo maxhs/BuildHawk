@@ -5,7 +5,7 @@
 			<ul id="phases">
 				<%= render :partial => 'admin/phase', collection: @checklist.phases, as: :p, cache: false %>
 			</ul>
-			<%= link_to "+ phase", new_phase_path(:checklist_id => @checklist), :id=>"new-phase", :class=>"empty-btn remote new-phase", remote: true %>
+			<%= link_to "+ phase", new_phase_path(checklist_id: @checklist), id:"new-phase", :class=>"empty-btn remote new-phase", remote: true %>
 		</div>
 	</div>
 </div>
@@ -17,8 +17,6 @@
 <script>
 $(document).ready(function(){
 	checklistSort('<%=@checklist.id%>');
-	<% @checklist.phases.each do |p| %>
-		phaseSort('#<%= p.id %>-items','<%= p.id %>')
-	<% end %>
+	phaseSort(<%= raw @checklist.phases.map(&:id).to_json %>);	
 });
 </script>

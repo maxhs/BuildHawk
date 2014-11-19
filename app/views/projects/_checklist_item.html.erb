@@ -84,7 +84,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		checklistItem("<%= j render partial:'checklist_item_export', locals: {:item => item} %>");
+		checklistItem("<%= j render partial:'checklist_item_export', locals: {item: item} %>");
 		$('#floating-save').click(function(){
 			$('.edit_checklist_item').trigger('submit.rails');
 		});
