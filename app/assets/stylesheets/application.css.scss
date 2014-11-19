@@ -107,6 +107,16 @@ body {
 		padding:0;
 	}
 
+	form {
+		label {
+			margin-top: 7px;
+			font-weight: normal;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			font-size: .9em;
+		}
+	}
+
 	#alert, #notice {
 		font-size: 1.25em;
 		line-height: 60px;
@@ -935,14 +945,6 @@ body {
 		form {
 			width:100%;
 			
-			label {
-				margin-top: 7px;
-				font-weight: normal;
-				text-transform: uppercase;
-				letter-spacing: 1px;
-				font-size: .9em;
-			}
-
 			input {
 				margin:0 auto 7px;
 				width:100%;

@@ -11,8 +11,8 @@
 		</thead>
 		<tbody>
 			<% @users.each do |user| %>
-				<tr>
-					<td><%= user.full_name %></td>
+				<tr id="pro-user-<%=user.id%>">
+					<td class="pro-user"><%= user.full_name %></td>
 					<td><%= user.projects.map{|p| link_to p.name, project_path(p), target:'_blank'}.to_sentence.html_safe %></td>
 					<td style="width:240px;"><%= link_to "Deactivate", basic_user_path(:id => user.id), method: :post, :class => "simple-btn centered", remote: true %></td>
 				</tr>
@@ -41,7 +41,7 @@
 				<% @users.each do |user| %>
 					<tr>
 						<td style="width:100px;padding:0;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% else %><span style="text-align:center;width:100px;display:block;color:#aaa;"> - </span><% end %></td>
-						<td style="width:23%;"><%= user.full_name %></td>
+						<td style="width:23%;" class="pro-user"><%= user.full_name %></td>
 						<td style="width:23%;"><%= user.email %></td>
 						<td style="width:23%;"><%= user.formatted_phone %></td>
 						<td style="width:23%;"><%= parse_time user.created_at%></td>

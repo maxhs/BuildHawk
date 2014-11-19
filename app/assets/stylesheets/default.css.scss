@@ -151,6 +151,8 @@ input[type="radio"] {
   padding: 0;
   box-sizing: border-box;
   display:inline-block;
+  position:relative;
+  top:-2px;
 }
 
 input[type="search"] {

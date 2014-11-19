@@ -15,7 +15,26 @@ class UsersController < AppController
 
 	def create
 		@user = current_user.company.users.create params[:user]
-		redirect_to projects_path
+		@users = current_user.company.users
+		@subcontractors = current_user.company.company_subs
+		if @user.errors.any?
+			render :new_user, notice:"#{@user.errors.full_messages.first}"
+		elsif @user.save & request.xhr?
+			@response_message = "User created".html_safe
+			respond_to do |format|
+				format.js { render :template => "admin/users" }
+			end
+		elsif @user.save
+			flash[:notice] = "User created"
+			redirect_to users_admin_index_path
+		elsif request.xhr?
+			@response_message = "Unable to create user. Please make sure the form is complete and the passwords match.".html_safe
+			respond_to do |format|
+				format.js { render :template => "admin/incorrect" }
+			end
+		else
+			render :new_user, notice:"Unable to create user. Please make sure the form is complete and the passwords match."
+		end
 	end
 
 	def index
