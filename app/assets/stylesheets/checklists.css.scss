@@ -2,35 +2,37 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-#project-checklist {
-	-webkit-transition: all 0.15s;
-	-moz-transition: all 0.15s;
-	-ms-transition: all 0.15s;
-	-o-transition: all 0.15s;
-	transition: all 0.15s;
-	width:100%;
-}
-
 .checklist-panel {
 	width:54% !important;
 }
 
 #checklist-focus {
-	position:relative;
+	position:absolute;
+	top:0;
 	left:100%;
 	margin-left:1%;
 	width:45%;
-	-webkit-transition: all 0.2s ease;
-	-moz-transition: all 0.2s ease;
-	-ms-transition: all 0.2s ease;
-	-o-transition: all 0.2s ease;
-	transition: all 0.2s ease;
+	-webkit-transition: all 0.23s ease;
+	-moz-transition: all 0.23s ease;
+	-ms-transition: all 0.23s ease;
+	-o-transition: all 0.23s ease;
+	transition: all 0.23s ease;
 }
 
-.project-checklist-table.border-box, .admin-checklist-table.border-box, .core-checklist-table.border-box {
-	margin:0 auto; 
+.admin-checklist-table.border-box, .project-checklist-table.border-box, .core-checklist-table.border-box, #core-checklist, #admin-checklist, #project-checklist {
+	clear:both;
+	float:none;
+	display:block;
 	width:100%;
+	-webkit-transition: all 0.23s ease;
+	-moz-transition: all 0.23s ease;
+	-ms-transition: all 0.23s ease;
+	-o-transition: all 0.23s ease;
+	transition: all 0.23s ease;
+
+	.bold-header {
+		margin:2% auto;
+	}
 
 	#search-button {
 
@@ -257,7 +259,7 @@
 	list-style:none;
 
 	.revealed {
-		border-left:1px dotted #ddd;
+		border-left:1px dotted #ccc;
 	}
 
 	h2 {
@@ -290,6 +292,11 @@
 		box-shadow:0 0 0 0;
 		-moz-box-shadow:0 0 0 0;
 		-webkit-box-shadow:0 0 0 0;
+		color:#000;
+	}
+
+	.left-edit:hover {
+		color:#cc0000 !important;
 	}
 }
 
@@ -300,7 +307,7 @@
 }
 
 .checklist-item.search {
-	border-bottom:1px dotted #ddd;
+	border-bottom:1px dotted #ccc;
 	h4, h5 {
 		text-align:left;
 	} 
@@ -316,10 +323,6 @@
 
 .phase-form, .category-form {
 	width:100%;
-	max-width:700px;
-	padding:0 20px;
-	margin:0 auto;
-	overflow:auto;
 
 	input[type="text"] {
 		width:100%;
@@ -438,7 +441,7 @@
 	width:99%;
 	margin-left:1%;
 	padding-left:1%;
-	border-left:1px dotted #ddd;
+	border-left:1px dotted #ccc;
 	
 	.checklist-item.active-item {
 		position: relative;

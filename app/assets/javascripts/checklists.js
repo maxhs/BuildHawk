@@ -33,10 +33,11 @@ function coreChecklist(){
 	});
 }
 
-function dismissChecklistItem(){
+function dismissChecklist(){
 	$('.checklist-panel').removeClass('checklist-panel');
 	$('.active-item').removeClass('active-item');
-	$('#checklist-focus').css({'left':"100%",'top':'0'});
+	$('#checklist-focus').css({'left':"101%",'top':'0'});
+	setTimeout(function(){$('#checklist-focus').html('')},230);
 }
 
 function checklistItem(itemExportPartial){
@@ -50,7 +51,7 @@ function checklistItem(itemExportPartial){
     	$('#dp').val('');
     });
     $('#dismiss-checklist-item').click(function(){
-		dismissChecklistItem();
+		dismissChecklist();
 	});
 
 	$('#export-checklist-item').on('click',function(){

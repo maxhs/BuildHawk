@@ -51,11 +51,11 @@ body {
 		cursor:pointer;
 		text-decoration: none;
 		color:#222;
-		-webkit-transition: all 0.2s ease-out;
-		-moz-transition: all 0.2s ease-out;
-		-ms-transition: all 0.2s ease-out;
-		-o-transition: all 0.2s ease-out;
-		transition: all 0.2s ease-out;
+		-webkit-transition: all 0.2s ease;
+		-moz-transition: all 0.2s ease;
+		-ms-transition: all 0.2s ease;
+		-o-transition: all 0.2s ease;
+		transition: all 0.2s ease;
 	}
 
 	a:hover, a.current-page, .hide-reveal:hover {
@@ -215,11 +215,11 @@ body {
 		font-size:1.25em;
 		background:#444;
 		overflow-y:scroll;
-		-webkit-transition: all 0.3s ease;
-		-moz-transition: all 0.3s ease;
-		-ms-transition: all 0.3s ease;
-		-o-transition: all 0.3s ease;
-		transition: all 0.3s ease;
+		-webkit-transition: all 0.23s ease;
+		-moz-transition: all 0.23s ease;
+		-ms-transition: all 0.23s ease;
+		-o-transition: all 0.23s ease;
+		transition: all 0.23s ease;
 		/*-webkit-transform: translateZ(0);
 		-ms-transform: translateZ(0);
 		transform: translateZ(0);
@@ -445,11 +445,11 @@ body {
 			border-right: 1px solid #555;
 			display: table;
 			background:rgba(68,68,68,.9);
-			-webkit-transition: all 0.3s ease;
-			-moz-transition: all 0.3s ease;
-			-ms-transition: all 0.3s ease;
-			-o-transition: all 0.3s ease;
-			transition: all 0.3s ease;
+			-webkit-transition: all 0.23s ease;
+			-moz-transition: all 0.23s ease;
+			-ms-transition: all 0.23s ease;
+			-o-transition: all 0.23s ease;
+			transition: all 0.23s ease;
 			opacity:.1;
 
 			a, a:hover {
@@ -499,11 +499,11 @@ body {
 			width:96%;
 			left:4%;
 			position:relative;
-			-webkit-transition: all 0.3s ease;
-			-moz-transition: all 0.3s ease;
-			-ms-transition: all 0.3s ease;
-			-o-transition: all 0.3s ease;
-			transition: all 0.3s ease;
+			-webkit-transition: all 0.23s ease;
+			-moz-transition: all 0.23s ease;
+			-ms-transition: all 0.23s ease;
+			-o-transition: all 0.23s ease;
+			transition: all 0.23s ease;
 			/*-webkit-transform: translateZ(0);
 			-ms-transform: translateZ(0);
 			transform: translateZ(0);*/
@@ -572,7 +572,7 @@ body {
 	}
 
 	.navbar-fixed-top.app {
-		background:#f7f7f7;
+		background:#fff;
 		box-shadow: 0 -1px 3px 0 rgba(0,0,0,.14);
 		-moz-box-shadow: 0 -1px 3px 0 rgba(0,0,0,.14);
 		-webkit-box-shadow: 0 -1px 3px 0 rgba(0,0,0,.14);
@@ -604,11 +604,11 @@ body {
 
     	#navigation {
 			width:100%;
-			-webkit-transition: all 0.3s ease;
-			-moz-transition: all 0.3s ease;
-			-ms-transition: all 0.3s ease;
-			-o-transition: all 0.3s ease;
-			transition: all 0.3s ease;
+			-webkit-transition: all 0.23s ease;
+			-moz-transition: all 0.23s ease;
+			-ms-transition: all 0.23s ease;
+			-o-transition: all 0.23s ease;
+			transition: all 0.23s ease;
 		}
 	}
 
@@ -618,11 +618,11 @@ body {
 		z-index:6;
 		border-bottom:1px solid #eee;
 		height:44px;
-		-webkit-transition: all 0.3s ease;
-		-moz-transition: all 0.3s ease;
-		-ms-transition: all 0.3s ease;
-		-o-transition: all 0.3s ease;
-		transition: all 0.3s ease;
+		-webkit-transition: all 0.23s ease;
+		-moz-transition: all 0.23s ease;
+		-ms-transition: all 0.23s ease;
+		-o-transition: all 0.23s ease;
+		transition: all 0.23s ease;
 
 		.nav-icon {
 
@@ -1055,6 +1055,40 @@ a.search-button {
    	transition: all 0.2s ease;
 }
 
+.empty-btn {
+	cursor:pointer;
+	box-shadow: 1px 1px 3px -1px rgba(0,0,0,.43);
+	-moz-box-shadow: 1px 1px 3px -1px rgba(0,0,0,.43);
+	-webkit-box-shadow: 1px 1px 3px -1px rgba(0,0,0,.43);
+	border-radius:9px;
+	-moz-border-radius:9px;
+	-webkit-border-radius:9px;
+	padding:10px 20px;
+	position:relative;
+	display:inline-block;
+	margin:0 10px;
+	width:auto;
+	text-align:center;
+	clear:both;
+	font-family:"Open Sans","OpenSans","Myriad Pro","Myriad Web Pro","Helvetica",sans-serif;
+	font-size:.9em;
+	line-height:1em;
+	letter-spacing:2px;
+	font-weight:600;
+	text-transform:uppercase;
+	-webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+   	transition: all 0.2s ease;
+}
+
+.empty-btn:hover {
+	box-shadow: 1px 1px 7px -1px rgba(0,0,0,.6);
+	-moz-box-shadow: 1px 1px 7px -1px rgba(0,0,0,.6);
+	-webkit-box-shadow: 1px 1px 7px -1px rgba(0,0,0,.6);
+}
+
 .simple-btn:hover {
 	box-shadow: 1px 1px 7px -1px rgba(0,0,0,.6);
 	-moz-box-shadow: 1px 1px 7px -1px rgba(0,0,0,.6);
@@ -1064,11 +1098,22 @@ a.search-button {
 }
 
 .simple-btn.save {
-	width:100%;
+	width:50%;
+	
+	.fa {
+		position:relative;
+		top:1px;
+		font-size:1.1em;
+	}
 }
 
 .full-width {
 	width:100%;
+	.fa {
+		position:relative;
+		top:1px;
+		font-size:1.25em;
+	}
 }
 
 .action-buttons {
@@ -1171,19 +1216,17 @@ a.search-button {
 
 }
 
-.simple-danger-btn {
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	padding:7px;
+.simple-btn.danger {
 	position:relative;
 	display:inline-block;
-	margin:0 10px;
 	width:auto;
 	text-align:center;
 	clear:both;
-	font-size:14px;
 	line-height:1em;
+	width:100%;
+	max-width:160px;
+	margin:1% auto 0;
+	background:#cc0000;
 }
 
 .btn, .btn input {
@@ -1214,20 +1257,6 @@ a.search-button {
 	.fa-trash, .fa-trash-o {
 		font-size:1.5em;
 	}
-}
-
-.btn.save {
-	margin:0 auto;
-	width:50%;
-	min-width:150px;
-}
-
-.btn-danger {
-	display:block;
-	width:100%;
-	max-width:160px;
-	margin:1% auto 0;
-	background:#cc0000;
 }
 
 .export {

@@ -1,5 +1,34 @@
-<%= form_for phase, method: :patch, remote: true do |f| %>
-	<h2><%= f.text_field :name, :style=>"padding:0;border:0;display:inline-block;", autofocus: true %></h2>
-<% end %> 
-<span id="cancel-edit-phase" class="simple-btn">cancel</span>
-<%= link_to image_tag("trashButton.png", :class=>"deleteimg remote"), phase_path(@phase), :method => :delete, :data => {:confirm => "Are you sure you want to delete this phase?"}, :class=>"btn btn-danger btn-md remote", :style=>"line-height:11px;position:relative;bottom:5px;margin:0 auto;width:80px;height:32px;display:inline-block;", :remote => true %>
+<div id="phase-container" class="border-box">
+	<%= form_for phase, method: :patch, remote: true do |f| %>
+		<h3>Editing</h3>
+		<div class="action-buttons">
+			<div style="display:table-row">
+				<div id="floating-save" class="action remote" type="submit">
+					<i class="fa fa-floppy-o remote"></i>
+				</div>
+				<div id="export-checklist-item" class="action">
+					<i class="fa fa-share"></i>
+				</div>
+				<% if current_user.admin || current_user.company_admin %>
+					<%= link_to phase_path(phase), :data => {:confirm => "Are you sure you want to delete this phase?"}, method: :delete, :class=>"remote action", remote: true do %>
+						<i class="fa fa-trash-o remote"></i>
+					<% end %>	
+				<% end %>
+				
+				<div id="dismiss-phase" class="dismiss action">
+					<i class="fa fa-remove" id="dismiss-phase"></i>
+				</div>
+			</div>
+		</div>
+	
+		<div class="">
+			<%= f.label "Phase name", style:"margin-bottom:0;" %>
+			<h5><%= f.text_field :name, placeholer:"Phase name", :style=>"width:100%;", autofocus: true %></h5>
+		</div>
+	<% end %>
+</div>
+<script>
+$('#dismiss-phase').click(function(){
+	dismissChecklist();
+})
+</script>

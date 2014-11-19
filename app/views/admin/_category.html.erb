@@ -6,7 +6,7 @@
 			<span class="completed-count">
 				<%= render partial:"checklists/completed_count", :locals => {:category => category} %>
 			</span>
-			<%= link_to "Edit Category", edit_category_path(category), :class=>"simple-btn edit-category remote", :remote => true %>
+			<%= link_to "Edit Category", edit_category_path(category), :class=>"empty-btn edit-category remote", :remote => true %>
 		</div>
 	</div>
 
@@ -14,6 +14,6 @@
 		<ul class="category-items" id="items-<%=category.id%>">
 			<%= render partial:"admin/item", collection:category.checklist_items, as: :item, cache: false %>
 		</ul>
-		<%= link_to "Add new item", new_checklist_item_path(:category_id => category.id), :id=>"new-item-#{category.id}", :class=>"remote new-checklist-item simple-btn", :remote => true %>
+		<%= link_to "+ item", new_checklist_item_path(:category_id => category.id), :id=>"new-item-#{category.id}", :class=>"remote new-checklist-item empty-btn", :remote => true %>
 	</div>
 </li>

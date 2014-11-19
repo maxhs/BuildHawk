@@ -1,7 +1,7 @@
 if ($('#<%=@phase.id%>-items .new_category').length){
 	$('#<%=@phase.id%>-items .new_category').fadeOut(200,function(){
 		$(this).remove();
-		$('#new-category-<%=@phase.id%>').text("Add a new category");
+		$('#new-category-<%=@phase.id%>').text("+ category");
 	});
 
 } else {

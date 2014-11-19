@@ -1,10 +1,7 @@
 $('#navigation a').removeClass('current-page');
 $('#admin-checklists-link').addClass('current-page');
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "admin/editor", :locals => {:checklist => @checklist } %>');
-	$(this).fadeIn(100);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#main').html('<%= j render partial: "admin/editor", locals: {checklist: @checklist } %>');
+$("html, body").animate({ scrollTop: 0 }, 230);
 if (history && history.pushState){
     history.pushState(null, null, '<%=root_url%>admin/editor?checklist_id=<%=@checklist.id%>');
     $(window).bind("popstate", function(){

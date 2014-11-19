@@ -1,9 +1,30 @@
-<div class="category-form container">
+<div class="category-form">
 	<div class="border-box">
 		<div class="row">
-			<span class="col-xs-5 header-description"><h2><%= @category.phase.name %></h2></span>
+			<span class="col-xs-5 header-description"><h2><%= category.name %></h2></span>
 		</div>
-		<%= nested_form_for @category, :url => update_category_checklist_path(@category.phase.checklist, :category_id => @category.id), :remote => true, :method => :patch do |f| %>
+		<%= nested_form_for category, url: update_category_checklist_path(category.phase.checklist, category_id: category.id), remote: true, method: :patch do |f| %>
+
+		<div class="action-buttons">
+			<div style="display:table-row">
+				<div id="floating-save" class="action remote" type="submit">
+					<i class="fa fa-floppy-o remote"></i>
+				</div>
+				<div id="export-checklist-item" class="action">
+					<i class="fa fa-share"></i>
+				</div>
+				<% if current_user.admin || current_user.company_admin %>
+					<%= link_to categories_path(category), :data => {:confirm => "Are you sure you want to delete this category?"}, method: :delete, :class=>"remote action", remote: true do %>
+						<i class="fa fa-trash-o remote"></i>
+					<% end %>	
+				<% end %>
+				
+				<div id="dismiss-category" class="dismiss action">
+					<i class="fa fa-remove" id="dismiss-category"></i>
+				</div>
+			</div>
+		</div>
+
 			<div class="row">
 				<h4 style="display:inline-block">Category Name</h4>
 				<%= f.text_field :name %>
@@ -36,8 +57,16 @@
 				<%= f.submit "Update", :class => "simple-btn remote save" %>
 		<% end %>
 				<div style="">
-					<%= link_to "Delete", destroy_category_checklist_path(@category.phase.checklist, :category_id => @category), :method => :delete, :data => {:confirm => "Are you sure you want to delete this category?"}, :class=>"btn btn-danger btn-md remote", :remote => true %>
+					<%= link_to destroy_category_checklist_path(category.phase.checklist, :category_id => category), method: :delete, data: {confirm: "Are you sure you want to delete this category?"}, :class=>"btn btn-danger btn-md remote", remote: true do %>
+						<i class="fa fa-trash-o remote"></i>
+					<% end %>
 				</div>
 			</div>
 	</div>
 </div>
+
+<script>
+$('#dismiss-category').click(function(){
+	dismissChecklist();
+})
+</script>

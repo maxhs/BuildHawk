@@ -66,20 +66,8 @@ class CategoriesController < AppController
 
 	def edit
 		@category = Category.find params[:id]
-		if params[:project_id]
-			@project = Project.find params[:project_id]
-			@projects = @project.company.projects
-		end
-
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			unless @projects
-				render "admin/editor"
-			end
-		end
+		@project = @category.phase.checklist.project
+		@projects = @project.company.projects if @project
 	end
 
 	def destroy

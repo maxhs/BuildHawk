@@ -1,5 +1,5 @@
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "checklist_items/edit", :locals => {:item => @item} %>');
-	$(this).fadeIn(100);
-	$("html, body").animate({ scrollTop: 0 }, 300);
-});
+$('#main * .navbar-nav > li > a').removeClass('current-page');
+$('.nav-checklists a').addClass('current-page');
+$("#admin-checklist, #project-checklist").addClass('checklist-panel');
+$('#checklist-focus').html('<%= j render partial:"checklist_items/edit", locals: {item: @item} %>');
+$('#checklist-focus').css('left','54%');

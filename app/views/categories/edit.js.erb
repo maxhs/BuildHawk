@@ -1,29 +1,5 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('.nav-checklists a').addClass('current-page');
-<% if @project %>
-	$('#main').fadeOut(170,function(){
-		$(this).html('<%= j render :partial => "categories/edit" %>');
-		$(this).fadeIn(170);
-		$("html, body").animate({ scrollTop: 0 }, 300);
-		$("#dp,#dp-completed").datepicker();
-		$('#clear-critical-date').on('click',function(){
-			$('#dp').val('');
-		});
-		$('#clear-completed-date').on('click',function(){
-			$('#dp-completed').val('');
-		});
-	});
-<% else %>
-	$('#category-<%=@category.id%> .editable').fadeOut(200,function(){
-		$(this).html('<%= j render partial:"categories/inline_edit", locals: {:category => @category} %>');
-		$(this).fadeIn(200);
-		$('#cancel-edit-category').on('click',function(){
-			console.log('clicked');
-			$("#category-<%=@category.id%> .editable").fadeOut(200,function(){
-				$(this).html('<h4 class="title" id="<%=@category.id%>"><%= @category.name %></h4><span class="completed-count"><%= j render partial:"checklists/completed_count", :locals => {:category => @category} %></span><%= link_to "Edit Category", edit_category_path(@category), :class=>"edit-category remote", :remote => true %>');
-				$(this).fadeIn(200);
-			});
-		});
-	});
-<% end %>
-
+$("#admin-checklist, #project-checklist").addClass('checklist-panel');
+$('#checklist-focus').html('<%= j render partial:"categories/edit", locals: {category: @category} %>');
+$('#checklist-focus').css('left','54%');

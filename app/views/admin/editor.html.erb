@@ -1,5 +1,3 @@
 <div class="col-xs-12" id="main">
-	<div id="pages">
-		<%= render :partial => "admin/editor" %>
-	</div>
+	<%= render :partial => "admin/editor", locals: {checklist: @checklist } %>
 </div>

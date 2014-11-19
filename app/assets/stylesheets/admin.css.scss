@@ -31,7 +31,10 @@
 .admin-checklist-table {
 	#checklist-items {
 		header {
-			margin-bottom:15px;
+			margin-bottom:2.5%;
+			padding-bottom:2.5%;
+			border-bottom:1px dashed #ccc;
+			overflow:auto;
 		}
 	}
 }

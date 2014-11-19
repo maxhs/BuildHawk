@@ -5,3 +5,4 @@ $('#navigation').html(nav);
 $('#inner-wrap').html('<%= j render :partial => "index" %>');
 $('#nav-admin a, #admin-link, #admin-checklists-link').addClass('current-page');
 $("html, body").animate({ scrollTop: 0 }, 0);
+$('.project.active').removeClass('active');

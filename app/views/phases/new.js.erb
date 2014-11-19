@@ -1,7 +1,7 @@
 if ($('.new_phase').length){
 	$('.new_phase').fadeOut(200,function(){
 		$(this).remove();
-		$('#new-phase').text('Add a new phase');
+		$('#new-phase').text('+ phase');
 	});
 } else {
 	var newDiv = $('<%= j render partial:"phases/new" %>').css('display','none');

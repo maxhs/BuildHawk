@@ -1,10 +1,7 @@
 $("#project-checklist").addClass('checklist-panel');
-$('#checklist-focus').html('<%= j render :partial => "checklist_item", :locals => {:item => @item } %>');
-var itemOffset = document.getElementById('item-<%=@item.id %>').offsetTop;
-var focusOffset = document.getElementById('project-checklist').offsetHeight;
-var posTop = itemOffset-focusOffset;
+$('#checklist-focus').html('<%= j render partial: "checklist_item", locals: {item: @item } %>');
 $('.active-item').removeClass('active-item');
 $('#item-<%=@item.id %>').addClass('active-item');
-$('#checklist-focus').css({'top':posTop,'left':'54%'});
+$('#checklist-focus').css('left','54%');
 $("html, body").delay(200).animate({ scrollTop: $("#item-<%=@item.id %>").offset().top-130 }, 200);
 $('#wrap').css('height',height);

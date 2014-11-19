@@ -11,9 +11,9 @@ if (itemsHolder.hasClass('revealed')){
     }, 600);
 	itemsHolder.fadeOut(200,function(){
 		<% if @project %>
-			$(this).html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category simple-btn", remote: true %>');
+			$(this).html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: false %><%= link_to "+ category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category empty-btn", remote: true %>');
 		<% else %>
-			$(this).html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category simple-btn", remote: true %>');
+			$(this).html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: false %><%= link_to "+ category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category empty-btn", remote: true %>');
 			itemsHolder.children(":first").find(".items-container").removeClass("collapsed");
 		<% end %>
 

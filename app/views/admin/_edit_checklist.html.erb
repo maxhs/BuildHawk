@@ -1,12 +1,12 @@
-<%= form_for @checklist, :method => :patch, remote: true do |f| %>
+<%= form_for @checklist, method: :patch, remote: true do |f| %>
 	<h3 class="bold-header center">Checklist Editor</h3>
 	<div>
 		<div><%= f.text_field :name, :style=> "width:100%;" %></div>
 		<div><%= f.text_area :description, :placeholder => "A brief description of this checklist...", :style=> "width:100%;" %></div>
 	</div>
 			
-	<div>
-		<%= button_tag(type: 'submit', :class=> "simple-btn remote", style:"float:right;margin:1% auto;", remote: true) do %>
+	<div class="btn-container center">
+		<%= button_tag(type: 'submit', :class=> "simple-btn save remote", style:"margin:2.5% auto;", remote: true) do %>
 	    	<i class="fa fa-floppy-o remote"></i> Save
 	  	<% end %>
 	</div>

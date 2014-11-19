@@ -58,7 +58,7 @@
 		
 		<div class="button-section">
 			<div class="button-container">
-				<%= button_tag(type: 'submit', :class=> "simple-btn save") do %>
+				<%= button_tag(type: 'submit', :class=> "simple-btn full-width") do %>
 			    	<i class="fa fa-floppy-o"></i> Save
 			  	<% end %>
 	<% end %>
@@ -69,7 +69,7 @@
 				<% else %>
 					<%= link_to "Hide", hide_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to hide this project?"}, remote: true %>
 				<% end %>
-				<%= link_to "Remove Project", destroy_confirmation_project_path(@project), :method => :get, id:"remove-project-button", :class=>"btn btn-danger btn-md", remote: true %>
+				<%= link_to "Remove", destroy_confirmation_project_path(@project), :method => :get, id:"remove-project-button", :class=>"simple-btn danger", remote: true %>
 			</div>
 		</div>
 </div>

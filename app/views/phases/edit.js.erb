@@ -1,5 +1,14 @@
-var disclosure = $('#phase-<%=@phase.id%> .title .disclosure')[0];
-$('#phase-<%=@phase.id%> .phase.editable').fadeOut(200,function(){
+
+//$('.active-item').removeClass('active-item');
+//$('#phase-<%=@phase.id %>').addClass('active-item');
+$("#admin-checklist").addClass('checklist-panel');
+$('#checklist-focus').html('<%= j render partial:"phases/edit", locals: {phase: @phase} %>');
+$('#checklist-focus').css('left','54%');
+//$("html, body").delay(200).animate({ scrollTop: $("#phase-<%=@phase.id %>").offset().top-130 }, 200);
+//$('#wrap').css('height',height);
+//var disclosure = $('#phase-<%=@phase.id%> .title .disclosure')[0];
+
+/*$('#phase-<%=@phase.id%> .phase.editable').fadeOut(200,function(){
 	$(this).html('<%= j render partial:"phases/edit", locals: {:phase => @phase} %>');
 	$(this).fadeIn(200);
 	$('#cancel-edit-phase').on('click',function(){
@@ -9,4 +18,4 @@ $('#phase-<%=@phase.id%> .phase.editable').fadeOut(200,function(){
 			$(this).fadeIn(200);
 		});
 	});
-});
+});*/
