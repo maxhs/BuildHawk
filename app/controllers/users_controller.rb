@@ -3,7 +3,6 @@ class UsersController < AppController
 	before_filter :authenticate_user!, :except => :preregister
 	def new
 		@user = User.new
-
 		if request.xhr?
 			respond_to do |format|
 				format.js

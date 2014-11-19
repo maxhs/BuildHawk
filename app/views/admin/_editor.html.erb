@@ -1,7 +1,12 @@
 <div id="admin-checklist" class="admin checklist">
 	<div class="admin-checklist-table border-box">
+		<aside>
+			<%= link_to "&#8592; Back".html_safe, checklists_admin_index_path, remote: true %>
+		</aside>
 		<div id="checklist-items">
-			<header><%= render partial:"admin/edit_checklist" %></header>
+			<header>
+				<%= render partial:"admin/edit_checklist" %>
+			</header>
 			<ul id="phases">
 				<%= render :partial => 'admin/phase', collection: @checklist.phases, as: :p, cache: false %>
 			</ul>

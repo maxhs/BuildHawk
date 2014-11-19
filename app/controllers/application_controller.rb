@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_admin  
-        unless current_user.any_admin?
+        if user_signed_in && !current_user.any_admin?
             @response = "Sorry, but you don't have access to that section.".html_safe
             if request.xhr?
                 respond_to do |format|

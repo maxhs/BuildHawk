@@ -22,6 +22,8 @@
 			<tr><td><%= f.password_field :password, placeholder: "Password", required: true %></td></tr>
 			<tr><td><%= f.label "Password Confirmation" %></td></tr>
 			<tr><td><%= f.password_field :password_confirmation, placeholder: "Confirm this user's password", required: true, 'data-parsley-equalto' => "#user_password", "data-parsley-error-message" => "These passwords don't match." %></td></tr>
+
+			<tr><td><div class="no-content.placeholder"><h5>Communication Preferences</h5></div></td></tr>
 			<tr style="margin-top:2.5%;">
 				<td class="label" >
 					<%= f.check_box :admin %>
@@ -39,7 +41,14 @@
 			</tr>
 			<tr>
 				<td class="label">
-				<%= f.check_box :email_permissions %>Emails?
+				<%= f.check_box :email_permissions %>Email
+					<i class="fa fa-info-circle"></i>
+				</td>
+				<td class="explanation">Do we have permission to email this user with notifications from their projects (e.g. A task has been assigned to them)?</td>
+			</tr>
+			<tr>
+				<td class="label">
+				<%= f.check_box :text_permissions %>Text message
 					<i class="fa fa-info-circle"></i>
 				</td>
 				<td class="explanation">Do we have permission to text message this user with notifications from their projects (e.g. A task has been assigned to them)?</td>
@@ -47,7 +56,7 @@
 			<tr>
 				<td class="label">
 					<%= f.check_box :push_permissions %>
-					Push notifications?
+					Push notifications
 					<i class="fa fa-info-circle"></i>
 				<td class="explanation">Do we have permission to send push notifications to this user with notifications from their projects (e.g. A task has been assigned to them)?</td>
 			</tr>
