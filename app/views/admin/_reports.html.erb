@@ -1,6 +1,6 @@
 <div id="reports-page" class="page border-box">
 	<% projects.each do |project| %>
-		<h4><%= link_to project.name, reports_path(:project_id => project.id), :remote => true %> </h4>
+		<h4><%= link_to project.name, reports_path(:project_id => project.id), remote: true %> </h4>
 		<table class="table table-bordered table-responsive report">
 			<% if project.reports && project.reports.count > 0 %>
 				<thead>

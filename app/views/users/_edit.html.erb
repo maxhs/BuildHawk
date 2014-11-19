@@ -18,6 +18,16 @@
 			<tr><td><%= f.password_field :password, :placeholder => "Password (if changing)", :class=>"tt-hint form-control" %></td></tr>
 			<tr><td><h4>Password Confirmation</h4></td></tr>
 			<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (if changing)", :class=>"tt-hint form-control" %></td></tr>
+			<% if current_user.any_admin? %>
+				<tr><td>
+					<%= f.check_box :admin %>
+					<div style="padding:10px 0 0;display:inline-block;">Admin</div>
+					</td></tr>
+				<tr><td>
+					<%= f.check_box :company_admin %>
+					<div style="padding:10px 0 0;display:inline-block;">Company Admin (access to billing)</div> 
+				</td></tr>
+			<% end %>
 			<tr><td>
 				<%= f.check_box :email_permissions %>
 				<div style="padding:10px 0 0;display:inline-block;">Email Permissions</div>
@@ -48,12 +58,10 @@
 							<i class="fa fa-sign-out"></i>
 							Log out
 						<% end %>	
+						<%= link_to delete_user_admin_path(@user), :class =>"btn-danger btn", :method => :delete, :data => {:confirm => "Are you sure you want to delete this user?"} do %>
+							<i class="fa fa-trash-o"></i>
+						<% end %>
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<td style="text-align:center;">
-					
 				</td>
 			</tr>
 		</table>

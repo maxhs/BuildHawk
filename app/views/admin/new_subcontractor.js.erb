@@ -1,7 +1,0 @@
-if ($('#add-sub-section').length){
-	$('#add-sub-section').html('<%= j render :partial => "new_subcontractor", locals: {subcontractor: @subcontractor } %>');
-	$("html, body").animate({ scrollTop: 0 }, 0);
-} else {
-	$('#main').html('<%= j render :partial => "new_subcontractor", locals: {subcontractor: @subcontractor } %>');
-	$("html, body").animate({ scrollTop: 0 }, 0);
-}

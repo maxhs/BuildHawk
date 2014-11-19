@@ -1,6 +1,0 @@
-$('#navigation a').removeClass('current-page');
-$('#personnel-link').addClass('current-page');
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "edit_subcontractor", :locals => {:subcontractor => @subcontractor } %>');
-	$(this).fadeIn(100);
-});

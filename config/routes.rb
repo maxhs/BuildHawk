@@ -23,7 +23,7 @@ Buildhawk::Application.routes.draw do
   get "/task/:id", :to => "tasks#edit"
   get 'mobile', :to => "home#mobile_redirect", :as => 'mobile_redirect'
 
-  resources :registrations, :only =>[] do
+  resources :registrations do
     collection do
       get :confirm
       get :alternates
@@ -49,11 +49,6 @@ Buildhawk::Application.routes.draw do
     collection do
       get :personnel
       get :safety_topics
-      get :edit_user
-      get :new_user
-      post :create_user
-      get :new_subcontractor
-      post :create_subcontractor
       get :reports
       get :checklists
       post :create_blank_template
@@ -67,11 +62,7 @@ Buildhawk::Application.routes.draw do
     member do
       post :clone_topic
       delete :remove_template
-      get :edit_user
-      patch :update_user
-      patch :update_subcontractor
       patch :update_checklist
-      delete :delete_user
     end
   end
   resources :billing do 
@@ -82,7 +73,7 @@ Buildhawk::Application.routes.draw do
     end
   end 
   resources :cards
-  resources :company_subs, only: [:destroy]
+  resources :company_subs
   resources :uber_admin do
     collection do
       post :upload_template

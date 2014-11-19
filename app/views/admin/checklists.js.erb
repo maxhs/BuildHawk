@@ -4,7 +4,5 @@ $('#main').html('<%= j render :partial => "checklists", :locals => {:checklists 
 $("html, body").animate({ scrollTop: 0 }, 0);
 
 <% if @response_message %>
-	$('#alert').text("<%= @response_message %>").delay(3000).fadeOut(500, function(){
-		$(this).text("");
-	});
+	showAlert("<%= @response_message %>");
 <% end %>

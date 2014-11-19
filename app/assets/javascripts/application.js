@@ -51,7 +51,7 @@ if (history && history.pushState){
 
 function showAlert(text){
     $('#alert').text(text);
-    $('#alert, .remove-top.banner').fadeIn(270).delay(2000).fadeOut(270, function(){
+    $('.remove-top.banner, #alert').fadeIn(270).delay(2000).fadeOut(270, function(){
         $('#alert').text("");
     });
 }

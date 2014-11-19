@@ -20,9 +20,4 @@ class PromosController < ApplicationController
 		promo.destroy
 	end
 
-	private
-
-	def authenticate_admin	
-		redirect_to (session[:previous_url] || root_path), notice: "Sorry, but you don't have access to that section.".html_safe unless current_user.admin
-	end
 end

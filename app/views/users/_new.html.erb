@@ -1,4 +1,8 @@
-<%= form_for @user, method: :post, remote: true, data: {'parsley-validate' => ''} do |f| %>
+<aside>
+	<%= link_to "&#8592; Back".html_safe, session[:previous_url] || root_url %>
+</aside>
+
+<%= form_for user, method: :post, remote: true, data: {'parsley-validate' => ''} do |f| %>
 	<table id="new-user-form" class="border-box">
 		<tbody>
 			<tr><td><h2>Add User</h2></td></tr>

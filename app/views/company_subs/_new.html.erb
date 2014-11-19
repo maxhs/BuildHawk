@@ -1,8 +1,11 @@
-
-<%= form_for @subcontractor, :url => create_subcontractor_admin_index_path(@subcontractor), :method => :post, remote: true do |f| %>
+<aside>
+	<%= link_to "&#8592; Back".html_safe, session[:previous_url] || root_url %>
+</aside>
+<%= form_for @subcontractor, :method => :post, remote: true do |f| %>
 	<div id="new-sub-form" class="border-box">
 		<h2>New Subcontractor</h2>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<%= hidden_field_tag :admin, true %>
 		<%= f.hidden_field :company_id, :value => current_user.company.id %>
 		
 			<%= f.label "Company Name" %> 

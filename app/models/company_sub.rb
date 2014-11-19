@@ -1,4 +1,6 @@
 class CompanySub < ActiveRecord::Base
+	include ActionView::Helpers::NumberHelper
+	
 	attr_accessible :company_id, :subcontractor_id, :subcontractor, :contact_name, :email, :phone
 	belongs_to :company
 	belongs_to :subcontractor, :class_name => "Company"
@@ -23,11 +25,15 @@ class CompanySub < ActiveRecord::Base
 		subcontractor.present?
 	end
 
-## slated for deletion ##
-	def users_count
-		subcontractor.users.count if subcontractor
-	end
-## ##
+	def formatted_phone
+        number_to_phone(phone, area_code:true) if phone && phone.length > 0
+    end
+
+# ## slated for deletion ##
+# 	def users_count
+# 		subcontractor.users.count if subcontractor
+# 	end
+# ## ##
 	api_accessible :projects do |t|
 		t.add :id
 		t.add :subcontractor
@@ -37,7 +43,7 @@ class CompanySub < ActiveRecord::Base
         t.add :id
         t.add :name, :if => :has_subcontractor?
         t.add :users, :if => :has_subcontractor?
-        t.add :users_count, :if => :has_subcontractor?
+        #t.add :users_count, :if => :has_subcontractor?
     end
 
     api_accessible :tasklist, :extend => :projects do |t|

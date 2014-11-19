@@ -27,10 +27,7 @@ class AdminController < AppController
 			@users = current_user.company.users
 			@subcontractors = current_user.company.company_subs			
 		end
-	end
-
-	def new_user
-		@user = User.new
+		session[:previous_url] = request.original_url
 	end
 
 	def edit_user
@@ -41,31 +38,6 @@ class AdminController < AppController
 		@user = User.find params[:id]
 		@user.update_attributes params[:user]
 		redirect_to users_admin_index_path
-	end
-
-	def new_subcontractor
-		@subcontractor = CompanySub.new
-		@subcontractor.build_subcontractor
-	end
-
-	def create_subcontractor
-		company = Company.where(name: params[:company_sub][:subcontractor][:name]).first_or_create
-		company_sub = current_user.company.company_subs.where(subcontractor_id: company.id).first_or_create
-		company_sub.update_attributes contact_name: params[:company_sub][:contact_name],email: params[:company_sub][:email],phone: params[:company_sub][:phone]
-		@users = current_user.company.users
-		@subcontractors = current_user.company.company_subs
-		
-		if company_sub.save
-			if request.xhr?
-				respond_to do |format|
-					format.js {render template:"admin/personnel"}
-				end
-			else
-				redirect_to personnel_admin_index_path, alert: "Subcontractor created"
-			end
-		else
-			redirect_to personnel_admin_index_path, alert: "Unable to create subcontractor. Please make sure the form is complete."
-		end
 	end
 
 	def edit_subcontractor

@@ -1,6 +1,6 @@
 class UsersController < AppController
+	before_filter :authenticate_admin, only: [:new]
 	before_filter :authenticate_user!, :except => :preregister
-
 	def new
 		@user = User.new
 
@@ -42,7 +42,7 @@ class UsersController < AppController
 	end
 
 	def edit
-		@user = current_user
+		@user = User.find params[:id]
 	end
 
 	def show
@@ -50,7 +50,8 @@ class UsersController < AppController
 	end
 
 	def update	
-		@user = current_user
+		@user = User.find params[:id]
+
 		if params[:user][:phone]
 			params[:user][:phone] = @user.clean_phone(params[:user][:phone])	
 		else
@@ -84,4 +85,16 @@ class UsersController < AppController
 		@user = User.find params[:id]
 		puts "deactivating #{@user.full_name}"
 	end
+
+	def back
+        @url = session[:previous_url] || root_url
+        if request.xhr?
+            respond_to do |format|
+                format.js {render template:"layouts/back"}
+            end
+        else
+            redirect_to @url
+        end
+    end
+
 end

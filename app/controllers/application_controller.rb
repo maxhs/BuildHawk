@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     #after_filter :store_location
     before_filter :detect_redirect
     before_filter :configure_permitted_parameters, if: :devise_controller?
-
+    
     def detect_redirect
         if params[:m]
             @mobile_redirect = true
@@ -51,6 +51,19 @@ class ApplicationController < ActionController::Base
 
     def configure_permitted_parameters
         devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :company_admin, :company_id, :phone]
+    end
+
+    def authenticate_admin  
+        unless current_user.any_admin?
+            @response = "Sorry, but you don't have access to that section.".html_safe
+            if request.xhr?
+                respond_to do |format|
+                    format.js {render template:"admin/denied"}
+                end
+            else
+                return redirect_to (session[:previous_url] || root_path), notice: @response 
+            end
+        end
     end
 
 end
