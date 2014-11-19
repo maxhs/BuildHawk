@@ -14,7 +14,7 @@
 				<tr id="pro-user-<%=user.id%>" class="center">
 					<td class="pro-user"><%= user.full_name %></td>
 					<td><%= user.projects.map{|p| link_to p.name, project_path(p), target:'_blank'}.to_sentence.html_safe %></td>
-					<td><%= link_to "Deactivate", basic_user_path(:id => user.id), method: :post, :class => "centered", remote: true %></td>
+					<td><%= link_to "Deactivate", basic_user_path(:id => user.id), method: :post, :class => "empty-btn centered", remote: true %></td>
 				</tr>
 			<% end %>
 		</tbody>

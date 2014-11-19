@@ -1,5 +1,5 @@
 <aside>
-	<%= link_to "&#8592; Back".html_safe, session[:previous_url] || root_url %>
+	<%= link_to "&#8592; Back".html_safe, personnel_admin_index_path, remote: true %>
 </aside>
 
 <%= form_for user, method: :post, remote: true, data: {'parsley-validate' => ''} do |f| %>

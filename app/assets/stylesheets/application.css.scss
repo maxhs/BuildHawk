@@ -303,14 +303,17 @@ body {
 				}
 			}
 
-			.project:last-child, .project.buttons {
-				
+			.project.buttons {
+				.bold-header {
+					position:relative;
+					left:7px;
+					top:-1px;
+				}	
 			}
 
 			.project {
 				cursor:default;
 				background:#555;
-				//border-top:2px solid rgba(255,255,255,.05);
 				line-height:15px;
 				-webkit-transition: all 0.23s ease;
     			-moz-transition: all 0.23s ease;
@@ -322,7 +325,7 @@ body {
     			font-family: "Myriad Pro","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
 
 				.inner-padding {
-					padding:0 10px;
+					padding:10px;
 				}
 
 				.project-name {
@@ -334,7 +337,8 @@ body {
 
 				a, a:hover {
 					color:#fff !important;
-					padding:0 10px;
+					padding:10px;
+					display:block;
 				}
 
 				a:hover {

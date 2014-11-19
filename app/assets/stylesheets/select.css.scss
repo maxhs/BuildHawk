@@ -8,18 +8,10 @@
     vertical-align: middle;
 }
 
-
 .select2-container, .select2-drop, .select2-search, .select2-search input {
-    /*
-    Force border-box so that % widths fit the parent container without overlap because of margin/padding.
-    More Info : http://www.quirksmode.org/css/box.html
-    */
     -webkit-box-sizing: border-box;
-    /* webkit */
     -moz-box-sizing: border-box;
-    /* firefox */
     box-sizing: border-box;
-    /* css3 */
 }
 
 .select2-container, .select2-container-multi {
@@ -27,7 +19,15 @@
     font-family:"Myriad Pro","Myriad Web Pro","Source Sans Pro","Helvetica Neue", Helvetica, sans-serif;
 
     .select2-choices {
-        border:1px solid #eee !important;
+        border:0 !important;
+        border-radius:2px;
+        -moz-border-radius:2px;
+        -webkit-border-radius:2px;
+        box-shadow:0 0 2px 0 rgba(0,0,0,.3);
+        -moz-box-shadow:0 0 2px 0 rgba(0,0,0,.3);
+        -webkit-box-shadow:0 0 2px 0 rgba(0,0,0,.3);
+        border-color:transparent;
+        padding:7px;
         background:#fff !important;
 
         .select2-search-choice {
@@ -45,7 +45,7 @@
 
     .select2-choice {
         background:#fff !important;
-        border-color:#eee !important;
+        border-color:#ddd !important;
         display: block;
         height: 26px;
         padding: 0 0 0 8px;
@@ -73,10 +73,10 @@
 }
 
 .select2-drop-active {
-    border-top:1px solid #eee !important;
-    border-left:1px solid #eee !important;
-    border-right:1px solid #eee !important;
-    border-bottom:1px solid #eee !important;
+    border-top:1px solid #ddd !important;
+    border-left:1px solid #ddd !important;
+    border-right:1px solid #ddd !important;
+    border-bottom:1px solid #ddd !important;
 }
 
 html[dir="rtl"] .select2-container .select2-choice {
