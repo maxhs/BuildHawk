@@ -37,10 +37,11 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         params[:worklist_item].delete(:connect_assignee_id) if params[:worklist_item][:connect_assignee_id]
         params[:worklist_item].delete(:assignee_id) if params[:worklist_item][:assignee_id]
 
+        puts "params? #{params[:worklist_item]}"
     	task.update_attributes params[:worklist_item]
 
         if notify
-           if assignee
+            if assignee
                 assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
                 assignee.email_task(task) if assignee.email_permissions && assignee.email && assignee.email.length > 0
             end
@@ -52,14 +53,12 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
         
     	respond_to do |format|
-        	format.json { render_for_api :tasklist, :json => task, :root => @root}
+        	format.json { render_for_api :tasklist, json: task, root: @root}
       	end
     end
 
     def create
         project = Project.find params[:project_id]
-
-        params[:worklist_item].delete(:connect_assignee_id) if params[:worklist_item][:connect_assignee_id]
 
         ## remove in 1.05
         if params[:worklist_item][:user_assignee].present? 
@@ -71,20 +70,22 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
         ###
 
+        params[:worklist_item].delete(:connect_assignee_id) if params[:worklist_item][:connect_assignee_id]
+        params[:worklist_item].delete(:assignee_id) if params[:worklist_item][:assignee_id]
         params[:worklist_item][:mobile] = true
         
         task = project.tasklists.last.tasks.create params[:worklist_item]
         task.activities.create(
-            :task_id => task.id,
-            :project_id => project.id,
-            :user_id => task.user.id,
-            :body => "#{task.user.full_name} created this item.",
-            :activity_type => task.class.name
+            task_id: task.id,
+            project_id: project.id,
+            user_id: task.user.id,
+            body: "#{task.user.full_name} created this item.",
+            activity_type: task.class.name
         )
     
         if task.save
             respond_to do |format|
-                format.json { render_for_api :tasklist, :json => task, :root => @root}
+                format.json { render_for_api :tasklist, json: task, root: @root}
             end
         end
     end
