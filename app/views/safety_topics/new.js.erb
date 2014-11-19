@@ -1,5 +1,1 @@
-$('#new-safety-topic-link').fadeOut(170,function(){
-	var div = $('<%= j render :partial => "new" %>');
-	$(this).replaceWith(div);
-	$(this).fadeIn(170);
-});
+$('#new-safety-topic-link').replaceWith($('<%= j render partial: "new", locals: {safety_topic: @safety_topic} %>'));

@@ -1,5 +1,5 @@
 <% if @safety_topic.company_id.nil? %>
 	<div class="col-xs-12" id="main">
-		<%= render :partial => "safety_topics/new" %>
+		<%= render :partial => "safety_topics/new", locals: {safety_topic: @safety_topic} %>
 	</div>
 <% end %>
