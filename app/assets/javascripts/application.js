@@ -50,7 +50,7 @@ if (history && history.pushState){
 }
 
 function showAlert(text){
-    $('#alert').text("Project Updated")
+    $('#alert').text(text);
     $('#alert, .remove-top.banner').fadeIn(270).delay(2000).fadeOut(270, function(){
         $('#alert').text("");
     });

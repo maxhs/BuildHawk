@@ -18,22 +18,35 @@
 			<tr><td><%= f.password_field :password, placeholder: "Password", required: true %></td></tr>
 			<tr><td><%= f.label "Password Confirmation" %></td></tr>
 			<tr><td><%= f.password_field :password_confirmation, placeholder: "Confirm this user's password", required: true, 'data-parsley-equalto' => "#user_password", "data-parsley-error-message" => "These passwords don't match." %></td></tr>
-			<tr><td>
-				<%= f.check_box :admin %>
-				<div style="padding:10px 0 0;display:inline-block;">Admin</div>
+			<tr style="margin-top:2.5%;">
+				<td class="label" >
+					<%= f.check_box :admin %>
+					Admin 
+					<i class="fa fa-info-circle"></i>
+				</td>
+				<td class="explanation">(Admin have the ability to view and edit any project, can create new projects, add users and edit checklists)</td>
 			</td></tr>
-			<tr><td>
-				<%= f.check_box :company_admin %>
-				<div style="padding:10px 0 0;display:inline-block;">Company Admin (access to billing)</div> 
-			</td></tr>
-			<tr><td>
-				<%= f.check_box :email_permissions %>
-				<div style="padding:10px 0 0;display:inline-block;">Email Permissions?</div>
-			</td></tr>
-			<tr><td>
-				<%= f.check_box :push_permissions %>
-				<div style="padding:10px 0 0;display:inline-block;">Push Permissions?</div>
-			</td></tr>
+			<tr>
+				<td class="label">
+					<%= f.check_box :company_admin %>
+					Company admin
+					<i class="fa fa-info-circle"></i>
+				<td class="explanation">(Company admins have all the same access as admins, but also have access to the accounts billing information)</td>
+			</tr>
+			<tr>
+				<td class="label">
+				<%= f.check_box :email_permissions %>Emails?
+					<i class="fa fa-info-circle"></i>
+				</td>
+				<td class="explanation">Do we have permission to text message this user with notifications from their projects (e.g. A task has been assigned to them)?</td>
+			</tr>
+			<tr>
+				<td class="label">
+					<%= f.check_box :push_permissions %>
+					Push notifications?
+					<i class="fa fa-info-circle"></i>
+				<td class="explanation">Do we have permission to send push notifications to this user with notifications from their projects (e.g. A task has been assigned to them)?</td>
+			</tr>
 			<tr>
 				<td class="button-container center">
 					<%= f.submit "Create", :class=>"simple-btn full-width" %>
@@ -42,3 +55,6 @@
 		</tbody>
 	</table>
 <% end %>
+<script>
+	personnelAdmin();
+</script>

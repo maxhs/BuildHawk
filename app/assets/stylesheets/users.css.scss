@@ -23,14 +23,30 @@
 		margin: 0 auto 2.5%;
 	}
 
+	form, tbody {
+		width:100%;
+		display:block;
+	}
+
 	input[type="text"],input[type="email"],input[type="password"] {
 		margin-bottom:10px;
 		width:100%;
 	}
 
-	form, tbody, tr, td {
-		display:block;
+	tr {
+		display:table;
 		width:100%;
+		cursor:pointer;
+
+		.label {
+			width:40%;
+			font-size:.9em;
+		}
+		
+		.explanation {
+			width:60%;
+			opacity:0;
+		}
 	}
 
 	#photo-section{
@@ -45,6 +61,25 @@
 
 	.button-container {
 		margin-bottom:0;
+	}
+
+	.fa-info, .fa-info-circle {	
+		padding-left:10px;
+		cursor:pointer;
+		color:#aaa;
+	}
+
+	.fa-info:hover, .fa-info-circle:hover {
+		color:#000;
+	}
+
+	tr:hover {
+		* {
+			opacity:1;
+		}
+		.fa-info, .fa-info-circle {	
+			color:#000;
+		}
 	}
 }
 
