@@ -12,15 +12,11 @@ class AdminController < AppController
 		render :checklists
 	end
 
-	def edit_item
-
-	end
-
 	def personnel
 		@company = @user.company
 		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges
-		  	active_projects = @company.projects.where(:active => true).count
+		  	active_projects = @company.projects.where(active: true).count
 		  	@amount = active_projects * 1000 / 100
 			redirect_to billing_index_path
 		else
@@ -28,32 +24,6 @@ class AdminController < AppController
 			@subcontractors = current_user.company.company_subs			
 		end
 		session[:previous_url] = request.original_url
-	end
-
-	def edit_user
-		@user = User.find params[:id]
-	end
-
-	def update_user
-		@user = User.find params[:id]
-		@user.update_attributes params[:user]
-		redirect_to users_admin_index_path
-	end
-
-	def edit_subcontractor
-		@company_sub = current_user.company.company_subs.where(:subcontractor_id => params[:id]).first
-	end
-
-	def update_subcontractor
-		@company_sub = current_user.company.company_subs.where(:id => params[:id]).first
-		@company_sub.update_attributes params[:company_sub][:subcontractor]
-		redirect_to users_admin_index_path
-	end
-
-	def delete_user
-		@user = User.find params[:id]
-		@user.destroy
-		redirect_to users_admin_index_path
 	end
 
 	def safety_topics
@@ -100,7 +70,7 @@ class AdminController < AppController
 
 	def editor
 		@checklist = Checklist.find params[:checklist_id]
-		unless current_user.company.checklists.map(&:id).include?(@checklist.id)
+		unless user_signed_in? && (current_user.company.checklists.map(&:id).include?(@checklist.id) || current_user.uber_admin)
 			if request.xhr?
 				respond_to do |format|
 					format.js {render template:"checklists/denied"} 
@@ -123,7 +93,7 @@ class AdminController < AppController
 			end
 		else
 			uber_checklists
-			@checklists = @user.company.checklists.where(:core => true).flatten
+			@checklists = @user.company.checklists.where(core: true).flatten
 			render :checklists
 		end
 	end
@@ -133,7 +103,7 @@ class AdminController < AppController
 		@checklist = list.duplicate
 		@checklist.update_attribute :company_id, @company.id
 		puts "New checklist's company id: #{@checklist.company.id}"
-		@checklists = @user.company.checklists.where(:core => true).flatten
+		@checklists = @user.company.checklists.where(core: true).flatten
 		if request.xhr?
 			respond_to do |format|
 				format.js

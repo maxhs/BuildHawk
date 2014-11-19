@@ -1,30 +1,34 @@
 <div class="border-box">
 	<div id="upload-core">
-		<%= form_for Checklist.new, :url => upload_template_uber_admin_index_path, :multipart => true, method: :post do |f| %>
+		<%= form_for Checklist.new, url: upload_template_uber_admin_index_path, multipart: true, method: :post do |f| %>
 			<div>
 				<h3>Upload a New Core Checklist</h3>
 				<div style="text-align:center;width:200px;margin:2.5% auto;"><%= f.file_field :file %></div>
-				<%= f.submit "Upload", :class =>"simple-btn", :style => "display:none" %>
+				<%= f.submit "Upload", :class => "simple-btn", style: "display:none" %>
 			</div>
 		<% end %>
 	</div>
 
 	<div class="core-checklist-table" id="uber-core-checklists" style="padding:20px;">
 		<% if @checklists && @checklists.count > 0 %>
-			<div class="row" style='border-bottom:1px solid #eee;'>
-				<div class="col-xs-5"><h5>Name</h5></div>
+			<div class="row">
+				<div class="col-xs-7"><h5 class="left">Name</h5></div>
 				<div class="col-xs-1"><h5>Phases</h5></div>
 				<div class="col-xs-1"><h5>Categories</h5></div>
 				<div class="col-xs-1"><h5>Items</h5></div>
-				<div class="col-xs-2"><h5>Edit</h5></div>
-				<div class="col-xs-2"><h5>Delete</h5></div>
+				<div class="col-xs-1 center"><h5>Edit</h5></div>
+				<div class="col-xs-1 center"><h5>Delete</h5></div>
 			</div>
-			<%= render :partial => "uber_admin/checklist_row", collection: @checklists, :as => :c, cache: false %>
-			
+			<div id="core-checklists">
+				<%= render :partial => "uber_admin/checklist_row", collection: @checklists, as: :c, cache: true %>
+			</div>
 		<% else %>
-			<div class="col-xs-12">You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></div>
+			<div class="col-xs-12 no-content placeholder font-smoothing">You don't have any available checklists. You'll need to create a checklist template in order to add projects.</td></div>
 		<% end %>
-		<%= link_to "Create blank template", create_blank_template_uber_admin_index_path, class: "simple-btn" %>
+
+		<div class="btn-container center">
+			<%= link_to "Create blank template", create_blank_template_uber_admin_index_path, id:"create-blank-uber-template", :class => "simple-btn save", remote: true %>
+		</div>
 	</div>
 </div>
 <script>

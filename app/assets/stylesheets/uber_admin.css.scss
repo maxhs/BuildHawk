@@ -2,16 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#core-checklist-table {
-	h5 {
-		text-align:center;
-	}
-
+.core-checklist-table {
 	.header.row {
 		
 	}
 	.checklist.row {
 
+	}
+
+	.row {
+		padding-top:1%;
+		padding-bottom:1%;
+		border-bottom:1px solid #eee;
+		text-align:center;
 	}
 }
 

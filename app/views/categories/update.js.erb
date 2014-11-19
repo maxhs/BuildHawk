@@ -1,4 +1,1 @@
-$('#category-<%=@category.id%> .editable').fadeOut(200,function(){
-	$(this).html('<h4 class="title" id="<%=@category.id%>"><%= @category.name %></h4><span class="completed-count"><%= render partial:"checklists/completed_count", :locals => {:category => @category} %></span><%= link_to "Edit Category", edit_category_path(@category), :class=>"edit-category remote", :remote => true %>');
-	$(this).fadeIn(200);
-});
+$('#category-<%=@category.id%> .editable').html('<h4 class="title" id="<%=@category.id%>"><%= @category.name %></h4><span class="completed-count"><%= render partial:"checklists/completed_count", :locals => {:category => @category} %></span><%= link_to "Edit Category", edit_category_path(@category), :class=>"edit-category remote", :remote => true %>');

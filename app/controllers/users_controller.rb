@@ -1,5 +1,5 @@
 class UsersController < AppController
-	before_filter :authenticate_admin, only: [:new]
+	before_filter :authenticate_admin, only: [:new, :destroy]
 	before_filter :authenticate_user!, :except => :preregister
 	def new
 		@user = User.new
@@ -71,7 +71,7 @@ class UsersController < AppController
 	def email_unsubscribe
 		@user = User.find params[:id]
 		@user.update_attribute :email_permissions, false
-		flash[:notice] = "Successfully unsubscribed from all Verses emails".html_safe
+		flash[:notice] = "Successfully unsubscribed from all BuildHawk emails".html_safe
 
 		unless @user.save
 			flash[:notice] = "Something went wrong. Please try unsubscribing again.".html_safe
@@ -85,15 +85,11 @@ class UsersController < AppController
 		puts "deactivating #{@user.full_name}"
 	end
 
-	def back
-        @url = session[:previous_url] || root_url
-        if request.xhr?
-            respond_to do |format|
-                format.js {render template:"layouts/back"}
-            end
-        else
-            redirect_to @url
-        end
-    end
+    def destroy
+		user = User.find params[:id]
+		@user_id = user.id
+		user.destroy
+		redirect_to users_admin_index_path
+	end
 
 end

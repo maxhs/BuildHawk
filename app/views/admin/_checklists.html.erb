@@ -1,12 +1,12 @@
-<div class="project-checklist-table border-box" style="padding:5px 20px 20px;">
+<div class="admin-checklist-table border-box" style="padding:5px 20px 20px;">
 	<h4 style="text-align:center"><%= @company.name %> Checklists</h4>
 	<table id="core-checklists">
-		<th><h5>Name</h5></th>
-		<th><h5>Phases</h5></th>
-		<th><h5>Categories</h5></th>
-		<th><h5>Items</h5></th>
-		<th><h5>Edit</h5></th>
-		<th><h5>Delete</h5></th>
+		<th><h5 class="label">Name</h5></th>
+		<th><h5 class="label">Phases</h5></th>
+		<th><h5 class="label">Categories</h5></th>
+		<th><h5 class="label">Items</h5></th>
+		<th><h5 class="label">Edit</h5></th>
+		<th><h5 class="label">Delete</h5></th>
 		<% if @checklists && @checklists.count > 0 %>
 			<%= render :partial => "admin/checklist_row", collection: @checklists, :as => :c, locals:{:company => @company}, cache: true %>
 	</table>
@@ -15,17 +15,17 @@
 		<div id="admin-no-checklists" class="no-content placeholder font-smoothing">You don't have any core checklist templates, but you can create some for your company from the list below.</div>
 	<% end %>
 </div>
-
-<div class="project-checklist-table standard-templates border-box">
+<hr>
+<div class="admin-checklist-table standard-templates border-box">
 	<h4 style="text-align:center">BuildHawk Standard Templates</h4>
 	<table>
 		<thead>
-			<th><h5>Name</h5></th>
-			<th><h5>Description</h5></th>
-			<th><h5>Phases</h5></th>
-			<th><h5>Categories</h5></th>
-			<th><h5>Items</h5></th>
-			<th><h5>&nbsp;</h5></th>
+			<th><h5 class="label">Name</h5></th>
+			<th><h5 class="label">Description</h5></th>
+			<th><h5 class="label">Phases</h5></th>
+			<th><h5 class="label">Categories</h5></th>
+			<th><h5 class="label">Items</h5></th>
+			<th><h5 class="label">Use</h5></th>
 		</thead>
 		<tbody>
 			<tr class="core-checklist-row">

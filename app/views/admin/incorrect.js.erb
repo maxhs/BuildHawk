@@ -1,3 +1,1 @@
-$('#alert').text("<%=@response_message%>").fadeIn(200).delay(3000).fadeOut(500, function(){
-	$(this).text("");
-});
+showAlert("<%= j @response_message%>");

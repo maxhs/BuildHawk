@@ -30,6 +30,11 @@
 	-o-transition: all 0.23s ease;
 	transition: all 0.23s ease;
 	
+	.label {
+		padding:10px 0;
+		font-weight:700;
+	}
+
 	.editor-header {
 		margin:0 auto 2%;
 	}
@@ -71,19 +76,19 @@
 		width:100%;
 
 		tr {
-			border:1px solid #eee;
+			border:1px solid #e3e3e3;
 		}
 
 		th {
 			text-align:center;
-			font-size:1.1em;
+			padding:9px 0 7px;
 		}
 
 		td {
 			text-align:center;
 			padding:10px 20px;
 			font-size:1em;
-			border:1px solid #eee;
+			border:1px solid #e3e3e3;
 		}
 
 		.checklist.delete-img {
@@ -228,7 +233,7 @@
 		position: absolute;
 		right: 100%;
 		background: #fff;
-		border-left: 1px solid #eee;
+		border-left: 1px solid #e3e3e3;
 		border-radius:20px 0 0 20px;
 		display:none;
 		z-index:7;
@@ -280,9 +285,9 @@
 		position: absolute;
 		right: 100%;
 		background: #fff;
-		border-left: 1px solid #eee;
-		border-top: 1px solid #eee;
-		border-bottom: 1px solid #eee;
+		border-left: 1px solid #e3e3e3;
+		border-top: 1px solid #e3e3e3;
+		border-bottom: 1px solid #e3e3e3;
 		border-right:1px solid transparent;
 		display: none;
 		border-radius: 18px 0 0 18px;
@@ -370,7 +375,7 @@
 
 	.row {
 		padding:15px;
-		border-bottom:1px solid #eee;
+		border-bottom:1px solid #e3e3e3;
 	}
 
 	.previous-item {
@@ -599,9 +604,4 @@
 		width:100%;
 		margin:20px 0;
 	}
-}
-
-.project-checklist-table.standard-templates {
-	padding: 5px 20px 20px;
-	margin-top: 10px;
 }

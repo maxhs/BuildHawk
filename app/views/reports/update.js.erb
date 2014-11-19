@@ -1,3 +1,3 @@
-showAlert("Saved");
+showAlert("Report Saved");
 $('#report-<%= @report.id %>').replaceWith('<%= j render partial:"reports/index_row", locals: {report: @report} %>');
 $('#report-<%= @report.id %>').addClass('active-report');

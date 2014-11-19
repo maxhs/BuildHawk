@@ -25,10 +25,9 @@ class UberAdminController < AppController
 
 	def create_blank_template
 		@checklist = Checklist.create :core => true, :name => "Blank template"
-		phase = @checklist.phases.create :name => "First phase"
-		category = phase.categories.create :name => "First category"
-		category.checklist_items.create :body => "First item"
-		@checklist.phases.map{|p| p.categories.build}
+		phase = @checklist.phases.create name: "First phase"
+		category = phase.categories.create name: "First category"
+		category.checklist_items.create body: "First item"
 		if request.xhr?
 			respond_to do |format|
 				format.js

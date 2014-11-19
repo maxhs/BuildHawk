@@ -1,4 +1,4 @@
 $('#navigation a').removeClass('current-page');
 $('#admin-safety-topics-link').addClass('current-page');
 $('#main').html('<%= j render :partial => "admin/safety_topics", locals: {:company => @company} %>');
-$("html, body").animate({ scrollTop: 0 }, 0);
+window.scrollTo(0,0);

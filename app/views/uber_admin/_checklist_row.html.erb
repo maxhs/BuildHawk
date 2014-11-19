@@ -1,13 +1,14 @@
 <div class="checklist row" id="checklist-<%=c.id%>">
-	<div class="col-xs-5"><h5><%= c.name %></h5></div>
+	<div class="col-xs-7 left"><h5 class="left"><%= c.name %></h5></div>
 	<div class="col-xs-1"><%= c.phases.count %></div>
 	<div class="col-xs-1"><%= c.phases.map(&:categories).flatten.count %></div>
 	<div class="col-xs-1"><%= c.item_count %></div>
-	<div class="col-xs-2"><%= link_to "Edit", editor_admin_index_path(:checklist_id => c.id), :class=>"simple-btn", :remote => true %></div>
-	<div class="col-xs-2">
-		<%= link_to checklist_path(c, :company_id => current_user.company.id), :data => {:confirm => "Are you sure you want to delete this core checklist? This can not be undone."}, :remote => true, :class=>"delete-checklist-link btn btn-danger btn-md", :style=>"max-width:100px;display:inline;", method: :delete do %>
-			<i class="fa fa-trash-o"></i>
+	<div class="col-xs-1 center">
+		<%= link_to "Edit", editor_admin_index_path(checklist_id: c.id), :class=>"empty-btn", remote: true %>
+	</div>
+	<div class="col-xs-1 center">
+		<%= link_to checklist_path(c), data: {confirm: "Are you sure you want to delete this core checklist? This can not be undone."}, remote: true, method: :delete, :class=>"remote", style:"text-align:center;" do %>
+			<i class="fa fa-trash-o remote"></i>
 		<% end %>
-
 	</div>
 </div>

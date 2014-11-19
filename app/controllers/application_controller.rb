@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :company_admin, :company_id, :phone]
     end
 
-    def authenticate_admin  
+    def authenticate_admin
         if user_signed_in? && !current_user.any_admin?
             @response = "Sorry, but you don't have access to that section.".html_safe
             if request.xhr?

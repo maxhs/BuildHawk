@@ -18,7 +18,6 @@
 	<%= render partial: "checklist_item", locals: {item: @item} if @item %>
 </div>
 
-
 <script>
 $(document).ready(function(){
 	checklistSort('<%=@checklist.id%>');

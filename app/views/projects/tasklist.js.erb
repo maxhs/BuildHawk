@@ -1,3 +1,3 @@
 $('#main').html('<%= j render :partial => "projects/tasklist", locals:{project: @project, tasks:@tasks, task: @task} %>');
-$("html, body").animate({ scrollTop: 0 }, 0);
+window.scrollTo(0,0);
 closeMenu();

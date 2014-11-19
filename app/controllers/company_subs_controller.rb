@@ -1,4 +1,5 @@
 class CompanySubsController < AppController
+	before_filter :authenticate_admin
 
 	def new
 		@subcontractor = CompanySub.new
@@ -23,6 +24,16 @@ class CompanySubsController < AppController
 		else
 			redirect_to personnel_admin_index_path, alert: "Unable to create subcontractor. Please make sure the form is complete."
 		end
+	end
+
+	def edit
+		@company_sub = current_user.company.company_subs.where(:id => params[:id]).first
+	end
+
+	def update
+		@company_sub = current_user.company.company_subs.where(:id => params[:id]).first
+		@company_sub.update_attributes params[:company_sub][:subcontractor]
+		redirect_to users_admin_index_path
 	end
 	
 	def destroy
