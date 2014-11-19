@@ -69,7 +69,7 @@ class AdminController < AppController
 	end
 
 	def editor
-		@checklist = Checklist.find params[:checklist_id]
+		@checklist = Checklist.find params[:cid]
 		unless user_signed_in? && (current_user.company.checklists.map(&:id).include?(@checklist.id) || current_user.uber_admin)
 			if request.xhr?
 				respond_to do |format|
@@ -102,7 +102,6 @@ class AdminController < AppController
 		list = Checklist.find params[:checklist_id]
 		@checklist = list.duplicate
 		@checklist.update_attribute :company_id, @company.id
-		puts "New checklist's company id: #{@checklist.company.id}"
 		@checklists = @user.company.checklists.where(core: true).flatten
 		if request.xhr?
 			respond_to do |format|
@@ -115,9 +114,9 @@ class AdminController < AppController
 	end
 
 	def remove_template
-		@checklist = Checklist.find params[:id]
-		@checklist_id = params[:id]
-		@checklist.destroy
+		checklist = Checklist.find params[:cid]
+		@checklist_id = params[:cid]
+		checklist.destroy
 	end
 
 	def new_project

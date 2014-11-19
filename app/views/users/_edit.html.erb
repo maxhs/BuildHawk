@@ -1,45 +1,78 @@
 <div id="main">
-	<%= nested_form_for @user, :url => {:action => :update}, :html => {:multipart => true}, :method => :post do |f| %>
+	<%= nested_form_for @user, url: {action: :update}, html: {multipart: true}, method: :post do |f| %>
 		<table id="edit-user-form" class="border-box">
 
 			<tr><td><h2 class="bold-header">Settings</h2></td></tr>
 			
-			<%= hidden_field_tag :company_id, :value => current_user.company.id %>
-			<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+			<%= hidden_field_tag :company_id, current_user.company.id %>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 			<tr><td><h4>First name</h4></td></tr>
-			<tr><td><%= f.text_field :first_name, :placeholder => "First name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.text_field :first_name, placeholder: "First name", required: true %></td></tr>
 			<tr><td><h4>Last name</h4></td></tr>
-			<tr><td><%= f.text_field :last_name, :placeholder => "Last name", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.text_field :last_name, placeholder: "Last name", required: true %></td></tr>
 			<tr><td><h4>Email</h4></td></tr>
-			<tr><td><%= f.email_field :email, :placeholder => "Email address", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.email_field :email, placeholder: "Email address", required: true %></td></tr>
 			<tr><td><h4>Phone Number</h4></td></tr>
-			<tr><td><%= f.text_field :phone, :value => @user.formatted_phone, :placeholder => "Phone number (e.g. (555) 555-5555)", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.text_field :phone, value: @user.formatted_phone, placeholder: "Phone number (e.g. (555) 555-5555)" %></td></tr>
 			<tr><td><h4>Password</h4></td></tr>
-			<tr><td><%= f.password_field :password, :placeholder => "Password (if changing)", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.password_field :password, placeholder: "Password (if changing)" %></td></tr>
 			<tr><td><h4>Password Confirmation</h4></td></tr>
-			<tr><td><%= f.password_field :password_confirmation, :placeholder => "Confirm password (if changing)", :class=>"tt-hint form-control" %></td></tr>
+			<tr><td><%= f.password_field :password_confirmation, placeholder: "Confirm password (if changing)" %></td></tr>
+
+
 			<% if current_user.any_admin? %>
-				<tr><td>
-					<%= f.check_box :admin %>
-					<div style="padding:10px 0 0;display:inline-block;">Admin</div>
-					</td></tr>
-				<tr><td>
-					<%= f.check_box :company_admin %>
-					<div style="padding:10px 0 0;display:inline-block;">Company Admin (access to billing)</div> 
+				<tr style="margin:2.5% auto"><td><div class="no-content.placeholder"><h5>User Type</h5></div></td></tr>
+				<tr>
+					<td class="label" >
+						<%= f.radio_button :admin, :basic, checked: (@user.any_admin? ? false : true) %>
+						<span>Basic</span>
+						<i class="fa fa-info-circle"></i>
+					</td>
+					<td class="explanation">(A normal BuildHawk user)</td>
 				</td></tr>
+				<tr style="margin-top:2.5%;">
+					<td class="label" >
+						<%= f.radio_button :admin, :admin, checked: (@user.admin ? true : false) %>
+						<span>Admin</span>
+						<i class="fa fa-info-circle"></i>
+					</td>
+					<td class="explanation">(Admins have the ability to view and edit any project, can create new projects, add users and edit checklists)</td>
+				</td></tr>
+				<tr>
+					<td class="label">
+						<%= f.radio_button :admin, :company_admin, checked: (@user.company_admin ? true : false) %>
+						<span>Company admin</span>
+						<i class="fa fa-info-circle"></i>
+					<td class="explanation">(Company admins have all the same access as admins, but also have access to the accounts billing information)</td>
+				</tr>
 			<% end %>
-			<tr><td>
-				<%= f.check_box :email_permissions %>
-				<div style="padding:10px 0 0;display:inline-block;">Email Permissions</div>
-			</td></tr>
-			<tr><td>
-				<%= f.check_box :text_permissions %>
-				<div style="padding:10px 0 30px;display:inline-block;">Text Permissions</div>
-			</td></tr>
-			<tr><td>
-				<%= f.check_box :push_permissions %>
-				<div style="padding:10px 0 30px;display:inline-block;">Push Permissions</div>
-			</td></tr>
+
+			<tr style="margin:2.5% auto"><td><div class="no-content.placeholder"><h5>Communication Preferences</h5></div></td></tr>
+			<tr>
+				<td class="label">
+					<%= f.check_box :email_permissions %>
+					<span>Email</span>
+					<i class="fa fa-info-circle"></i>
+				</td>
+				<td class="explanation">Do we have permission to send notification emails (e.g. A report has been generated for you)?</td>
+			</tr>
+			<tr>
+				<td class="label">
+					<%= f.check_box :text_permissions %>
+					<span>Text message</span>
+					<i class="fa fa-info-circle"></i>
+				</td>
+				<td class="explanation">Do we have permission to send notification texts (e.g. You've been assigned a task)?</td>
+			</tr>
+			<tr>
+				<td class="label">
+					<%= f.check_box :push_permissions %>
+					<span>Push notifications</span>
+					<i class="fa fa-info-circle"></i>
+				<td class="explanation">Do we have permission to send push notifications (e.g. You've been assigned to a project)?</td>
+			</tr>
+
+			<tr style="margin:2.5% auto"><td><div class="no-content.placeholder"><h5>Photo</h5></div></td></tr>
 			<% if @user.image_file_name %>
 				<tr><td>
 					<%= image_tag @user.image.url(:small), :class => "user-pic" %>

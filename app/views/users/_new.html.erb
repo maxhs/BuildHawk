@@ -6,7 +6,6 @@
 	<table id="new-user-form" class="border-box">
 		<tbody>
 			<tr><td><h2>Add User</h2></td></tr>
-			<%= hidden_field_tag :company_id, current_user.company.id %>
 			<%= hidden_field_tag :admin, true %>
 			<%= hidden_field_tag :current_user_id, current_user.id %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -22,11 +21,20 @@
 			<tr><td><%= f.password_field :password, placeholder: "Password", required: true %></td></tr>
 			<tr><td><%= f.label "Password Confirmation" %></td></tr>
 			<tr><td><%= f.password_field :password_confirmation, placeholder: "Confirm this user's password", required: true, 'data-parsley-equalto' => "#user_password", "data-parsley-error-message" => "These passwords don't match." %></td></tr>
+			
+			<tr style="margin:2.5% auto"><td><div class="no-content.placeholder"><h5>User Type</h5></div></td></tr>
 
-			<tr><td><div class="no-content.placeholder"><h5>Communication Preferences</h5></div></td></tr>
+			<tr>
+				<td class="label" >
+					<%= f.radio_button :admin, :basic, checked: true %>
+					<span>Basic</span>
+					<i class="fa fa-info-circle"></i>
+				</td>
+				<td class="explanation">(A normal BuildHawk user)</td>
+			</td></tr>
 			<tr style="margin-top:2.5%;">
 				<td class="label" >
-					<%= f.check_box :admin %>
+					<%= f.radio_button :admin, :admin %>
 					<span>Admin</span>
 					<i class="fa fa-info-circle"></i>
 				</td>
@@ -34,11 +42,14 @@
 			</td></tr>
 			<tr>
 				<td class="label">
-					<%= f.check_box :company_admin %>
+					<%= f.radio_button :admin, :company_admin %>
 					<span>Company admin</span>
 					<i class="fa fa-info-circle"></i>
 				<td class="explanation">(Company admins have all the same access as admins, but also have access to the accounts billing information)</td>
 			</tr>
+
+			<tr style="margin:2.5% auto"><td><div class="no-content.placeholder"><h5>Communication Preferences</h5></div></td></tr>
+			
 			<tr>
 				<td class="label">
 					<%= f.check_box :email_permissions %>
@@ -62,7 +73,8 @@
 					<i class="fa fa-info-circle"></i>
 				<td class="explanation">Do we have permission to send push notifications to this user with notifications from their projects (e.g. A task has been assigned to them)?</td>
 			</tr>
-			<tr>
+
+			<tr style="margin:2.5% auto">
 				<td class="button-container center">
 					<%= f.submit "Create", :class=>"simple-btn full-width" %>
 				</td>

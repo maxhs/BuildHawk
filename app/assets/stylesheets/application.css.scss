@@ -27,6 +27,7 @@ html {
 	overflow-x: hidden;
 	-webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    box-sizing:border-box;
 }
 
 * {
@@ -151,6 +152,10 @@ body {
 		font-size:1.25em;
 		z-index:1000;
 		display:none;
+	}
+
+	.fa-trash-o {
+		font-size:1.5em;
 	}
 
 	.centered {

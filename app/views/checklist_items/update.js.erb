@@ -3,9 +3,5 @@
 	//TODO update row
 
 <% else %>
-	$('#main').fadeOut(100,function(){
-
-		$(this).html('<%= j render :partial => "admin/editor", :locals => {:checklist => @checklist} %>');
-		$(this).fadeIn(100);
-	});
+	$('#main').html('<%= j render partial: "admin/editor", :locals => {checklist: @checklist} %>')
 <% end %>

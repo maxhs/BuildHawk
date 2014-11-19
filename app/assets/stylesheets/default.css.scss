@@ -268,11 +268,6 @@ table {
 
 }
 
-html {
-  font-size: 62.5%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 input,
 button,
 select,
@@ -1621,7 +1616,7 @@ label {
 
 input[type="radio"],
 input[type="checkbox"] {
-  margin: 4px 0 0;
+  margin: 4px 17px 0 0;
   margin-top: 1px \9;
   /* IE8-9 */
 

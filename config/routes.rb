@@ -9,6 +9,7 @@ Buildhawk::Application.routes.draw do
     get "logout", :to => "devise/sessions#destroy", :as => :logout
     get '/sign_up', :to => "registrations#new"
     get '/signup', :to => "registrations#new"
+    post '/registrations/user', :to => "registrations#create"
     get '/register_connect', :to => "registrations#connect"
     post '/confirm', :to => "registrations#confirm"
   end
@@ -57,11 +58,10 @@ Buildhawk::Application.routes.draw do
       get :project_groups
       post :create_project
       get :editor
-      delete :delete_checklist
+      delete :remove_template
     end
     member do
       post :clone_topic
-      delete :remove_template
       patch :update_checklist
     end
   end

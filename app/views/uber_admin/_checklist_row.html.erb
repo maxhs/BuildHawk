@@ -4,7 +4,7 @@
 	<div class="col-xs-1"><%= c.phases.map(&:categories).flatten.count %></div>
 	<div class="col-xs-1"><%= c.item_count %></div>
 	<div class="col-xs-1 center">
-		<%= link_to "Edit", editor_admin_index_path(checklist_id: c.id), :class=>"empty-btn", remote: true %>
+		<%= link_to "Edit", editor_admin_index_path(cid: c.id), :class=>"empty-btn", remote: true %>
 	</div>
 	<div class="col-xs-1 center">
 		<%= link_to checklist_path(c), data: {confirm: "Are you sure you want to delete this core checklist? This can not be undone."}, remote: true, method: :delete, :class=>"remote", style:"text-align:center;" do %>
