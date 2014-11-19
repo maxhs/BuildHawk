@@ -58,7 +58,7 @@ Buildhawk::Application.routes.draw do
       get :project_groups
       post :create_project
       get :editor
-      delete :remove_template
+      delete :remove_checklist
     end
     member do
       post :clone_topic

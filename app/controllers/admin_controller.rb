@@ -113,10 +113,10 @@ class AdminController < AppController
 		end
 	end
 
-	def remove_template
+	def remove_checklist
 		checklist = Checklist.find params[:cid]
 		@checklist_id = params[:cid]
-		checklist.destroy
+		checklist.background_destroy
 	end
 
 	def new_project

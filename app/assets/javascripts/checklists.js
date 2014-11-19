@@ -28,8 +28,8 @@ function projectChecklistSetup(){
 }
 
 function coreChecklist(){
-	$('.company-template').on('click',function(){
-		$('#alert').text("Creating your template. This may take a few moments.").fadeIn(500);
+	$('.company-template').click(function(){
+		showAlert("Creating your template. This may take a few moments.");
 	});
 }
 

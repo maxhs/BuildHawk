@@ -5,7 +5,7 @@
 	<td><%= c.item_count %></td>
 	<td><h5><%= link_to "EDIT", editor_admin_index_path(cid: c.id), :class=>"simple-btn", remote: true %></h5></td>
 	<td>
-		<%= link_to remove_template_admin_index_path(cid: c.id), :data => {:confirm => "Are you sure you want to remove this checklist template? This can not be undone."}, :remote => true, :class=>"remote", :style=>"max-width:100px;display:inline;", method: :delete do %>
+		<%= link_to remove_checklist_admin_index_path(cid: c.id), :data => {:confirm => "Are you sure you want to remove this checklist template? This can not be undone."}, :remote => true, :class=>"remote", :style=>"max-width:100px;display:inline;", method: :delete do %>
 			<i class="fa fa-trash-o remote checklist"></i>
 		<% end %>
 	</td>

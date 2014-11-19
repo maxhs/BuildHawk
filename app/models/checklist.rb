@@ -66,6 +66,15 @@ class Checklist < ActiveRecord::Base
         (completed_count+not_applicable_count)/item_count.to_f*100
     end
 
+    def background_destroy
+        if Rails.env.production?
+            require "resque"
+            Resque.enqueue(DestroyChecklist, id)
+        else
+            self.destroy
+        end
+    end
+
     class << self
       	def import(file)
             spreadsheet = open_spreadsheet(file)
