@@ -13,6 +13,19 @@ class UsersController < AppController
 	end
 
 	def create
+		if params[:user][:admin]
+			if params[:user][:admin] == "admin"
+				params[:user][:admin] = true
+			elsif params[:user][:admin] == "company_admin"
+				params[:user][:company_admin] = true
+				params[:user].delete(:admin)
+			else
+				params[:user][:company_admin] = false
+				params[:user][:admin] = false
+				params[:user].delete(:admin)
+			end 
+		end
+
 		@user = current_user.company.users.create params[:user]
 		@company = current_user.company
 		@users = @company.users
@@ -50,6 +63,19 @@ class UsersController < AppController
 
 	def update	
 		@user = User.find params[:id]
+		
+		if params[:user][:admin]
+			if params[:user][:admin] == "admin"
+				params[:user][:admin] = true
+			elsif params[:user][:admin] == "company_admin"
+				params[:user][:company_admin] = true
+				params[:user].delete(:admin)
+			else
+				params[:user][:company_admin] = false
+				params[:user][:admin] = false
+				params[:user].delete(:admin)
+			end 
+		end
 
 		if params[:user][:phone]
 			params[:user][:phone] = @user.clean_phone(params[:user][:phone])	
