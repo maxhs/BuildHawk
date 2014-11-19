@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     has_many :message_users, dependent: :destroy, autosave: true
     has_many :messages, through: :message_users , autosave: true
     has_many :comments, dependent: :destroy
-    #has_many :tasks, foreign_key: "assignee_id"
+    has_many :tasks, foreign_key: "assignee_id"
 
     has_many :photos
 

@@ -15,7 +15,7 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         elsif params[:worklist_item][:assignee_id]
             assignee = User.where(:id => params[:worklist_item][:assignee_id]).first
             params[:worklist_item][:assignee_ids] = [assignee.id]
-            notify = true if assignee && task.assignee_id != assignee.id
+            notify = true if assignee && !task.assignee_ids.include?(assignee.id)
         else
             params[:worklist_item][:assignee_ids] = nil
         end
