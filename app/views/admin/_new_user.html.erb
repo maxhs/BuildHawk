@@ -17,7 +17,7 @@
 			<tr><td><%= f.label "Password" %></td></tr>
 			<tr><td><%= f.password_field :password, placeholder: "Password", required: true %></td></tr>
 			<tr><td><%= f.label "Password Confirmation" %></td></tr>
-			<tr><td><%= f.password_field :password_confirmation, placeholder: "Confirm this user's password", required: true %></td></tr>
+			<tr><td><%= f.password_field :password_confirmation, placeholder: "Confirm this user's password", required: true, 'data-parsley-equalto' => "#user_password", "data-parsley-error-message" => "These passwords don't match." %></td></tr>
 			<tr><td>
 				<%= f.check_box :admin %>
 				<div style="padding:10px 0 0;display:inline-block;">Admin</div>
@@ -36,7 +36,7 @@
 			</td></tr>
 			<tr>
 				<td class="button-container center">
-					<%= f.submit "Create", :class=>"simple-btn save" %>
+					<%= f.submit "Create", :class=>"simple-btn full-width" %>
 				</td>
 			</tr>
 		</tbody>

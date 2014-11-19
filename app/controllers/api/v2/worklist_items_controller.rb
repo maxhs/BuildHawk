@@ -1,5 +1,4 @@
 class Api::V2::WorklistItemsController < Api::V2::ApiController
-    before_filter :refactor_punchlist
 
     def update
     	task = Task.find params[:id]
@@ -136,16 +135,4 @@ class Api::V2::WorklistItemsController < Api::V2::ApiController
         end
     end
 
-    private
-
-    def refactor_punchlist
-        ##api compatibility
-        if params[:punchlist_item]
-            params[:worklist_item] = params[:punchlist_item] 
-            @root = :punchlist_item
-        else
-            @root = :worklist_item
-        end
-        ###
-    end
 end
