@@ -18,6 +18,7 @@
 //= require jquery.ui.autocomplete
 //= require jquery.easing
 //= require bootstrap
+//= require bootstrap-datepicker
 //= require dropzone
 //= require jquery.remotipart
 //= require parsley

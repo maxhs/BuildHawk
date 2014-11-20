@@ -21,6 +21,17 @@
 			width:35px;
 		}
 	}
+
+	#reload-weather {
+		cursor:pointer;
+		font-size:.7em !important;
+		position:relative;
+		left:2.5%;
+	}
+
+	#reload-weather:hover {
+		color:#cc0000;
+	}
 }
 
 #reports-header{

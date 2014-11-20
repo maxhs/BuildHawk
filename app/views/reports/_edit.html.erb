@@ -23,7 +23,7 @@
 
 			<div class="thin-form">
 				<div class="row form-title dates types">
-					<div class="input-append date col-md-6" data-date-format="dd-mm-yyyy">
+					<div class="input-append date col-md-6">
 						<h5>Date</h5>
 						<%= f.text_field :date_string, :value => report.date_string, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
 					</div>
@@ -65,7 +65,10 @@
 					</div>
 				<% else %>
 					<div class="row form-title">
-						<div class="col-md-12"><h5>Weather</h5></div>
+						<div class="col-md-12">
+							<h5 style="display:inline-block">Weather</h5>
+							<span id="reload-weather" class="empty-btn" onclick="reloadWeather(<%=report.project.address.latitude%>,<%=report.project.address.longitude%>)">Reload</span>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12"><%= f.text_area :weather, :rows => 2, value: report.weather && report.weather.length > 0 ? report.weather : @summary, placeholder: "Weather report" %></div>

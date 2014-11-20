@@ -16,10 +16,9 @@ function dismissReport(projectId){
 }
 
 function newReport(latitude,longitude,projectId) {
-	$("#dp").datepicker();
 	$('#dp').datepicker().on('changeDate', function(ev){
 	    $('#dp').datepicker('hide');
-	    assignDate(latitude, longitude, ev.date.getTime());
+	    reloadWeather(latitude, longitude, ev.date.getTime());
 	});
 	
 	$('#report-add').click(function(){
@@ -51,8 +50,11 @@ function newReport(latitude,longitude,projectId) {
 	});
 }
 
-function assignDate(latitude, longitude, date){
-	//console.log('assign date '+date);
+function reloadWeather(latitude, longitude, date){
+	//console.log('reload weather '+date);
+	if (!date){
+		date = $("#dp").datepicker('getDate').getTime();
+	}
 	$.ajax({
       	type: "GET",
      	url: "/reports/weather",
@@ -64,19 +66,20 @@ function assignDate(latitude, longitude, date){
       		$('#report_humidity').val(data.humidity);
       		$('#report_wind').val(data.windSpeed+' '+data.windBearing);
       		$('#report_precip').val(data.precip);
+      		$('#reload-weather').fadeOut(230,function(){
+      			$(this).remove();
+      		});
         },
       	error:function(data) {
-      		
+      		showAlert("Something went wrong while trying to load the weather for this report. Please try again soon.");
         }
     })
 }
 
 function editReport(latitude,longitude,projectId) {
-
-	$("#dp").datepicker();
-	$('#dp').datepicker().on('changeDate', function(ev){
-	    $('#dp').datepicker('hide');
-	    assignDate(latitude, longitude, ev.date.getTime());
+	$('#dp').datepicker().on('changeDate', function(e){
+		$('#dp').datepicker('hide');
+	    reloadWeather(latitude, longitude, e.date.getTime());
 	});
 	
 	$('.report-topic .title').click(function(){

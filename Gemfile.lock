@@ -43,6 +43,8 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
+    bootstrap-datepicker-rails (1.3.0.2)
+      railties (>= 3.0)
     builder (3.2.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -262,6 +264,7 @@ DEPENDENCIES
   acts_as_api
   acts_as_list
   aws-sdk
+  bootstrap-datepicker-rails
   deep_cloneable
   delayed_paperclip
   devise

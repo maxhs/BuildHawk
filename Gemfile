@@ -45,6 +45,7 @@ gem 'font-awesome-rails'
 gem 'sweet-alert'
 gem 'mandrill_mailer'
 gem 'gibbon'
+gem 'bootstrap-datepicker-rails'
 gem 'forecast_io'
 
 #gem 'resque-pool'
