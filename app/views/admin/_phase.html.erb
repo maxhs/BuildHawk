@@ -1,12 +1,12 @@
 <li class="phase" id="phase-<%=p.id%>">
 	<h2 class="title remote">
 		<%= link_to load_items_checklist_path(p), :id => "p-#{p.id}", :class=>"phase-link remote", remote: true do %>
-			<i class="fa fa-minus disclosure"></i>
+			<i class="fa fa-circle-o disclosure"></i>
 			<%=p.name%>
 		<% end %>
+		<%= link_to edit_phase_path(p), :class => "edit-phase remote", remote: true do %>
+			<i class="fa fa-cog remote"></i>
+		<% end %>
 	</h2>
-	<%= link_to edit_phase_path(p), :class => "edit-phase remote", remote: true do %>
-		<i class="fa fa-cog remote"></i>
-	<% end %>
 	<div id="<%= p.id %>-items"></div>
 </li>

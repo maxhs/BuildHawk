@@ -1,5 +1,5 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('.nav-checklists a').addClass('current-page');
-$("#admin-checklist, #project-checklist").addClass('panel');
+$(".checklist").addClass('panel');
 $('#checklist.focus').html('<%= j render partial:"categories/edit", locals: {category: @category} %>');
 $('#checklist.focus').css('left','54%');

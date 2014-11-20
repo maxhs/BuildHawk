@@ -1,7 +1,7 @@
 var itemsHolder = $('#<%= @phase.id %>-items');
 if (itemsHolder.hasClass('revealed')){
 	itemsHolder.hide(230,function(){
-		$('#phase-<%=@phase.id%> .disclosure').replaceWith('<i class="fa fa-minus disclosure"></i>');
+		$('#phase-<%=@phase.id%> .disclosure').replaceWith('<i class="fa fa-circle-o disclosure"></i>');
 	});
 	itemsHolder.removeClass('revealed');
 } else {
@@ -18,7 +18,7 @@ if (itemsHolder.hasClass('revealed')){
 
 		$(this).addClass('revealed');
 		$(this).show(230,function(){
-			$('#phase-<%=@phase.id%> .disclosure').replaceWith('<i class="fa fa-plus disclosure"></i>');
+			$('#phase-<%=@phase.id%> .disclosure').replaceWith('<i class="fa fa-circle disclosure"></i>');
 			categorySort(<%= j @phase.categories.map(&:id).to_json %>);  
 		});
 

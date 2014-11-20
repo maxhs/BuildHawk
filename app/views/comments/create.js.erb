@@ -1,5 +1,5 @@
 $('#comments-table').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "comments/comments", :locals => {:comments => @comments} %>');
+	$(this).html('<%= j render :partial => "comments/comments", locals: {comments: @comments} %>');
 	$(this).fadeIn(100);
 });
 $('#comment_body').val('');

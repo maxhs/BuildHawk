@@ -16,6 +16,8 @@
 		<ul class="category-items" id="items-<%=category.id%>">
 			<%= render partial:"admin/item", collection:category.checklist_items, as: :item, cache: false %>
 		</ul>
-		<%= link_to "+ item", new_checklist_item_path(:category_id => category.id), :id=>"new-item-#{category.id}", :class=>"remote new-checklist-item empty-btn", :remote => true %>
+		<%= link_to new_checklist_item_path(:category_id => category.id), :id=>"new-item-#{category.id}", :class=>"remote new-checklist-item empty-btn", remote: true do %>
+			<i class="fa fa-plus remote"></i><span style="padding-left:10px;">Item</span>
+		<% end %>
 	</div>
 </li>

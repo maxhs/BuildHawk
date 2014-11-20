@@ -276,7 +276,7 @@
 		cursor:move;
 	}
 
-	.left-edit {
+	/*.left-edit {
 		top: 8px;
 		font-size: 14px;
 		padding:10px 10px 10px 20px;
@@ -303,7 +303,7 @@
 
 	.left-edit:hover {
 		color:#cc0000 !important;
-	}
+	}*/
 }
 
 .phase:hover {
@@ -344,24 +344,12 @@
 	}
 
 	#clear-critical-date, #clear-completed-date {
-		padding-top:5px;
-		width:164px;
-		text-align:center;
-		font-size:14px;
-		text-transform:uppercase;
-		margin:0 auto;
-		-webkit-transition: all 0.25s ease-out;
-		-moz-transition: all 0.25s ease-out;
-		-ms-transition: all 0.25s ease-out;
-		-o-transition: all 0.25s ease-out;
-		transition: all 0.25s ease-out;
-		cursor:pointer;
+		margin-top:5px;
 	}
 
 	#clear-critical-date:hover, #clear-completed-date:hover {
 		color:#cc0000;
 	}	
-
 }
 
 .checklist-item-link {
@@ -514,7 +502,7 @@
 .edit-phase {
 	position:relative;
 	left:10px;
-	bottom:5px;
+	bottom:3px;
 }
 
 .new-category {

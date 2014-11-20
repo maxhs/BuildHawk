@@ -10,7 +10,9 @@
 			<ul id="phases">
 				<%= render :partial => 'admin/phase', collection: @checklist.phases, as: :p, cache: true %>
 			</ul>
-			<%= link_to "+ phase", new_phase_path(checklist_id: @checklist), id:"new-phase", :class=>"empty-btn remote new-phase", remote: true %>
+			<%= link_to new_phase_path(checklist_id: @checklist), id:"new-phase", :class=>"empty-btn remote new-phase", remote: true do %>
+				<i class="fa fa-plus remote"></i><span style="padding-left:10px;">Phase</span>
+			<% end %>
 		</div>
 	</div>
 </div>

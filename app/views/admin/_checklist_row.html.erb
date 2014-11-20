@@ -21,7 +21,11 @@
 			<i class="fa fa-circle-o-notch fa-spin center"></i>
 		<% end %>
 	</td>
-	<td><h5><%= link_to "EDIT", editor_admin_index_path(cid: c.id), :class=>"simple-btn", remote: true unless c.flagged_for_removal %></h5></td>
+	<td>
+		<h5>
+			<%= link_to "EDIT", editor_admin_index_path(cid: c.id), :class=>"simple-btn", remote: true unless c.flagged_for_removal %>
+		</h5>
+	</td>
 	<td>
 		<% if c.flagged_for_removal %>
 			<div class="placeholder font-smoothing" style="text-decoration:none; display:inline-block;">Removing...</div>

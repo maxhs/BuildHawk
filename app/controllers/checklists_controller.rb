@@ -31,11 +31,18 @@ class ChecklistsController < AppController
 
 	def load_items
 		@phase = Phase.find params[:id]
-		@project = @phase.checklist.project
+		@checklist = @phase.checklist
+		@project = @checklist.project
 		@categories = @phase.categories
 		if request.xhr?
 			respond_to do |format|
 				format.js
+			end
+		else
+			if @project
+				redirect_to checklist_project_path
+			else
+				redirect_to editor_admin_index_path(cid: @checklist.id)
 			end
 		end
 	end
