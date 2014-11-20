@@ -69,6 +69,7 @@ class UsersController < AppController
 				params[:user][:admin] = true
 			elsif params[:user][:admin] == "company_admin"
 				params[:user][:company_admin] = true
+				params[:user][:admin] = true
 				params[:user].delete(:admin)
 			else
 				params[:user][:company_admin] = false

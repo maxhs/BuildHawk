@@ -1,8 +1,26 @@
 <tr id="checklist-<%=c.id%>">
 	<td><%= c.name %></td>
-	<td><%= c.phases.count %></td>
-	<td><%= c.phases.map(&:categories).flatten.count %></td>
-	<td><%= c.item_count %></td>
+	<td>
+		<% if c.phases.count > 0 %>
+			<%= c.phases.count %>
+		<% else %>
+			<i class="fa fa-circle-o-notch fa-spin center"></i>
+		<% end %>
+	</td>
+	<td>
+		<% if c.phases.map(&:categories).flatten.count > 0 %>
+			<%= c.phases.map(&:categories).flatten.count %>
+		<% else %>
+			<i class="fa fa-circle-o-notch fa-spin center"></i>
+		<% end %>
+	</td>
+	<td>
+		<% if c.item_count > 0 %>
+			<%= c.item_count %>
+		<% else %>
+			<i class="fa fa-circle-o-notch fa-spin center"></i>
+		<% end %>
+	</td>
 	<td><h5><%= link_to "EDIT", editor_admin_index_path(cid: c.id), :class=>"simple-btn", remote: true %></h5></td>
 	<td>
 		<%= link_to remove_checklist_admin_index_path(cid: c.id), :data => {:confirm => "Are you sure you want to remove this checklist template? This can not be undone."}, :remote => true, :class=>"remote", :style=>"max-width:100px;display:inline;", method: :delete do %>

@@ -1,8 +1,26 @@
 <div class="checklist row" id="checklist-<%=c.id%>">
 	<div class="col-xs-7 left"><h5 class="left"><%= c.name %></h5></div>
-	<div class="col-xs-1"><%= c.phases.count %></div>
-	<div class="col-xs-1"><%= c.phases.map(&:categories).flatten.count %></div>
-	<div class="col-xs-1"><%= c.item_count %></div>
+	<div class="col-xs-1">
+		<% if c.phases.count > 0 %>
+			<%= c.phases.count %>
+		<% else %>
+			<i class="fa fa-circle-o-notch center"></i>
+		<% end %>
+	</div>
+	<div class="col-xs-1">
+		<% if c.phases.map(&:categories).flatten.count > 0 %>
+			<%= c.phases.map(&:categories).flatten.count %>
+		<% else %>
+			<i class="fa fa-circle-o-notch center"></i>
+		<% end %>
+	</div>
+	<div class="col-xs-1">
+		<% if c.item_count > 0 %>
+			<%= c.item_count %>
+		<% else %>
+			<i class="fa fa-circle-o-notch fa-spin center"></i>
+		<% end %>
+	</div>
 	<div class="col-xs-1 center">
 		<%= link_to "Edit", editor_admin_index_path(cid: c.id), :class=>"empty-btn", remote: true %>
 	</div>

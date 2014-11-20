@@ -18,7 +18,7 @@ function projectChecklistSetup(){
 		if ($('#checklist-search').css('display') == "none"){
 			$('#checklist-search').fadeIn().css('display','table');
 		} else {
-			$('#checklist-search').fadeOut(200);
+			$('#checklist-search').fadeOut(230);
 		}
 	});
 	$('#remove').on('click',function(){
@@ -29,7 +29,7 @@ function projectChecklistSetup(){
 
 function coreChecklist(){
 	$('.company-template').click(function(){
-		showAlert("Creating your template. This may take a few moments.");
+		showAlert("Creating your template. This may take a few moments. Please refresh to view status.");
 	});
 }
 
@@ -60,10 +60,10 @@ function checklistItem(itemExportPartial){
 		}
 
 		$('body').append('<div class="modal-backdrop in"></div>');
-		$('#export-checklist-modal').animate({"left":"25%",'opacity':'1'},200);
+		$('#export-checklist-modal').animate({"left":"25%",'opacity':'1'},230);
 		$('#cancel-checklist-modal,.modal-backdrop.in').on('click',function(){
-			$('#export-checklist-modal').animate({"left":"100%",'opacity':'0'},200);
-			$('.modal-backdrop.in').fadeOut(200,function(){
+			$('#export-checklist-modal').animate({"left":"100%",'opacity':'0'},230);
+			$('.modal-backdrop.in').fadeOut(230,function(){
 				$(this).remove();
 			});
 		});
