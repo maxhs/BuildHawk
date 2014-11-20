@@ -98,7 +98,13 @@ class ChecklistItemsController < AppController
 				format.js
 			end
 		else
-			render :show
+			@checklist = @item.category.phase.checklist
+			@project = @checklist.project
+			if @project
+				render "projects/checklist"
+			else
+				render "admin/editor"
+			end
 		end
 	end
 

@@ -574,23 +574,3 @@
 	-webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,.25);
 	text-transform:uppercase;
 }
-
-.item-editor {
-	display:block;
-	max-width:800px;
-	background-color:#fff;
-	padding: 15px 40px;
-	margin:0 auto;
-	overflow:auto;
-
-	h2, h3,h4 {
-		display:inline-block;
-		text-align:left;
-		padding-right:10px;
-	}
-
-	input[type="text"] {
-		width:100%;
-		margin:20px 0;
-	}
-}

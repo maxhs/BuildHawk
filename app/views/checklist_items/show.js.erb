@@ -1,5 +1,5 @@
 $('.active-item').removeClass('active-item');
 $('#item-<%=@item.id %>').addClass('active-item');
-$("#admin-checklist").addClass('checklist-panel');
-$('#checklist-focus').html('<%= j render partial:"checklist_items/show", locals: {item: @item} %>');
-$('#checklist-focus').css('left','54%');
+$(".checklist").addClass('panel');
+$('#checklist.focus').html('<%= j render partial:"checklist_items/edit", locals: {item: @item} %>');
+$('#checklist.focus').css('left','54%');

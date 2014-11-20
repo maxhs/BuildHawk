@@ -1,15 +1,15 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('.nav-checklists a').addClass('current-page');
 <% if @project %>
-	$('#main').fadeOut(170,function(){
-		$(this).html('<%= j render :partial => "phases/show" %>');
-		$(this).fadeIn(170);
-		$("html, body").animate({ scrollTop: 0 }, 300);
+	$('#main').fadeOut(230,function(){
+		$(this).html('<%= j render partial: "phases/show" %>');
+		$(this).fadeIn(230);
+		$("html, body").animate({ scrollTop: 0 }, 230);
 	});
 <% else %>
 	$('#checklist-items').fadeOut(170,function(){
-		$(this).html('<%= j render :partial => "phases/show" %>');
-		$(this).fadeIn(170);
-		$("html, body").animate({ scrollTop: 0 }, 300);
+		$(this).html('<%= j render partial: "phases/show" %>');
+		$(this).fadeIn(230);
+		$("html, body").animate({ scrollTop: 0 }, 230);
 	});
 <% end %>

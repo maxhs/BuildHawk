@@ -14,3 +14,18 @@
 		}
 	}
 }
+
+.item-editor {
+	padding:2.5%;
+
+	h2, h3, h4 {
+		display:inline-block;
+		text-align:left;
+		padding-right:10px;
+	}
+
+	input[type="text"] {
+		width:100%;
+		margin:20px 0;
+	}
+}
