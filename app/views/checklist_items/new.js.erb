@@ -1,9 +1,9 @@
-if ($('#category-<%= @category.id %> .new_checklist_item').length){
-	$('#category-<%= @category.id %> .new_checklist_item').fadeOut(200,function(){
-		$(this).remove();
+$('#items-<%= @category.id %>').append('<%= j render partial:"checklist_items/new" %>');
+$('#new-item-<%= @category.id %>').hide();
+
+$('#dismiss-new-item').click(function(){
+	$('.new_checklist_item').slideUp(230,function(){
+		$('.new_checklist_item').remove();
 	});
-	$('#new-item-<%=@category.id %>').text("Add new item");
-} else {
-	$('#items-<%= @category.id %>').append('<%= j render partial:"checklist_items/new" %>');
-	$('#new-item-<%=@category.id %>').text("Cancel");
-}
+	$('#new-item-<%= @category.id %>').show();
+});

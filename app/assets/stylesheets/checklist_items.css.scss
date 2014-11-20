@@ -29,3 +29,42 @@
 		margin:20px 0;
 	}
 }
+
+.new_checklist_item {
+	position:relative;
+	margin:2.5% auto;
+	width:98%;
+	display:block;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-color:transparent !important;
+
+	.new-item.row {
+		margin:0;
+		padding:0;
+		width:100%;
+
+		input[type="text"] {
+			width:100%;
+			margin:0;
+		}
+
+		input[type="submit"] {
+			width:90%;
+		}
+	}
+
+	.fa-remove {
+		position:absolute;
+		top:5px;
+		right:5px;
+		cursor:pointer;
+	}
+}

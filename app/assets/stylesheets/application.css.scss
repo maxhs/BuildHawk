@@ -184,10 +184,6 @@ body {
 		opacity:.77;
 	}
 
-	.danger {
-		color:#cc0000;
-	}
-
 	table {
 		width:100%;
   		max-width: 100%;
@@ -389,6 +385,7 @@ body {
 			.project.active {
 				background:#eee;
 				opacity: 1 !important;
+				font-weight:700;
 
 				* {
 					color:#000 !important;
