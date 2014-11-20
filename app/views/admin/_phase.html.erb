@@ -5,7 +5,8 @@
 			<%=p.name%>
 		<% end %>
 	</h2>
-	<%= link_to "Edit Phase", edit_phase_path(p), :class => "empty-btn edit-phase remote", remote: true %>
-	
+	<%= link_to edit_phase_path(p), :class => "edit-phase remote", remote: true do %>
+		<i class="fa fa-cog remote"></i>
+	<% end %>
 	<div id="<%= p.id %>-items"></div>
 </li>

@@ -52,11 +52,11 @@ body {
 		cursor:pointer;
 		text-decoration: none;
 		color:#222;
-		-webkit-transition: all 0.2s ease;
-		-moz-transition: all 0.2s ease;
-		-ms-transition: all 0.2s ease;
-		-o-transition: all 0.2s ease;
-		transition: all 0.2s ease;
+		-webkit-transition: all 0.23s ease;
+		-moz-transition: all 0.23s ease;
+		-ms-transition: all 0.23s ease;
+		-o-transition: all 0.23s ease;
+		transition: all 0.23s ease;
 	}
 
 	a:hover, a.current-page, .hide-reveal:hover {
@@ -166,6 +166,22 @@ body {
 
 	.fa-trash-o {
 		font-size:23px;
+	}
+
+	.fa-cog {
+		font-size:17px;
+		color:#000 !important;
+		opacity:.33;
+		-webkit-transition: all 0.07s;
+		-moz-transition: all 0.07s;
+		-ms-transition: all 0.07s;
+		-o-transition: all 0.07s;
+		transition: all 0.07s;
+	}
+
+	.fa-cog:hover {
+		color:#000;
+		opacity:.77;
 	}
 
 	.danger {

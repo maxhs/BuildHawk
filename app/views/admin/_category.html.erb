@@ -6,7 +6,9 @@
 			<span class="completed-count">
 				<%= render partial:"checklists/completed_count", :locals => {:category => category} %>
 			</span>
-			<%= link_to "Edit Category", edit_category_path(category), :class=>"empty-btn edit-category remote", :remote => true %>
+			<%= link_to edit_category_path(category), :class=>"edit-category remote", remote: true do %>
+				<i class="fa fa-cog remote"></i>
+			<% end %>
 		</div>
 	</div>
 

@@ -11,7 +11,7 @@ function datetimepickers(){
 function checklistSetup(){
 	$('#top-nav a').removeClass('current-page');
 	$('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-page');
-	
+
 	$('.phase-link').click(function(e){
 		if ($(this).hasClass('expanded')){
 			var pid = $(this).data('phase');
@@ -53,14 +53,18 @@ function coreChecklist(){
 	});
 }
 
-function dismissChecklist(projectId){
+function dismissChecklist(projectId,checklistId){
 	$('.panel').removeClass('panel');
 	$('.active-item').removeClass('active-item');
 	$('#checklist.focus').css('left',"101%");
 	setTimeout(function(){$('#checklist.focus').html('')},230);
 
-	if (history && history.pushState && projectId){
-	    history.pushState(null, null, '/projects/'+projectId+'/checklist');
+	if (history && history.pushState && (projectId || checklistId)){
+		if (projectId){
+			history.pushState(null, null, '/projects/'+projectId+'/checklist');
+		} else if (checklistId) {
+			history.pushState(null, null, '/admin/editor?cid='+checklistId);
+		}
 	    $(window).bind("popstate", function(){
 	      $.getScript(location.href);
 	    });

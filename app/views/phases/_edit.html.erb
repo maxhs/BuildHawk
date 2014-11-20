@@ -10,7 +10,7 @@
 					<i class="fa fa-share"></i>
 				</div>
 				<% if current_user.admin || current_user.company_admin %>
-					<%= link_to phase_path(phase), :data => {:confirm => "Are you sure you want to delete this phase?"}, method: :delete, :class=>"remote action", remote: true do %>
+					<%= link_to phase_path(phase), :data => {:confirm => "Are you sure you want to delete \"#{phase.name}\"? This cannot be undone."}, method: :delete, :class=>"remote action", remote: true do %>
 						<i class="fa fa-trash-o remote"></i>
 					<% end %>	
 				<% end %>
@@ -28,5 +28,5 @@
 	<% end %>
 </div>
 <script>
-phase('<%=phase.checklist.project.to_param%>');
+phase('<%= phase.checklist.project.to_param %>');
 </script>

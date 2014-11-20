@@ -4,7 +4,9 @@
 			<h5 class="title" id="<%= category.id %>"><%= category.name %></h5>
 			<span style="padding:0 1em;color:#aaa;">(<%=category.completed_count%> of <%= category.checklist_items.count%>)</span>
 			<% if current_user.admin || current_user.company_admin %>
-				<%= link_to "Edit", edit_category_path(category), :class=>"edit-category empty-btn", :remote => true %>
+				<%= link_to edit_category_path(category), :class=>"edit-category", remote: true do %>
+					<i class="fa fa-cog remote"></i>
+				<% end %>
 			<% end %>
 			
 		</div>
@@ -18,8 +20,10 @@
 
 	<div class="items-container collapsed" id="category-<%=category.id%>-container">
 		<ul class="category-items" id="items-<%=category.id%>">
-			<%= render partial:"projects/item", collection:category.checklist_items, as: :item, cache: false %>
+			<%= render partial:"projects/item", collection:category.checklist_items, as: :item, cache: true %>
 		</ul>
-		<%= link_to "Add Item", new_checklist_item_path(:project_id => @project.id, :category_id => category.id), :id=>"new-item-#{category.id}", :class=>"new-checklist-item simple-btn", :remote => true %>
+		<%= link_to new_checklist_item_path(:project_id => @project.id, :category_id => category.id), :id=>"new-item-#{category.id}", :class=>"new-checklist-item empty-btn", :remote => true do %>
+			<i class="fa fa-plus remote"></i><span style="padding-left:10px;">Item</span>
+		<% end %>
 	</div>
 </li>

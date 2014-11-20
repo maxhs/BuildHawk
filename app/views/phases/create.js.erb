@@ -1,9 +1,9 @@
 $('.new_phase').fadeOut(170,function(){
 	$(this).remove();
 	<% if @phase.checklist.project %>
-		$('#phases').append('<%= j render partial:"projects/phase", locals:{:p => @phase} %>');
+		$('#phases').append('<%= j render partial:"projects/phase", locals:{p: @phase} %>');
 	<% else %>
-		$('#phases').append('<%= j render partial:"admin/phase", locals:{:p => @phase} %>');
+		$('#phases').append('<%= j render partial:"admin/phase", locals:{p: @phase} %>');
 	<% end %>
 	$('#new-phase').text("Add a new phase");
     checklistSort('<%= @phase.checklist.id %>');

@@ -1,5 +1,7 @@
 class PhasesController < AppController
 	before_filter :authenticate_user!
+	before_filter :authenticate_admin, only:[:destroy, :new, :create]
+
 	def new
 		@checklist = Checklist.find params[:checklist_id] if params[:checklist_id]
 		@phase = @checklist.phases.new
@@ -86,19 +88,14 @@ class PhasesController < AppController
 	end
 
 	def destroy
-		@phase = Phase.find params[:id]
-		@phase_id = @phase.id
-		@checklist = @phase.checklist
+		phase = Phase.find params[:id]
+		@phase_id = phase.id
+		@checklist = phase.checklist
 		@project = @checklist.project
-		if @phase.destroy && request.xhr?
-			if @project
-				respond_to do |format|
-					format.js { render :template => "projects/checklist"}
-				end
-			else
-				respond_to do |format|
-					format.js
-				end
+		phase.destroy
+		if request.xhr?
+			respond_to do |format|
+				format.js
 			end
 		else
 			if @project
