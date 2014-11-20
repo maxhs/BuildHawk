@@ -1,5 +1,5 @@
 $('#main * .navbar-nav > li > a').removeClass('current-page');
 $('.nav-checklists a').addClass('current-page');
-$("#admin-checklist, #project-checklist").addClass('checklist-panel');
-$('#checklist-focus').html('<%= j render partial:"checklist_items/edit", locals: {item: @item} %>');
-$('#checklist-focus').css('left','54%');
+$(".checklist").addClass('panel');
+$('#checklist.focus').html('<%= j render partial:"checklist_items/edit", locals: {item: @item} %>');
+$('#checklist.focus').css('left','54%');

@@ -33,25 +33,37 @@ function coreChecklist(){
 	});
 }
 
-function dismissChecklist(){
+function dismissChecklist(projectId){
 	$('.panel').removeClass('panel');
 	$('.active-item').removeClass('active-item');
 	$('#checklist.focus').css('left',"101%");
 	setTimeout(function(){$('#checklist.focus').html('')},230);
+
+	if (history && history.pushState && projectId){
+	    history.pushState(null, null, '/projects/'+projectId+'/checklist');
+	    $(window).bind("popstate", function(){
+	      $.getScript(location.href);
+	    });
+	}
 }
 
-function checklistItem(itemExportPartial){
+function checklistItem(itemExportPartial, projectId){
 	$("#dp").datepicker();
 	$('#dp').datepicker().on('changeDate', function(){
 	    $('#dp').datepicker('hide');
 	});
 	Shadowbox.clearCache();
     Shadowbox.setup(".shadow-photo", {});
+
+    $('#floating-save').click(function(){
+		$('.edit_checklist_item').trigger('submit.rails');
+	});
+
     $('#clear-critical-date').click(function(){
     	$('#dp').val('');
     });
     $('#dismiss-checklist-item').click(function(){
-		dismissChecklist();
+		dismissChecklist(projectId);
 	});
 
 	$('#export-checklist-item').on('click',function(){

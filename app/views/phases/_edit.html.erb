@@ -28,7 +28,5 @@
 	<% end %>
 </div>
 <script>
-$('#dismiss-phase').click(function(){
-	dismissChecklist();
-})
+phase('<%=phase.checklist.project.to_param%>');
 </script>

@@ -16,7 +16,7 @@
 					<% end %>
 					
 					<div id="dismiss-checklist-item" class="dismiss action">
-						<i class="fa fa-remove" id="dismiss-task"></i>
+						<i class="fa fa-remove" id="dismiss-item"></i>
 					</div>
 				</div>
 			</div>
@@ -84,9 +84,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		checklistItem("<%= j render partial:'checklist_item_export', locals: {item: item} %>");
-		$('#floating-save').click(function(){
-			$('.edit_checklist_item').trigger('submit.rails');
-		});
+		checklistItem("<%= j render partial:'checklist_item_export', locals: {item: item} %>",'<%=@project.to_param%>');
 	});
 </script>

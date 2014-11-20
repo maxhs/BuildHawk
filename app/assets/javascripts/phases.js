@@ -22,3 +22,9 @@ function phaseSort(phaseIds) {
         });
     }
 }
+
+function phase(projectId){
+    $('#dismiss-phase').click(function(){
+        dismissChecklist(projectId);
+    })
+}

@@ -22,3 +22,9 @@ function categorySort(categoryIds) {
 	    });
 	}
 }
+
+function category(projectId){
+    $('#dismiss-category').click(function(){
+        dismissChecklist(projectId);
+    })
+}

@@ -1,6 +1,6 @@
-<div id="project-checklist">
+<div id="project-checklist" class="checklist border-box">
 	<% if @checklist %>
-		<div class="project-checklist-table border-box">
+		<div class="project-checklist-table">
 			<div id="checklist-items">
 				<header>
 					<%= form_tag search_items_checklist_path(@checklist, :project_id => @project.id), :id => "checklist-search", :method => :post, :class=>"input-group search", :remote => true do %>

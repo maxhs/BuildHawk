@@ -1,6 +1,6 @@
 <li class="phase" id="phase-<%=p.id%>">
-	<% if current_user.admin %>
-		<%= link_to "Edit", phase_path(p, :project_id => @project), :class => "simple-btn left-edit", remote: true %>
+	<% if current_user.any_admin? %>
+		<%= link_to "Edit", edit_phase_path(p), :class => "simple-btn left-edit", remote: true %>
 	<% end %>
 	<div class="row">
 		<span class="col-xs-8">
