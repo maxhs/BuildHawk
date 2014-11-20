@@ -9,6 +9,9 @@ function datetimepickers(){
 }
 
 function checklistSetup(){
+	$('#top-nav a').removeClass('current-page');
+	$('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-page');
+	
 	$('.phase-link').click(function(e){
 		if ($(this).hasClass('expanded')){
 			var pid = $(this).data('phase');

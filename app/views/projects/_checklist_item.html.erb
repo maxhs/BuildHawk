@@ -60,8 +60,8 @@
 		<% end %>				
 	</div>		
 	
-	<div class="comment-container" style="margin-top:20px;overflow:auto;">
-		<h4>Comments</h4>
+	<section class="comment-container">
+		<h4 class="center bold-header">Comments</h4>
 		<div id="comments-form">
 			<%= form_for item.comments.new, :method => :post, :remote => true do |f| %>
 				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
@@ -71,13 +71,13 @@
 			<% end %>
 		</div>
 		<%= render :partial => "comments/comments", :locals => {:comments => item.comments} %>
-	</div>
+	</section>
 
 	<% if item.activities.count > 0 %>
-		<div class="activity-container" style="margin-top:20px;overflow:auto;">
-			<h3 style="text-align:center; width:80%;margin:20px auto; display:block;">Activity</h3>
+		<section class="activity-container" style="margin-top:20px;overflow:auto;">
+			<h4 class="center bold-header">Activity</h4>
 			<%= render :partial => "activities/activity", collection: item.activities, as: :activity, cache: true %>
-		</div>
+		</section>
 	<% end %>
 	</div>
 </div>

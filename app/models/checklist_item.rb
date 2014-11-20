@@ -51,6 +51,7 @@ class ChecklistItem < ActiveRecord::Base
     end
 
     def log_activity(current_user)
+        return unless checklist.project
         if state == 1
             category.update_column :completed_date, DateTime.now if category.completed_count == category.item_count 
             attribution = current_user ? "#{current_user.full_name} marked this item complete." : "This item was marked complete."
