@@ -3,10 +3,12 @@
 	<%= f.hidden_field :checklist_id, :value => @checklist.id %>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
 
-	<div class="row">
-		<div class="col-xs-8"><%= f.text_area :body, :placeholder => "Describe the new checklist item" %></div>
+	<i class="fa fa-remove remote" id="dismiss-new-item"></i>
+	<%= f.label "New Item" %>
+	<div class="new-item row">
+		<div class="col-xs-8"><%= f.text_area :body, placeholder: "Describe the new checklist item" %></div>
 		<div class="col-xs-2" style="text-align:center;"><%= f.label "Item Type" %><br/><%= f.select :item_type, @checklist_item.types %></div>
-		<div class="col-xs-2"> <%= f.submit "ADD", :class=>"simple-btn", :style=>"margin-top:7px;" %></div>
+		<div class="col-xs-2"> <%= f.submit "ADD", :class=>"simple-btn", style: "margin-top:7px;" %></div>
 	</div>
 
 <% end %>
