@@ -7,17 +7,23 @@
 			<th><h4>Email</h4></th>
 			<th><h4>Phone</h4></th>
 			<th><h4>Created On</h4></th>
+			<th><h4 class="danger">Delete</h4></th>
 		</thead>
 
 		<tbody>
 			<% @users.each do |user| %>
-				<tr class="user-row">
+				<tr class="user-row" id="user-<%= user.id %>">
 					<td style="width:100px;"><% if user.image_file_name %><%= image_tag user.image.url(:thumb), :class =>"admin-user-pic" %><% end %></td>
 					<td class="user-name"><%= link_to user.full_name, edit_user_uber_admin_index_path(:user_id => user.id), :remote => true %></td>
 					<td><%= user.company.name if user && user.company %></td>
 					<td><%= user.email %></td>
-					<td><%= user.formatted_phone %></td>
-					<td><%= parse_time user.created_at %></td>
+					<td class="center"><%= user.formatted_phone %></td>
+					<td class="center"><%= parse_time user.created_at %></td>
+					<td class="center">
+						<%= link_to user_path(user), method: :delete, data: {confirm: "Are you ABSOLUTELY sure you want to delete this user? This cannot be undone."}, remote: true do %>
+							<i class="fa fa-trash-o remote center"></i>
+						<% end %>
+					</td>
 				</tr>
 			<% end %>
 		</tbody>

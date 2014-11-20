@@ -116,7 +116,18 @@ class UsersController < AppController
 		user = User.find params[:id]
 		@user_id = user.id
 		user.destroy
-		redirect_to users_admin_index_path
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end	
+		else
+			if current_user.uber_admin
+				redirect_to users_uber_admin_index_path
+			else
+				redirect_to personnel_admin_index_path
+			end
+		end
+		
 	end
 
 end
