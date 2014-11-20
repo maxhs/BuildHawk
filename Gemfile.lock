@@ -51,8 +51,8 @@ GEM
     commander (4.2.1)
       highline (~> 1.6.11)
     daemon_controller (1.2.0)
-    deep_cloneable (1.6.1)
-      activerecord (>= 3.1.0)
+    deep_cloneable (2.0.0)
+      activerecord (>= 3.1.0, < 5.0.0)
     delayed_paperclip (2.8.0)
       paperclip (>= 3.3)
     devise (3.3.0)
@@ -110,7 +110,7 @@ GEM
       mandrill-api (~> 1.0.9)
     mime-types (1.25.1)
     mini_portile (0.6.0)
-    minitest (5.4.2)
+    minitest (5.4.3)
     mono_logger (1.1.0)
     multi_fetch_fragments (0.0.17)
     multi_json (1.10.1)
@@ -262,7 +262,7 @@ DEPENDENCIES
   acts_as_api
   acts_as_list
   aws-sdk
-  deep_cloneable (~> 1.6.0)
+  deep_cloneable
   delayed_paperclip
   devise
   font-awesome-rails

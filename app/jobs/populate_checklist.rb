@@ -1,10 +1,11 @@
 class PopulateChecklist
   	@queue = :populate_checklist
   
-  	def self.perform(new_checklist_id, template_id)
-    	checklist = Checklist.where(id: new_checklist_id).first
+  	def self.perform(company_id, template_id)
     	template = Checklist.where(id: template_id).first
-    	checklist = template.dup :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :state}}}
+    	checklist = template.deep_clone :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :state}}}
+  		checklist.core = true
+  		checklist.company_id = company_id
   		checklist.save!
   	end  
 end
