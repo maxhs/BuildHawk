@@ -8,6 +8,23 @@ function datetimepickers(){
 	});
 }
 
+function checklistSetup(){
+	$('.phase-link').click(function(e){
+		if ($(this).hasClass('expanded')){
+			var pid = $(this).data('phase');
+			$(this).removeClass('expanded');
+			$('#'+pid+'-items').hide(230,function(){
+				$('#phase-'+pid+' .disclosure').replaceWith('<i class="fa fa-minus disclosure"></i>');
+			});
+			$('#'+pid+'-items').removeClass('revealed');
+
+			return false;
+		} else {
+			$(this).addClass('expanded');
+		}
+	});
+}
+
 function projectChecklistSetup(){
 	$(document).on('click',".checklist-item-link",function(){
 		$('.active-item').removeClass('active-item');

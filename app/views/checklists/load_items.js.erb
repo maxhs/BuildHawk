@@ -4,16 +4,15 @@ if (itemsHolder.hasClass('revealed')){
 		$('#phase-<%=@phase.id%> .disclosure').replaceWith('<i class="fa fa-minus disclosure"></i>');
 	});
 	itemsHolder.removeClass('revealed');
-	
 } else {
 	$('html, body').animate({
         scrollTop: $('#phase-<%=@phase.id %>').offset().top-50
     }, 500);
 	itemsHolder.fadeOut(230,function(){
 		<% if @project %>
-			$(this).html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: false %><%= link_to "+ category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category empty-btn", remote: true %>');
+			$(this).html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: true %><%= link_to "+ category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category empty-btn", remote: true %>');
 		<% else %>
-			$(this).html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: false %><%= link_to "+ category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category empty-btn", remote: true %>');
+			$(this).html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: true %><%= link_to "+ category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category empty-btn", remote: true %>');
 			itemsHolder.children(":first").find(".items-container").removeClass("collapsed");
 		<% end %>
 

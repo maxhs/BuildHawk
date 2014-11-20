@@ -4,7 +4,7 @@
 			<h5 class="title" id="<%= category.id %>"><%= category.name %></h5>
 			<span style="padding:0 1em;color:#aaa;">(<%=category.completed_count%> of <%= category.checklist_items.count%>)</span>
 			<% if current_user.admin || current_user.company_admin %>
-				<%= link_to "Edit", edit_category_path(category), :class=>"edit-category simple-btn", :remote => true %>
+				<%= link_to "Edit", edit_category_path(category), :class=>"edit-category empty-btn", :remote => true %>
 			<% end %>
 			
 		</div>

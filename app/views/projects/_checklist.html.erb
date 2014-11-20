@@ -40,6 +40,7 @@
 
 <script>
 $(document).ready(function(){
+	checklistSetup();
 	projectChecklistSetup();
 	$('#top-nav a').removeClass('current-page');
 	$('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-page');

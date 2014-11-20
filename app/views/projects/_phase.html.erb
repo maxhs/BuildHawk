@@ -1,11 +1,11 @@
 <li class="phase" id="phase-<%=p.id%>">
 	<% if current_user.any_admin? %>
-		<%= link_to "Edit", edit_phase_path(p), :class => "simple-btn left-edit", remote: true %>
+		<%= link_to "Edit", edit_phase_path(p), :class => "empty-btn left-edit", remote: true %>
 	<% end %>
 	<div class="row">
 		<span class="col-xs-8">
 			<h3 class="title remote">
-				<%= link_to load_items_checklist_path(p), :id => "p-#{p.id}", :class=>"phase-link remote", remote: true do %>
+				<%= link_to load_items_checklist_path(p), :id => "p-#{p.id}", data:{phase:"#{p.id}"}, :class=>"phase-link remote", remote: true do %>
 					<i class="fa fa-minus disclosure"></i>
 					<%=p.name%>
 				<% end %>

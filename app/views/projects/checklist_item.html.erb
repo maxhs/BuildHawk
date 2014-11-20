@@ -4,28 +4,27 @@
 <script type="text/javascript">
 	var itemsHolder = $('#<%= @phase.id %>-items');
 	<% if @project %>
-		itemsHolder.html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category simple-btn", remote: true %>');
+		itemsHolder.html('<%= j render partial:"projects/category", collection:@categories, as: :category, cache: true %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id,:project_id => @project.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category simple-btn", remote: true %>');
 	<% else %>
-		itemsHolder.html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: false %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category simple-btn", remote: true %>');
+		itemsHolder.html('<%= j render partial:"admin/category", collection:@categories, as: :category, cache: true %><%= link_to "Add a new category", new_category_path(:phase_id => @phase.id), :id=>"new-category-#{@phase.id}", :class=>"remote new-category simple-btn", remote: true %>');
 		itemsHolder.children(":first").find(".items-container").removeClass("collapsed");
 	<% end %>
 
 	itemsHolder.addClass('revealed');
 	
-	$('#phase-<%=@phase.id%> .disclosure').text('[+]');
+	$('#phase-<%=@phase.id%> .disclosure').replaceWith('<i class="fa fa-plus disclosure"></i>');
     categorySort(<%= j @phase.categories.map(&:id).to_json %>);
 
-
     $('#category-<%=@category.id%>-container').removeClass('collapsed');
-	$("#project-checklist").addClass('checklist-panel');
+	$(".checklist").addClass('panel');
 	$('#nav-admin a, #nav-uber-admin a').removeClass('current-page');
 	$('#nav-projects a, li.nav-checklists a').addClass('current-page');
 	$('#item-<%=@item.id%>').addClass("active-item");
 	
-    $('#checklist-focus').html('<%= j render partial: "checklist_item", locals: {item: @item } %>');
+    $('#checklist.focus').html('<%= j render partial: "checklist_item", locals: {item: @item } %>');
     $('.active-item').removeClass('active-item');
     $('#item-<%=@item.id %>').addClass('active-item');
-    $('#checklist-focus').css('left','54%');
+    $('#checklist.focus').css('left','54%');
     $("html, body").animate({ scrollTop: 0 }, 0);
 
 	$('.category .title').on('click',function(e){
