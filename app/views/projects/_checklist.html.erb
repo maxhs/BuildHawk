@@ -21,7 +21,7 @@
 					</div>
 				</header>
 				<ul id="phases">
-					<%= render :partial => 'projects/phase', collection: @checklist.phases, :as => :p, cache: true %>
+					<%= render partial: 'phases/show', collection: @checklist.phases, as: :p, cache: true %>
 				</ul>
 				<% if current_user.admin %>
 					<%= link_to new_phase_path(:checklist_id => @checklist.id,:project_id => @project.id), :id=>"new-phase", :class=>"remote new-phase empty-btn", remote: true do %>
@@ -42,7 +42,7 @@
 
 <script>
 $(document).ready(function(){
-	checklistSetup();
+	checklistSetup('<%= @project.id %>');
 	projectChecklistSetup();
 	checklistSort('<%= @checklist.id %>');	
 	phaseSort(<%= j @checklist.phases.map(&:id).to_json %>);

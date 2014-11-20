@@ -1,12 +1,10 @@
-if ($('#<%=@phase.id%>-items .new_category').length){
-	$('#<%=@phase.id%>-items .new_category').fadeOut(200,function(){
-		$(this).remove();
-		$('#new-category-<%=@phase.id%>').text("+ category");
+var newDiv = $('<%= j render partial:"categories/new" %>').css('display','none');
+$('#new-category-<%=@phase.id%>').before(newDiv);
+$('#new-category-<%=@phase.id%>').hide();
+newDiv.fadeIn(230);
+$('#dismiss-new-category').click(function(){
+	newDiv.slideUp(230,function(){
+		newDiv.remove();
 	});
-
-} else {
-	var newDiv = $('<%= j render partial:"categories/new" %>').css('display','none');
-	$('#new-category-<%=@phase.id%>').before(newDiv);
-	newDiv.fadeIn(200);
-	$('#new-category-<%=@phase.id%>').text("Cancel");
-}
+	$('#new-category-<%=@phase.id%>').show();
+});

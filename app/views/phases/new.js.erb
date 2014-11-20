@@ -1,11 +1,11 @@
-if ($('.new_phase').length){
-	$('.new_phase').fadeOut(200,function(){
-		$(this).remove();
-		$('#new-phase').text('+ phase');
+
+var newDiv = $('<%= j render partial:"phases/new" %>').css('display','none');
+$('#new-phase').before(newDiv);
+newDiv.fadeIn(200);
+$('#new-phase').hide();
+$('#dismiss-new-phase').click(function(){
+	$('.new_phase').slideUp(230,function(){
+		$('.new_phase').remove();
 	});
-} else {
-	var newDiv = $('<%= j render partial:"phases/new" %>').css('display','none');
-	$('#new-phase').before(newDiv);
-	newDiv.fadeIn(200);
-	$('#new-phase').text('Cancel');
-}
+	$('#new-phase').show(230);
+});

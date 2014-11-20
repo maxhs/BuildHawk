@@ -4,13 +4,18 @@ class CategoriesController < AppController
 	def new
 		@phase = Phase.find params[:phase_id]
 		@checklist = @phase.checklist
+		@project = @checklist.project
 		@category = @phase.categories.new
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else
-			render "admin/editor"
+			if @project
+				render "projects/checklist"
+			else
+				render "admin/editor"
+			end
 		end
 	end
 

@@ -4,13 +4,18 @@ class PhasesController < AppController
 
 	def new
 		@checklist = Checklist.find params[:checklist_id] if params[:checklist_id]
-		@phase = @checklist.phases.new
+		@project = @checklist.project
 		if request.xhr?
+			@phase = @checklist.phases.new
 			respond_to do |format|
 				format.js
 			end
 		else
-			render "admin/editor"
+			if @project
+				render "projects/checklist"
+			else
+				render "admin/editor"
+			end
 		end
 	end
 

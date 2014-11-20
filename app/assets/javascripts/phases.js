@@ -4,7 +4,8 @@
 function phaseSort(phaseIds) {
     for (index = 0; index < phaseIds.length; ++index) {
         var pid = phaseIds[index];
-      	$("#"+pid+"-items").sortable({
+        var selector = "#"+pid+"-items";
+      	$('#phases').sortable({
             axis: 'y',
             dropOnEmpty:true,
             cursor: 'move',
@@ -14,9 +15,9 @@ function phaseSort(phaseIds) {
             stop: function(){
                 $.ajax({
                     type: 'post',
-                    data: $("#"+pid+"-items").sortable('serialize') + '&id=' + pid,
+                    data: $('#phases').sortable('serialize') + '&id=' + pid,
                     dataType: 'script',
-                    url: '/checklists/order_categories'
+                    url: '/checklists/order_phases'
                 })
             }
         });

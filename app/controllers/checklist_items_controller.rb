@@ -61,13 +61,18 @@ class ChecklistItemsController < AppController
 		@category = Category.find params[:category_id]
 		@phase = @category.phase
 		@checklist = @phase.checklist
+		@project = @checklist.project
 		@phase_name = @phase.name
 		if request.xhr?
 			respond_to do |format|
 				format.js
 			end
 		else
-			render :new
+			if @project
+				render "projects/checklist"
+			else
+				render "admin/editor"
+			end
 		end
 	end
 

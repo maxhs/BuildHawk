@@ -8,19 +8,22 @@ function datetimepickers(){
 	});
 }
 
-function checklistSetup(){
+function checklistSetup(projectId){
 	$('#top-nav a').removeClass('current-page');
-	$('.nav-checklists a,#nav-projects a,#<%=@project.id%>-link').addClass('current-page');
+	$('.nav-checklists a,#nav-projects a,'+projectId+'-link').addClass('current-page');
 
+	$('.dismiss-checklist').click(function(){
+        dismissChecklist(projectId);
+    });
 	$('.phase-link').click(function(e){
 		if ($(this).hasClass('expanded')){
 			var pid = $(this).data('phase');
 			$(this).removeClass('expanded');
 			$('#'+pid+'-items').hide(230,function(){
-				$('#phase-'+pid+' .disclosure').replaceWith('<i class="fa fa-minus disclosure"></i>');
+				$('#phase-'+pid+' .disclosure').replaceWith('<i class="fa fa-circle-o disclosure"></i>');
 			});
 			$('#'+pid+'-items').removeClass('revealed');
-
+			console.log("Not reloading items");
 			return false;
 		} else {
 			$(this).addClass('expanded');
