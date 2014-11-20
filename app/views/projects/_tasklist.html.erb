@@ -59,33 +59,6 @@
 			$("html, body").delay(200).animate({ scrollTop: $("#task-<%=task.id %>").offset().top-84 }, 200);
 		<% end %>
 	<% end %>
-	$('#top-nav a').removeClass('current-page');
-	$('.nav-tasks a,#<%=project.id%>-link').addClass('current-page');
-	$('#remove').click(function(){
-		$('#search').val('');
-		$('#task-search').submit();
-	});
-	$('#export-tasks').click(function(){
-		if (!$('#export-tasklist-modal').length > 0){
-			$('#project-tasklist').before('<%= j render partial:"projects/tasklist_export" %>');
-		}
-
-		var values = [];
-		$('.task-checkbox input').each(function(i,obj){
-			if (obj.checked) {
-				values.push(obj.value);		
-			}
-		});
-		$('body').append('<div class="modal-backdrop in"></div>');
-
-		$('#export-tasklist-modal form').append('<input type="hidden" id="items" name="items" value="'+values+'">');
-		$('#export-tasklist-modal').animate({"left":"25%",'opacity':'1'},300);
-		$('#cancel-tasklist-modal,.modal-backdrop.in').on('click',function(){
-			$('#export-tasklist-modal').animate({"left":"100%",'opacity':'0'},300);
-			$('.modal-backdrop.in').fadeOut(300,function(){
-				$(this).remove();
-			});
-		});
-	});
-
+	taskSetup('<%=project.id%>','<%= j render partial:"projects/tasklist_export" %>');
+	
 </script>

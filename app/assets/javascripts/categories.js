@@ -3,7 +3,6 @@
 
 function categorySort(phaseId) {
     var selector = '#'+phaseId+'-items';
-    console.log("selector"+selector);
     $(selector).sortable({
       axis: 'y',
       dropOnEmpty:true,

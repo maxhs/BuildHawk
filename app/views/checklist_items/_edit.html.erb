@@ -28,7 +28,7 @@
 				<h4>Category:</h4><%= item.category.name %>
 			</div>
 			<div class="row">
-				<h4>Type:</h4><%= f.select :item_type, options_for_select(item.types), selected: item.item_type, :class=>"full-width", :style => "width:100%;margin-bottom:14px;" %>
+				<h4>Type:</h4><%= f.select :item_type, options_for_select(item.types), selected: item.item_type, :class=>"full-width", style: "margin-bottom:14px;" %>
 			</div>
 			<div class="row">
 				<h4>Item:</h4><%= f.text_area :body, rows: 5, :class=>"full-width", :style => "margin-bottom:14px;" %>

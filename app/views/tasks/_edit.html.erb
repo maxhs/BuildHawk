@@ -83,10 +83,9 @@
 				<%= photo.hidden_field :source, :value => "Tasklist" %>
 			<% end %>
 		</div>
-		<div id="comment-toggle" class="simple-btn">View Comments</div>
+		<div id="comment-toggle" class="empty-btn">View Comments</div>
 	</div>
 <% end %>
-
 	<div class="comment-container collapsed border-box">
 		<div id="comments-form">
 			<%= form_for task.comments.new, :method => :post, remote: true do |f| %>
@@ -101,5 +100,5 @@
 	</div>
 
 <script>
-	taskSetup('<%=@project.to_param%>');
+	taskSetup('<%=@project.to_param%>',null);
 </script>
