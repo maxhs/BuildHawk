@@ -44,7 +44,6 @@
 $(document).ready(function(){
 	checklistSetup('<%= @project.id %>');
 	projectChecklistSetup();
-	checklistSort('<%= @checklist.id %>');	
-	phaseSort(<%= j @checklist.phases.map(&:id).to_json %>);
+	phaseSort('<%= @checklist.id %>');	
 });
 </script>

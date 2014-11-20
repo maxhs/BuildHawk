@@ -7,7 +7,8 @@ if (itemsHolder.hasClass('revealed')){
 } else {
 	$('html, body').animate({
         scrollTop: $('#phase-<%=@phase.id %>').offset().top-50
-    }, 500);
+    }, 230);
+
 	itemsHolder.fadeOut(230,function(){
 		$(this).html('<%= j render partial:"categories/show", collection:@categories, as: :category, cache: true %><%= link_to new_category_path(phase_id: @phase.id), id: "new-category-#{@phase.id}", :class=>"remote new-category empty-btn", remote: true do %><i class="fa fa-plus remote"></i><span style="padding-left:10px;">Category</span><% end %>');
 		itemsHolder.children(":first").find(".items-container").removeClass("collapsed");
@@ -15,7 +16,7 @@ if (itemsHolder.hasClass('revealed')){
 		$(this).addClass('revealed');
 		$(this).show(230,function(){
 			$('#phase-<%=@phase.id%> .disclosure').replaceWith('<i class="fa fa-circle disclosure"></i>');
-			categorySort(<%= j @phase.categories.map(&:id).to_json %>);  
+			categorySort('<%= @phase.id %>');
 		});
 
 		$('.category .title').on('click',function(e){

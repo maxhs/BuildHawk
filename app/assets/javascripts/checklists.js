@@ -108,22 +108,3 @@ function checklistItem(itemExportPartial, projectId){
 		});
 	});
 }
-
-function checklistSort(checklistId){
-	$('#phases').sortable({
-		axis: 'y',
-		dropOnEmpty:true,
-		cursor: 'move',
-		items: 'li',
-		opacity: 0.4,
-		scroll: true,
-		stop: function(){
-		$.ajax({
-		    type: 'post',
-		    data: $('#phases').sortable('serialize') + '&id=' + checklistId,
-		    dataType: 'script',
-		    url: '/checklists/order_phases'})
-		}
-	});
-	$('#phases li:first-child .phase-link').click();
-}
