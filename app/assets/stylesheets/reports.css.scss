@@ -2,19 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.reports-panel {
-	width:49% !important;
+#project-reports.panel {
+	width:49.5% !important;
 }
 
-#report-focus {
+#report.focus {
 	position:absolute;
+	top:0;
 	left:101%;
 	width:50%;
-	-webkit-transition: all 0.15s;
-	-moz-transition: all 0.15s;
-	-ms-transition: all 0.15s;
-	-o-transition: all 0.15s;
-	transition: all 0.15s;
+	-webkit-transition: all 0.23s ease;
+	-moz-transition: all 0.23s ease;
+	-ms-transition: all 0.23s ease;
+	-o-transition: all 0.23s ease;
+	transition: all 0.23s ease;
 
 	#export-report {
 		img {
@@ -49,11 +50,11 @@
 }
 
 #project-reports {
-	-webkit-transition: all 0.15s;
-	-moz-transition: all 0.15s;
-	-ms-transition: all 0.15s;
-	-o-transition: all 0.15s;
-	transition: all 0.15s;
+	-webkit-transition: all 0.23s ease;
+	-moz-transition: all 0.23s ease;
+	-ms-transition: all 0.23s ease;
+	-o-transition: all 0.23s ease;
+	transition: all 0.23s ease;
 	width:100%;
 	float:left;
 	padding-bottom:0;

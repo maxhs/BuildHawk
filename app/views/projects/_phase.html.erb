@@ -6,7 +6,7 @@
 		<span class="col-xs-8">
 			<h3 class="title remote">
 				<%= link_to load_items_checklist_path(p), :id => "p-#{p.id}", :class=>"phase-link remote", remote: true do %>
-					<span class="disclosure">[&#45;]</span>
+					<i class="fa fa-minus disclosure"></i>
 					<%=p.name%>
 				<% end %>
 			</h3>

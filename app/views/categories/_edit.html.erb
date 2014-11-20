@@ -1,7 +1,9 @@
 <div class="category-form">
 	<div class="border-box">
 		<div class="row">
-			<span class="col-xs-5 header-description"><h2><%= category.name %></h2></span>
+			<span class="col-xs-5 header-description">
+				<h3 class="left"><%= category.name %></h3>
+			</span>
 		</div>
 		<%= nested_form_for category, url: update_category_checklist_path(category.phase.checklist, category_id: category.id), remote: true, method: :patch do |f| %>
 

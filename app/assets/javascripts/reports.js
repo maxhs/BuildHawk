@@ -1,10 +1,10 @@
 function dismissReport(projectId){
-	$('.reports-panel').removeClass('reports-panel');
+	$('.panel').removeClass('panel');
 	$('.active-report').removeClass('active-report');
 	$('.faded').removeClass('faded');
-	$('#report-focus').css('left','101%');
-	$("html, body").animate({ scrollTop: 0 }, 300 ,function(){
-		$('#report-focus').html('');
+	$('#report.focus').css('left','101%');
+	$("html, body").animate({ scrollTop: 0 }, 230 ,function(){
+		$('#report.focus').html('');
 	});
 
 	if (history && history.pushState){
@@ -25,9 +25,7 @@ function newReport(latitude,longitude,projectId) {
 		if ($(this).val().length > 0) {
 			$(this).trigger('submit.rails');
 		} else {
-			$('#alert').text("Please ensure that you've set a date for this report.").fadeIn(200).delay(1700).fadeOut(300, function(){
-				$(this).text("");
-			});
+			showAlert("Please ensure that you've set a date for this report.");
 		}
 	});
 
@@ -93,7 +91,7 @@ function editReport(latitude,longitude,projectId) {
 	})
 
 	$('.remove-personnel').click(function(){
-		$(this).parent().parent().fadeOut(200,function(){
+		$(this).parent().parent().fadeOut(230,function(){
 			$(this).remove();
 		});
 	});
@@ -101,9 +99,7 @@ function editReport(latitude,longitude,projectId) {
 		if ($(this).val().length > 0) {
 			$(this).trigger('submit.rails');
 		} else {
-			$('#alert').text("Please ensure that you've set a date for this report.").fadeIn(200).delay(1700).fadeOut(300, function(){
-				$(this).text("");
-			});
+			showAlert("Please ensure that you've set a date for this report.");
 		}
 	});
 	$('#type-select').select2();

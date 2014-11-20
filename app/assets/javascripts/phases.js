@@ -2,9 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 function phaseSort(phaseIds) {
-    console.log('phaseSort: '+phaseIds);
     for (index = 0; index < phaseIds.length; ++index) {
-        console.log(phaseIds[index]);
         var pid = phaseIds[index];
       	$("#"+pid+"-items").sortable({
             axis: 'y',

@@ -4,14 +4,14 @@
 		<% if c.phases.count > 0 %>
 			<%= c.phases.count %>
 		<% else %>
-			<i class="fa fa-circle-o-notch center"></i>
+			<i class="fa fa-circle-o-notch fa-spin center"></i>
 		<% end %>
 	</div>
 	<div class="col-xs-1">
 		<% if c.phases.map(&:categories).flatten.count > 0 %>
 			<%= c.phases.map(&:categories).flatten.count %>
 		<% else %>
-			<i class="fa fa-circle-o-notch center"></i>
+			<i class="fa fa-circle-o-notch fa-spin center"></i>
 		<% end %>
 	</div>
 	<div class="col-xs-1">

@@ -4,7 +4,7 @@ $('#main').html('<%= j render partial: "admin/editor", locals: {checklist: @chec
 $("html, body").animate({ scrollTop: 0 }, 230);
 
 if (history && history.pushState){
-    history.pushState(null, null, '<%=root_url%>admin/editor?checklist_id=<%=@checklist.id%>');
+    history.pushState(null, null, '<%=root_url%>admin/editor?cid=<%=@checklist.id%>');
     $(window).bind("popstate", function(){
       $.getScript(location.href);
     });

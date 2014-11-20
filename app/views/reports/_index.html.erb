@@ -1,5 +1,4 @@
 <div id="project-reports" class="border-box">
-	
 	<div id="reports-header" class="row">
 		<div class="col-xs-3">
 			<%= link_to "+ Report", new_report_path(:project_id => project.id), :class=>"simple-btn new-report", remote: true %>
@@ -33,7 +32,7 @@
 	</div>
 </div>
 
-<div id="report-focus">
+<div id="report" class="focus">
 	<% if report %>
 		<% if report.new_record? %>
 			<%= render partial:"reports/new", locals:{report: report, project: @project, project_users: @project_users} %>
@@ -49,7 +48,7 @@
 		$('#reports-search').submit();
 	});
 	<% if report %>
-		$("#project-reports").addClass('reports-panel');
+		$("#project-reports").addClass('panel');
 		<% if report.new_record? %>
 			var posTop = 0;
 		<% else %>
@@ -61,10 +60,10 @@
 		$('.active-report').removeClass('active-report');
 		$('.report').addClass('faded');
 		$('#report-<%=report.id %>').addClass('active-report');
-		$('#report-focus').css({/*'margin-top':posTop,*/'left':'50%'});
+		$('#report.focus').css('left','50%');
 		
 	<% else %>
 		focusOffset = document.getElementById('project-reports').offsetHeight;
-		$('#report-focus').css({/*'margin-top':-focusOffset,*/'left':'50%'});
+		$('#report.focus').css('left','50%');
 	<% end %>
 </script>

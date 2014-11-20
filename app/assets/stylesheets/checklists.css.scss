@@ -2,11 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.checklist-panel {
+#project-checklist.panel {
 	width:54% !important;
 }
 
-#checklist-focus {
+#checklist.focus {
 	position:absolute;
 	top:0;
 	left:100%;

@@ -2,63 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/	
 
-.new-task {
-	width:95%;
-	margin:0;
-}
-
-.new-task:hover {
-	border-color:#ddd;
-}
-
-#task-search {
-	
-}
-
-.tasks-panel {
-	width:50% !important;
-}
-
-#project-tasks {
-	-webkit-transition: all 0.15s ease;
-	-moz-transition: all 0.15s ease;
-	-ms-transition: all 0.15s ease;
-	-o-transition: all 0.15s ease;
-	transition: all 0.15s ease;
-	width:100%;
-	float:left;
-	padding-bottom: 0;
-
-	#task-table {
-
-		.row {
-			border-top:1px solid #eee;
-			text-align:center;
-		}
-
-		.row:last-child {
-			//border-bottom:0;
-		}
-
-		.header.row {
-
-			h5 {
-			
-			}
-		}
-	}
-}
-
-#task-focus {
+#task.focus {
 	position:absolute;
 	left:101%;
 	margin-left:1%;
 	width:49%;
-	-webkit-transition: all 0.15s ease;
-	-moz-transition: all 0.15s ease;
-	-ms-transition: all 0.15s ease;
-	-o-transition: all 0.15s ease;
-	transition: all 0.15s ease;
+	-webkit-transition: all 0.23s ease;
+	-moz-transition: all 0.23s ease;
+	-ms-transition: all 0.23s ease;
+	-o-transition: all 0.23s ease;
+	transition: all 0.23s ease;
 
 	#dismiss-task {
 		padding-right:0;
@@ -80,6 +33,49 @@
 
 	.select2-container-multi {
 		width:100%;
+	}
+}
+
+#project-tasks.panel {
+	width:50% !important;
+}
+
+.new-task {
+	width:95%;
+	margin:0;
+}
+
+.new-task:hover {
+	border-color:#ddd;
+}
+
+#project-tasks {
+	-webkit-transition: all 0.23s ease;
+	-moz-transition: all 0.23s ease;
+	-ms-transition: all 0.23s ease;
+	-o-transition: all 0.23s ease;
+	transition: all 0.23s ease;
+	width:100%;
+	float:left;
+	padding-bottom: 0;
+
+	#task-table {
+
+		.row {
+			border-top:1px solid #eee;
+			text-align:center;
+		}
+
+		.row:last-child {
+			//border-bottom:0;
+		}
+
+		.header.row {
+
+			h5 {
+			
+			}
+		}
 	}
 }
 

@@ -2,16 +2,10 @@ $('#task_location').autocomplete({
   	source: <%= raw @locations.to_json %>
 });
 
-$("#project-tasks").addClass('tasks-panel');
-$('#task-focus').html('<%= j render :partial => "tasks/edit", :locals => {task: @task } %>');
-var taskOffset = document.getElementById('task-<%=@task.id %>').offsetTop;
-var focusOffset = document.getElementById('project-tasks').offsetHeight;
-var posTop = taskOffset-focusOffset+60;
-if (posTop < 0){
-	posTop = 0;
-}
+$("#project-tasks").addClass('panel');
+$('#task.focus').html('<%= j render partial: "tasks/edit", locals: {task: @task } %>');
 $('.active-task').removeClass('active-task');
 $('.task').addClass('faded');
 $('#task-<%=@task.id %>').addClass('active-task');
-$('#task-focus').css({'top':-posTop,'left':'50%'});
+$('#task.focus').css('left','50%');
 $("html, body").delay(200).animate({ scrollTop: $("#task-<%=@task.id %>").offset().top-60}, 200);

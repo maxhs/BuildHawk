@@ -74,6 +74,10 @@ function setupWindow(){
             });
         });
     }
+    $(window).resize(function() {
+        var viewportWidth = $(window).width();
+        var viewportHeight = $(window).height();
+    });
 
     $('.remove-top').click(function(){
         $('#alert, #notice').stop().fadeOut(function(){

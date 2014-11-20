@@ -34,10 +34,8 @@
 	<% end %>
 </div>
 
-<div id="checklist-focus">
-	<% if @item %>
-		<%= render :partial => "checklist_item", :locals => {:item => @item} %>
-	<% end %>
+<div id="checklist" class="focus">
+	<%= render :partial => "checklist_item", :locals => {:item => @item} if @item %>	
 </div>
 
 <script>

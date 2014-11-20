@@ -2,9 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 function categorySort(categoryIds) {
-	console.log('categorySort: '+categoryIds);
 	for (index = 0; index < categoryIds.length; ++index) {
-	    console.log(categoryIds[index]);
 	    var cid = categoryIds[index];
 	    $('#items-'+cid).sortable({
 	      axis: 'y',

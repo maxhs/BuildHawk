@@ -1,10 +1,10 @@
 function dismissTask(projectId) {
-	$('.tasks-panel').removeClass('tasks-panel');
+	$('.panel').removeClass('panel');
 	$('.active-task').removeClass('active-task');
 	$('.faded').removeClass('faded');
-	$('#task-focus').css({'left':"101%",'top':'0'});
+	$('#task.focus').css({'left':"101%",'top':'0'});
 	$("html, body").delay(200).animate({ scrollTop: 0 }, 230, function(){
-		$('#task-focus').html('');
+		$('#task.focus').html('');
 	});
 
 	if (history && history.pushState){

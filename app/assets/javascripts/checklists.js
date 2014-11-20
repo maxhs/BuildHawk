@@ -34,10 +34,10 @@ function coreChecklist(){
 }
 
 function dismissChecklist(){
-	$('.checklist-panel').removeClass('checklist-panel');
+	$('.panel').removeClass('panel');
 	$('.active-item').removeClass('active-item');
-	$('#checklist-focus').css('left',"101%");
-	setTimeout(function(){$('#checklist-focus').html('')},230);
+	$('#checklist.focus').css('left',"101%");
+	setTimeout(function(){$('#checklist.focus').html('')},230);
 }
 
 function checklistItem(itemExportPartial){

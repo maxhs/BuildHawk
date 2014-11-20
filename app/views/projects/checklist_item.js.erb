@@ -1,7 +1,7 @@
-$("#project-checklist").addClass('checklist-panel');
-$('#checklist-focus').html('<%= j render partial: "checklist_item", locals: {item: @item } %>');
+$("#project-checklist").addClass('panel');
+$('#checklist.focus').html('<%= j render partial: "checklist_item", locals: {item: @item } %>');
 $('.active-item').removeClass('active-item');
 $('#item-<%=@item.id %>').addClass('active-item');
-$('#checklist-focus').css('left','54%');
-$("html, body").delay(200).animate({ scrollTop: $("#item-<%=@item.id %>").offset().top-130 }, 200);
+$('#checklist.focus').css('left','54%');
+$("html, body").delay(230).animate({ scrollTop: $("#item-<%=@item.id %>").offset().top-130 }, 230);
 $('#wrap').css('height',height);
