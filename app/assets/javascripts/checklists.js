@@ -29,7 +29,7 @@ function projectChecklistSetup(){
 
 function coreChecklist(){
 	$('.company-template').click(function(){
-		showAlert("Creating your template. This may take a few moments. Please refresh to view status.");
+		showAlert("Creating your template. This may take a few moments. You can refresh to view the checklist's status.");
 	});
 }
 

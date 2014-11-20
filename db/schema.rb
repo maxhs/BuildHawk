@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20141117031816) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "flagged_for_removal"
   end
 
   add_index "checklists", ["project_id", "company_id"], name: "checklists_idx"

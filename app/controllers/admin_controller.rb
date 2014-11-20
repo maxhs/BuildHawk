@@ -100,7 +100,8 @@ class AdminController < AppController
 
 	def create_template
 		list = Checklist.find params[:checklist_id]
-		@checklist = list.duplicate(@company.id)
+		list.duplicate(@company.id)
+		@checklist = Checklist.new name: list.name, company_id: @company_id, core: true
 		@checklists = @user.company.checklists.where(core: true).flatten
 		if request.xhr?
 			respond_to do |format|
@@ -114,6 +115,7 @@ class AdminController < AppController
 
 	def remove_checklist
 		checklist = Checklist.find params[:cid]
+		checklist.update_column :flagged_for_removal, true
 		@checklist_id = params[:cid]
 		checklist.background_destroy
 	end

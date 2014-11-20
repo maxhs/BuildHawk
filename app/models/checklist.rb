@@ -4,7 +4,8 @@ class Checklist < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
     
     attr_accessible :name, :description, :body, :user_id, :project_id, :milestone_date, :completed_date, :phases_attributes, 
-    				:phases, :company_id, :core
+    				:phases, :company_id, :core, :flagged_for_removal
+                    
   	belongs_to :project
   	belongs_to :company
   	
@@ -15,13 +16,12 @@ class Checklist < ActiveRecord::Base
     def duplicate(company_id)
         if Rails.env.production?
             require "resque"
-            new_checklist = Checklist.new name: name, company_id: company_id, core: true
             Resque.enqueue(PopulateChecklist, company_id, id)
-            return new_checklist
         else
             new_checklist = self.deep_clone :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :state}}}
+            new_checklist.company_id = company_id
+            new_checklist.core = true
             new_checklist.save
-            return new_checklist
         end
     end
 
