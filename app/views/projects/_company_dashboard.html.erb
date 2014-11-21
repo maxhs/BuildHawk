@@ -14,7 +14,7 @@
 				<tr>
 					<td><%= link_to "Checklist",checklist_project_path(project), :remote => true %></td>
 					<td><%= link_to "Reports", reports_path(:project_id => project.id), :remote => true %></td>
-					<td><%= link_to "Documents", document_photos_project_path(project), remote: true %></td>
+					<td><%= link_to "Documents", documents_project_path(project), remote: true %></td>
 					<td><%= link_to "Tasks", tasklist_project_path(project), :remote => true %></td>
 				</tr>
 			</table>

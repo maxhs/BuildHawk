@@ -3,9 +3,9 @@
 		<div class="label-container">
 		<% if p.source %>
 			<% if p.source == "Documents" %>
-				<%= link_to image_tag(p.image.url(:small)), document_photos_project_path(project), :remote => true %>
+				<%= link_to image_tag(p.image.url(:small)), documents_project_path(project), :remote => true %>
 				<div class="label-container"><span class="label"></span><%= p.created_date%></div>
-				<%= link_to "Project Docs", document_photos_project_path(project), :remote => true %>
+				<%= link_to "Project Docs", documents_project_path(project), :remote => true %>
 			<% elsif p.source == "Checklist" %>
 				<%= link_to image_tag(p.image.url(:small)), checklist_item_path(p.checklist_item), :remote => true %>
 				<% if p.checklist_item %>
