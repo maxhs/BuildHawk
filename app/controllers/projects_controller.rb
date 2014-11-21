@@ -21,12 +21,12 @@ class ProjectsController < AppController
 	end
 
 	def create
-		list = Checklist.find params[:checklist_id]
+		list = Checklist.where(id: params[:checklist_id]).first
 		@project = @company.projects.create params[:project]
 		project_user = current_user.project_users.create project_id: @project.id
-		@checklist = list.duplicate(@company.id, @project.id)
+		@checklist = list.duplicate(@company.id, @project.id) if params[:checklist_id]
 		reset_projects
-		
+
 	    @messages = current_user.messages
 	    if request.xhr?
 	    	respond_to do |format|
