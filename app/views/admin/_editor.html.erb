@@ -1,4 +1,4 @@
-<div id="admin-checklist" class="admin checklist">
+<div id="admin-checklist" class="admin checklist <% if @item %>panel<% end %>">
 	<div class="admin-checklist-table border-box">
 		<aside>
 			<%= link_to "&#8592; Back".html_safe, checklists_admin_index_path, remote: true %>
@@ -16,14 +16,11 @@
 		</div>
 	</div>
 </div>
-<div id="checklist" class="focus editor">
-	<%= render partial: "checklist_item", locals: {item: @item} if @item %>
+<div id="checklist" class="focus editor" <% if @item %>style="left:54%"<% end %>>
+	<%= render partial: "checklist_items/edit", locals: {item: @item} if @item %>
 </div>
 
 <script>
-$(document).ready(function(){
-	checklistSetup();
-	checklistSort('<%=@checklist.id%>');
-	phaseSort(<%= raw @checklist.phases.map(&:id).to_json %>);	
-});
+	checklistSetup(null);
+	phaseSort('<%= @checklist.id %>');
 </script>

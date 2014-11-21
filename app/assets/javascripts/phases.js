@@ -23,5 +23,8 @@ function phaseSort(checklistId) {
 function phase(projectId){
     $('#dismiss-phase').click(function(){
         dismissChecklist(projectId);
-    })
+    });
+    $('#floating-save').click(function(){
+        $('.edit_phase').trigger('submit.rails');
+    });
 }

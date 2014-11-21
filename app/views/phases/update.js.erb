@@ -1,5 +1,1 @@
-$('#phase-<%=@phase.id%> .phase.editable').fadeOut(200,function(){
-	$(this).html('<h2 class="title remote"><%= link_to load_items_checklist_path(@phase), :id => "p-#{@phase.id}", :class=>"phase-link remote", remote: true do %><span class="name"><%=@phase.name%></span><% end %></h2><%= link_to "Edit Phase", edit_phase_path(@phase), :class => "edit-phase remote", remote: true %>');
-	$(this).find('.name').before(disclosure);
-	$(this).fadeIn(200);
-});
+$('#phase-<%= @phase.id %> .phase-link').html('<i class="fa fa-circle disclosure"></i><%=@phase.name%>');

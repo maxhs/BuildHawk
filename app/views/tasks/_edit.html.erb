@@ -93,7 +93,9 @@
 				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
 				<%= f.hidden_field :user_id, :value => current_user.id %>
 				<%= f.hidden_field :task_id, :value => task.id %>
-				<%= f.submit "Send", :class => "simple-btn pull-right", :style => "margin-top:14px;", remote:true %>
+				<%= button_tag(type: 'submit', :class=> "simple-btn full-width", style:"margin:14px auto;", remote: true) do %>
+			    	<i class="fa fa-paper-plane remote"></i> Add			  	
+			    <% end %>
 			<% end %>
 		</div>
 		<%= render :partial => "comments/comments", :locals => {:comments => task.comments} %>

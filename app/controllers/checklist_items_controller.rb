@@ -10,7 +10,7 @@ class ChecklistItemsController < AppController
 	end
 
 	def update
-		@checklist_item = ChecklistItem.find params[:id]
+		@item = ChecklistItem.find params[:id]
 		if params[:checklist_item][:critical_date].present?
 			datetime = Date.strptime(params[:checklist_item][:critical_date].to_s,"%m/%d/%Y").to_datetime + 12.hours
 			params[:checklist_item][:critical_date] = datetime
@@ -25,15 +25,15 @@ class ChecklistItemsController < AppController
 			end
 		end
 
-		@checklist_item.update_attributes params[:checklist_item]
-		@checklist_item.log_activity(current_user)
+		@item.update_attributes params[:checklist_item]
+		@item.log_activity(current_user)
 
-		@checklist = @checklist_item.category.phase.checklist
+		@checklist = @item.category.phase.checklist
 		if @checklist.core && @checklist.company_id.nil?
 			@items = @checklist.items
 			if request.xhr?
 				respond_to do |format|
-					format.js {render :template => "admin/editor"}
+					format.js
 				end
 			else 
 				redirect_to core_checklist_uber_admin_index_path
@@ -46,7 +46,7 @@ class ChecklistItemsController < AppController
 		else
 			if request.xhr?
 				respond_to do |format|
-					format.js { render :template => "admin/editor" }
+					format.js
 				end
 			else
 				render "admin/editor"
@@ -56,7 +56,7 @@ class ChecklistItemsController < AppController
 	end
 
 	def new
-		@checklist_item = ChecklistItem.new
+		@item = ChecklistItem.new
 		@item_index = params[:item_index]
 		@category = Category.find params[:category_id]
 		@phase = @category.phase

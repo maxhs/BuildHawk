@@ -5,65 +5,65 @@
 				<h3 class="left"><%= category.name %></h3>
 			</span>
 		</div>
-		<%= nested_form_for category, url: update_category_checklist_path(category.phase.checklist, category_id: category.id), remote: true, method: :patch do |f| %>
+		<%= nested_form_for category, url: category_path(category), remote: true, method: :patch do |f| %>
 
-		<div class="action-buttons">
-			<div style="display:table-row">
-				<div id="floating-save" class="action remote" type="submit">
-					<i class="fa fa-floppy-o remote"></i>
-				</div>
-				<div id="export-checklist-item" class="action">
-					<i class="fa fa-share"></i>
-				</div>
-				<% if current_user.admin || current_user.company_admin %>
-					<%= link_to categories_path(category), :data => {:confirm => "Are you sure you want to delete this category?"}, method: :delete, :class=>"remote action", remote: true do %>
-						<i class="fa fa-trash-o remote"></i>
-					<% end %>	
-				<% end %>
-				
-				<div id="dismiss-category" class="dismiss action">
-					<i class="fa fa-remove" id="dismiss-category"></i>
-				</div>
-			</div>
-		</div>
-
-			<div class="row">
-				<h4 style="display:inline-block">Category Name</h4>
-				<%= f.text_field :name %>
-			</div>
-
-			<% if @project %>
-				<div class="row">
-					<div class="col-xs-6" style="text-align:center">
-						<h4>Milestone Date</h4>
-						<div class="input-append date row" data-date-format="dd-mm-yyyy">
-							<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
-							<div id="clear-critical-date" class="empty-btn"> Clear Date</div>
-						</div>
+			<div class="action-buttons">
+				<div style="display:table-row">
+					<div id="floating-save" class="action remote" type="submit">
+						<i class="fa fa-floppy-o remote"></i>
 					</div>
-				
-					<% if current_user.admin? || current_user.company_admin? || current_user.uber_admin? %>
-					<div class="col-xs-6" style="text-align:center">
-						<h4>Completion Date</h4>
-					
-						<div class="input-append date row" data-date-format="dd-mm-yyyy">
-							<%= f.text_field :completed_date, :value => parse_date(f.object.completed_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp-completed" %>
-							<div id="clear-completed-date" class="empty-btn"> Clear Date</div>
-						</div>
+					<div id="export-checklist-item" class="action">
+						<i class="fa fa-share"></i>
 					</div>
-				<% end %>
-				</div>
-			<% end %>
-
-			<!--<div class="button-container">
-				<%= f.submit "Update", :class => "simple-btn remote save" %>-->
-		<% end %>
-				<!--<div style="">
-					<%= link_to destroy_category_checklist_path(category.phase.checklist, :category_id => category), method: :delete, data: {confirm: "Are you sure you want to delete this category?"}, :class=>"btn btn-danger btn-md remote", remote: true do %>
-						<i class="fa fa-trash-o remote"></i>
+					<% if current_user.admin || current_user.company_admin %>
+						<%= link_to categories_path(category), :data => {:confirm => "Are you sure you want to delete this category?"}, method: :delete, :class=>"remote action", remote: true do %>
+							<i class="fa fa-trash-o remote"></i>
+						<% end %>	
 					<% end %>
+					
+					<div id="dismiss-category" class="dismiss action">
+						<i class="fa fa-remove" id="dismiss-category"></i>
+					</div>
 				</div>
-			</div>-->
+			</div>
+
+				<div class="row">
+					<h4 style="display:inline-block">Category Name</h4>
+					<%= f.text_field :name %>
+				</div>
+
+				<% if @project %>
+					<div class="row">
+						<div class="col-xs-6" style="text-align:center">
+							<h4>Milestone Date</h4>
+							<div class="input-append date row" data-date-format="dd-mm-yyyy">
+								<%= f.text_field :milestone_date, :value => parse_date(f.object.milestone_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
+								<div id="clear-critical-date" class="empty-btn"> Clear Date</div>
+							</div>
+						</div>
+					
+						<% if current_user.admin? || current_user.company_admin? || current_user.uber_admin? %>
+						<div class="col-xs-6" style="text-align:center">
+							<h4>Completion Date</h4>
+						
+							<div class="input-append date row" data-date-format="dd-mm-yyyy">
+								<%= f.text_field :completed_date, :value => parse_date(f.object.completed_date), :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp-completed" %>
+								<div id="clear-completed-date" class="empty-btn"> Clear Date</div>
+							</div>
+						</div>
+					<% end %>
+					</div>
+				<% end %>
+
+				<!--<div class="button-container">
+					<%= f.submit "Update", :class => "simple-btn remote save" %>-->
+			<% end %>
+					<!--<div style="">
+						<%= link_to destroy_category_checklist_path(category.phase.checklist, :category_id => category), method: :delete, data: {confirm: "Are you sure you want to delete this category?"}, :class=>"btn btn-danger btn-md remote", remote: true do %>
+							<i class="fa fa-trash-o remote"></i>
+						<% end %>
+					</div>
+				</div>-->
 	</div>
 </div>
 

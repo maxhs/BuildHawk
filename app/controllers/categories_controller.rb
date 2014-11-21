@@ -48,12 +48,13 @@ class CategoriesController < AppController
 		end
 
 		@checklist = @category.phase.checklist
-		if @checklist.project
-			@project = @checklist.project
+		@project = @checklist.project
+		
+		if @project
 			@projects = @project.company.projects if @project.company
 			if request.xhr?
 			 	respond_to do |format|
-			 		format.js { render :template => "projects/checklist" }
+			 		format.js
 			 	end
 			else
 			 	redirect_to checklist_project_path(@project)

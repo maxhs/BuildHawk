@@ -1,7 +1,2 @@
-<% if @project %>
-	
-	//TODO update row
-
-<% else %>
-	$('#main').html('<%= j render partial: "admin/editor", :locals => {checklist: @checklist} %>')
-<% end %>
+$('#item-<%= @item.id %>').replaceWith('<%= j render partial:"checklist_items/show", locals: {item: @item} %>');
+$('#item-<%= @item.id %>').addClass('active-item');

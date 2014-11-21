@@ -24,5 +24,8 @@ function categorySort(phaseId) {
 function category(projectId){
     $('#dismiss-category').click(function(){
         dismissChecklist(projectId);
-    })
+    });
+    $('#floating-save').click(function(){
+        $('.edit_category').trigger('submit.rails');
+    });
 }
