@@ -22,11 +22,19 @@ class ProjectsController < AppController
 
 	def create
 		list = Checklist.find params[:checklist_id]
-		project = @company.projects.create params[:project]
-		@checklist = list.duplicate(@company.id,project.id)
-
+		@project = @company.projects.create params[:project]
+		project_user = current_user.project_users.create project_id: @project.id
+		@checklist = list.duplicate(@company.id, @project.id)
+		reset_projects
+		
 	    @messages = current_user.messages
-		render :index
+	    if request.xhr?
+	    	respond_to do |format|
+	    		format.js
+	    	end
+	    else
+			render :index
+		end
 	end
 
 	def index
@@ -340,14 +348,18 @@ class ProjectsController < AppController
 
 	def reset_projects
 		if current_user.any_admin?
-            @sidebar_projects = current_user.company.projects.where("project_group_id IS NULL and hidden = ? and active = ?",false, true).order('order_index')
-            @projects = current_user.company.projects.where(core: false, active: true, hidden: false)
+            @sidebar_projects = current_user.company.projects.where("hidden = ? and project_group_id IS NULL",false).order('order_index')
+            @projects = current_user.company.projects.where(core: false)
         else
-            @sidebar_projects = current_user.project_users.where("hidden = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id && p.project.active && !p.project.hidden}.compact.uniq.sort_by(&:order_index)
-            @projects = current_user.project_users.where("hidden = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id && p.project.active && !p.project.hidden}.compact.uniq.sort_by(&:order_index)
+            @sidebar_projects = current_user.project_users.where("hidden = ? and project_group_id IS NULL",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
+            @projects = current_user.project_users.where("hidden = ?",false).map{|p| p.project if p.project.company_id == current_user.company_id}.compact.uniq.sort_by(&:order_index)
         end
     
-        @hidden_projects = current_user.project_users.where(hidden: true).map(&:project).compact.uniq
+        @hidden_projects = current_user.project_users.where(hidden: true).map(&:project).compact.uniq     
+        @demo_projects = Project.where(core: true)
+        @project_groups = current_user.company.project_groups if current_user.company
+        tasks = current_user.connect_tasks(nil)
+        @companies = tasks.map{|t| t.tasklist.project.company}.compact.uniq if tasks && tasks.count > 0
 	end
 
 	def fetch

@@ -18,23 +18,7 @@
 
 	<ul id="projects" class="sortable-projects">
 		<% if @sidebar_projects && @sidebar_projects.count > 0 %>
-			<% @sidebar_projects.each do |project| %>
-				
-				<li class="project" id="project_<%= project.id %>" data-project="<%=project.id%>" data-group="<%=project.project_group_id%>" <% if @project == project %>class="active"<% end %>>
-					<%= link_to project_path(project, reload: true),:id=>"#{project.id}-link",remote: true do %>
-						<div class="inner-padding">
-							<span class="project-name" id="project-name-<%=project.id%>"><%= project.name %></span>
-							<% if project.checklist && project.checklist.item_count > 0 %>
-								<span class="percentage"><%= project.checklist.progress_percentage %></span>
-							<% else %>
-								<span class="percentage">0.0%</span>
-							<% end %>
-							<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
-						</div>
-					<% end %>
-				</li>
-				
-			<% end %>
+			<%= render partial: "projects/project", collection: @sidebar_projects, as: :project, cache: false %>
 		<% else %>
 			<% if @projects && @projects.count > 0 %>
 				<li class="group unsortable">
