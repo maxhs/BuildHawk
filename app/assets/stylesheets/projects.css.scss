@@ -256,9 +256,6 @@
 }
 
 #project-dashboard {
-	padding: 0;
-	background-color: #fff;
-
 	.dashboard-placeholder {
 		color: #aaa;
 		font-style: italic;
@@ -278,7 +275,7 @@
 		max-width:25px;
 	}
 
-	h4.header {
+	h3.header, h4.header {
 		padding:10px;
 		margin:2.5% auto 1%;
 	}

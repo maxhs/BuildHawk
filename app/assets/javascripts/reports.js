@@ -29,8 +29,8 @@ function newReport(latitude,longitude,projectId) {
 	});
 	
 	$('#report-add').click(function(){
-		if ($(this).val().length > 0) {
-			$(this).trigger('submit.rails');
+		if ($('#dp').val().length > 0) {
+			$('.new_report').trigger('submit.rails');
 		} else {
 			showAlert("Please ensure that you've set a date for this report.");
 		}
@@ -103,8 +103,8 @@ function editReport(latitude,longitude,projectId) {
 		});
 	});
 	$('#report-save').click(function(){
-		if ($(this).val().length > 0) {
-			$(this).trigger('submit.rails');
+		if ($('#dp').val().length > 0) {
+			$('.edit_report').trigger('submit.rails');
 		} else {
 			showAlert("Please ensure that you've set a date for this report.");
 		}

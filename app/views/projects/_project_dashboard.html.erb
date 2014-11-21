@@ -1,5 +1,5 @@
 <div id="project-dashboard" class="border-box container">
-	<h4 style="margin-top:0;border-top:0;" class="header">Upcoming Critical Items</h4>
+	<h3 style="margin-top:0;border-top:0;" class="header">Upcoming Critical Items</h3>
 		<div id="upcoming-items">
 			<% if @upcoming_items && @upcoming_items.count > 0 %>
 				<% @upcoming_items.each_with_index do |item, idx| %>
@@ -16,7 +16,7 @@
 			<% end %>
 		</div>
 
-	<h4 class="header">Latest Activity</h4>
+	<h3 class="header">Latest Activity</h3>
 		<% if @activities && @activities.count > 0 %>
 			<div id="recent-items">
 				<div class="row">
@@ -53,7 +53,7 @@
 		<% end %>
 
 	<% if @recent_photos && @recent_photos.count > 0 %>
-		<h4 class="header">Recently Added Documents</h4>
+		<h3 class="header">Recently Added Documents</h3>
 		<div id="recent-documents" class="row">
 			<div class="col-xs-12" style="overflow: hidden;">
 				<% @recent_photos.each do |p| %>
@@ -66,7 +66,7 @@
 	<% end %>
 
 	<% if @checklist %>
-		<h4 class="header">Checklist Progress</h4>
+		<h3 class="header">Checklist Progress</h3>
 		<div id="checklist-section">
 			<div class="row">
 				<div class="col-xs-4 header-label"><h4>Phase</h4></div>
@@ -99,13 +99,7 @@
 	<% else %>
 		<div  class="dashboard-placeholder">This project does not have a checklist attached to it</div>
 	<% end %>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('a').removeClass('current-page');
-			$('#<%=@project.id%>-link, .nav-dashboard.admin a').addClass('current-page');
-			Shadowbox.clearCache();
-		    Shadowbox.setup(".shadow-photo", {});
-		});
-	</script>
 </div>
+<script type="text/javascript">
+	projectDashboard('<%=@project.id%>');
+</script>

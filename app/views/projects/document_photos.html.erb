@@ -12,7 +12,7 @@
 	</div>
 	<div id="photo-section">
 		<div id="photo-table">
-			<%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: false %>
+			<%= render :partial => "folders/folder", collection: @folders, as: :folder, cache: true %>
 		</div>
 		<div id="photo-focus">	
 			<%= render :partial => "photos/large_image" %>
@@ -20,12 +20,6 @@
 	</div>
 </div>
 
-
 <script type="text/javascript">
-	$('#main * .navbar-nav > li > a').removeClass('current-page');
-	$('.nav-documents a').addClass('current-page');
-	$(document).ready(function(){
-		Shadowbox.clearCache();
-	    Shadowbox.setup(".shadow-photo", {});
-	});
+	documentPhotos();
 </script>

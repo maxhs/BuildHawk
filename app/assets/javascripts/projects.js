@@ -1,3 +1,10 @@
+function projectDashboard(projectId) {
+	$('a').removeClass('current-page');
+	$('#'+projectId+'-link, .nav-dashboard.admin a').addClass('current-page');
+	Shadowbox.clearCache();
+    Shadowbox.setup(".shadow-photo", {});
+}
+
 function sidebarSetup(){
 	$('#archived-projects-button').on('click',function(){
 		if ($('.projects.archived').css('display') === "none"){
