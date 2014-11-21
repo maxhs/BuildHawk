@@ -135,7 +135,7 @@ class User < ActiveRecord::Base
     def any_admin?
         admin || uber_admin || company_admin
     end
-
+    
     def url_medium
         if image_file_name
             image.url(:medium)
