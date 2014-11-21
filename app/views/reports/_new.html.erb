@@ -1,5 +1,5 @@
 <%= nested_form_for report, url: reports_path, html: {multipart: true}, data: {'parsley-validate' => ''}, remote: true, method: :post do |f| %>
-	<%= f.hidden_field :project_id, value: @project.id %>
+	<%= f.hidden_field :project_id, value: project.id %>
 	<%= f.hidden_field :author_id, value: current_user.id %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 	<div id="add-report" class="border-box container">
@@ -39,10 +39,13 @@
 			</div>
 
 			<div class="row form-title">
-				<div class="col-md-12"><h5>Weather</h5></div>
+				<div class="col-md-12">
+					<h5 style="display:inline-block;">Weather</h5>
+					<span id="reload-weather" class="empty-btn" onclick="reloadWeather(<%= project.address.latitude%>,<%= project.address.longitude%>)"><i class="fa fa-refresh"></i> Weather Data</span>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12"><%= f.text_area :weather, :rows => 2, :placeholder => "Weather report" %></div>
+				<div class="col-md-12"><%= f.text_area :weather, rows: 2, placeholder: "Weather report" %></div>
 			</div>
 
 			<div class="row weather-titles">
@@ -52,11 +55,12 @@
 				<div class="col-md-3"><h5>Humidity</h5></div>
 			</div>
 			<div class="row weather-fields">
-				<div class="col-md-3"><%= f.text_field :temp, :value => report.temp, :placeholder => "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :wind, :value => report.wind, :placeholder => "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :precip, :value => report.precip, :placeholder => "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :humidity, :value => report.humidity, :placeholder => "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :temp, value: report.temp, placeholder: "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :wind, value: report.wind, placeholder: "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :precip, value: report.precip, placeholder: "N/A" %></div>
+				<div class="col-md-3"><%= f.text_field :humidity, value: report.humidity, placeholder: "N/A" %></div>
 			</div>
+			<div class="forecast-credit center placeholder">Powered by <%= link_to "Forecast.io", 'http://forecast.io/', target: "_blank" %></div>
 
 			<div class="row form-title">
 				<div class="col-md-6"><h5><%=current_user.company.name%> (# hours)</h5></div>
@@ -100,9 +104,10 @@
 					<div class="col-md-12">
 						<%= f.fields_for :photos, report.photos.build do |photo| %>
 							<%= photo.file_field :image %>
-							<%= photo.hidden_field :report_id, :value => report.id %>
-							<%= photo.hidden_field :project_id, :value => project.id %>
-							<%= photo.hidden_field :source, :value => "Reports" %>
+							<%= photo.hidden_field :report_id, value: report.id %>
+							<%= photo.hidden_field :project_id, value: project.id %>
+							<%= photo.hidden_field :source, value: "Reports" %>
+							<%= photo.hidden_field :name, value: "Reports" %>
 						<% end %>
 					</div>
 				</div>

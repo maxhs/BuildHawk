@@ -27,11 +27,16 @@
 		cursor:pointer;
 		font-size:.7em !important;
 		position:relative;
-		left:2.5%;
+		padding:5px 10px;
 	}
 
 	#reload-weather:hover {
 		color:#cc0000;
+	}
+
+	.forecast-credit {
+		margin:2.5% auto;
+		font-size:.8em;
 	}
 }
 

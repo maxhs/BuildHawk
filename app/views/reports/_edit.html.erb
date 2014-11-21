@@ -67,7 +67,7 @@
 					<div class="row form-title">
 						<div class="col-md-12">
 							<h5 style="display:inline-block">Weather</h5>
-							<span id="reload-weather" class="empty-btn" onclick="reloadWeather(<%=report.project.address.latitude%>,<%=report.project.address.longitude%>)">Reload</span>
+							<span id="reload-weather" class="empty-btn" onclick="reloadWeather(<%=report.project.address.latitude%>,<%=report.project.address.longitude%>)"><i class="fa fa-refresh"></i> Weather Data</span>
 						</div>
 					</div>
 					<div class="row">
@@ -86,6 +86,7 @@
 						<div class="col-md-3"><%= f.text_field :precip, value: report.precip && report.precip.length > 0 ? report.precip : @precip, placeholder: "N/A" %></div>
 						<div class="col-md-3"><%= f.text_field :humidity, value: report.humidity && report.humidity.length > 0 ? report.humidity : @humidity, placeholder: "N/A" %></div>
 					</div>
+					<div class="forecast-credit center placeholder">Powered by <%= link_to "Forecast.io", 'http://forecast.io/', target: "_blank" %></div>
 				<% end %>
 
 				<div class="row form-title">
@@ -120,7 +121,7 @@
 				<div class="row" style="margin-top:20px;">
 					<% report.photos.each do |p| %>
 						<% if p.image_file_name%>
-							<%= render :partial => "photos/image", :locals => {:p => p} %> 
+							<%= render :partial => "photos/image", locals: {p: p} %> 
 						<% end %>
 					<% end %>
 				</div>
@@ -135,9 +136,10 @@
 					<div class="col-md-12">
 						<%= f.fields_for :photos, report.photos.build do |photo| %>
 							<%= photo.file_field :image %>
-							<%= photo.hidden_field :report_id, :value => report.id %>
-							<%= photo.hidden_field :project_id, :value => project.id %>
-							<%= photo.hidden_field :source, :value => "Reports" %>
+							<%= photo.hidden_field :report_id, value: report.id %>
+							<%= photo.hidden_field :project_id, value: project.id %>
+							<%= photo.hidden_field :name, value: "Reports" %>
+							<%= photo.hidden_field :source, value: "Reports" %>
 						<% end %>
 					</div>
 				</div>
@@ -148,17 +150,17 @@
 	<div class="comment-container border-box">
 		<h4 style="text-align:center; margin:5px auto 15px; display:block;">Comments for <%= "#{report.report_type} Report - #{report.created_date}"%></h4>
 		<div id="comments-form">
-			<%= form_for report.comments.new, :method => :post, :remote => true do |f| %>
+			<%= form_for report.comments.new, method: :post, remote: true do |f| %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
-				<%= f.hidden_field :user_id, :value => current_user.id %>
-				<%= f.hidden_field :report_id, :value => report.id %>
+				<%= f.text_area :body, rows: "3", :placeholder => "Type your notes/comment here" %>
+				<%= f.hidden_field :user_id, value: current_user.id %>
+				<%= f.hidden_field :report_id, value: report.id %>
 				<%= button_tag(type: 'submit', :class=> "simple-btn full-width", style:"margin:14px auto;", remote: true) do %>
 			    	<i class="fa fa-paper-plane remote"></i> Add			  	
 			    <% end %>
 			<% end %>
 		</div>
-		<%= render :partial => "comments/comments", :locals => {:comments => report.comments} %>
+		<%= render :partial => "comments/comments", locals: {comments: report.comments} %>
 	</div>
 
 	<% if report.report_type == "Daily" && report.daily_activities.count > 0 %>
