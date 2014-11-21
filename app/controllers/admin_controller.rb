@@ -8,10 +8,6 @@ class AdminController < AppController
 		@checklists = @user.company.checklists.where(:core => true)
 	end
 
-	def show
-		render :checklists
-	end
-
 	def personnel
 		@company = @user.company
 		if @company.customer_id.nil? && current_user.uber_admin?

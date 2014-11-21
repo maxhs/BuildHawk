@@ -3,3 +3,4 @@ $('#item-<%=@item.id %>').addClass('active-item');
 $(".checklist").addClass('panel');
 $('#checklist.focus').html('<%= j render partial:"checklist_items/edit", locals: {item: @item} %>');
 $('#checklist.focus').css('left','54%');
+setTimeout(function(){$("html, body").animate({ scrollTop: 0 }, 330)},100);

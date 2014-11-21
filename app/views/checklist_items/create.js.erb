@@ -1,12 +1,8 @@
-$('#new_checklist_item').fadeOut(200,function(){
-	<% if @project %>
-		$(this).replaceWith('<%= j render partial:"projects/item", :locals => {:item => @item} %>');
-	<% else %>
-		$(this).replaceWith('<%= j render partial:"admin/item", :locals => {:item => @item} %>');
-	<% end %>
+$('#new_checklist_item').fadeOut(230,function(){
+	$(this).replaceWith('<%= j render partial:"checklist_items/show", locals: {item: @item} %>');
 	<% if @category %>
-		$('#category-<%= @category.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", :locals => {:category => @category} %>');
+		$('#category-<%= @category.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", locals: {category: @category} %>');
 	<% end %>
-	$('.new-checklist-item').text("Add a new item");
-	$(this).fadeIn(200);
+	$(this).fadeIn(230);
 });
+$('.new-checklist-item').show();

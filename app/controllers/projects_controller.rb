@@ -7,7 +7,7 @@ class ProjectsController < AppController
 		@users = current_user.company.users
 		@subs = current_user.company.company_subs
 
-		if @company.customer_id.nil?# && current_user.uber_admin?
+		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges
 		  	active_projects = @company.projects.where(:active => true).count
 		  	@amount = active_projects * 1000 / 100
@@ -16,7 +16,6 @@ class ProjectsController < AppController
 			@project = Project.new
 			@project.build_address
 			@project.project_users.build
-			
 			@checklists = @user.company.checklists.where(:core => true)
 		end
 	end
