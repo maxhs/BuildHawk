@@ -396,5 +396,7 @@ class ProjectsController < AppController
 				redirect_to root_url
 			end
 		end
+	rescue
+		redirect_to root_url, notice:"Sorry, something went wrong with your previous request. Please try again soon.".html_safe
 	end
 end
