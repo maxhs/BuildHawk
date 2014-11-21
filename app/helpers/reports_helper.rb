@@ -2,6 +2,7 @@ module ReportsHelper
 	include ActionView::Helpers::NumberHelper
 
 	def wind_bearing(bearing)
+		return unless bearing
 		if (360 > bearing && bearing > 348.75) || (0 < bearing  && bearing < 11.25)
         	return "N"
   		elsif 33.75 > bearing && bearing > 11.25

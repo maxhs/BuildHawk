@@ -81,7 +81,7 @@
 						<div class="col-md-3"><h5>Humidity</h5></div>
 					</div>
 					<div class="row weather-fields">
-						<div class="col-md-3"><%= f.text_field :temp, value: report.temp && report.temp.length > 0 ? report.temp : @temp, placeholder: "N/A" if %></div>
+						<div class="col-md-3"><%= f.text_field :temp, value: report.temp && report.temp.length > 0 ? report.temp : @temp, placeholder: "N/A" %></div>
 						<div class="col-md-3"><%= f.text_field :wind, value: report.wind && report.wind.length > 0 ? report.wind : @wind, placeholder: "N/A" %></div>
 						<div class="col-md-3"><%= f.text_field :precip, value: report.precip && report.precip.length > 0 ? report.precip : @precip, placeholder: "N/A" %></div>
 						<div class="col-md-3"><%= f.text_field :humidity, value: report.humidity && report.humidity.length > 0 ? report.humidity : @humidity, placeholder: "N/A" %></div>
