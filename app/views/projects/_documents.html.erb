@@ -3,7 +3,7 @@
 		<div id="filter-section">
 			<h5 id="filter-button">FILTER:</h5><h5 id="current-filter">Project Docs</h5>
 			<ul id="filters">
-				<%= link_to document_photos_project_path(@project), :id => "document-photos-nav", :class => "current-page filter-link", :remote => true do %>
+				<%= link_to documents_project_path(@project), :id => "document-photos-nav", :class => "current-page filter-link", :remote => true do %>
 					<li>Project Docs</li>
 				<% end %>
 				<%= link_to checklist_photos_project_path(@project), :id => "checklist-photos-nav", :class => "filter-link", :remote => true do %>

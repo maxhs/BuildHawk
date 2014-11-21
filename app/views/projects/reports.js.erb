@@ -1,4 +1,4 @@
 $('#top-nav a').removeClass('current-page');
 $('.nav-reports a,#<%=@project.id%>-link').addClass('current-page');
-$('#main').html('<%= j render :partial => "index", :locals => {:reports => @reports, project: @project, report: @report } %>');
+$('#main').html('<%= j render partial: "projects/reports", locals: {reports: @reports, project: @project, report: @report } %>');
 $("html, body").animate({ scrollTop: 0 }, 0);

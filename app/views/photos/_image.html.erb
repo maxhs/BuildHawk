@@ -1,13 +1,13 @@
 <% if p.image_file_name %>
 	<div class="image-block" id="photo-<%=p.id%>">
-		<%= link_to image_tag(p.image.url(:small)), p.image.url(:original), :class => "shadow-photo remote", :rel => "shadowbox[Mixed]" %> 
+		<%= link_to image_tag(p.image.url(:medium)), p.image.url(:original), :class => "shadow-photo remote", :rel => "shadowbox[Mixed]" %> 
 			<div class="first label-container"><span class="label">Date:</span><%= p.created_date%></div>
 			<div class="label-container">
 				<% if p.source %>
 					
 					<% if p.source == "Documents" %>
 						<span class="label">Source:</span>
-						<%= link_to "Project Docs", document_photos_project_path(@project), :remote => true %>
+						<%= link_to "Project Docs", documents_project_path(@project), :remote => true %>
 					<% elsif p.source == "Checklist" %>
 						<% if p.checklist_item %>
 							<span class="label">Item:</span>

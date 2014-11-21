@@ -92,7 +92,6 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				</div>
 			</div>
 		</nav>
-	
 
 		<div class="navbar navbar-fixed-top app revealed" id="top-nav" role="navigation">
 			<ul id="navigation">
@@ -113,13 +112,13 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 				<span id="dropdown-toggle">Menu</span>
 				<% if @project %>
 					<ul id="dropdown-menu">
-						<li class="nav-dashboard admin"><%= link_to @project.name, project_path(@project), :remote => true %></li>
-						<li class="nav-checklists admin"><%= link_to "Checklist", checklist_project_path(@project), :remote => true %></li>
-						<li class="nav-documents admin"><%= link_to "Documents", document_photos_project_path(@project), :remote => true %></a></li>
-						<li class="nav-reports admin"><%= link_to "Reports", reports_path(:project_id => @project.id), :remote => true %></li>
-						<li class="nav-tasklists admin"><%= link_to "Tasks", tasklist_project_path(@project), :remote => true %></li>
-						<% if current_user.admin %> 
-							<li class="nav-edit admin"><%= link_to "Edit", edit_project_path(@project), :remote => true %></li> 
+						<li class="nav-dashboard admin"><%= link_to @project.name, project_path(@project), remote: true %></li>
+						<li class="nav-checklists admin"><%= link_to "Checklist", checklist_project_path(@project), remote: true %></li>
+						<li class="nav-documents admin"><%= link_to "Documents", documents_project_path(@project), remote: true %></a></li>
+						<li class="nav-reports admin"><%= link_to "Reports", reports_project_path(@project), remote: true %></li>
+						<li class="nav-tasklists admin"><%= link_to "Tasks", tasklist_project_path(@project), remote: true %></li>
+						<% if current_user.any_admin? %> 
+							<li class="nav-edit admin"><%= link_to "Edit", edit_project_path(@project), remote: true %></li> 
 						<% end %>
 					</ul>	
 				<% elsif params[:controller] == "admin" %>
@@ -130,7 +129,9 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 						<li><%= link_to "Reports", reports_admin_index_path, id: "admin-reports-link", remote: true %></li><% end %>
 						<li><%= link_to "Checklists", checklists_admin_index_path, id: "admin-checklists-link", remote: true %></li>
 						<li><%= link_to "Personnel", personnel_admin_index_path, id: "personnel-link", remote: true %></li>
-						<% if current_user.uber_admin %><li><%= link_to "Billing", billing_index_path, id: "billing-link", remote: true %></li><% end %>
+						<% if current_user.uber_admin %>
+							<li><%= link_to "Billing", billing_index_path, id: "billing-link", remote: true %></li>
+						<% end %>
 					</ul>
 
 				<% else %>	

@@ -102,12 +102,12 @@ Buildhawk::Application.routes.draw do
       post :hide
       post :activate
       get :tasklist
+      get :reports
       post :search_tasklist
       get :checklist
       get :checklist_item
-      get :documents
       get :show_photo
-      get :document_photos
+      get :documents
       get :checklist_photos
       get :tasklist_photos
       get :report_photos

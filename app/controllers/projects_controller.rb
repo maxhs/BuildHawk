@@ -168,6 +168,18 @@ class ProjectsController < AppController
 		#@previous = category.checklist_items.where(:order_index => @item.order_index-1).first
 	end  
 
+	def reports
+		@project = Project.find params[:id]
+		redirect_to session[:previous_url] || root_url, notice:"Sorry, but you don't have access to that section.".html_safe unless params[:id] == @project.to_param
+		@reports = @project.reports
+	rescue
+		if @project
+			redirect_to project_path @project
+		else
+			redirect_to root_url
+		end
+	end
+
 	def tasklist
 		@tasklist = @project.tasklists.first_or_create
 		#@connect
@@ -198,21 +210,21 @@ class ProjectsController < AppController
 		end
 	end
 
-	def documents
-		@photos = @project.photos.sort_by(&:created_date).reverse
-		@folders = @project.folders
-		@nav = "all-photos-nav"
-		if request.xhr?
-			respond_to do |format|
-				format.js { render :template => "projects/photos"}
-			end
-		else 
-			render :documents
-		end
-	end
+	# def documents
+	# 	@photos = @project.photos.sort_by(&:created_date).reverse
+	# 	@folders = @project.folders
+	# 	@nav = "all-photos-nav"
+	# 	if request.xhr?
+	# 		respond_to do |format|
+	# 			format.js { render :template => "projects/photos"}
+	# 		end
+	# 	else 
+	# 		render :documents
+	# 	end
+	# end
 
-	def document_photos
-		@photos = @project.photos.where(:source => "Documents").sort_by(&:created_date).reverse
+	def documents
+		@photos = @project.photos.where(source: "Documents").sort_by(&:created_date).reverse
 		@p = @photos.first
 		@folders = @project.folders
 		@new_photo = Photo.new
@@ -227,7 +239,7 @@ class ProjectsController < AppController
 	end	
 	
 	def checklist_photos
-		@photos = @project.photos.where(:source => "Checklist").order('created_at DESC')
+		@photos = @project.photos.where(source: "Checklist").order('created_at DESC')
 		@p = @photos.first
 		@folders = @photos.map(&:folder).flatten
 		@nav = "checklist-photos-nav"
