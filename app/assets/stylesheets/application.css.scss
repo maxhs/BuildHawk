@@ -1061,7 +1061,7 @@ a.search-button {
 	text-align:right;
 }
 
-.simple-btn {
+.simple-btn, .simple-btn:focus {
 	cursor:pointer;
 	background:#0880ff;
 	color:#fff;
