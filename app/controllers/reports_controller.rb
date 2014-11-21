@@ -201,7 +201,8 @@ class ReportsController < AppController
 		@report = Report.find params[:id]
 
 		forecast(@project.address.latitude, @project.address.longitude, @report.report_date.to_time.to_i) unless @report.has_weather?
-
+		@temp = @temp_min && @temp_max ? "#{@temp_min.round(1)}&deg; - #{@temp_max.round(1)}&deg;".html_safe : "N/A"
+		@wind = "#{@wind_speed} #{wind_bearing(@bearing)}".html_safe
 		if request.xhr?
 			respond_to do |format|
 				format.js
@@ -213,14 +214,15 @@ class ReportsController < AppController
 
 	def forecast(latitude, longitude, time)
 		@forecast = ForecastIO.forecast(latitude, longitude, time: time)
-		puts "Forecast: #{@forecast.currently}"
-		@summary = @forecast.daily.data[0].summary
-		@temp_min = @forecast.daily.data[0].temperatureMin
-		@temp_max = @forecast.daily.data[0].temperatureMax
-		@bearing = @forecast.daily.data[0].windBearing
-		@wind_speed = @forecast.daily.data[0].windSpeed.round(1) if @forecast.daily.data[0].windSpeed
-		@humidity = number_to_percentage(@forecast.currently.humidity*100, precision: 0) if @forecast.currently.humidity
-		@precip = number_to_percentage(@forecast.currently.precipProbability*100, precision: 0) if @forecast.currently.precipProbability
+		if @forecast
+			@summary = @forecast.daily.data[0].summary
+			@temp_min = @forecast.daily.data[0].temperatureMin
+			@temp_max = @forecast.daily.data[0].temperatureMax
+			@bearing = @forecast.daily.data[0].windBearing
+			@wind_speed = @forecast.daily.data[0].windSpeed.round(1) if @forecast.daily.data[0].windSpeed
+			@humidity = number_to_percentage(@forecast.currently.humidity*100, precision: 0) if @forecast.currently.humidity
+			@precip = number_to_percentage(@forecast.currently.precipProbability*100, precision: 0) if @forecast.currently.precipProbability
+		end
 	end
 
 	def generate
