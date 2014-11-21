@@ -1,0 +1,9 @@
+<li class="group project" id="project_<%= project.id %>" data-project="<%=project.id%>" data-group="<%=project.project_group_id%>">
+	<%= link_to project_path(project),id: "#{project.id}-link",remote: true do %>
+		<div class="inner-padding">
+			<span class="project-name"><%= project.name %></span>
+			<span class="percentage"><%= project.checklist ? project.checklist.progress_percentage : "0.0%" %></span>
+			<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
+		</div>
+	<% end %>
+</li>

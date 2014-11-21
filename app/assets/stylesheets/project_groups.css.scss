@@ -25,15 +25,13 @@
 
 #groups {
 	.group-header {
-		
+		color:#aaa;	
 		height:44px;
 		text-align:right;
 		line-height:0;
-		
-		a {
-			color:#aaa;
-		}
-		a:hover {
+		cursor:default;
+
+		.fa-cog:hover {
 			color:#fff !important;
 		}
 

@@ -4286,8 +4286,10 @@ button.close {
   position: absolute;
   z-index: 1030;
   display: block;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 1.1em;
+  font-weight:200;
+  padding:20px;
+  line-height: 1.5em;
   opacity: 0;
   filter: alpha(opacity=0);
   visibility: visible;
@@ -4309,22 +4311,22 @@ button.close {
 }
 
 .tooltip.bottom {
-  padding: 5px 0;
+  padding: 10px 0;
   margin-top: 3px;
 }
 
 .tooltip.left {
-  padding: 0 5px;
+  padding: 0 10px;
   margin-left: -3px;
 }
 
 .tooltip-inner {
-  max-width: 200px;
-  padding: 3px 8px;
+  max-width: 300px;
+  padding: 10px 17px;
   color: #ffffff;
   text-align: center;
   text-decoration: none;
-  background-color: #000000;
+  background-color: rgba(0,0,0,.925);
   border-radius: 4px;
 }
 
