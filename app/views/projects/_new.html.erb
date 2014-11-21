@@ -1,7 +1,7 @@
-<%= nested_form_for @project, :url => projects_path, method: :post, remote: true do |f| %>
+<%= nested_form_for @project, url: projects_path, method: :post, remote: true do |f| %>
 	<div class="border-box new-project" id="new-project">
 		<h2 style="text-align:center;padding-bottom:15px;">Create a New Project</h2>
-		<%= f.hidden_field :company_id, :value => current_user.company.id %>
+		<%= f.hidden_field :company_id, value: current_user.company.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 		
 		<div class="row">
@@ -38,7 +38,7 @@
         <div class="row extra-padding">
         	<div class="col-xs-3"><h4>Users:</h4></div>
         	<div class="col-xs-9">
-        		<%= f.collection_select :user_ids, @users, :id, :full_name, {}, {:include_blank => false, include_empty: false, multiple: true, :id=>"users-select", :style => "position:relative;top:2px;"} %>
+        		<%= f.collection_select :user_ids, @users, :id, :full_name, {}, {include_blank: false, include_empty: false, multiple: true, :id=>"users-select", :style => "position:relative;top:2px;"} %>
 	    	</div>
         </div>
         

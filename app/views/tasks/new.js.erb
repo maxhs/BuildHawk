@@ -1,12 +1,9 @@
-$("#project-tasks").addClass('tasks-panel');
-$('#task-focus').html('<%= j render :partial => "tasks/new", :locals => {task: @task, tasks: @tasks, project: @project } %>');
-var tasksOffset = document.getElementById('project-tasks').offsetHeight;
+$("#project-tasks").addClass('panel');
+$('#task.focus').html('<%= j render partial: "tasks/new", locals: {task: @task, tasks: @tasks, project: @project } %>');
 $('.active-task').removeClass('active-task');
 $('.faded').removeClass('faded');
-
-$('#task-focus').css({/*'margin-top':-tasksOffset,*/'left':'50%'});
-$("html, body").delay(200).animate({ scrollTop: 0 }, 200);
-var locations = <%= raw @locations.to_json %>; 
+$('#task.focus').css('left','50%');
+$("html, body").delay(100).animate({ scrollTop: 0 }, 230); 
 $('#task_location').autocomplete({
-  	source: locations
+  	source: <%= raw @locations.to_json %>
 });

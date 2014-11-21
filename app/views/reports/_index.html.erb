@@ -1,12 +1,12 @@
-<div id="project-reports" class="border-box">
+<div id="project-reports" class="border-box<% if report && report.id %>panel<% end %>">
 	<div id="reports-header" class="row">
 		<div class="col-xs-3">
-			<%= link_to "+ Report", new_report_path(:project_id => project.id), :class=>"simple-btn new-report", remote: true %>
+			<%= link_to "+ Report", new_report_path(project_id: project.id), :class=>"simple-btn new-report", remote: true %>
 		</div>
 		
 		<div class="col-xs-9">
-			<%= form_tag search_reports_path(:project_id => project.id), :id => "reports-search", :method => :post, :class=>"input-group search", :remote => true do %>
-				<%= text_field_tag :search, nil, :placeholder => "Search Reports...", :class => "form-control search" %>
+			<%= form_tag search_reports_path(project_id: project.id), id: "reports-search", method: :post, :class=>"input-group search", remote: true do %>
+				<%= text_field_tag :search, nil, placeholder: "Search Reports...", :class => "form-control search" %>
 				<span class="input-group-addon cancel-search" id="remove" >
 					<i class="fa fa-remove"></i>
 				</span>
@@ -43,12 +43,8 @@
 </div>
 
 <script>
-	$('#remove').click(function(){
-		$('#search').val('');
-		$('#reports-search').submit();
-	});
+	reportSetup();
 	<% if report %>
-		$("#project-reports").addClass('panel');
 		<% if report.new_record? %>
 			var posTop = 0;
 		<% else %>
@@ -61,9 +57,7 @@
 		$('.report').addClass('faded');
 		$('#report-<%=report.id %>').addClass('active-report');
 		$('#report.focus').css('left','50%');
-		
 	<% else %>
-		focusOffset = document.getElementById('project-reports').offsetHeight;
 		$('#report.focus').css('left','50%');
 	<% end %>
 </script>

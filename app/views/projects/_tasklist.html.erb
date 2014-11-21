@@ -1,11 +1,11 @@
 <div class="border-box <% if task %> panel <%end%>" id="project-tasks">
 	<div style="margin-bottom: 15px" class="header row">
 		<div class="col-xs-3">
-			<%= link_to "+ Task", new_task_path(:project_id => project.id), :class=>"simple-btn new-task", remote: true %>
+			<%= link_to "+ Task", new_task_path(project_id: project.id), :class=>"simple-btn new-task", remote: true %>
 		</div>
 		<div class="col-xs-9">
-			<%= form_tag search_tasklist_project_path(project), :id => "task-search", :method => :post, :class=>"input-group search", :remote => true do %>
-				<%= text_field_tag :search, nil, :placeholder=>"Search tasks...", :class=>"form-control search" %>
+			<%= form_tag search_tasklist_project_path(project), id: "task-search", method: :post, :class=>"input-group search", remote: true do %>
+				<%= text_field_tag :search, nil, placeholder: "Search tasks...", :class=>"form-control search" %>
 				<span class="input-group-addon cancel-search" id="remove">
 					<i class="fa fa-remove"></i>
 				</span>
@@ -36,9 +36,9 @@
 <div id="task" class="focus">
 	<% if task %>
 		<% if task.new_record? %> 
-			<%= render partial:"tasks/new", locals:{task: task} %>
+			<%= render partial:"tasks/new", locals: {task: task} %>
 		<% else %>
-			<%= render partial:"tasks/edit", locals:{task: task} %>
+			<%= render partial:"tasks/edit", locals: {task: task} %>
 		<% end %>
 	<% end %>
 </div>

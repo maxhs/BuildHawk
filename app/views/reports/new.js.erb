@@ -1,8 +1,6 @@
-$("#project-reports").addClass('reports-panel');
-$('#report-focus').html('<%= j render :partial => "new", :locals => {report: @report, project: @project, project_users: @project_users} %>');
-//var reportsOffset = document.getElementById('project-reports').offsetHeight;
+$("#project-reports").addClass('panel');
+$('#report.focus').html('<%= j render partial: "new", locals: {report: @report, project: @project, project_users: @project_users} %>');
 $('.active-report').removeClass('active-report');
 $('.faded').removeClass('faded');
-
-$('#report-focus').css({'left':'50%'});
-$("html, body").delay(200).animate({ scrollTop: 0 }, 200);
+$('#report.focus').css('left','50%');
+$("html, body").delay(100).animate({ scrollTop: 0 }, 230);

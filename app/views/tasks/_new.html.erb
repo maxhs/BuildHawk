@@ -7,6 +7,19 @@
 		<header>
 			<h4>New task</h4>
 		</header>
+
+		<div class="action-buttons">
+			<div id="task-save" class="action">
+               	<i class="fa fa-floppy-o remote"></i>
+			</div>
+			
+			<i class="fa fa-share inactive action"></i>
+		
+			<div id="dismiss-task" class="action">
+				<i class="fa fa-remove" id="dismiss-task"></i>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-xs-2"><h5>Item</h5></div>
 			<div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the task" %></div>
@@ -31,7 +44,7 @@
 			<% end %>
 		</div>
 		<div class="row button-container">
-			<%= f.submit "Add", :class=>"simple-btn save" %>
+			<%= f.submit "Add", :class=>"simple-btn full-width" %>
 		</div>
 		
 	</div>
@@ -39,5 +52,5 @@
 <% end %>
 
 <script>
-	taskSetup();
+	taskSetup('<%=@project.to_param%>',null);
 </script>

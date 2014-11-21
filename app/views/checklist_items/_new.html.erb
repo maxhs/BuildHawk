@@ -1,11 +1,11 @@
 <%= nested_form_for @item, remote: true, :method => :post do |f| %>
-	<%= f.hidden_field :category_id, :value => @category.id %>
-	<%= f.hidden_field :checklist_id, :value => @checklist.id %>
-	<%= f.hidden_field :user_id, :value => current_user.id %>
-
+	<%= f.hidden_field :category_id, value: @category.id %>
+	<%= f.hidden_field :checklist_id, value: @checklist.id %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
 	<i class="fa fa-remove remote" id="dismiss-new-item"></i>
-	<%= f.label "New Item" %>
+	
 	<div class="new-item row">
+		<%= f.label "New Item" %>
 		<div class="col-xs-8"><%= f.text_area :body, placeholder: "Describe the new checklist item" %></div>
 		<div class="col-xs-2" style="text-align:center;"><%= f.label "Item Type" %><br/><%= f.select :item_type, @item.types %></div>
 		<div class="col-xs-2"> <%= f.submit "ADD", :class=>"simple-btn", style: "margin-top:7px;" %></div>

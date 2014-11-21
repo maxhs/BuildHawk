@@ -15,6 +15,13 @@ function dismissReport(projectId){
 	}
 }
 
+function reportSetup() {
+	$('#remove').click(function(){
+		$('#search').val('');
+		$('#reports-search').submit();
+	});
+}
+
 function newReport(latitude,longitude,projectId) {
 	$('#dp').datepicker().on('changeDate', function(ev){
 	    $('#dp').datepicker('hide');

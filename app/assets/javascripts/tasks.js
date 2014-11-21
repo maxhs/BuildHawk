@@ -3,7 +3,7 @@ function dismissTask(projectId) {
 	$('.active-task').removeClass('active-task');
 	$('.faded').removeClass('faded');
 	$('#task.focus').css({'left':"101%",'top':'0'});
-	$("html, body").delay(200).animate({ scrollTop: 0 }, 230, function(){
+	$("html, body").delay(100).animate({ scrollTop: 0 }, 230, function(){
 		$('#task.focus').html('');
 	});
 
@@ -29,13 +29,13 @@ function taskSetup(projectId,exportPartial){
 	$('#comment-toggle').click(function(){
 		if ($('.comment-container').hasClass('collapsed')){
 			$(this).text('Comments');
-			$('.comment-container').slideDown(130,function(){
+			$('.comment-container').slideDown(230,function(){
 				$(this).removeClass('collapsed');
 			});
 		} else {
 			$(this).text('View Comments');
 			$('.comment-container').addClass('collapsed');
-			$('.comment-container').slideUp(130);
+			$('.comment-container').slideUp(230);
 		}
 	});
 
@@ -59,10 +59,10 @@ function taskSetup(projectId,exportPartial){
 		$('body').append('<div class="modal-backdrop in"></div>');
 
 		$('#export-tasklist-modal form').append('<input type="hidden" id="items" name="items" value="'+values+'">');
-		$('#export-tasklist-modal').animate({"left":"25%",'opacity':'1'},300);
+		$('#export-tasklist-modal').animate({"left":"25%",'opacity':'1'},230);
 		$('#cancel-tasklist-modal,.modal-backdrop.in').on('click',function(){
-			$('#export-tasklist-modal').animate({"left":"100%",'opacity':'0'},300);
-			$('.modal-backdrop.in').fadeOut(300,function(){
+			$('#export-tasklist-modal').animate({"left":"100%",'opacity':'0'},230);
+			$('.modal-backdrop.in').fadeOut(230,function(){
 				$(this).remove();
 			});
 		});

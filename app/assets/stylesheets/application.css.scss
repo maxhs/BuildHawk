@@ -1062,7 +1062,11 @@ a.search-button {
 	text-align:right;
 }
 
-.simple-btn, .simple-btn:focus {
+.simple-btn:focus {
+	color:#fff;
+}
+
+.simple-btn {
 	cursor:pointer;
 	background:#0880ff;
 	color:#fff;
@@ -1190,6 +1194,12 @@ a.search-button {
 		.fa {
 			font-size:1.5em;
 		}
+	}
+
+	.action.fa.inactive {
+		font-size:1.5em;
+		cursor:default;
+		color:#aaa;
 	}
 
 	.action:hover {
