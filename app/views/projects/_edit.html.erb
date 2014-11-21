@@ -1,6 +1,6 @@
 <div id="edit-project" class="border-box">
-	<h3 class="edit-header">Edit Project</h3>
-	<%= nested_form_for @project, :method => :put, :remote => true do |f| %>
+	<h3 class="edit-header center">Edit Project</h3>
+	<%= nested_form_for @project, method: :patch, remote: true do |f| %>
 
 		<%= hidden_field_tag :company_id, current_user.company.id %>
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -59,7 +59,9 @@
 	    <% if current_user.uber_admin %>
 		    <div class="row" style="margin-top:1em;">
 		    	<div class="col-xs-3"><h5>Use as Demo</h5></div>
-		    	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %><% if f.object.core %> <span id="core-warning"> WARNING: This will make the project visible to all users</span><% end %></div>
+		    	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %>
+		    		<% if f.object.core %> <span id="core-warning"> WARNING: This will make the project visible to all users</span><% end %>
+		    	</div>
 		    </div>
 		<% end %>
 		
@@ -71,16 +73,16 @@
 	<% end %>
 			</div>
 			<div class="button-container">
-				<% if current_user.project_users.where(:project_id => @project.id, :hidden => true).first %>
-					<%= link_to "Activate", activate_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to activate this project?"}, remote: true %>
+				<% if current_user.project_users.where(project_id: @project.id, hidden: true).first %>
+					<%= link_to "Activate", activate_project_path(@project), method: :post, id: "hide-button", :class=>"simple-btn remote", data: {confirm: "Are you sure you want to activate this project?"}, remote: true %>
 				<% else %>
-					<%= link_to "Hide", hide_project_path(@project), :method => :post, id: "hide-button", :class=>"simple-btn remote", data: {:confirm => "Are you sure you want to hide this project?"}, remote: true %>
+					<%= link_to "Hide", hide_project_path(@project), method: :post, id: "hide-button", :class=>"simple-btn remote", data: {confirm: "Are you sure you want to hide this project?"}, remote: true %>
 				<% end %>
-				<%= link_to "Remove", destroy_confirmation_project_path(@project), :method => :get, id:"remove-project-button", :class=>"simple-btn danger", remote: true %>
+				<%= link_to "Remove", destroy_confirmation_project_path(@project), method: :get, id:"remove-project-button", :class=>"simple-btn danger", remote: true %>
 			</div>
 		</div>
 </div>
 
 <script>
-	$(".for-select-2").select2();
+	editSetup('<%=@project.id%>');
 </script>

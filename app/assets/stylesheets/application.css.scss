@@ -184,6 +184,16 @@ body {
 		opacity:.77;
 	}
 
+	.action-icon {
+		display:table-cell;
+		vertical-align:middle;
+	}
+
+	.no-btn {
+		border:0;
+		background:0;
+	}
+
 	table {
 		width:100%;
   		max-width: 100%;
@@ -1150,6 +1160,10 @@ a.search-button {
 		top:1px;
 		font-size:1.25em;
 	}
+}
+
+.bottom-border {
+	border-top:1px solid #ddd;
 }
 
 .action-buttons {

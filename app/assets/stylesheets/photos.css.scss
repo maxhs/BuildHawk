@@ -211,7 +211,7 @@ form.edit_photo {
 			position:absolute;
 			background:#fff;
 			margin:0;
-			padding:0;
+			padding:2%;
 			list-style:none;
 			display:none;
 			left:-1px;
@@ -222,7 +222,9 @@ form.edit_photo {
 			border-radius:7px;
 			-webkit-border-radius:7px;
 			-moz-border-radius:7px;
-			box-shadow: 0 0 14px 0 rgba(0,0,0,.1);
+			box-shadow: 0 0 14px 0 rgba(0,0,0,.23);
+			-moz-box-shadow: 0 0 14px 0 rgba(0,0,0,.23);
+			-webkit-box-shadow: 0 0 14px 0 rgba(0,0,0,.23);
 
 			li {
 				width:100%;

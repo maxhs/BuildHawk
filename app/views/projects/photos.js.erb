@@ -1,5 +1,5 @@
 $('#filters a').removeClass('current-page');
 $('#<%= @nav %>').addClass('current-page');
 $('#photo-table').fadeOut(0);
-$('#photo-focus').html('<% if @photos && @photos.count > 0 %><%= j render :partial => "photos/image", collection: @photos, as: :p, cache: true %><% else %><div class="no-image-placeholder">No Documents</div><% end %>');
+$('#photo-focus').html('<% if @photos && @photos.count > 0 %><%= j render :partial => "photos/image", collection: @photos, as: :p, cache: true %><% else %><div class="no-content placeholder font-smoothing">No Documents</div><% end %>');
 $('#photo-focus').addClass('full-focus');

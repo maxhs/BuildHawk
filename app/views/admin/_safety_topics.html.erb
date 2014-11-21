@@ -1,7 +1,7 @@
 <div id="pages" class="page border-box">
-	<h3 style="text-align:center;"> Standard Topics </h3>
+	<h3 class="center"> Standard Topics </h3>
 	<div id="uber-safety-topics">
-		<div class="row" style="border-bottom:1px solid #ddd;">
+		<div class="row bottom-border">
 			<div class="col-xs-3"><h5>Topic</h5></div>
 			<div class="col-xs-9"><h5>Description</h5></div>
 		</div>
@@ -13,11 +13,12 @@
 	</div>
 	<hr>
 	<div id="admin-safety-topics" style="padding-top:30px;">
-		<h3 style="text-align:center;"> Company Topics </h3>
-		<div class="row" style="border-bottom:1px solid #ddd;">
+		<h3 class="center"> Company Topics </h3>
+		<div class="row bottom-border">
 			<div class="col-xs-3"><h5>Topic</h5></div>
-			<div class="col-xs-6"><h5>Description</h5></div>
-			<div class="col-xs-3" style="text-align:center;"><h5>Edit</h5></div>
+			<div class="col-xs-7"><h5>Description</h5></div>
+			<div class="col-xs-1 center"><h5>Edit</h5></div>
+			<div class="col-xs-1"></div>
 		</div>
 		<div id="topics">
 			<% if @safety_topics && @safety_topics.count > 0 %>
@@ -26,10 +27,11 @@
 				<div class="no-content placeholder font-smoothing">No safety topics</div>
 			<% end %>
 		</div>
-		<%= render partial:"safety_topics/new", locals: {safety_topic: SafetyTopic.new} %>
+
+		<section class="bottom-border">
+			<%= render partial:"safety_topics/new", locals: {safety_topic: SafetyTopic.new} %>
+		</section>
 	</div>
 </div>
 
-<script>
-	readMoreLess();
-</script>
+<script>readMoreLess();</script>

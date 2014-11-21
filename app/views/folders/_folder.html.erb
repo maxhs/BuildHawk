@@ -1,42 +1,31 @@
 <% if folder && folder.name.length > 0 %>
 	<li class="folder" id="fid-<%=folder.id%>">
-		<h4 class="folder-name"><%= folder.name %></h4>
-
-		<div style="float:right">
-			<%= form_for Photo.new, url: photos_path(:project_id => project.id), :multipart => true , :remote => true, :method => :post do |f| %>
-				<div class="dz-message simple-btn">Upload</div>
-				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= f.hidden_field :folder_id, :value => folder.id %>
+		<h4 class="folder-name">
+			<%= folder.name %>
+			<%= link_to edit_folder_path(folder), :class=>"edit-folder-link remote", remote: true do %>
+				<i class="fa fa-cog remote"></i>
 			<% end %>
-			<%= link_to "Edit", edit_folder_path(folder), :class=>"edit-folder simple-btn remote", :remote => true %>
-		</div>
+		</h4>
+
+		<span>
+			<%= form_for Photo.new, url: photos_path(project_id: project.id), multipart: true , remote: true, method: :post do |f| %>
+				<div class="dz-message empty-btn">Upload</div>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+				<%= f.hidden_field :folder_id, value: folder.id %>
+			<% end %>
+		</span>
 		<ul>
 			<% folder.photos.sort_by(&:name).each do |p| %>
 				<li class="photo-name" id="p-<%= p.id %>">
-					<%= link_to show_photo_project_path(project,:photo_id => p.id), :class=>"remote", :remote => true do %>
+					<%= link_to show_photo_project_path(project, photo_id: p.id), :class=>"remote", remote: true do %>
 						<%= render partial:"folders/p", locals: {p: p} %>
 					<% end %>
 				</li>
 			<% end %>
 		</ul>
-		<div id="fid-<%=folder.id%>-add-document" class="add-photo">
-
-			<script type="text/javascript">
-				$(function(){
-					$('#fid-<%=folder.id%> form').dropzone({
-						init: function () {
-						    this.on("complete", function (file) {
-						      	if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-						        	location.reload();
-						      	}
-							});
-							this.on("addedfile",function(){
-								$('#fid-<%=folder.id%>-add-document .dz-message').text("Uploading...");
-							});
-						}
-					});
-				});
-			</script>
-		</div>
+		<div id="fid-<%=folder.id%>-add-document" class="add-photo"></div>
 	</li>
+<script type="text/javascript">
+setupDropzone('<%= folder.id %>');
+</script>
 <% end %>

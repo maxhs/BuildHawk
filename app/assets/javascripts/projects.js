@@ -31,3 +31,18 @@ function setupSearch(content){
 		$('#main').html(content);
 	});
 }
+
+function editSetup(projectId){
+	$(".for-select-2").select2();
+	$('#top-nav a').removeClass('current-page');
+	$('.nav-edit a,#'+projectId+'-link').addClass('current-page');
+	$("#project_core").change(function() {
+	    if(this.checked) {
+	    	$('#project_core').after('<span id="core-warning"> WARNING: This will make the project visible to all users</span>');
+	    } else {
+	    	$('#core-warning').fadeOut(200,function(){
+	    		$(this).remove();
+	    	});
+	    }
+	});
+}

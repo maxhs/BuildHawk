@@ -27,12 +27,22 @@
 	color:#cc0000;
 }
 
+
+.folder-name {
+	display:inline-block;
+}
+
+.edit-folder-link {
+	.fa-cog {
+		
+	}	
+}
+
 .edit_folder {
 	margin-bottom:9px;
 	
 	input[type="text"] {
 		width:60%;
-		font-size:16px;
 		height:39px;
 		display:inline-block;
 	}
@@ -41,15 +51,22 @@
 		font-size:1.5em;
 	}
 	
+	.no-btn {
+		position:relative;
+		left:14px;
+		font-size:1.25em;
+	}
 	.cancel {
 		position:relative;
-		left:10px;
+		left:24px;
+		top:1px;
 		cursor:pointer;
 	}
 
 	.delete {
 		position:relative;
-		left:20px;
+		left:34px;
+		top:1px;
 	}
 }
 
@@ -58,10 +75,12 @@
 	margin:0;
 }
 
-.folder-name {
-	display:inline-block;
-}
-
 .folder {
 	clear:both;
+
+	.fa-cog {
+		position:relative;
+		left:5px;
+		margin-right:5px;
+	}
 }

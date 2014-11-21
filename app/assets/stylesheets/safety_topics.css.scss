@@ -14,13 +14,12 @@
 
 	.read-more {
 		cursor:pointer;
-		-webkit-transition: all 0.2s ease-out;
-		-moz-transition: all 0.2s ease-out;
-		-ms-transition: all 0.2s ease-out;
-		-o-transition: all 0.2s ease-out;
-		transition: all 0.2s ease-out;
-		margin:0;
-		width:160px;
+		-webkit-transition: all 0.23s ease;
+		-moz-transition: all 0.23s ease;
+		-ms-transition: all 0.23s ease;
+		-o-transition: all 0.23s ease;
+		transition: all 0.23s ease;
+		margin:2.5% auto;
 		display:block;
 	}
 
@@ -32,7 +31,7 @@
 		margin:0;
 	}
 	input[type="text"],textarea {
-		width:100%;
+		width:90%;
 	}
 	textarea {
 		min-height:100px;
