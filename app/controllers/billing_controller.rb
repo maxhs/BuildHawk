@@ -6,7 +6,7 @@ class BillingController < AppController
 		@cards = @company.cards.where("card_id IS NOT NULL")
 		@active_card = @company.cards.where(:active => true).first 
 		@month = Time.now.to_datetime
-		@pro_users = @user.company.billing_days_for(@month).map{|day| day.project_user.user}.compact.uniq
+		@pro_users = @company.billing_days_for(@month).map{|day| day.project_user.user}.compact.uniq
 
 		if @company.customer_id
 			customer = Stripe::Customer.retrieve(@company.customer_id)
