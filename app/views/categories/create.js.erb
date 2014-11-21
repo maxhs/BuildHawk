@@ -1,18 +1,15 @@
-<% if @category.phase.checklist.project %>
-	$('#new_category').replaceWith('<%= j render partial:"projects/category", locals:{:category => @category} %>');
-<% else %>
-	$('#new_category').replaceWith('<%= j render partial:"admin/category", locals:{:category => @category} %>');
-<% end %>
-$('#new-category-<%=@category.phase.id %>').text('Add a new category');
+$('#new_category').replaceWith('<%= j render partial:"categories/show", locals:{category: @category} %>');
+$('#category-<%=@category.id%>-container').removeClass('collapsed');
+$('#new-category-<%= @category.phase.id %>').show();
 $('.category .title').on('click',function(e){
 	var catId = e.target.id;
 	var cat = $('#category-'+catId+'-container');	
     if (cat.hasClass("collapsed")){
-    	cat.show(200,function(){
+    	cat.show(230,function(){
     		cat.removeClass('collapsed');
     	});
     } else {
-    	cat.hide(200,function(){
+    	cat.hide(230,function(){
     		cat.addClass('collapsed');
     	});
     }

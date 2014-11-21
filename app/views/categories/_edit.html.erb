@@ -14,8 +14,8 @@
 					<div id="export-checklist-item" class="action">
 						<i class="fa fa-share"></i>
 					</div>
-					<% if current_user.admin || current_user.company_admin %>
-						<%= link_to categories_path(category), data: {confirm: "Are you sure you want to delete this category?"}, method: :delete, :class=>"remote action", remote: true do %>
+					<% if current_user.any_admin? %>
+						<%= link_to category_path(category), data: {confirm: "Are you sure you want to delete this category?"}, method: :delete, :class=>"remote action", remote: true do %>
 							<i class="fa fa-trash-o remote"></i>
 						<% end %>	
 					<% end %>
