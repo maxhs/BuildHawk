@@ -37,8 +37,8 @@
 				</tr>
 			</table>
 		<% end %>
-		<% if current_user.admin || current_user.company_admin || @p.user == current_user %>
-			<%= link_to photo_path(@p), :method => :delete, :class=>"delete-link", :remote => true, :data => {:confirm => "Are you sure you want to delete this photo? This can't be undone."} do %>
+		<% if current_user.any_admin? || @p.user == current_user %>
+			<%= link_to photo_path(@p), method: :delete, title:"Delete", :class=>"delete-link", remote: true, data: {confirm: "Are you sure you want to delete this photo? This can't be undone."} do %>
 				<i class="fa fa-trash-o remote"></i>
 			<% end %>
 		<% end %>
@@ -48,18 +48,5 @@
 	<div class="no-image-placeholder">No Document</div>
 <% end %>
 <script>
-	Shadowbox.clearCache();
-	Shadowbox.setup(".shadow-photo", {});
-	$("#photo_name,#photo_description").focus(function(){
-		$('#click-to-edit').fadeOut(170,function(){
-			$(this).text('(enter/return to save)');
-			$(this).fadeIn(170);
-		});
-	});
-	$("#photo_name,#photo_description").focusout(function(){
-		$('#click-to-edit').fadeOut(170,function(){
-			$(this).text('(click name to edit)');
-			$(this).fadeIn(170);
-		});
-	});
+	largeImage();
 </script>

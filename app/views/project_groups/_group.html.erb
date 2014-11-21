@@ -1,13 +1,14 @@
 <div class="group" id="<%=project_group.id%>">
 	<div class="group-header">
-		<%= link_to edit_project_group_path(project_group), :class=> "remote", remote: true do %>
-			<i class="fa fa-cog remote"></i>
-		<% end %>
 		
 		<h5 class="group-name remote">
 			<%= project_group.name %>
 		</h5>
 
+		<%= link_to edit_project_group_path(project_group), :class=> "remote", remote: true do %>
+			<i class="fa fa-cog remote"></i>
+		<% end %>
+		
 		<span class="projects-count remote">
 			<% if project_group.projects.count == 1 %>
 				(1 project)
