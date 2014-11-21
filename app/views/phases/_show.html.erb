@@ -7,7 +7,7 @@
 					<%=p.name%>
 				<% end %>
 				<% if current_user.any_admin? %>
-					<%= link_to edit_phase_path(p), :class => "edit-phase", remote: true do %>
+					<%= link_to edit_phase_path(p), :class => "edit-phase", title:"Edit", remote: true do %>
 						<i class="fa fa-cog remote"></i>
 					<% end %>
 				<% end %>

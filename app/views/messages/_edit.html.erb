@@ -1,0 +1,52 @@
+<%= nested_form_for @message, url: messages_path, html: {multipart: true}, remote: true, :class=>"remote", method: :patch do |f| %>
+	<%= f.hidden_field :author_id, value: current_user.id %>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
+
+	<div id="edit-message" class="border-box">
+		<h4 class="centered">Editing</h4>
+
+		<div class="action-buttons">
+			<div style="display:table-row">
+				<div id="message-send" title="Save message" class="action">
+					<i class="fa fa-floppy-o remote"></i>
+				</div>
+				<div id="dismiss-message" title="Dismiss" class="action dismiss"><i class="fa fa-remove"></i></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-2">
+				<h4>Location</h4>
+			</div>
+			<div class="col-xs-10">
+				<%= f.text_area :body, :placeholder => "Message body..." %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-2"><h4>Projects</h4></div>
+			<div class="col-xs-10">			
+				<%= f.collection_select :project_ids, @projects, :id, :name, {selected: @message.project_ids}, {multiple: true, include_blank: false, :class=>"project-select",:style=>"width:100%;"} %>
+			</div>
+
+			<div class="col-xs-2"></div>
+			<div class="col-xs-10 personnel-label font-smoothing">This message will be sent to all <%= current_user.company.name %> personnel attached to the above project(s).</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-2">
+				<h4>Recipients</h4>
+			</div>
+			<div class="col-xs-10">
+				<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @users.map(&:id)}, {multiple: true, include_blank: false, :class=>"user-select"} %>
+			</div>
+		</div>
+
+		<div class="button-container">
+			<%= f.submit "Save", :class=>"simple-btn save" %>
+		</div>
+	</div>
+<% end %>
+
+<script>
+	messageSetup();
+</script>

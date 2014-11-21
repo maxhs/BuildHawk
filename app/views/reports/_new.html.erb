@@ -5,15 +5,17 @@
 	<div id="add-report" class="border-box container">
 		<div class="action-buttons">
 			<div style="display:table-row">
-				<div id="report-add" class="action">
+				<div id="report-add" title="Add" class="action">
 					<i class="fa fa-plus remote"></i>
 				</div>
-				<div id="export-report" class="action">
+				<div id="export-report" title="Export" class="action">
 					<%= link_to generate_report_path(report), remote: true do %>
 						<i class="fa fa-share"></i>
 					<% end %>
 				</div>
-				<div id="dismiss-report" class="action dismiss"><i class="fa fa-remove"></i></div>
+				<div id="dismiss-report" title="Dismiss" class="action dismiss">
+					<i class="fa fa-remove"></i>
+				</div>
 			</div>
 		</div>
 

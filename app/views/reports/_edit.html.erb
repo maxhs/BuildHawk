@@ -4,20 +4,20 @@
 		<div class="border-box">
 			<div class="action-buttons">
 				<div style="display:table-row">
-					<div id="report-save" class="action">
+					<div id="report-save" title="Save" class="action">
 						<i class="fa fa-floppy-o remote"></i>
 					</div>
-					<div id="export-report" class="action">
+					<div id="export-report" title="Export" class="action">
 						<%= link_to generate_report_path(report), remote: true do %>
 							<i class="fa fa-share"></i>
 						<% end %>
 					</div>
 					<% if current_user.any_admin? || report.author == current_user %>
-						<%= link_to report_path(report, :project_id => project.id), :method => :delete, :data => {:confirm => "Are you sure you want to delete this report? This can't be undone."}, :class=>"action", remote: true do %>
+						<%= link_to report_path(report, :project_id => project.id), title:"Delete", method: :delete, data: {confirm: "Are you sure you want to delete this report? This can't be undone."}, :class=>"action", remote: true do %>
 							<i class="fa fa-trash-o remote"></i>
 						<% end %>
 					<% end %>
-					<div id="dismiss-report" class="action dismiss"><i class="fa fa-remove"></i></div>
+					<div id="dismiss-report" title="Dismiss" class="action dismiss"><i class="fa fa-remove"></i></div>
 				</div>
 			</div>
 

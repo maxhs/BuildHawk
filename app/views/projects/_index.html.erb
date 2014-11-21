@@ -17,8 +17,6 @@
 		<% end %>
 	<% else %>
 		<div id="pro-signup-prompt" class="font-smoothing">
-			<!--<div>Want to add projects?</div> 
-			<div>Need access to checklists, reports, tasks and documents? </div>-->
 			<% unless current_user.company.has_admin? %>
 				<div class="call-to-action">Sign up for <%= link_to "BuildHawk pro", :style=>"color:#cc0000;", remote:true %> to start adding some.</div>
 			<% end %>
@@ -27,14 +25,16 @@
 		</div>		
 	<% end %>
 
-	<div id="messages" class="container">
-		<div>
+	<div id="communication" class="container">
+		<div id="messages" class="border-box">
 			<h4>Messages</h4>
 			<div class="explanation font-smoothing">Use the messages section to communicate with your team.  <%= link_to "Send a new message", new_message_path, remote:true %>.</div>
-			<table id="messages-table">
+			
+			<div id="messages-table">
 				<%= render partial:"messages/message", collection: @messages, as: :message, cache: true %>
-			</table>
-
+			</div>
+		</div>
+		<div id="message" class="focus">
 		</div>
 	</div>
 

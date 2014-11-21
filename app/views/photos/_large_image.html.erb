@@ -9,7 +9,7 @@
 			<table class="image-details">
 				<tr>
 					<td><h5>Date</h5></td>
-					<td><%= @p.created_date %></td>
+					<td><%= parse_datetime @p.created_at %></td>
 				</tr>
 				<% if @p.user %>
 					<tr>

@@ -126,7 +126,11 @@ Buildhawk::Application.routes.draw do
   resources :comments
   resources :project_groups
   resources :leads, only: [:create, :index]
-  resources :messages
+  resources :messages do
+    member do
+      delete :message_user
+    end
+  end
   resources :categories
   resources :checklist_items do
     member do

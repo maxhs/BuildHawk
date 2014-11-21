@@ -3,19 +3,16 @@
 		<h4>Editing <%= phase.name %></h4>
 		<div class="action-buttons">
 			<div style="display:table-row">
-				<div id="floating-save" class="action remote" type="submit">
+				<div id="floating-save" title="Save" class="action remote" type="submit">
 					<i class="fa fa-floppy-o remote"></i>
 				</div>
-				<div id="export-checklist-item" class="action">
-					<i class="fa fa-share"></i>
-				</div>
 				<% if current_user.admin || current_user.company_admin %>
-					<%= link_to phase_path(phase), :data => {:confirm => "Are you sure you want to delete \"#{phase.name}\"? This cannot be undone."}, method: :delete, :class=>"remote action", remote: true do %>
+					<%= link_to phase_path(phase), title:"Delete", data: {:confirm => "Are you sure you want to delete \"#{phase.name}\"? This cannot be undone."}, method: :delete, :class=>"remote action", remote: true do %>
 						<i class="fa fa-trash-o remote"></i>
 					<% end %>	
 				<% end %>
 				
-				<div id="dismiss-phase" class="dismiss action">
+				<div id="dismiss-phase" title="Dismiss" class="dismiss action">
 					<i class="fa fa-remove" id="dismiss-phase"></i>
 				</div>
 			</div>

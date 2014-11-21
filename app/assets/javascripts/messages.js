@@ -10,4 +10,19 @@ function messageSetup() {
 		placeholder: "Select individual recipients...",
     	allowClear: true
 	});
+
+	$('#dismiss-message').click(function(){
+		$('.panel').removeClass('panel');
+		$('#message.focus').css('left','101%');
+		setTimeout(function(){
+			$('#message.focus').html('')
+		},230);
+	});
+
+	$('#new-message #message-send').click(function(){
+		$('.new_message').trigger('submit.rails')
+	});
+	$('#edit-message #message-send').click(function(){
+		$('.edit_message').trigger('submit.rails')
+	});
 }

@@ -1,5 +1,5 @@
 <li class="project" id="project_<%= project.id %>" data-project="<%=project.id%>" data-group="<%=project.project_group_id%>" <% if @project == project %>class="active"<% end %>>
-	<%= link_to project_path(project, reload: true),:id=>"#{project.id}-link",remote: true do %>
+	<%= link_to project_path(project, reload: true), id: "#{project.id}-link", remote: true do %>
 		<div class="inner-padding">
 			<span class="project-name" id="project-name-<%=project.id%>"><%= project.name %></span>
 			<% if project.checklist && project.checklist.item_count > 0 %>

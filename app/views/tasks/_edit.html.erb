@@ -3,20 +3,20 @@
 
 	<div id="task-container" class="border-box container">
 		<div class="action-buttons">
-			<div id="task-save" class="action">
+			<div id="task-save" title="Save" class="action">
                	<i class="fa fa-floppy-o remote"></i>
 			</div>
 			
-			<%= link_to export_task_path(task), :class=>"action remote", id:"export-task", remote: true do %>
+			<%= link_to export_task_path(task), title: "Export", :class=>"action remote", id:"export-task", remote: true do %>
 				<i class="fa fa-share"></i>
 			<% end %>
 			
 			<% if current_user.any_admin? %>
-				<%= link_to task_path(task), :method => :delete, :data => {:confirm => "Are you sure you want to delete this task?"}, remote: true, :class=>"action remote" do %>
+				<%= link_to task_path(task), title: "Delete", method: :delete, data: {:confirm => "Are you sure you want to delete this task?"}, remote: true, :class=>"action remote" do %>
 					<i class="fa fa-trash-o remote"></i>
 				<% end %>
 			<% end %>
-			<div id="dismiss-task" class="action">
+			<div id="dismiss-task" title="Dismiss" class="action">
 				<i class="fa fa-remove" id="dismiss-task"></i>
 			</div>
 		</div>
@@ -88,17 +88,17 @@
 <% end %>
 	<div class="comment-container collapsed border-box">
 		<div id="comments-form">
-			<%= form_for task.comments.new, :method => :post, remote: true do |f| %>
+			<%= form_for task.comments.new, method: :post, remote: true do |f| %>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= f.text_area :body, :rows => "3", :placeholder => "Type your notes/comment here" %>
-				<%= f.hidden_field :user_id, :value => current_user.id %>
-				<%= f.hidden_field :task_id, :value => task.id %>
+				<%= f.text_area :body, rows: "3", placeholder: "Type your notes/comment here" %>
+				<%= f.hidden_field :user_id, value: current_user.id %>
+				<%= f.hidden_field :task_id, value: task.id %>
 				<%= button_tag(type: 'submit', :class=> "simple-btn full-width", style:"margin:14px auto;", remote: true) do %>
 			    	<i class="fa fa-paper-plane remote"></i> Add			  	
 			    <% end %>
 			<% end %>
 		</div>
-		<%= render :partial => "comments/comments", :locals => {:comments => task.comments} %>
+		<%= render partial: "comments/comments", locals: {comments: task.comments} %>
 	</div>
 
 <script>

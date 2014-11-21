@@ -7,10 +7,10 @@
 	<% end %>
 			<h5 class="title" id="<%= category.id %>"><%= category.name %></h5>
 			<span class="completed-count">
-				<%= render partial:"checklists/completed_count", :locals => {:category => category} %>
+				<%= render partial:"checklists/completed_count", locals: {category: category} %>
 			</span>
 			<% if current_user.any_admin? %>
-				<%= link_to edit_category_path(category), :class=>"edit-category", remote: true do %>
+				<%= link_to edit_category_path(category), :class=>"edit-category", title:"Edit", remote: true do %>
 					<i class="fa fa-cog remote"></i>
 				<% end %>
 			<% end %>
