@@ -54,9 +54,7 @@ Buildhawk::Application.routes.draw do
       get :checklists
       post :create_blank_template
       post :create_template
-      get :new_project
       get :project_groups
-      post :create_project
       get :editor
       delete :remove_checklist
     end

@@ -7,7 +7,7 @@
 	
 	<% if current_user.any_admin? %>
 		<li class="project buttons" style="padding:0">
-			<%= link_to new_project_admin_index_path, id:"new-project-button", remote: true do %>
+			<%= link_to new_project_path, id:"new-project-button", remote: true do %>
 				<i class="fa fa-plus"></i><span class="bold-header">Project</span>
 			<% end %>
 			<%= link_to new_project_group_path, id:"new-group-button", :class=>"remote", remote: true do %>

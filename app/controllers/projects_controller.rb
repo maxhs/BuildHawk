@@ -1,28 +1,33 @@
 class ProjectsController < AppController
 	before_filter :authenticate_user!
 	before_filter :fetch
+	before_filter :find_project, except: [:new]
 
 	def new
-		@project = Project.new
-		@project.build_address
 		@users = current_user.company.users
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
+		@subs = current_user.company.company_subs
+
+		if @company.customer_id.nil?# && current_user.uber_admin?
+			@charges = @company.charges
+		  	active_projects = @company.projects.where(:active => true).count
+		  	@amount = active_projects * 1000 / 100
+			redirect_to billing_index_path
 		else
-			render :new
+			@project = Project.new
+			@project.build_address
+			@project.project_users.build
+			
+			@checklists = @user.company.checklists.where(:core => true)
 		end
 	end
 
 	def create
 		list = Checklist.find params[:checklist_id]
-		@checklist = list.duplicate
-		puts "Freshly duplicated checklist: #{@checklist.id}"
-		params[:project][:checklist_id] = @checklist.id
-	    project = @company.projects.create params[:project]
-	    @checklist.update_attributes :company_id => @company.id, :project_id => project.id, :core => false
-		redirect_to projects_path
+		project = @company.projects.create params[:project]
+		@checklist = list.duplicate(@company.id,project.id)
+
+	    @messages = current_user.messages
+		render :index
 	end
 
 	def index
@@ -357,8 +362,6 @@ class ProjectsController < AppController
 		@users = @company.users
 		@subs = @company.company_subs
 		
-		find_project
-
 		if current_user
 			if @project
 				@items = current_user.connect_tasks(@project)

@@ -120,25 +120,6 @@ class AdminController < AppController
 		checklist.background_destroy
 	end
 
-	def new_project
-		@company = @user.company
-		@users = current_user.company.users
-		@subs = current_user.company.company_subs
-
-		if @company.customer_id.nil?# && current_user.uber_admin?
-			@charges = @company.charges
-		  	active_projects = @company.projects.where(:active => true).count
-		  	@amount = active_projects * 1000 / 100
-			redirect_to billing_index_path
-		else
-			@project = Project.new
-			@project.build_address
-			@project.project_users.build
-			
-			@checklists = @user.company.checklists.where(:core => true)
-		end
-	end
-
 	def project_groups
 		@company = current_user.company
 		@project_groups = @company.project_groups.where("id IS NOT NULL")

@@ -13,14 +13,20 @@ class Checklist < ActiveRecord::Base
   	has_many :phases, :dependent => :destroy
   	accepts_nested_attributes_for :phases, :allow_destroy => true
 
-    def duplicate(company_id)
+    def duplicate(company_id, project_id)
         if Rails.env.production?
             require "resque"
-            Resque.enqueue(PopulateChecklist, company_id, id)
+            Resque.enqueue(PopulateChecklist, company_id, project_id, id)
         else
-            new_checklist = self.deep_clone :include => {:phases => {:categories => :checklist_items}}, :except => {:phases => {:categories => {:checklist_items => :state}}}
+            new_checklist = self.deep_clone :include => {phases: {categories: :checklist_items}}, except: {phases: {categories: {checklist_items: :state}}}
             new_checklist.company_id = company_id
-            new_checklist.core = true
+            puts "there was a project id: #{project_id}"
+            if project_id
+                new_checklist.core = false
+                new_checklist.project_id = project_id
+            else
+                new_checklist.core = true
+            end
             new_checklist.save
         end
     end

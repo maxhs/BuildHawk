@@ -17,6 +17,13 @@ function newProjectSetup(){
 			return false;
 		}
 	});
+
+	$('#users-select').select2({
+		placeholder: "Add personnel to the project"
+	});
+	$('#companies-select').select2({
+		placeholder: "Connect other companies to the project"
+	});
 }
 
 function setupSearch(content){
