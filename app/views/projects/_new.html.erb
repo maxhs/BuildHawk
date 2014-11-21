@@ -47,7 +47,7 @@
         		<h4>Subs:</h4>
         	</div>
         	<div class="col-xs-9">
-        		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple: true, :id => "companies-select", include_blank: false, include_empty: false} %>
+        		<%= f.collection_select :company_ids, @subs, :company_id, :name, {selected: @project.company_ids}, {multiple: true, :id => "companies-select", include_blank: false, include_empty: false} %>
 	    	</div>
         </div>
 

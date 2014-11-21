@@ -28,8 +28,6 @@ class Project < ActiveRecord::Base
     after_commit :adjust_users, :if => :persisted?
 
     accepts_nested_attributes_for :address, :allow_destroy => true
-    accepts_nested_attributes_for :users, :allow_destroy => true
-    accepts_nested_attributes_for :companies, :allow_destroy => true
 
     # websolr
     searchable do

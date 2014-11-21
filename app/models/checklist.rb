@@ -20,7 +20,6 @@ class Checklist < ActiveRecord::Base
         else
             new_checklist = self.deep_clone :include => {phases: {categories: :checklist_items}}, except: {phases: {categories: {checklist_items: :state}}}
             new_checklist.company_id = company_id
-            puts "there was a project id: #{project_id}"
             if project_id
                 new_checklist.core = false
                 new_checklist.project_id = project_id
