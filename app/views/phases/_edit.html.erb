@@ -1,6 +1,6 @@
 <div id="phase-container" class="border-box">
 	<%= form_for phase, method: :patch, remote: true do |f| %>
-		<h3>Editing</h3>
+		<h4>Editing <%= phase.name %></h4>
 		<div class="action-buttons">
 			<div style="display:table-row">
 				<div id="floating-save" class="action remote" type="submit">
@@ -21,9 +21,12 @@
 			</div>
 		</div>
 	
-		<div class="">
-			<%= f.label "Phase name", style:"margin-bottom:0;" %>
-			<h5><%= f.text_field :name, placeholer:"Phase name", :style=>"width:100%;", autofocus: true %></h5>
+		<div>
+			<%= f.label "Phase name", :class=>"no-bottom" %>
+			<%= f.text_field :name, placeholer:"Phase name", :class=>"full-width", autofocus: true %>
+		</div>
+		<div class="btn-container center no-bottom">
+			<%= f.submit "Update", :class=>"simple-btn full-width remote" %>
 		</div>
 	<% end %>
 </div>

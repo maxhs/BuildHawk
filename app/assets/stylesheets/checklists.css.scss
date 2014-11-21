@@ -54,10 +54,37 @@
 		top:5px;
 		width:24px;
 		cursor:pointer;
-		font-size:1.5em;
+		font-size:1.4em;
+		opacity:.23;
 	}
-	#checklist-search-button:hover {
 	
+	#checklist-search-button:hover {
+		opacity:1;
+	}
+
+	.category-items {
+		width:99%;
+		margin-left:1%;
+		padding-left:1%;
+		border-left:1px dotted #ccc;
+		
+		.checklist-item.active-item {
+			position: relative;
+			z-index: 5;
+			right:-1%;
+			background:#fff5cf !important;
+			color: #000;
+			width:102%;
+		}
+
+		.checklist-item {
+			border-bottom:1px solid #ddd;
+			padding:10px 0 10px 10px !important;
+		}	
+
+		.checklist-item:first-child {
+			border-top:1px solid #ddd;
+		}
 	}
 		
 	#checklist-items header {
@@ -183,7 +210,6 @@
 	}
 
 	#checklist-items {
-
 		.category {
 			list-style:none;
 			padding-left:1%;
@@ -193,10 +219,11 @@
 			}
 		}
 
-		.header-label {
-			font-weight: bold; 
-			margin: 0;
-			text-align:center;
+		.header-label { 
+			h5, h6 {
+				font-weight: 600;
+				
+			}
 		}
 		.row{
 			.btn {
@@ -429,30 +456,6 @@
 	#clear-critical-date:hover {
 		color:#cc0000;
 	}	
-}
-
-.category-items {
-	width:99%;
-	margin-left:1%;
-	padding-left:1%;
-	border-left:1px dotted #ccc;
-	
-	.checklist-item.active-item {
-		position: relative;
-		z-index: 5;
-		right:-1%;
-		background:#fff5cf !important;
-		color: #000;
-	}
-
-	.checklist-item {
-		border-bottom:1px solid #ddd;
-		padding:10px 0 10px 10px !important;
-	}	
-
-	.checklist-item:first-child {
-		border-top:1px solid #ddd;
-	}
 }
 
 .category {

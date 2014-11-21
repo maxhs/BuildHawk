@@ -1,7 +1,7 @@
 <ul id="projects-sidebar" class="project-sidebar font-smoothing" role="navigation">
 	<li id="search-section">
-		<%= form_tag search_projects_path, :method => :post, :remote => true do %>
-	   		<%= text_field_tag :search, params[:search], :id => "projects-search-form", :placeholder => "Search", :class=>"tt-hint form-control" %>
+		<%= form_tag search_projects_path, method: :post, remote: true do %>
+	   		<%= text_field_tag :search, params[:search], id: "projects-search-form", placeholder: "Search", :class=>"tt-hint form-control" %>
 		<% end %>
 	</li>
 	
@@ -19,19 +19,21 @@
 	<ul id="projects" class="sortable-projects">
 		<% if @sidebar_projects && @sidebar_projects.count > 0 %>
 			<% @sidebar_projects.each do |project| %>
-				<% if project.checklist && project.checklist.item_count > 0 %>
-					<li class="project" id="project_<%= project.id %>" data-project="<%=project.id%>" data-group="<%=project.project_group_id%>">
-						<%= link_to project_path(project, reload: true),:id=>"#{project.id}-link",remote: true do %>
-							<div class="inner-padding">
-								<span class="project-name" id="project-name-<%=project.id%>"><%= project.name %></span>
+				
+				<li class="project" id="project_<%= project.id %>" data-project="<%=project.id%>" data-group="<%=project.project_group_id%>" <% if @project == project %>class="active"<% end %>>
+					<%= link_to project_path(project, reload: true),:id=>"#{project.id}-link",remote: true do %>
+						<div class="inner-padding">
+							<span class="project-name" id="project-name-<%=project.id%>"><%= project.name %></span>
+							<% if project.checklist && project.checklist.item_count > 0 %>
 								<span class="percentage"><%= project.checklist.progress_percentage %></span>
-								<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
-							</div>
-						<% end %>
-					</li>
-				<% else %>
-					<li><%= link_to project.name, project_path(project), :id=>"#{project.id}-link", :remote => true %></li>
-				<% end %>
+							<% else %>
+								<span class="percentage">0.0%</span>
+							<% end %>
+							<div id="sidebar-progress-link-<%=project.id%>" class="sidebar-progress-link" ></div>
+						</div>
+					<% end %>
+				</li>
+				
 			<% end %>
 		<% else %>
 			<% if @projects && @projects.count > 0 %>
@@ -42,7 +44,7 @@
 				<% @demo_projects.each do |project| %>
 					<% if project.checklist && project.checklist.item_count > 0 %>
 						<li class="project" id="project_<%= project.id %>" data-project="<%=project.id%>">
-							<%= link_to project_path(project, reload: true),:id=>"#{project.id}-link","data-stuff"=>"stuff", remote: true do %>
+							<%= link_to project_path(project, reload: true),id: "#{project.id}-link", remote: true do %>
 								<div class="inner-padding">
 									<span class="project-name"><%= project.name %></span>
 									<span class="percentage"><%= project.checklist.progress_percentage %></span>
@@ -83,16 +85,15 @@
 	
 	$(function(){
 		sidebarSetup();
-		
-		<% if @project %>
-			$('#project_<%= @project.id %>').addClass('active');
-		<% end %>
-
 		<% if @sidebar_projects && @sidebar_projects.count > 0 %>
 			<% @sidebar_projects.each do |p| %>
 				<% if p.checklist %>
 					$('#sidebar-progress-link-<%=p.id%>').progressbar({
 				    	value:<%=p.checklist.progress%>
+				    });
+				<% else %>
+					$('#sidebar-progress-link-<%=p.id%>').progressbar({
+				    	value:0
 				    });
 				<% end %>
 		    <% end %>
@@ -101,6 +102,10 @@
 				<% if p.checklist %>
 					$('#sidebar-progress-link-<%=p.id%>').progressbar({
 				    	value:<%=p.checklist.progress%>
+				    });
+				<% else %>
+					$('#sidebar-progress-link-<%=p.id%>').progressbar({
+				    	value:0
 				    });
 				<% end %>
 		    <% end %>
@@ -112,6 +117,10 @@
 					<% if p.checklist %>
 						$('#sidebar-progress-link-<%=p.id%>').progressbar({
 					    	value:<%=p.checklist.progress%>
+					    });
+					<% else %>
+						$('#sidebar-progress-link-<%=p.id%>').progressbar({
+					    	value:0
 					    });
 					<% end %>
 				<% end %>

@@ -48,6 +48,13 @@ class PhasesController < AppController
 
 	def edit
 		@phase = Phase.find params[:id]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to root_url
+		end
 	end
 
 	def update
