@@ -27,7 +27,7 @@
 		<div>Tasks</div>
 	<% end %>
 </li>
-<% if current_user.admin %> 
+<% if current_user.any_admin? %> 
 	<li class="nav-edit admin">
 		<%= link_to edit_project_path(@project), :remote => true do %>
 			<i class="fa fa-wrench nav-icon"></i>
