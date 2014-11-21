@@ -669,7 +669,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice
   top: 4px;
   font-size: 1px;
   outline: none;
-  background: url(/assets/select2.png) right top no-repeat;
+  background: asset-url('select2.png') right top no-repeat;
 }
 
 /* line 616, /usr/local/rvm/gems/ruby-2.1.4/gems/select2-rails-3.5.9.1/vendor/assets/stylesheets/select2.scss */
