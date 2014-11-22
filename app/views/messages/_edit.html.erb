@@ -40,7 +40,9 @@
 
 
 		<div class="button-container">
-			<%= f.submit "Update", :class=>"simple-btn full-width" %>
+			<%= button_tag(type: 'submit', :class=> "simple-btn full-width", remote: true) do %>
+		    	<!--<i class="fa fa-floppy-o remote"></i> -->Update			  	
+		    <% end %>
 		</div>
 	</div>
 <% end %>
