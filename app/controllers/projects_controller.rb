@@ -83,10 +83,8 @@ class ProjectsController < AppController
 		end
 
 		@project.users.build
-		unless @project.address
-			@project.build_address
-		end
-		
+		@project.build_address unless @project.address
+			
 		if request.xhr?
 			respond_to do |format|
 				format.js

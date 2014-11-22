@@ -9,7 +9,7 @@
 					<i class="fa fa-share"></i>
 				</div>
 				<% if current_user.admin || current_user.company_admin %>
-					<%= link_to checklist_items_path(item), title: "Delete" data: {confirm: "Are you sure you want to delete this item?"}, method: :delete, :class=>"remote action", remote: true do %>
+					<%= link_to checklist_items_path(item), title: "Delete", data: {confirm: "Are you sure you want to delete this item?"}, method: :delete, :class=>"remote action", remote: true do %>
 						<i class="fa fa-trash-o remote"></i>
 					<% end %>	
 				<% end %>
