@@ -15,7 +15,8 @@ function messageSetup() {
 		$('.panel').removeClass('panel');
 		$('#message.focus').css('left','101%');
 		setTimeout(function(){
-			$('#message.focus').html('')
+			$('#message.focus').html('');
+			$('.active').removeClass('active');
 		},230);
 	});
 
