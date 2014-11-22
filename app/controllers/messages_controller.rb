@@ -42,6 +42,18 @@ class MessagesController < AppController
 		end
 	end
 
+	def update
+		@message = Message.find params[:id]
+		@message.update_attributes params[:message]
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to projects_path
+		end
+	end
+
 	def message_user
 		message = Message.find params[:id]
 		message_user = MessageUser.where(message_id: message.id, user_id: current_user.id).first

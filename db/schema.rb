@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117031816) do
+ActiveRecord::Schema.define(version: 20141122015124) do
 
   create_table "activities", force: true do |t|
     t.integer  "report_id"
@@ -249,6 +249,9 @@ ActiveRecord::Schema.define(version: 20141117031816) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sent",       default: false
+    t.boolean  "archived"
+    t.boolean  "read"
   end
 
   add_index "messages", ["author_id", "company_id"], name: "messages_idx"

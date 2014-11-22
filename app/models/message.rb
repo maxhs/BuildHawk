@@ -9,19 +9,6 @@ class Message < ActiveRecord::Base
     has_many :users, :through => :message_users , autosave: true
 	has_many :comments
 
-	after_commit :notify, on: :create
-
-	def notify
-		users.each do |u|
-			u.notifications.create(
-				:body 				=> body,
-				:message_id 		=> id,
-				#:company_id			=> company_id,  ## this foreign key doesn't exist yet
-				:notification_type 	=> self.class.name
-			)
-		end
-	end
-
 	def epoch_time
 		created_at.to_i
 	end

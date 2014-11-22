@@ -1,4 +1,4 @@
-<%= nested_form_for @message, url: messages_path, html: {multipart: true}, remote: true, :class=>"remote", method: :patch do |f| %>
+<%= nested_form_for @message, remote: true, method: :patch do |f| %>
 	<%= f.hidden_field :author_id, value: current_user.id %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
 
@@ -32,7 +32,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<%= f.label "Recipients" %>
-				<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @users.map(&:id)}, {multiple: true, include_blank: false, :class=>"user-select"} %>
+				<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @message.users.map(&:id)}, {multiple: true, include_blank: false, :class=>"user-select"} %>
 			</div>
 		</div>
 
@@ -45,7 +45,7 @@
 
 
 		<div class="button-container">
-			<%= button_tag(type: 'submit', :class=> "simple-btn full-width", remote: true) do %>
+			<%= button_tag(type: 'submit', :class=> "simple-btn full-width remote", remote: true) do %>
 		    	<!--<i class="fa fa-floppy-o remote"></i> -->Update			  	
 		    <% end %>
 		</div>
