@@ -1,5 +1,5 @@
 $('.active').removeClass('active');
 $('#message-<%=@message.id%>').addClass("active");
 $('#messages').addClass('panel');
-$('#message.focus').html('<%= j render partial: "messages/edit" %>');
+$('#message.focus').html('<%= j render partial: "messages/edit", locals: {message: @message} %>');
 $('#message.focus').css('left','50%');

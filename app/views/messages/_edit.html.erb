@@ -7,9 +7,12 @@
 
 		<div class="action-buttons">
 			<div style="display:table-row">
-				<div id="message-send" title="Save message" class="action">
+				<div id="message-send" title="Save" class="action">
 					<i class="fa fa-floppy-o remote"></i>
 				</div>
+				<%= link_to message_user_message_path(message), method: :delete, title:"Hide", :class=>"action", data: {confirm: "Are you sure you want to hide this message?"}, remote: true do %>
+					<i class="fa fa-trash-o remote"></i>
+				<% end %>
 				<div id="dismiss-message" title="Dismiss" class="action dismiss"><i class="fa fa-remove"></i></div>
 			</div>
 		</div>
