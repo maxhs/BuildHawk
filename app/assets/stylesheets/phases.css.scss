@@ -1,10 +1,9 @@
 #phase-container {
 	padding:5%;
-	margin:0 auto;
-	position:relative;
 }
 
 .checklist {
+
 	#checklist-items{
 		.new_phase {
 			position:relative;
@@ -14,12 +13,7 @@
 			border-radius:2px;
 			-moz-border-radius:2px;
 			-webkit-border-radius:2px;
-			-webkit-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			backface-visibility: hidden;
+			
 			border-color:transparent !important;
 
 			.new-phase.row {

@@ -1,37 +1,36 @@
-<div id="project-checklist" class="checklist border-box <% if @item %>panel<% end %>">
-	<% if @checklist %>
-		<div class="project-checklist-table">
-			<div id="checklist-items">
-				<header>
-					<%= form_tag search_items_checklist_path(@checklist, :project_id => @project.id), :id => "checklist-search", :method => :post, :class=>"input-group search", :remote => true do %>
-						<%= text_field_tag :search, nil, :placeholder=>"Search for checklist items...", :class=>"form-control search" %>
-						<span class="input-group-addon cancel-search" id="remove">
-							<i class="fa fa-remove"></i>
-						</span>
-					<% end %>				
-					<div class="checklist-header row">
-						<div class="col-xs-1">
-							<i class="fa fa-search" id="checklist-search-button"></i>
-						</div>
-						<div class="col-xs-7 header-label left"><h6 class="left">Phase</h6></div>
-						<div class="col-xs-2 header-label center"><h6>Target</h6></div>	
-						<div class="col-xs-2 header-label center"><h6>Completed</h6></div>
+
+<% if @checklist %>
+	<div id="project-checklist" class="checklist border-box">
+		<div id="checklist-items">
+			<header>
+				<%= form_tag search_items_checklist_path(@checklist, :project_id => @project.id), :id => "checklist-search", :method => :post, :class=>"input-group search", :remote => true do %>
+					<%= text_field_tag :search, nil, :placeholder=>"Search for checklist items...", :class=>"form-control search" %>
+					<span class="input-group-addon cancel-search" id="remove">
+						<i class="fa fa-remove"></i>
+					</span>
+				<% end %>				
+				<div class="checklist-header row">
+					<div class="col-xs-1">
+						<i class="fa fa-search" id="checklist-search-button"></i>
 					</div>
-				</header>
-				<ul id="phases">
-					<%= render partial: 'phases/show', collection: @checklist.phases, as: :p, cache: true %>
-				</ul>
-				<% if current_user.admin %>
-					<%= link_to new_phase_path(:checklist_id => @checklist.id,:project_id => @project.id), :id=>"new-phase", :class=>"remote new-phase empty-btn", remote: true do %>
-						<i class="fa fa-plus remote"></i><span style="padding-left:10px;">Phase</span>
-					<% end %>
+					<div class="col-xs-7 header-label left"><h6 class="left">Phase</h6></div>
+					<div class="col-xs-2 header-label center"><h6>Target</h6></div>	
+					<div class="col-xs-2 header-label center"><h6>Completed</h6></div>
+				</div>
+			</header>
+			<ul id="phases">
+				<%= render partial: 'phases/show', collection: @checklist.phases, as: :p, cache: true %>
+			</ul>
+			<% if current_user.admin %>
+				<%= link_to new_phase_path(:checklist_id => @checklist.id,:project_id => @project.id), :id=>"new-phase", :class=>"remote new-phase empty-btn", remote: true do %>
+					<i class="fa fa-plus remote"></i><span style="padding-left:10px;">Phase</span>
 				<% end %>
-			</div>
+			<% end %>
 		</div>
-	<% else %>
-		<div class="no-content placeholder font-smoothing">This project does not have a checklist</div>	
-	<% end %>
-</div>
+	</div>
+<% else %>
+	<div class="no-content placeholder font-smoothing">This project does not have a checklist</div>	
+<% end %>
 
 <div id="checklist" class="focus"<% if @item %>style="left:54%"<% end %>>
 	<%= render :partial => "checklist_items/edit", locals: {item: @item} if @item %>	

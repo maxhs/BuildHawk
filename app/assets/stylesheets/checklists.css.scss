@@ -2,10 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.checklist.panel {
-	width:54% !important;
-}
-
 #checklist.focus {
 	position:absolute;
 	top:0;
@@ -17,13 +13,36 @@
 	-ms-transition: all 0.23s ease;
 	-o-transition: all 0.23s ease;
 	transition: all 0.23s ease;
+
+	/*form.edit_phase {
+		display:inline-block;
+		width:100%;
+		height:100%;
+	}
+
+	form.edit_category {
+		display:inline-block;
+		width:300px;
+		height:39px;
+
+		h3,h4,input[type="text"] {
+			width:100%;
+		}
+	}*/
 }
 
-.admin-checklist-table.border-box, .project-checklist-table.border-box, .core-checklist-table.border-box, #core-checklist, #admin-checklist, #project-checklist {
-	clear:both;
-	float:none;
-	display:block;
+.checklist.panel {
+	width:54% !important;
+}
+
+.admin-checklist-table, .project-checklist-table, .core-checklist-table{
+	
+}
+
+#core-checklist, #admin-checklist, #project-checklist {
 	width:100%;
+	height:100%;
+	position:relative;
 	-webkit-transition: all 0.23s ease;
 	-moz-transition: all 0.23s ease;
 	-ms-transition: all 0.23s ease;
@@ -40,7 +59,6 @@
 	}
 
 	.flagged {
-		//color:#cc0000;
 		text-decoration: line-through;
 	}
 
@@ -163,24 +181,6 @@
 			display:inline-block;
 			margin:15px auto;
 		}
-	}
-	form.edit_phase {
-		display:inline-block;
-		height:63px;
-	}
-
-	form.edit_category {
-		display:inline-block;
-		width:300px;
-		height:39px;
-		h3,h4,input[type="text"] {
-			width:100%;
-		}
-	}
-
-	#cancel-edit-category {
-		cursor:pointer;
-		text-transform:uppercase;
 	}
 
 	.phase-label {

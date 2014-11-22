@@ -36,9 +36,9 @@
 	    <% end %>
 
 	    <% unless @project.checklist %>
-	    	<div class="row extra-padding" style="border:0;padding-top:10px">
+	    	<div class="row personnel">
 				<div class="col-xs-3"><h5>Checklist</h5></div>
-				<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(@project.company.checklists.where(core: true).flatten, :id, :name) %></div>
+				<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(@project.company.checklists.where(core: true).flatten, :id, :name), :class=>"for-select-2" %></div>
 			</div>
 	    <% end %>
 

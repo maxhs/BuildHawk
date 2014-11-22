@@ -25,12 +25,13 @@
 
 #groups {
 	.group-header {
-		color:#aaa;	
-		height:44px;
-		text-align:right;
-		line-height:0;
-		cursor:default;
-		display:table;
+		color: #aaa;	
+		height: 44px;
+		text-align: right;
+		line-height: 0;
+		cursor: default;
+		display: table;
+		width: 100%;
 		padding-bottom:10px;
 
 		.fa-cog:hover {
@@ -40,15 +41,14 @@
 		.group-name {
 			display:inline-block;
 			text-align:left;
-			margin-left:7px;
-			margin-top:0;
+			margin: 0 7px;
 			padding-top:14px;
-			font-size:1em;
-			padding-right:10px;
+			font-size:.8em;
 		}
 
 		.projects-count {
 			padding-right:5px;
+			line-height:1em;
 		}
 	}
 }
