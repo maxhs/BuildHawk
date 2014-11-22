@@ -1,8 +1,8 @@
-<p style="text-align:center;font-size:1.25em;color:#aaa;font-weight:200;">You just received a new message:</p>
+<p style="text-align:center;font-family:'Helvetica';margin:-2.5% auto 2.5%;color:#aaa;font-weight:200;">You just received a new message</p>
 
 <p><%= @message.body %></p>
 
-<p style="float: right; color: #aaa;">
-	<div><%= @message.author.full_name %></div>
-	<div><%= @timestamp %></div>
-</p>
+<div style="float: right; color: #aaa; font-weight:200; font-size:1.1em;">
+	<p style="margin:0;"><%= @message.author.full_name %></p>
+	<p style="margin:0;"><%= @timestamp %></p>
+</div>

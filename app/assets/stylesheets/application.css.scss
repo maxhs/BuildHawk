@@ -350,7 +350,7 @@ body {
 			.project {
 				cursor:default;
 				background:#555;
-				line-height:15px;
+				line-height:1em;
 				-webkit-transition: all 0.23s ease;
     			-moz-transition: all 0.23s ease;
     			-ms-transition: all 0.23s ease;
@@ -361,7 +361,7 @@ body {
     			font-family: "Lato","Open Sans","OpenSans","Source Sans Pro",'Helvetica Neue',Helvetica,sans-serif;
 
 				.inner-padding {
-					padding:10px;
+					padding: 5px 10px;
 				}
 
 				.project-name {
