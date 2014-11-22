@@ -7,7 +7,7 @@ class MessageMailer < ActionMailer::Base
   		@user = user
   		@timestamp = parse_datetime(message.created_at)
   		mail(
-      		:subject => "#{message.body[0..15]}...",
+      		:subject => "#{message.body[0..23]}...",
       		:to      => user.email,
       		:from 	 => "BuildHawk Message <support@buildhawk.com>",
       		:tag     => 'Message'
