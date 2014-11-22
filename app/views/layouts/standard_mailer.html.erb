@@ -9,14 +9,14 @@
 <body>
     <div>
         <div style="margin:0 auto;border-radius:3px;padding:2.5% 0 7.5% 0">
-            <div style="text-align:center; margin:0 auto 1%;">
+            <div style="text-align:center; margin:0 auto;">
                 <%= link_to image_tag('logo.png', alt: "BuildHawk", :style=>"width:200px;"), root_url %>
             </div>
-            <div style="width:80%;max-width:800px;background:#ffffff;margin: 0 auto; padding:2.5% 5% 5% 5%;overflow:auto;">
+            <div style="width:80%;max-width:700px;background:#ffffff;margin: 0 auto; padding:0 2.5%; overflow:auto;">
                 <%= yield %>
             </div>
         </div>
-        <div style="width:98%;margin:0 auto;min-height:40px;padding:1% 0;border-top:1px solid #dfdfdf;text-align:left;">
+        <div style="width:98%;margin:0 auto;min-height:40px;padding:1% 0;border-top:1px solid #dfdfdf;text-align:left;font-family:'Helvetica';font-weight:200;">
             <div style='max-width:700px;margin:0 auto;width:100%;font-size:12px;line-height:1.25em;'>
                 <div>Sent by <%= link_to "BuildHawk", root_url, :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %>  |  760 Market Street, 5th Floor  |  San Francisco, CA 94102</div>
                 <div>Viewing on an iOS device? Download our <%= link_to "iOS", "https://itunes.apple.com/us/app/buildhawk/id816590963?mt=8", :style=>"color:#0880ff;text-decoration:none;display:inline-block;" %> app.</div>

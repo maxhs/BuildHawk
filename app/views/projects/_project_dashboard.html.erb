@@ -12,7 +12,7 @@
 				<% end %>	
 			
 			<% else %>
-				<div class="dashboard-placeholder">(No upcoming items)</div>
+				<div class="no-content placeholder font-smoothing">(No upcoming items)</div>
 			<% end %>
 		</div>
 
@@ -49,7 +49,7 @@
 				<% end %>
 			</div>
 		<% else %>
-			<div class="dashboard-placeholder">(No recent activity)</div>
+			<div class="no-content placeholder font-smoothing">(No recent activity)</div>
 		<% end %>
 
 	<% if @recent_photos && @recent_photos.count > 0 %>
