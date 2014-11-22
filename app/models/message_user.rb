@@ -7,6 +7,6 @@ class MessageUser < ActiveRecord::Base
 	after_create :notify
 
 	def notify
-		MessageMailer.send_message(message,user).deliver
+		MessageMailer.send_message(message,user).deliver if user.email_permissions
 	end
 end

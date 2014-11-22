@@ -69,14 +69,14 @@ class MessagesController < AppController
 
 	def destroy
 		message = Message.find params[:id]
+		@message_id = message.id
 		if message.destroy
 			if request.xhr?
 				respond_to do |format|
 					format.js
 				end
 			else
-				flash[:notice] = "Message removed"
-				redirect_to root_url
+				redirect_to root_url, notice:"Message removed"
 			end
 
 		else

@@ -1,6 +1,15 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+function dismissMessage(){
+	$('.panel').removeClass('panel');
+	$('#message.focus').css('left','101%');
+	setTimeout(function(){
+		$('#message.focus').html('');
+		$('.active').removeClass('active');
+	},230);
+}
+
 function messageSetup() {
 	$('.project-select').select2({
 		placeholder: "Select multiple projects...",
@@ -12,12 +21,7 @@ function messageSetup() {
 	});
 
 	$('#dismiss-message').click(function(){
-		$('.panel').removeClass('panel');
-		$('#message.focus').css('left','101%');
-		setTimeout(function(){
-			$('#message.focus').html('');
-			$('.active').removeClass('active');
-		},230);
+		dismissMessage();
 	});
 
 	$('#new-message #message-send').click(function(){
