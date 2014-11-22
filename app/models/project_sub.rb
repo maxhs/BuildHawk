@@ -2,7 +2,7 @@ class ProjectSub < ActiveRecord::Base
 	attr_accessible :project_id, :company_id
 	belongs_to :project
 	belongs_to :company
-	validates_uniqueness_of :project_id, :scope => :company_id
+	validates_uniqueness_of :project_id, scope: :company_id
 
 	acts_as_api
 

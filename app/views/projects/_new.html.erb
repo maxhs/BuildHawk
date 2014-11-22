@@ -5,39 +5,39 @@
 		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 		
 		<div class="row">
-			<div class="col-xs-3"><h4>Name:</h4></div>
+			<div class="col-xs-3"><h4>Name</h4></div>
 			<div class="col-xs-9"><%= f.text_field :name, placeholder: "Project name" %></div>
 		</div>
 
 		<%= f.fields_for :address do |a| %>	
 			<div class="row">
-				<div class="col-xs-3"><h4>Street:</h4></div>
+				<div class="col-xs-3"><h4>Street</h4></div>
 				<div class="col-xs-9"><%= a.text_field :street1 , placeholder: "Street address" %></div>
 			</div>
 			<div class="row">
-				<div class="col-xs-3"><h4>City:</h4></div>
+				<div class="col-xs-3"><h4>City</h4></div>
 				<div class="col-xs-9"><%= a.text_field :city , placeholder: "City" %></div>
 			</div>
 			
 			<div class="row">
-				<div class="col-xs-3"><h4>State:</h4></div>
+				<div class="col-xs-3"><h4>State</h4></div>
 				<div class="col-xs-9"><%= a.text_field :state , placeholder: "State" %></div>
 			</div>
 			
 			<div class="row">
-				<div class="col-xs-3"><h4>Zip:</h4></div>
+				<div class="col-xs-3"><h4>Zip</h4></div>
 				<div class="col-xs-9"><%= a.text_field :zip , placeholder: "Zip" %></div>
 			</div>
 		<% end %>
 
 		<div class="row extra-padding" style="border:0;padding-top:10px">
-			<div class="col-xs-3"><h4>Checklist:</h4></div>
+			<div class="col-xs-3"><h4>Checklist</h4></div>
 			<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(@checklists,  :id, :name) %></div>
 		</div>
 
         <div class="row extra-padding">
         	<div class="col-xs-3">
-        		<h4 style="display:inline-block;">Users:</h4>
+        		<h4 style="display:inline-block;">Users</h4>
         		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the personnel you want to attach to each project. Each user attached here will count towards your monthly billing cycle.'></i>
 
         	</div>
@@ -48,16 +48,16 @@
         
         <div class="row extra-padding">
         	<div class="col-xs-3">
-        		<h4 style="display:inline-block;">Subs:</h4>
+        		<h4 style="display:inline-block;">Subcontractors</h4>
         		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the companies you want to associated with this project. You can assign them tasks and list them on reports, but they will not be able to view the full project.'></i>
         	</div>
         	<div class="col-xs-9">
-        		<%= f.collection_select :company_ids, @subs, :company_id, :name, {selected: @project.company_ids}, {multiple: true, :id => "companies-select", include_blank: false, include_empty: false} %>
+        		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple: true, :id => "companies-select", include_blank: false, include_empty: false} %>
 	    	</div>
         </div>
 
 		<div class="button-container">
-			<%= f.submit "CREATE PROJECT", :id=>"new-project-submit", :class => "simple-btn" %>
+			<%= f.submit "CREATE PROJECT", id: "new-project-submit", :class => "simple-btn save" %>
 		</div>
 	</div>
 <% end %>

@@ -37,20 +37,20 @@
 
 	    <% unless @project.checklist %>
 	    	<div class="row extra-padding" style="border:0;padding-top:10px">
-				<div class="col-xs-3"><h5>Checklist:</h5></div>
+				<div class="col-xs-3"><h5>Checklist</h5></div>
 				<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(@project.company.checklists.where(core: true).flatten, :id, :name) %></div>
 			</div>
 	    <% end %>
 
 	    <div class="row personnel">
-	    	<div class="col-xs-3"><h5>Personnel Assigned</h5></div>
+	    	<div class="col-xs-3"><h5>Personnel</h5></div>
 	    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
 	    		<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @project.user_ids}, {multiple: true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>
 	    </div>
 
 	    <div class="row personnel">
-	    	<div class="col-xs-3"><h5>Subcontractors Assigned</h5></div>
+	    	<div class="col-xs-3"><h5>Subcontractors</h5></div>
 	    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
 	    		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple:true, :class => "for-select-2", include_blank: false, include_empty: false} %>
 	    	</div>

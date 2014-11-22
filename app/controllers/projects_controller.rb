@@ -1,11 +1,11 @@
 class ProjectsController < AppController
 	before_filter :authenticate_user!
 	before_filter :fetch
-	before_filter :find_project, except: [:new]
+	before_filter :find_project, except: [:new, :edit]
 
 	def new
-		@users = current_user.company.users
-		@subs = current_user.company.company_subs
+		@users = @user.company.users
+		@subs = @user.company.company_subs.sort_by{|cs| cs.subcontractor.name}.map(&:subcontractor)
 
 		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges
@@ -79,10 +79,9 @@ class ProjectsController < AppController
 		if @project.company
 			@project_groups = @project.company.project_groups 
 			@users = @project.company.users
-			@subs = @project.company.company_subs.flatten.sort_by{|cs| cs.subcontractor.name}
+			@subs = @project.company.company_subs.sort_by{|cs| cs.subcontractor.name}.map(&:subcontractor)
 		end
 
-		@project.users.build
 		@project.build_address unless @project.address
 			
 		if request.xhr?
