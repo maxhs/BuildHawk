@@ -8,7 +8,7 @@ class MessageUser < ActiveRecord::Base
 
 	def notify
 		puts "Just created a message user: #{user.full_name}"
-		MessageMailer.send_message(message,user).deliver if user.email_permissions && !message.sent
+		MessageMailer.send_message(message,user).deliver if user.email_permissions
 		self.update_column :sent, true
 	end
 end
