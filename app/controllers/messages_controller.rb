@@ -31,6 +31,8 @@ class MessagesController < AppController
 
 	def edit
 		@message = Message.find params[:id]
+		@users = current_user.company.users
+		@projects = current_user.company.projects
 		if request.xhr?
 			respond_to do |format|
 				format.js

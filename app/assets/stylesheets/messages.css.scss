@@ -75,7 +75,7 @@
 	}
 }
 
-#new-message {
+#new-message, #edit-message {
 	h3, h4 {
 		margin:1.5% auto 2%;
 	}
@@ -98,13 +98,17 @@
 	left:3%;
 }
 
-.message{
-	width:95%;
-	margin:0 auto;
-	border-radius:18px;
-	-moz-border-radius:18px;
-	-webkit-border-radius:18px;
-	border:1px solid #e3e3e3;
+.message.active {
+	background:#fff5cf;
+}
+
+.message {
+	width:100%;
+	margin:2% auto;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border:1px solid #e1e1e1;
 	position:relative;
 	background:#fff;
 	display:table;
@@ -119,9 +123,16 @@
 		font-size:1.1em;
 	}
 
+	.fa-cog {
+		position:absolute;
+		right:33px;
+		top:12px;
+	}
+
 	.fa-remove {
 		position:absolute;
 		right:10px;
 		top:10px;
+		font-size:1.25em;
 	}
 }
