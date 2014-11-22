@@ -3,4 +3,10 @@ class MessageUser < ActiveRecord::Base
 	
 	belongs_to :message
 	belongs_to :user
+
+	after_create :notify
+
+	def notify
+		MessageMailer.send_message(message,user).deliver
+	end
 end
