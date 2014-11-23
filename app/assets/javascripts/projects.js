@@ -30,10 +30,19 @@ function projectSetup(projectId) {
 	}
 	$("#project_core").change(function() {
 	    if($('#project_core').is(":checked")) {
-	    	console.log('checked');
-	    	$('#core-warning').text('WARNING: This will make the project visible to all users');
+	    	if (projectId){
+	    		console.log('projectId');
+		    	$('#core-warning').val('WARNING: This will make the project visible to all users');
+		    } else {
+		    	console.log('no projectId');
+		    	$('#core-warning').text('WARNING: This will make the project visible to all users');	
+		    }
 	    } else {
-    		$('#core-warning').text('');
+	    	if (projectId){
+	    		$('#core-warning').val('').text('');
+	    	} else {
+	    		$('#core-warning').val('').text('');
+	    	}
     	}
 	});
 }
