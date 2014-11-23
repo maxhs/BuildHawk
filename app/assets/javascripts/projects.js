@@ -25,13 +25,15 @@ function projectSetup(projectId) {
 	$(".for-select-2").select2();
 	$('.has-tooltip').tooltip();
 	$('#top-nav a').removeClass('current-page');
-	$('.nav-edit a,#'+projectId+'-link').addClass('current-page');
-
+	if (projectId){
+		$('.nav-edit a,#'+projectId+'-link').addClass('current-page');
+	}
 	$("#project_core").change(function() {
-	    if(this.checked) {
-	    	$('#core-warning').val('WARNING: This will make the project visible to all users');
+	    if($('#project_core').is(":checked")) {
+	    	console.log('checked');
+	    	$('#core-warning').text('WARNING: This will make the project visible to all users');
 	    } else {
-    		$('#core-warning').val('');
+    		$('#core-warning').text('');
     	}
 	});
 }

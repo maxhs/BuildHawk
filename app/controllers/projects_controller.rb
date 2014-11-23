@@ -15,6 +15,7 @@ class ProjectsController < AppController
 			redirect_to billing_index_path
 		else
 			@project = Project.new
+			@project.core = false
 			@project.build_address
 			@checklists = @user.company.checklists.where(core: true)
 		end

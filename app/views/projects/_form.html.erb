@@ -65,7 +65,7 @@
 
 <% if current_user.uber_admin %>
     <div class="row" style="margin-top:1em;">
-    	<div class="col-xs-3"><h5>Use as Demo</h5></div>
+    	<div class="col-xs-3"><h4>Demo</h4></div>
     	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %>
     		<span id="core-warning"><% if f.object.core %> WARNING: This will make the project visible to all users<% end %></span>
     	</div>

@@ -1,14 +1,12 @@
 <div class="border-box new-project" id="new-project">
-	<%= nested_form_for @project, url: projects_path, method: :post, remote: true do |f| %>
-		
+	<%= nested_form_for @project, url: projects_path, method: :post, remote: true do |f| %>		
 		<h2 style="text-align:center;padding-bottom:15px;">Create a New Project</h2>
-
 		<%= render partial:"form", locals:{project: @project, users: @users, checklist: @checklists, subs: @subs, project_groups: @project_groups, company: @company, f: f}%>
-
-		<div class="button-container">
-			<%= f.submit "CREATE PROJECT", id: "new-project-submit", :class => "simple-btn save" %>
+		<div class="button-section">
+			<div class="button-container">
+				<%= f.submit "CREATE PROJECT", id: "new-project-submit", :class => "simple-btn save" %>
+			</div>
 		</div>
-
 	<% end %>
 </div>
 
