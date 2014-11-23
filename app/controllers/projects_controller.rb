@@ -6,6 +6,7 @@ class ProjectsController < AppController
 	def new
 		@users = @user.company.users
 		@subs = @user.company.company_subs.sort_by{|cs| cs.subcontractor.name}.map(&:subcontractor)
+		@project_groups = @company.project_groups 
 
 		if @company.customer_id.nil? && current_user.uber_admin?
 			@charges = @company.charges

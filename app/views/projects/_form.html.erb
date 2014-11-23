@@ -1,0 +1,73 @@
+<%= f.hidden_field :company_id, value: current_user.company.id %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+<div class="row">
+	<div class="col-xs-3"><h4>Name</h4></div>
+	<div class="col-xs-9"><%= f.text_field :name, placeholder: "Project name" %></div>
+</div>
+
+<%= f.fields_for :address do |a| %>	
+	<div class="row">
+		<div class="col-xs-3"><h4>Street</h4></div>
+		<div class="col-xs-9"><%= a.text_field :street1 , placeholder: "Street address" %></div>
+	</div>
+	<div class="row">
+		<div class="col-xs-3"><h4>City</h4></div>
+		<div class="col-xs-9"><%= a.text_field :city , placeholder: "City" %></div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-3"><h4>State</h4></div>
+		<div class="col-xs-9"><%= a.text_field :state , placeholder: "State" %></div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-3"><h4>Zip</h4></div>
+		<div class="col-xs-9"><%= a.text_field :zip , placeholder: "Zip" %></div>
+	</div>
+<% end %>
+
+<% if project_groups %>
+    <div class="row personnel">
+    	<div class="col-xs-3"><h4>Project Group</h4></div>
+    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id), {}, :class=>"for-select-2" %></div>
+    </div>
+<% end %>
+
+<% unless project && project.checklist %>
+	<div class="row personnel">
+		<div class="col-xs-3"><h4>Checklist</h4></div>
+		<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(company.checklists.where(core: true).flatten, :id, :name), :class=>"for-select-2" %></div>
+	</div>
+<% end %>
+
+<div class="row extra-padding personnel">
+	<div class="col-xs-3">
+		<h4 class="display:inline-block">Personnel</h4>
+		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the personnel you want to attach to each project. Each user attached here will count towards your monthly billing cycle.'></i>
+	</div>
+	
+	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
+		<%= f.collection_select :user_ids, users, :id, :full_name, {selected: project.user_ids}, {multiple: true, include_blank: false, include_empty: false} %>
+	</div>
+</div>
+
+<div class="row personnel">
+	<div class="col-xs-3">
+		<h4 class="display:inline-block">Subcontractors</h4>
+		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the companies you want to associated with this project. You can assign them tasks and list them on reports, but they will not be able to view the full project.'></i>
+	</div>
+	
+	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
+		<%= f.collection_select :company_ids, subs, :id, :name, {selected: project.company_ids}, {multiple:true, include_blank: false, include_empty: false} %>
+	</div>
+</div>
+
+<% if current_user.uber_admin %>
+    <div class="row" style="margin-top:1em;">
+    	<div class="col-xs-3"><h5>Use as Demo</h5></div>
+    	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %>
+    		<span id="core-warning"><% if f.object.core %> WARNING: This will make the project visible to all users<% end %></span>
+    	</div>
+    </div>
+<% end %>

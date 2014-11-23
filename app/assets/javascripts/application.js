@@ -81,7 +81,7 @@ function setupWindow(){
     $('.has-tooltip').tooltip();
 
     $('.remove-top').click(function(){
-        $('#alert, #notice').stop().fadeOut(function(){
+        $('#alert, #notice, .remove-top').stop().fadeOut(function(){
             $('#alert, #notice').text("");
         });
     });

@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#edit-project {
+#edit-project, #new-project {
 	form, input[type="text"] {
 		width:100%;
 	}
@@ -10,7 +10,9 @@
 		width:auto;
 		margin-left:0;
 	}
-
+	h4 {
+		display:inline-block;
+	}
 	.button-container {
 		margin: 0 auto;
 	}

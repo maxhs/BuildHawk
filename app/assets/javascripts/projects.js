@@ -15,32 +15,29 @@ function sidebarSetup(){
 	});
 }
 
-function newProjectSetup(){
-	$('#users-select').select2({
+function projectSetup(projectId) {
+	$('#project_user_ids').select2({
 		placeholder: "Add personnel to the project"
 	});
-	$('#companies-select').select2({
-		placeholder: "Connect other companies to the project"
+	$('#project_company_ids').select2({
+		placeholder: "Connect companies to the project"
+	});
+	$(".for-select-2").select2();
+	$('.has-tooltip').tooltip();
+	$('#top-nav a').removeClass('current-page');
+	$('.nav-edit a,#'+projectId+'-link').addClass('current-page');
+
+	$("#project_core").change(function() {
+	    if(this.checked) {
+	    	$('#core-warning').val('WARNING: This will make the project visible to all users');
+	    } else {
+    		$('#core-warning').val('');
+    	}
 	});
 }
 
 function setupSearch(content){
 	$('#dismiss-search').click(function(){
 		$('#main').html(content);
-	});
-}
-
-function editSetup(projectId){
-	$(".for-select-2").select2();
-	$('#top-nav a').removeClass('current-page');
-	$('.nav-edit a,#'+projectId+'-link').addClass('current-page');
-	$("#project_core").change(function() {
-	    if(this.checked) {
-	    	$('#project_core').after('<span id="core-warning"> WARNING: This will make the project visible to all users</span>');
-	    } else {
-	    	$('#core-warning').fadeOut(200,function(){
-	    		$(this).remove();
-	    	});
-	    }
 	});
 }

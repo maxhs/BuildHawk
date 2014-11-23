@@ -2,75 +2,14 @@
 	<h3 class="edit-header center">Edit Project</h3>
 	<%= nested_form_for @project, method: :patch, remote: true do |f| %>
 
-		<%= hidden_field_tag :company_id, current_user.company.id %>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-		<div class="row">
-			<div class="col-xs-3 project-label"><h5>Name</h5></div>
-			<div class="col-xs-9"><%= f.text_field :name, :placeholder => "Project name" %></div>
-		</div>
-		
-		<%= f.fields_for :address do |a| %>
-			<div class="row">
-				<div class="col-xs-3 project-label"><h5>Street</h5></div>
-				<div class="col-xs-9"><%= a.text_field :street1 , :placeholder => "Street address" %></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-3 project-label"><h5>City</h5></div>
-				<div class="col-xs-9"><%= a.text_field :city , :placeholder => "City" %></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-3 project-label"><h5>State</h5></div>
-				<div class="col-xs-9"><%= a.text_field :state , :placeholder => "State" %></div>
-			</div>
-			<div class="row" style="margin-bottom:10px;">
-				<div class="col-xs-3 project-label"><h5>Zip</h5></div>
-				<div class="col-xs-9"><%= a.text_field :zip , :placeholder => "Zip" %></div>
-			</div>
-		<% end %>
-		
-		<% if @project_groups %>
-		    <div class="row personnel">
-		    	<div class="col-xs-3"><h5>Project Group</h5></div>
-		    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(@project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id), {}, :class=>"for-select-2" %></div>
-		    </div>
-	    <% end %>
-
-	    <% unless @project.checklist %>
-	    	<div class="row personnel">
-				<div class="col-xs-3"><h5>Checklist</h5></div>
-				<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(@project.company.checklists.where(core: true).flatten, :id, :name), :class=>"for-select-2" %></div>
-			</div>
-	    <% end %>
-
-	    <div class="row personnel">
-	    	<div class="col-xs-3"><h5>Personnel</h5></div>
-	    	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-	    		<%= f.collection_select :user_ids, @users, :id, :full_name, {selected: @project.user_ids}, {multiple: true, :class => "for-select-2", include_blank: false, include_empty: false} %>
-	    	</div>
-	    </div>
-
-	    <div class="row personnel">
-	    	<div class="col-xs-3"><h5>Subcontractors</h5></div>
-	    	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
-	    		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple:true, :class => "for-select-2", include_blank: false, include_empty: false} %>
-	    	</div>
-	    </div>
-
-	    <% if current_user.uber_admin %>
-		    <div class="row" style="margin-top:1em;">
-		    	<div class="col-xs-3"><h5>Use as Demo</h5></div>
-		    	<div class="col-xs-9" style="padding-top:3px;"><%= f.check_box :core %>
-		    		<% if f.object.core %> <span id="core-warning"> WARNING: This will make the project visible to all users</span><% end %>
-		    	</div>
-		    </div>
-		<% end %>
+		<%= render partial:"form", locals:{project: @project, users: @users, checklist: @checklists, subs: @subs, project_groups: @project_groups, company: @company, f: f}%>
 		
 		<div class="button-section">
 			<div class="button-container">
 				<%= button_tag(type: 'submit', :class=> "simple-btn save") do %>
 			    	<i class="fa fa-floppy-o"></i> Update
 			  	<% end %>
-	<% end %>
+	
 			</div>
 			<div class="button-container">
 				<% if current_user.project_users.where(project_id: @project.id, hidden: true).first %>
@@ -81,8 +20,9 @@
 				<%= link_to "Remove", destroy_confirmation_project_path(@project), method: :get, id:"remove-project-button", :class=>"simple-btn danger", remote: true %>
 			</div>
 		</div>
+	<% end %>
 </div>
 
 <script>
-	editSetup('<%=@project.id%>');
+	projectSetup('<%=@project.id%>');
 </script>

@@ -1,67 +1,17 @@
-<%= nested_form_for @project, url: projects_path, method: :post, remote: true do |f| %>
-	<div class="border-box new-project" id="new-project">
-		<h2 style="text-align:center;padding-bottom:15px;">Create a New Project</h2>
-		<%= f.hidden_field :company_id, value: current_user.company.id %>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<div class="border-box new-project" id="new-project">
+	<%= nested_form_for @project, url: projects_path, method: :post, remote: true do |f| %>
 		
-		<div class="row">
-			<div class="col-xs-3"><h4>Name</h4></div>
-			<div class="col-xs-9"><%= f.text_field :name, placeholder: "Project name" %></div>
-		</div>
+		<h2 style="text-align:center;padding-bottom:15px;">Create a New Project</h2>
 
-		<%= f.fields_for :address do |a| %>	
-			<div class="row">
-				<div class="col-xs-3"><h4>Street</h4></div>
-				<div class="col-xs-9"><%= a.text_field :street1 , placeholder: "Street address" %></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-3"><h4>City</h4></div>
-				<div class="col-xs-9"><%= a.text_field :city , placeholder: "City" %></div>
-			</div>
-			
-			<div class="row">
-				<div class="col-xs-3"><h4>State</h4></div>
-				<div class="col-xs-9"><%= a.text_field :state , placeholder: "State" %></div>
-			</div>
-			
-			<div class="row">
-				<div class="col-xs-3"><h4>Zip</h4></div>
-				<div class="col-xs-9"><%= a.text_field :zip , placeholder: "Zip" %></div>
-			</div>
-		<% end %>
-
-		<div class="row extra-padding" style="border:0;padding-top:10px">
-			<div class="col-xs-3"><h4>Checklist</h4></div>
-			<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(@checklists,  :id, :name) %></div>
-		</div>
-
-        <div class="row extra-padding">
-        	<div class="col-xs-3">
-        		<h4 style="display:inline-block;">Users</h4>
-        		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the personnel you want to attach to each project. Each user attached here will count towards your monthly billing cycle.'></i>
-
-        	</div>
-        	<div class="col-xs-9">
-        		<%= f.collection_select :user_ids, @users, :id, :full_name, {}, {include_blank: false, include_empty: false, multiple: true, :id=>"users-select", :style => "position:relative;top:2px;"} %>
-	    	</div>
-        </div>
-        
-        <div class="row extra-padding">
-        	<div class="col-xs-3">
-        		<h4 style="display:inline-block;">Subcontractors</h4>
-        		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the companies you want to associated with this project. You can assign them tasks and list them on reports, but they will not be able to view the full project.'></i>
-        	</div>
-        	<div class="col-xs-9">
-        		<%= f.collection_select :company_ids, @subs, :id, :name, {selected: @project.company_ids}, {multiple: true, :id => "companies-select", include_blank: false, include_empty: false} %>
-	    	</div>
-        </div>
+		<%= render partial:"form", locals:{project: @project, users: @users, checklist: @checklists, subs: @subs, project_groups: @project_groups, company: @company, f: f}%>
 
 		<div class="button-container">
 			<%= f.submit "CREATE PROJECT", id: "new-project-submit", :class => "simple-btn save" %>
 		</div>
-	</div>
-<% end %>
+
+	<% end %>
+</div>
 
 <script>
-	newProjectSetup();
+	projectSetup(null);
 </script>
