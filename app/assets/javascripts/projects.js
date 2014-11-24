@@ -31,10 +31,8 @@ function projectSetup(projectId) {
 	$("#project_core").change(function() {
 	    if($('#project_core').is(":checked")) {
 	    	if (projectId){
-	    		console.log('projectId');
 		    	$('#core-warning').val('WARNING: This will make the project visible to all users');
 		    } else {
-		    	console.log('no projectId');
 		    	$('#core-warning').text('WARNING: This will make the project visible to all users');	
 		    }
 	    } else {

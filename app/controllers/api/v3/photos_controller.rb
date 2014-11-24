@@ -17,7 +17,7 @@ class Api::V3::PhotosController < Api::V3::ApiController
         ## ios ##
             photo = Photo.create params[:photo]
             respond_to do |format|
-                format.json { render_for_api :dashboard, json: photo.report, root: :report}
+                format.json { render_for_api :dashboard, json: photo, root: :photo}
             end
         end
     end
