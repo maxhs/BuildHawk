@@ -13,6 +13,7 @@ class Api::V3::TasksController < Api::V3::ApiController
         else
             params[:task][:assignee_id] = nil
         end
+        params[:task].delete(:assignee_id)
         params[:task][:user_ids] = params[:task][:user_ids].split(',') if params[:task][:user_ids]
         ###
 

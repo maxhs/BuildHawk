@@ -1,4 +1,9 @@
-$('#projects').prepend('<%= j render partial:"projects/project", locals: {project: @project} %>');
+<% if @project.project_group %>
+	$('#pg-<%= @project.project_group.id %>').append('<%= j render partial:"project_groups/project", locals: {project: @project} %>');
+<% else %>
+	$('#projects').prepend('<%= j render partial:"projects/project", locals: {project: @project} %>');
+<% end %>
+
 $('#main').html('<%= j render partial:"projects/index", locals: {projects: @projects} %>');
 if (history && history.pushState){
     history.pushState(null, null, '<%=root_url%>projects');

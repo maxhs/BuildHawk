@@ -17,6 +17,7 @@ class ProjectsController < AppController
 			@project = Project.new
 			@project.core = false
 			@project.build_address
+			@project.build_project_group
 			@checklists = @user.company.checklists.where(core: true)
 		end
 	end

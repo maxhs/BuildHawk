@@ -28,9 +28,9 @@
 <% end %>
 
 <% if project_groups %>
-    <div class="row personnel">
+    <div class="row personnel groups">
     	<div class="col-xs-3"><h4>Project Group</h4></div>
-    	<div class="col-xs-9"><%= f.select :project_group_id, options_for_select(project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id), {}, :class=>"for-select-2" %></div>
+    	<div class="col-xs-9 group-select"><%= f.select :project_group_id, options_for_select(project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id), {}, :class=>"for-select-2" %></div>
     </div>
 <% end %>
 
@@ -52,13 +52,13 @@
 	</div>
 </div>
 
-<div class="row personnel">
+<div class="row subcontractors">
 	<div class="col-xs-3">
 		<h4 class="display:inline-block">Subcontractors</h4>
 		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the companies you want to associated with this project. You can assign them tasks and list them on reports, but they will not be able to view the full project.'></i>
 	</div>
 	
-	<div class="col-xs-6" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
+	<div class="col-xs-6 select" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
 		<%= f.collection_select :company_ids, subs, :id, :name, {selected: project.company_ids}, {multiple:true, include_blank: false, include_empty: false} %>
 	</div>
 </div>

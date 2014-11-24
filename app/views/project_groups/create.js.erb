@@ -1,4 +1,8 @@
 $('.new.project.group').fadeOut(200,function(){
 	$(this).remove();
-	$('#groups').prepend('<%= j render partial:"project_groups/group", :locals => {:project_group => @project_group} %>');
+	$('#groups').prepend('<%= j render partial:"project_groups/group", locals: {project_group: @project_group} %>');
 })
+
+//reset the project groups
+$('#project_project_group_id').append('<option value="<%=@project_group.id%>"><%=@project_group.name%></option>');
+$('#project_project_group_id').select2();

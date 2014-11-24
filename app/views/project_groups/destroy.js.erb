@@ -1,4 +1,6 @@
-$('#<%=@project_group_id%>').fadeOut(170,function(){
+$('#pg-<%=@project_group_id%>').fadeOut(170,function(){
 	$(this).remove();
-	$('#projects-sidebar').replaceWith('<%= j render partial:"projects/sidebar" %>');
 });
+//reset the project groups
+$('#project_project_group_id option[value="<%=@project_group_id%>"]').remove();
+$('#project_project_group_id').select2();

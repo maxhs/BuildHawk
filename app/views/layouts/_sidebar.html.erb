@@ -11,7 +11,7 @@
 				<i class="fa fa-plus"></i><span class="bold-header">Project</span>
 			<% end %>
 			<%= link_to new_project_group_path, id:"new-group-button", :class=>"remote", remote: true do %>
-				<i class="fa fa-plus"></i><span class="bold-header">Group</span>
+				<i class="fa fa-plus remote"></i><span class="bold-header remote">Group</span>
 			<% end %>
 		</li>
 	<% end %>
@@ -32,8 +32,6 @@
 	<ul id="groups" class="sortable-projects">
 		<% if @project_groups && @project_groups.count > 0 %>
 			<%= render partial:"project_groups/group", collection: @project_groups, as: :project_group %>
-		<% else %>
-			<!--<li style="color:#aaa;font-weight:100;">N/A</li>-->
 		<% end %>
 	</ul>
 

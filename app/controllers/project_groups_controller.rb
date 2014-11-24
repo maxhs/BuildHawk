@@ -10,6 +10,7 @@ class ProjectGroupsController < AppController
 		params[:project_group][:company_id] = @company.id
 		@project_group = ProjectGroup.create params[:project_group]
 		@project_groups = @company.project_groups
+		@project = Project.find params[:project_id] if params[:project_id]
 	end
 
 	def edit
@@ -28,5 +29,7 @@ class ProjectGroupsController < AppController
 		end
 		@project_group_id = project_group.id
 		project_group.destroy
+		company = current_user.company
+		@project_groups = company.project_groups
 	end
 end
