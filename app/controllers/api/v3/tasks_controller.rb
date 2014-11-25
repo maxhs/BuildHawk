@@ -6,9 +6,9 @@ class Api::V3::TasksController < Api::V3::ApiController
         
         notify = false
         
-        ## compatibility briding ##
+        ## compatibility briding, can remove when more people are on 1.06 ##
         if params[:task][:assignee_id]
-            assignee = User.where(:id => params[:task][:assignee_id]).first
+            assignee = User.where(id: params[:task][:assignee_id]).first
             notify = true if assignee && task.assignee_id != assignee.id
         else
             params[:task][:assignee_id] = nil
@@ -34,7 +34,7 @@ class Api::V3::TasksController < Api::V3::ApiController
 
         params[:task][:location] = nil unless params[:task][:location].present?    
 
-    	task.update_attributes params[:task]
+    	task.update_attributes! params[:task]
 
         if notify
             assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0
