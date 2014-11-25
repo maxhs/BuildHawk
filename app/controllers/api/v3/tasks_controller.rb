@@ -34,7 +34,7 @@ class Api::V3::TasksController < Api::V3::ApiController
 
         params[:task][:location] = nil unless params[:task][:location].present?    
 
-    	task.update_attributes! params[:task]
+    	task.update_attributes params[:task]
 
         if notify
             assignee.text_task(task) if assignee.text_permissions && assignee.phone && assignee.phone.length > 0

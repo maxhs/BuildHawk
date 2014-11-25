@@ -1,5 +1,6 @@
 class ServicesController < ApplicationController
 	skip_before_filter :verify_authenticity_token
+	include TaskHelper
 
 	def support
 		render json: {success: true}
@@ -9,7 +10,8 @@ class ServicesController < ApplicationController
 		events = JSON.parse params[:mandrill_events]
 		events.each do |e|
 			text = e['msg']['text'].partition('Write ABOVE THIS LINE to reply').first.html_safe
-			puts "e text:#{text.partition('\n\nOn ').first.html_safe}"
+			text = cleanText(text)
+			puts "e text:#{text}"
 		end
 		render json: {success: true}
 	end
