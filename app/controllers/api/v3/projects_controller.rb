@@ -2,28 +2,28 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
     def index
         user = User.find params[:user_id]
-        user.notifications.where(:read => false).each do |n| n.update_attribute :read, true end
+        user.notifications.where(read: false).each do |n| n.update_attribute :read, true end
 
         projects = user.project_users.where("hidden = ? and core = ? and project_group_id IS NULL",false,false).map{|p| p.project if p.project.company_id == user.company_id}.compact.sort_by(&:order_index)
         projects += user.company.projects.map{|p| p unless user.hidden_project_ids.include?(p.id)}.compact if user.any_admin?
            
         if projects
             respond_to do |format|
-                format.json { render_for_api :projects, :json => projects.uniq, :root => :projects}
+                format.json { render_for_api :projects, json: projects.uniq, root: :projects}
             end
         else
-            render :json => {success: false}
+            render json: {success: false}
         end
     end
 
     def demo
-        projects = Project.where(:core => true)
+        projects = Project.where(core: true)
         if params[:user_id]
             projects = projects.map{|project| project unless ProjectUser.where(project_id: project.id, user_id: params[:user_id].first.hidden)}.compact.uniq
         end
         if projects.count > 0
             respond_to do |format|
-                format.json { render_for_api :projects, :json => projects, :root => :projects}
+                format.json { render_for_api :projects, json: projects, root: :projects}
             end
         else
             render :json => {success: false}
@@ -33,18 +33,18 @@ class Api::V3::ProjectsController < Api::V3::ApiController
     def show
         project = Project.find params[:id]
         respond_to do |format|
-            format.json { render_for_api :v3_details, :json => project, :root => :project}
+            format.json { render_for_api :v3_details, json: project, root: :project}
         end
     end
 
     def find_user
         project = Project.find params[:id]
         if params[:user][:email]
-            user = User.where(:email => params[:user][:email]).first
+            user = User.where(email: params[:user][:email]).first
         elsif params[:user][:phone]
             phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'')
             puts "Trying to find a user with phone: #{phone}"
-            user = User.where(:phone => phone).first
+            user = User.where(phone: phone).first
         end
 
         if user
@@ -91,13 +91,15 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             params[:user].delete(:company_name)
         end
 
-        email = params[:user][:email].strip if params[:user][:email]
-        puts "do we have an email? #{email}"
-        phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'') if params[:user][:phone]
-        puts "do we have a phone? #{phone}"
 
-        user = User.where(:email => email).first if email && email.length > 0
-        user = User.where(:phone => phone).first if !user && phone && phone.length > 0
+        if params[:user][:email]
+            email = params[:user][:email].strip 
+            user = User.where(:email => email).first
+        end
+        if params[:user][:phone]
+            phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'') 
+            user = User.where(:phone => phone).first if !user && phone && phone.length > 0
+        end
 
         unless user
             if email && email.length > 0
@@ -109,14 +111,11 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         end
 
         unless user
-            puts "we still don't have a user, so we have to create someone #{email} length: #{email.length}"
             ## still no user? This means they're a "connect user". Creating a new user here will create an inactive user by default.
             if email && email.length > 0
                 user = User.where(email: email, company_id: company.id).first_or_create
-                puts "new email user: #{user.full_name}"
             elsif phone && phone.length > 0
                 user = User.where(phone: phone, company_id: company.id).first_or_create
-                puts "new phone user: #{phone}"
             end
         end
 
@@ -127,17 +126,17 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         ## notify the user
         if task
             if email && user.email_permissions
-                #user.email_task(task)
+                user.email_task(task)
             elsif phone && user.text_permissions
-                #user.text_task(task)
+                user.text_task(task)
             end
         elsif report
-            report.report_users.where(:user_id => user.id).first_or_create
+            report.report_users.where(user_id: user.id).first_or_create
         end
 
         if user
             respond_to do |format|
-                format.json { render_for_api :user, :json => user, :root => :user}
+                format.json { render_for_api :user, json: user, :root => :user}
             end
         else 
             render json: {success: false}
@@ -145,10 +144,10 @@ class Api::V3::ProjectsController < Api::V3::ApiController
     end
 
     def dash
-        @project = Project.find params[:id]
-        unless @project.checklist.nil?
+        project = Project.find params[:id]
+        unless project.checklist.nil?
             respond_to do |format|
-                format.json { render_for_api :dashboard, :json => @project}
+                format.json { render_for_api :dashboard, json: project}
             end
         else
             render :json => {success: false}
@@ -157,11 +156,11 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
     def hidden
         user = User.find params[:user_id]    
-        projects = user.project_users.where(:hidden => true).map(&:project).compact
+        projects = user.project_users.where(hidden: true).map(&:project).compact
      
         if projects
             respond_to do |format|
-                format.json { render_for_api :projects, :json => projects.sort_by{|p| p.name.downcase}, :root => :projects}
+                format.json { render_for_api :projects, json: projects.sort_by{|p| p.name.downcase}, :root => :projects}
             end
         else
             render :json => {success: false}
