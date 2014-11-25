@@ -75,15 +75,14 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
         if params[:user][:company_name]
             company_name = "#{params[:user][:company_name]}"
-            company = Company.where("name ILIKE ?",company_name).first_or_create
-            #company = Company.create name: company_name unless company
+            company = Company.where("name ILIKE ?",company_name).first
+            company = Company.create name: company_name unless company
             params[:user][:company_id] = company.id
-
-            ## create a new project subcontractor object for the project
-            project.project_subs.where(company_id: company.id).first_or_create
 
             ## create a new company subcontractor object for the company that owns the project
             project.company.company_subs.where(:subcontractor_id => company.id).first_or_create 
+            ## create new project subcontractor object for the project
+            project.project_subs.where(company_id: company.id).first_or_create
 
             params[:user].delete(:company_name)
         end
@@ -120,20 +119,20 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         project.project_users.where(user_id: user.id).first_or_create
         project.project_subs.where(company_id: user.company_id).first_or_create if user.company_id
 
-        ## notify the user
-        if task
-            ## ensure the user is actually assigned
-            TaskUser.where(task_id: task.id, user_id: user.id).first_or_create
-            if email && user.email_permissions
-                user.email_task(task)
-            elsif phone && user.text_permissions
-                user.text_task(task)
-            end
-        elsif report
-            report.report_users.where(user_id: user.id).first_or_create
-        end
-
         if user
+            ## notify the user
+            if task
+                ## ensure the user is actually assigned to the task
+                TaskUser.where(task_id: task.id, user_id: user.id).first_or_create
+                if email && user.email_permissions
+                    user.email_task(task)
+                elsif phone && user.text_permissions
+                    user.text_task(task)
+                end
+            elsif report
+                report.report_users.where(user_id: user.id).first_or_create
+            end
+        
             respond_to do |format|
                 format.json { render_for_api :user, json: user, :root => :user}
             end
