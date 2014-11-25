@@ -81,7 +81,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             company = Company.where("name ILIKE ?",company_name).first
             company = Company.create name: company_name unless company
             params[:user][:company_id] = company.id
-            puts "What's the company name? #{company_name}"
+            
             ## create a new project subcontractor object for the project
             project.project_subs.where(company_id: company.id).first_or_create
 
@@ -96,8 +96,10 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         phone = params[:user][:phone].gsub(/[^0-9a-z ]/i, '').gsub(/\s+/,'') if params[:user][:phone]
         puts "do we have a phone? #{phone}"
 
-        user = User.where(:email => email).first
-        user = User.where(:phone => phone).first unless user
+        user = User.where(:email => email).first if email && email.length > 0
+        user = User.where(:phone => phone).first if !user && phone && phone.length > 0
+
+        puts "do we have an initial user? #{user.full_name}" if user
 
         unless user
             if email && email.length > 0
@@ -106,6 +108,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
                 alternate = Alternate.where(:phone => phone).first
             end
             user = alternate.user if alternate
+            puts "do we have an user from the alternates? #{user.full_name}" if user
         end
 
         unless user
