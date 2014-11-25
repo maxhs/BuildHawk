@@ -10,7 +10,7 @@ class TasklistMailer < ActionMailer::Base
   		mail(
       		:subject  => "#{@project.name} - Tasks Assigned to You",
       		:to       => @recipient.email,
-      		:from     => "support@buildhawk.com",
+      		:from     => "BuildHawk Tasks <support@buildhawk.com>",
             :reply_to => "tasks@inbound.buildhawk.com",
       		:tag      => 'Task Export'
     	)
