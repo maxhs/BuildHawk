@@ -81,7 +81,7 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             company = Company.where("name ILIKE ?",company_name).first
             company = Company.create name: company_name unless company
             params[:user][:company_id] = company.id
-            
+
             ## create a new project subcontractor object for the project
             project.project_subs.where(company_id: company.id).first_or_create
 
@@ -99,31 +99,30 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user = User.where(:email => email).first if email && email.length > 0
         user = User.where(:phone => phone).first if !user && phone && phone.length > 0
 
-        puts "do we have an initial user? #{user.full_name}" if user
-
         unless user
             if email && email.length > 0
-                alternate = Alternate.where(:email => email).first
+                alternate = Alternate.where(email: email).first
             elsif phone && phone.length > 0
-                alternate = Alternate.where(:phone => phone).first
+                alternate = Alternate.where(phone: phone).first
             end
             user = alternate.user if alternate
-            puts "do we have an user from the alternates? #{user.full_name}" if user
         end
 
         unless user
-            puts "we still don't have a user, so we have to create someone"
+            puts "we still don't have a user, so we have to create someone #{email} length: #{email.length}"
             ## still no user? This means they're a "connect user". Creating a new user here will create an inactive user by default.
             if email && email.length > 0
-                user = User.where(:email => email).first_or_create
+                user = User.where(email: email).first_or_create
+                puts "new email user: #{user.full_name}"
             elsif phone && phone.length > 0
-                user = User.where(:phone => phone).first_or_create
+                user = User.where(phone: phone).first_or_create
+                puts "new phone user: #{phone}"
             end
         end
 
         ## ensure the user is attached to the project
-        project.project_users.where(:user_id => user.id).first_or_create
-        project.project_subs.where(:company_id => user.company_id).first_or_create if user.company_id
+        project.project_users.where(user_id: user.id).first_or_create
+        project.project_subs.where(company_id: user.company_id).first_or_create if user.company_id
 
         ## notify the user
         if task
