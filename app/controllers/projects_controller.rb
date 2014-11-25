@@ -44,7 +44,7 @@ class ProjectsController < AppController
 			@company = Company.find params[:company_id]
 		end
 		
-		@messages = @user.messages
+		@messages = @user.message_users
 		@items = Notification.where("user_id = ? and read = ? and checklist_item_id IS NOT NULL",@user.id,false)
 		@reports = Notification.where("user_id = ? and read = ? and report_id IS NOT NULL",@user.id,false)
 		@tasks = Notification.where("user_id = ? and read = ? and task_id IS NOT NULL",@user.id,false)

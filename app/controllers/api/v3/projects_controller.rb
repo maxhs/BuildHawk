@@ -49,22 +49,23 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
         if user
             ## existing user. ensure they're attached to the project
-            project.project_users.where(:user_id => user.id).first_or_create
+            project.project_users.where(user_id: user.id).first_or_create
             respond_to do |format|
-                format.json { render_for_api :user, :json => user, :root => :user}
+                format.json { render_for_api :user, json: user, root: :user}
             end
         else
-            alternate = Alternate.where(:email => params[:user][:email]).first
-            alternate = Alternate.where(:phone => phone).first if phone && !alternate
+            puts "couldn't find email for user: #{params[:user][:email]}" if params[:user][:email]
+            puts "just couldn't find the user"
+            alternate = Alternate.where(email: params[:user][:email]).first
+            alternate = Alternate.where(phone: phone).first if phone && !alternate
             if alternate
                 user = alternate.user
                 puts "did we find an alternate? #{user.full_name}"
-                project.project_users.where(:user_id => user.id).first_or_create
+                project.project_users.where(user_id: user.id).first_or_create
                 respond_to do |format|
-                    format.json { render_for_api :user, :json => user, :root => :user}
+                    format.json { render_for_api :user, json: user, root: :user}
                 end
             else
-                
                 render json: {success: false}
             end
         end
@@ -78,11 +79,11 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         if params[:user][:company_name]
             company_name = "#{params[:user][:company_name]}"
             company = Company.where("name ILIKE ?",company_name).first
-            company = Company.create :name => company_name unless company
+            company = Company.create name: company_name unless company
             params[:user][:company_id] = company.id
-
+            puts "What's the company name? #{company_name}"
             ## create a new project subcontractor object for the project
-            project.project_subs.create :company_id => company.id
+            project.project_subs.where(company_id: company.id).first_or_create
 
             ## create a new company subcontractor object for the company that owns the project
             project.company.company_subs.where(:subcontractor_id => company.id).first_or_create 
