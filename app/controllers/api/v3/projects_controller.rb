@@ -54,13 +54,10 @@ class Api::V3::ProjectsController < Api::V3::ApiController
                 format.json { render_for_api :user, json: user, root: :user}
             end
         else
-            puts "couldn't find email for user: #{params[:user][:email]}" if params[:user][:email]
-            puts "just couldn't find the user"
             alternate = Alternate.where(email: params[:user][:email]).first
             alternate = Alternate.where(phone: phone).first if phone && !alternate
             if alternate
                 user = alternate.user
-                puts "did we find an alternate? #{user.full_name}"
                 project.project_users.where(user_id: user.id).first_or_create
                 respond_to do |format|
                     format.json { render_for_api :user, json: user, root: :user}
@@ -125,6 +122,8 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
         ## notify the user
         if task
+            ## ensure the user is actually assigned
+            TaskUser.where(task_id: task.id, user_id: user.id).first_or_create
             if email && user.email_permissions
                 user.email_task(task)
             elsif phone && user.text_permissions
