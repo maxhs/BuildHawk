@@ -17,7 +17,11 @@ class Api::V3::TasksController < Api::V3::ApiController
         params[:task][:user_ids] = params[:task][:user_ids].split(',') if params[:task][:user_ids]
         ###
 
-        params[:task][:assignee_ids] = params[:task][:assignee_ids].split(',') if params[:task][:assignee_ids]
+        if params[:task][:assignee_ids]
+            params[:task][:assignee_ids] = params[:task][:assignee_ids].split(',')
+        else
+            params[:task][:assignee_ids] = nil
+        end
 
         if params[:task][:completed] == "1"
             params[:task][:completed] = true
