@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
 	skip_before_filter :verify_authenticity_token
-	include TaskHelper
+	include TasksHelper
 
 	def support
 		render json: {success: true}
