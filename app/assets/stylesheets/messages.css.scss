@@ -22,6 +22,17 @@
 		-ms-transition: all 0.23s ease;
 		-o-transition: all 0.23s ease;
 		transition: all 0.23s ease;
+
+		#sent-received {
+			.inbox, .sent {
+				margin:0 10px;
+				text-decoration:none;
+			}
+			.current {
+				color:#cc0000;
+				text-decoration:underline;
+			}
+		}
 	}
 
 	.focus {
@@ -41,7 +52,7 @@
 		text-align:center;
 		color:#aaa;
 		font-size:1.1em;
-		margin-bottom:2%;
+		margin-bottom:1%;
 
 		a {
 			color:#aaa;

@@ -1,6 +1,9 @@
-$('#main').fadeOut(100,function(){
-	$(this).html('<%= j render :partial => "messages/index" %>');
-	$(this).fadeIn(100, function(){
-		closeMenu();
-	});
-});
+$('#messages-table').html('<%= j render partial: "messages/index", locals:{messages: @messages} %>');
+$('.current').removeClass('current');
+$('#sent-received .inbox').addClass('current');
+if (history && history.pushState){
+    history.pushState(null, null, '<%=root_url%>projects');
+    $(window).bind("popstate", function(){
+      	$.getScript(location.href);
+    });
+}

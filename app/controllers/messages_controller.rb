@@ -2,7 +2,15 @@ class MessagesController < AppController
 	before_filter :authenticate_user!
 
 	def index
-		@messages = current_user.messages 
+		@user = current_user
+		@messages = @user.messages
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to projects_path
+		end
 	end
 
 	def new
@@ -77,6 +85,18 @@ class MessagesController < AppController
 				redirect_to root_url, notice:"Sorry, but something went wrong while trying to hide this message."
 			end
 		end 
+	end
+
+	def sent
+		@user = current_user
+		@messages = Message.where(author_id: @user.id)
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			redirect_to projects_path
+		end
 	end
 
 	def destroy

@@ -27,15 +27,14 @@
 
 	<div id="communication" class="container">
 		<div id="messages" class="border-box">
-			<h4>Messages</h4>
+			<h4 id="title">Messages</h4>
+			<div class="explanation font-smoothing" id="sent-received"><%= link_to "Inbox", messages_path, :class=>"current inbox", remote: true %>|<%= link_to "Sent", sent_messages_path, :class=>"sent", remote: true %></div>
 			<div class="explanation font-smoothing">Use the messages section to communicate with your team.  <%= link_to "Send a new message", new_message_path, remote:true %>.</div>
 			
 			<div id="messages-table">
 				<%= render partial:"messages/message", collection: @messages, as: :message, cache: true %>
 			</div>
 		</div>
-		<div id="message" class="focus">
-		</div>
+		<div id="message" class="focus"></div>
 	</div>
-
 </div>

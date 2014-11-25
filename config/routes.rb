@@ -71,64 +71,21 @@ Buildhawk::Application.routes.draw do
     end
   end 
   resources :cards
-  resources :company_subs
-  resources :uber_admin do
-    collection do
-      post :upload_template
-      get :companies
-      get :users
-      get :errors
-      get :core_checklists
-      get :promos
-      get :edit_company
-      get :edit_user
-      post :update_company
-      post :update_user
-      delete :destroy_company
-      delete :destroy_user
-      get :promo_codes
-      get :safety_topics
-      get :create_blank_template
-    end
-  end
-  resources :promos
-  resources :connect do
+  resources :charges do
     member do 
-      get :task
+      patch :promo_code
     end
   end
-  resources :projects do
-    member do
-      post :hide
-      post :activate
-      get :tasklist
-      get :reports
-      post :search_tasklist
-      get :checklist
-      get :checklist_item
-      get :show_photo
-      get :documents
-      get :checklist_photos
-      get :tasklist_photos
-      get :report_photos
-      get :destroy_confirmation
-    end
-    collection do
-      post :search
-      post :order_projects
-    end
-  end
+  resources :comments
   resources :companies do
     collection do 
       post :search
     end
   end
-  resources :comments
-  resources :project_groups
-  resources :leads, only: [:create, :index]
-  resources :messages do
-    member do
-      delete :message_user
+  resources :company_subs
+  resources :connect do
+    member do 
+      get :task
     end
   end
   resources :categories
@@ -155,7 +112,40 @@ Buildhawk::Application.routes.draw do
       delete :destroy_category
     end
   end
+  resources :folders
+  resources :leads, only: [:create, :index]
+  resources :messages do
+    member do
+      delete :message_user
+    end
+    collection do 
+      get :sent
+    end
+  end
   resources :phases
+  resources :projects do
+    member do
+      post :hide
+      post :activate
+      get :tasklist
+      get :reports
+      post :search_tasklist
+      get :checklist
+      get :checklist_item
+      get :show_photo
+      get :documents
+      get :checklist_photos
+      get :tasklist_photos
+      get :report_photos
+      get :destroy_confirmation
+    end
+    collection do
+      post :search
+      post :order_projects
+    end
+  end
+  resources :project_groups
+  resources :promos
   resources :safety_topics
   resources :services do
     collection do
@@ -194,10 +184,23 @@ Buildhawk::Application.routes.draw do
       post :search
     end
   end
-  resources :folders
-  resources :charges do
-    member do 
-      patch :promo_code
+  resources :uber_admin do
+    collection do
+      post :upload_template
+      get :companies
+      get :users
+      get :errors
+      get :core_checklists
+      get :promos
+      get :edit_company
+      get :edit_user
+      post :update_company
+      post :update_user
+      delete :destroy_company
+      delete :destroy_user
+      get :promo_codes
+      get :safety_topics
+      get :create_blank_template
     end
   end
   resources :errors

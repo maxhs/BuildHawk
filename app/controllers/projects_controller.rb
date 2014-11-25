@@ -44,7 +44,7 @@ class ProjectsController < AppController
 			@company = Company.find params[:company_id]
 		end
 		
-		@messages = current_user.messages 
+		@messages = @user.messages
 
 		if request.xhr?
 			respond_to do |format|
