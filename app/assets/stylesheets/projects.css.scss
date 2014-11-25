@@ -101,39 +101,28 @@
 	}
 
 	.company-project, .search-project {
+		display:table;
+		width:100%;
+		height:100%;
 		background-color:#fff;
-		padding:0px 20px;
+		padding:15px;
 		overflow:auto;
 		border-bottom:1px solid #eee;
 
-		table {
-			width:100%;
-			tr {
-				border-bottom:1px dashed #eee;
-				td{
-					padding:10px 0;
-				}
-			}
-
-			tr:last-child{
-				border:0;
-			}
-
-			.more {
-				text-align:center;
-				text-transform:uppercase;
-				font-size:.9em;
-				letter-spacing:1px;
-				border:1px solid #eee;
-				padding:5px;
-			}
+		.project-breakdown {
+			height:100%;
+			width:50%;
+			vertical-align:middle;
+			display:table-cell;
 		}
 
 		.project-header {
-			margin: 10px 0 0;
-			padding-left: 0;
+			padding: 15px 0;
 			border-right: 1px solid #eee;
-			line-height: 1em;
+
+			.address {
+				padding-left:3px;
+			}
 		}
 
 		.progress-section {
