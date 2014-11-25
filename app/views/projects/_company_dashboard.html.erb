@@ -11,13 +11,10 @@
 	</div>
 
 	<div class="project-breakdown">
-		<table class="alert-table">
-			<tr>
-				<td><%= link_to "Checklist",checklist_project_path(project), :remote => true %></td>
-				<td><%= link_to "Reports", reports_path(:project_id => project.id), :remote => true %></td>
-				<td><%= link_to "Documents", documents_project_path(project), remote: true %></td>
-				<td><%= link_to "Tasks", tasklist_project_path(project), :remote => true %></td>
-			</tr>
-		</table>
+		<% if (@items.where(project_id: project.id).count + @reports.where(project_id: project.id).count + @tasks.where(project_id: project.id).count) > 0 %>
+			<div>Updates: <%= @items.where(project_id: project.id).count %> items, <%= @tasks.where(project_id: project.id).count %> tasks, <%= @reports.where(project_id: project.id).count %> reports</div>
+		<% else %>
+			<div class="placeholder font-smoothing">No unread updates</div>
+		<% end %>
 	</div>
 </div>

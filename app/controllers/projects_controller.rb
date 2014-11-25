@@ -45,6 +45,9 @@ class ProjectsController < AppController
 		end
 		
 		@messages = @user.messages
+		@items = Notification.where("user_id = ? and read = ? and checklist_item_id IS NOT NULL",@user.id,false)
+		@reports = Notification.where("user_id = ? and read = ? and report_id IS NOT NULL",@user.id,false)
+		@tasks = Notification.where("user_id = ? and read = ? and task_id IS NOT NULL",@user.id,false)
 
 		if request.xhr?
 			respond_to do |format|
@@ -182,9 +185,9 @@ class ProjectsController < AppController
 
 	def tasklist
 		@tasklist = @project.tasklists.first_or_create
-		#@connect
 		@tasks = @tasklist.tasks
 		@task = Task.find params[:task_id] if params[:task_id]
+		@user.mark_tasks_as_read
 	end
 
 	def search_tasklist

@@ -160,6 +160,12 @@ class User < ActiveRecord::Base
         end
     end
 
+    def mark_tasks_as_read
+        notifications.where("task_id IS NOT NULL and read = ?",false).each do |n|
+            n.update_attribute :read, true
+        end
+    end
+
     def cost(company,month)
         days_in_month = Time.days_in_month(Time.now.month,Time.now.year)
         beginning_of_month = Time.now.beginning_of_month
