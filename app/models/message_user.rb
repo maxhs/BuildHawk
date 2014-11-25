@@ -7,8 +7,14 @@ class MessageUser < ActiveRecord::Base
 	after_create :notify
 
 	def notify
-		puts "Just created a message user: #{user.full_name}"
-		MessageMailer.send_message(message,user).deliver if user.email_permissions
-		self.update_column :sent, true
+		if user.email_permissions
+			MessageMailer.send_message(message,user).deliver
+			self.update_column :sent, true
+		end
+
+		user.notifications.create(
+			message_id: id,
+			body: "#{message.author.full_name} just sent you a message: #{message.body}."
+		)
 	end
 end
