@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
 
-	attr_accessible :user_id, :comment_id, :read, :sent, :checklist_item_id, :task_id, 
-					:report_id, :body, :notification_type, :project_id, :feed, :message_id
+	attr_accessible :user_id, :comment_id, :read, :sent, :checklist_item_id, :task_id, :report_id, 
+					:body, :notification_type, :project_id, :feed, :message_id
 
 	belongs_to :user
 	belongs_to :target_user, :class_name => "User"
@@ -24,6 +24,7 @@ class Notification < ActiveRecord::Base
 		        :checklist_item_id 	=> checklist_item_id,
 		        :comment_id 		=> comment_id,
 		        :project_id 		=> project_id,
+		        :message_id 		=> message_id,
 		        :badge          	=> user.notifications.where(:read => false).count
 		    )
 			sent = true
@@ -43,12 +44,15 @@ class Notification < ActiveRecord::Base
 
 	api_accessible :notifications do |t|
 		t.add :id
-		t.add :report_id
-		t.add :task_id
-		t.add :checklist_item_id
-		t.add :message
 		t.add :created_date
 		t.add :epoch_time
+		t.add :report_id
+		t.add :task_id
+		t.add :project_id
+		t.add :checklist_item_id
+		t.add :comment
+		t.add :message
+		t.add :notification_type
 		t.add :read
 	end
 

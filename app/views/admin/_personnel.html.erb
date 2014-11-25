@@ -14,7 +14,7 @@
 				<tr id="pro-user-<%=user.id%>" class="center">
 					<td class="pro-user"><%= user.full_name %></td>
 					<td><%= user.projects.map{|p| link_to p.name, project_path(p), target:'_blank'}.to_sentence.html_safe %></td>
-					<td><%= link_to "Deactivate", basic_user_path(:id => user.id), method: :post, :class => "empty-btn centered", remote: true %></td>
+					<td><%= link_to "Deactivate", basic_user_path(id: user.id), method: :post, :class => "empty-btn centered", remote: true %></td>
 				</tr>
 			<% end %>
 		</tbody>
@@ -22,28 +22,30 @@
 </div>
 
 <div id="users-page" class="page border-box">
-	<div><%= link_to "Add Personnel", new_user_path, :id => "add-user-button", :class=>"simple-btn", :remote => true %></div>
-	<h4><%=@company.name%> Personnel</h4>
+	<div><%= link_to "Add Personnel", new_user_path, id: "add-user-button", :class=>"simple-btn", :remote => true %></div>
+	<h4><%= @company.name %> Personnel</h4>
 	<% if @users && @users.count > 0 %>
 		<table id="users">
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Email</th>
-					<th>Phone</th>
-					<th>Created On</th>
-					<th>Edit</th>
+					<th class="center">Phone</th>
+					<th class="center">Created On</th>
+					<th class="center">Project</th>
+					<th class="center"></th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<% @users.each do |user| %>
-					<tr class="personnel center">
+					<tr class="personnel">
 						<td class="pro-user"><%= user.full_name %></td>
 						<td><%= user.email %></td>
-						<td><%= user.formatted_phone %></td>
-						<td><%= parse_time user.created_at%></td>
-						<td><%= link_to "Edit", edit_user_path(user), :class => "empty-btn", remote: true %></td>
+						<td class="center"><%= user.formatted_phone %></td>
+						<td class="center"><%= parse_time user.created_at %></td>
+						<td class="center"><%= user.projects.where(company_id: @company.id).count %></td>
+						<td class="center"><%= link_to "Edit", edit_user_path(user), :class => "empty-btn", remote: true %></td>
 					</tr>
 				<% end %>
 			</tbody>

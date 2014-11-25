@@ -4,15 +4,15 @@ class Api::V3::NotificationsController < Api::V3::ApiController
         user = User.find params[:user_id]
         notifications = user.notifications
         respond_to do |format|
-            format.json { render_for_api :notifications, :json => notifications, :root => :notifications}
+            format.json { render_for_api :notifications, json: notifications, root: :notifications}
         end
     end
 
     def messages
         user = User.find params[:user_id]
-        notifications = user.notifications.where(:notification_type => "Message")
+        notifications = user.notifications.where("notification_type = ? and message_id IS NOT NULL", "Message")
         respond_to do |format|
-            format.json { render_for_api :notifications, :json => notifications, :root => :notifications}
+            format.json { render_for_api :notifications, json: notifications, root: :notifications}
         end
     end
 

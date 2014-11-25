@@ -14,11 +14,10 @@ class Task < ActiveRecord::Base
     has_many :notifications, dependent: :destroy
     has_many :activities, dependent: :destroy
 
-    has_many :task_users, dependent: :destroy, autosave: true
+    has_many :task_users, autosave: true
     has_many :assignees, through: :task_users, autosave: true, source: :user
     
     accepts_nested_attributes_for :photos, allow_destroy: true, :reject_if => lambda { |c| c[:image].blank? }
-    #accepts_nested_attributes_for :assignee, :allow_destroy => true, :reject_if => lambda { |c| c[:id].blank? }
 
     after_create :notify
 
@@ -65,25 +64,24 @@ class Task < ActiveRecord::Base
         end
         
         if completed
-            
             text = "#{tasklist.project.name} (Tasklist) - \"#{truncated}\" was completed by #{current_user.full_name}"
-            Notification.where(:body => text,:user_id => user_id, :task_id => id, :notification_type => "Tasklist").first_or_create
+            Notification.where(body: text,user_id: user_id, task_id: id, notification_type: "Tasklist").first_or_create
             activities.create(
-                :user_id => current_user.id,
-                :project_id => tasklist.project.id,
-                :task_id => id,
-                :body => "This item was completed by #{current_user.full_name}.",
-                :activity_type => self.class.name
+                user_id: current_user.id,
+                project_id: tasklist.project.id,
+                task_id: id,
+                body: "This item was completed by #{current_user.full_name}.",
+                activity_type: self.class.name
             )
         else
             body = "#{tasklist.project.name} (Tasklist) - \"#{truncated}\" has been modified"
             user.notifications.where(:body => body,:task_id => id,:notification_type => "Tasklist").first_or_create if user
             activities.create(
-                :user_id => current_user.id,
-                :project_id => tasklist.project.id,
-                :task_id => id,
-                :body => "This item was modified by #{current_user.full_name}.",
-                :activity_type => self.class.name
+                user_id: current_user.id,
+                project_id: tasklist.project.id,
+                task_id: id,
+                body: "This item was modified by #{current_user.full_name}.",
+                activity_type: self.class.name
             )
         end
 
@@ -91,11 +89,11 @@ class Task < ActiveRecord::Base
             body = "\"#{truncated}\" has been assigned to you for #{tasklist.project.name}"
             assignee.notifications.where(:body => body,:task_id => id,:notification_type => "Tasklist").first_or_create
             activities.create(
-                :user_id => current_user.id,
-                :project_id => tasklist.project.id,
-                :task_id => id,
-                :body => "This item was assigned to #{assignee.full_name}.",
-                :activity_type => self.class.name
+                user_id: current_user.id,
+                project_id: tasklist.project.id,
+                task_id: id,
+                body: "This item was assigned to #{assignee.full_name}.",
+                activity_type: self.class.name
             )
         end
     end
