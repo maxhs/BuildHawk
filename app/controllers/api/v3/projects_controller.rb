@@ -100,16 +100,20 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         user = User.where(:phone => phone).first unless user
 
         unless user
-            alternate = Alternate.where(:email => email).first if email
-            alternate = Alternate.where(:phone => phone).first if phone && !alternate
+            if email && email.length > 0
+                alternate = Alternate.where(:email => email).first
+            elsif phone && phone.length > 0
+                alternate = Alternate.where(:phone => phone).first
+            end
             user = alternate.user if alternate
         end
 
         unless user
+            puts "we still don't have a user, so we have to create someone"
             ## still no user? This means they're a "connect user". Creating a new user here will create an inactive user by default.
-            if email
+            if email && email.length > 0
                 user = User.where(:email => email).first_or_create
-            elsif phone
+            elsif phone && phone.length > 0
                 user = User.where(:phone => phone).first_or_create
             end
         end
@@ -121,16 +125,20 @@ class Api::V3::ProjectsController < Api::V3::ApiController
         ## notify the user
         if task
             if email && user.email_permissions
-                user.email_task(task)
+                #user.email_task(task)
             elsif phone && user.text_permissions
-                user.text_task(task)
+                #user.text_task(task)
             end
         elsif report
             report.report_users.where(:user_id => user.id).first_or_create
         end
 
-        respond_to do |format|
-            format.json { render_for_api :user, :json => user, :root => :user}
+        if user
+            respond_to do |format|
+                format.json { render_for_api :user, :json => user, :root => :user}
+            end
+        else 
+            render json: {success: false}
         end
     end
 
