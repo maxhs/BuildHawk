@@ -78,8 +78,8 @@ class Api::V3::ProjectsController < Api::V3::ApiController
 
         if params[:user][:company_name]
             company_name = "#{params[:user][:company_name]}"
-            company = Company.where("name ILIKE ?",company_name).first
-            company = Company.create name: company_name unless company
+            company = Company.where("name ILIKE ?",company_name).first_or_create
+            #company = Company.create name: company_name unless company
             params[:user][:company_id] = company.id
 
             ## create a new project subcontractor object for the project
@@ -112,10 +112,10 @@ class Api::V3::ProjectsController < Api::V3::ApiController
             puts "we still don't have a user, so we have to create someone #{email} length: #{email.length}"
             ## still no user? This means they're a "connect user". Creating a new user here will create an inactive user by default.
             if email && email.length > 0
-                user = User.where(email: email).first_or_create
+                user = User.where(email: email, company_id: company.id).first_or_create
                 puts "new email user: #{user.full_name}"
             elsif phone && phone.length > 0
-                user = User.where(phone: phone).first_or_create
+                user = User.where(phone: phone, company_id: company.id).first_or_create
                 puts "new phone user: #{phone}"
             end
         end
