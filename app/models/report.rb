@@ -6,29 +6,29 @@ class Report < ActiveRecord::Base
   	
     belongs_to :author, :class_name => "User"
   	belongs_to :project
-  	has_many :comments, :dependent => :destroy
-    has_many :notifications, :dependent => :destroy
-  	has_many :report_fields, :dependent => :destroy
-    has_many :report_users, :dependent => :destroy
-    has_many :users, :through => :report_users
-    has_many :report_companies, :dependent => :destroy
-    has_many :companies, :through => :report_companies
-    has_many :photos, :dependent => :destroy
+  	has_many :comments, dependent: :destroy
+    has_many :notifications, dependent: :destroy
+  	has_many :report_fields, dependent: :destroy
+    has_many :report_users, dependent: :destroy
+    has_many :users, through: :report_users
+    has_many :report_companies, dependent: :destroy
+    has_many :companies, through: :report_companies
+    has_many :photos, dependent: :destroy
 
-    has_many :report_topics, :dependent => :destroy
-    has_many :safety_topics, :through => :report_topics
+    has_many :report_topics, dependent: :destroy
+    has_many :safety_topics, through: :report_topics
 
-    has_many :activities, :dependent => :destroy
+    has_many :activities, dependent: :destroy
 
     validates_presence_of :report_type
     validates_presence_of :date_string
 
     default_scope { order('report_date DESC') } 
 
-    accepts_nested_attributes_for :users, :allow_destroy => true
-    accepts_nested_attributes_for :report_users, :allow_destroy => true
-    accepts_nested_attributes_for :report_companies, :allow_destroy => true
-    accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => lambda { |c| c[:image].blank? }
+    accepts_nested_attributes_for :users, allow_destroy: true
+    accepts_nested_attributes_for :report_users, allow_destroy: true
+    accepts_nested_attributes_for :report_companies, allow_destroy: true
+    accepts_nested_attributes_for :photos, allow_destroy: true, :reject_if => lambda { |c| c[:image].blank? }
 
     after_commit :assign_date, :if => :persisted?
 
