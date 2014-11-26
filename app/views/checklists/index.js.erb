@@ -1,4 +1,1 @@
-$('#main').fadeOut(200,function(){
-	$(this).html('<%= j render :partial => "index", :locals => {:checklists => @checklists } %>');
-	$(this).fadeIn(200);
-});
+$('#main').html('<%= j render :partial => "index", locals: {checklists: @checklists } %>');

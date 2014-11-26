@@ -18,6 +18,16 @@
 .item-editor {
 	padding:2.5%;
 
+	.status-section {
+	
+		h4 {
+			display:block;
+		}
+
+		.placeholder {
+			display:block;
+		}
+	}
 	h2, h3, h4 {
 		display:inline-block;
 		text-align:left;

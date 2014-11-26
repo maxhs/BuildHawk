@@ -1,6 +1,5 @@
-
 <% if @checklist %>
-	<div id="project-checklist" class="checklist border-box">
+	<div id="project-checklist" class="checklist border-box<% if @item%> panel<% end %>">
 		<div id="checklist-items">
 			<header>
 				<%= form_tag search_items_checklist_path(@checklist, :project_id => @project.id), :id => "checklist-search", :method => :post, :class=>"input-group search", :remote => true do %>
@@ -33,7 +32,7 @@
 <% end %>
 
 <div id="checklist" class="focus"<% if @item %>style="left:54%"<% end %>>
-	<%= render :partial => "checklist_items/edit", locals: {item: @item} if @item %>	
+	<%= render :partial => "checklist_items/show", locals: {item: @item} if @item %>	
 </div>
 
 <script>

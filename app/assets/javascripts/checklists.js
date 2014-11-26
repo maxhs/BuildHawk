@@ -15,6 +15,8 @@ function checklistSetup(projectId){
 	$('.dismiss-checklist').click(function(){
         dismissChecklist(projectId);
     });
+	$('.for-select-2').select2();
+
 	$('.phase-link').click(function(e){
 		if ($(this).hasClass('expanded')){
 			var pid = $(this).data('phase');

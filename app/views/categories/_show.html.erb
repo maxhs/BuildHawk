@@ -27,7 +27,7 @@
 
 	<div class="items-container collapsed" id="category-<%=category.id%>-container">
 		<ul class="category-items" id="items-<%=category.id%>">
-			<%= render partial:"checklist_items/show", collection: category.checklist_items, as: :item, cache: true %>
+			<%= render partial:"checklist_items/row", collection: category.checklist_items, as: :item, cache: true %>
 		</ul>
 		<%= link_to new_checklist_item_path(category_id: category.id), id:"new-item-#{category.id}", :class=>"new-checklist-item empty-btn", remote: true do %>
 			<i class="fa fa-plus remote"></i><span style="padding-left:10px;">Item</span>

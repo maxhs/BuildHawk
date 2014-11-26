@@ -105,8 +105,10 @@ function setupWindow(){
     $('#menu-toggle').click(function(){
         if ($('#main-sidebar').hasClass('revealed')){
             $('.revealed').removeClass('revealed');
+            $(this).html('<i class="fa fa-chevron-right"></i>');
         } else {
             $('#main-sidebar, #bottom-menu, #inner-wrap, #top-nav').addClass('revealed');
+            $(this).html('<i class="fa fa-chevron-left revealed"></i>');
         }
     });
     $('#toggle').click(function(){

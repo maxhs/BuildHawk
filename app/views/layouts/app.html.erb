@@ -73,7 +73,9 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			<div id="settings-row">
 				<a href="/"><%= image_tag 'logo_white.png', id: "logo" %></a>
 				<i class="fa fa-search" id="project-search-button"></i>
-				<%= image_tag "whiteK.png", id:"menu-toggle", :class=>"revealed" %>
+				<span id="menu-toggle">
+					<i class="fa fa-chevron-left revealed"></i>
+				</span>
 			</div>
 				
 			<%= render partial: "layouts/sidebar" %>

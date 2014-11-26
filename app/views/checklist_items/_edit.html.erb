@@ -5,17 +5,14 @@
 				<div id="floating-save" title="Save" class="action remote" type="submit">
 					<i class="fa fa-floppy-o remote"></i>
 				</div>
-				<div id="export-checklist-item" title="Export" class="action">
-					<i class="fa fa-share"></i>
-				</div>
 				<% if current_user.admin || current_user.company_admin %>
 					<%= link_to checklist_items_path(item), title: "Delete", data: {confirm: "Are you sure you want to delete this item?"}, method: :delete, :class=>"remote action", remote: true do %>
 						<i class="fa fa-trash-o remote"></i>
 					<% end %>	
 				<% end %>
 				
-				<div id="dismiss-item" title="Dismiss" class="dismiss action">
-					<i class="fa fa-remove" id="dismiss-item"></i>
+				<div title="Dismiss" class="dismiss action">
+					<i class="fa fa-remove dismiss-checklist" id="dismiss-item"></i>
 				</div>
 			</div>
 		</div>
@@ -28,7 +25,7 @@
 				<h5>Category:</h5><%= item.category.name %>
 			</div>
 			<div class="row">
-				<h5>Type:</h5><%= f.select :item_type, options_for_select(item.types), selected: item.item_type, :class=>"full-width", style: "margin-bottom:14px;" %>
+				<h5>Type:</h5><%= f.select :item_type, options_for_select(item.types, selected: item.item_type), :class=>"full-width for-select-2", style: "margin-bottom:14px;" %>
 			</div>
 			<div class="row">
 				<h5>Item:</h5><%= f.text_area :body, rows: 5, :class=>"full-width", :style => "margin-bottom:14px;" %>
@@ -40,9 +37,3 @@
 		</div>
 	<% end %>
 </div>
-
-<script>
-$('#dismiss-item').click(function(){
-	dismissChecklist();
-})
-</script>
