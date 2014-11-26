@@ -91,10 +91,10 @@ class Checklist < ActiveRecord::Base
       	def import(file)
             spreadsheet = open_spreadsheet(file)
             header = spreadsheet.row(2)
-            phase_title = spreadsheet.row(2)[0]
-            category_title = spreadsheet.row(2)[1]
-            type_title = spreadsheet.row(2)[2]
-            item_title = spreadsheet.row(2)[3]
+            phase_title = spreadsheet.row(2)[0].to_s
+            category_title = spreadsheet.row(2)[1].to_s
+            type_title = spreadsheet.row(2)[2].to_s
+            item_title = spreadsheet.row(2)[3].to_s
 
             @new_core = self.create :core => true
             order_index = 0
