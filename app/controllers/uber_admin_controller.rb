@@ -49,7 +49,7 @@ class UberAdminController < AppController
 
 	def safety_topics
 		@safety_topics = SafetyTopic.where("company_id IS NULL")
-		ERROR!
+		#ERROR!
 		if request.xhr?
 			respond_to do |format|
 				format.js
