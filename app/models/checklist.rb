@@ -90,19 +90,28 @@ class Checklist < ActiveRecord::Base
     class << self
       	def import(file)
             spreadsheet = open_spreadsheet(file)
-            header = spreadsheet.row(2)
-            phase_title = spreadsheet.row(2)[0].to_s
-            category_title = spreadsheet.row(2)[1].to_s
-            type_title = spreadsheet.row(2)[2].to_s
-            item_title = spreadsheet.row(2)[3].to_s
-
-            @new_core = self.create :core => true
+            # header = spreadsheet.row(2)
+            # phase_title = spreadsheet.row(2)[0].to_s
+            # category_title = spreadsheet.row(2)[1].to_s
+            # type_title = spreadsheet.row(2)[2].to_s
+            # item_title = spreadsheet.row(2)[3].to_s
+            @new_core = self.create core: true
             order_index = 0
             (0..spreadsheet.last_row).each do |i|
-                row = Hash[[header, spreadsheet.row(i)].transpose]
-                phase = @new_core.phases.where(:name => row[phase_title]).first_or_create
-                category = phase.categories.where(:name => row[category_title]).first_or_create
-                item = category.checklist_items.create :item_type => row[type_title], :body => row[item_title], :order_index => order_index if row[type_title] || row[item_title]
+                #row = Hash[[header, spreadsheet.row(i)].transpose]
+                #phase = @new_core.phases.where(:name => row[phase_title]).first_or_create
+                #category = phase.categories.where(:name => row[category_title]).first_or_create
+                #item = category.checklist_items.create :item_type => row[type_title], :body => row[item_title], :order_index => order_index if row[type_title] || row[item_title]
+                #order_index += 1
+                row = spreadsheet.row(i)
+                first_column = row[0]
+                first_column = first_column.to_i.to_s if first_column.is_a?(Integer) || first_column.is_a?(Float)
+                second_column = row[1] 
+                second_column = second_column.to.i.to_s if second_column.is_a?(Integer) || second_column.is_a?(Float)
+                
+                phase = @new_core.phases.where(name: first_column).first_or_create if first_column && first_column.length > 0
+                category = phase.categories.where(name: second_column).first_or_create if second_column && second_column.length > 0
+                item = category.checklist_items.create(item_type: row[3].to_s, body: row[2].to_s, order_index: order_index) if row[2] && row[2].to_s.length > 0
                 order_index += 1
     	    end
             @new_core.core = true
@@ -111,8 +120,8 @@ class Checklist < ActiveRecord::Base
 
     	def open_spreadsheet(file)
             case File.extname(file.original_filename)
-            when ".csv" then CSV.new(file.path, nil, :ignore)
-            when ".xls" then Excel.new(file.path, nil, :ignore)
+            when ".csv" then Roo::CSV.new(file.path)
+            when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
             when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
             else raise "Unknown file type: #{file.original_filename}"
             end
