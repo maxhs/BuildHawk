@@ -25,7 +25,7 @@ class Notification < ActiveRecord::Base
 		        :comment_id 		=> comment_id,
 		        :project_id 		=> project_id,
 		        :message_id 		=> message_id,
-		        :badge          	=> user.notifications.where(:read => false).count
+		        :badge          	=> user.notifications.where(read: false).count
 		    )
 			self.update_column :sent, true
 		end

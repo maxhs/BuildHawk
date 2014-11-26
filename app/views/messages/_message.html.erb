@@ -1,16 +1,16 @@
-<div class="message<% unless message_user.read %> unread<% end %>" id="message-<%= message_user.message.id %>">
-	<% if message_user.message.author == current_user %>
-		<%= link_to edit_message_path(message_user.message), title:"Edit", remote: true do %>
+<div class="message" id="message-<%= message.id %>">
+	<% if message.author == current_user %>
+		<%= link_to edit_message_path(message), title:"Edit", remote: true do %>
 			<i class="fa fa-cog remote"></i>
 		<% end %>
 	<% else %>	
-		<%= link_to message_user_message_path(message_user.message), method: :delete, title:"Hide", data: {confirm: "Are you sure you want to hide this message?"}, remote: true do %>
+		<%= link_to message_user_message_path(message), method: :delete, title:"Hide", data: {confirm: "Are you sure you want to hide this message?"}, remote: true do %>
 			<i class="fa fa-trash-o remote"></i>
 		<% end %>
 	<% end %>
-	<div class="message-body"><%= message_user.message.body %></div>
+	<div class="message-body"><%= message.body %></div>
 	<div class="attribution font-smoothing">
-		<div class="author"><%= message_user.message.author.full_name if message_user.message.author %></div>
-		<div class="timestamp"><%= parse_datetime message_user.message.created_at %></div>
+		<div class="author"><%= message.author.full_name if message.author %></div>
+		<div class="timestamp"><%= parse_datetime message.created_at %></div>
 	</div>
 </div>

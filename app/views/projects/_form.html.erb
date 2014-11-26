@@ -30,7 +30,7 @@
 <% if project_groups %>
     <div class="row personnel groups">
     	<div class="col-xs-3"><h4>Project Group</h4></div>
-    	<div class="col-xs-9 group-select"><%= f.select :project_group_id, options_for_select(project_groups.map{|pg| [pg.name, pg.id]}.unshift("No Assignment"), selected: f.object.project_group_id), {}, :class=>"for-select-2" %></div>
+    	<div class="col-xs-9 group-select"><%= f.select :project_group_id, options_for_select(project_groups.map{|pg| [pg.name, pg.id]}, selected: f.object.project_group_id), {include_blank: "No assignment", include_empty: false}, :class=>"for-select-2" %></div>
     </div>
 <% end %>
 

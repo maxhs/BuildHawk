@@ -35,7 +35,7 @@ class ProjectsController < AppController
 	    		format.js
 	    	end
 	    else
-			render :index
+			redirect_to projects_path
 		end
 	end
 
@@ -44,10 +44,10 @@ class ProjectsController < AppController
 			@company = Company.find params[:company_id]
 		end
 		
-		@messages = @user.message_users
-		@items = Notification.where("user_id = ? and read = ? and checklist_item_id IS NOT NULL",@user.id,false)
-		@reports = Notification.where("user_id = ? and read = ? and report_id IS NOT NULL",@user.id,false)
-		@tasks = Notification.where("user_id = ? and read = ? and task_id IS NOT NULL",@user.id,false)
+		@messages = @user.messages
+		#@items = Notification.where("user_id = ? and read = ? and checklist_item_id IS NOT NULL",@user.id,false)
+		#@reports = Notification.where("user_id = ? and read = ? and report_id IS NOT NULL",@user.id,false)
+		#@tasks = Notification.where("user_id = ? and read = ? and task_id IS NOT NULL",@user.id,false)
 
 		if request.xhr?
 			respond_to do |format|
