@@ -10,22 +10,17 @@ class ProjectUser < ActiveRecord::Base
 	after_create :notify
 
 	def notify
-		user = User.where(:id => user_id).first
-		if user
-	        user.notifications.where(
-	        	:body => "You were added to a project: #{project.name}", 
-	        	:project_id => project_id,
-	        	:notification_type => "Project"
-	        ).first_or_create
-	    end
+		user = User.where(id: user_id).first
+        user.notifications.create(
+        	body: "You were added to a project: #{project.name}", 
+        	project_id: project_id,
+        	notification_type: "Project"
+        ) if user
 	end
 
 	def hide_project
-		self.hidden = true
-		self.project_group_id = nil
-		self.save
-
-		project.update_attribute :project_group_id, nil
+		self.update_columns hidden: true, project_group_id: nil
+		project.update_column :project_group_id, nil
 	end
 
 	acts_as_api
