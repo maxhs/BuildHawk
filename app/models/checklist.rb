@@ -98,7 +98,7 @@ class Checklist < ActiveRecord::Base
 
             @new_core = self.create :core => true
             order_index = 0
-            (3..spreadsheet.last_row).each do |i|
+            (0..spreadsheet.last_row).each do |i|
                 row = Hash[[header, spreadsheet.row(i)].transpose]
                 phase = @new_core.phases.where(:name => row[phase_title]).first_or_create
                 category = phase.categories.where(:name => row[category_title]).first_or_create
@@ -111,7 +111,7 @@ class Checklist < ActiveRecord::Base
 
     	def open_spreadsheet(file)
             case File.extname(file.original_filename)
-            when ".csv" then Csv.new(file.path, nil, :ignore)
+            when ".csv" then CSV.new(file.path, nil, :ignore)
             when ".xls" then Excel.new(file.path, nil, :ignore)
             when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
             else raise "Unknown file type: #{file.original_filename}"
