@@ -10,8 +10,8 @@ class ServicesController < ApplicationController
 		events = JSON.parse params[:mandrill_events]
 		events.each do |e|
 			text = e['msg']['text'].partition('Write ABOVE THIS LINE to reply').first.html_safe
-			text = cleanText(text)
-			puts "e text:#{text}"
+			cleaned_text = cleanText(text)
+			puts "e text:#{cleaned_text}"
 		end
 		render json: {success: true}
 	end
