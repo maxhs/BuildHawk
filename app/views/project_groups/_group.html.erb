@@ -1,26 +1,20 @@
-<div class="group" id="pg-<%=project_group.id%>">
-	<div class="group-header">
-		
-		<h5 class="group-name remote">
-			<%= project_group.name %>
-		</h5>
+<div class="group" id="pg-<%=project_group.id%>" data-pg="<%=project_group.id%>">
+	<div class="group-header" data-pg="<%=project_group.id%>">
+		<h5 class="group-name remote"><%= project_group.name %></h5>
 
 		<%= link_to edit_project_group_path(project_group), :class=> "remote", remote: true do %>
 			<i class="fa fa-cog remote"></i>
 		<% end %>
 		
 		<span class="projects-count remote">
-			<% if project_group.projects.count == 1 %>
-				(1 project)
-			<% else %>
-				(<%= project_group.projects.count %> projects)
-			<% end %>
+			<%= project_group.projects.count == 1 ? "(1 project)" : "(#{project_group.projects.count} projects)" %>
 		</span>
-		
 	</div>
 
 	<% if project_group.projects.count > 0 %>	
-		<%= render partial:"project_groups/project", collection: project_group.projects, as: :project, cache: true %>
+		<div id="pg-<%=project_group.id%>-projects" data-pg="<%=project_group.id%>" <% unless ordered_group && ordered_group.id == project_group.id %>class="collapsed"<% end %>> 
+			<%= render partial:"project_groups/project", collection: project_group.projects, as: :project, cache: true %>
+		</div>
 	<% else %>
 		<li class="group unsortable">
 			<span style="color: #aaa;padding-left: 10px;height: 47px; line-height: 47px; font-style:italic">&nbsp;</span>

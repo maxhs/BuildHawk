@@ -66,6 +66,10 @@ class Project < ActiveRecord::Base
     def adjust_users
         if project_group_id != nil
             puts 'inside check_groups'
+            if project_group_id == 0
+                self.update_column :project_group_id, nil
+                project_group_id = nil
+            end
             project_users.each do |pu|
                 pu.update_attribute :project_group_id, project_group_id
             end

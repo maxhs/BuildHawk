@@ -336,7 +336,6 @@ class ProjectsController < AppController
 	end
 
 	def order_projects
-		puts "request: #{params}"
 		if params[:project]
 			params[:project].each_with_index do |p,i|
 				project = Project.where(id: p).first
@@ -345,9 +344,11 @@ class ProjectsController < AppController
 		end
 		if params[:project_id]
 			project = Project.where(id: params[:project_id]).first
-			if project && params[:group_id]
-				params[:group_id] = nil if params[:group_id] == 'undefined'
+			if project && params[:group_id] && params[:group_id] != 'undefined'
 				project.update_attribute :project_group_id, params[:group_id]
+				@project_group = ProjectGroup.where(id: params[:group_id]).first
+			else
+				project.update_attribute :project_group_id, nil
 			end
 		end
 
@@ -355,6 +356,8 @@ class ProjectsController < AppController
 			respond_to do |format|
 				format.js
 			end
+		else
+			redirect_to projects_path
 		end
 	end
 

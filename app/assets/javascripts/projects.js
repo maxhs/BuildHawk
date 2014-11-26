@@ -13,6 +13,37 @@ function sidebarSetup(){
 			$('.projects.archived').fadeOut(230);
 		}
 	});
+
+	$('.group-header').click(function(){
+		var pgId = $(this).data('pg');
+		var $projectsDiv = $('#pg-'+pgId+'-projects');
+		if ($projectsDiv.hasClass('collapsed')){
+			$projectsDiv.removeClass('collapsed');
+		} else {
+			$projectsDiv.addClass('collapsed');
+		}
+		
+	});
+
+	var groupId, projectId;
+	$('#projects, #groups').sortable({
+      	axis: 'y',
+      	dropOnEmpty:true,
+      	cursor: 'move',
+      	items: 'li',
+      	opacity: 0.6,
+      	scroll: true,
+      	connectWith: ".sortable-projects",
+      	stop: function(e, ui){
+      		projectId = ui.item.data('project');
+        	groupId = ui.item.parent().data('pg');
+            $.ajax({
+                type: 'post',
+                data: $('#projects, #groups').sortable('serialize') + '&group_id='+groupId + "&project_id="+projectId,
+                dataType: 'script',
+                url: '/projects/order_projects'})
+            }
+    });
 }
 
 function projectSetup(projectId) {
