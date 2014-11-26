@@ -3,16 +3,16 @@ class Company < ActiveRecord::Base
 	attr_accessible :name, :phone, :email, :photo_attributes, :pre_register, :contact_name, :image, :image_file_name,
                     :active, :customer_id
   
-    has_many :project_users, :dependent => :destroy, autosave: true
-    has_many :users
-    has_many :projects, :dependent => :destroy
-	has_many :photos, :dependent => :destroy
-	has_many :checklists, :dependent => :destroy
+    has_many :project_users, dependent: :destroy, autosave: true
+    has_many :users, dependent: :destroy
+    has_many :projects, dependent: :destroy
+	has_many :photos, dependent: :destroy
+	has_many :checklists, dependent: :destroy
     has_many :charges
-    has_many :project_groups, :dependent => :destroy
-    has_many :safety_topics, :dependent => :destroy
-    has_many :company_subs, :dependent => :destroy
-    has_many :subcontractors, :through => :company_subs, :source => :subcontractor
+    has_many :project_groups, dependent: :destroy
+    has_many :safety_topics, dependent: :destroy
+    has_many :company_subs, dependent: :destroy
+    has_many :subcontractors, through: :company_subs, source: :subcontractor
     has_one :billing_address, :class_name => "Address"
     has_many :cards
     has_many :billing_days
