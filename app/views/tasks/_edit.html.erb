@@ -83,23 +83,28 @@
 				<%= photo.hidden_field :source, :value => "Tasklist" %>
 			<% end %>
 		</div>
-		<div id="comment-toggle" class="empty-btn">View Comments</div>
-	</div>
 <% end %>
-	<div class="comment-container collapsed border-box">
-		<div id="comments-form">
-			<%= form_for task.comments.new, method: :post, remote: true do |f| %>
-				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= f.text_area :body, rows: "3", placeholder: "Type your notes/comment here" %>
-				<%= f.hidden_field :user_id, value: current_user.id %>
-				<%= f.hidden_field :task_id, value: task.id %>
-				<%= button_tag(type: 'submit', :class=> "simple-btn full-width", style:"margin:14px auto;", remote: true) do %>
-			    	<i class="fa fa-paper-plane remote"></i> Add			  	
-			    <% end %>
-			<% end %>
-		</div>
-		<%= render partial: "comments/comments", locals: {comments: task.comments} %>
+	
+	<div id="comment-toggle" class="empty-btn">View Comments</div>
+</div>
+
+<div class="comment-container collapsed border-box">
+	<div id="comments-form">
+		<%= form_for task.comments.new, method: :post, remote: true do |f| %>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+			<%= f.text_area :body, rows: "3", placeholder: "Type your notes/comment here" %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+			<%= f.hidden_field :task_id, value: task.id %>
+			<%= button_tag(type: 'submit', :class=> "simple-btn full-width", style:"margin:14px auto;", remote: true) do %>
+		    	<i class="fa fa-paper-plane remote"></i> Add			  	
+		    <% end %>
+		<% end %>
 	</div>
+	
+	<table id="comments-table">
+		<%= render partial:"comments/comment", collection: task.comments, as: :comment, cache: false %>
+	</table>
+</div>
 
 <script>
 	taskSetup('<%=@project.to_param%>',null);

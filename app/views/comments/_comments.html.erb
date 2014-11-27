@@ -1,5 +1,0 @@
-<table id="comments-table">
-	<% if comments && comments.count > 0 %>
-		<%= render partial:"comments/comment", collection: :comments, as: :comment, cache: true %>
-	<% end %>
-</table>

@@ -104,7 +104,9 @@
 		    <% end %>
         <% end %>
     </div>
-    <%= render partial: "comments/comments", locals: {comments: item.comments} %>
+    <table id="comments-table">
+		<%= render partial:"comments/comment", collection: item.comments, as: :comment, cache: false %>
+	</table>
 </section>
 
 <% if item.activities.count > 0 %>

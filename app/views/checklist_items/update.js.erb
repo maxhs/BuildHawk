@@ -1,2 +1,3 @@
+showAlert('Saved');
 $('#item-<%= @item.id %>').replaceWith('<%= j render partial:"checklist_items/row", locals: {item: @item} %>');
 $('#item-<%= @item.id %>').addClass('active-item');

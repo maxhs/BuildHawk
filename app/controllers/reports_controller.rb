@@ -209,6 +209,7 @@ class ReportsController < AppController
 			end
 		else
 			@reports = @project.reports
+			render "projects/reports"
 		end
 	end
 
