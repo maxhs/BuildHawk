@@ -1,7 +1,7 @@
 class ChecklistItem < ActiveRecord::Base
 	attr_accessible :body, :item_type, :completed_by_user_id, :category_id, :critical_date, 
                     :completed_date,:photos, :photos_attributes, :checklist_id, :order_index, :photos_count, 
-                    :comments_count, :reminder_date, :state, :user_id
+                    :comments_count, :state, :user_id, :reminders_attributes
   	
   	belongs_to :user ## this could be the person who created the checklist item, if it was not a default item
     belongs_to :category
@@ -16,6 +16,7 @@ class ChecklistItem < ActiveRecord::Base
     default_scope { order('order_index') }
 
     accepts_nested_attributes_for :photos, :reject_if => lambda { |c| c[:image].blank? }
+    accepts_nested_attributes_for :reminders
 
     if Rails.env.production?
         # websolr

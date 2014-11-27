@@ -20,30 +20,57 @@
 			</div>
 		</div>
 
-		<div class="item-editor" class="border-box;">
+		<div class="item-editor">
 			<div class="row">
-				<h5>Phase:</h5><%= item.category.phase.name %>
+				<div class="col-xs-3"><h5>Phase</h5></div>
+				<div class="col-xs-9 body"><%= item.category.phase.name %></div>
 			</div>
 			<div class="row">
-				<h5>Category:</h5><%= item.category.name %>
+				<div class="col-xs-3"><h5>Category</h5></div>
+				<div class="col-xs-9 body"><%= item.category.name %></div>
 			</div>
 			<div class="row">
-				<h5>Type:</h5><%= item.item_type %>
+				<div class="col-xs-3"><h5>Type</h5></div>
+				<div class="col-xs-9 body"><%= item.item_type %></div>
 			</div>
 			
 			<div class="row status-section">
-                <div class="col-xs-12 center">
-                    <h5 class="display: block;">Item Status</h5>
+                <div class="col-xs-3"><h5>Status</h5></div>
+                <div class="col-xs-9">
                     <%= f.select :state, options_for_select({"In-Progress"=>0,"Completed"=>1,"Not Applicable"=>-1}, selected: item.state), {include_blank: "No Status"}, multiple: true, :class=>"center" %> 
                     <span class="placeholder">&#8984; / Ctrl click to deselect <span>
                 </div>
             </div>
+
+            <div class="row">
+				<div class="col-xs-3"><h5>Reminders</h5></div>
+				<div class="col-xs-9 body">
+					<%= f.fields_for :reminders do |reminder| %>
+						<% if reminder.object.new_record? %>
+							<%= reminder.text_field :reminder_datetime, placeholder: "Selecte a reminder date", id:"dp" %>
+						<% else %>
+							<%= reminder.text_field :reminder_datetime, value: parse_datetime(reminder.object.reminder_datetime), placeholder: "Selecte a reminder date", id:"dp" %>
+						<% end %>
+						<%= reminder.link_to_remove :class=>"remote center remove-reminder full-width", style:"display:block; margin:1em auto;", title:"Delete this reminder", data: {confirm: "Are you sure you want to delete this reminder?"} do %>
+							<i class="fa fa-trash remote center"></i>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+			<div class="row">
+				<p>
+					<%= f.link_to_add :reminders, :class=>"remote" do %>
+						<i class="fa fa-plus remote"></i> Reminder
+					<% end %>
+				</p>
+			</div>
         </div>
 
         <% if item.photos && item.photos.count > 0 %>
-            <div class="col-xs-12" style="padding:30px 0;padding-top:60px;clear:both;">
+        	<h5 class="center">Photos</h5>
+            <div class="col-xs-12">
                 <% item.photos.each do |p| %>
-                    <% if p.image_file_name%>
+                    <% if p.image_file_name %>
                    		<%= render :partial => "photos/image", locals: {p: p} %>
                     <% end %>
                 <% end %>
@@ -87,7 +114,6 @@
 	</section>
 <% end %>
  
-
 <script type="text/javascript">
      checklistItem("<%= j render partial:'projects/checklist_item_export', locals: {item: item} %>",'<%=@project.to_param%>');
 </script>

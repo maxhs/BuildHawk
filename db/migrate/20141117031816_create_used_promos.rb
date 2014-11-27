@@ -11,5 +11,8 @@ class CreateUsedPromos < ActiveRecord::Migration
     	add_column :company_subs, :phone, :string
     	add_column :company_subs, :contact_name, :string
       add_column :checklists, :flagged_for_removal, :boolean
+      add_column :checklists, :reminder_id, :integer
+      add_column :phases, :reminder_id, :integer
+      add_column :categories, :reminder_id, :integer
   	end
 end

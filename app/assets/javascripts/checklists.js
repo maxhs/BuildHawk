@@ -1,5 +1,5 @@
 function datetimepickers(){
-	$("#dp,#dp-completed").datepicker();		
+	$("#dp,#dp-completed").datetimepicker();		
 	$('#clear-critical-date').on('click',function(){
 		$('#dp').val('');
 	});
@@ -58,6 +58,16 @@ function coreChecklist(){
 	});
 }
 
+function datepickerSetup() {
+	$("#dp").datepicker();
+	$('#dp').datepicker().on('changeDate', function(){
+	    $('#dp').datepicker('hide');
+	});
+	$('#clear-critical-date').click(function(){
+    	$('#dp').val('');
+    });
+}
+
 function dismissChecklist(projectId,checklistId){
 	$('.panel').removeClass('panel');
 	$('.active-item').removeClass('active-item');
@@ -77,10 +87,7 @@ function dismissChecklist(projectId,checklistId){
 }
 
 function checklistItem(itemExportPartial, projectId){
-	$("#dp").datepicker();
-	$('#dp').datepicker().on('changeDate', function(){
-	    $('#dp').datepicker('hide');
-	});
+	datepickerSetup();
 	Shadowbox.clearCache();
     Shadowbox.setup(".shadow-photo", {});
 
@@ -88,10 +95,8 @@ function checklistItem(itemExportPartial, projectId){
 		$('.edit_checklist_item').trigger('submit.rails');
 	});
 
-    $('#clear-critical-date').click(function(){
-    	$('#dp').val('');
-    });
-    $('#dismiss-checklist-item').click(function(){
+    
+    $('#dismiss-item').click(function(){
 		dismissChecklist(projectId);
 	});
 
@@ -109,4 +114,11 @@ function checklistItem(itemExportPartial, projectId){
 			});
 		});
 	});
+
+	$(document).on('nested:fieldAdded', function(event){
+	  	var field = event.field; 
+	  	var dateField = field.find('#dp');
+	  	dateField.datetimepicker();
+	  	datepickerSetup();
+	})
 }

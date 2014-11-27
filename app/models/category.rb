@@ -2,8 +2,9 @@ class Category < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :phase_id, :order_index, :milestone_date, :completed_date, :checklist_items, :state
   	belongs_to :phase
-  	has_many :checklist_items, :dependent => :destroy
-
+  	has_many :checklist_items, dependent: :destroy
+    has_many :reminders, dependent: :destroy
+    
     after_commit :check_completed, :if => :persisted?
     after_create :order_indices
 

@@ -2,7 +2,9 @@ class Phase < ActiveRecord::Base
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :checklist_id, :order_index, :milestone_date, :completed_date, :categories_attributes
   	belongs_to :checklist
-  	has_many :categories, :dependent => :destroy
+  	has_many :categories, dependent: :destroy
+    has_many :reminders, dependent: :destroy
+    
   	accepts_nested_attributes_for :categories, :allow_destroy => true
 
     after_create :order_indices

@@ -4,6 +4,9 @@ class Reminder < ActiveRecord::Base
 
 	belongs_to :user
 	belongs_to :checklist_item
+	belongs_to :checklist
+	belongs_to :phase
+	belongs_to :category
 	belongs_to :project
 	belongs_to :task
 

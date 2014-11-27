@@ -46,6 +46,8 @@ gem 'sweet-alert'
 gem 'mandrill_mailer'
 gem 'gibbon'
 gem 'bootstrap-datepicker-rails'
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
 gem 'forecast_io'
 
 #gem 'resque-pool'

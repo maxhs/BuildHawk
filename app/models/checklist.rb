@@ -9,8 +9,10 @@ class Checklist < ActiveRecord::Base
   	belongs_to :project
   	belongs_to :company
   	
-    has_many :checklist_items, :dependent => :destroy
-  	has_many :phases, :dependent => :destroy
+    has_many :checklist_items, dependent: :destroy
+  	has_many :phases, dependent: :destroy
+    has_many :reminders, dependent: :destroy
+
   	accepts_nested_attributes_for :phases, :allow_destroy => true
 
     def duplicate(company_id, project_id)
