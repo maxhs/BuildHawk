@@ -51,7 +51,7 @@
 			var reportOffset = document.getElementById('report-<%=report.id %>').offsetTop;
 			var focusOffset = document.getElementById('project-reports').offsetHeight;
 			var posTop = reportOffset-focusOffset;
-			$("html, body").delay(200).animate({ scrollTop: $("#report-<%=report.id %>").offset().top-140 }, 200);
+			$("html, body").delay(200).animate({ scrollTop: $("#report-<%=report.id %>").offset().top+140 }, 200);
 		<% end %>
 		$('.active-report').removeClass('active-report');
 		$('.report').addClass('faded');

@@ -1,10 +1,12 @@
-$('#report-focus').css({'left':'100%','top':'0'});
-$('#project-reports').removeClass('reports-panel');
+$('#report.focus').css({'left':'101%'});
+$('#project-reports').removeClass('panel');
 $('.faded').removeClass('faded');
-$('#report-<%= @report_id %>').fadeOut(200,function(){
+$('#report-<%= @report_id %>').fadeOut(230,function(){
 	$(this).remove();
 });
-$("html, body").animate({ scrollTop: 0 }, 200);
+$("html, body").animate({ scrollTop: 0 }, 230);
+setTimeout(function(){$('#report.focus').html('')},230);
+
 if (history && history.pushState){
     history.pushState(null, null, '<%=root_url%>reports?project_id=<%=@project.id%>');
     $(window).bind("popstate", function(){

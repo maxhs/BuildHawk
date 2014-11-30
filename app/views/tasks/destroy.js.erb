@@ -1,8 +1,9 @@
-$('#task-focus').css({'left':'100%','top':'0'});
-$('#project-tasks').removeClass('tasks-panel');
+$('#task.focus').css({'left':'101%'});
+$('#project-tasks').removeClass('panel');
 $('.active-task').removeClass('active-task');
 $('.faded').removeClass('faded');
-$('#task-<%= @task_id %>').fadeOut(200,function(){
+$('#task-<%= @task_id %>').fadeOut(230,function(){
 	$(this).remove();
 });
-$("html, body").animate({ scrollTop: 0 }, 200);
+setTimeout(function(){$('#task.focus').html('')},230);
+$("html, body").animate({ scrollTop: 0 }, 230);
