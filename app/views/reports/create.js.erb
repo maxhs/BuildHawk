@@ -1,1 +1,1 @@
-$('#main').html('<%= j render :partial => "index", :locals => {:reports => @reports, project: @project, report: @report } %>');
+$('#reports').prepend("<%= j render partial:'reports/row', locals:{report: @report} %>");
