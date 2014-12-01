@@ -12,7 +12,7 @@
 	</div>
 
 	<% if project_group.projects.count > 0 %>	
-		<div id="pg-<%=project_group.id%>-projects" data-pg="<%=project_group.id%>" <% unless ordered_group && ordered_group.id == project_group.id %>class="collapsed"<% end %>> 
+		<div id="pg-<%=project_group.id%>-projects" data-pg="<%=project_group.id%>"> 
 			<%= render partial:"project_groups/project", collection: project_group.projects, as: :project, cache: true %>
 		</div>
 	<% else %>

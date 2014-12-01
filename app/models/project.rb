@@ -1,5 +1,4 @@
-class Project < ActiveRecord::Base
-    
+class Project < ActiveRecord::Base    
     include ActionView::Helpers::NumberHelper
 	attr_accessible :name, :company_id, :active, :users, :address_attributes, :checklist_id, :photos,
                     :user_ids, :core, :project_group_id, :companies, :company_ids, :order_index, :hidden
@@ -52,11 +51,7 @@ class Project < ActiveRecord::Base
 
     def hidden_for_user?(current_user)
         project_user = ProjectUser.where(project_id: id, user_id: current_user.id).first
-        if project_user && project_user.hidden
-            return true
-        else
-            return false
-        end
+        project_user && project_user.hidden ? true : false
     end
 
     def tasks

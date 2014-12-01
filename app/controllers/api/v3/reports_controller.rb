@@ -138,7 +138,8 @@ class Api::V3::ReportsController < Api::V3::ApiController
                 end
 
                 if company
-                    report.project.companies << company unless report.project.companies.flatten.include?(company)
+                    report.project.project_subs.where(id: company.id).first_or_create
+                    report.project.company.subcontractors.where(id: company.id).first_or_create
                     rc = report.report_companies.where(:company_id => company.id).first_or_create
                     rc.update_attribute :count, c[:count]
                     company_ids << company.id

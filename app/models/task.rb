@@ -13,7 +13,7 @@ class Task < ActiveRecord::Base
     has_many :notifications, dependent: :destroy
     has_many :activities, dependent: :destroy
 
-    has_many :task_users, autosave: true
+    has_many :task_users, autosave: true, dependent: :destroy
     has_many :assignees, through: :task_users, autosave: true, source: :user
     
     accepts_nested_attributes_for :photos, allow_destroy: true, :reject_if => lambda { |c| c[:image].blank? }

@@ -106,9 +106,9 @@ class User < ActiveRecord::Base
 
     def connect_tasks(project)
         if project
-            TaskUser.where(:user_id => id).map{|tu| tu.task if tu.task.tasklist.project.id == project.id && tu.task.tasklist.project.company.id != company_id}.compact
+            TaskUser.where(:user_id => id).map{|tu| tu.task if tu.task && tu.task.tasklist.project.id == project.id && tu.task.tasklist.project.company.id != company_id}.compact
         else
-            TaskUser.where(:user_id => id).map{|tu| tu.task if tu.task.tasklist.project && tu.task.tasklist.project.company && tu.task.tasklist.project.company.id != company_id}.compact if company_id
+            TaskUser.where(:user_id => id).map{|tu| tu.task if tu.task && tu.task.tasklist.project && tu.task.tasklist.project.company && tu.task.tasklist.project.company.id != company_id}.compact if company_id
         end
     end
 
