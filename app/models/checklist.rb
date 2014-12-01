@@ -11,7 +11,7 @@ class Checklist < ActiveRecord::Base
   	has_many :phases, dependent: :destroy
     has_many :reminders, dependent: :destroy
 
-  	accepts_nested_attributes_for :phases, :allow_destroy => true
+  	accepts_nested_attributes_for :phases, allow_destroy: true
 
     def duplicate(company_id, project_id)
         if Rails.env.production?
@@ -139,12 +139,6 @@ class Checklist < ActiveRecord::Base
         end
     end
 
-    ## slated for deletion
-    def categories
-        phases
-    end
-    ##
-
 	acts_as_api
 
 	api_accessible :user do |t|
@@ -161,9 +155,6 @@ class Checklist < ActiveRecord::Base
         t.add :phases
         t.add :name
         t.add :project_id
-        ## slated for deletion
-        #t.add :categories
-        ##
     end
 
     api_accessible :v3_checklists do |t|

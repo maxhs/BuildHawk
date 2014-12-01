@@ -97,7 +97,6 @@ class AdminController < AppController
 	def create_template
 		list = Checklist.find params[:checklist_id]
 		list.duplicate(@company.id,nil)
-		@checklist = Checklist.new name: list.name, company_id: @company_id, core: true
 		@checklists = @user.company.checklists.where(core: true).flatten
 		if request.xhr?
 			respond_to do |format|
