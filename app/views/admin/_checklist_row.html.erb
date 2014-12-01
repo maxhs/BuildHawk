@@ -23,7 +23,7 @@
 	</td>
 	<td class="center">
 		<h5>
-			<%= link_to "EDIT", editor_admin_index_path(cid: c.id), :class=>"simple-btn", remote: true unless c.flagged_for_removal %>
+			<%= link_to "EDIT", editor_admin_index_path(cid: c.id), :class=>"empty-btn", remote: true unless c.flagged_for_removal %>
 		</h5>
 	</td>
 	<td class="center">
