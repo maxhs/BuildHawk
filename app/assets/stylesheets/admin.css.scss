@@ -29,6 +29,14 @@
 }
 
 .admin-checklist-table {
+
+	.edit_checklist {
+		input, textarea {
+			width:98%;
+			margin:5px auto;
+		}
+	}
+
 	#checklist-items {
 		header {
 			margin-bottom:2.5%;

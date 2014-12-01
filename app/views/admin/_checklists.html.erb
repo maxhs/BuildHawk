@@ -31,10 +31,10 @@
 			<tr class="core-checklist-row">
 				<td><h5>Blank Template</h5></td>
 				<td class="checklist-description">This is a fully customizable, blank checklist template.</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td><h5><%= link_to "Use", create_blank_template_admin_index_path(company_id: current_user.company.id, name: "Blank Template"), :class=>"remote simple-btn", method: :post, remote: true %></h5></td>
+				<td class="center">1</td>
+				<td class="center">1</td>
+				<td class="center">1</td>
+				<td class="center"><h5><%= link_to "Use", create_blank_template_admin_index_path(company_id: current_user.company.id, name: "Blank Template"), :class=>"remote simple-btn", method: :post, remote: true %></h5></td>
 			</tr>
 			<%= render :partial => "admin/core_checklist_row", collection: @uber_checklists, as: :c, cache: true %>
 		</tbody>

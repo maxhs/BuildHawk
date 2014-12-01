@@ -1,6 +1,4 @@
 class Checklist < ActiveRecord::Base
-	require 'roo'
-    require 'deep_cloneable'
     include ActionView::Helpers::NumberHelper
     
     attr_accessible :name, :description, :body, :user_id, :project_id, :milestone_date, :completed_date, :phases_attributes, 
@@ -20,6 +18,7 @@ class Checklist < ActiveRecord::Base
             require "resque"
             Resque.enqueue(PopulateChecklist, company_id, project_id, id)
         else
+            require 'deep_cloneable'
             new_checklist = self.deep_clone :include => {phases: {categories: :checklist_items}}, except: {phases: {categories: {checklist_items: :state}}}
             new_checklist.company_id = company_id
             if project_id
@@ -121,6 +120,7 @@ class Checklist < ActiveRecord::Base
     	end
 
     	def open_spreadsheet(file)
+            require 'roo'
             case File.extname(file.original_filename)
             when ".csv" then Roo::CSV.new(file.path)
             when ".xls" then Roo::Excel.new(file.path, nil, :ignore)

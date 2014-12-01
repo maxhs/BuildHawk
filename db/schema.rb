@@ -148,8 +148,8 @@ ActiveRecord::Schema.define(version: 20141117031816) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "flagged_for_removal"
     t.integer  "reminder_id"
+    t.boolean  "flagged_for_removal"
   end
 
   add_index "checklists", ["project_id", "company_id"], name: "checklists_idx"
@@ -393,6 +393,9 @@ ActiveRecord::Schema.define(version: 20141117031816) do
     t.boolean  "active",            default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "checklist_id"
+    t.integer  "phase_id"
+    t.integer  "category_id"
   end
 
   add_index "reminders", ["user_id", "checklist_item_id", "task_id", "project_id"], name: "reminders_idx"

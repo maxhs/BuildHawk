@@ -1,32 +1,32 @@
 <tr id="checklist-<%=c.id%>" <% if c.flagged_for_removal %> class="flagged" <% end %>>
 	<td><%= c.name %></td>
-	<td>
+	<td class="center">
 		<% if c.phases.count > 0 %>
 			<%= c.phases.count %>
 		<% else %>
 			<i class="fa fa-circle-o-notch fa-spin center"></i>
 		<% end %>
 	</td>
-	<td>
+	<td class="center">
 		<% if c.phases.map(&:categories).flatten.count > 0 %>
 			<%= c.phases.map(&:categories).flatten.count %>
 		<% else %>
 			<i class="fa fa-circle-o-notch fa-spin center"></i>
 		<% end %>
 	</td>
-	<td>
+	<td class="center">
 		<% if c.item_count > 0 %>
 			<%= c.item_count %>
 		<% else %>
 			<i class="fa fa-circle-o-notch fa-spin center"></i>
 		<% end %>
 	</td>
-	<td>
+	<td class="center">
 		<h5>
 			<%= link_to "EDIT", editor_admin_index_path(cid: c.id), :class=>"simple-btn", remote: true unless c.flagged_for_removal %>
 		</h5>
 	</td>
-	<td>
+	<td class="center">
 		<% if c.flagged_for_removal %>
 			<div class="placeholder font-smoothing" style="text-decoration:none; display:inline-block;">Removing...</div>
 		<% else %>

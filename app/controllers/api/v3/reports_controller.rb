@@ -132,15 +132,15 @@ class Api::V3::ReportsController < Api::V3::ApiController
             company_ids = []
             companies.each do |c|
                 if c[:name]
-                    company = Company.where(:name => c[:name]).first
+                    company = Company.where(name: c[:name]).first
                 elsif c[:id]
-                    company = Company.where(:id => c[:id]).first
+                    company = Company.where(id: c[:id]).first
                 end
 
                 if company
                     report.project.project_subs.where(id: company.id).first_or_create
                     report.project.company.subcontractors.where(id: company.id).first_or_create
-                    rc = report.report_companies.where(:company_id => company.id).first_or_create
+                    rc = report.report_companies.where(company_id: company.id).first_or_create
                     rc.update_attribute :count, c[:count]
                     company_ids << company.id
                 end
@@ -155,11 +155,11 @@ class Api::V3::ReportsController < Api::V3::ApiController
             new_topics = []
             params[:report][:safety_topics].each do |topic|
                 if topic["topic_id"]
-                    t = report.report_topics.where(:safety_topic_id => topic["topic_id"]).first_or_create
+                    t = report.report_topics.where(safety_topic_id: topic["topic_id"]).first_or_create
                     new_topics << t
                 else
                     if topic["id"].present?
-                        t = report.report_topics.where(:safety_topic_id => topic["id"]).first_or_create
+                        t = report.report_topics.where(safety_topic_id: topic["id"]).first_or_create
                         new_topics << t
                     else
                         new_topic = report.project.company.safety_topics.where(:title => topic["title"]).first_or_create
