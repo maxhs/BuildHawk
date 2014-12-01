@@ -1,7 +1,7 @@
 <% unless comment.new_record? %>
-	<tr id="comment-<%=comment.id%>">
-		<td class="col-md-12"><%= comment.body %></td>
-		<td class="col-md-12" style="line-height:1em">
+	<div class="comment" id="comment-<%=comment.id%>">
+		<div><%= comment.body %></div>
+		<div style="float:right">
 			<% if comment.user %>- <%= comment.user.full_name %> <span class="comment-pipe">|</span> <% end %>
 			<%= parse_time comment.created_at %>
 			<% if user_signed_in? && comment.user == current_user %>
@@ -10,6 +10,6 @@
 					<i class="fa fa-trash remote"></i>
 				<% end %>
 			<% end %>
-		</td>
-	</tr>
+		</div>
+	</div>
 <% end %>

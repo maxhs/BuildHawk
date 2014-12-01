@@ -93,7 +93,7 @@
 </div>          
         
 <section class="comment-container border-box">
-    <h4 class="center">Comments</h4>
+    <h4 class="center header">Comments</h4>
     <div id="comments-form">
         <%= form_for item.comments.new, method: :post, remote: true do |f| %>
             <%= f.text_area :body, rows: "3", placeholder: "Type your notes/comment here" %>
@@ -104,9 +104,9 @@
 		    <% end %>
         <% end %>
     </div>
-    <table id="comments-table">
+    <div id="comments-table">
 		<%= render partial:"comments/comment", collection: item.comments, as: :comment, cache: false %>
-	</table>
+	</div>
 </section>
 
 <% if item.activities.count > 0 %>

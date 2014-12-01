@@ -1,5 +1,7 @@
-<%= form_for(folder, url: folder_path(folder), :method => :patch, :remote => true) do |f|%>
-	<%= f.text_field :name, :value => folder.name %>
+<%= form_for(folder, url: folder_path(folder), method: :patch, remote: true) do |f|%>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	<%= f.text_field :name, value: folder.name %>
+
 	<%= button_tag(type: 'submit', remote: true, :class=> "no-btn action-icon") do %>
     	<i class="fa fa-floppy-o remote"></i>			  	
     <% end %>

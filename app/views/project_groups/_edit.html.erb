@@ -1,5 +1,6 @@
 <div id="<%= @project_group.id %>" class="project-group editing">
 	<%= form_for @project_group, url: project_group_path(@project_group), method: :patch, remote: true do |f| %>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 		<div class="col-xs-4" style="display:table">
 			<%= button_tag(type: 'submit', :class=> "no-btn action-icon", title:"Save") do %>
 		    	<i class="fa fa-floppy-o"></i>

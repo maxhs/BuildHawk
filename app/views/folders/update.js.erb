@@ -1,5 +1,5 @@
 $('#edit_folder_<%=@folder.id%>').fadeOut(200,function(){
-	$(this).replaceWith('<h4 class="folder-name"><%= @folder.name %></h4>');
+	$(this).replaceWith('<%= j render partial:"folders/folder", locals: {folder: @folder, project: @project} %>');
 	$(this).fadeIn(200);
 	$('#fid-<%=@folder.id%> > .edit-folder').fadeIn(200);
 });

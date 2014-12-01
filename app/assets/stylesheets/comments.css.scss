@@ -46,18 +46,11 @@
 	margin:2.5% auto 0;
 	display:block;
 
-	tr, tbody {
+	.comment {
+		padding-top:15px;
 		width:100%;
-		display:block;
-	}
-
-	td {
-		line-height:1.5em;
-		display:inline-block;
-	}
-
-	tr {
-		line-height: 60px;
+		display:table;
+		position:relative;
 		border-top:1px solid #ddd;
 	}
 }

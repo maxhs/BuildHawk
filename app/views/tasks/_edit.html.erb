@@ -84,11 +84,10 @@
 			<% end %>
 		</div>
 <% end %>
-	
-	<div id="comment-toggle" class="empty-btn">View Comments</div>
 </div>
 
-<div class="comment-container collapsed border-box">
+<div class="comment-container border-box">
+	<h4 class="center header">Comments</h4>
 	<div id="comments-form">
 		<%= form_for task.comments.new, method: :post, remote: true do |f| %>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -101,9 +100,9 @@
 		<% end %>
 	</div>
 	
-	<table id="comments-table">
+	<div id="comments-table">
 		<%= render partial:"comments/comment", collection: task.comments, as: :comment, cache: false %>
-	</table>
+	</div>
 </div>
 
 <script>
