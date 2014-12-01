@@ -27,7 +27,9 @@ class Checklist < ActiveRecord::Base
             else
                 new_checklist.core = true
             end
+
             new_checklist.save
+            puts "new checklist now!: #{new_checklist.id}"
         end
     end
 

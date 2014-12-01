@@ -61,7 +61,7 @@ class AdminController < AppController
 
 	def checklists
 		uber_checklists
-		@checklists = @user.company.checklists.where(:core => true).flatten
+		@checklists = @user.company.checklists.where(core: true).flatten
 	end
 
 	def editor
@@ -79,10 +79,10 @@ class AdminController < AppController
 	end
 
 	def create_blank_template
-		@checklist = Checklist.create :company_id => @user.company.id, :name => params[:name], :core => true
-		phase = @checklist.phases.create :name => "Phase"
-		category = phase.categories.create :name => "Category"
-		category.checklist_items.create :body => "First Item"
+		@checklist = Checklist.create company_id: @user.company.id, name: params[:name], core: true
+		phase = @checklist.phases.create name: "Phase"
+		category = phase.categories.create name: "Category"
+		category.checklist_items.create body: "First Item"
 		if request.xhr?
 			respond_to do |format|
 				format.js { render template: "admin/create_template"}
@@ -97,7 +97,7 @@ class AdminController < AppController
 	def create_template
 		list = Checklist.find params[:checklist_id]
 		list.duplicate(@company.id,nil)
-		@checklist = Checklist.new name: list.name, company_id: @company_id, core: true
+		@list_name = list.name
 		@checklists = @user.company.checklists.where(core: true).flatten
 		if request.xhr?
 			respond_to do |format|
