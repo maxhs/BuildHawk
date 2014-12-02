@@ -7,10 +7,10 @@
 	
 	<% if current_user.any_admin? %>
 		<li class="project buttons" style="padding:0">
-			<%= link_to new_project_path, id:"new-project-button", remote: true do %>
+			<%= link_to new_project_path, id:"new-project-button", title:"Add a new project", remote: true do %>
 				<i class="fa fa-plus"></i><span class="bold-header">Project</span>
 			<% end %>
-			<%= link_to new_project_group_path, id:"new-group-button", :class=>"remote", remote: true do %>
+			<%= link_to new_project_group_path, id:"new-group-button", :class=>"remote", title:"Add a new group",  remote: true do %>
 				<i class="fa fa-plus remote"></i><span class="bold-header remote">Group</span>
 			<% end %>
 		</li>
@@ -50,10 +50,8 @@
 </ul>
 	
 <script type="text/javascript">
-	
 	$(function(){
 		sidebarSetup();
-
 		<% if @sidebar_projects && @sidebar_projects.count > 0 %>
 			<% @sidebar_projects.each do |p| %>
 				<% if p.checklist %>

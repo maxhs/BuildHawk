@@ -45,7 +45,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
     <div id="wrap" style="margin-bottom:0;">
 
 		<nav id="condensed-sidebar" role="sidebar">
-			<%= image_tag "whiteK.png", id:"toggle" %>
+			<%= image_tag "whiteK.png", id:"toggle", title:"Toggle the sidebar" %>
 			<ul id="main-dropdown-menu">
 				<% if @projects && @projects.count > 0 %>
 					<% @projects.each do |p| %>
@@ -58,8 +58,8 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 		<nav id="main-sidebar" class="revealed" role="sidebar">
 			<div id="settings-row">
 				<a href="/"><%= image_tag 'logo_white.png', id: "logo" %></a>
-				<i class="fa fa-search" id="project-search-button"></i>
-				<span id="menu-toggle">
+				<i class="fa fa-search" id="project-search-button" title="Search"></i>
+				<span id="menu-toggle" title="Toggle the sidebar">
 					<i class="fa fa-chevron-left revealed"></i>
 				</span>
 			</div>
@@ -68,7 +68,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 			
 			<div id="bottom-menu" class="app revealed">
 				<div>
-					<%= link_to image_tag('settings_white.png', id: "settings"),edit_user_path(current_user), remote:true %>
+					<%= link_to image_tag('settings_white.png', id: "settings"),edit_user_path(current_user), title:"View Settings", remote:true %>
 				</div>
 				<div>
 					<% if current_user.any_admin? %>
