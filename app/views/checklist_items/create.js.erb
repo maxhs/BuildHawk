@@ -1,8 +1,16 @@
+$('.active-item').removeClass('active-item');
+$('#item-<%=@item.id %>').addClass('active-item');
+$(".checklist").addClass('panel');
+
+<% if @category %>
+	$('#category-<%= @category.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", locals: {category: @category} %>');
+	$('#category-<%= @category.id %> .category-items').append('<%= j render partial:"checklist_items/row", locals: {item: @item} %>');
+<% end %>
+
+$('#checklist.focus').html('<%= j render partial:"checklist_items/show", locals: {item: @item} %>');
+$('#checklist.focus').css('left','54%');
+setTimeout(function(){$("html, body").animate({ scrollTop: 0 }, 230)},100);
 $('#new_checklist_item').fadeOut(230,function(){
-	$(this).replaceWith('<%= j render partial:"checklist_items/show", locals: {item: @item} %>');
-	<% if @category %>
-		$('#category-<%= @category.id %> .completed-count').html('<%= j render partial:"checklists/completed_count", locals: {category: @category} %>');
-	<% end %>
-	$(this).fadeIn(230);
+	$(this).remove();
 });
-$('.new-checklist-item').show();
+$('#new-item-<%= @category.id %>').show();

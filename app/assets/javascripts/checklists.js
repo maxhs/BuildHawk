@@ -94,7 +94,6 @@ function checklistItem(itemExportPartial, projectId){
     $('#floating-save').click(function(){
 		$('.edit_checklist_item').trigger('submit.rails');
 	});
-
     
     $('#dismiss-item').click(function(){
 		dismissChecklist(projectId);

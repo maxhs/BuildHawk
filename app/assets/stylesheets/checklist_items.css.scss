@@ -23,11 +23,15 @@
 	}
 
 	.status-section {
+		padding:15px;
+		background:#eee;
 
 		#checklist_item_state {
 			option {
 				padding:3px 0;
-				font-weight:700;
+				font-size:.95em;
+				text-transform:uppercase;
+				font-weight:600;
 			}
 		}
 

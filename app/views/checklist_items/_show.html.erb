@@ -9,7 +9,7 @@
 					<i class="fa fa-share"></i>
 				</div>
 				<% if current_user.admin || current_user.company_admin %>
-					<%= link_to checklist_items_path(item), title: "Delete", data: {confirm: "Are you sure you want to delete this item?"}, method: :delete, :class=>"remote action", remote: true do %>
+					<%= link_to checklist_item_path(item), title: "Delete", data: {confirm: "Are you sure you want to delete this item?"}, method: :delete, :class=>"remote action", remote: true do %>
 						<i class="fa fa-trash-o remote"></i>
 					<% end %>	
 				<% end %>
@@ -33,12 +33,16 @@
 				<div class="col-xs-3"><h5>Type</h5></div>
 				<div class="col-xs-9 body"><%= item.item_type %></div>
 			</div>
+			<div class="row">
+				<div class="col-xs-3"><h5>Item</h5></div>
+				<div class="col-xs-9 body"><%= item.body %></div>
+			</div>
 			
 			<div class="row status-section">
                 <div class="col-xs-3"><h5>Status</h5></div>
-                <div class="col-xs-9">
+                <div class="col-xs-9 center">
                     <%= f.select :state, options_for_select({"In-Progress"=>0,"Completed"=>1,"Not Applicable"=>-1}, selected: item.state), {include_blank: "No Status"}, multiple: true, :class=>"center" %> 
-                    <span class="placeholder">&#8984; / Ctrl click to deselect <span>
+                    <span class="placeholder center">&#8984; / Ctrl click to deselect <span>
                 </div>
             </div>
 

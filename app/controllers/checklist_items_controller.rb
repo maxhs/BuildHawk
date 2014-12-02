@@ -149,10 +149,5 @@ class ChecklistItemsController < AppController
 		@checklist = @category.phase.checklist
 		@project = @checklist.project
 		checklist_item.destroy
-		if @project
-			render "projects/checklist"
-		else
-			render "admin/editor"
-		end
 	end
 end
