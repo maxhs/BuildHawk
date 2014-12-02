@@ -110,6 +110,7 @@ class TasksController < AppController
 		
 	def destroy
 		@task_id = @task.id
+		@tasklist = @task.tasklist
 		if @task && @task.destroy && request.xhr?
 			respond_to do |format|
 				format.js

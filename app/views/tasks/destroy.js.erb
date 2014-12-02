@@ -5,5 +5,8 @@ $('.faded').removeClass('faded');
 $('#task-<%= @task_id %>').fadeOut(230,function(){
 	$(this).remove();
 });
+<% if @tasklist.tasks.count == 0 %>
+	$('#task-table').html('<div id="tasks"><div class="no-content placeholder font-smoothing">No tasks</div></div>');
+<% end %>
 setTimeout(function(){$('#task.focus').html('')},230);
 $("html, body").animate({ scrollTop: 0 }, 230);

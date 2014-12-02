@@ -1,1 +1,5 @@
-$('#tasks').prepend("<%= j render partial:'tasks/row', locals:{task: @task} %>");
+<% if @tasklist.tasks.count == 1 %>
+	$('#tasks').html("<%= j render partial:'tasks/row', locals:{task: @task} %>");
+<% else %>
+	$('#tasks').prepend("<%= j render partial:'tasks/row', locals:{task: @task} %>");
+<% end %>
