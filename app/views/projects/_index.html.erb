@@ -4,11 +4,12 @@
 			<%= render :partial => "projects/company_dashboard", collection: projects, as: :project, cache: false %>
 		</div>
 	<% else %>
-		<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects.</div>
-		<div id="demo-prompt" class="font-smoothing">But you can explore several demo projects on your dashboard (all the way to the left).</div>
+		<div id="dashboard-placeholder" class="font-smoothing">You don't have any active projects (yet).</div>
+		<div id="demo-prompt" class="font-smoothing">For now, you can explore several demo projects on your dashboard to the left.</div>
+		<div id="demo-prompt" class="font-smoothing">When you're ready to create your own project, click the "+ project" button.</div>
 	<% end %>
 		
-	<% if current_user.company.has_admin? %>
+	<!--<% if current_user.company.has_admin? %>
 		<% if !projects || projects.count == 0 %>
 			<div id="pro-signup-prompt" class="font-smoothing">
 			<div class="call-to-action">Send your company administrator <%= mail_to "support@buildhawk.com", "an email", remote: true %> asking them to set up <%= link_to "BuildHawk", root_url, target:"_blank" %>.</div>
@@ -23,7 +24,7 @@
 			
 			<div>Efficiency through organization.</div>
 		</div>		
-	<% end %>
+	<% end %>-->
 
 	<div id="communication" class="container">
 		<div id="messages" class="border-box">
