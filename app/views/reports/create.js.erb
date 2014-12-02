@@ -1,5 +1,10 @@
 showAlert('Report created');
-$('#reports').prepend("<%= j render partial:'reports/row', locals:{report: @report} %>");
+<% if @project.reports.count == 1 %>
+	$('#reports').html("<div class='header row'><div class='col-xs-3'><h6>Report Date</h6></div><div class='col-xs-3'><h6>Type</h6></div><div class='col-xs-3'><h6>Personnel</h6></div><div class='col-xs-3'><h6>Photos</h6></div></div><%= j render partial:'reports/row', locals:{report: @report} %>");
+<% else %>
+	$('#reports').prepend("<%= j render partial:'reports/row', locals:{report: @report} %>");
+<% end %>
+
 if (history && history.pushState){
     history.pushState(null, null, '<%=root_url%>reports/<%=@report.to_param%>');
     $(window).bind("popstate", function(){

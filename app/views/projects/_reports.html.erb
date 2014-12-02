@@ -14,7 +14,7 @@
 		</div>
 	</div>
 
-	<div>
+	<div id="reports-table">
 		<% if reports && reports.count > 0 %>
 			<div class="header row">
 				<div class="col-xs-3"><h6>Report Date</h6></div>
@@ -26,9 +26,10 @@
 				<%= render partial:"reports/row", collection: reports, as: :report, cache: true %>
 			</div>
 		<% else %>
-			<div class="no-content placeholder font-smoothing">No reports</div>
+			<div id="reports">
+				<div class="no-content placeholder font-smoothing">No reports</div>
+			</div>
 		<% end %>
-		
 	</div>
 </div>
 
