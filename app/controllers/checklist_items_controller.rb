@@ -1,6 +1,42 @@
 class ChecklistItemsController < AppController
 	before_filter :authenticate_user!
 	
+	def new
+		@item = ChecklistItem.new
+		@item_index = params[:item_index]
+		@category = Category.find params[:category_id]
+		@phase = @category.phase
+		@checklist = @phase.checklist
+		@project = @checklist.project
+		@phase_name = @phase.name
+		if request.xhr?
+			respond_to do |format|
+				format.js
+			end
+		else
+			if @project
+				render "projects/checklist"
+			else
+				render "admin/editor"
+			end
+		end
+	end
+
+	def create
+		@item = ChecklistItem.create params[:checklist_item]
+		@item.move_to_bottom
+		@checklist = @item.checklist
+		@category = @item.category
+		@project = @checklist.project if @checklist.project
+		if request.xhr?
+			respond_to do |format|
+				format.js 
+			end
+		else
+			render :checklist
+		end
+	end
+
 	def edit
 		@item = ChecklistItem.find params[:id]	
 		@checklist = @item.category.phase.checklist
@@ -53,42 +89,6 @@ class ChecklistItemsController < AppController
 			end
 		end
 				
-	end
-
-	def new
-		@item = ChecklistItem.new
-		@item_index = params[:item_index]
-		@category = Category.find params[:category_id]
-		@phase = @category.phase
-		@checklist = @phase.checklist
-		@project = @checklist.project
-		@phase_name = @phase.name
-		if request.xhr?
-			respond_to do |format|
-				format.js
-			end
-		else
-			if @project
-				render "projects/checklist"
-			else
-				render "admin/editor"
-			end
-		end
-	end
-
-	def create
-		@item = ChecklistItem.create params[:checklist_item]
-		@item.move_to_bottom
-		@checklist = @item.checklist
-		@category = @item.category
-		@project = @checklist.project if @checklist.project
-		if request.xhr?
-			respond_to do |format|
-				format.js 
-			end
-		else
-			render :checklist
-		end
 	end
 
 	def show

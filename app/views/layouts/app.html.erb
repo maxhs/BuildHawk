@@ -57,7 +57,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");</script><!-- end Mixpanel -->
 
 		<nav id="main-sidebar" class="revealed" role="sidebar">
 			<div id="settings-row">
-				<a href="/"><%= image_tag 'logo_white.png', id: "logo" %></a>
+				<%= link_to image_tag('logo_white.png'), projects_path, id: "logo" %>
 				<i class="fa fa-search" id="project-search-button" title="Search"></i>
 				<span id="menu-toggle" title="Toggle the sidebar">
 					<i class="fa fa-chevron-left revealed"></i>

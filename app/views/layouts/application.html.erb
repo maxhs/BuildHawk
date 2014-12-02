@@ -8,9 +8,7 @@
 	<link rel="shortcut icon" href="<%=root_url %>/favicon.ico?v=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-itunes-app" content="app-id=816590963">
-	<% if !current_page?(root_url) %>
-		<meta name="robots" content="noindex">
-	<% end %>
+	<% unless current_page?(root_url) %> <meta name="robots" content="noindex"> <% end %>
 	<% if @mobile_redirect %>
 		<script type="text/javascript">	
 			var userAgent = window.navigator.userAgent;
@@ -26,7 +24,6 @@
 	  _gaq.push(['_setAccount', 'UA-43601553-1']);
 	  _gaq.push(['_setDomainName', 'buildhawk.com']);
 	  _gaq.push(['_trackPageview']);
-
 	  (function() {
 	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -47,25 +44,15 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");
     <div id="wrap">
 		<div class="navbar navbar-fixed-top <% if !user_signed_in? && (current_page?(root_url) || current_page?(login_path) )%>splash<% end %>" id="top-nav" role="navigation">
 			<ul id="navigation">
-				<% if !user_signed_in? %>
-					<li class="logo"><a href="/"><%= image_tag('logo.png') %></a></li>
-					<% if current_page?(root_url) %>
-						<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
-						<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
-						<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
-					<% else %>
-						<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#{root_url}#contact" %></li>
-						<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#{root_url}#pricing" %></li>
-						<li class="nav-about" id="nav-about"><%= link_to 'About', "#{root_url}#about" %></li>
-					<% end %>
-				<% elsif params[:controller] == "admin" || params[:controller] == "billing"%>
-					<%= render partial: "admin/top_nav" %>
-				<% elsif params[:controller] == "uber_admin" %>
-					<%= render partial: "uber_admin/top_nav" %>
-				<% elsif @project %>
-					<%= render partial: "projects/project_nav" %>
-				<% elsif user_signed_in? %>
-					<%= render partial: "layouts/internal_nav" %>
+				<li class="logo"><a href="/"><%= image_tag('logo.png') %></a></li>
+				<% if current_page?(root_url) %>
+					<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#contact" %></li>
+					<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#pricing" %></li>
+					<li class="nav-about" id="nav-about"><%= link_to 'About', "#about" %></li>
+				<% else %>
+					<li class="nav-contact" id="nav-contact"><%= link_to 'Contact', "#{root_url}#contact" %></li>
+					<li class="nav-pricing" id="nav-pricing"><%= link_to 'Pricing', "#{root_url}#pricing" %></li>
+					<li class="nav-about" id="nav-about"><%= link_to 'About', "#{root_url}#about" %></li>
 				<% end %>
 			</ul>	
 		</div>
@@ -83,7 +70,7 @@ mixpanel.init("2e57104ead72acdd8a77ca963e32e74a");
 	<div id="container">
 		<ul>
 			<li><a href="http://blog.buildhawk.com" target="_blank" >Blog</a></li>
-			<li><%= mail_to "contact@buildhawk.com", "Contact", encode: "javascript", :id => "contact-link" %></li>
+			<li><%= mail_to "contact@buildhawk.com", "Contact", encode: "javascript", id: "contact-link" %></li>
 		</ul>
 		<ul>
 			<li><a href="/terms">Terms of Service</a></li>

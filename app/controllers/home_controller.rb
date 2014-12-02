@@ -1,20 +1,11 @@
 class HomeController < ApplicationController
 
 	def index
-		if user_signed_in?
-			redirect_to projects_path
-		else
-			@lead = Lead.new
-			render :splash
-		end
+		@lead = Lead.new
 	end
 
-	def show
-		if user_signed_in?
-			redirect_to projects_path
-		else
-			render :index
-		end
+	def show	
+		render :index
 	end
 
 	def about

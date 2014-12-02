@@ -1,6 +1,9 @@
 <div id="main">
-	<div id="error-container" style="margin:0 auto; width:50%;">
-		<h1>We couldn't load that page.</h1> 
-		<%= link_to "Back", :back, :class=>"error-back-button simple-btn" %>
+	<div id="error-container" class="border-box half-width">
+		<h2>We couldn't load that page.</h2>
+		<div class="no-content placeholder font-smoothing">Time for a coffee break?</div>
+		<div class="btn-container center">
+			<div class="error-back-button empty-btn center" onclick="javascript:history.go(-1)">Go Back</div>
+		</div>
 	</div>
 </div>
