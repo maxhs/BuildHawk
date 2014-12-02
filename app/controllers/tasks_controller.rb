@@ -54,7 +54,11 @@ class TasksController < AppController
 	end
 
 	def edit
-		@locations = @tasklist.tasks.map{|i| i.location if i.location && i.location.length > 0}.flatten
+		#@locations = @tasklist.tasks.map{|i| i.location if i.location && i.location.length > 0}.compact.flatten.to_json
+		@locations = @tasklist.tasks.collect do |task|
+				{id: task.location, 
+				text: task.location} if task.location && task.location.length > 0
+			end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
 	rescue
 		if @project
 			redirect_to tasklist_project_path @project

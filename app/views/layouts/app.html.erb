@@ -9,29 +9,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-itunes-app" content="app-id=816590963">
 	<meta name="robots" content="noindex">
-	<script type="text/javascript">	
-		<% if @mobile_redirect %>
+	<% if @mobile_redirect %>
+		<script type="text/javascript">	
 			var userAgent = window.navigator.userAgent;
 		   	if ((userAgent.match(/iPhone/i) || (userAgent.match(/iPad/i)) && window.location != "<%=root_url%>" && window.location != "<%=root_url%>mobile") {
 		   		setTimeout(function () { window.location = "https://itunes.apple.com/us/app/buildhawk/id816590963?mt=8" }, 25);
-		   	 	<% if @task %>
-		  	 		window.location = "buildhawk://?task_id=<%= j @task.id.to_s %>"	
-		  	 	<% end %>
+		   	 	<% if @task %> window.location = "buildhawk://?task_id=<%= j @task.id.to_s %>"<% end %>
 		  	}
-	  	<% end %>
- 	</script>
-
-	<script type="text/javascript">
-	    Shadowbox.init({
-	    	skipSetup:true,
-	    	onOpen:function(){
-	    		$('#top-nav').css('opacity','.1');
-	    	},
-	    	onClose:function(){
-	    		$('#top-nav').css('opacity','1');}
-	    })
-		window.Dropzone;
-	</script>
+ 		</script>
+ 	<% end %>
 
 	<script type="text/javascript">
 	  var _gaq = _gaq || [];

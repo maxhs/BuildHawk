@@ -32,15 +32,13 @@
 				<h5>Location</h5>
 			</div>
 			<div class="col-xs-9">
-				<%= f.text_field :location, placeholder: "Add a location (optional)" %>
+				<%= f.hidden_field :location, id:"location-select" %>
 			</div>		
 		</div>
 		<div class="row" style="margin-bottom:2.5%;">
 			<div class="col-xs-3"><h5>Status</h5></div>
 			<div class="col-xs-9">
-				<div>
-					<%= f.radio_button :completed, false %><h6 class="task-progress">IN PROGRESS</h6>
-				</div>
+				<div> <%= f.radio_button :completed, false %><h6 class="task-progress">IN PROGRESS</h6> </div>
 				<div>
 					<%= f.radio_button :completed, true %><h6 class="task-progress">COMPLETED</h6>
 					<% if task.completed_by_user %>
@@ -71,18 +69,18 @@
 		</div>
 	<% end %>
 	
-		<div class="row">
-			<h5>Add a photo</h5>
-			<%= f.fields_for :photos, task.photos.build do |photo| %>
-				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= photo.hidden_field :name, value: "Task Photo" %>
-				<%= photo.hidden_field :project_id, :value => @project.id %>
-				<%= photo.hidden_field :user_id, :value => current_user.id %>
-				<%= photo.file_field :image %>
-				<% if task.id %><%= photo.hidden_field :task_id, :value => task.id %><% end %>
-				<%= photo.hidden_field :source, :value => "Tasklist" %>
-			<% end %>
-		</div>
+	<div class="row">
+		<h5>Add a photo</h5>
+		<%= f.fields_for :photos, task.photos.build do |photo| %>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+			<%= photo.hidden_field :name, value: "Task Photo" %>
+			<%= photo.hidden_field :project_id, value: @project.id %>
+			<%= photo.hidden_field :user_id, value: current_user.id %>
+			<%= photo.file_field :image %>
+			<% if task.id %><%= photo.hidden_field :task_id, value: task.id %><% end %>
+			<%= photo.hidden_field :source, value: "Tasklist" %>
+		<% end %>
+	</div>
 <% end %>
 </div>
 
@@ -94,7 +92,7 @@
 			<%= f.text_area :body, rows: "3", placeholder: "Type your notes/comment here" %>
 			<%= f.hidden_field :user_id, value: current_user.id %>
 			<%= f.hidden_field :task_id, value: task.id %>
-			<%= button_tag(type: 'submit', :class=> "simple-btn full-width", style:"margin:14px auto;", remote: true) do %>
+			<%= button_tag(type: 'submit', :class => "simple-btn full-width", style:"margin:14px auto;", remote: true) do %>
 		    	<i class="fa fa-paper-plane remote"></i> Add			  	
 		    <% end %>
 		<% end %>
@@ -105,6 +103,17 @@
 	</div>
 </div>
 
-<script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#location-select').select2({
+	    createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
+	    multiple: false,
+	    data: <%=@locations.html_safe%>,
+	    initSelection : function (element, callback) {
+            var elementText = $(element).val();
+            callback({"text":elementText,"id":elementText});
+        }
+	});
 	taskSetup('<%=@project.to_param%>',null);
+});
 </script>

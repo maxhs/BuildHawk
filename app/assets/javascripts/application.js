@@ -120,6 +120,16 @@ function setupWindow(){
             $('#main-dropdown-menu').hide(200);
         }
     });
+
+    Shadowbox.init({
+        skipSetup:true,
+        onOpen:function(){
+            $('#top-nav').css('opacity','.1');
+        },
+        onClose:function(){
+            $('#top-nav').css('opacity','1');}
+    })
+    window.Dropzone;
 }
 
  function mobilecheck() {

@@ -162,7 +162,7 @@
 		<% end %>
 	</div>
 	<div id="comments-table">
-		<%= render partial:"comments/comment", collection: report.comments, as: :comment, cache: false %>
+		<%= render partial:"comments/comment", collection: report.comments, as: :comment, cache: true %>
 	</div>
 </div>
 

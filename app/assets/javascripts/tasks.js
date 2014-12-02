@@ -22,10 +22,11 @@ function taskSetup(projectId,exportPartial){
 	$('#task-save').click(function(){
 		$('.new_task, .edit_task').submit();
 	});
-	$('.assignee-select').select2({
+	$('select.assignee-select').select2({
 		placeholder: "Select assignees...",
 		allowClear: true
 	});
+	
 	$('#comment-toggle').click(function(){
 		if ($('.comment-container').hasClass('collapsed')){
 			$(this).text('Comments');
