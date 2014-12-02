@@ -28,7 +28,9 @@
 					<%= render partial: "tasks/row", collection: tasks, as: :task, cache: false %>
 				</div>
 			<% else %>
-				<div class="no-content placeholder font-smoothing">No tasks</div>
+				<div id="tasks">
+					<div class="no-content placeholder font-smoothing">No tasks</div>
+				</div>
 			<% end %>
 		</div>
 	</div>

@@ -28,7 +28,7 @@ function newReport(latitude,longitude,projectId) {
 	    reloadWeather(latitude, longitude, ev.date.getTime());
 	});
 	
-	$('#report-add').click(function(){
+	$('#report-add, #big-add-report').click(function(){
 		if ($('#dp').val().length > 0) {
 			$('.new_report').trigger('submit.rails');
 		} else {

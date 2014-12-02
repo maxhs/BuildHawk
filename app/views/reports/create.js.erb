@@ -1,1 +1,8 @@
+showAlert('Report created');
 $('#reports').prepend("<%= j render partial:'reports/row', locals:{report: @report} %>");
+if (history && history.pushState){
+    history.pushState(null, null, '<%=root_url%>reports/<%=@report.to_param%>');
+    $(window).bind("popstate", function(){
+      	$.getScript(location.href);
+    });
+}
