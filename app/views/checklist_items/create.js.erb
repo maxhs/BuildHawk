@@ -1,5 +1,4 @@
 $('.active-item').removeClass('active-item');
-$('#item-<%=@item.id %>').addClass('active-item');
 $(".checklist").addClass('panel');
 
 <% if @category %>
@@ -7,6 +6,7 @@ $(".checklist").addClass('panel');
 	$('#category-<%= @category.id %> .category-items').append('<%= j render partial:"checklist_items/row", locals: {item: @item} %>');
 <% end %>
 
+$('#item-<%=@item.id %>').addClass('active-item');
 $('#checklist.focus').html('<%= j render partial:"checklist_items/show", locals: {item: @item} %>');
 $('#checklist.focus').css('left','54%');
 setTimeout(function(){$("html, body").animate({ scrollTop: 0 }, 230)},100);

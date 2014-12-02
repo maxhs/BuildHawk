@@ -85,7 +85,7 @@
             <%= f.fields_for :photos, item.photos.build do |photo| %>
                 <%= photo.file_field :image, style: "margin:0 auto;" %>
                 <%= photo.hidden_field :user_id, value: current_user.id %>
-                <%= photo.hidden_field :project_id, value: item.category.phase.checklist.project.id %>
+                <%= photo.hidden_field :project_id, value: item.category.phase.checklist.project.id if item.category.phase.checklist.project %>
                 <%= photo.hidden_field :name, value: "Checklist Photo" %>
                 <%= photo.hidden_field :phase, value: item.category.phase.name if item.category.phase %>
                 <%= photo.hidden_field :checklist_item_id, value: item.id %>
