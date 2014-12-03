@@ -1,16 +1,14 @@
-<%= nested_form_for task, url: tasks_path, html: {:multipart => true}, remote: true, :class=>"remote", method: :post do |f| %>
+<%= nested_form_for task, url: tasks_path, html: {multipart: true}, remote: true, :class=>"remote", method: :post do |f| %>
 	<%= f.hidden_field :user_id, value: current_user.id %>
 	<%= hidden_field_tag :project_id, @project.id %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %> 
 
 	<div id="task-container" class="border-box">
-		<header>
-			<h4>New task</h4>
-		</header>
+		<h4 class="task-title">New task</h4>
 
 		<div class="action-buttons">
 			<div id="task-save" title="Add" class="action">
-               	<i class="fa fa-floppy-o remote"></i>
+               	<i class="fa fa-plus remote"></i>
 			</div>
 			
 			<i class="fa fa-share inactive action"></i>
@@ -21,16 +19,16 @@
 		</div>
 
 		<div class="row">
-			<div class="col-xs-2"><h5>Item</h5></div>
-			<div class="col-xs-10"><%= f.text_field :body, :placeholder => "Describe the task" %></div>
+			<div class="col-xs-3"><h5>Task</h5></div>
+			<div class="col-xs-9"><%= f.text_field :body, :placeholder => "Describe the task" %></div>
 		</div>
 		<div class="row">
-			<div class="col-xs-2"><h5>Location</h5></div>
-			<div class="col-xs-10"><%= f.text_field :location, :placeholder => "Add a location (optional)" %></div>
+			<div class="col-xs-3"><h5>Location</h5></div>
+			<div class="col-xs-9"><%= f.hidden_field :location, placeholder: "Add a location (optional)", id:"location-select" %></div>
 		</div>
 		<div class="row">
-			<h5 class="col-xs-2">Assignees</h5>
-			<div class="col-xs-10">
+			<h5 class="col-xs-3">Assignees</h5>
+			<div class="col-xs-9">
 				<%= f.collection_select :assignee_ids, @users, :id, :full_name, {selected: task.assignee_ids}, {:include_blank => false, multiple: true, :class=>"assignee-select", :style => "position:relative;top:10px;"} %>
 			</div>
 		</div>
@@ -52,5 +50,15 @@
 <% end %>
 
 <script>
+	$('#location-select').select2({
+	    createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
+	    multiple: false,
+	    data: <%=@locations.html_safe %>,
+	    allowClear: true,
+	    initSelection : function (element, callback) {
+            var elementText = $(element).val();
+            callback({"text":elementText,"id":elementText});
+        }
+	});
 	taskSetup('<%=@project.to_param%>',null);
 </script>

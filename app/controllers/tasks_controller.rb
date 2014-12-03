@@ -12,9 +12,9 @@ class TasksController < AppController
 		@users = @project.users
 		@subs = @project.project_subs
 		@locations = @tasklist.tasks.collect do |task|
-				{id: task.location, 
-				text: task.location} if task.location && task.location.length > 0
-			end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
+			{id: task.location, 
+			text: task.location} if task.location && task.location.length > 0
+		end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
 		@tasks = @tasklist.tasks
 		if request.xhr?
 			respond_to do |format|
@@ -38,7 +38,11 @@ class TasksController < AppController
 		end
 
 		@task = @tasklist.tasks.create params[:task]
-		
+		@locations = @tasklist.tasks.collect do |task|
+			{id: task.location, 
+			text: task.location} if task.location && task.location.length > 0
+		end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
+			
 		if assignee
 			@task.update_attribute :assignee_id, assignee.id
 		end

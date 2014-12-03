@@ -47,13 +47,12 @@
         background:#fff !important;
         border-color:#ddd !important;
         display: block;
-        height: 26px;
-        padding: 0 0 0 8px;
+        font-size:1em;
+        padding: 7px;
         overflow: hidden;
         position: relative;
         border: 1px solid #aaa;
         white-space: nowrap;
-        line-height: 26px;
         color: #444;
         text-decoration: none;
         border-radius: 4px;
@@ -98,13 +97,13 @@ html[dir="rtl"] .select2-container .select2-choice {
 }
 
 .select2-container .select2-choice > .select2-chosen {
-  margin-right: 26px;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  float: none;
-  width: auto;
+    margin-right: 26px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    float: none;
+    width: auto;
 }
 
 html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
@@ -124,7 +123,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
     border: 0;
     background:asset-url('select2.png') right top no-repeat;
     cursor: pointer;
-    outline: 0;
+    outline: 0 !important;
 }
 
 .select2-container.select2-allowclear .select2-choice abbr {

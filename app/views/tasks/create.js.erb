@@ -3,3 +3,4 @@
 <% else %>
 	$('#tasks').prepend("<%= j render partial:'tasks/row', locals:{task: @task} %>");
 <% end %>
+$('#task.focus').html('<%= j render partial:"tasks/edit", locals: {task: @task} %>');
