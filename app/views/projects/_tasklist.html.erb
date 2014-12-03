@@ -54,13 +54,12 @@
 			$('#task.focus').css('left','50%');
 			$("html, body").delay(230).animate({ scrollTop: 0 }, 230);
 		<% else %>
+			console.log('should be doing stuff');
 			$('.active-task').removeClass('active-task');
 			$('.task').addClass('faded');
 			$('#task-<%=task.id %>').addClass('active-task');
 			$('#task.focus').css('left','50%');
-			$("html, body").delay(200).animate({ scrollTop: $("#task-<%=task.id %>").offset().top-84 }, 200);
+			$("html, body").delay(230).animate({ scrollTop: $("#task-<%=task.id %>").offset().top-84 }, 200);
 		<% end %>
 	<% end %>
-	taskSetup('<%=project.id%>','<%= j render partial:"projects/tasklist_export" %>');
-	
 </script>

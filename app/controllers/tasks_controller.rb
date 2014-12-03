@@ -11,7 +11,10 @@ class TasksController < AppController
 		@projects = @company.projects
 		@users = @project.users
 		@subs = @project.project_subs
-		@locations = @project.tasklists.last.tasks.map{|i| i.location if i.location && i.location.length > 0}.flatten
+		@locations = @tasklist.tasks.collect do |task|
+				{id: task.location, 
+				text: task.location} if task.location && task.location.length > 0
+			end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
 		@tasks = @tasklist.tasks
 		if request.xhr?
 			respond_to do |format|

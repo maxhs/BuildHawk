@@ -108,7 +108,7 @@ $(document).ready(function(){
 	$('#location-select').select2({
 	    createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
 	    multiple: false,
-	    data: <%=@locations.html_safe%>,
+	    data: <%=@locations.html_safe %>,
 	    initSelection : function (element, callback) {
             var elementText = $(element).val();
             callback({"text":elementText,"id":elementText});

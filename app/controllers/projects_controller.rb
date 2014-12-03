@@ -188,6 +188,11 @@ class ProjectsController < AppController
 		@tasks = @tasklist.tasks
 		@task = Task.find params[:task_id] if params[:task_id]
 		@user.mark_tasks_as_read
+
+		@locations = @tasklist.tasks.collect do |task|
+				{id: task.location, 
+				text: task.location} if task.location && task.location.length > 0
+			end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
 	end
 
 	def search_tasklist
