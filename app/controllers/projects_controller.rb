@@ -175,6 +175,11 @@ class ProjectsController < AppController
 		@project = Project.find params[:id]
 		redirect_to session[:previous_url] || root_url, notice:"Sorry, but you don't have access to that section.".html_safe unless params[:id] == @project.to_param
 		@reports = @project.reports
+		@report = Report.find params[:report_id] if params[:report_id]
+		@company = @project.company
+		@projects = @company.projects
+		@project_users = @project.project_users
+		@subs = @project.companies.sort_by(&:name)
 	rescue
 		if @project
 			redirect_to project_path @project
@@ -190,9 +195,9 @@ class ProjectsController < AppController
 		@user.mark_tasks_as_read
 
 		@locations = @tasklist.tasks.collect do |task|
-				{id: task.location, 
-				text: task.location} if task.location && task.location.length > 0
-			end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
+			{id: task.location, 
+			text: task.location} if task.location && task.location.length > 0
+		end.compact.to_json.gsub('"id"','id').gsub('"text"','text').to_s
 	end
 
 	def search_tasklist
@@ -217,19 +222,6 @@ class ProjectsController < AppController
 			render :tasklist
 		end
 	end
-
-	# def documents
-	# 	@photos = @project.photos.sort_by(&:created_date).reverse
-	# 	@folders = @project.folders
-	# 	@nav = "all-photos-nav"
-	# 	if request.xhr?
-	# 		respond_to do |format|
-	# 			format.js { render :template => "projects/photos"}
-	# 		end
-	# 	else 
-	# 		render :documents
-	# 	end
-	# end
 
 	def documents
 		@photos = @project.photos.where(source: "Documents").sort_by(&:created_date).reverse
