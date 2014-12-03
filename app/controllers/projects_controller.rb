@@ -415,6 +415,10 @@ class ProjectsController < AppController
 			end
 		end
 	rescue
-		redirect_to root_url, notice:"Sorry, something went wrong with your previous request. Please try again soon.".html_safe
+		if user_signed_in?
+			redirect_to projects_path, notice:"Sorry, but we couldn't find that project.".html_safe
+		else
+			redirect_to root_url, notice:"Sorry, but we couldn't find that project.".html_safe
+		end
 	end
 end

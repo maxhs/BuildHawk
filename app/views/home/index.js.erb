@@ -1,4 +1,1 @@
-$('#main').fadeOut(230,function(){
-	$(this).html('<%= j render partial:"home/splash", locals:{} %>');
-	$(this).fadeIn(230);
-})
+$('#inner-wrap').replaceWith('<%= j render partial:"home/splash" %>');
