@@ -1,5 +1,5 @@
 <%= form_for @checklist, method: :patch, remote: true do |f| %>
-	<h2 class="bold-header editor-header center">Checklist Editor</h2>
+	<h3 class="editor-header center">Checklist Editor</h3>
 	<div>
 		<div><%= f.text_field :name, placeholder: "Name your checklist..." %></div>
 		<div><%= f.text_area :description, :placeholder => "A brief description of this checklist..." %></div>

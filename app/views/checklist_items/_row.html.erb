@@ -16,14 +16,13 @@
 	<div class="col-xs-10 checklist-body">
 <% end %>
 		<% if current_user.any_admin? || item.user == current_user %>
-			<%= link_to edit_checklist_item_path(item), :class => "left-edit-checklist", remote: true do %>
+			<%= link_to edit_checklist_item_path(item), :class => "left-edit-checklist remote", remote: true do %>
 				<i class="fa fa-cog remote"></i>
 			<% end %>
 		<% end %>
-		<%= link_to item.body, checklist_item_path(item), :class=>"checklist-item-link", remote: true %>
+		<%= link_to item.body, checklist_item_path(item), :class=>"checklist-item-link remote", remote: true %>
 	</div>
 
-<% if item.category.phase.checklist.project %>
 	<div class="col-md-2" style="text-align: center;">
 		<% if item.critical_date %>
 			<%= parse_date item.critical_date %>
@@ -38,11 +37,5 @@
 			&nbsp;
 		<% end %>
 	</div>
-<% else %>
-	<div class="col-xs-1" style="text-align: center;">
-		<%= link_to checklist_item_path(item), method: :delete, data: {:confirm => "Are you sure you want to delete this checklist item?"}, :class => "simple-btn", :class=>"", style:"font-size:1.5em;", remote: true do %>
-			<i class="fa fa-trash-o remote"></i>
-		<% end %>
-	</div>
-<% end %>
+
 </li>

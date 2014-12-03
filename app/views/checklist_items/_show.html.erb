@@ -42,7 +42,7 @@
                 <div class="col-xs-3"><h5>Status</h5></div>
                 <div class="col-xs-9 center">
                     <%= f.select :state, options_for_select({"In-Progress"=>0,"Completed"=>1,"Not Applicable"=>-1}, selected: item.state), {include_blank: "No Status"}, multiple: true, :class=>"center" %> 
-                    <span class="placeholder center">&#8984; / Ctrl click to deselect <span>
+                    <span class="placeholder center font-smoothing">&#8984; / Ctrl click to deselect <span>
                 </div>
             </div>
 
