@@ -2,7 +2,10 @@
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
 <div class="row">
-	<div class="col-xs-3"><h4>Name</h4></div>
+	<div class="col-xs-3">
+		<h4>Name</h4>
+		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title="This name is what your project will show up as on the sidebar and on your mobile dashboard."></i>
+	</div>
 	<div class="col-xs-9"><%= f.text_field :name, placeholder: "Project name" %></div>
 </div>
 
@@ -29,14 +32,20 @@
 
 <% if project_groups %>
     <div class="row personnel groups">
-    	<div class="col-xs-3"><h4>Project Group</h4></div>
+    	<div class="col-xs-3">
+    		<h4>Project Group</h4>
+    		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title="Do you want to add this project to a group (for example: if it was part of a subdivision)? To add a new group, click the '+ Group' button on the left sidebar. Projects can always be moved in and out of groups either editing the project's settings or by clicking and dragging the project on the sidebar."></i>
+    	</div>
     	<div class="col-xs-9 group-select"><%= f.select :project_group_id, options_for_select(project_groups.map{|pg| [pg.name, pg.id]}, selected: f.object.project_group_id), {include_blank: "No assignment", include_empty: false}, :class=>"for-select-2" %></div>
     </div>
 <% end %>
 
 <% unless project && project.checklist %>
 	<div class="row personnel">
-		<div class="col-xs-3"><h4>Checklist</h4></div>
+		<div class="col-xs-3">
+			<h4>Checklist</h4>
+			<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title="Select the checklist that you'd like to use on this project. Your checklists can be edited from the 'admin' section, and can always be individually customized once the project is created."></i>
+		</div>
 		<div class="col-xs-9" style="position:relative;top:7px;"><%= select_tag :checklist_id, options_from_collection_for_select(company.checklists.where(core: true).flatten, :id, :name), :class=>"for-select-2" %></div>
 	</div>
 <% end %>
@@ -44,7 +53,7 @@
 <div class="row extra-padding personnel">
 	<div class="col-xs-3">
 		<h4 class="display:inline-block">Personnel</h4>
-		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the personnel you want to attach to each project. Each user attached here will count towards your monthly billing cycle.'></i>
+		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='Who would you like to give access to this project? Admins will automatically have access, but basic users will need to be added. The list of assigned users can always be modified in the "edit" section of the project.'></i>
 	</div>
 	
 	<div class="col-xs-9" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
@@ -55,7 +64,7 @@
 <div class="row subcontractors">
 	<div class="col-xs-3">
 		<h4 class="display:inline-block">Subcontractors</h4>
-		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title='These are the companies you want to associated with this project. You can assign them tasks and list them on reports, but they will not be able to view the full project.'></i>
+		<i class="fa fa-info-circle has-tooltip" data-toggle="tooltip" title="What subcontractors will you be using on this project? Don't worry about leaving this blank or incomplete; subcontractors can always be added as you go. Adding subcontractors won't give them access to the project, but will make it easier to do things like add them to daily reports or assign them tasks."></i>
 	</div>
 	
 	<div class="col-xs-6 select" style="max-height:50%;overflow-y:scroll;padding-top:3px;">
