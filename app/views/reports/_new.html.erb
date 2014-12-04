@@ -19,106 +19,12 @@
 			</div>
 		</div>
 
-		<div class="thin-form">
-			<div class="row">
-				<div class="input-append date col-md-6" data-date-format="dd-mm-yyyy">
-					<h5>Date</h5>
-					<%= f.text_field :date_string, :value => report.date_string, :placeholder => Time.now.strftime("%m/%d/%Y"), :class =>"date-input", :id => "dp" %>
-				</div>
-
-				<div class="col-md-6">
-					<h5 style="display:inline-block;">Type</h5></div>
-					<%= select_tag :report_type, options_for_select(report.possible_types, :selected => report.report_type), :class=>"for-select-2", required: true, :style=>"width:50%;" %>
-				</div>
+		<%= render partial:"reports/form", locals: {f: f, project: project, report: report, subs: @subs, project_users: project_users} %>
 			
-			</div>
-				
-			<div class="row form-title">
-				<div class="col-md-12"><h5>General Remarks</h5></div>
-			</div>
-			<div class="row">
-				<div class="col-md-12"><%= f.text_area :body, :rows => 5, :placeholder => "General remarks" %></div>
-			</div>
-
-			<div class="row form-title">
-				<div class="col-md-12">
-					<h5 style="display:inline-block;">Weather</h5>
-					<span id="reload-weather" class="empty-btn" onclick="reloadWeather(<%= project.address.latitude%>,<%= project.address.longitude%>)"><i class="fa fa-refresh"></i> Weather Data</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12"><%= f.text_area :weather, rows: 2, placeholder: "Weather report" %></div>
-			</div>
-
-			<div class="row weather-titles">
-				<div class="col-md-3"><h5>Temp</h5></div>
-				<div class="col-md-3"><h5>Wind</h5></div>
-				<div class="col-md-3"><h5>Precip</h5></div>
-				<div class="col-md-3"><h5>Humidity</h5></div>
-			</div>
-			<div class="row weather-fields">
-				<div class="col-md-3"><%= f.text_field :temp, value: report.temp, placeholder: "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :wind, value: report.wind, placeholder: "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :precip, value: report.precip, placeholder: "N/A" %></div>
-				<div class="col-md-3"><%= f.text_field :humidity, value: report.humidity, placeholder: "N/A" %></div>
-			</div>
-			<div class="forecast-credit center placeholder">Powered by <%= link_to "Forecast.io", 'http://forecast.io/', target: "_blank" %></div>
-
-			<div class="row form-title">
-				<div class="col-md-6"><h5><%=current_user.company.name%> (# hours)</h5></div>
-				<div class="col-md-6"><h5>Personnel onsite</h5></div>
-			</div>
-
-			<div class="row">
-				<div class="user-container col-md-6">
-					<%= select_tag :users, options_for_select(project_users.map{|pu| [pu.user.full_name, pu.user.id]}.unshift("")), :id=>"users-select", style:"padding-bottom:5px;" %>
-
-					<% report.report_users.each do |report_user| %>
-						<%= render partial:"reports/user", locals:{report: report, report_user: report_user} %>
-					<% end %>
-				</div>
-				<div class="sub-container col-md-6">
-					<%= select_tag :subs, options_for_select(@subs.map{|s| [s.name, s.id]}.unshift("")), :id=>"subs-select", style:"padding-bottom:5px;" %>
-
-					<% report.report_companies.each do |rc| %>
-						<%= render partial:"reports/company", locals:{report: report, report_company: rc} %>
-					<% end %>
-					
-				</div>
-			</div>
-
-			<% if report.photos && report.photos.count > 0 %>
-				<div class="row">
-					<% report.photos.each do |p| %>
-						<% if p.image_file_name%>
-							<%= render :partial => "image", :locals => {:p => p} %> 
-						<% end %>
-					<% end %>
-				</div>
-			<% end %>
-
-			<div class="thin-form report-photos">	
-				<div class="row form-title">
-					<div class="col-md-12"><h5>Add a photo</h5></div>
-				</div>
-		
-				<div class="row">
-					<div class="col-md-12">
-						<%= f.fields_for :photos, report.photos.build do |photo| %>
-							<%= photo.file_field :image %>
-							<%= photo.hidden_field :report_id, value: report.id %>
-							<%= photo.hidden_field :project_id, value: project.id %>
-							<%= photo.hidden_field :source, value: "Reports" %>
-							<%= photo.hidden_field :name, value: "Reports" %>
-						<% end %>
-					</div>
-				</div>
-			</div>
+		<div class="button-container">
+			<div class="simple-btn full-width" id="big-add-report">Add</div>
+		</div>
 			
-			<div class="button-container">
-				<div class="simple-btn full-width" id="big-add-report">Add</div>
-			</div>
-		</div>	
 	</div>
 <% end %>
 

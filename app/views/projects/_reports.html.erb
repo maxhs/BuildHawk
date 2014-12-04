@@ -1,4 +1,4 @@
-<div id="project-reports" class="border-box <% if report && report.id %>panel<% end %>">
+<div id="project-reports" class="border-box <% if report %>panel<% end %>">
 	<div id="reports-header" class="row">
 		<div class="col-xs-3">
 			<%= link_to "+ Report", new_report_path(project_id: project.id), title:"Add a report", :class=>"simple-btn new-report", remote: true %>

@@ -71,42 +71,13 @@ class ReportsController < AppController
 			end
 		end
 
-		if params[:report_companies].present?
-			params[:report_companies].each do |rc|
-				report_company = @report.report_companies.where(:company_id => rc.first).first
-				if rc[1].to_i > 0
-					unless report_company
-						report_company = @report.report_companies.create :company_id => rc.first
-					end
-					report_company.update_attribute :count, rc[1]
-				else
-					report_company.destroy if report_company
-				end
-			end
-		end
+		report_companies = params[:report_companies]
+		report_users = params[:report_users]
+		safety_topics = params[:report][:safety_topics]
+		assign_report_values(report_users, report_companies, safety_topics)
+		params[:report].delete(:safety_topics)
 
-		if params[:report_users]
-			params[:report_users].each do |ru|
-				report_user = @report.report_users.where(:user_id => ru.first).first_or_create
-				if ru[1].to_i > 0
-					report_user.update_attribute :hours, ru[1]
-				else
-					report_user.destroy if report_user
-				end
-			end
-		end
-
-		if params[:report][:safety_topics]
-			params[:report][:safety_topics].each do |safety_topic_id|
-				unless safety_topic_id.nil? || safety_topic_id.length == 0
-					@report.report_topics.where(safety_topic_id: safety_topic_id).first_or_create
-				end
-			end
-			params[:report].delete(:safety_topics)
-		end
-		
 		@report.update_attributes params[:report]
-		
 		@report.activities.create(
             :project_id => @report.project.id,
             :activity_type => @report.class.name,
@@ -124,16 +95,39 @@ class ReportsController < AppController
 		end
 	end
 
-	def remove_report_user
-		report_user = ReportUser.find params[:id]
-		@report_user_id = report_user.id
-		report_user.destroy
-	end
+	def assign_report_values(report_users, report_companies, safety_topics)
+		if report_companies.present?
+			report_companies.each do |rc|
+				report_company = @report.report_companies.where(company_id: rc.first).first
+				if rc[1].to_i > 0
+					unless report_company
+						report_company = @report.report_companies.create company_id: rc.first
+					end
+					report_company.update_attribute :count, rc[1]
+				else
+					report_company.destroy if report_company
+				end
+			end
+		end
 
-	def remove_report_company
-		report_company = ReportCompany.find params[:id]
-		@report_company_id = report_company.id
-		report_company.destroy
+		if report_users.present?
+			report_users.each do |ru|
+				report_user = @report.report_users.where(user_id: ru.first).first_or_create
+				if ru[1].to_i > 0
+					report_user.update_attribute :hours, ru[1]
+				else
+					report_user.destroy if report_user
+				end
+			end
+		end
+
+		if safety_topics.present?
+			safety_topics.each do |safety_topic_id|
+				unless safety_topic_id.nil? || safety_topic_id.length == 0
+					@report.report_topics.where(safety_topic_id: safety_topic_id).first_or_create
+				end
+			end
+		end
 	end
 
 	def create
@@ -153,9 +147,16 @@ class ReportsController < AppController
 			return
 		end
 
+		report_companies = params[:report_companies]
+		report_users = params[:report_users]
+		safety_topics = params[:report][:safety_topics]
+		params[:report].delete(:safety_topics)
+
 		## ensure the report type is properly included, despite the Select2 stuff happening on the front end 
 		params[:report][:report_type] = params[:report_type] if params[:report_type]
 		@report = @project.reports.create! params[:report]
+
+		assign_report_values(report_users, report_companies, safety_topics)
 
 		@report.activities.create(
             :project_id => @report.project.id,
@@ -177,6 +178,18 @@ class ReportsController < AppController
 		else 
 			redirect_to reports_project_path(@project)
 		end
+	end
+
+	def remove_report_user
+		report_user = ReportUser.find params[:id]
+		@report_user_id = report_user.id
+		report_user.destroy
+	end
+
+	def remove_report_company
+		report_company = ReportCompany.find params[:id]
+		@report_company_id = report_company.id
+		report_company.destroy
 	end
 
 	def weather
